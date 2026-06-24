@@ -1,0 +1,8 @@
+# Artefatos de build do libft (gerados; nunca versionar)
+C/libft/**/*.a
+C/libft/**/*.o
+C/libft/**/*.out
+C/libft/**/*.bin
+
+# macOS
+.DS_Store

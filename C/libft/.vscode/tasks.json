@@ -1,0 +1,23 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build-libft-test-debug",
+            "type": "shell",
+            "command": "make -C ${workspaceFolder}/repo CFLAGS=\"-Wall -Wextra -Werror -g3 -O0\" re && cc -g3 -O0 -Wall -Wextra -Werror -o bin.out ${input:libftTest}.c ${workspaceFolder}/repo/libft.a -lbsd",
+            "options": {
+                "cwd": "${workspaceFolder}/mains"
+            },
+            "group": "build",
+            "problemMatcher": ["$gcc"]
+        }
+    ],
+    "inputs": [
+        {
+            "id": "libftTest",
+            "type": "promptString",
+            "description": "Nome do teste libft a debugar (ex: strnstr, strncmp)",
+            "default": "strnstr"
+        }
+    ]
+}

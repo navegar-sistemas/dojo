@@ -1,0 +1,34 @@
+{
+    "version": "0.2.0",
+    "inputs": [
+        {
+            "id": "libftTest",
+            "type": "promptString",
+            "description": "Nome do teste libft a debugar (ex: strnstr, strncmp)",
+            "default": "strnstr"
+        }
+    ],
+    "configurations": [
+        {
+            "name": "Debug libft test (sandbox/gdb)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/C/libft/mains/bin.out",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/C/libft/mains",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "preLaunchTask": "build-libft-test-debug",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty printing",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}

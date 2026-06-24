@@ -1,0 +1,55 @@
+{
+  "name": "42SP libft (sandbox-vibe)",
+  "dockerComposeFile": [
+    "../.sandbox-vibe/docker-compose.sandbox.yml",
+    "../.sandbox-vibe/docker-compose.override.yml",
+    "docker-compose.devcontainer.yml"
+  ],
+  "service": "sandbox",
+  "workspaceFolder": "/workspace",
+  "remoteUser": "sandbox",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "anthropic.claude-code",
+        "bierner.markdown-mermaid",
+        "bmewburn.vscode-intelephense-client",
+        "dart-code.dart-code",
+        "dart-code.flutter",
+        "dbaeumer.vscode-eslint",
+        "editorconfig.editorconfig",
+        "esbenp.prettier-vscode",
+        "golang.go",
+        "google.gemini-cli-vscode-ide-companion",
+        "gruntfuggly.todo-tree",
+        "humao.rest-client",
+        "johnpapa.vscode-peacock",
+        "llvm-vs-code-extensions.lldb-dap",
+        "mechatroner.rainbow-csv",
+        "mhutchie.git-graph",
+        "ms-azuretools.vscode-containers",
+        "ms-dotnettools.csdevkit",
+        "ms-dotnettools.csharp",
+        "ms-dotnettools.vscode-dotnet-runtime",
+        "ms-playwright.playwright",
+        "ms-python.debugpy",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.vscode-python-envs",
+        "ms-vscode.cmake-tools",
+        "ms-vscode.cpp-devtools",
+        "ms-vscode.cpptools",
+        "ms-vscode.cpptools-extension-pack",
+        "ms-vscode.cpptools-themes",
+        "ms-vscode.makefile-tools",
+        "ms-vscode.vscode-typescript-next",
+        "ms-vsliveshare.vsliveshare",
+        "natizyskunk.sftp",
+        "prisma.prisma",
+        "repreng.csv",
+        "swiftlang.swift-vscode",
+        "tomoki1207.pdf"
+      ]
+    }
+  }
+}

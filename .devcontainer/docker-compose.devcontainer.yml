@@ -1,0 +1,7 @@
+# Camada do Dev Container (VSCode), sobreposta aos compose do sandbox-vibe.
+# O entrypoint do sandbox-vibe roda o bootstrap do Claude e encerra sem TTY;
+# para o VSCode, sobrescrevemos por um processo que mantem o container vivo.
+# O Claude continua sendo usado via `npx sandbox-vibe up` (fluxo separado).
+services:
+  sandbox:
+    entrypoint: ["/bin/sh", "-c", "sleep infinity"]
