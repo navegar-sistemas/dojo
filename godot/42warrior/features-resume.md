@@ -33,16 +33,16 @@ Remake do **Ruby Warrior** (beginner tower, 9 níveis) reambientado no universo 
 - [x] **008 — Glossário de termos in-game** · spec `done` · **INTEGRADA na main** (pilha com 007)
   - Aba Glossário no editor (`glossary_catalog` + `glossary_tab`); review.ts verde.
 
-- [ ] **009 — Seleção e replay de níveis** · spec `done` · **código em branch `feature/009` (próxima a integrar)**
-  - Escolher/refazer níveis já jogados. review.ts verde; aguardando merge na main (após 007/008 ✓).
+- [x] **009 — Seleção e replay de níveis** · spec `done` · **INTEGRADA na main** (merge `bc38056`)
+  - Escolher/refazer níveis já jogados (`level_progress_store` + `level_select_screen`); merge limpo; check.sh 158/158.
 
-- [ ] **010 — Nível introdutório sandbox** · spec `done` · **código em branch `feature/010` (NÃO integrado)** · último na ordem
-  - Nível de onboarding/sandbox. review.ts verde; integra por último (conflitos esperados em game.tscn/game_controller/tower_flow — resolvidos na integração).
+- [x] **010 — Nível introdutório sandbox** · spec `done` · **INTEGRADA na main** (merge `6672f33`)
+  - Nível 0 de onboarding (sandbox → nível 1). Conflito em `tower_flow.gd` resolvido (sandbox retorna antes de gravar progresso); check.sh 165/165.
 
 ## O que falta (visão rápida)
 
-1. Integrar **009 → 010** na main (007 ✓, 008 ✓). Cada merge: `godot --import` (regenera cache de classes) → `check.sh` verde → push → atualiza este resumo.
-2. Fechar o **aceite runtime da 006** (rodar o jogo: 1 tela após transição, sem vazamento de nós, animações, console).
+1. **Todas as features especificadas (001–010) estão integradas na main.** Próximas em pipeline: 011 (câmera follow — em dev), 012/013 (specs em refinamento), 014 (a criar).
+2. Fechar o **aceite runtime da 006** (rodar o jogo: 1 tela após transição, sem vazamento de nós, animações, console) — auditoria read-only pendente (handoff do PO).
 
 ## Cobertura dos requisitos de produto (PR → feature)
 
