@@ -26,6 +26,10 @@ AudioManager="*res://src/presentation/audio_manager.gd"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[gui]
+
+theme/custom="res://assets/theme/game_theme.tres"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
