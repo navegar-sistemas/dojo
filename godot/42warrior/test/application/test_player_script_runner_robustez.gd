@@ -1,6 +1,7 @@
 extends GutTest
 ## Robustez da fronteira de execução (014): código do jogador com erro de RUNTIME
-## (RF-141) ou LOOP INFINITO (RF-142) não crasha nem trava — vira no-op + reporte.
+## (RF-141), LOOP INFINITO (RF-142) ou RECURSÃO INFINITA (RF-143) não crasha nem
+## trava — vira no-op + reporte.
 ## Erro de SINTAXE (RF-140): coberto por test_player_script_runner.gd.
 
 
@@ -68,3 +69,56 @@ func play_turn(warrior):
 	var action: Action = runner.play_turn(instance, _facade())
 	assert_true(action is WalkAction, "o laço termina e a ação seguinte é registrada")
 	assert_false(runner.has_error(), "laço legítimo não dispara o corte")
+
+
+func test_recursao_infinita_direta_nao_crasha() -> void:
+	# RF-143: play_turn que se chama → sem depth-guard → "Stack overflow" +
+	# "Stack underflow Engine Bug" → VM corrompida → crash do app.
+	# Com o depth-guard injetado, deve virar no-op + erro reportado.
+	var source := """
+extends RefCounted
+func play_turn(warrior):
+	play_turn(warrior)
+"""
+	var runner := PlayerScriptRunner.new()
+	var instance := runner.compile(source)
+	assert_true(instance != null, "recursão só aparece em runtime, compila ok")
+	# Se crashasse, o GUT não chegaria à linha abaixo.
+	var action: Action = runner.play_turn(instance, _facade())
+	assert_null(action, "recursão infinita vira no-op")
+	assert_true(runner.has_error(), "o corte de recursão é reportado")
+
+
+func test_recursao_via_helper_nao_crasha() -> void:
+	# Recursão indireta via função auxiliar também deve ser bloqueada.
+	var source := """
+extends RefCounted
+func play_turn(warrior):
+	_loop(warrior)
+func _loop(w):
+	_loop(w)
+"""
+	var runner := PlayerScriptRunner.new()
+	var instance := runner.compile(source)
+	assert_true(instance != null)
+	var action: Action = runner.play_turn(instance, _facade())
+	assert_null(action, "recursão via helper vira no-op")
+	assert_true(runner.has_error(), "o corte de recursão via helper é reportado")
+
+
+func test_funcao_legitima_com_helper_age_normalmente() -> void:
+	# Funções auxiliares legítimas (não recursivas) não devem ser bloqueadas.
+	var source := """
+extends RefCounted
+func play_turn(warrior):
+	if _deve_andar(warrior):
+		warrior.walk()
+func _deve_andar(w):
+	return w.health() > 0
+"""
+	var runner := PlayerScriptRunner.new()
+	var instance := runner.compile(source)
+	assert_true(instance != null)
+	var action: Action = runner.play_turn(instance, _facade())
+	assert_true(action is WalkAction, "helper legítimo não bloqueia a ação")
+	assert_false(runner.has_error(), "helper legítimo não dispara o corte")
