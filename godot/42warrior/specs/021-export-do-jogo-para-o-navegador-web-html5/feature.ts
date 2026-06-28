@@ -23,6 +23,6 @@ export const feature: IFeature = {
     "P0-recursão (feature 020) é PRÉ-REQUISITO do smoke web do código do jogador e está FECHADO (a robustez do runner já vale no desktop e, por construção, no WASM).",
     "Config/export (project.godot, export_presets.cfg, áudio-gesto) é implementação do dev/tech-lead (fora de specs/); o spec define RF/RNF/DoD e o smoke como prova.",
   ],
-  phase: "implementing",
+  phase: "done",
   createdAt: "2026-06-28",
 };
