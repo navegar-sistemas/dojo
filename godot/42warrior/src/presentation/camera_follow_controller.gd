@@ -18,23 +18,30 @@ var current_lookahead_dir: float = 0.0
 var _camera: Camera2D
 var _get_warrior_pos: Callable
 var _static_mode: bool = true
+## Segue Y somente quando o nível é maior que o viewport verticalmente.
+var _static_mode_y: bool = true
 var _lookahead_dir: float = 0.0
 var _anchor_x: float = 0.0
 
 
 func initialize(
-	camera: Camera2D, level_width_px: float, viewport_size: Vector2, get_warrior_pos: Callable
+	camera: Camera2D,
+	level_width_px: float,
+	viewport_size: Vector2,
+	get_warrior_pos: Callable,
+	level_height_px: float = 0.0
 ) -> void:
 	_camera = camera
 	_get_warrior_pos = get_warrior_pos
 	_static_mode = level_width_px <= viewport_size.x
+	_static_mode_y = level_height_px <= 0.0 or level_height_px <= viewport_size.y
 
 	camera.zoom = Vector2.ONE
 	camera.position_smoothing_enabled = false
 	camera.limit_left = 0
 	camera.limit_right = int(level_width_px)
 	camera.limit_top = -int(viewport_size.y)
-	camera.limit_bottom = int(viewport_size.y)
+	camera.limit_bottom = int(viewport_size.y + maxf(0.0, level_height_px))
 
 	var initial_x: float
 	if _static_mode:
@@ -43,7 +50,11 @@ func initialize(
 		var wp: Vector2 = get_warrior_pos.call()
 		initial_x = wp.x
 
-	camera.global_position = Vector2(initial_x, 0.0)
+	var initial_y: float = 0.0
+	if not _static_mode_y:
+		initial_y = get_warrior_pos.call().y
+
+	camera.global_position = Vector2(initial_x, initial_y)
 	target_position = camera.global_position
 	_anchor_x = initial_x
 	_lookahead_dir = 0.0
@@ -70,8 +81,16 @@ func _follow(warrior_pos: Vector2, delta: float) -> void:
 
 	var cam_x := _camera.global_position.x
 	var warrior_dist := warrior_pos.x - cam_x
-
+	var new_x := cam_x
 	if absf(warrior_dist) > dead_zone_half_w:
 		var target_x := warrior_pos.x + _lookahead_dir * lookahead_px
-		var new_x := lerpf(cam_x, target_x, minf(1.0, delta * smooth_speed))
-		_camera.global_position = Vector2(new_x, 0.0)
+		new_x = lerpf(cam_x, target_x, minf(1.0, delta * smooth_speed))
+
+	var new_y := _camera.global_position.y
+	if not _static_mode_y:
+		var cam_y := _camera.global_position.y
+		var dy := warrior_pos.y - cam_y
+		if absf(dy) > dead_zone_half_w:
+			new_y = lerpf(cam_y, warrior_pos.y, minf(1.0, delta * smooth_speed))
+
+	_camera.global_position = Vector2(new_x, new_y)
