@@ -8,7 +8,7 @@ export const tasks: ITask[] = [
       "WebRendererConfig: definir em project.godot o override rendering/renderer/rendering_method.web=\"gl_compatibility\", mantendo Forward+ no desktop. Conferir que o 2D (TileMap/sprites/HUD) não depende de recursos Forward+-only.",
     definitionOfDone:
       "project.godot tem rendering_method.web=gl_compatibility; desktop permanece Forward+; o jogo renderiza no WebGL2 (verificado no smoke web do T-214).",
-    status: "todo",
+    status: "done",
     dependsOn: [],
     parallel: true,
     assignee: null,
@@ -20,7 +20,7 @@ export const tasks: ITask[] = [
       "WebExportPreset: criar o preset \"Web\" no export_presets.cfg + instalar os export templates do Godot 4.7 no ambiente de build; gerar o artefato HTML5/WASM (index.html + .wasm + .pck).",
     definitionOfDone:
       "Existe o preset Web; o export produz o build HTML5/WASM que ABRE e inicia o jogo no navegador.",
-    status: "todo",
+    status: "done",
     dependsOn: ["T-210"],
     parallel: false,
     assignee: null,
@@ -32,7 +32,7 @@ export const tasks: ITask[] = [
       "AudioGestureGate: ajustar o AudioManager para iniciar/retomar o áudio no 1º gesto do usuário (autoplay-block), preservando o comportamento desktop atual.",
     definitionOfDone:
       "No web o áudio inicia após o 1º gesto (não fica mudo); no desktop o áudio segue como hoje (0 regressão).",
-    status: "todo",
+    status: "done",
     dependsOn: [],
     parallel: true,
     assignee: null,
@@ -44,7 +44,7 @@ export const tasks: ITask[] = [
       "WebPersistenceAdapter: garantir/validar que user:// (player_code_store + level_progress_store/progress_store) persiste no web (IndexedDB) entre reloads; tratar o flush assíncrono se necessário, sem alterar o desktop.",
     definitionOfDone:
       "Código do jogador e progresso gravados no web sobrevivem a reload da página (user://→IndexedDB); desktop inalterado.",
-    status: "todo",
+    status: "done",
     dependsOn: [],
     parallel: true,
     assignee: null,
