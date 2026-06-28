@@ -9,7 +9,7 @@ export const tasks: ITask[] = [
       "F2: AnimatedEntityRegistry + AnimatedSprite2D dos 4 personagens, acionados por turn_events, ancorados pelos pés.",
     definitionOfDone:
       "AnimatedEntityRegistry lê o anim/manifest.json e constrói os SpriteFrames de hero/enemy_cadet/enemy_dev/boss_director (idle/walk/attack|shoot|cast/hurt/death, 48x48, velocidades do brief; death não-loop). As entidades usam AnimatedSprite2D com mapa turn_event→animação e ancoragem bottom-center na célula de 32px; o shoot do arqueiro spawna fx_arrow no frame de release. DoD = PROVA DE RENDER (instancia game.tscn, renderiza ≥1 frame, assere AnimatedSprite2D ativo + animação correta por evento + ancoragem) + GUT; suíte 100% verde, 0 regressão.",
-    status: "todo",
+    status: "done",
     dependsOn: [],
     parallel: true,
     assignee: null,
