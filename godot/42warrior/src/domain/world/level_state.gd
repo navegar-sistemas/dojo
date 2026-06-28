@@ -16,6 +16,10 @@ var _warrior_facing: int
 var _units: Dictionary
 var _turn: int
 
+## Campos de GlitchDetection (T-191). Opcionais: null preserva comportamento legado.
+var _glitch_model: GlitchRuleModel = null
+var _glitch_seed: int = 0
+
 ## Campos 2D (preenchidos via from_2d(); em LevelStates 1D ficam em -1/null).
 var _rows: int = -1
 var _cols: int = -1
@@ -162,9 +166,13 @@ func warrior_4dir() -> Direction:
 
 
 func space_at(position: int) -> Space:
+	var s: Space
 	if position < 0 or position >= _width:
-		return Space.wall(position)
-	return Space.of(_units.get(position, null), position == _stairs_position, position)
+		s = Space.wall(position)
+	else:
+		s = Space.of(_units.get(position, null), position == _stairs_position, position)
+	_apply_glitch(s)
+	return s
 
 
 ## Consulta espacial 2D: retorna parede se pos estiver fora de [0,rows-1]×[0,cols-1].
@@ -172,11 +180,15 @@ func space_at(position: int) -> Space:
 func space_at_2d(pos: Vector2i) -> Space:
 	var r := rows()
 	var c := cols()
+	var s: Space
 	if pos.x < 0 or pos.x >= r or pos.y < 0 or pos.y >= c:
-		return Space.wall_2d(pos)
-	var unit: Unit = _units_2d.get(pos, null)
-	var is_stairs: bool = pos == stairs_position_2d()
-	return Space.of_2d(unit, is_stairs, pos)
+		s = Space.wall_2d(pos)
+	else:
+		var unit: Unit = _units_2d.get(pos, null)
+		var is_stairs: bool = pos == stairs_position_2d()
+		s = Space.of_2d(unit, is_stairs, pos)
+	_apply_glitch(s)
+	return s
 
 
 ## Passo absoluto na grade para uma direção relativa ao warrior (1D).
@@ -282,3 +294,42 @@ func _with_warrior_position_2d(new_pos: Vector2i) -> LevelState:
 		_turn
 	)
 	return result
+
+
+## Retorna novo estado com GlitchRuleModel configurado (GlitchDetection T-191).
+## Preserva tipo do estado (1D ou 2D). CQS: não muta o receptor.
+func with_glitch_model(model: GlitchRuleModel, seed: int) -> LevelState:
+	var result: LevelState
+	if _rows >= 0:
+		result = LevelState.from_2d(
+			_rows,
+			_cols,
+			_stairs_2d,
+			_warrior,
+			_warrior_pos_2d,
+			_warrior_facing,
+			_units_2d.duplicate(),
+			_turn,
+			_warrior_4dir
+		)
+	else:
+		result = LevelState.new(
+			_width,
+			_stairs_position,
+			_warrior,
+			_warrior_position,
+			_warrior_facing,
+			_clone_units(),
+			_turn
+		)
+	result._glitch_model = model
+	result._glitch_seed = seed
+	return result
+
+
+## Propaga estado de glitch no Space se o modelo estiver configurado.
+func _apply_glitch(s: Space) -> void:
+	if _glitch_model == null:
+		return
+	s._glitch_active = _glitch_model.window_open(_glitch_seed, _turn)
+	s._glitch_next = _glitch_model.window_open(_glitch_seed, _turn + 1)
