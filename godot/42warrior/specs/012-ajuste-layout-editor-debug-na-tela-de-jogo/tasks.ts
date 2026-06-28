@@ -17,9 +17,9 @@ export const tasks: ITask[] = [
   {
     key: "T-121",
     storyKey: "US-121",
-    summary: "Fazer o DebugPanel iniciar oculto e adicionar um DebugBtn ao fim da HBox Buttons do editor (Run/Reset/Ref → + DebugBtn) que alterna a visibilidade do DebugPanel",
+    summary: "Estruturar o debug de inspeção (WarriorStatePanel + TurnConsole) como unidade ocultável SEPARADA do editor (não aninhar o editor dentro dela), com os ExecutionControls SEMPRE visíveis fora dela, e adicionar um DebugBtn ao fim da HBox Buttons do editor (Run/Reset/Ref → + DebugBtn) que alterna essa unidade",
     definitionOfDone:
-      "DebugPanel inicia com visible=false; existe um DebugBtn ao final da barra de botões do editor; clicar nele abre o DebugPanel e clicar de novo fecha; teste GUT cobre o toggle de visibilidade pelo DebugBtn (RF-121, RF-122).",
+      "Ao entrar no nível: WarriorStatePanel + TurnConsole iniciam com visible=false; o editor e os ExecutionControls iniciam VISÍVEIS. Há um DebugBtn ao final da barra do editor; clicar abre WarriorStatePanel+TurnConsole como UNIDADE e clicar de novo fecha, SEM ocultar o editor nem os controles. Teste GUT/smoke-test de cena confirma os estados iniciais (state+console ocultos; editor+controles visíveis) e o toggle pela DebugBtn (RF-121, RF-122).",
     status: "todo",
     dependsOn: ["T-120"],
     parallel: false,

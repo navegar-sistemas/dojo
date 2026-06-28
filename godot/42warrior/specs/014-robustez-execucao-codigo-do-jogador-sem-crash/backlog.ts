@@ -13,7 +13,7 @@ export const stories: IUserStory[] = [
     requirementKeys: ["RF-140", "RF-141", "RF-143"],
     priority: "highest",
     storyPoints: 8,
-    status: "todo",
+    status: "done",
     assignee: null,
   },
   {
@@ -27,7 +27,7 @@ export const stories: IUserStory[] = [
     requirementKeys: ["RF-142"],
     priority: "high",
     storyPoints: 5,
-    status: "todo",
+    status: "done",
     assignee: null,
   },
   {
@@ -42,7 +42,7 @@ export const stories: IUserStory[] = [
     requirementKeys: ["RF-144", "RNF-140"],
     priority: "high",
     storyPoints: 5,
-    status: "todo",
+    status: "done",
     assignee: null,
   },
 ];

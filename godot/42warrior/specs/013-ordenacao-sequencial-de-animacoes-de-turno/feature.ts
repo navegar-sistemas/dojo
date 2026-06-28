@@ -18,6 +18,6 @@ export const feature: IFeature = {
     "Redesenhar os controles de velocidade (feature 004) — a sequência deve respeitar a velocidade/step já existentes.",
   ],
   productDecisions: [],
-  phase: "implementing",
+  phase: "done",
   createdAt: "2026-06-28",
 };

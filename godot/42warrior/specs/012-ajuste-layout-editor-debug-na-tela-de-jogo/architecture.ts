@@ -7,9 +7,9 @@ export const decisions: IArchitectureDecision[] = [
     context:
       "Em scenes/game.tscn + game_controller.gd, o DebugPanel (DebugLayer/DebugPanel da 004) está sempre visível ocupando o lugar do editor, e o editor é alternado por um ToggleEditorBtn solto no HUD. A nova orientação (CLR-001/002/004) é: editor no painel principal (RF-120), debug oculto por padrão e retrátil (RF-121), sem destruir estado ao alternar (RF-123/RNF-120).",
     decision:
-      "Reorganizar o layout da tela de jogo: o CodeEditorPanel passa a ocupar o slot principal; o DebugPanel inicia oculto (visible=false) e é alternado por toggle, reutilizando o mesmo mecanismo do editor retrátil da 006 (_on_toggle_editor) — só visibilidade, sem recriar nós nem trocar de tela. O texto do editor e a arena permanecem intactos ao alternar.",
+      "Reorganizar o layout da tela de jogo: o CodeEditorPanel ocupa o slot principal de forma INDEPENDENTE do debug (NÃO aninhado dentro do painel ocultável). O DEBUG DE INSPEÇÃO (WarriorStatePanel + TurnConsole da 004) inicia oculto (visible=false) e é alternado COMO UNIDADE (os dois juntos) por um overlay/painel retrátil separado, via toggle (padrão _on_toggle_editor da 006) — só visibilidade, sem recriar nós nem trocar de tela. Os ExecutionControls (play/pause/passo/velocidade) ficam FORA desse painel ocultável e permanecem SEMPRE VISÍVEIS, pois são necessários para rodar o jogo (não são inspeção). O texto do editor e a arena permanecem intactos ao alternar.",
     consequences:
-      "Hierarquia visual corrigida (ação primária em foco; auxiliar sob demanda); alternância não-destrutiva por reuso do padrão existente. Não altera o conteúdo do debug (004) nem as abas API/Glossário (007/008). Custo: rearranjo da cena e fiação do toggle de visibilidade.",
+      "Hierarquia visual corrigida (editor em foco; inspeção sob demanda) sem tornar o jogo não-rodável (controles sempre acessíveis). Como o editor não fica aninhado no painel ocultável, ocultar o debug não oculta o editor. Não altera o conteúdo do debug (004) nem as abas API/Glossário (007/008). Custo: separar a árvore (editor / debug-inspeção / controles) e fiar o toggle só sobre o painel de inspeção.",
     status: "accepted",
     requirementKeys: ["RF-120", "RF-121", "RF-123", "RNF-120"],
     rejectedAlternatives: [

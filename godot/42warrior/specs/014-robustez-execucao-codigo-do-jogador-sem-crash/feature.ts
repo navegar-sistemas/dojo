@@ -18,6 +18,6 @@ export const feature: IFeature = {
     "Reescrever o editor (003) — só endurecer a execução e o reporte.",
   ],
   productDecisions: [],
-  phase: "implementing",
+  phase: "done",
   createdAt: "2026-06-28",
 };

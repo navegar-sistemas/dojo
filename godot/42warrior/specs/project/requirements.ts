@@ -78,4 +78,11 @@ export const requirements: IProductRequirement[] = [
     priority: "highest",
     provenance: { author: "usuario", reason: "Debug/inspecao nunca foi requisito; so existe HUD turno/HP e resultado final. Jogo de programacao precisa que o jogador veja o que sua logica fez por turno. Prioridade 3 do usuario.", at: "2026-06-27" },
   },
+  {
+    key: "PR-012",
+    title: "Tema da game jam — Glitch (identidade 42)",
+    description: "O jogo comunica o tema obrigatorio da game jam \"glitch\" em conceito, mecanica, estetica, audio e identidade visual da 42 (terminal/Unix, P&B com neon de acento, o \"42\"). O tema aparece na JOGABILIDADE, nao so decorativo: erros do codigo do jogador glitcham o mundo de forma DETERMINISTICA/seedada, e a corrupcao escala com o progresso na torre e com os eventos de turno. Aditivo: nao regride a mecanica core nem os 9 niveis canonicos.",
+    priority: "highest",
+    provenance: { author: "usuario", reason: "Decisao direta do Matheus: tema obrigatorio da game jam (glitch) e o criterio central da jam; registrar como PR de tema cross-cutting para rastreabilidade.", at: "2026-06-28" },
+  },
 ];

@@ -21,8 +21,8 @@ export const stories: IUserStory[] = [
     iWant: "que o debug fique oculto por padrão e eu o abra/feche por um botão na barra do editor",
     soThat: "eu use o debug sob demanda sem que ele tome o espaço do editor",
     acceptanceCriteria: [
-      "Dado que entro num nível, quando a tela de jogo aparece, então o DebugPanel inicia oculto (RF-121).",
-      "Dado o DebugPanel oculto, quando clico no DebugBtn ao final da barra de botões do editor (junto de Run/Reset/Ref), então o DebugPanel abre; quando clico de novo, então fecha (RF-121, RF-122).",
+      "Dado que entro num nível, quando a tela de jogo aparece, então o debug de inspeção (WarriorStatePanel + TurnConsole) inicia OCULTO, enquanto o editor e os ExecutionControls (play/pause/passo/velocidade) ficam VISÍVEIS (RF-121).",
+      "Dado o debug oculto, quando clico no DebugBtn ao final da barra de botões do editor (junto de Run/Reset/Ref), então WarriorStatePanel + TurnConsole abrem COMO UNIDADE; quando clico de novo, então fecham juntos — sem ocultar o editor nem os ExecutionControls (RF-121, RF-122).",
     ],
     requirementKeys: ["RF-121", "RF-122"],
     priority: "highest",

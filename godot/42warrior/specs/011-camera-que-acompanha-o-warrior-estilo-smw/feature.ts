@@ -19,6 +19,6 @@ export const feature: IFeature = {
     "Adicionar ou alterar níveis.",
   ],
   productDecisions: [],
-  phase: "implementing",
+  phase: "done",
   createdAt: "2026-06-28",
 };

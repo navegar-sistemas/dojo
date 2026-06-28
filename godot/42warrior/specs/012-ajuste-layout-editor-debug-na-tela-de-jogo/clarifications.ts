@@ -25,9 +25,9 @@ export const clarifications: IClarification[] = [
     topic: "Visibilidade e toggle do debug",
     questions: [
       {
-        question: "O DebugPanel deve ficar sempre visível ou ser retrátil?",
+        question: "O DebugPanel deve ficar sempre visível ou ser retrátil? O que exatamente oculta?",
         answer:
-          "O DEBUG inicia OCULTO por padrão e é aberto/fechado ao clicar num botão de Debug (toggle), espelhando o padrão retrátil do editor já existente (_on_toggle_editor).",
+          "O DEBUG DE INSPEÇÃO (WarriorStatePanel + TurnConsole) inicia OCULTO e é aberto/fechado COMO UNIDADE ao clicar num botão de Debug (toggle), espelhando o padrão retrátil do editor (_on_toggle_editor). REFINO (decisão do PO em cmqxl5r1n, após rejeição da 1ª implementação f669a43): os ExecutionControls (play/pause/passo/velocidade) NÃO entram no que oculta — permanecem SEMPRE VISÍVEIS, pois são necessários para rodar o jogo e não são inspeção; e o editor é independente do debug (não aninhado no painel ocultável).",
       },
     ],
     status: "confirmed",

@@ -13,7 +13,7 @@ export const requirements: IRequirement[] = [
     key: "RF-121",
     kind: "functional",
     description:
-      "O DebugPanel (estado/console/controles da 004) inicia OCULTO por padrão e é aberto/fechado por um botão de Debug (toggle), espelhando o padrão retrátil do editor.",
+      "O DEBUG DE INSPEÇÃO (WarriorStatePanel + TurnConsole da 004) inicia OCULTO por padrão e é aberto/fechado COMO UNIDADE (os dois juntos) por um botão de Debug (toggle), espelhando o padrão retrátil do editor. Os ExecutionControls (play/pause/passo/velocidade) permanecem SEMPRE VISÍVEIS — são necessários para rodar o jogo, NÃO são inspeção. O editor é independente do debug (não aninhado dentro do painel ocultável).",
     priority: "highest",
     rationale: "CLR-002: debug é auxiliar sob demanda.",
   },

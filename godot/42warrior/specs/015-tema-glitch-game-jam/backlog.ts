@@ -1,0 +1,122 @@
+import type { IUserStory } from "../types.ts";
+
+export const stories: IUserStory[] = [
+  // ── P0 — combo mínimo (1º sprint) ────────────────────────────────────────────────
+  {
+    key: "US-150",
+    asA: "jogador",
+    iWant: "perceber, nas telas e textos, que a torre é um mainframe da 42 infectado e que eu sou um processo de debug subindo para limpá-la",
+    soThat: "o tema 'glitch' e a identidade da 42 fiquem claros desde o conceito",
+    acceptanceCriteria: [
+      "Dado o menu e as telas de transição, quando eu jogo, então um fio narrativo 'Kernel corrompido da 42' aparece (torre = mainframe infectado; warrior = processo de debug) nos textos (RF-150).",
+    ],
+    requirementKeys: ["RF-150"],
+    priority: "highest",
+    storyPoints: 3,
+    status: "done",
+    assignee: null,
+  },
+  {
+    key: "US-151",
+    asA: "jogador",
+    iWant: "que, quando meu código dá erro, o mundo glitche de verdade de forma sempre igual para o mesmo erro",
+    soThat: "o tema apareça na jogabilidade ligada a programar, sem me punir com aleatoriedade injusta",
+    acceptanceCriteria: [
+      "Dado que meu script lança erro/exceção, quando o turno é processado, então o mundo glitcha de verdade (warrior/tela/tile corrompem) além do log no console (RF-151).",
+      "Dado o mesmo erro no mesmo estado/seed, quando o glitch ocorre, então o resultado é idêntico (determinístico/seedado), reproduzível por teste de domínio, sem RNG (RF-151, RNF-150).",
+    ],
+    requirementKeys: ["RF-151", "RNF-150"],
+    priority: "highest",
+    storyPoints: 8,
+    status: "done",
+    assignee: null,
+  },
+  {
+    key: "US-152",
+    asA: "jogador",
+    iWant: "ver um efeito de glitch na tela que aumenta quando levo dano, morro ou meu código falha",
+    soThat: "a estética glitch reaja ao que acontece no jogo",
+    acceptanceCriteria: [
+      "Dado um evento de dano/morte/erro, quando ele ocorre, então o pós-processo de glitch (RGB split/aberração/scanlines) intensifica e depois relaxa; a intensidade é função determinística do estado/evento (RF-152).",
+    ],
+    requirementKeys: ["RF-152"],
+    priority: "highest",
+    storyPoints: 5,
+    status: "done",
+    assignee: null,
+  },
+  {
+    key: "US-153",
+    asA: "jogador",
+    iWant: "que a interface fique mais corrompida conforme eu subo na torre",
+    soThat: "eu sinta a corrupção crescente do kernel ao progredir",
+    acceptanceCriteria: [
+      "Dado um andar mais alto na torre, quando a tela é exibida, então a UI degrada mais (scanlines/texto embaralhado/RGB split) de forma determinística por andar (RF-153).",
+    ],
+    requirementKeys: ["RF-153"],
+    priority: "high",
+    storyPoints: 5,
+    status: "done",
+    assignee: null,
+  },
+  {
+    key: "US-154",
+    asA: "jogador",
+    iWant: "que as mensagens de erro/feedback falem a língua Unix/42",
+    soThat: "a identidade terminal/hacker da 42 fique evidente",
+    acceptanceCriteria: [
+      "Dado um erro/evento, quando a mensagem aparece, então ela usa o vocabulário Unix/42 ('segfault (core dumped)', 'command not found', 'exit 0', etc.) vindo do catálogo data-driven (RF-154).",
+    ],
+    requirementKeys: ["RF-154"],
+    priority: "high",
+    storyPoints: 3,
+    status: "done",
+    assignee: null,
+  },
+  // ── P1 — reforço (sprints futuros) ───────────────────────────────────────────────
+  {
+    key: "US-155",
+    asA: "jogador",
+    iWant: "um glitch determinístico por andar que eu precise contornar no meu código",
+    soThat: "o tema entre na resolução do puzzle, não só na estética",
+    acceptanceCriteria: [
+      "Dado um andar com glitch mecânico, quando eu jogo, então há uma entidade cintilante em padrão fixo (turnos alternados) OU uma ação corrompida scriptada, sempre seedada/reproduzível, que eu contorno no código (RF-155).",
+    ],
+    requirementKeys: ["RF-155"],
+    priority: "medium",
+    storyPoints: 8,
+    status: "backlog",
+    assignee: null,
+  },
+  {
+    key: "US-156",
+    asA: "jogador",
+    iWant: "polish glitch extra — sprite que corrompe em dano/morte, transições datamosh e áudio que distorce com o estado",
+    soThat: "o tema fique mais imersivo quando houver tempo",
+    acceptanceCriteria: [
+      "Dado DAMAGED/DIED, quando ocorre, então o sprite corrompe (pixel-sort/static) acionado pelos turn_events (RF-156).",
+      "Dado uma transição de tela/nível, quando ela ocorre, então usa efeito datamosh (RF-157).",
+      "Dado HP baixo ou código que falha, quando o estado muda, então o áudio corrompe (bit-crush/distorção) (RF-158).",
+    ],
+    requirementKeys: ["RF-156", "RF-157", "RF-158"],
+    priority: "low",
+    storyPoints: 8,
+    status: "backlog",
+    assignee: null,
+  },
+  // ── P2 — nice-to-have (backlog) ──────────────────────────────────────────────────
+  {
+    key: "US-157",
+    asA: "jogador",
+    iWant: "aprofundamentos temáticos opcionais (glitch-through-walls, falso crash, 'o warrior é o glitch')",
+    soThat: "o tema ganhe um momento memorável se houver tempo de sobra",
+    acceptanceCriteria: [
+      "Dado tempo de sobra na jam, quando um aprofundamento P2 é escolhido, então é implementado de forma determinística e contida (glitch-through-walls de 1 nível, OU falso crash encenado, OU variação narrativa), sem comprometer o P0 (RF-159).",
+    ],
+    requirementKeys: ["RF-159"],
+    priority: "low",
+    storyPoints: 5,
+    status: "backlog",
+    assignee: null,
+  },
+];
