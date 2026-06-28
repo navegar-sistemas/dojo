@@ -5,7 +5,7 @@ export const requirements: IRequirement[] = [
     key: "RF-170",
     kind: "functional",
     description:
-      "Um turno SEM animação (eventos vazios: no-op/pass, pivot, andar na parede, atacar o vazio) NÃO congela o jogo: o loop de turnos avança ao próximo tick normalmente. (O mecanismo — diferir all_done um frame quando não há tween — já está na 013 integrada; RF-170 fixa o invariante e exige a prova de cena.)",
+      "Um turno SEM animação (eventos vazios: no-op/pass, pivot, andar na parede, atacar o vazio) NÃO congela o jogo: o loop de turnos avança ao próximo tick normalmente. (O mecanismo — diferir all_done um frame quando não há tween — já está na 013 integrada; RF-170 fixa o invariante, guardado por teste unitário na 017; a prova de runtime de CENA, render-rule, fica como follow-up aberto.)",
     priority: "highest",
     rationale: "Bug #1 do code review (ALTA, era release-blocker). game_controller esperava animations_finished que era emitido síncrono antes do await.",
   },
@@ -29,7 +29,7 @@ export const requirements: IRequirement[] = [
     key: "RNF-170",
     kind: "non_functional",
     description:
-      "Cada correção é provada por um teste que EXERCITA o caso: #1 = o teste UNITÁRIO do sequencer já existente na 013 (referenciado) MAIS um teste de NÍVEL DE CENA que joga um turno no-op via game_controller e assere o avanço; #2 e #3 = 1 teste GUT cada que exercita o caso. A suíte permanece 100% verde, com 0 regressão das features integradas.",
+      "Cada correção é provada por um teste que EXERCITA o caso: #1 = o teste UNITÁRIO do sequencer já existente na 013 (referenciado) MAIS um guard UNITÁRIO co-localizado na 017 (test_017_noop_cena.gd); a prova de NÍVEL DE CENA (render-rule: instanciar game.tscn / dirigir game_controller, renderizar ≥1 frame, asserir o avanço) é FOLLOW-UP ABERTO, não entregue nesta feature. #2 e #3 = 1 teste GUT cada que exercita o caso. A suíte permanece 100% verde, com 0 regressão das features integradas.",
     priority: "highest",
     rationale: "Critério de pronto do PO (cmqxnaz83): teste que exercita cada caso, prova de runtime para o #1, sem regressão.",
   },

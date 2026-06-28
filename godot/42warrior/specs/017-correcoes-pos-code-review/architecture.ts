@@ -3,19 +3,19 @@ import type { IArchitectureDecision, IComponent } from "../types.ts";
 export const decisions: IArchitectureDecision[] = [
   {
     key: "ADR-041",
-    title: "Bug #1 (deadlock no-op): fix permanece na 013; a 017 só adiciona a prova de CENA",
+    title: "Bug #1 (deadlock no-op): fix permanece na 013; a 017 adiciona um guard UNITÁRIO e deixa a prova de CENA como follow-up aberto",
     context:
-      "O deadlock do turno sem animação (game_controller aguarda animations_finished, mas all_done era emitido SÍNCRONO antes do await em turnos no-op/pivot/parede/atacar-vazio) já foi corrigido na 013 (AnimationSequencer.play() difere all_done um frame quando nenhum tween foi aguardado, commit 6ccc57c), integrada na main. Há teste UNITÁRIO do mecanismo na 013 (test_all_done_nao_e_sincrono_sem_animacao). O PO exige, além do unitário, a prova de RUNTIME no nível de cena.",
+      "O deadlock do turno sem animação (game_controller aguarda animations_finished, mas all_done era emitido SÍNCRONO antes do await em turnos no-op/pivot/parede/atacar-vazio) já foi corrigido na 013 (AnimationSequencer.play() difere all_done um frame quando nenhum tween foi aguardado, commit 6ccc57c), integrada na main. Há teste UNITÁRIO do mecanismo na 013 (test_all_done_nao_e_sincrono_sem_animacao). O PO deseja, além do unitário, uma prova de RUNTIME no nível de cena (render-rule) — que NÃO foi entregue nesta feature e fica como FOLLOW-UP ABERTO.",
     decision:
-      "NÃO duplicar o fix nem o teste unitário. A 017 referencia o fix/teste da 013 para rastreabilidade e adiciona EXCLUSIVAMENTE um teste de NÍVEL DE CENA que instancia game_controller, joga um turno no-op (pivot/andar-na-parede) e assere que o loop de turnos AVANÇA ao próximo tick (não congela). Nenhuma lógica de produção nova entra pelo #1.",
+      "NÃO duplicar o fix. A 017 referencia o fix/teste da 013 e adiciona um GUARD UNITÁRIO do invariante do all_done diferido (test_017_noop_cena.gd) — equivalente/co-localizado ao test_all_done_nao_e_sincrono_sem_animacao da 013; é um teste UNITÁRIO do AnimationSequencer e NÃO instancia game.tscn nem dirige game_controller. A prova de NÍVEL DE CENA real (instanciar game.tscn / dirigir game_controller num turno no-op, renderizar ≥1 frame e asserir o avanço, honrando a render-rule) fica como FOLLOW-UP ABERTO (código do dev/tech-lead), NÃO alegada como entregue. Nenhuma lógica de produção nova entra pelo #1.",
     consequences:
-      "Cobertura completa do #1 (mecanismo no sequencer + comportamento integrado na cena) sem retrabalho nem risco de regressão por re-edição. Custo: um teste de cena headless que dirige o game_controller. Acoplado ao fluxo all_done/animations_finished da 013.",
+      "Cobertura do #1 no nível de MECANISMO (sequencer) garantida pelo guard unitário; a cobertura integrada de CENA fica PENDENTE como follow-up aberto. Sem retrabalho do fix. Honestidade: a spec NÃO afirma prova de cena sobre um teste unitário.",
     status: "accepted",
     requirementKeys: ["RF-170", "RNF-170"],
     rejectedAlternatives: [
       {
         alternative: "Reabrir a 013 / reaplicar o fix dentro da 017",
-        reason: "O fix já está vivo e testado na main; reaplicar duplicaria fonte e arriscaria regressão. O que falta é só a prova de cena.",
+        reason: "O fix já está vivo e testado na main; reaplicar duplicaria fonte e arriscaria regressão. O que falta (prova de cena de runtime) fica como follow-up aberto, não como re-edição do fix.",
       },
     ],
   },

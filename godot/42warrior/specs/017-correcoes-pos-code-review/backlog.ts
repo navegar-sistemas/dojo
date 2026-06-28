@@ -9,7 +9,7 @@ export const stories: IUserStory[] = [
     soThat: "eu consiga continuar jogando após qualquer ação, inclusive as que não movem nada",
     acceptanceCriteria: [
       "Dado um jogo em execução via game_controller, quando eu submeto um turno no-op (pivot ou andar contra a parede) que não produz tween, então o loop de turnos avança ao próximo tick e o jogo não fica travado aguardando animations_finished.",
-      "Dado o mecanismo do all_done diferido já corrigido e testado na 013 (test_all_done_nao_e_sincrono_sem_animacao), quando a 017 é entregue, então existe um teste de NÍVEL DE CENA que prova o avanço integrado, sem reimplementar o fix.",
+      "Dado o mecanismo do all_done diferido já corrigido e testado na 013 (test_all_done_nao_e_sincrono_sem_animacao), quando a 017 é entregue, então existe um GUARD UNITÁRIO do invariante co-localizado na 017 (sem reimplementar o fix), e a prova de NÍVEL DE CENA integrada (render-rule) fica como follow-up aberto.",
     ],
     requirementKeys: ["RF-170", "RNF-170"],
     priority: "highest",
