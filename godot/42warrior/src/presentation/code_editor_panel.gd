@@ -15,6 +15,7 @@ var _player_source := ""
 @onready var _ref_btn: Button = $VBox/Tabs/Editor/Buttons/RefBtn
 @onready var _error_view: ErrorView = $VBox/Tabs/Editor/ErrorView
 @onready var _api_tab: ApiReferenceTab = $VBox/Tabs/API
+@onready var _glossary_tab: GlossaryTab = $VBox/Tabs/Glossario
 
 
 func _ready() -> void:
@@ -35,6 +36,7 @@ func setup_level(level_index: int, ref_source: String) -> void:
 	_player_source = _editor.text
 	_error_view.clear()
 	_api_tab.populate(WarriorApiCatalog.entries_for_level(level_index))
+	_glossary_tab.populate(GlossaryCatalog.entries_for_level(level_index))
 
 
 func show_compile_error(msg: String) -> void:

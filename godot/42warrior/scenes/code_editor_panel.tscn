@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://src/presentation/code_editor_panel.gd" id="1_panel"]
 [ext_resource type="Script" path="res://src/presentation/error_view.gd" id="2_errview"]
 [ext_resource type="PackedScene" path="res://scenes/api_reference_tab.tscn" id="3_apitab"]
+[ext_resource type="PackedScene" path="res://scenes/glossary_tab.tscn" id="4_glosstab"]
 
 [node name="CodeEditorPanel" type="PanelContainer"]
 script = ExtResource("1_panel")
@@ -68,5 +69,9 @@ theme_override_colors/font_color = Color(1, 0.4, 0.4, 1)
 theme_override_font_sizes/font_size = 13
 
 [node name="API" parent="VBox/Tabs" instance=ExtResource("3_apitab")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Glossario" parent="VBox/Tabs" instance=ExtResource("4_glosstab")]
 layout_mode = 2
 size_flags_vertical = 3
