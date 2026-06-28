@@ -23,6 +23,8 @@ var _stairs_2d: Vector2i = Vector2i(-1, -1)
 var _warrior_pos_2d: Vector2i = Vector2i(-1, -1)
 ## Unidades 2D: Vector2i → Unit (usado só em from_2d()).
 var _units_2d: Dictionary = {}
+## Direção 4-dir do warrior em estado 2D (null em 1D).
+var _warrior_4dir: Direction = null
 
 
 func _init(
@@ -54,7 +56,8 @@ static func from_2d(
 	warrior_pos: Vector2i,
 	warrior_facing: int,
 	units: Dictionary,
-	turn: int
+	turn: int,
+	warrior_4dir: Direction = null
 ) -> LevelState:
 	var s := LevelState.new(cols, stairs_pos.y, warrior, warrior_pos.y, warrior_facing, {}, turn)
 	s._rows = rows
@@ -62,6 +65,10 @@ static func from_2d(
 	s._stairs_2d = stairs_pos
 	s._warrior_pos_2d = warrior_pos
 	s._units_2d = units.duplicate()
+	if warrior_4dir != null:
+		s._warrior_4dir = warrior_4dir
+	else:
+		s._warrior_4dir = Direction.east() if warrior_facing >= 0 else Direction.west()
 	return s
 
 
@@ -122,6 +129,35 @@ func stairs_position_2d() -> Vector2i:
 	return _stairs_2d if _rows >= 0 else Vector2i(0, _stairs_position)
 
 
+## Posições (ordenadas) das unidades vivas no nível em coordenadas 2D.
+## Em LevelState 1D, converte posições int para Vector2i(0, pos).
+func unit_positions_2d() -> Array:
+	if _rows >= 0:
+		var positions: Array = _units_2d.keys()
+		positions.sort_custom(
+			func(a: Vector2i, b: Vector2i) -> bool: return a.x < b.x or (a.x == b.x and a.y < b.y)
+		)
+		return positions
+	var positions_1d: Array = _units.keys()
+	positions_1d.sort()
+	var result: Array = []
+	for p: int in positions_1d:
+		result.append(Vector2i(0, p))
+	return result
+
+
+func unit_at_2d(pos: Vector2i) -> Unit:
+	if _rows >= 0:
+		return _units_2d.get(pos, null)
+	return _units.get(pos.y, null)
+
+
+## Direção 4-dir do warrior (usado na apresentação 2D para flip/rotation do sprite).
+## Retorna null em estados 1D.
+func warrior_4dir() -> Direction:
+	return _warrior_4dir
+
+
 # ── Consultas espaciais (puras) ──────────────────────────────────────────────
 
 
@@ -144,18 +180,13 @@ func space_at_2d(pos: Vector2i) -> Space:
 
 
 ## Passo absoluto na grade para uma direção relativa ao warrior (1D).
-func step_of(direction: Direction) -> int:
+func _step_of(direction: Direction) -> int:
 	return _warrior_facing * direction.relative_sign()
 
 
 ## Posição a `distance` passos do warrior na direção dada (1D).
 func position_toward(direction: Direction, distance: int) -> int:
-	return _warrior_position + step_of(direction) * distance
-
-
-## Delta Vector2i para uma direção absoluta cardeal (2D).
-func step_of_2d(direction: Direction) -> Vector2i:
-	return direction.delta()
+	return _warrior_position + _step_of(direction) * distance
 
 
 ## Posição 2D a `distance` passos do warrior na direção absoluta dada.
@@ -239,7 +270,7 @@ func with_turn(new_turn: int) -> LevelState:
 
 
 ## Novo estado 2D com posição do warrior alterada (produz LevelState 2D).
-func with_warrior_position_2d(new_pos: Vector2i) -> LevelState:
+func _with_warrior_position_2d(new_pos: Vector2i) -> LevelState:
 	var result := LevelState.from_2d(
 		rows(),
 		cols(),

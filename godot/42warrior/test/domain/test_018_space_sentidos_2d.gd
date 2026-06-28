@@ -116,23 +116,23 @@ func test_direction_of_2d_via_feel_north() -> void:
 	assert_true(facade.direction_of_2d(space).equals(Direction.north()))
 
 
-# ── step_of_2d / position_toward_2d ─────────────────────────────────────────
+# ── direction.delta() / position_toward_2d ───────────────────────────────────
 
 
-func test_step_of_2d_north() -> void:
-	assert_eq(_state_3x5(Vector2i(1, 2)).step_of_2d(Direction.north()), Vector2i(-1, 0))
+func test_direction_delta_north() -> void:
+	assert_eq(Direction.north().delta(), Vector2i(-1, 0))
 
 
-func test_step_of_2d_south() -> void:
-	assert_eq(_state_3x5(Vector2i(1, 2)).step_of_2d(Direction.south()), Vector2i(1, 0))
+func test_direction_delta_south() -> void:
+	assert_eq(Direction.south().delta(), Vector2i(1, 0))
 
 
-func test_step_of_2d_east() -> void:
-	assert_eq(_state_3x5(Vector2i(1, 2)).step_of_2d(Direction.east()), Vector2i(0, 1))
+func test_direction_delta_east() -> void:
+	assert_eq(Direction.east().delta(), Vector2i(0, 1))
 
 
-func test_step_of_2d_west() -> void:
-	assert_eq(_state_3x5(Vector2i(1, 2)).step_of_2d(Direction.west()), Vector2i(0, -1))
+func test_direction_delta_west() -> void:
+	assert_eq(Direction.west().delta(), Vector2i(0, -1))
 
 
 func test_position_toward_2d_dois_passos_east() -> void:

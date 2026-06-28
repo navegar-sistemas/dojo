@@ -43,14 +43,14 @@ func test_space_da_escada() -> void:
 
 func test_step_e_posicao_por_direcao() -> void:
 	var state := _build_state()
-	assert_eq(state.step_of(Direction.forward()), 1)
-	assert_eq(state.step_of(Direction.backward()), -1)
+	assert_eq(state._step_of(Direction.forward()), 1)
+	assert_eq(state._step_of(Direction.backward()), -1)
 	assert_eq(state.position_toward(Direction.forward(), 2), 3)
 
 
 func test_facing_invertido_inverte_o_step() -> void:
 	var state := _build_state().with_warrior_facing(-1)
-	assert_eq(state.step_of(Direction.forward()), -1)
+	assert_eq(state._step_of(Direction.forward()), -1)
 
 
 func test_with_warrior_position_nao_muta_original() -> void:

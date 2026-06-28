@@ -57,18 +57,22 @@ func _ready() -> void:
 func update_from_state(state: LevelState, floor_layer: TileMapLayer) -> void:
 	var active: Dictionary = {}
 
-	var stairs_world := _cell_world(state.stairs_position(), floor_layer)
+	var stairs_world := _cell_world_2d(state.stairs_position_2d(), floor_layer)
 	_ensure_sprite("stairs", stairs_world, "")
 	active["stairs"] = true
 
-	for pos: int in state.unit_positions():
-		var key := "unit_%d" % pos
-		var type_name: String = state.unit_at(pos).get_script().get_global_name()
-		_ensure_sprite(key, _cell_world(pos, floor_layer), type_name)
+	for pos: Vector2i in state.unit_positions_2d():
+		var key := "unit_%d_%d" % [pos.x, pos.y]
+		var unit: Unit = state.unit_at_2d(pos)
+		if unit == null:
+			continue
+		var type_name: String = unit.get_script().get_global_name()
+		_ensure_sprite(key, _cell_world_2d(pos, floor_layer), type_name)
 		active[key] = true
 
-	var warrior_world := _cell_world(state.warrior_position(), floor_layer)
+	var warrior_world := _cell_world_2d(state.warrior_position_2d(), floor_layer)
 	_ensure_sprite("warrior", warrior_world, "Warrior")
+	_apply_warrior_direction(state)
 	active["warrior"] = true
 
 	for key: String in _sprites.keys():
@@ -307,6 +311,46 @@ func _anim_duration(node: Node2D, anim_name: String) -> float:
 
 func _cell_world(col: int, floor_layer: TileMapLayer) -> Vector2:
 	return floor_layer.to_global(floor_layer.map_to_local(Vector2i(col, 0)))
+
+
+## Converte posição domínio (row, col) → posição mundo via TileMap (col, row).
+func _cell_world_2d(grid_pos: Vector2i, floor_layer: TileMapLayer) -> Vector2:
+	return floor_layer.to_global(floor_layer.map_to_local(Vector2i(grid_pos.y, grid_pos.x)))
+
+
+## Aplica flip_h/flip_v no sprite do warrior conforme a direção 4-dir do estado.
+## Leste: flip_h=false. Oeste: flip_h=true.
+## Norte: flip_h=false, flip_v=false, rotation=-PI/2.
+## Sul: flip_h=false, flip_v=false, rotation=PI/2.
+## Preserva comportamento 1D (warrior_4dir=null → usa warrior_facing).
+func _apply_warrior_direction(state: LevelState) -> void:
+	var node: Node2D = _sprites.get("warrior") as Node2D
+	if not node is AnimatedSprite2D:
+		return
+	var asp := node as AnimatedSprite2D
+	var dir: Direction = state.warrior_4dir()
+	if dir == null:
+		asp.flip_h = state.warrior_facing() < 0
+		asp.flip_v = false
+		asp.rotation = 0.0
+		return
+	var delta := dir.delta()
+	if delta == Vector2i(0, 1):  # East
+		asp.flip_h = false
+		asp.flip_v = false
+		asp.rotation = 0.0
+	elif delta == Vector2i(0, -1):  # West
+		asp.flip_h = true
+		asp.flip_v = false
+		asp.rotation = 0.0
+	elif delta == Vector2i(-1, 0):  # North (row diminui)
+		asp.flip_h = false
+		asp.flip_v = false
+		asp.rotation = -PI / 2.0
+	else:  # South (row aumenta)
+		asp.flip_h = false
+		asp.flip_v = false
+		asp.rotation = PI / 2.0
 
 
 func _load_tex(path: String) -> Texture2D:

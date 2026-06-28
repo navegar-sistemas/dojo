@@ -68,7 +68,7 @@ func test_stairs_position_2d_acessivel() -> void:
 
 func test_with_warrior_position_2d_imutavel() -> void:
 	var state := LevelState.from_2d(3, 5, Vector2i(2, 4), Warrior.new(), Vector2i(0, 0), 1, {}, 0)
-	var moved := state.with_warrior_position_2d(Vector2i(1, 3))
+	var moved := state._with_warrior_position_2d(Vector2i(1, 3))
 	assert_eq(state.warrior_position_2d(), Vector2i(0, 0), "original imutável")
 	assert_eq(moved.warrior_position_2d(), Vector2i(1, 3))
 
