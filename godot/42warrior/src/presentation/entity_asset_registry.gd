@@ -29,3 +29,7 @@ static func floor_tile() -> String:
 
 static func wall_tile() -> String:
 	return AssetPaths.WALL_TILE
+
+
+static func stairs_tile() -> String:
+	return AssetPaths.STAIRS_SPRITE
