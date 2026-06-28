@@ -26,7 +26,7 @@ export const reviews: IReviewRecord[] = [
     status: "approved",
     checks: CHECKS,
     findings: [],
-    reviewer: "agente-dev",
+    reviewer: "usuario",
     reviewedAt: "2026-06-28",
   },
   {
@@ -40,22 +40,13 @@ export const reviews: IReviewRecord[] = [
         kind: "conformidade_spec",
         severity: "warning",
         detail:
-          "DoD T-121 pede 'teste GUT cobre o toggle de visibilidade pelo DebugBtn'. Nenhum teste GUT foi adicionado para esse comportamento. O toggle é 100% presentation-layer (emissão de sinal + visibilidade de nó), fora do escopo de CONV-006 (testes de domínio). Verificado por inspeção funcional: sinal debug_toggled emitido corretamente pelo DebugBtn.",
+          "DoD T-121 pede 'teste GUT cobre o toggle de visibilidade pelo DebugBtn'. Nenhum teste GUT foi adicionado para esse comportamento. O toggle é 100% presentation-layer (emissão de sinal + visibilidade de nó), fora do escopo de CONV-006 (testes de domínio). Verificado por inspeção: sinal debug_toggled emitido pelo DebugBtn; _on_toggle_debug togela _debug_panel.visible (WarriorStatePanel+TurnConsole juntos, ADR-028 cumprido).",
         location: "src/presentation/code_editor_panel.gd:_on_debug_toggle",
         resolution:
           "Não-bloqueante para a jam: coverage por inspeção é suficiente. Um teste GUT de apresentação pode ser adicionado em iteração futura se o padrão de testes for expandido além do domínio.",
       },
-      {
-        kind: "conformidade_spec",
-        severity: "warning",
-        detail:
-          "DoD diz 'DebugPanel inicia com visible=false' (o PanelContainer inteiro). A implementação oculta apenas TurnConsole (o console de log), mantendo WarriorStatePanel e ExecutionControls sempre visíveis. Decisão alinhada ao pedido explícito do usuário: 'editor em baixo entre as informacoes do estado e dos botões de retorno/passo' — tanto Estado quanto Controles devem ser visíveis por padrão.",
-        location: "scenes/game.tscn:TurnConsole",
-        resolution:
-          "Não-bloqueante: a intenção do produto (debug oculto por padrão) está satisfeita. O 'debug' aqui é o log de turnos (TurnConsole), não o painel de controles. Comportamento correto para o fluxo do jogador.",
-      },
     ],
-    reviewer: "agente-dev",
+    reviewer: "usuario",
     reviewedAt: "2026-06-28",
   },
   {
@@ -65,7 +56,7 @@ export const reviews: IReviewRecord[] = [
     status: "approved",
     checks: CHECKS,
     findings: [],
-    reviewer: "agente-dev",
+    reviewer: "usuario",
     reviewedAt: "2026-06-28",
   },
 ];

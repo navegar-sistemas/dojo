@@ -18,6 +18,6 @@ export const feature: IFeature = {
     "Alterar as abas API/Glossário do editor (features 007/008).",
   ],
   productDecisions: [],
-  phase: "implementing",
+  phase: "done",
   createdAt: "2026-06-28",
 };
