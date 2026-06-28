@@ -10,6 +10,7 @@ var _loader := LevelLoader.new()
 var _script_runner := PlayerScriptRunner.new()
 var _scoring := ScoringService.new()
 var _formatter := TurnEventFormatter.new()
+var _glitch_rule := GlitchRule.new()
 
 var _level_index := 1
 var _definition: LevelDefinition
@@ -30,6 +31,8 @@ var _last_outcome: TurnResult.Outcome = TurnResult.Outcome.ONGOING
 var _last_score: Score
 var _last_turns: int = 0
 var _timer: Timer
+var _glitch_post_process: GlitchPostProcess
+var _ui_corruption: UiCorruption
 
 @onready var _dungeon: DungeonView = $DungeonView
 @onready var _hud: HudView = $HudView
@@ -45,6 +48,10 @@ func _ready() -> void:
 	_timer.wait_time = 0.45
 	_timer.timeout.connect(_on_tick)
 	add_child(_timer)
+	_glitch_post_process = GlitchPostProcess.new()
+	add_child(_glitch_post_process)
+	_ui_corruption = UiCorruption.new()
+	add_child(_ui_corruption)
 	_editor.run_pressed.connect(_on_run_pressed)
 	_controls.play_pause_toggled.connect(_on_play_pause_toggled)
 	_controls.step_requested.connect(_on_step_requested)
@@ -75,6 +82,8 @@ func _load_level(index: int) -> void:
 	_finished = false
 	_animating = false
 	_timer.stop()
+	if _ui_corruption:
+		_ui_corruption.set_floor(index)
 	_dungeon.refresh_level(_state)
 	_hud.update_hud(_state, 0, _definition.description, 0)
 	_hud.setup_hint(_definition.hint_text)
@@ -88,7 +97,8 @@ func _load_level(index: int) -> void:
 func _on_run_pressed(source: String) -> void:
 	var compiled := _script_runner.compile(source)
 	if _script_runner.has_error():
-		_editor.show_compile_error(_script_runner.error())
+		_editor.show_compile_error(ThemeCatalog.message("error_compile"))
+		_glitch_post_process.set_intensity(0.90)
 		return
 	_editor.clear_error()
 	_compute_turns(compiled)
@@ -159,6 +169,10 @@ func _step() -> void:
 	var audio: Node = get_node_or_null("/root/AudioManager")
 	if audio:
 		audio.on_events(result.events)
+	var glitch := _glitch_rule.evaluate(
+		_level_index, _display_index, result.events, _turn_errors[_display_index] != ""
+	)
+	_glitch_post_process.set_intensity(glitch.post_process_intensity)
 	_display_index += 1
 	if result.outcome != TurnResult.Outcome.ONGOING:
 		_finish()

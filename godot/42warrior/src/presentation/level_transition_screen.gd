@@ -18,7 +18,7 @@ func _ready() -> void:
 
 
 func _show_level(definition: LevelDefinition) -> void:
-	_title.text = "Nível %d" % definition.index
+	_title.text = ThemeCatalog.message("floor_heading", [definition.index])
 	_desc.text = definition.description
 	if definition.abilities.is_empty():
 		_abilities.text = ""
