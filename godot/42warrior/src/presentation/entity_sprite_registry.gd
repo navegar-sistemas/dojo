@@ -11,7 +11,9 @@ const ANIM_DIE := 0.30
 const ANIM_REST := 0.20
 
 var _sprites: Dictionary = {}
-var _pending := 0
+## Mantém a referência viva enquanto a sequência toca (play() é assíncrono e o
+## sequencer é RefCounted — sem isto ele poderia ser coletado durante o await).
+var _sequencer: AnimationSequencer = null
 
 
 func update_from_state(state: LevelState, floor_layer: TileMapLayer) -> void:
@@ -39,13 +41,15 @@ func update_from_state(state: LevelState, floor_layer: TileMapLayer) -> void:
 			_sprites.erase(key)
 
 
+## Anima os eventos do turno em ordem causal (RF-130): cada TurnEvent é um beat
+## da fila; o beat N+1 só inicia depois que o N concluir. Pares causa-efeito do
+## mesmo instante (ATTACKED = pulse+hurt) formam UM beat concorrente (RF-131).
 func animate_events(events: Array, floor_layer: TileMapLayer) -> void:
-	_pending = 0
+	_sequencer = AnimationSequencer.new()
 	for event: TurnEvent in events:
-		if _animate_event(event, floor_layer):
-			_pending += 1
-	if _pending == 0:
-		all_done.emit()
+		_sequencer.enqueue_beat(_beat_factories(event, floor_layer))
+	_sequencer.all_done.connect(_on_sequence_done, CONNECT_ONE_SHOT)
+	_sequencer.play()
 
 
 func warrior_global_position() -> Vector2:
@@ -54,20 +58,32 @@ func warrior_global_position() -> Vector2:
 	return Vector2.ZERO
 
 
-func _animate_event(event: TurnEvent, floor_layer: TileMapLayer) -> bool:
+func _on_sequence_done() -> void:
+	all_done.emit()
+
+
+## Traduz um TurnEvent no conjunto de factories (Callables que criam tweens) do
+## seu beat. Um beat com >1 factory é concorrente (tocado junto); a serialização
+## acontece ENTRE beats, no AnimationSequencer.
+func _beat_factories(event: TurnEvent, floor_layer: TileMapLayer) -> Array:
 	match event.kind:
 		TurnEvent.Kind.MOVED:
-			return _tween_move("warrior", _cell_world(event.position, floor_layer))
+			var target := _cell_world(event.position, floor_layer)
+			return [func() -> Tween: return _tween_move("warrior", target)]
 		TurnEvent.Kind.ATTACKED, TurnEvent.Kind.SHOT:
-			_tween_scale_pulse("warrior")
-			return _tween_hurt("unit_%d" % event.position)
+			var target_key := "unit_%d" % event.position
+			return [
+				func() -> Tween: return _tween_scale_pulse("warrior"),
+				func() -> Tween: return _tween_hurt(target_key),
+			]
 		TurnEvent.Kind.DAMAGED:
-			return _tween_hurt("warrior")
+			return [func() -> Tween: return _tween_hurt("warrior")]
 		TurnEvent.Kind.ENEMY_DEFEATED, TurnEvent.Kind.RESCUED, TurnEvent.Kind.DIED:
-			return _tween_die(_entity_key(event))
+			var die_key := _entity_key(event)
+			return [func() -> Tween: return _tween_die(die_key)]
 		TurnEvent.Kind.RESTED, TurnEvent.Kind.WON:
-			return _tween_scale_pulse("warrior")
-	return false
+			return [func() -> Tween: return _tween_scale_pulse("warrior")]
+	return []
 
 
 func _entity_key(event: TurnEvent) -> String:
@@ -76,54 +92,44 @@ func _entity_key(event: TurnEvent) -> String:
 	return "unit_%d" % event.position
 
 
-func _tween_move(key: String, target_world: Vector2) -> bool:
+func _tween_move(key: String, target_world: Vector2) -> Tween:
 	var sprite := _sprites.get(key) as Sprite2D
 	if sprite == null:
-		return false
+		return null
 	var tween := create_tween()
 	tween.tween_property(sprite, "global_position", target_world, ANIM_WALK).set_ease(
 		Tween.EASE_IN_OUT
 	)
-	tween.finished.connect(_on_tween_done, CONNECT_ONE_SHOT)
-	return true
+	return tween
 
 
-func _tween_scale_pulse(key: String) -> bool:
+func _tween_scale_pulse(key: String) -> Tween:
 	var sprite := _sprites.get(key) as Sprite2D
 	if sprite == null:
-		return false
+		return null
 	var tween := create_tween()
 	tween.tween_property(sprite, "scale", Vector2(1.3, 1.3), ANIM_ATTACK * 0.5)
 	tween.tween_property(sprite, "scale", Vector2.ONE, ANIM_ATTACK * 0.5)
-	tween.finished.connect(_on_tween_done, CONNECT_ONE_SHOT)
-	return true
+	return tween
 
 
-func _tween_hurt(key: String) -> bool:
+func _tween_hurt(key: String) -> Tween:
 	var sprite := _sprites.get(key) as Sprite2D
 	if sprite == null:
-		return false
+		return null
 	var tween := create_tween()
 	tween.tween_property(sprite, "modulate", Color.RED, ANIM_HURT * 0.4)
 	tween.tween_property(sprite, "modulate", Color.WHITE, ANIM_HURT * 0.6)
-	tween.finished.connect(_on_tween_done, CONNECT_ONE_SHOT)
-	return true
+	return tween
 
 
-func _tween_die(key: String) -> bool:
+func _tween_die(key: String) -> Tween:
 	var sprite := _sprites.get(key) as Sprite2D
 	if sprite == null:
-		return false
+		return null
 	var tween := create_tween()
 	tween.tween_property(sprite, "modulate:a", 0.0, ANIM_DIE)
-	tween.finished.connect(_on_tween_done, CONNECT_ONE_SHOT)
-	return true
-
-
-func _on_tween_done() -> void:
-	_pending -= 1
-	if _pending <= 0:
-		all_done.emit()
+	return tween
 
 
 func _cell_world(col: int, floor_layer: TileMapLayer) -> Vector2:
