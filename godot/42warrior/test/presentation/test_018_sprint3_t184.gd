@@ -87,11 +87,11 @@ func test_grade_2d_nao_afeta_grade_1d_retrocompat() -> void:
 func test_camera_segue_warrior_no_eixo_y_em_nivel_2d() -> void:
 	var warrior_pos := Vector2.ZERO
 	var cam := Camera2D.new()
-	add_child(cam)
+	add_child_autoqfree(cam)
 	var ctrl := CameraFollowController.new()
 	ctrl.smooth_speed = 1.0
 	ctrl.dead_zone_half_w = 10.0
-	add_child(ctrl)
+	add_child_autoqfree(ctrl)
 
 	warrior_pos = Vector2(200.0, 100.0)
 	ctrl.initialize(cam, 2000.0, VIEWPORT, func() -> Vector2: return warrior_pos, 1500.0)
@@ -103,18 +103,16 @@ func test_camera_segue_warrior_no_eixo_y_em_nivel_2d() -> void:
 	assert_gt(
 		cam.global_position.y, cam_y_antes, "câmera deve seguir warrior no eixo Y em nível 2D"
 	)
-	cam.queue_free()
-	ctrl.queue_free()
 
 
 func test_camera_nao_segue_y_em_nivel_1d() -> void:
 	var warrior_pos := Vector2.ZERO
 	var cam := Camera2D.new()
-	add_child(cam)
+	add_child_autoqfree(cam)
 	var ctrl := CameraFollowController.new()
 	ctrl.smooth_speed = 1.0
 	ctrl.dead_zone_half_w = 10.0
-	add_child(ctrl)
+	add_child_autoqfree(ctrl)
 
 	warrior_pos = Vector2(200.0, 0.0)
 	ctrl.initialize(cam, 2000.0, VIEWPORT, func() -> Vector2: return warrior_pos)
@@ -129,8 +127,6 @@ func test_camera_nao_segue_y_em_nivel_1d() -> void:
 		0.01,
 		"câmera NÃO deve seguir Y em nível 1D (level_height_px=0)"
 	)
-	cam.queue_free()
-	ctrl.queue_free()
 
 
 # ── AnimatedEntityRegistry: visual por direção 4-dir ─────────────────────────
@@ -141,10 +137,10 @@ func _warrior_sprite_from_state(state: LevelState) -> AnimatedSprite2D:
 	var tile_set := TileSet.new()
 	tile_set.tile_size = Vector2i(32, 32)
 	floor.tile_set = tile_set
-	add_child(floor)
+	add_child_autoqfree(floor)
 
 	var registry := AnimatedEntityRegistry.new()
-	add_child(registry)
+	add_child_autoqfree(registry)
 	await get_tree().process_frame
 
 	registry.update_from_state(state, floor)
