@@ -73,9 +73,34 @@ export const decisions: IArchitectureDecision[] = [
       },
     ],
   },
+  {
+    key: "ADR-042",
+    title: "Theme global (design system) data-driven aplicado a todas as telas; resolve o RNF-063",
+    context:
+      "O brief do Matheus aponta que as telas usavam o tema DEFAULT do Godot (cinza, fonte genérica, amarelo). É preciso um design system único — paleta void/grafite, Press Start 2P + JetBrains Mono, cores por contexto, overlay de glitch, fundo temático — aplicado a TODAS as telas, sem estilizar tela a tela. A 006 criou game_theme.tres mas nunca o aplicou (RNF-063, débito deferido pelo PO).",
+    decision:
+      "Um Theme GLOBAL (recurso .tres único) + uma fundação GlobalDesignSystem (F4) que carrega fontes/paleta/cores-por-contexto e provê o overlay de glitch (CanvasLayer Add/Screen) e o fundo temático (tile_void/scanlines/data-rain) reusáveis; todas as telas e controles consomem esse Theme data-driven (RNF-060), sem hardcode. Aplicar o Theme global RESOLVE o RNF-063 da 006. F4 é independente das demais fundações (dependsOn:[]).",
+    consequences:
+      "Identidade visual coesa e consistente em todas as telas; trocar cor/fonte = trocar Theme. Fecha o débito RNF-063. Custo: montar o Theme + fontes + sistema de cores + overlay/fundo reusáveis. As telas (S2/S3) consomem F4, que entrega na S1 (P0) antes delas.",
+    status: "accepted",
+    requirementKeys: ["RF-165", "RF-163"],
+    rejectedAlternatives: [
+      {
+        alternative: "Estilizar cada tela isoladamente, sem Theme global",
+        reason: "Foi o estado defeituoso (tema default + estilos ad-hoc); viola RNF-060 e não fecha o RNF-063.",
+      },
+    ],
+  },
 ];
 
 export const components: IComponent[] = [
+  {
+    name: "GlobalDesignSystem",
+    responsibility:
+      "Apresentação (fundação F4): Theme global único (paleta void/grafite, fontes Press Start 2P/JetBrains Mono de design_files/v1/fonts, cores por contexto data-driven, botões/sliders tematizados) + overlay de glitch (CanvasLayer Add/Screen) e fundo temático (tile_void/scanlines/data-rain) reusáveis por todas as telas. Aplica o Theme global e resolve o RNF-063 da 006. Independente das demais fundações.",
+    dependsOn: [],
+    requirementKeys: ["RF-165", "RF-163", "RNF-160"],
+  },
   {
     name: "ScreenComposer",
     responsibility:

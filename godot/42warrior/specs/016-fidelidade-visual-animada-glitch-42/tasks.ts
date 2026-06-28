@@ -36,7 +36,18 @@ export const tasks: ITask[] = [
     parallel: true,
     assignee: null,
   },
-  // ── TELAS P0 — dependem das fundações; paralelizáveis entre si ──
+  {
+    key: "T-172",
+    storyKey: "US-172",
+    summary: "F4: Theme global + design system (paleta/fontes/cores-por-contexto/overlay/fundo/sliders); resolve RNF-063.",
+    definitionOfDone:
+      "Theme global único (.tres) carregando paleta (void #0A0A0B/grafite), fontes Press Start 2P + JetBrains Mono de design_files/v1/fonts, sistema de cores por contexto data-driven (zero amarelo base; verde #00FF66 / rubi #FF003C / ciano #00F0FF) e botões/sliders tematizados; + overlay de glitch (CanvasLayer Add/Screen) e fundo temático (tile_void/scanlines/data-rain) reusáveis por todas as telas. Aplica o Theme global ao jogo (fecha o RNF-063 da 006). DoD = PROVA DE RENDER DE CENA (renderiza ≥1 frame, assere: fundo void, fontes aplicadas, cores-por-contexto, overlay ativo, botão 4-estados) + DATA-DRIVEN (cores/fontes via Theme, sem hardcode); suíte 100% verde, 0 regressão.",
+    status: "todo",
+    dependsOn: [],
+    parallel: true,
+    assignee: null,
+  },
+  // ── TELAS P0 — dependem das fundações (incl. F4/T-172 p/ o Theme); paralelizáveis entre si ──
   {
     key: "T-163",
     storyKey: "US-163",
@@ -74,9 +85,9 @@ export const tasks: ITask[] = [
   {
     key: "T-166",
     storyKey: "US-166",
-    summary: "Tela Resultado/Pontuação fiel ao mockup.",
+    summary: "Tela Resultado de nível (vitória E derrota/SIGKILL) fiel ao mockup.",
     definitionOfDone:
-      "Resultado: `>> RUN COMPLETE`, grade (S/A/…) grande + estrelas (ui_star), stats (SCORE/TIME BONUS/TURNS/ACE), botões PRÓXIMO/REPLAY (T-162). Tipografia via Theme. DoD = PROVA DE RENDER (renderiza ≥1 frame, assere elementos-chave) + suíte verde, 0 regressão.",
+      "VITÓRIA: `>> RUN COMPLETE`, exit 0 em VERDE #00FF66, grade (S/A/…) grande + estrelas (ui_star), stats alinhados (SCORE/TIME BONUS/TURNS/ACE), botões PRÓXIMO/REPLAY (T-162). DERROTA: SIGKILL em RUBI #FF003C + efeito de morte (glitch/datamosh + screen-shake mínimo) + re-exec/retry. Tipografia/cores via Theme (F4), sem amarelo. DoD = PROVA DE RENDER (renderiza ≥1 frame, assere os elementos-chave de cada estado) + suíte verde, 0 regressão.",
     status: "todo",
     dependsOn: ["T-162"],
     parallel: true,
@@ -129,9 +140,9 @@ export const tasks: ITask[] = [
   {
     key: "T-171",
     storyKey: "US-171",
-    summary: "Tela Conclusão/Créditos fiel ao mockup.",
+    summary: "Tela Conclusão/Créditos fiel ao mockup + CORREÇÃO FACTUAL dos créditos (must-fix).",
     definitionOfDone:
-      "Conclusão: terminal `SYSTEM RESTORED` / `exit 0` com créditos rolando, fiel ao mockup. Tipografia via Theme. DoD = PROVA DE RENDER (renderiza ≥1 frame, assere o terminal + créditos) + suíte verde, 0 regressão.",
+      "Conclusão: terminal `SYSTEM RESTORED` / `exit 0` (verde) com créditos rolando, fiel ao mockup, tipografia via Theme. CORREÇÃO FACTUAL (ALTA prioridade): REMOVER a linha falsa 'CC0 assets by freesound.org / opengameart.org' (arte e áudio são ORIGINAIS) → 'Arte e áudio originais'; MANTER 'Inspired by Ruby Warrior (Ryan Bates)' + 'Built with Godot 4 + GDScript'. DoD = PROVA DE RENDER (renderiza ≥1 frame, assere o terminal + créditos SEM a linha freesound/opengameart) + suíte verde, 0 regressão.",
     status: "todo",
     dependsOn: [],
     parallel: true,

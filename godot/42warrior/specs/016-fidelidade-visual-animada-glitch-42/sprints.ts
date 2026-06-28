@@ -5,11 +5,11 @@ export const sprints: ISprint[] = [
     id: 1,
     name: "Fundações P0 (paralelizáveis entre 2 devs)",
     goal:
-      "As 3 fundações reutilizáveis, INDEPENDENTES entre si (sem dependsOn cruzado) para alocação 1-por-dev em worktrees disjuntas: US-160 (AnimatedSprite2D dos personagens), US-161 (TileMap 32px nativo da arena + feet-anchor), US-162 (botão 4-estados). DoD por task = prova de render de cena (RNF-160).",
+      "As 4 fundações reutilizáveis, INDEPENDENTES entre si (sem dependsOn cruzado) para alocação por dev em worktrees disjuntas: US-160 (AnimatedSprite2D dos personagens), US-161 (TileMap 32px nativo da arena + feet-anchor), US-162 (botão 4-estados), US-172 (F4: Theme global + design system, resolve RNF-063). DoD por task = prova de render de cena (RNF-160).",
     state: "active",
     startDate: "",
     endDate: "",
-    storyKeys: ["US-160", "US-161", "US-162"],
+    storyKeys: ["US-160", "US-161", "US-162", "US-172"],
   },
   {
     id: 2,

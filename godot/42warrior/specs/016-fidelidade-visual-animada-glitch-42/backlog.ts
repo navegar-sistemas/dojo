@@ -48,6 +48,22 @@ export const stories: IUserStory[] = [
     status: "todo",
     assignee: null,
   },
+  {
+    key: "US-172",
+    asA: "Jogador",
+    iWant:
+      "que todas as telas sigam a identidade visual 42/glitch (paleta void, fontes e cores por contexto), não o tema default do Godot",
+    soThat: "o jogo tenha a cara do design system desde a primeira tela, em vez de cinza/amarelo genérico",
+    acceptanceCriteria: [
+      "Dado o Theme global aplicado, quando qualquer tela renderiza, então usa o fundo void #0A0A0B (não cinza), as fontes Press Start 2P (títulos) + JetBrains Mono (resto) e as cores por contexto (zero amarelo base; verde sucesso / rubi perigo / ciano ativo), tudo data-driven via Theme.",
+      "Dado o design system, quando uma tela renderiza, então há overlay de glitch (CanvasLayer Add/Screen) + fundo temático (tile_void/scanlines/data-rain) e os botões/sliders são tematizados (primário ciano), fechando o RNF-063 da 006.",
+    ],
+    requirementKeys: ["RF-165", "RF-163", "RNF-160"],
+    priority: "highest",
+    storyPoints: 5,
+    status: "todo",
+    assignee: null,
+  },
   // ── TELAS P0 (fluxo principal: jogo, menu, seleção) ──
   {
     key: "US-163",
@@ -98,10 +114,11 @@ export const stories: IUserStory[] = [
   {
     key: "US-166",
     asA: "Jogador",
-    iWant: "ver a tela de resultado/pontuação fiel ao mockup",
-    soThat: "eu veja meu desempenho ao concluir um andar",
+    iWant: "ver a tela de resultado de nível (vitória E derrota) fiel ao mockup",
+    soThat: "eu veja meu desempenho ao concluir um andar ou o motivo da derrota",
     acceptanceCriteria: [
-      "Dado o fim de um andar, quando a tela de resultado renderiza, então mostra >> RUN COMPLETE, a grade (S/A/…) grande + estrelas (ui_star), stats (SCORE/TIME BONUS/TURNS/ACE) e botões PRÓXIMO/REPLAY, fiel ao mockup com a tipografia do Theme.",
+      "Dado o fim de um andar com VITÓRIA, quando a tela de resultado renderiza, então mostra >> RUN COMPLETE, exit 0 em VERDE #00FF66, a grade (S/A/…) grande + estrelas (ui_star), stats alinhados (SCORE/TIME BONUS/TURNS/ACE) e botões PRÓXIMO/REPLAY, fiel ao mockup com a tipografia do Theme.",
+      "Dado uma DERROTA, quando a tela renderiza, então mostra SIGKILL em RUBI #FF003C, efeito de morte (glitch/datamosh + screen-shake mínimo) e a opção de re-exec/retry, fiel ao mockup (sem amarelo).",
     ],
     requirementKeys: ["RF-164", "RF-163", "RNF-160"],
     priority: "medium",
@@ -168,10 +185,11 @@ export const stories: IUserStory[] = [
   {
     key: "US-171",
     asA: "Jogador",
-    iWant: "ver a tela de conclusão/créditos fiel ao mockup",
-    soThat: "eu tenha o fechamento da torre com a identidade do jogo",
+    iWant: "ver a tela de conclusão/créditos fiel ao mockup, com atribuição CORRETA",
+    soThat: "eu tenha o fechamento da torre com a identidade do jogo e os créditos honestos",
     acceptanceCriteria: [
-      "Dado a conclusão do jogo, quando a tela renderiza, então mostra o terminal SYSTEM RESTORED / exit 0 com os créditos rolando, fiel ao mockup e com a tipografia do Theme.",
+      "Dado a conclusão do jogo, quando a tela renderiza, então mostra o terminal SYSTEM RESTORED / exit 0 (verde) com os créditos rolando, fiel ao mockup e com a tipografia do Theme.",
+      "CORREÇÃO FACTUAL (must-fix): Dado os créditos, quando exibidos, então NÃO contêm a linha falsa 'CC0 assets by freesound.org / opengameart.org' (arte e áudio são ORIGINAIS deste projeto) — em vez disso mostram 'Arte e áudio originais', MANTENDO 'Inspired by Ruby Warrior (Ryan Bates)' e 'Built with Godot 4 + GDScript'.",
     ],
     requirementKeys: ["RF-164", "RF-163", "RNF-160"],
     priority: "medium",
