@@ -9,6 +9,7 @@ const ATLAS_COORD := Vector2i(0, 0)
 var _floor_source_id := 0
 var _wall_source_id := 1
 var _pending_state: LevelState
+var _cam_controller: CameraFollowController
 
 @onready var _floor_layer: TileMapLayer = $Floor
 @onready var _entities: EntitySpriteRegistry = $Entities
@@ -17,15 +18,15 @@ var _pending_state: LevelState
 
 func _ready() -> void:
 	_setup_tiles()
-	_camera.position_smoothing_enabled = true
-	_camera.position_smoothing_speed = 5.0
 	_entities.all_done.connect(_on_animations_done)
+	_cam_controller = CameraFollowController.new()
+	add_child(_cam_controller)
 
 
 func refresh_level(state: LevelState) -> void:
 	_update_floor(state)
 	_entities.update_from_state(state, _floor_layer)
-	_fit_camera(state)
+	_init_camera(state)
 
 
 func on_turn_result(result: TurnResult, state: LevelState) -> void:
@@ -36,8 +37,13 @@ func on_turn_result(result: TurnResult, state: LevelState) -> void:
 func _on_animations_done() -> void:
 	if _pending_state != null:
 		_entities.update_from_state(_pending_state, _floor_layer)
-		_camera.global_position = _entities.warrior_global_position()
 	animations_finished.emit()
+
+
+func _init_camera(state: LevelState) -> void:
+	var level_w := float(state.width() * TILE_SIZE)
+	var vp_size := get_viewport_rect().size
+	_cam_controller.initialize(_camera, level_w, vp_size, _entities.warrior_global_position)
 
 
 func _update_floor(state: LevelState) -> void:
@@ -47,18 +53,6 @@ func _update_floor(state: LevelState) -> void:
 		_floor_layer.set_cell(Vector2i(col, 0), _floor_source_id, ATLAS_COORD)
 	_floor_layer.set_cell(Vector2i(-1, 0), _wall_source_id, ATLAS_COORD)
 	_floor_layer.set_cell(Vector2i(width, 0), _wall_source_id, ATLAS_COORD)
-
-
-func _fit_camera(state: LevelState) -> void:
-	var dungeon_w := state.width() * TILE_SIZE
-	var viewport_w := get_viewport_rect().size.x
-	if dungeon_w <= viewport_w:
-		var zoom := viewport_w / float(dungeon_w)
-		_camera.zoom = Vector2(zoom, zoom)
-		_camera.global_position = Vector2(dungeon_w * 0.5, 0.0)
-	else:
-		_camera.zoom = Vector2.ONE
-		_camera.global_position = _entities.warrior_global_position()
 
 
 func _setup_tiles() -> void:
