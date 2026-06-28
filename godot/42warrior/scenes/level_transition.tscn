@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/presentation/level_transition_screen.gd" id="1_trans"]
+
+[node name="LevelTransition" type="PanelContainer"]
+script = ExtResource("1_trans")
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="VBox"]
+layout_mode = 2
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 36
+theme_override_colors/font_color = Color(0.9, 0.8, 0.4, 1)
+
+[node name="Description" type="Label" parent="VBox"]
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 16
+
+[node name="Abilities" type="Label" parent="VBox"]
+layout_mode = 2
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.5, 0.9, 0.6, 1)
+
+[node name="StartBtn" type="Button" parent="VBox"]
+layout_mode = 2
+text = "▶ Iniciar Nível"
+theme_override_font_sizes/font_size = 20

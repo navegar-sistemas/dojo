@@ -1,0 +1,66 @@
+import type { IUserStory } from "../types.ts";
+
+export const stories: IUserStory[] = [
+  {
+    key: "US-040",
+    asA: "jogador",
+    iWant: "um console que lista o que o warrior fez a cada turno",
+    soThat: "eu entenda o que minha lógica executou",
+    acceptanceCriteria: [
+      "Dado um nível em execução, quando os turnos passam, então o console mostra uma entrada por turno com a ação e o efeito (andou; atacou causando N; descansou +N; levou dano; resgatou; sem ação/erro).",
+      "Dado o turno corrente, quando ele é exibido, então sua entrada fica destacada no console.",
+    ],
+    requirementKeys: ["RF-040", "RF-044"],
+    priority: "highest",
+    storyPoints: 5,
+    status: "done",
+    assignee: "usuario",
+  },
+  {
+    key: "US-041",
+    asA: "jogador",
+    iWant: "ver o estado corrente do warrior e do nível",
+    soThat: "eu correlacione o estado com a decisão da minha lógica",
+    acceptanceCriteria: [
+      "Dado um turno exibido, quando olho o painel de estado, então vejo HP atual/máximo, posição e direção do warrior.",
+      "Dado o nível em andamento, quando olho o painel, então vejo o número do turno e os inimigos restantes.",
+    ],
+    requirementKeys: ["RF-041"],
+    priority: "highest",
+    storyPoints: 5,
+    status: "done",
+    assignee: "usuario",
+  },
+  {
+    key: "US-042",
+    asA: "jogador",
+    iWant: "controlar o ritmo da execução (play, pause, passo-a-passo, velocidade)",
+    soThat: "eu inspecione turno a turno no meu tempo",
+    acceptanceCriteria: [
+      "Dado um nível rodando, quando uso play/pause, então o avanço automático segue/para; quando uso passo-a-passo, então avança exatamente um turno.",
+      "Dado o ajuste de velocidade, quando o altero, então o intervalo entre turnos muda.",
+      "Dado o mesmo nível e código, quando comparo execução contínua, pausada e passo-a-passo, então o LevelState final é idêntico (RNF-041).",
+    ],
+    requirementKeys: ["RF-042", "RNF-041"],
+    priority: "highest",
+    storyPoints: 8,
+    status: "done",
+    assignee: "usuario",
+  },
+  {
+    key: "US-043",
+    asA: "jogador",
+    iWant: "ver erros e o contexto sentido associados ao turno",
+    soThat: "eu depure por que minha lógica falhou ou decidiu algo",
+    acceptanceCriteria: [
+      "Dado um erro no código num turno, quando ele ocorre, então a entrada daquele turno mostra a mensagem de erro, sem impedir a navegação pelos demais turnos.",
+      "Dado que os eventos carregam o que o warrior sentiu, quando exibidos, então o console pode mostrar esse contexto junto da ação.",
+      "Dado o console, quando o reviso, então ele apenas lê TurnEvents/estado e não altera o resultado do turno (RNF-040).",
+    ],
+    requirementKeys: ["RF-043", "RF-045", "RNF-040"],
+    priority: "high",
+    storyPoints: 5,
+    status: "done",
+    assignee: "usuario",
+  },
+];

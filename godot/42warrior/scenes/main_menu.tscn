@@ -1,0 +1,62 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/presentation/main_menu.gd" id="1_menu"]
+
+[node name="MainMenu" type="PanelContainer"]
+script = ExtResource("1_menu")
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 16
+
+[node name="Title" type="Label" parent="VBox"]
+layout_mode = 2
+text = "42 WARRIOR"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 48
+theme_override_colors/font_color = Color(0.9, 0.8, 0.4, 1)
+
+[node name="StartBtn" type="Button" parent="VBox"]
+layout_mode = 2
+text = "▶ Iniciar"
+theme_override_font_sizes/font_size = 22
+
+[node name="ContinueBtn" type="Button" parent="VBox"]
+layout_mode = 2
+text = "↩ Continuar"
+theme_override_font_sizes/font_size = 22
+
+[node name="VolumeBox" type="VBoxContainer" parent="VBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="MusicLabel" type="Label" parent="VBox/VolumeBox"]
+layout_mode = 2
+text = "Música"
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+
+[node name="MusicSlider" type="HSlider" parent="VBox/VolumeBox"]
+layout_mode = 2
+min_value = 0.0
+max_value = 1.0
+step = 0.05
+value = 1.0
+size_flags_horizontal = 3
+
+[node name="SfxLabel" type="Label" parent="VBox/VolumeBox"]
+layout_mode = 2
+text = "Efeitos"
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+
+[node name="SfxSlider" type="HSlider" parent="VBox/VolumeBox"]
+layout_mode = 2
+min_value = 0.0
+max_value = 1.0
+step = 0.05
+value = 1.0
+size_flags_horizontal = 3

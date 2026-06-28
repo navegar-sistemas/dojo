@@ -1,0 +1,226 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://src/presentation/game_controller.gd" id="1_gamecontroller"]
+[ext_resource type="Script" path="res://src/presentation/dungeon_view.gd" id="2_dungview"]
+[ext_resource type="Script" path="res://src/presentation/entity_sprite_registry.gd" id="3_registry"]
+[ext_resource type="Script" path="res://src/presentation/hud_view.gd" id="4_hudview"]
+[ext_resource type="Script" path="res://src/presentation/code_editor_panel.gd" id="5_panel"]
+[ext_resource type="Script" path="res://src/presentation/error_view.gd" id="6_errview"]
+[ext_resource type="Script" path="res://src/presentation/warrior_state_panel.gd" id="7_warpanel"]
+[ext_resource type="Script" path="res://src/presentation/turn_console.gd" id="8_console"]
+[ext_resource type="Script" path="res://src/presentation/execution_controls.gd" id="9_controls"]
+
+[node name="GameView" type="Node"]
+script = ExtResource("1_gamecontroller")
+
+[node name="DungeonView" type="Node2D" parent="."]
+script = ExtResource("2_dungview")
+
+[node name="Floor" type="TileMapLayer" parent="DungeonView"]
+
+[node name="Entities" type="Node2D" parent="DungeonView"]
+script = ExtResource("3_registry")
+
+[node name="Camera" type="Camera2D" parent="DungeonView"]
+position_smoothing_enabled = true
+position_smoothing_speed = 5.0
+
+[node name="HudView" type="CanvasLayer" parent="."]
+layer = 1
+script = ExtResource("4_hudview")
+
+[node name="HpLabel" type="Label" parent="HudView"]
+anchors_preset = 1
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 200.0
+offset_bottom = 48.0
+text = "♥ 20/20"
+theme_override_font_sizes/font_size = 24
+
+[node name="TurnLabel" type="Label" parent="HudView"]
+anchors_preset = 1
+offset_left = 16.0
+offset_top = 52.0
+offset_right = 200.0
+offset_bottom = 80.0
+text = "Turno: 0"
+theme_override_font_sizes/font_size = 18
+
+[node name="LevelLabel" type="Label" parent="HudView"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 16.0
+offset_right = 200.0
+offset_bottom = 48.0
+horizontal_alignment = 1
+text = ""
+theme_override_font_sizes/font_size = 20
+
+[node name="ScoreLabel" type="Label" parent="HudView"]
+anchors_preset = 3
+offset_left = -200.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 48.0
+horizontal_alignment = 2
+text = "Score: 0"
+theme_override_font_sizes/font_size = 20
+
+[node name="EditorLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="CodeEditorPanel" type="PanelContainer" parent="EditorLayer"]
+script = ExtResource("5_panel")
+anchor_left = 0.58
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="EditorLayer/CodeEditorPanel"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TitleBar" type="Label" parent="EditorLayer/CodeEditorPanel/VBox"]
+layout_mode = 2
+text = "▶ CÓDIGO DO WARRIOR"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.9, 0.8, 0.4, 1)
+
+[node name="Editor" type="CodeEdit" parent="EditorLayer/CodeEditorPanel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+custom_minimum_size = Vector2(0, 300)
+text = "extends RefCounted
+
+func play_turn(warrior):
+	pass"
+
+[node name="Buttons" type="HBoxContainer" parent="EditorLayer/CodeEditorPanel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="RunBtn" type="Button" parent="EditorLayer/CodeEditorPanel/VBox/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "▶ Rodar"
+theme_override_colors/font_color = Color(0.4, 0.9, 0.5, 1)
+
+[node name="ResetBtn" type="Button" parent="EditorLayer/CodeEditorPanel/VBox/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "↺ Resetar"
+
+[node name="RefBtn" type="Button" parent="EditorLayer/CodeEditorPanel/VBox/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Solucao"
+
+[node name="ErrorView" type="PanelContainer" parent="EditorLayer/CodeEditorPanel/VBox"]
+script = ExtResource("6_errview")
+visible = false
+custom_minimum_size = Vector2(0, 60)
+
+[node name="Label" type="Label" parent="EditorLayer/CodeEditorPanel/VBox/ErrorView"]
+layout_mode = 2
+text = ""
+autowrap_mode = 3
+theme_override_colors/font_color = Color(1, 0.4, 0.4, 1)
+theme_override_font_sizes/font_size = 13
+
+[node name="DebugLayer" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="DebugPanel" type="PanelContainer" parent="DebugLayer"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.28
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="DebugLayer/DebugPanel"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="WarriorStatePanel" type="PanelContainer" parent="DebugLayer/DebugPanel/VBox"]
+script = ExtResource("7_warpanel")
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="DebugLayer/DebugPanel/VBox/WarriorStatePanel"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Title" type="Label" parent="DebugLayer/DebugPanel/VBox/WarriorStatePanel/VBox"]
+layout_mode = 2
+text = "▶ ESTADO"
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.9, 0.8, 0.4, 1)
+
+[node name="HpLabel" type="Label" parent="DebugLayer/DebugPanel/VBox/WarriorStatePanel/VBox"]
+layout_mode = 2
+text = "HP: —"
+theme_override_font_sizes/font_size = 11
+
+[node name="PosLabel" type="Label" parent="DebugLayer/DebugPanel/VBox/WarriorStatePanel/VBox"]
+layout_mode = 2
+text = "Pos: —"
+theme_override_font_sizes/font_size = 11
+
+[node name="DirLabel" type="Label" parent="DebugLayer/DebugPanel/VBox/WarriorStatePanel/VBox"]
+layout_mode = 2
+text = "Dir: —"
+theme_override_font_sizes/font_size = 11
+
+[node name="TurnLabel" type="Label" parent="DebugLayer/DebugPanel/VBox/WarriorStatePanel/VBox"]
+layout_mode = 2
+text = "Turno: —"
+theme_override_font_sizes/font_size = 11
+
+[node name="EnemiesLabel" type="Label" parent="DebugLayer/DebugPanel/VBox/WarriorStatePanel/VBox"]
+layout_mode = 2
+text = "Inimigos: —"
+theme_override_font_sizes/font_size = 11
+
+[node name="TurnConsole" type="ScrollContainer" parent="DebugLayer/DebugPanel/VBox"]
+script = ExtResource("8_console")
+layout_mode = 2
+size_flags_vertical = 3
+custom_minimum_size = Vector2(0, 200)
+
+[node name="List" type="VBoxContainer" parent="DebugLayer/DebugPanel/VBox/TurnConsole"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ExecutionControls" type="PanelContainer" parent="DebugLayer/DebugPanel/VBox"]
+script = ExtResource("9_controls")
+layout_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="DebugLayer/DebugPanel/VBox/ExecutionControls"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="PlayBtn" type="Button" parent="DebugLayer/DebugPanel/VBox/ExecutionControls/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "▶ Retomar"
+theme_override_font_sizes/font_size = 11
+
+[node name="StepBtn" type="Button" parent="DebugLayer/DebugPanel/VBox/ExecutionControls/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "⏭ Passo"
+theme_override_font_sizes/font_size = 11
+
+[node name="SpeedSlider" type="HSlider" parent="DebugLayer/DebugPanel/VBox/ExecutionControls/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.1
+max_value = 2.0
+value = 0.45

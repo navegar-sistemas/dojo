@@ -1,0 +1,10 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+.mcp.json
+.worktrees/
+.agentes-backup
+.vscode/
+.claude/
+.DS_Store
+.vscode

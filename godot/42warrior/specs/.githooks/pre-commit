@@ -1,0 +1,24 @@
+#!/bin/sh
+# Pre-commit da skill spec — versionado no repo-alvo (specs/.githooks/) e ativado por
+# core.hooksPath, então VIAJA com o repositório (protege clone novo/sessão fria após o setup
+# do init/doctor). Roda os gates dos artefatos de specs/ que estão STAGED e ABORTA o commit no
+# vermelho. NÃO há chave de bypass aqui: um hook local é, por natureza do git (--no-verify),
+# burlável — a autoridade não-bypassável é a CI. Este hook é o fail-fast local.
+
+REPO=$(git rev-parse --show-toplevel) || exit 1
+
+# A skill vive fora do repo-alvo (path por-máquina) — descoberta por config LOCAL, não versionada.
+SKILL=$(git config spec.skillPath || true)
+if [ -z "$SKILL" ]; then
+  echo "spec: enforcement não configurado — 'git config spec.skillPath' ausente." >&2
+  echo "      Rode o doctor da skill (ou init-project) para configurar e re-tente o commit." >&2
+  exit 1
+fi
+
+TSX="$SKILL/scripts/node_modules/.bin/tsx"
+if [ ! -x "$TSX" ]; then
+  echo "spec: tsx não encontrado em '$TSX' — rode 'cd \"$SKILL/scripts\" && npm install'." >&2
+  exit 1
+fi
+
+exec "$TSX" "$SKILL/scripts/run-staged-gates.ts" --repo "$REPO"
