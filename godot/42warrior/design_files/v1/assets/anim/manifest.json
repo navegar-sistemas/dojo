@@ -1,0 +1,135 @@
+[
+ {
+  "name": "hero",
+  "anim": "idle",
+  "frames": 4,
+  "fw": 48,
+  "fh": 48
+ },
+ {
+  "name": "hero",
+  "anim": "walk",
+  "frames": 6,
+  "fw": 48,
+  "fh": 48
+ },
+ {
+  "name": "hero",
+  "anim": "attack",
+  "frames": 5,
+  "fw": 48,
+  "fh": 48
+ },
+ {
+  "name": "hero",
+  "anim": "hurt",
+  "frames": 4,
+  "fw": 48,
+  "fh": 48
+ },
+ {
+  "name": "hero",
+  "anim": "death",
+  "frames": 6,
+  "fw": 48,
+  "fh": 48
+ },
+ {
+  "name": "enemy_cadet",
+  "anim": "idle",
+  "frames": 4,
+  "fw": 48,
+  "fh": 48
+ },
+ {
+  "name": "enemy_cadet",
+  "anim": "walk",
+  "frames": 6,
+  "fw": 48,
+  "fh": 48
+ },
+ {
+  "name": "enemy_cadet",
+  "anim": "cast",
+  "frames": 5,
+  "fw": 48,
+  "fh": 48
+ },
+ {
+  "name": "enemy_cadet",
+  "anim": "hurt",
+  "frames": 4,
+  "fw": 48,
+  "fh": 48
+ },
+ {
+  "name": "enemy_cadet",
+  "anim": "death",
+  "frames": 6,
+  "fw": 48,
+  "fh": 48
+ },
+ {
+  "name": "enemy_dev",
+  "anim": "idle",
+  "frames": 4,
+  "fw": 48,
+  "fh": 48
+ },
+ {
+  "name": "enemy_dev",
+  "anim": "walk",
+  "frames": 6,
+  "fw": 48,
+  "fh": 48
+ },
+ {
+  "name": "enemy_dev",
+  "anim": "shoot",
+  "frames": 5,
+  "fw": 48,
+  "fh": 48
+ },
+ {
+  "name": "enemy_dev",
+  "anim": "hurt",
+  "frames": 4,
+  "fw": 48,
+  "fh": 48
+ },
+ {
+  "name": "enemy_dev",
+  "anim": "death",
+  "frames": 6,
+  "fw": 48,
+  "fh": 48
+ },
+ {
+  "name": "boss_director",
+  "anim": "idle",
+  "frames": 4,
+  "fw": 48,
+  "fh": 48
+ },
+ {
+  "name": "boss_director",
+  "anim": "cast",
+  "frames": 5,
+  "fw": 48,
+  "fh": 48
+ },
+ {
+  "name": "boss_director",
+  "anim": "hurt",
+  "frames": 4,
+  "fw": 48,
+  "fh": 48
+ },
+ {
+  "name": "boss_director",
+  "anim": "death",
+  "frames": 6,
+  "fw": 48,
+  "fh": 48
+ }
+]

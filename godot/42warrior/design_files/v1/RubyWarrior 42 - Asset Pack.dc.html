@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;background:#0A0A0B}
+  @keyframes scan{0%{background-position:0 0}100%{background-position:0 4px}}
+  @keyframes ovdrift{0%,100%{transform:translate(0,0);opacity:.20}50%{transform:translate(-2px,1px);opacity:.32}}
+  @keyframes wmglitch{0%,90%,100%{text-shadow:2px 0 #00F0FF,-2px 0 #FF2BD6;clip-path:none;transform:translate(0)}92%{text-shadow:-4px 0 #00F0FF,4px 0 #FF2BD6;transform:translate(2px,0)}95%{text-shadow:4px 0 #00F0FF,-4px 0 #FF2BD6;transform:translate(-2px,0)}98%{text-shadow:2px 0 #00F0FF,-2px 0 #FF2BD6;transform:translate(1px,0)}}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+</style>
+</helmet>
+<div style="position:relative;min-height:100vh;background:radial-gradient(120% 80% at 50% -10%, #15161A 0%, #0A0A0B 60%);font-family:'JetBrains Mono',monospace;color:#E8E8EA;padding:0 0 80px;overflow:hidden">
+
+  <template id="__bundler_thumbnail"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="#0A0A0B"/><rect x="6" y="6" width="88" height="88" rx="6" fill="#15161A" stroke="#26282F"/><g font-family="monospace" font-weight="bold" font-size="30" text-anchor="middle"><text x="48" y="58" fill="#00F0FF">42</text><text x="52" y="58" fill="#FF2BD6">42</text><text x="50" y="58" fill="#F2F2F2">42</text></g></svg></template>
+  <div style="position:fixed;inset:0;pointer-events:none;z-index:60;background:repeating-linear-gradient(0deg, rgba(0,0,0,.16) 0 1px, transparent 1px 4px);animation:scan .6s steps(2) infinite;mix-blend-mode:multiply"></div>
+
+  <!-- HEADER -->
+  <div style="max-width:1160px;margin:0 auto;padding:44px 32px 8px;display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap">
+    <div style="min-width:300px">
+      <div style="font-size:11px;letter-spacing:3px;color:#8A8F98;margin-bottom:18px">// ÉCOLE 42 · GAME JAM · ASSET PACK v1 · GLITCH</div>
+      <h1 style="font-family:'Press Start 2P',monospace;font-size:38px;line-height:1.35;margin:0;color:#F2F2F2;animation:wmglitch 4s infinite">42<span style="color:#00F0FF">//</span>WARRIOR</h1>
+      <div style="font-size:13px;color:#A9AEB8;margin-top:16px;max-width:460px;line-height:1.7">A Torre é um sistema da 42 <span style="color:#FF2BD6">corrompido por um glitch</span>. O herói é um <span style="color:#9b6aa8">aluno-daemon</span> (óculos, flail de mouse-USB, escudo-teclado) que você programa pra limpar a corrupção e subir até a raiz <span style="color:#00FF66">/</span>. Inimigos e chefe inspirados em <span style="color:#00F0FF">pessoas reais da 42</span>.</div>
+      <div style="display:flex;gap:10px;margin-top:22px;flex-wrap:wrap">
+        <button onClick="{{ downloadAll }}" style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;letter-spacing:1px;cursor:pointer;color:#0A0A0B;background:#00F0FF;border:none;padding:11px 18px;border-radius:3px;box-shadow:0 0 18px #00F0FF66" style-hover="background:#7afcff;box-shadow:0 0 26px #00F0FF99">⤓ BAIXAR TUDO ({{ totalCount }})</button>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8A8F98;align-self:center;padding:0 6px">ou clique no <span style="color:#A9AEB8">⤓ PNG</span> de cada asset</div>
+      </div>
+    </div>
+    <!-- LIVE HERO -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+      <div style="position:relative;width:180px;height:180px;display:flex;align-items:center;justify-content:center;background:#101114;border:1px solid #26282F;border-radius:6px;box-shadow:inset 0 0 40px #0006, 0 0 30px #FF2BD622">
+        <div style="position:absolute;inset:0;background-image:url(assets/fx_glitch_overlay.png);background-size:64px;image-rendering:pixelated;mix-blend-mode:screen;animation:ovdrift 2.4s infinite;border-radius:6px"></div>
+        <img id="hero-live" src="assets/hero.png" alt="hero" style="width:148px;height:148px;image-rendering:pixelated;filter:drop-shadow(0 0 8px #00F0FF55)">
+      </div>
+      <div style="font-size:10px;letter-spacing:2px;color:#8A8F98">HERO.IA <span style="color:#FF2BD6;animation:blink 1s infinite">● REC</span></div>
+    </div>
+  </div>
+
+  <!-- SCENE PREVIEW -->
+  <div style="max-width:1160px;margin:28px auto 0;padding:0 32px">
+    <div style="font-size:11px;letter-spacing:2px;color:#8A8F98;margin-bottom:14px">// PREVIEW DE CENA · tiles + sprites em grid</div>
+    <div style="display:inline-block;position:relative;padding:14px;background:#0c0d10;border:1px solid #26282F;border-radius:6px;box-shadow:0 0 40px #00000080">
+      <div style="position:relative">
+        <div style="display:grid;grid-template-columns:repeat(9, 46px);grid-auto-rows:46px">
+          <sc-for list="{{ cells }}" as="cell" hint-placeholder-count="45">
+            <div style="position:relative;width:46px;height:46px">
+              <div style="position:absolute;inset:0;background-image:url(assets/{{ cell.base }}.png);background-size:46px 46px;image-rendering:pixelated"></div>
+              <sc-if value="{{ cell.spr }}" hint-placeholder-val="{{ true }}">
+                <div style="position:absolute;left:3px;top:1px;width:40px;height:40px;background-image:url(assets/{{ cell.spr }}.png);background-size:40px 40px;image-rendering:pixelated"></div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+        <div style="position:absolute;inset:0;background-image:url(assets/fx_glitch_overlay.png);background-size:64px;image-rendering:pixelated;mix-blend-mode:screen;animation:ovdrift 3s infinite;pointer-events:none"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANIMATIONS (Fase 2) -->
+  <div style="max-width:1160px;margin:48px auto 0;padding:0 32px">
+    <div style="display:flex;align-items:baseline;gap:14px;border-bottom:1px solid #26282F;padding-bottom:12px;margin-bottom:22px">
+      <h2 style="font-family:'Press Start 2P',monospace;font-size:15px;margin:0;color:#F2F2F2">ANIMAÇÕES</h2>
+      <span style="font-size:11px;color:#8A8F98;letter-spacing:1px">Fase 2 · sprite sheets · idle · walk · ação · hurt · death</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <sc-for list="{{ animChars }}" as="ch" hint-placeholder-count="4">
+        <div style="background:#15161A;border:1px solid #26282F;border-radius:6px;padding:16px 18px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+            <div style="width:9px;height:9px;border-radius:50%;background:{{ ch.accent }};box-shadow:0 0 8px {{ ch.accent }}"></div>
+            <div style="font-size:13px;color:#E8E8EA;font-weight:500">{{ ch.label }}</div>
+          </div>
+          <div style="display:flex;gap:18px;flex-wrap:wrap">
+            <sc-for list="{{ ch.anims }}" as="a" hint-placeholder-count="5">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:7px">
+                <div style="width:96px;height:96px;background:#0A0A0B;border:1px solid #22242B;border-radius:4px;display:flex;align-items:center;justify-content:center;overflow:hidden">
+                  <div data-anim="1" data-frames="{{ a.n }}" data-fw="{{ a.fw }}" style="width:96px;height:96px;background-image:url({{ a.sheet }});background-size:{{ a.bgW }}px 96px;background-position:0 0;image-rendering:pixelated"></div>
+                </div>
+                <div style="font-size:10px;color:#8A8F98;letter-spacing:1px;text-transform:uppercase">{{ a.anim }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="font-size:11px;color:#8A8F98;margin-top:14px;line-height:1.7">Cada sheet é horizontal (frames lado a lado, 48×48). No Godot: <span style="color:#00F0FF">AnimatedSprite2D</span> ou <span style="color:#00F0FF">SpriteFrames</span> com hframes = nº de frames. Arquivos em <span style="color:#00FF66">assets/anim/</span> + <span style="color:#00FF66">manifest.json</span>.</div>
+  </div>
+
+  <!-- SECTIONS -->
+  <div style="max-width:1160px;margin:42px auto 0;padding:0 32px;display:flex;flex-direction:column;gap:42px">
+    <sc-for list="{{ groups }}" as="g" hint-placeholder-count="4">
+      <section>
+        <div style="display:flex;align-items:baseline;gap:14px;border-bottom:1px solid #26282F;padding-bottom:12px;margin-bottom:22px">
+          <h2 style="font-family:'Press Start 2P',monospace;font-size:15px;margin:0;color:#F2F2F2">{{ g.title }}</h2>
+          <span style="font-size:11px;color:#8A8F98;letter-spacing:1px">{{ g.sub }}</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(150px, 1fr));gap:16px">
+          <sc-for list="{{ g.items }}" as="item" hint-placeholder-count="6">
+            <div style="display:flex;flex-direction:column;gap:0;background:#15161A;border:1px solid #26282F;border-radius:5px;overflow:hidden;transition:all .15s" style-hover="border-color:#00F0FF66;box-shadow:0 0 20px #00F0FF22;transform:translateY(-2px)">
+              <div style="height:138px;display:flex;align-items:center;justify-content:center;background:{{ previewBg }};position:relative;border-bottom:1px solid #26282F">
+                <div style="width:{{ item.iw }}px;height:{{ item.ih }}px;background-image:url(assets/{{ item.file }}.png);background-size:100% 100%;image-rendering:pixelated"></div>
+              </div>
+              <div style="padding:11px 12px;display:flex;justify-content:space-between;align-items:center;gap:8px">
+                <div style="min-width:0">
+                  <div style="font-size:12px;color:#E8E8EA;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ item.label }}</div>
+                  <div style="font-size:10px;color:#8A8F98;margin-top:3px">{{ item.dim }} · {{ item.file }}.png</div>
+                </div>
+                <a href="assets/{{ item.file }}.png" download="{{ item.file }}.png" style="flex-shrink:0;font-size:10px;font-weight:700;letter-spacing:.5px;text-decoration:none;color:#00F0FF;border:1px solid #00F0FF44;padding:5px 8px;border-radius:3px" style-hover="background:#00F0FF;color:#0A0A0B">⤓ PNG</a>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </sc-for>
+  </div>
+
+  <!-- STYLE SHEET -->
+  <div style="max-width:1160px;margin:48px auto 0;padding:0 32px">
+    <div style="display:flex;align-items:baseline;gap:14px;border-bottom:1px solid #26282F;padding-bottom:12px;margin-bottom:22px">
+      <h2 style="font-family:'Press Start 2P',monospace;font-size:15px;margin:0;color:#F2F2F2">FOLHA DE ESTILO</h2>
+      <span style="font-size:11px;color:#8A8F98;letter-spacing:1px">paleta · tipografia · estados</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:16px">
+
+      <!-- palette -->
+      <div style="background:#15161A;border:1px solid #26282F;border-radius:5px;padding:16px">
+        <div style="font-size:11px;color:#8A8F98;letter-spacing:1px;margin-bottom:14px">// PALETA</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <sc-for list="{{ palette }}" as="c" hint-placeholder-count="9">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:26px;height:26px;border-radius:3px;flex-shrink:0;border:1px solid #00000060;background:{{ c.hex }}"></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:11px;color:#E8E8EA">{{ c.name }}</div>
+              </div>
+              <div style="font-size:11px;color:#8A8F98;font-weight:500">{{ c.hex }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- typography -->
+      <div style="background:#15161A;border:1px solid #26282F;border-radius:5px;padding:16px">
+        <div style="font-size:11px;color:#8A8F98;letter-spacing:1px;margin-bottom:14px">// TIPOGRAFIA</div>
+        <div style="font-family:'Press Start 2P',monospace;font-size:18px;color:#F2F2F2;margin-bottom:6px">42 WARRIOR</div>
+        <div style="font-size:10px;color:#8A8F98;margin-bottom:18px">Press Start 2P — títulos / logo</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:15px;color:#E8E8EA;margin-bottom:4px">play_turn(warrior)</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#00FF66;margin-bottom:6px">&gt; feel: enemy ahead → attack! <span style="color:#FF003C">(-3)</span></div>
+        <div style="font-size:10px;color:#8A8F98">JetBrains Mono — UI / código / HUD <span style="color:#00F0FF;animation:blink 1s infinite">▌</span></div>
+      </div>
+
+      <!-- button states -->
+      <div style="background:#15161A;border:1px solid #26282F;border-radius:5px;padding:16px">
+        <div style="font-size:11px;color:#8A8F98;letter-spacing:1px;margin-bottom:14px">// BOTÃO · 4 ESTADOS</div>
+        <div style="display:flex;flex-direction:column;gap:10px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;letter-spacing:1px">
+          <div style="display:flex;align-items:center;gap:10px"><div style="padding:9px 14px;border-radius:3px;color:#00F0FF;background:#101114;border:1px solid #00F0FF66">▶ RODAR</div><span style="font-size:10px;color:#8A8F98">normal</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><div style="padding:9px 14px;border-radius:3px;color:#0A0A0B;background:#00F0FF;border:1px solid #00F0FF;box-shadow:0 0 16px #00F0FF66">▶ RODAR</div><span style="font-size:10px;color:#8A8F98">hover · glow</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><div style="padding:9px 14px;border-radius:3px;color:#00F0FF;background:#0a3a40;border:1px solid #00F0FF;transform:translateY(1px)">▶ RODAR</div><span style="font-size:10px;color:#8A8F98">pressed</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><div style="padding:9px 14px;border-radius:3px;color:#4a4d54;background:#101114;border:1px solid #26282F">▶ RODAR</div><span style="font-size:10px;color:#8A8F98">disabled</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREENS (Fase 3) -->
+  <div style="max-width:1160px;margin:52px auto 0;padding:0 32px">
+    <div style="display:flex;align-items:baseline;gap:14px;border-bottom:1px solid #26282F;padding-bottom:12px;margin-bottom:24px">
+      <h2 style="font-family:'Press Start 2P',monospace;font-size:15px;margin:0;color:#F2F2F2">TELAS / SCREENS</h2>
+      <span style="font-size:11px;color:#8A8F98;letter-spacing:1px">Fase 3 · 9 mockups de UI · 16:9</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:30px">
+
+      <!-- TELA 01 · MENU -->
+      <div>
+        <div style="font-size:11px;color:#8A8F98;letter-spacing:2px;margin-bottom:8px">// 01 · MENU INICIAL</div>
+        <div style="width:1096px;max-width:100%;height:616px;position:relative;border:1px solid #26282F;border-radius:8px;overflow:hidden;box-shadow:0 10px 40px #00000080">
+          <div style="position:absolute;top:0;left:0;width:1280px;height:720px;transform:scale(0.85625);transform-origin:top left;font-family:'JetBrains Mono',monospace;background:#0A0A0B">
+            <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(0deg, rgba(0,0,0,.4) 0 1px, transparent 1px 4px)"></div>
+            <div style="position:absolute;left:60px;top:80px;width:420px;font-size:15px;line-height:2.1;color:#00FF66">
+              <div>$ ./42warrior --boot</div>
+              <div style="color:#8A8F98">mounting /tower ............ ok</div>
+              <div style="color:#8A8F98">loading kernel.daemon ...... ok</div>
+              <div style="color:#FF003C">[WARN] corruption detected</div>
+              <div style="color:#FF003C">[WARN] 9 segments infected</div>
+              <div style="color:#8A8F98">spawning cadet.process ..... ok</div>
+              <div>&gt; ready_ <span style="animation:blink 1s infinite">▌</span></div>
+            </div>
+            <div style="position:absolute;right:80px;top:120px;width:560px;text-align:right">
+              <div style="width:560px;height:260px;background-image:url(assets/key_art.png);background-size:contain;background-repeat:no-repeat;background-position:right;image-rendering:pixelated"></div>
+              <div style="margin-top:30px;display:flex;flex-direction:column;gap:16px;align-items:flex-end;font-size:20px;font-weight:700;letter-spacing:1px">
+                <div style="color:#0A0A0B;background:#00F0FF;padding:12px 26px;border-radius:4px;box-shadow:0 0 22px #00F0FF55">▶ JOGAR / CONTINUAR</div>
+                <div style="color:#E8E8EA;padding:12px 26px;border:1px solid #26282F;border-radius:4px">≡ SELECIONAR NÍVEL</div>
+                <div style="color:#E8E8EA;padding:12px 26px;border:1px solid #26282F;border-radius:4px">⚙ ÁUDIO</div>
+                <div style="color:#E8E8EA;padding:12px 26px;border:1px solid #26282F;border-radius:4px">ⓘ SOBRE / CRÉDITOS</div>
+              </div>
+            </div>
+            <div style="position:absolute;left:60px;bottom:40px;font-size:13px;color:#8A8F98">v1.0 · ÉCOLE 42 GAME JAM · tema glitch</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TELA 02 · JOGO (CORE) -->
+      <div>
+        <div style="font-size:11px;color:#8A8F98;letter-spacing:2px;margin-bottom:8px">// 02 · TELA DE JOGO (CORE)</div>
+        <div style="width:1096px;max-width:100%;height:616px;position:relative;border:1px solid #26282F;border-radius:8px;overflow:hidden;box-shadow:0 10px 40px #00000080">
+          <div style="position:absolute;top:0;left:0;width:1280px;height:720px;transform:scale(0.85625);transform-origin:top left;font-family:'JetBrains Mono',monospace;background:#0A0A0B">
+            <!-- status bar -->
+            <div style="position:absolute;top:0;left:0;right:0;height:52px;background:#15161A;border-bottom:1px solid #26282F;display:flex;align-items:center;gap:26px;padding:0 22px;font-size:16px;color:#E8E8EA">
+              <span style="font-family:'Press Start 2P',monospace;font-size:13px;color:#00F0FF">LVL 03/09</span>
+              <span style="display:flex;align-items:center;gap:4px">HP
+                <span style="display:inline-flex;gap:2px;margin-left:6px">
+                  <span style="width:18px;height:18px;background-image:url(assets/ui_hp.png);background-size:contain;image-rendering:pixelated"></span>
+                  <span style="width:18px;height:18px;background-image:url(assets/ui_hp.png);background-size:contain;image-rendering:pixelated"></span>
+                  <span style="width:18px;height:18px;background-image:url(assets/ui_hp.png);background-size:contain;image-rendering:pixelated"></span>
+                  <span style="width:18px;height:18px;background-image:url(assets/ui_hp.png);background-size:contain;image-rendering:pixelated"></span>
+                  <span style="width:18px;height:18px;background-image:url(assets/ui_hp.png);background-size:contain;image-rendering:pixelated;opacity:.25"></span>
+                </span>
+                <span style="color:#8A8F98;font-size:14px;margin-left:4px">18/20</span>
+              </span>
+              <span style="display:flex;align-items:center;gap:6px"><span style="width:18px;height:18px;background-image:url(assets/ui_clock.png);background-size:contain;image-rendering:pixelated"></span>TURN 07</span>
+              <span style="display:flex;align-items:center;gap:6px"><span style="width:18px;height:18px;background-image:url(assets/ui_gem.png);background-size:contain;image-rendering:pixelated"></span>SCORE 1240</span>
+              <span style="margin-left:auto;display:flex;gap:10px">
+                <span style="width:20px;height:20px;background-image:url(assets/ui_vol_on.png);background-size:contain;image-rendering:pixelated"></span>
+                <span style="width:20px;height:20px;background-image:url(assets/ui_gear.png);background-size:contain;image-rendering:pixelated"></span>
+              </span>
+            </div>
+            <!-- arena · grade de tiles · 1 personagem por bloco -->
+            <div style="position:absolute;left:22px;top:74px;width:680px;height:470px;border:10px solid #22242B;border-radius:4px;background:#0c0d10;box-shadow:inset 0 0 60px #000a;overflow:hidden;display:flex;align-items:center;justify-content:center">
+              <div style="position:relative">
+                <div style="display:grid;grid-template-columns:repeat(9,72px);grid-auto-rows:72px">
+                  <sc-for list="{{ cells }}" as="cell" hint-placeholder-count="45">
+                    <div style="position:relative;width:72px;height:72px">
+                      <div style="position:absolute;inset:0;background-image:url(assets/{{ cell.base }}.png);background-size:72px 72px;image-rendering:pixelated"></div>
+                      <sc-if value="{{ cell.spr }}" hint-placeholder-val="{{ true }}">
+                        <div style="position:absolute;left:4px;top:0;width:64px;height:64px;background-image:url(assets/{{ cell.spr }}.png);background-size:contain;background-repeat:no-repeat;background-position:center bottom;image-rendering:pixelated;filter:drop-shadow(0 2px 3px #000a)"></div>
+                      </sc-if>
+                    </div>
+                  </sc-for>
+                </div>
+                <div style="position:absolute;inset:0;background-image:url(assets/fx_glitch_overlay.png);background-size:64px;image-rendering:pixelated;mix-blend-mode:screen;opacity:.4;animation:ovdrift 3s infinite;pointer-events:none"></div>
+              </div>
+            </div>
+            <!-- code editor -->
+            <div style="position:absolute;right:22px;top:74px;width:534px;height:470px;background:#15161A;border:1px solid #26282F;border-radius:4px;overflow:hidden">
+              <div style="height:34px;background:#0c0d10;border-bottom:1px solid #26282F;display:flex;align-items:center;gap:8px;padding:0 12px;font-size:13px;color:#8A8F98">
+                <span style="color:#FF003C">●</span><span style="color:#ffd23f">●</span><span style="color:#00FF66">●</span>
+                <span style="margin-left:6px;color:#E8E8EA">play_turn.gd</span>
+                <span style="margin-left:auto;width:16px;height:16px;background-image:url(assets/ui_code.png);background-size:contain;image-rendering:pixelated"></span>
+              </div>
+              <div style="padding:16px 14px;font-size:15px;line-height:1.95">
+                <div><span style="color:#3d4452">1</span>  <span style="color:#FF2BD6">func</span> <span style="color:#00F0FF">play_turn</span>(warrior):</div>
+                <div><span style="color:#3d4452">2</span>    <span style="color:#FF2BD6">if</span> warrior.<span style="color:#00F0FF">feel</span>().<span style="color:#00F0FF">is_enemy</span>():</div>
+                <div><span style="color:#3d4452">3</span>      warrior.<span style="color:#00FF66">attack!</span>()</div>
+                <div><span style="color:#3d4452">4</span>    <span style="color:#FF2BD6">elif</span> warrior.<span style="color:#00F0FF">health</span>() &lt; <span style="color:#ffd23f">10</span>:</div>
+                <div><span style="color:#3d4452">5</span>      warrior.<span style="color:#00FF66">rest!</span>()</div>
+                <div><span style="color:#3d4452">6</span>    <span style="color:#FF2BD6">else</span>:</div>
+                <div><span style="color:#3d4452">7</span>      warrior.<span style="color:#00FF66">walk!</span>()</div>
+                <div style="height:1px;background:#26282F;margin:14px 0"></div>
+                <div style="display:flex;gap:10px;font-weight:700;font-size:13px">
+                  <span style="color:#0A0A0B;background:#00F0FF;padding:8px 14px;border-radius:3px">▶ RODAR</span>
+                  <span style="color:#E8E8EA;border:1px solid #26282F;padding:8px 14px;border-radius:3px">↺ RESETAR</span>
+                  <span style="color:#8A8F98;border:1px solid #26282F;padding:8px 14px;border-radius:3px">👁 SOLUÇÃO</span>
+                </div>
+              </div>
+            </div>
+            <!-- console -->
+            <div style="position:absolute;left:22px;right:22px;bottom:18px;height:138px;background:#0c0d10;border:1px solid #26282F;border-radius:4px;padding:12px 16px;font-size:14px;line-height:1.7;color:#8A8F98;overflow:hidden">
+              <div><span style="color:#00FF66">&gt;</span> turn 6 · feel: enemy ahead → <span style="color:#00F0FF">attack!</span></div>
+              <div><span style="color:#00FF66">&gt;</span> cadet.process tomou <span style="color:#FF003C">-3</span> · hp 5/8</div>
+              <div><span style="color:#00FF66">&gt;</span> turn 7 · feel: enemy ahead → <span style="color:#00F0FF">attack!</span></div>
+              <div style="position:absolute;right:16px;bottom:12px;display:flex;gap:10px;align-items:center">
+                <span style="width:24px;height:24px;background-image:url(assets/ui_step.png);background-size:contain;image-rendering:pixelated"></span>
+                <span style="width:24px;height:24px;background-image:url(assets/ui_play.png);background-size:contain;image-rendering:pixelated"></span>
+                <span style="width:24px;height:24px;background-image:url(assets/ui_pause.png);background-size:contain;image-rendering:pixelated"></span>
+                <span style="width:24px;height:24px;background-image:url(assets/ui_speed.png);background-size:contain;image-rendering:pixelated"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2-col smaller screens -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px">
+
+        <!-- TELA 03 · TRANSIÇÃO -->
+        <div>
+          <div style="font-size:11px;color:#8A8F98;letter-spacing:2px;margin-bottom:8px">// 03 · TRANSIÇÃO DE NÍVEL</div>
+          <div style="width:100%;aspect-ratio:16/9;position:relative;border:1px solid #26282F;border-radius:8px;overflow:hidden;background:#0A0A0B;font-family:'JetBrains Mono',monospace;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:24px">
+            <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(0deg, rgba(0,0,0,.4) 0 1px, transparent 1px 4px)"></div>
+            <div style="font-size:12px;color:#8A8F98;letter-spacing:2px;z-index:1">/sys/memory/segment_03</div>
+            <div style="font-family:'Press Start 2P',monospace;font-size:30px;color:#F2F2F2;margin:14px 0;text-shadow:2px 0 #00F0FF,-2px 0 #FF2BD6;z-index:1">ANDAR 03</div>
+            <div style="font-size:13px;color:#A9AEB8;max-width:78%;line-height:1.6;z-index:1">A corrupção engrossou. Sentinelas de firewall patrulham o segmento.</div>
+            <div style="margin-top:16px;font-size:13px;font-weight:700;color:#00FF66;border:1px solid #00FF6655;padding:7px 14px;border-radius:3px;z-index:1">⊕ NOVA HABILIDADE · attack!</div>
+            <div style="margin-top:16px;font-size:11px;color:#8A8F98;z-index:1;animation:blink 1.2s infinite">&gt; pressione ENTER para continuar</div>
+          </div>
+        </div>
+
+        <!-- TELA 04 · RESULTADO -->
+        <div>
+          <div style="font-size:11px;color:#8A8F98;letter-spacing:2px;margin-bottom:8px">// 04 · RESULTADO / PONTUAÇÃO</div>
+          <div style="width:100%;aspect-ratio:16/9;position:relative;border:1px solid #26282F;border-radius:8px;overflow:hidden;background:#0A0A0B;font-family:'JetBrains Mono',monospace;padding:26px 30px">
+            <div style="font-family:'Press Start 2P',monospace;font-size:16px;color:#00FF66">&gt;&gt; RUN COMPLETE</div>
+            <div style="display:flex;align-items:center;gap:22px;margin-top:18px">
+              <div style="font-family:'Press Start 2P',monospace;font-size:64px;color:#ffd23f;text-shadow:0 0 20px #ffd23f55">S</div>
+              <div style="display:flex;gap:5px">
+                <span style="width:26px;height:26px;background-image:url(assets/ui_star.png);background-size:contain;image-rendering:pixelated"></span>
+                <span style="width:26px;height:26px;background-image:url(assets/ui_star.png);background-size:contain;image-rendering:pixelated"></span>
+                <span style="width:26px;height:26px;background-image:url(assets/ui_star.png);background-size:contain;image-rendering:pixelated"></span>
+              </div>
+            </div>
+            <div style="margin-top:18px;font-size:14px;line-height:1.9;color:#A9AEB8">
+              <div style="display:flex;justify-content:space-between;max-width:78%"><span>SCORE</span><span style="color:#E8E8EA">1240</span></div>
+              <div style="display:flex;justify-content:space-between;max-width:78%"><span>TIME BONUS</span><span style="color:#00FF66">+200</span></div>
+              <div style="display:flex;justify-content:space-between;max-width:78%"><span>TURNS</span><span style="color:#E8E8EA">7</span></div>
+              <div style="display:flex;justify-content:space-between;max-width:78%"><span>ACE</span><span style="color:#ffd23f">★ sim</span></div>
+            </div>
+            <div style="position:absolute;right:30px;bottom:26px;display:flex;gap:10px;font-weight:700;font-size:13px">
+              <span style="color:#0A0A0B;background:#00F0FF;padding:9px 16px;border-radius:3px">PRÓXIMO ▶</span>
+              <span style="color:#E8E8EA;border:1px solid #26282F;padding:9px 16px;border-radius:3px">↺ REPLAY</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- TELA 05 · CRÉDITOS -->
+        <div>
+          <div style="font-size:11px;color:#8A8F98;letter-spacing:2px;margin-bottom:8px">// 05 · CONCLUSÃO + CRÉDITOS</div>
+          <div style="width:100%;aspect-ratio:16/9;position:relative;border:1px solid #26282F;border-radius:8px;overflow:hidden;background:#0A0A0B;font-family:'JetBrains Mono',monospace;padding:26px 30px">
+            <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(0deg, rgba(0,0,0,.4) 0 1px, transparent 1px 4px)"></div>
+            <div style="position:relative;font-size:14px;line-height:1.95;color:#00FF66">
+              <div style="font-family:'Press Start 2P',monospace;font-size:15px;color:#F2F2F2;text-shadow:2px 0 #00F0FF,-2px 0 #FF2BD6">SYSTEM RESTORED</div>
+              <div style="margin-top:6px;color:#8A8F98">root@42tower:/# <span style="color:#00FF66">exit 0</span></div>
+              <div style="margin-top:14px;color:#A9AEB8">— CRÉDITOS —</div>
+              <div style="color:#8A8F98">design & arte · <span style="color:#E8E8EA">você</span></div>
+              <div style="color:#8A8F98">código · <span style="color:#E8E8EA">você</span></div>
+              <div style="color:#8A8F98">elenco · <span style="color:#E8E8EA">cadetes da 42</span></div>
+              <div style="margin-top:10px;color:#00F0FF">obrigado por jogar ▌</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TELA 06 · SELEÇÃO DE NÍVEIS -->
+        <div>
+          <div style="font-size:11px;color:#8A8F98;letter-spacing:2px;margin-bottom:8px">// 06 · SELEÇÃO DE NÍVEIS</div>
+          <div style="width:100%;aspect-ratio:16/9;position:relative;border:1px solid #26282F;border-radius:8px;overflow:hidden;background:#0A0A0B;font-family:'JetBrains Mono',monospace;padding:20px 24px">
+            <div style="font-family:'Press Start 2P',monospace;font-size:12px;color:#F2F2F2;margin-bottom:14px">A TORRE · 9 ANDARES</div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+              <div style="aspect-ratio:1.6;background:#15161A;border:1px solid #26282F;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px"><span style="font-family:'Press Start 2P',monospace;font-size:13px;color:#8A8F98">01</span><span style="width:16px;height:16px;background-image:url(assets/ui_check.png);background-size:contain;image-rendering:pixelated"></span></div>
+              <div style="aspect-ratio:1.6;background:#15161A;border:1px solid #26282F;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px"><span style="font-family:'Press Start 2P',monospace;font-size:13px;color:#8A8F98">02</span><span style="width:16px;height:16px;background-image:url(assets/ui_star.png);background-size:contain;image-rendering:pixelated"></span></div>
+              <div style="aspect-ratio:1.6;background:#15161A;border:1px solid #26282F;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px"><span style="font-family:'Press Start 2P',monospace;font-size:13px;color:#8A8F98">03</span><span style="width:16px;height:16px;background-image:url(assets/ui_check.png);background-size:contain;image-rendering:pixelated"></span></div>
+              <div style="aspect-ratio:1.6;background:#15161A;border:1px solid #26282F;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px"><span style="font-family:'Press Start 2P',monospace;font-size:13px;color:#8A8F98">04</span><span style="width:16px;height:16px;background-image:url(assets/ui_check.png);background-size:contain;image-rendering:pixelated"></span></div>
+              <div style="aspect-ratio:1.6;background:#101a1c;border:1px solid #00F0FF;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;box-shadow:0 0 16px #00F0FF33"><span style="font-family:'Press Start 2P',monospace;font-size:13px;color:#00F0FF">05</span><span style="font-size:10px;color:#00F0FF">▶ AGORA</span></div>
+              <div style="aspect-ratio:1.6;background:#101114;border:1px solid #26282F;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;opacity:.5"><span style="font-family:'Press Start 2P',monospace;font-size:13px;color:#8A8F98">06</span><span style="width:15px;height:15px;background-image:url(assets/ui_lock.png);background-size:contain;image-rendering:pixelated"></span></div>
+              <div style="aspect-ratio:1.6;background:#101114;border:1px solid #26282F;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;opacity:.5"><span style="font-family:'Press Start 2P',monospace;font-size:13px;color:#8A8F98">07</span><span style="width:15px;height:15px;background-image:url(assets/ui_lock.png);background-size:contain;image-rendering:pixelated"></span></div>
+              <div style="aspect-ratio:1.6;background:#101114;border:1px solid #26282F;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;opacity:.5"><span style="font-family:'Press Start 2P',monospace;font-size:13px;color:#8A8F98">08</span><span style="width:15px;height:15px;background-image:url(assets/ui_lock.png);background-size:contain;image-rendering:pixelated"></span></div>
+              <div style="aspect-ratio:1.6;background:#1a0f14;border:1px solid #FF2BD655;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;opacity:.7"><span style="font-family:'Press Start 2P',monospace;font-size:12px;color:#FF2BD6">09</span><span style="font-size:9px;color:#FF2BD6">CHEFE</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TELA 07 · API -->
+        <div>
+          <div style="font-size:11px;color:#8A8F98;letter-spacing:2px;margin-bottom:8px">// 07 · REFERÊNCIA DA API</div>
+          <div style="width:100%;aspect-ratio:16/9;position:relative;border:1px solid #26282F;border-radius:8px;overflow:hidden;background:#0A0A0B;font-family:'JetBrains Mono',monospace;padding:20px 24px;font-size:13px;line-height:1.7">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><span style="width:16px;height:16px;background-image:url(assets/ui_api.png);background-size:contain;image-rendering:pixelated"></span><span style="font-family:'Press Start 2P',monospace;font-size:11px;color:#F2F2F2">API · man warrior</span></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+              <div>
+                <div style="color:#00F0FF;margin-bottom:5px">SENTIDOS</div>
+                <div style="color:#A9AEB8">warrior.<span style="color:#E8E8EA">feel</span>(:dir)</div>
+                <div style="color:#A9AEB8">warrior.<span style="color:#E8E8EA">look</span>(:dir)</div>
+                <div style="color:#A9AEB8">warrior.<span style="color:#E8E8EA">health</span>()</div>
+                <div style="color:#A9AEB8">warrior.<span style="color:#E8E8EA">listen</span>()</div>
+                <div style="color:#A9AEB8">warrior.<span style="color:#E8E8EA">direction_of_stairs</span>()</div>
+              </div>
+              <div>
+                <div style="color:#00FF66;margin-bottom:5px">AÇÕES</div>
+                <div style="color:#A9AEB8">warrior.<span style="color:#E8E8EA">walk!</span>(:dir)</div>
+                <div style="color:#A9AEB8">warrior.<span style="color:#E8E8EA">attack!</span>(:dir)</div>
+                <div style="color:#A9AEB8">warrior.<span style="color:#E8E8EA">rest!</span>()</div>
+                <div style="color:#A9AEB8">warrior.<span style="color:#E8E8EA">rescue!</span>(:dir)</div>
+                <div style="color:#A9AEB8">warrior.<span style="color:#E8E8EA">pivot!</span>() · <span style="color:#E8E8EA">shoot!</span>()</div>
+              </div>
+            </div>
+            <div style="margin-top:14px;color:#8A8F98;font-size:12px">:dir → <span style="color:#FF2BD6">:forward</span> | <span style="color:#FF2BD6">:backward</span></div>
+          </div>
+        </div>
+
+        <!-- TELA 08 · GLOSSÁRIO -->
+        <div>
+          <div style="font-size:11px;color:#8A8F98;letter-spacing:2px;margin-bottom:8px">// 08 · GLOSSÁRIO</div>
+          <div style="width:100%;aspect-ratio:16/9;position:relative;border:1px solid #26282F;border-radius:8px;overflow:hidden;background:#0A0A0B;font-family:'JetBrains Mono',monospace;padding:20px 24px;font-size:13px;line-height:1.55">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><span style="width:16px;height:16px;background-image:url(assets/ui_book.png);background-size:contain;image-rendering:pixelated"></span><span style="font-family:'Press Start 2P',monospace;font-size:11px;color:#F2F2F2">GLOSSÁRIO</span></div>
+            <div style="color:#A9AEB8">
+              <div><span style="color:#00F0FF">cadete</span> — processo corrompido inimigo.</div>
+              <div><span style="color:#00F0FF">cativo</span> — processo preso a resgatar.</div>
+              <div><span style="color:#00F0FF">ace</span> — completar o andar com pontuação perfeita.</div>
+              <div><span style="color:#00F0FF">turno</span> — 1 execução de play_turn().</div>
+              <div><span style="color:#00F0FF">andar</span> — segmento de memória da torre.</div>
+              <div><span style="color:#00F0FF">corrupção</span> — o glitch que infecta o sistema.</div>
+              <div><span style="color:#00F0FF">daemon</span> — o herói, processo-cavaleiro.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TELA 09 · SANDBOX -->
+        <div>
+          <div style="font-size:11px;color:#8A8F98;letter-spacing:2px;margin-bottom:8px">// 09 · SANDBOX / TUTORIAL</div>
+          <div style="width:100%;aspect-ratio:16/9;position:relative;border:1px solid #26282F;border-radius:8px;overflow:hidden;background:#0A0A0B;font-family:'JetBrains Mono',monospace;padding:16px 18px;display:flex;flex-direction:column">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+              <span style="font-family:'Press Start 2P',monospace;font-size:11px;color:#00FF66">MODO SANDBOX</span>
+              <span style="font-size:11px;color:#8A8F98;border:1px solid #26282F;padding:3px 8px;border-radius:3px">sem corrupção</span>
+            </div>
+            <div style="flex:1;display:flex;align-items:center;justify-content:center;border:6px solid #22242B;border-radius:4px;background:#0c0d10;overflow:hidden;position:relative">
+              <div style="position:relative">
+                <div style="display:grid;grid-template-columns:repeat(7,38px);grid-auto-rows:38px">
+                  <sc-for list="{{ sandboxCells }}" as="cell" hint-placeholder-count="35">
+                    <div style="position:relative;width:38px;height:38px">
+                      <div style="position:absolute;inset:0;background-image:url(assets/{{ cell.base }}.png);background-size:38px 38px;image-rendering:pixelated"></div>
+                      <sc-if value="{{ cell.spr }}" hint-placeholder-val="{{ true }}">
+                        <div style="position:absolute;left:2px;top:0;width:34px;height:34px;background-image:url(assets/{{ cell.spr }}.png);background-size:contain;background-repeat:no-repeat;background-position:center bottom;image-rendering:pixelated"></div>
+                      </sc-if>
+                    </div>
+                  </sc-for>
+                </div>
+                <div style="position:absolute;left:84px;top:42px;background:#0c0d10;border:1px solid #00FF6655;border-radius:4px;padding:5px 9px;font-size:11px;color:#00FF66;white-space:nowrap">↳ digite <span style="color:#E8E8EA">warrior.walk!</span> →</div>
+              </div>
+            </div>
+            <div style="margin-top:9px;font-size:12px;color:#8A8F98">Tutorial guiado · dicas passo a passo, visual mais limpo que a torre.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="max-width:1160px;margin:56px auto 0;padding:24px 32px 0;border-top:1px solid #26282F;font-size:11px;color:#8A8F98;line-height:1.8">
+    <div style="color:#A9AEB8;margin-bottom:6px">// GODOT · dica de import &amp; integração</div>
+    Import PNG → desligue <span style="color:#00F0FF">Filter</span> e <span style="color:#00F0FF">Mipmaps</span> (Texture → Nearest). Escale por inteiros (2x / 3x) pra manter pixels nítidos. Overlay glitch: <span style="color:#FF2BD6">CanvasLayer</span> com blend <span style="color:#FF2BD6">Add/Screen</span>, tile 64px. Sprites/tiles 32×32, ícones 16×16, todos múltiplos de 16. O <span style="color:#00FF66">README.md</span> no .zip traz lista de arquivos, paleta e mapa de assets pro registro data-driven.<br><br>
+    <span style="color:#8A8F98">// FASES — </span><span style="color:#00F0FF">✓ Fase 1</span> fundação · <span style="color:#00F0FF">✓ Fase 2</span> animações (sprite sheets) · <span style="color:#00F0FF">✓ Fase 3</span> 9 telas de UI. Personagens em <span style="color:#00FF66">48×48</span> (herói + inimigos + chefe), tiles/UI em 32/16. Animações em <span style="color:#00FF66">assets/anim/</span>.
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:900},&quot;glitchFx&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Efeitos&quot;},&quot;previewBg&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Grade&quot;,&quot;Escuro&quot;,&quot;Preto&quot;],&quot;default&quot;:&quot;Grade&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Efeitos&quot;}}">
+class Component extends DCLogic {
+  renderVals(){
+    const mk = (file, label, w, h) => {
+      const m = Math.max(w, h);
+      const target = m <= 16 ? 88 : 116;
+      const s = Math.max(1, Math.round(target / m));
+      return { file, label, w, h, dim: w + '\u00d7' + h, iw: w * s, ih: h * s };
+    };
+    const herois = [
+      mk('hero','Herói · aluno 42',48,48),
+      mk('captive','Cativo enjaulado · aluno 42',48,48),
+    ];
+    const inimigos = [
+      mk('enemy_cadet','Cadete corrompida · 1º inimigo',48,48),
+      mk('enemy_dev','Arqueiro · aluno 42 (foto real)',48,48),
+      mk('enemy_sludge','Bug / data-blob',32,32),
+      mk('enemy_sludge_thick','Memory leak',32,32),
+      mk('enemy_archer','Sentinela firewall',32,32),
+      mk('enemy_wizard','Kernel daemon',32,32),
+    ];
+    const chefe = [
+      mk('boss_director','Diretora · CHEFE FINAL',48,48),
+    ];
+    const cenario = [
+      mk('tile_floor','Ch\u00e3o · placa-m\u00e3e',32,32),
+      mk('tile_floor_corrupt','Ch\u00e3o corrompido',32,32),
+      mk('tile_wall','Parede · rack RAM',32,32),
+      mk('tile_stairs','Portal de diret\u00f3rio',32,32),
+      mk('tile_door','Porta',32,32),
+      mk('tile_void','Void · data rain',32,32),
+    ];
+    const ui = [
+      mk('ui_hp','HP / Vida',16,16),
+      mk('ui_sword','Ataque',16,16),
+      mk('ui_bow','Tiro',16,16),
+      mk('ui_shield','Defesa / pivot',16,16),
+      mk('ui_key','Resgate',16,16),
+      mk('ui_code','C\u00f3digo </>',16,16),
+      mk('ui_api','API { }',16,16),
+      mk('ui_book','Gloss\u00e1rio',16,16),
+      mk('ui_gear','Settings',16,16),
+      mk('ui_play','Play',16,16),
+      mk('ui_pause','Pause',16,16),
+      mk('ui_step','Passo',16,16),
+      mk('ui_speed','Velocidade',16,16),
+      mk('ui_clock','Turno',16,16),
+      mk('ui_vol_on','Volume',16,16),
+      mk('ui_vol_off','Mudo',16,16),
+      mk('ui_check','Conclu\u00eddo',16,16),
+      mk('ui_star','Ace',16,16),
+      mk('ui_lock','Bloqueado',16,16),
+      mk('ui_gem','Gema',16,16),
+      mk('ui_skull','Perigo',16,16),
+    ];
+    const fx = [
+      mk('key_art','Key art · 42 WARRIOR',120,56),
+      mk('logo_42','Logo 42',44,26),
+      mk('fx_arrow','Flecha (projétil)',24,8),
+      mk('fx_glitch_overlay','Overlay glitch (tile)',64,64),
+      mk('fx_hero_glitch_1','Glitch f1',48,48),
+      mk('fx_hero_glitch_2','Glitch f2',48,48),
+      mk('fx_hero_glitch_3','Glitch f3',48,48),
+      mk('fx_hero_glitch_4','Glitch f4',48,48),
+    ];
+    const groups = [
+      { id:'h', title:'HERÓI & ALIADOS', sub:'48×48 · o aluno + o cativo', items:herois },
+      { id:'i', title:'INIMIGOS', sub:'cadetes corrompidos + entidades', items:inimigos },
+      { id:'b', title:'CHEFE FINAL', sub:'48×48 · a diretora glitchada', items:chefe },
+      { id:'c', title:'CEN\u00c1RIO', sub:'32\u00d732 \u00b7 tiles da masmorra digital', items:cenario },
+      { id:'u', title:'UI / HUD', sub:'16\u00d716 \u00b7 \u00edcones e controles', items:ui },
+      { id:'f', title:'KEY ART & FX', sub:'logo · glitch', items:fx },
+    ];
+    const all = [...herois, ...inimigos, ...chefe, ...cenario, ...ui, ...fx];
+    const SC = 96; // display size of 48px sprite (×2)
+    const buildAnims = (name, list) => list.map(([anim, n]) => ({
+      anim, n, fw: SC, bgW: n * SC, sheet: 'assets/anim/' + name + '_' + anim + '.png'
+    }));
+    const animChars = [
+      { name:'hero', label:'Herói · aluno 42', accent:'#00F0FF', anims: buildAnims('hero',[['idle',4],['walk',6],['attack',5],['hurt',4],['death',6]]) },
+      { name:'enemy_cadet', label:'Cadete corrompida · 1º inimigo', accent:'#2bff66', anims: buildAnims('enemy_cadet',[['idle',4],['walk',6],['cast',5],['hurt',4],['death',6]]) },
+      { name:'enemy_dev', label:'Arqueiro · aluno 42', accent:'#00F0FF', anims: buildAnims('enemy_dev',[['idle',4],['walk',6],['shoot',5],['hurt',4],['death',6]]) },
+      { name:'boss_director', label:'Diretora · CHEFE FINAL', accent:'#FF2BD6', anims: buildAnims('boss_director',[['idle',4],['cast',5],['hurt',4],['death',6]]) },
+    ];
+    const palette = [
+      { name:'Void / fundo', hex:'#0A0A0B' },
+      { name:'Painel grafite', hex:'#22242B' },
+      { name:'Texto / branco', hex:'#F2F2F2' },
+      { name:'Cinza linha', hex:'#8A8F98' },
+      { name:'Ciano (glitch)', hex:'#00F0FF' },
+      { name:'Magenta (glitch)', hex:'#FF2BD6' },
+      { name:'Verde-f\u00f3sforo', hex:'#00FF66' },
+      { name:'Vermelho-rubi', hex:'#FF003C' },
+    ];
+
+    // scene layout
+    const L = ['WWWWWWWWW','WFFXHFF>W','WFSXFXAFW','WFXFCFFFW','WWWWDWWWW'];
+    const baseFor = t => t==='W'?'tile_wall' : t==='D'?'tile_door' : t==='>'?'tile_stairs' : t==='X'?'tile_floor_corrupt' : 'tile_floor';
+    const sprMap = { H:'hero', S:'enemy_cadet', A:'enemy_dev', C:'captive' };
+    const cells = [];
+    L.forEach(row => { for (const ch of row) cells.push({ base: baseFor(ch), spr: sprMap[ch] || null }); });
+    // sandbox: limpo (sem corrupção), 1 personagem por bloco
+    const sL = ['WWWWWWW','WHFFFFW','WFFFF>W','WFFFFFW','WWWWWWW'];
+    const sandboxCells = [];
+    sL.forEach(row => { for (const ch of row) sandboxCells.push({ base: baseFor(ch), spr: sprMap[ch] || null }); });
+
+    const bgMap = { 'Grade':'#101114', 'Escuro':'#15161A', 'Preto':'#0A0A0B' };
+    const previewBg = bgMap[this.props.previewBg] || bgMap['Grade'];
+
+    return {
+      groups, cells, sandboxCells, previewBg, palette, animChars,
+      totalCount: all.length,
+      downloadAll: () => {
+        all.forEach((it, i) => {
+          setTimeout(() => {
+            const a = document.createElement('a');
+            a.href = 'assets/' + it.file + '.png';
+            a.download = it.file + '.png';
+            document.body.appendChild(a); a.click(); a.remove();
+          }, i * 180);
+        });
+      },
+    };
+  }
+  componentDidMount(){ this._tick(); this._animLoop(); }
+  _animLoop(){
+    const step = () => {
+      const els = document.querySelectorAll('[data-anim]');
+      els.forEach(el => {
+        const frames = +el.getAttribute('data-frames');
+        const fw = +el.getAttribute('data-fw');
+        let f = (+el.getAttribute('data-f') || 0);
+        f = (f + 1) % frames;
+        el.setAttribute('data-f', f);
+        el.style.backgroundPositionX = (-f * fw) + 'px';
+      });
+      this._a = setTimeout(step, 160);
+    };
+    step();
+  }
+  _tick(){
+    if (this.props.glitchFx === false) return;
+    const img = document.getElementById('hero-live');
+    if (!img){ this._t = setTimeout(() => this._tick(), 250); return; }
+    const F = ['fx_hero_glitch_1','fx_hero_glitch_2','fx_hero_glitch_3','fx_hero_glitch_4'];
+    const loop = () => {
+      if (this.props.glitchFx === false){ if(img) img.src='assets/hero.png'; return; }
+      if (Math.random() < 0.32){
+        img.src = 'assets/' + F[Math.floor(Math.random()*4)] + '.png';
+        setTimeout(() => { if (img) img.src = 'assets/hero.png'; }, 70 + Math.random()*110);
+      }
+      this._t = setTimeout(loop, 320 + Math.random()*820);
+    };
+    loop();
+  }
+  componentWillUnmount(){ clearTimeout(this._t); clearTimeout(this._a); }
+}
+</script>
+</body>
+</html>
