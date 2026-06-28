@@ -117,5 +117,14 @@ Tema **OBRIGATÓRIO** da game jam ("glitch"). Narrativa: **Kernel corrompido da 
 **P2 — backlog (nice-to-have):**
 - [ ] **US-157** — glitch-through-walls / falso crash encenado / variação "o warrior é o glitch" (RF-159)
 
+### Glitch como ferramenta do jogador (019) — spec IMPLEMENT-READY, sprint FUTURE
+
+Evolução do tema: o glitch deixa de ser só efeito e vira **ferramenta** que o jogador detecta e explora a favor. Cadeia aprovada pelo PO (cmqxyjjd8); implementação **GATED na 018** (domínio 2D = done) e **sequenciada P3** (após 016 telas P1 + 018 apresentação); aguarda GO de ativação do PO. Reusa GlitchRule/GlitchPostProcess (015) + sentidos 2D/LevelState (018). Fonte de verdade: `specs/019-glitch-como-ferramenta-do-jogador-exploits-a-favor/`.
+- [ ] **T-190** GlitchRuleModel — modelo **seedado** comum (estende a GlitchRule da 015); janela = f(seed, turno) publicada nos `turn_events`; sinalização via GlitchPostProcess
+- [ ] **T-191** GlitchDetection — feel/look revelam a janela/padrão do glitch (sentidos 2D da 018), CQS, **≥1 turno de antecedência** (justiça)
+- [ ] **T-192** GlitchExploits — 4 mecânicas de domínio: no-clip seedado · buffer-overflow→dano dobrado · memory-leak→cura dobrada · inimigo intangível piscante (efeito só na janela)
+- [ ] **T-193** GlitchTeleport2D — teleporte corrompido p/ célula-alvo determinística na grade R×C (018); gated na 018
+- [ ] **T-194** Invariantes — determinismo seedado (≥1 teste/mecânica, 0 RNG injusto) + aditivo 0-regressão 001–016/018 (janela fechada = motor base) + detectabilidade 100% via feel/look
+
 ---
 > Fonte de verdade do status de spec: `specs/*.ts` (campo `phase`). Integração: presença do código na `main`.
