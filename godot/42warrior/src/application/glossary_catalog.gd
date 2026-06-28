@@ -10,6 +10,7 @@ static func entries_for_level(level_index: int) -> Dictionary:
 	return {
 		"entities": _entity_entries(state),
 		"score_terms": _score_entries(definition, state),
+		"directions": _direction_entries(),
 	}
 
 
@@ -54,6 +55,45 @@ static func _has_captives(state: LevelState) -> bool:
 		if state.unit_at(pos) is Captive:
 			return true
 	return false
+
+
+static func _direction_entries() -> Array:
+	return [
+		{
+			"name": "Norte",
+			"description":
+			"Direção absoluta. Move o warrior para a linha anterior (linha - 1). Use Direction.north().",
+		},
+		{
+			"name": "Sul",
+			"description":
+			"Direção absoluta. Move o warrior para a linha seguinte (linha + 1). Use Direction.south().",
+		},
+		{
+			"name": "Leste",
+			"description":
+			"Direção absoluta. Move o warrior para a próxima coluna (coluna + 1). Use Direction.east().",
+		},
+		{
+			"name": "Oeste",
+			"description":
+			"Direção absoluta. Move o warrior para a coluna anterior (coluna - 1). Use Direction.west().",
+		},
+		{
+			"name": "Frente",
+			"description": "Direção relativa. Para onde o warrior aponta. Use Direction.forward().",
+		},
+		{
+			"name": "Trás",
+			"description":
+			"Direção relativa. Oposto de onde o warrior aponta. Use Direction.backward().",
+		},
+		{
+			"name": "Pivot",
+			"description":
+			"Rotação 90° horária: N→L→S→O→N. Chame direction.pivot() em dir. absoluta.",
+		},
+	]
 
 
 static func _entity_key(unit: Unit) -> String:

@@ -79,3 +79,54 @@ static func _all_entry_data() -> Array:
 			"kind": "action",
 		},
 	]
+
+
+## Entradas que descrevem as constantes/métodos de Direction disponíveis ao jogador.
+## Separado de entries_for_level() porque direções não são "habilidades" desbloqueadas
+## por nível — são valores usados como argumento em qualquer contexto.
+static func direction_entries() -> Array:
+	return [
+		{
+			"name": "north",
+			"signature": "Direction.north() -> Direction",
+			"description": "Norte: move para a linha anterior (linha - 1, coluna inalterada).",
+			"kind": "direction",
+		},
+		{
+			"name": "south",
+			"signature": "Direction.south() -> Direction",
+			"description": "Sul: move para a linha seguinte (linha + 1, coluna inalterada).",
+			"kind": "direction",
+		},
+		{
+			"name": "east",
+			"signature": "Direction.east() -> Direction",
+			"description": "Leste: move para a próxima coluna (linha inalterada, coluna + 1).",
+			"kind": "direction",
+		},
+		{
+			"name": "west",
+			"signature": "Direction.west() -> Direction",
+			"description": "Oeste: move para a coluna anterior (linha inalterada, coluna - 1).",
+			"kind": "direction",
+		},
+		{
+			"name": "forward",
+			"signature": "Direction.forward() -> Direction",
+			"description":
+			"Frente: direção relativa para onde o warrior aponta (padrão da beginner tower).",
+			"kind": "direction",
+		},
+		{
+			"name": "backward",
+			"signature": "Direction.backward() -> Direction",
+			"description": "Trás: direção relativa oposta a onde o warrior aponta.",
+			"kind": "direction",
+		},
+		{
+			"name": "pivot_dir",
+			"signature": "direction.pivot() -> Direction",
+			"description": "Rotaciona 90° horário: N→E→S→W→N. Retorna nova Direction absoluta.",
+			"kind": "direction",
+		},
+	]
