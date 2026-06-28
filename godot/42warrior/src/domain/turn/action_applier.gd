@@ -46,7 +46,7 @@ func _walk(state: LevelState, direction: Direction) -> Dictionary:
 func _attack(state: LevelState, direction: Direction) -> Dictionary:
 	var target := state.position_toward(direction, 1)
 	var unit := state.unit_at(target)
-	if unit == null:
+	if unit == null or unit.is_captive():
 		return _no_op(state)
 	var power := _attack_power(state.warrior().attack_power, direction)
 	var wounded := unit.damaged_by(power)
@@ -104,6 +104,8 @@ func _shoot(state: LevelState, direction: Direction) -> Dictionary:
 	if target == -1:
 		return _no_op(state)
 	var unit := state.unit_at(target)
+	if unit.is_captive():
+		return _no_op(state)
 	var wounded := unit.damaged_by(SHOOT_POWER)
 	var events := [TurnEvent.new(TurnEvent.Kind.SHOT, "warrior", SHOOT_POWER, target)]
 	if wounded.is_alive():
