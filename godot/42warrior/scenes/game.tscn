@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://src/presentation/game_controller.gd" id="1_gamecontroller"]
 [ext_resource type="Script" path="res://src/presentation/dungeon_view.gd" id="2_dungview"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://src/presentation/warrior_state_panel.gd" id="7_warpanel"]
 [ext_resource type="Script" path="res://src/presentation/turn_console.gd" id="8_console"]
 [ext_resource type="Script" path="res://src/presentation/execution_controls.gd" id="9_controls"]
+[ext_resource type="Script" path="res://src/presentation/four_state_button.gd" id="10_fourstatebutton"]
 
 [node name="GameView" type="Node"]
 script = ExtResource("1_gamecontroller")
@@ -28,46 +29,35 @@ position_smoothing_speed = 5.0
 layer = 1
 script = ExtResource("4_hudview")
 
-[node name="HpLabel" type="Label" parent="HudView"]
-anchors_preset = 1
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 200.0
+[node name="StatusBar" type="HBoxContainer" parent="HudView"]
+anchor_right = 1.0
 offset_bottom = 48.0
-text = "♥ 20/20"
-theme_override_font_sizes/font_size = 24
+grow_horizontal = 2
+theme_override_constants/separation = 16
 
-[node name="TurnLabel" type="Label" parent="HudView"]
-anchors_preset = 1
-offset_left = 16.0
-offset_top = 52.0
-offset_right = 200.0
-offset_bottom = 80.0
-text = "Turno: 0"
+[node name="HpLabel" type="Label" parent="HudView/StatusBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "♥ 20/20"
 theme_override_font_sizes/font_size = 18
 
-[node name="LevelLabel" type="Label" parent="HudView"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -200.0
-offset_top = 16.0
-offset_right = 200.0
-offset_bottom = 48.0
+[node name="TurnLabel" type="Label" parent="HudView/StatusBar"]
+layout_mode = 2
+text = "T: 0"
+theme_override_font_sizes/font_size = 18
+
+[node name="LevelLabel" type="Label" parent="HudView/StatusBar"]
+layout_mode = 2
+size_flags_horizontal = 3
 horizontal_alignment = 1
 text = ""
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 18
 
-[node name="ScoreLabel" type="Label" parent="HudView"]
-anchors_preset = 3
-offset_left = -200.0
-offset_top = 16.0
-offset_right = -16.0
-offset_bottom = 48.0
+[node name="ScoreLabel" type="Label" parent="HudView/StatusBar"]
+layout_mode = 2
 horizontal_alignment = 2
-text = "Score: 0"
-theme_override_font_sizes/font_size = 20
+text = "SCORE: 0"
+theme_override_font_sizes/font_size = 18
 
 [node name="HintLabel" type="Label" parent="HudView"]
 visible = false
@@ -115,16 +105,16 @@ layout_mode = 2
 theme_override_constants/separation = 4
 
 [node name="PlayBtn" type="Button" parent="DebugLayer/EditorBar/HBox/ExecutionControls/HBox"]
+script = ExtResource("10_fourstatebutton")
 layout_mode = 2
 size_flags_horizontal = 3
 text = "▶ Retomar"
-theme_override_font_sizes/font_size = 11
 
 [node name="StepBtn" type="Button" parent="DebugLayer/EditorBar/HBox/ExecutionControls/HBox"]
+script = ExtResource("10_fourstatebutton")
 layout_mode = 2
 size_flags_horizontal = 3
 text = "⏭ Passo"
-theme_override_font_sizes/font_size = 11
 
 [node name="SpeedSlider" type="HSlider" parent="DebugLayer/EditorBar/HBox/ExecutionControls/HBox"]
 layout_mode = 2

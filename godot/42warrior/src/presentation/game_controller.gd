@@ -49,9 +49,11 @@ func _ready() -> void:
 	_timer.timeout.connect(_on_tick)
 	add_child(_timer)
 	_glitch_post_process = GlitchPostProcess.new()
+	_glitch_post_process.name = "GlitchPostProcess"
 	add_child(_glitch_post_process)
 	_ui_corruption = UiCorruption.new()
 	add_child(_ui_corruption)
+	_apply_theme()
 	_editor.run_pressed.connect(_on_run_pressed)
 	_editor.debug_toggled.connect(_on_debug_toggled)
 	_controls.play_pause_toggled.connect(_on_play_pause_toggled)
@@ -210,6 +212,13 @@ func _on_speed_changed(interval: float) -> void:
 
 func _on_debug_toggled(open: bool) -> void:
 	_debug_panel.visible = open
+
+
+func _apply_theme() -> void:
+	var t := GlobalDesignSystem.build_theme()
+	($DebugLayer/EditorBar as Control).theme = t
+	_debug_panel.theme = t
+	_hud.apply_theme(t)
 
 
 func _unhandled_input(event: InputEvent) -> void:
