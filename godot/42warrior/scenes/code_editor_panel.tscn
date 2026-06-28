@@ -30,7 +30,7 @@ theme_override_constants/separation = 4
 [node name="CodeArea" type="CodeEdit" parent="VBox/Tabs/Editor"]
 layout_mode = 2
 size_flags_vertical = 3
-custom_minimum_size = Vector2(0, 300)
+custom_minimum_size = Vector2(0, 80)
 text = "extends RefCounted
 
 func play_turn(warrior):
@@ -55,6 +55,12 @@ text = "↺ Resetar"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Solucao"
+
+[node name="DebugBtn" type="Button" parent="VBox/Tabs/Editor/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Debug"
+theme_override_colors/font_color = Color(0.6, 0.85, 1.0, 1)
 
 [node name="ErrorView" type="PanelContainer" parent="VBox/Tabs/Editor"]
 script = ExtResource("2_errview")
