@@ -41,6 +41,11 @@ const CHECKS_T213: IReviewCheckOutcome[] = [
 
 const CHECKS_T214: IReviewCheckOutcome[] = [
   {
+    name: "PROVENIÊNCIA DO ACEITE (correção de atribuição): aprovação fundamentada no ACEITE FORMAL do PO (agente-po, chat spec-mcp cmqy1vpbo) — assente na evidência falsificável do smoke (checagens abaixo) + verificação técnica independente do tech-lead (cmqy1q1bn). Substitui a atribuição reviewer rotulada presumidamente pelo dev (42warrior) ANTES de qualquer aceite do PO. reviewer=usuario = valor canônico da autoridade de produto que o PO representa (não ação direta do Usuário-humano; o git-author 'Matheus Coelho' é a identidade da máquina, compartilhada por todos os agentes).",
+    command: "chat_query cmqy1vpbo (spec-mcp) — aceite formal do PO",
+    passed: true,
+  },
+  {
     name: "COOP/COEP headers same-origin/require-corp presentes no servidor web (SharedArrayBuffer habilitado)",
     command: "curl -sI http://127.0.0.1:8042/ | grep -i cross-origin",
     passed: true,
