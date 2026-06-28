@@ -36,7 +36,7 @@ export const sprints: ISprint[] = [
     name: "Extensão de animação — rescue + captive (delta-A v2)",
     goal:
       "Estender o registro de animação (de US-160/T-160, já done) para hero_rescue + captive (idle/rescue), do pack v2 do Matheus: US-173. Aditivo, data-driven, render-proof count-level. Prioridade MÉDIA (sequenciado pelo PO após o trabalho visível).",
-    state: "future",
+    state: "active",
     startDate: "",
     endDate: "",
     storyKeys: ["US-173"],
