@@ -9,11 +9,12 @@ var _skeleton_provider := LevelSkeletonProvider.new()
 var _ref_source := ""
 var _player_source := ""
 
-@onready var _editor: CodeEdit = $VBox/Editor
-@onready var _run_btn: Button = $VBox/Buttons/RunBtn
-@onready var _reset_btn: Button = $VBox/Buttons/ResetBtn
-@onready var _ref_btn: Button = $VBox/Buttons/RefBtn
-@onready var _error_view: ErrorView = $VBox/ErrorView
+@onready var _editor: CodeEdit = $VBox/Tabs/Editor/CodeArea
+@onready var _run_btn: Button = $VBox/Tabs/Editor/Buttons/RunBtn
+@onready var _reset_btn: Button = $VBox/Tabs/Editor/Buttons/ResetBtn
+@onready var _ref_btn: Button = $VBox/Tabs/Editor/Buttons/RefBtn
+@onready var _error_view: ErrorView = $VBox/Tabs/Editor/ErrorView
+@onready var _api_tab: ApiReferenceTab = $VBox/Tabs/API
 
 
 func _ready() -> void:
@@ -33,6 +34,7 @@ func setup_level(level_index: int, ref_source: String) -> void:
 		_editor.text = _skeleton_provider.skeleton(level_index)
 	_player_source = _editor.text
 	_error_view.clear()
+	_api_tab.populate(WarriorApiCatalog.entries_for_level(level_index))
 
 
 func show_compile_error(msg: String) -> void:

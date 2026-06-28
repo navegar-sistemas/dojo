@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://src/presentation/code_editor_panel.gd" id="1_panel"]
 [ext_resource type="Script" path="res://src/presentation/error_view.gd" id="2_errview"]
+[ext_resource type="PackedScene" path="res://scenes/api_reference_tab.tscn" id="3_apitab"]
 
 [node name="CodeEditorPanel" type="PanelContainer"]
 script = ExtResource("1_panel")
@@ -17,7 +18,15 @@ horizontal_alignment = 1
 theme_override_font_sizes/font_size = 13
 theme_override_colors/font_color = Color(0.9, 0.8, 0.4, 1)
 
-[node name="Editor" type="CodeEdit" parent="VBox"]
+[node name="Tabs" type="TabContainer" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Editor" type="VBoxContainer" parent="VBox/Tabs"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="CodeArea" type="CodeEdit" parent="VBox/Tabs/Editor"]
 layout_mode = 2
 size_flags_vertical = 3
 custom_minimum_size = Vector2(0, 300)
@@ -26,34 +35,38 @@ text = "extends RefCounted
 func play_turn(warrior):
 	pass"
 
-[node name="Buttons" type="HBoxContainer" parent="VBox"]
+[node name="Buttons" type="HBoxContainer" parent="VBox/Tabs/Editor"]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="RunBtn" type="Button" parent="VBox/Buttons"]
+[node name="RunBtn" type="Button" parent="VBox/Tabs/Editor/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "▶ Rodar"
 theme_override_colors/font_color = Color(0.4, 0.9, 0.5, 1)
 
-[node name="ResetBtn" type="Button" parent="VBox/Buttons"]
+[node name="ResetBtn" type="Button" parent="VBox/Tabs/Editor/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "↺ Resetar"
 
-[node name="RefBtn" type="Button" parent="VBox/Buttons"]
+[node name="RefBtn" type="Button" parent="VBox/Tabs/Editor/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Solucao"
 
-[node name="ErrorView" type="PanelContainer" parent="VBox"]
+[node name="ErrorView" type="PanelContainer" parent="VBox/Tabs/Editor"]
 script = ExtResource("2_errview")
 visible = false
 custom_minimum_size = Vector2(0, 60)
 
-[node name="Label" type="Label" parent="VBox/ErrorView"]
+[node name="Label" type="Label" parent="VBox/Tabs/Editor/ErrorView"]
 layout_mode = 2
 text = ""
 autowrap_mode = 3
 theme_override_colors/font_color = Color(1, 0.4, 0.4, 1)
 theme_override_font_sizes/font_size = 13
+
+[node name="API" parent="VBox/Tabs" instance=ExtResource("3_apitab")]
+layout_mode = 2
+size_flags_vertical = 3
