@@ -8,6 +8,7 @@ var _store: ProgressStore
 
 @onready var _start_btn: Button = $VBox/StartBtn
 @onready var _continue_btn: Button = $VBox/ContinueBtn
+@onready var _select_btn: Button = $VBox/SelectLevelsBtn
 @onready var _music_slider: HSlider = $VBox/VolumeBox/MusicSlider
 @onready var _sfx_slider: HSlider = $VBox/VolumeBox/SfxSlider
 
@@ -16,6 +17,7 @@ func _ready() -> void:
 	_store = ProgressStore.new()
 	_start_btn.pressed.connect(_on_start_pressed)
 	_continue_btn.pressed.connect(_on_continue_pressed)
+	_select_btn.pressed.connect(_on_select_levels_pressed)
 	_continue_btn.disabled = not _store.has_save()
 	_music_slider.value = _store.vol_music()
 	_sfx_slider.value = _store.vol_sfx()
@@ -24,11 +26,18 @@ func _ready() -> void:
 
 
 func _on_start_pressed() -> void:
+	LevelProgressStore.new().unlock_level(1)
 	var flow: Node = get_node_or_null("/root/TowerFlow")
 	if flow:
 		flow.start(1)
 	else:
 		start_requested.emit(1)
+
+
+func _on_select_levels_pressed() -> void:
+	var screen_mgr: Node = get_node_or_null("/root/ScreenManager")
+	if screen_mgr:
+		screen_mgr.change_to("res://scenes/level_select_screen.tscn")
 
 
 func _on_continue_pressed() -> void:

@@ -3,6 +3,7 @@ extends Node
 ## menu → transição → jogo → resultado → (próximo / créditos).
 
 var _store := ProgressStore.new()
+var _level_store := LevelProgressStore.new()
 var _current_level := 1
 var _last_score_total := 0
 var _last_turns := 0
@@ -37,8 +38,10 @@ func on_level_won(score_total: int, turns: int, is_ace: bool) -> void:
 	_last_turns = turns
 	_last_is_ace = is_ace
 	_last_won = true
+	_level_store.save_result(_current_level, score_total, true, is_ace)
 	if _current_level < BeginnerTower.LEVEL_COUNT:
 		_store.save_level(_current_level + 1)
+		_level_store.unlock_level(_current_level + 1)
 	if _current_level >= BeginnerTower.LEVEL_COUNT:
 		ScreenManager.change_to("res://scenes/tower_complete.tscn")
 	else:
