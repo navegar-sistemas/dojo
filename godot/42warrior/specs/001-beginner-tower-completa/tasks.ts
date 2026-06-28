@@ -262,7 +262,7 @@ export const tasks: ITask[] = [
       "Escrever uma solução-referência (código play_turn) para cada um dos 9 níveis e um teste ponta-a-ponta que roda cada solução pelo runner+resolver até o desfecho.",
     definitionOfDone:
       "Teste GUT ponta-a-ponta: cada um dos 9 níveis é VENCIDO pela sua solução-referência; nenhuma solução ataca cativo.",
-    status: "in_progress",
+    status: "done",
     dependsOn: ["T-018", "T-020", "T-016"],
     parallel: false,
     assignee: "usuario",

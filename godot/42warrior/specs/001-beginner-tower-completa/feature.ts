@@ -39,6 +39,6 @@ export const feature: IFeature = {
     "Escopo extra aprovado: pontuação+ace, telas de torre, áudio completo (SFX+música), menu+créditos.",
     "Fonte canônica dos 9 níveis ratificada por usuario (2026-06-27): o gem original ryanb/ruby-warrior (towers/beginner/level_001..009.rb). beginner_tower.gd usa os literais do código-fonte (width/unidades/escada/time_bonus/ace_score), ancorados por test_beginner_tower_canonical.gd. Correção aplicada: L5 (size 7, stairs 6) e L6 (size 8, stairs 7), antes reconstruídos de walkthrough.",
   ],
-  phase: "implementing",
+  phase: "done",
   createdAt: "2026-06-27",
 };

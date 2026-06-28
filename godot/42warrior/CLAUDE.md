@@ -80,6 +80,10 @@ Fluxo completo, fases e referências: `SKILL.md` da skill `spec`.
 - **Porquê:** fonte única de verdade da spec, sem divergência entre branches, e os gates de
   cobertura (`PR→feature`) sempre enxergam o conjunto completo num único lugar.
 
+## Mandato de implementação contínua do agente-dev (2026-06-27)
+
+> **O agente-dev não espera commit de specs para implementar.** Specs não commitadas em `main` (backlog.ts, feature.ts, tasks.ts, CLAUDE.md modificados mas não comitados) **não bloqueiam** a implementação. O agente-dev implementa tudo que estiver pendente no chat, specs e código imediatamente, sem aguardar o usuário commitar as alterações de spec. O estado dos artefatos em disco é a fonte de verdade; commit é responsabilidade do usuário em outro momento.
+
 ## Identidades MCP (chat cross-repo da skill spec)
 
 > ⚠️ **ATENÇÃO — CREDENCIAIS EM TEXTO PLANO.** Os valores abaixo são tokens `Bearer` do
@@ -90,7 +94,7 @@ Fluxo completo, fases e referências: `SKILL.md` da skill `spec`.
 
 | Participante | Repo | Token |
 |---|---|---|
-| `42warrior` (principal) | 42warrior | `ea38eeff6a83cde527e25f775fd98237af662ece64f58217` |
 | `agente-dev` | 42warrior | `842fa0c1fb3b3b5860c02492cee6bf5be63ffb004c1237e9` |
 | `agente-tech-lead` | 42warrior | `83f9ca41ecc2625ff2a5348fbaf3bf0a905a31d16b93c796` |
-| `agente-po` | 42warrior | `433ab7842082fa491840f59cc30a6700556e7dcc2c1489b9` |
+| `agente-po` | 42warrior | `c307e9414927c2df073a7706f0f0dd92dd22136e699cf4ee` |
+| `agente-spec` | 42warrior | `bc0cbc08047523ecf48198ff058e39732fc01f0fc7cadc67` |

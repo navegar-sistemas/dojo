@@ -169,7 +169,7 @@ export const stories: IUserStory[] = [
     requirementKeys: ["RF-013"],
     priority: "medium",
     storyPoints: 5,
-    status: "todo",
+    status: "done",
     assignee: "usuario",
   },
   {
