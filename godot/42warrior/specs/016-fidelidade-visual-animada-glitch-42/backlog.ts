@@ -77,7 +77,7 @@ export const stories: IUserStory[] = [
     requirementKeys: ["RF-164", "RF-163", "RNF-160"],
     priority: "highest",
     storyPoints: 8,
-    status: "todo",
+    status: "done",
     assignee: null,
   },
   {
@@ -93,7 +93,7 @@ export const stories: IUserStory[] = [
     requirementKeys: ["RF-164", "RF-165", "RF-163", "RNF-160"],
     priority: "high",
     storyPoints: 5,
-    status: "todo",
+    status: "done",
     assignee: null,
   },
   {
@@ -108,7 +108,7 @@ export const stories: IUserStory[] = [
     requirementKeys: ["RF-164", "RF-163", "RNF-160"],
     priority: "high",
     storyPoints: 5,
-    status: "todo",
+    status: "done",
     assignee: null,
   },
   // ── TELAS P1 (secundárias) ──

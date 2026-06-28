@@ -54,7 +54,7 @@ export const tasks: ITask[] = [
     summary: "Tela de JOGO (CORE) fiel ao mockup: status bar + arena + console + editor retrátil.",
     definitionOfDone:
       "Cena de jogo fiel ao mockup: topo = status bar terminal (LVL/HP via ui_hp/TURN via ui_clock/SCORE via ui_gem, vol+gear); centro = arena TileMap (reusa T-161) com personagem por célula animado (reusa T-160) + overlay glitch (reusa GlitchPostProcess da 015); inferior = console de turnos + controles (reusa T-162); editor retrátil lateral (toggle </>, começa visível). Tipografia via Theme. DoD = PROVA DE RENDER (renderiza ≥1 frame, assere as 3 zonas + arena com tiles/sprites posicionados) + suíte verde, 0 regressão.",
-    status: "in_progress",
+    status: "done",
     dependsOn: ["T-160", "T-161", "T-162"],
     parallel: true,
     assignee: null,
@@ -65,7 +65,7 @@ export const tasks: ITask[] = [
     summary: "Tela Menu inicial fiel ao mockup (boot log + key art + opções).",
     definitionOfDone:
       "Menu inicial fiel: fundo void + boot log fake (`$ ./42warrior --boot`, [WARN] corruption detected) + key_art.png + opções (Jogar/Continuar destacada ciano, Selecionar nível, Áudio, Sobre/Créditos via T-162). Tipografia Press Start 2P/JetBrains Mono via Theme. DoD = PROVA DE RENDER (renderiza ≥1 frame, assere elementos-chave do mockup) + suíte verde, 0 regressão.",
-    status: "todo",
+    status: "done",
     dependsOn: ["T-162"],
     parallel: true,
     assignee: null,
@@ -76,7 +76,7 @@ export const tasks: ITask[] = [
     summary: "Tela Seleção de níveis fiel ao mockup (grade 3×3 com estados).",
     definitionOfDone:
       "Seleção: grade 3×3 dos 9 andares com estado (ui_check concluído, ui_star ace, ui_lock bloqueado, andar atual destacado ciano, andar 9 = chefe magenta), reusando T-162. Tipografia via Theme. DoD = PROVA DE RENDER (renderiza ≥1 frame, assere a grade + estados) + suíte verde, 0 regressão.",
-    status: "todo",
+    status: "done",
     dependsOn: ["T-162"],
     parallel: true,
     assignee: null,
