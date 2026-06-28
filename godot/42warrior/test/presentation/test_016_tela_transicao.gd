@@ -53,6 +53,23 @@ func test_sem_tower_flow_nao_crasha() -> void:
 	assert_not_null(root, "level_transition deve renderizar sem crash mesmo sem TowerFlow")
 
 
+func test_fundo_void_presente() -> void:
+	var root := _load_scene()
+	await get_tree().process_frame
+	var bg := root.find_child("VoidBackground", true, false)
+	assert_not_null(bg, "VoidBackground (fundo void) deve existir em level_transition.tscn")
+
+
+func test_start_btn_e_four_state_button() -> void:
+	var root := _load_scene()
+	await get_tree().process_frame
+	var btn := root.find_child("StartBtn", true, false)
+	assert_not_null(btn, "StartBtn deve existir")
+	assert_true(
+		btn is FourStateButton, "StartBtn deve ser FourStateButton (T-162) — nao Button base"
+	)
+
+
 func _load_scene() -> Node:
 	var packed := load(_SCENE) as PackedScene
 	var root := packed.instantiate()

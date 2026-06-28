@@ -75,6 +75,23 @@ func test_menu_btn_presente() -> void:
 	assert_not_null(btn, "MenuBtn deve existir em tower_complete.tscn")
 
 
+func test_fundo_void_presente() -> void:
+	var root := _load_scene()
+	await get_tree().process_frame
+	var bg := root.find_child("VoidBackground", true, false)
+	assert_not_null(bg, "VoidBackground (fundo void) deve existir em tower_complete.tscn")
+
+
+func test_menu_btn_e_four_state_button() -> void:
+	var root := _load_scene()
+	await get_tree().process_frame
+	var btn := root.find_child("MenuBtn", true, false)
+	assert_not_null(btn, "MenuBtn deve existir")
+	assert_true(
+		btn is FourStateButton, "MenuBtn deve ser FourStateButton (T-162) — nao Button base"
+	)
+
+
 func _load_scene() -> Node:
 	var packed := load(_SCENE) as PackedScene
 	var root := packed.instantiate()
