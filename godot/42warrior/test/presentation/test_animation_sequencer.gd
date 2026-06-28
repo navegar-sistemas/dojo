@@ -12,6 +12,17 @@ func test_fila_vazia_emite_all_done() -> void:
 	assert_eq(seq.sequence_size(), 0)
 
 
+func test_all_done_nao_e_sincrono_sem_animacao() -> void:
+	# Regressão do deadlock (code review): sem animação efetiva, all_done NÃO pode
+	# sair SÍNCRONO dentro de play() — senão o `await` do chamador o perde e trava.
+	var seq := AnimationSequencer.new()
+	watch_signals(seq)
+	seq.play()
+	assert_signal_not_emitted(seq, "all_done", "all_done síncrono travaria o chamador")
+	await wait_for_signal(seq.all_done, 1.0)
+	assert_signal_emitted(seq, "all_done", "emite no frame seguinte")
+
+
 func test_sequence_size_e_consultavel() -> void:
 	var host := Node2D.new()
 	add_child_autofree(host)

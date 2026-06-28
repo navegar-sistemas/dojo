@@ -44,6 +44,7 @@ func play() -> void:
 	if _playing:
 		return
 	_playing = true
+	var awaited := false
 	for beat: Array in _beats:
 		var tweens: Array = []
 		for factory: Callable in beat:
@@ -53,5 +54,12 @@ func play() -> void:
 		for tween: Tween in tweens:
 			if tween.is_valid():
 				await tween.finished
+				awaited = true
+	if not awaited:
+		# Nenhuma animação efetiva (turno no-op, pivot, andar na parede): difere a
+		# emissão um frame. Sem isto, all_done sairia SÍNCRONO dentro de play() e o
+		# `await animations_finished` do chamador o perderia — travando o jogo (o
+		# deadlock que o code review apontou).
+		await (Engine.get_main_loop() as SceneTree).process_frame
 	_playing = false
 	all_done.emit()
