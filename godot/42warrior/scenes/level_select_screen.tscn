@@ -1,34 +1,39 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://src/presentation/level_select_screen.gd" id="1_lvlsel"]
+[ext_resource type="Script" path="res://src/presentation/four_state_button.gd" id="2_fsbutton"]
 
 [node name="LevelSelectScreen" type="PanelContainer"]
 script = ExtResource("1_lvlsel")
 anchor_right = 1.0
 anchor_bottom = 1.0
 
+[node name="VoidBackground" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.039, 0.039, 0.043, 1)
+
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 2
-alignment = 0
+alignment = 1
 theme_override_constants/separation = 16
 
 [node name="Title" type="Label" parent="VBox"]
 layout_mode = 2
-text = "Selecionar Nível"
+text = "SELECIONAR ANDAR"
 horizontal_alignment = 1
-theme_override_font_sizes/font_size = 36
-theme_override_colors/font_color = Color(0.9, 0.8, 0.4, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(0, 0.941, 1, 1)
 
-[node name="Scroll" type="ScrollContainer" parent="VBox"]
+[node name="LevelGrid" type="GridContainer" parent="VBox"]
 layout_mode = 2
-size_flags_vertical = 3
-
-[node name="List" type="VBoxContainer" parent="VBox/Scroll"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 8
+columns = 3
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
 
 [node name="BackBtn" type="Button" parent="VBox"]
+script = ExtResource("2_fsbutton")
 layout_mode = 2
+size_flags_horizontal = 4
 text = "← Voltar"
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 16
