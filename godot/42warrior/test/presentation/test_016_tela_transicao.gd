@@ -70,6 +70,19 @@ func test_start_btn_e_four_state_button() -> void:
 	)
 
 
+func test_theme_fonte_real_aplicada() -> void:
+	var root := _load_scene()
+	await get_tree().process_frame
+	var title := root.find_child("Title", true, false) as Label
+	assert_not_null(title, "Title Label deve existir")
+	var font := title.get_theme_font("font", "Label")
+	assert_not_null(font, "Label deve ter fonte do Theme aplicada (nao null)")
+	assert_true(
+		font.resource_path.length() > 0,
+		"fonte deve ser real do GlobalDesignSystem (resource_path nao vazio — nao default Godot)"
+	)
+
+
 func _load_scene() -> Node:
 	var packed := load(_SCENE) as PackedScene
 	var root := packed.instantiate()

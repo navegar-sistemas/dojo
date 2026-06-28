@@ -12,6 +12,7 @@ extends PanelContainer
 
 
 func _ready() -> void:
+	theme = GlobalDesignSystem.build_theme()
 	_next_btn.pressed.connect(_on_next_pressed)
 	_retry_btn.pressed.connect(_on_retry_pressed)
 	_menu_btn.pressed.connect(_on_menu_pressed)

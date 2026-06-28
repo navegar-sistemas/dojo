@@ -10,6 +10,7 @@ extends PanelContainer
 
 
 func _ready() -> void:
+	theme = GlobalDesignSystem.build_theme()
 	_start_btn.pressed.connect(_on_start_pressed)
 	var flow: Node = get_node_or_null("/root/TowerFlow")
 	if flow:
