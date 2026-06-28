@@ -25,11 +25,11 @@ func last_result() -> Dictionary:
 
 func start(level: int) -> void:
 	_current_level = level
-	get_tree().change_scene_to_file("res://scenes/level_transition.tscn")
+	ScreenManager.change_to("res://scenes/level_transition.tscn")
 
 
 func on_transition_confirmed() -> void:
-	get_tree().change_scene_to_file("res://scenes/game.tscn")
+	ScreenManager.change_to("res://scenes/game.tscn")
 
 
 func on_level_won(score_total: int, turns: int, is_ace: bool) -> void:
@@ -40,14 +40,14 @@ func on_level_won(score_total: int, turns: int, is_ace: bool) -> void:
 	if _current_level < BeginnerTower.LEVEL_COUNT:
 		_store.save_level(_current_level + 1)
 	if _current_level >= BeginnerTower.LEVEL_COUNT:
-		get_tree().change_scene_to_file("res://scenes/tower_complete.tscn")
+		ScreenManager.change_to("res://scenes/tower_complete.tscn")
 	else:
-		get_tree().change_scene_to_file("res://scenes/level_result.tscn")
+		ScreenManager.change_to("res://scenes/level_result.tscn")
 
 
 func on_level_lost() -> void:
 	_last_won = false
-	get_tree().change_scene_to_file("res://scenes/level_result.tscn")
+	ScreenManager.change_to("res://scenes/level_result.tscn")
 
 
 func on_next_level() -> void:
@@ -60,4 +60,4 @@ func on_retry() -> void:
 
 
 func on_go_to_menu() -> void:
-	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	ScreenManager.change_to("res://scenes/main_menu.tscn")

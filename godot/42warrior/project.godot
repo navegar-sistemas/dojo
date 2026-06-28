@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+ScreenManager="*res://src/presentation/screen_manager.gd"
 TowerFlow="*res://src/presentation/tower_flow.gd"
 AudioManager="*res://src/presentation/audio_manager.gd"
 
@@ -24,6 +25,10 @@ AudioManager="*res://src/presentation/audio_manager.gd"
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[gui]
+
+theme/custom="res://assets/theme/game_theme.tres"
 
 [physics]
 

@@ -37,6 +37,7 @@ var _timer: Timer
 @onready var _console: TurnConsole = $DebugLayer/DebugPanel/VBox/TurnConsole
 @onready var _state_panel: WarriorStatePanel = $DebugLayer/DebugPanel/VBox/WarriorStatePanel
 @onready var _controls: ExecutionControls = $DebugLayer/DebugPanel/VBox/ExecutionControls
+@onready var _toggle_editor_btn: Button = $HudView/ToggleEditorBtn
 
 
 func _ready() -> void:
@@ -48,6 +49,7 @@ func _ready() -> void:
 	_controls.play_pause_toggled.connect(_on_play_pause_toggled)
 	_controls.step_requested.connect(_on_step_requested)
 	_controls.speed_changed.connect(_on_speed_changed)
+	_toggle_editor_btn.pressed.connect(_on_toggle_editor)
 	var flow: Node = get_node_or_null("/root/TowerFlow")
 	var start_level := 1
 	if flow:
@@ -186,6 +188,10 @@ func _on_speed_changed(interval: float) -> void:
 	_timer.wait_time = interval
 	if not _timer.is_stopped():
 		_timer.start()
+
+
+func _on_toggle_editor() -> void:
+	_editor.visible = not _editor.visible
 
 
 func _unhandled_input(event: InputEvent) -> void:

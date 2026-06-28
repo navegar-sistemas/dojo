@@ -18,17 +18,19 @@ func update_from_state(state: LevelState, floor_layer: TileMapLayer) -> void:
 	var active: Dictionary = {}
 
 	var stairs_world := _cell_world(state.stairs_position(), floor_layer)
-	_ensure_sprite("stairs", stairs_world, AssetPaths.STAIRS_SPRITE)
+	_ensure_sprite("stairs", stairs_world, EntityAssetRegistry.sprite_for_type("stairs"))
 	active["stairs"] = true
 
 	for pos: int in state.unit_positions():
-		var unit: Unit = state.unit_at(pos)
 		var key := "unit_%d" % pos
-		_ensure_sprite(key, _cell_world(pos, floor_layer), _unit_sprite_path(unit))
+		var type_name: String = state.unit_at(pos).get_script().get_global_name()
+		_ensure_sprite(
+			key, _cell_world(pos, floor_layer), EntityAssetRegistry.sprite_for_type(type_name)
+		)
 		active[key] = true
 
 	var warrior_world := _cell_world(state.warrior_position(), floor_layer)
-	_ensure_sprite("warrior", warrior_world, AssetPaths.WARRIOR_SPRITE)
+	_ensure_sprite("warrior", warrior_world, EntityAssetRegistry.sprite_for_type("Warrior"))
 	active["warrior"] = true
 
 	for key: String in _sprites.keys():
@@ -137,21 +139,6 @@ func _ensure_sprite(key: String, world_pos: Vector2, tex_path: String) -> void:
 	(_sprites[key] as Sprite2D).global_position = world_pos
 	(_sprites[key] as Sprite2D).modulate = Color.WHITE
 	(_sprites[key] as Sprite2D).scale = Vector2.ONE
-
-
-func _unit_sprite_path(unit: Unit) -> String:
-	match unit.get_script().get_global_name():
-		"Sludge":
-			return AssetPaths.SLUDGE_SPRITE
-		"ThickSludge":
-			return AssetPaths.THICK_SLUDGE_SPRITE
-		"Archer":
-			return AssetPaths.ARCHER_SPRITE
-		"Wizard":
-			return AssetPaths.WIZARD_SPRITE
-		"Captive":
-			return AssetPaths.CAPTIVE_SPRITE
-	return AssetPaths.SLUDGE_SPRITE
 
 
 func _load_or_placeholder(path: String) -> Texture2D:
