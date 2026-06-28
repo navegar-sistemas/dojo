@@ -28,6 +28,28 @@ static func definition(index: int) -> LevelDefinition:
 	return definitions()[index - 1]
 
 
+static func sandbox_definition() -> LevelDefinition:
+	return LevelDefinition.new(
+		{
+			"index": 0,
+			"width": 5,
+			"warrior_position": 0,
+			"warrior_facing": 1,
+			"stairs_position": 4,
+			"description": "Treinamento",
+			"abilities":
+			PackedStringArray(
+				["walk", "feel", "attack", "health", "rest", "rescue", "pivot", "look", "shoot"]
+			),
+			"time_bonus": 0,
+			"ace_score": 0,
+			"is_sandbox": true,
+			"hint_text": "Escreva play_turn(warrior): e clique Rodar. Toda a API está disponível.",
+			"units": {2: func() -> Unit: return Sludge.new()},
+		}
+	)
+
+
 static func _level_1() -> LevelDefinition:
 	return (
 		LevelDefinition
