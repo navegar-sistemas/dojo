@@ -46,13 +46,15 @@ func _build_level_btn(index: int, entry: Dictionary) -> FourStateButton:
 	var label := ""
 	var color := _COLOR_LOCKED
 
+	if status == LevelProgressStore.STATUS_LOCKED:
+		btn.disabled = true
+
 	if index == LEVEL_COUNT:
 		label = "BOSS\n[%02d]" % index
 		color = _COLOR_BOSS if status != LevelProgressStore.STATUS_LOCKED else _COLOR_LOCKED
 	elif status == LevelProgressStore.STATUS_LOCKED:
 		label = "🔒\n[%02d]" % index
 		color = _COLOR_LOCKED
-		btn.disabled = true
 	elif status == LevelProgressStore.STATUS_WON:
 		var mark := " ★" if is_ace else " ✓"
 		label = "[%02d]%s" % [index, mark]

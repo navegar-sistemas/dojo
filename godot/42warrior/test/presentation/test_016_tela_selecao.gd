@@ -92,6 +92,18 @@ func test_theme_fonte_press_start_2p_aplicada() -> void:
 	)
 
 
+func test_level_btn_bloqueado_disabled() -> void:
+	var root := _load_scene()
+	await get_tree().process_frame
+	# LevelBtn_9 (boss) sempre bloqueado em estado sem save — estado visual real
+	var btn_9 := root.find_child("LevelBtn_9", true, false) as FourStateButton
+	assert_not_null(btn_9, "LevelBtn_9 deve existir")
+	assert_true(
+		btn_9.disabled,
+		"LevelBtn_9 deve estar disabled em estado sem save (andar bloqueado = disabled=true)"
+	)
+
+
 func _load_scene() -> Node:
 	var packed := load(_SCENE) as PackedScene
 	var root := packed.instantiate()
