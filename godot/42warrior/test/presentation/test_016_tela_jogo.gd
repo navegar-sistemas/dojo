@@ -96,6 +96,43 @@ func test_theme_global_design_system_aplicado() -> void:
 	assert_not_null(any_label, "HpLabel deve existir no StatusBar")
 
 
+func test_arena_tiles_contados() -> void:
+	var root := _load_game()
+	await get_tree().process_frame
+	var floor_layer := root.find_child("Floor", true, false) as TileMapLayer
+	assert_not_null(floor_layer, "Floor TileMapLayer deve existir")
+	var used := floor_layer.get_used_cells()
+	assert_true(
+		used.size() > 0,
+		"Floor deve ter tiles REALMENTE desenhados (get_used_cells > 0, arena nao preta)"
+	)
+
+
+func test_arena_animated_sprite_posicionado() -> void:
+	var root := _load_game()
+	await get_tree().process_frame
+	var entities := root.find_child("Entities", true, false)
+	assert_not_null(entities, "Entities deve existir")
+	var sprites := entities.find_children("*", "AnimatedSprite2D", true, false)
+	assert_true(
+		sprites.size() > 0,
+		">=1 AnimatedSprite2D deve estar posicionado em Entities (heroi ou inimigo na arena)"
+	)
+
+
+func test_theme_fonte_press_start_2p_aplicada() -> void:
+	var root := _load_game()
+	await get_tree().process_frame
+	var hp_label := root.find_child("HpLabel", true, false) as Label
+	assert_not_null(hp_label, "HpLabel deve existir no StatusBar")
+	var font := hp_label.get_theme_font("font", "Label")
+	assert_not_null(font, "Label deve ter fonte do Theme aplicada (nao null)")
+	assert_true(
+		font.resource_path.length() > 0,
+		"fonte deve ser Press Start 2P ou JetBrains Mono (resource_path nao vazio — nao default Godot)"
+	)
+
+
 func _load_game() -> Node:
 	var packed := load(_GAME_SCENE) as PackedScene
 	var root := packed.instantiate()
