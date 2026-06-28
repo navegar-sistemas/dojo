@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/presentation/game_controller.gd" id="1_gamecontroller"]
 [ext_resource type="Script" path="res://src/presentation/dungeon_view.gd" id="2_dungview"]
-[ext_resource type="Script" path="res://src/presentation/entity_sprite_registry.gd" id="3_registry"]
+[ext_resource type="Script" path="res://src/presentation/animated_entity_registry.gd" id="3_registry"]
 [ext_resource type="Script" path="res://src/presentation/hud_view.gd" id="4_hudview"]
 [ext_resource type="PackedScene" path="res://scenes/code_editor_panel.tscn" id="5_panel"]
 [ext_resource type="Script" path="res://src/presentation/warrior_state_panel.gd" id="7_warpanel"]
