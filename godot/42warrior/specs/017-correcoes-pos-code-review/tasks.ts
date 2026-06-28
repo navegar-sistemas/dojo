@@ -5,9 +5,9 @@ export const tasks: ITask[] = [
     key: "T-170",
     storyKey: "US-170",
     summary:
-      "Guard UNITÁRIO do all_done diferido em turno no-op (NÃO é prova de cena — a prova de cena real fica como follow-up aberto).",
+      "Guard UNITÁRIO do all_done diferido em turno no-op (a prova de cena real foi ENTREGUE como follow-up integrado).",
     definitionOfDone:
-      "Existe um teste GUT (test_017_noop_cena.gd) que assere o invariante do all_done diferido num turno sem tween (no-op), equivalente/co-localizado ao test_all_done_nao_e_sincrono_sem_animacao da 013 — é UNITÁRIO do AnimationSequencer e NÃO instancia game.tscn nem dirige game_controller. FOLLOW-UP ABERTO (não entregue nesta task; código do dev/tech-lead): teste de NÍVEL DE CENA real que dirige game_controller / instancia game.tscn num turno no-op, renderiza ≥1 frame e assere que o loop AVANÇA, honrando a render-rule. Suíte GUT 100% verde, 0 regressão das features integradas.",
+      "Existe um teste GUT (test_017_noop_cena.gd) que assere o invariante do all_done diferido num turno sem tween (no-op), equivalente/co-localizado ao test_all_done_nao_e_sincrono_sem_animacao da 013 — é UNITÁRIO do AnimationSequencer e NÃO instancia game.tscn nem dirige game_controller. A prova de NÍVEL DE CENA real (dirige game_controller / instancia game.tscn num turno no-op, renderiza ≥1 frame e assere que o loop AVANÇA, honrando a render-rule) foi ENTREGUE como follow-up (test_017_noop_render_cena.gd, dev 42warrior, aceito pelo PO e integrado na main 677d1c4). Suíte GUT 100% verde, 0 regressão das features integradas.",
     status: "done",
     dependsOn: [],
     parallel: true,
