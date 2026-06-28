@@ -3,7 +3,7 @@ extends Node2D
 
 signal all_done
 
-const TILE_SIZE := 64
+const TILE_SIZE := 32
 const ANIM_WALK := 0.25
 const ANIM_ATTACK := 0.20
 const ANIM_HURT := 0.20

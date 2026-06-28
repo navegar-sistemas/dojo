@@ -3,7 +3,7 @@ extends Node2D
 
 signal animations_finished
 
-const TILE_SIZE := 64
+const TILE_SIZE := 32
 const ATLAS_COORD := Vector2i(0, 0)
 
 var _floor_source_id := 0
