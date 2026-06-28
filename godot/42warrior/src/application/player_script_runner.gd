@@ -12,8 +12,10 @@ extends RefCounted
 ##   se a profundidade de chamada exceder CALL_DEPTH_LIMIT, a função retorna imediatamente;
 ##   o turno vira no-op + erro reportado (RF-143). GDScript não tem try/catch para
 ##   stack overflow — o guard PREVINE, não reage.
-##   Limitações conhecidas (instrumentação textual, não-AST): `while` em string literal
-##   pode não ser coberto; `func` one-liner (`func foo(): pass`) não é instrumentado.
+##   Corpos INLINE (one-liner) — `func foo(): bar()`, `while c: x()`, `for/if ...: y()` —
+##   são NORMALIZADOS para multi-linha ANTES da instrumentação, então os guards os cobrem
+##   (sem isso, `func play_turn(w): play_turn(w)` recursava sem guarda e crashava o jogo).
+##   Limitação residual: cabeçalho de bloco dentro de string literal não é coberto.
 ##
 ## Detalhe de Application (depende de GDScript da engine, não da árvore de cenas).
 
@@ -85,12 +87,15 @@ func play_turn(instance: Object, facade: WarriorFacade) -> Action:
 ## e __enter_func().
 func _instrument(source: String) -> String:
 	var out := PackedStringArray()
+	# Normaliza corpos inline (one-liner) para multi-linha ANTES de injetar os guards —
+	# sem isso, `func f(w): play_turn(w)` ou `while c: x()` escapam da instrumentação.
+	var normalized := _normalize_inline_blocks(source)
 	# Variáveis de controle precisam ser declaradas APÓS `extends` (GDScript exige
 	# extends antes de qualquer membro). Flag rastreia se a injeção já ocorreu.
 	var counter_injected := false
 	# Flag: a próxima linha não-vazia não-comentário é a primeira do corpo de uma func.
 	var inject_func_guard := false
-	for line: String in source.split("\n"):
+	for line: String in normalized.split("\n"):
 		if inject_func_guard:
 			var stripped_line := line.strip_edges()
 			if stripped_line != "" and not stripped_line.begins_with("#"):
@@ -133,3 +138,73 @@ func _guard_while(line: String) -> String:
 	var cond := line.substr(while_pos + 6, colon - while_pos - 6).strip_edges()
 	var rest := line.substr(colon + 1)
 	return "%swhile (%s) and __guard():%s" % [indent, cond, rest]
+
+
+## Quebra cabeçalhos de bloco com corpo inline (`func f(): x()`, `while c: x()`) em
+## múltiplas linhas, para que os guards de while/func sejam injetados também neles.
+## Aplica recursivamente (cobre `func f(w): while true: x()`). Sem isso, um one-liner
+## recursivo (`func play_turn(w): play_turn(w)`) escapa do depth-guard e crasha o jogo.
+func _normalize_inline_blocks(source: String) -> String:
+	var out := PackedStringArray()
+	for line: String in source.split("\n"):
+		_split_inline(line, out)
+	return "\n".join(out)
+
+
+## Acrescenta `line` a `out`, já normalizada: se for cabeçalho de bloco com corpo inline,
+## emite o cabeçalho até o `:` e re-processa o corpo numa linha indentada +1 tab.
+func _split_inline(line: String, out: PackedStringArray) -> void:
+	if not _is_block_header(line.strip_edges()):
+		out.append(line)
+		return
+	var colon := _statement_colon(line)
+	if colon == -1:
+		out.append(line)
+		return
+	var body := line.substr(colon + 1).strip_edges()
+	# Corpo vazio ou só comentário → bloco multi-linha normal, nada a quebrar.
+	if body == "" or body.begins_with("#"):
+		out.append(line)
+		return
+	var indent := line.substr(0, line.length() - line.lstrip("\t").length())
+	out.append(line.substr(0, colon + 1))
+	_split_inline("%s\t%s" % [indent, body], out)
+
+
+## Verdadeiro se a linha (já sem indentação) inicia um bloco que aceita corpo indentado.
+func _is_block_header(stripped: String) -> bool:
+	for kw: String in ["func ", "static func ", "while ", "for ", "if ", "elif ", "match "]:
+		if stripped.begins_with(kw):
+			return true
+	return stripped == "else:" or stripped.begins_with("else:")
+
+
+## Índice do `:` que TERMINA o cabeçalho do bloco, ciente de parênteses/colchetes/chaves
+## e de strings (não confunde com `:` de dict-literal ou de param tipado). -1 se não houver.
+func _statement_colon(line: String) -> int:
+	var depth := 0
+	var in_str := false
+	var quote := ""
+	var i := 0
+	var n := line.length()
+	while i < n:
+		var c := line[i]
+		if in_str:
+			if c == "\\":
+				i += 2
+				continue
+			if c == quote:
+				in_str = false
+		elif c == '"' or c == "'":
+			in_str = true
+			quote = c
+		elif c == "(" or c == "[" or c == "{":
+			depth += 1
+		elif c == ")" or c == "]" or c == "}":
+			depth -= 1
+		elif c == "#":
+			return -1
+		elif c == ":" and depth == 0:
+			return i
+		i += 1
+	return -1

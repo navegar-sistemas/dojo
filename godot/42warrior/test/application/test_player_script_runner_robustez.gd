@@ -134,3 +134,51 @@ func play_turn(w) walk(
 	var instance := runner.compile(source)
 	assert_null(instance, "sintaxe inválida → compile() devolve null")
 	assert_true(runner.has_error(), "sintaxe inválida → has_error() true")
+
+
+func test_recursao_one_liner_nao_crasha() -> void:
+	# REGRESSÃO (crash reportado pelo Usuário): `func play_turn(w): play_turn(w)` numa
+	# ÚNICA linha escapava do depth-guard (que só cobria func multi-linha) → Stack
+	# overflow → "Stack underflow Engine Bug" → crash. A normalização de corpos inline
+	# quebra o one-liner em multi-linha antes da instrumentação, fechando o buraco.
+	var source := "extends RefCounted\nfunc play_turn(warrior): play_turn(warrior)"
+	var runner := PlayerScriptRunner.new()
+	var instance := runner.compile(source)
+	assert_true(instance != null, "one-liner compila; o crash era em runtime")
+	var action: Action = runner.play_turn(instance, _facade())
+	assert_null(action, "recursão one-liner vira no-op")
+	assert_true(runner.has_error(), "o corte de recursão one-liner é reportado")
+
+
+func test_while_inline_one_liner_e_cortado() -> void:
+	# `func play_turn(w): while true: pass` — func one-liner COM while inline: ambos
+	# escapavam dos guards. Normalizado → loop-guard corta sem travar.
+	var source := "extends RefCounted\nfunc play_turn(warrior): while true: pass"
+	var runner := PlayerScriptRunner.new()
+	var instance := runner.compile(source)
+	assert_true(instance != null)
+	var action: Action = runner.play_turn(instance, _facade())
+	assert_null(action, "while inline one-liner vira no-op")
+	assert_true(runner.has_error(), "o corte do loop inline é reportado")
+
+
+func test_recursao_em_if_inline_nao_crasha() -> void:
+	# Corpo inline aninhado (`if true: play_turn(w)`) também é normalizado e guardado.
+	var source := "extends RefCounted\nfunc play_turn(warrior):\n\tif true: play_turn(warrior)"
+	var runner := PlayerScriptRunner.new()
+	var instance := runner.compile(source)
+	assert_true(instance != null)
+	var action: Action = runner.play_turn(instance, _facade())
+	assert_null(action, "recursão dentro de if inline vira no-op")
+	assert_true(runner.has_error(), "o corte é reportado")
+
+
+func test_one_liner_legitimo_age_normalmente() -> void:
+	# A normalização NÃO pode quebrar um one-liner válido (que não recursa nem loopa).
+	var source := "extends RefCounted\nfunc play_turn(warrior): warrior.walk()"
+	var runner := PlayerScriptRunner.new()
+	var instance := runner.compile(source)
+	assert_true(instance != null)
+	var action: Action = runner.play_turn(instance, _facade())
+	assert_true(action is WalkAction, "one-liner válido executa a ação normalmente")
+	assert_false(runner.has_error(), "one-liner legítimo não dispara corte")
