@@ -18,6 +18,6 @@ export const feature: IFeature = {
     "Duplicar a referência de API (feature 007) — glossário é semântica de termos/entidades, não catálogo de comandos.",
   ],
   productDecisions: [],
-  phase: "clarifying",
+  phase: "done",
   createdAt: "2026-06-28",
 };

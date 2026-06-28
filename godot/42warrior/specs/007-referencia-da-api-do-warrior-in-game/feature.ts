@@ -17,6 +17,6 @@ export const feature: IFeature = {
     "Substituir o botão 'ver solução de referência' (PR-010) — é catálogo de API, não solução pronta.",
   ],
   productDecisions: [],
-  phase: "backlog",
+  phase: "done",
   createdAt: "2026-06-28",
 };
