@@ -61,7 +61,7 @@ export const stories: IUserStory[] = [
     requirementKeys: ["RF-165", "RF-163", "RNF-160"],
     priority: "highest",
     storyPoints: 5,
-    status: "todo",
+    status: "done",
     assignee: null,
   },
   // ── TELAS P0 (fluxo principal: jogo, menu, seleção) ──

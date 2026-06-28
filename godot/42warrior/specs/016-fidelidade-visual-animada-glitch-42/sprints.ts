@@ -6,7 +6,7 @@ export const sprints: ISprint[] = [
     name: "Fundações P0 (paralelizáveis entre 2 devs)",
     goal:
       "As 4 fundações reutilizáveis, INDEPENDENTES entre si (sem dependsOn cruzado) para alocação por dev em worktrees disjuntas: US-160 (AnimatedSprite2D dos personagens), US-161 (TileMap 32px nativo da arena + feet-anchor), US-162 (botão 4-estados), US-172 (F4: Theme global + design system, resolve RNF-063). DoD por task = prova de render de cena (RNF-160).",
-    state: "active",
+    state: "closed",
     startDate: "",
     endDate: "",
     storyKeys: ["US-160", "US-161", "US-162", "US-172"],
@@ -16,7 +16,7 @@ export const sprints: ISprint[] = [
     name: "Telas P0 (fluxo principal: jogo, menu, seleção)",
     goal:
       "As telas onde o jogador passa o tempo, fiéis aos mockups, reusando as fundações: US-163 (tela de JOGO/arena), US-164 (menu inicial), US-165 (seleção de níveis). Valor visível cedo. DoD por tela = prova de render de cena.",
-    state: "future",
+    state: "active",
     startDate: "",
     endDate: "",
     storyKeys: ["US-163", "US-164", "US-165"],

@@ -42,7 +42,7 @@ export const tasks: ITask[] = [
     summary: "F4: Theme global + design system (paleta/fontes/cores-por-contexto/overlay/fundo/sliders); resolve RNF-063.",
     definitionOfDone:
       "Theme global único (.tres) carregando paleta (void #0A0A0B/grafite), fontes Press Start 2P + JetBrains Mono de design_files/v1/fonts, sistema de cores por contexto data-driven (zero amarelo base; verde #00FF66 / rubi #FF003C / ciano #00F0FF) e botões/sliders tematizados; + overlay de glitch (CanvasLayer Add/Screen) e fundo temático (tile_void/scanlines/data-rain) reusáveis por todas as telas. Aplica o Theme global ao jogo (fecha o RNF-063 da 006). DoD = PROVA DE RENDER DE CENA (renderiza ≥1 frame, assere: fundo void, fontes aplicadas, cores-por-contexto, overlay ativo, botão 4-estados) + DATA-DRIVEN (cores/fontes via Theme, sem hardcode); suíte 100% verde, 0 regressão.",
-    status: "todo",
+    status: "done",
     dependsOn: [],
     parallel: true,
     assignee: null,
@@ -54,7 +54,7 @@ export const tasks: ITask[] = [
     summary: "Tela de JOGO (CORE) fiel ao mockup: status bar + arena + console + editor retrátil.",
     definitionOfDone:
       "Cena de jogo fiel ao mockup: topo = status bar terminal (LVL/HP via ui_hp/TURN via ui_clock/SCORE via ui_gem, vol+gear); centro = arena TileMap (reusa T-161) com personagem por célula animado (reusa T-160) + overlay glitch (reusa GlitchPostProcess da 015); inferior = console de turnos + controles (reusa T-162); editor retrátil lateral (toggle </>, começa visível). Tipografia via Theme. DoD = PROVA DE RENDER (renderiza ≥1 frame, assere as 3 zonas + arena com tiles/sprites posicionados) + suíte verde, 0 regressão.",
-    status: "todo",
+    status: "in_progress",
     dependsOn: ["T-160", "T-161", "T-162"],
     parallel: true,
     assignee: null,
