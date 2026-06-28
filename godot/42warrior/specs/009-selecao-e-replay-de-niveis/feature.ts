@@ -18,6 +18,6 @@ export const feature: IFeature = {
     "Leaderboard online ou modo speedrun.",
   ],
   productDecisions: [],
-  phase: "clarifying",
+  phase: "done",
   createdAt: "2026-06-28",
 };
