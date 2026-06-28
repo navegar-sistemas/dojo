@@ -84,6 +84,40 @@ Fluxo completo, fases e referências: `SKILL.md` da skill `spec`.
 
 > **O agente-dev não espera commit de specs para implementar.** Specs não commitadas em `main` (backlog.ts, feature.ts, tasks.ts, CLAUDE.md modificados mas não comitados) **não bloqueiam** a implementação. O agente-dev implementa tudo que estiver pendente no chat, specs e código imediatamente, sem aguardar o usuário commitar as alterações de spec. O estado dos artefatos em disco é a fonte de verdade; commit é responsabilidade do usuário em outro momento.
 
+## agente-spec — verificação completa das próprias atividades (mandato do usuario, 2026-06-28)
+
+> **O `agente-spec` SEMPRE verifica suas atividades por completo, na fonte, antes de declarar
+> qualquer coisa "feita", "ociosa" ou "sem novidades".** Regra direta do usuario após uma falha
+> real: o agente ficou cego a 4 pedidos pendentes do PO (criar feature de câmera, criar feature
+> de layout editor/debug, reconciliar 001, popular review.ts de 007-010) por confiar em
+> `chat_query` filtrado por janela de horário.
+
+- **Inbox = `chat_pending`, SEMPRE e por inteiro.** `chat_pending` é a única fonte autoritativa
+  das pendências endereçadas a `agente-spec` — não tem filtro de tempo. **NUNCA** derive o estado
+  do inbox de `chat_query --since <horário>`: o campo `at` das mensagens tem granularidade de DIA
+  (`2026-06-28`), então um `--since` com hora do dia (ex.: `…T15:00:00Z`) exclui silenciosamente
+  todas as mensagens do próprio dia e o corte vai sendo empurrado para frente a cada ciclo,
+  cegando o inbox. `chat_query` só serve para LER o conteúdo completo de uma mensagem já
+  identificada pelo `chat_pending`, nunca para detectar se há pendências.
+- **Todo ciclo começa por `chat_pending` completo** e tria CADA entrada (não só as do topo);
+  identidade confirmada por `participant`. Item pendente não-atendido = trabalho a fazer, não
+  ruído de fundo.
+- **"Ocioso/sem novidades" exige prova:** `chat_pending` sem item acionável novo **E** HEAD da
+  main == `lastBaseHeadSha`. Se `chat_pending` traz qualquer pedido do PO ainda não executado,
+  o ciclo **não** é ocioso — atue ou reencaminhe, nunca registre "sem novidades" por cima de
+  pendência viva.
+- **"Feito" exige saída REAL do script + `validate-*` verde** no exato estado atual dos
+  arquivos — nunca de memória, nunca por inspeção, nunca confiando em rodada anterior a edições
+  posteriores. Vale também para reportar status ao usuario: pergunta factual ("você implementou
+  X?") se responde verificando specs/chat/git na fonte, não de lembrança.
+- **Cobertura, não amostra:** ao varrer o chat ou os specs, cubra o conjunto inteiro (todas as
+  features, todas as mensagens pendentes), não as primeiras que aparecem. Truncar a varredura e
+  declarar conclusão é o mesmo defeito de declarar "feito" sem testar.
+
+Ver também a memória [[agente-spec-verify-activities-completely]] e a disciplina de brevidade de
+ciclo ocioso [[agente-spec-idle-cycle-brevity]] (a brevidade vale só DEPOIS da verificação completa
+dar negativo — nunca como atalho que pula a verificação).
+
 ## Identidades MCP (chat cross-repo da skill spec)
 
 > ⚠️ **ATENÇÃO — CREDENCIAIS EM TEXTO PLANO.** Os valores abaixo são tokens `Bearer` do
