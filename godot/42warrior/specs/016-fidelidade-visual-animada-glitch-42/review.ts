@@ -250,4 +250,20 @@ export const reviews: IReviewRecord[] = [
     reviewer: "usuario",
     reviewedAt: "2026-06-28",
   },
+  {
+    target: "code",
+    taskKey: "T-173",
+    phase: null,
+    status: "approved",
+    checks: [
+      {
+        name: "Delta-A rescue/captive (extensão aditiva, T-160 NÃO reaberto) — RENDER-RULE COUNT-LEVEL: manifest data-driven com FRAMES REAIS get_frame_count rescue=6 (hero) / idle=4 (captive) / rescue=5 (captive); Captive RENDERIZA como AnimatedSprite2D (child is AnimatedSprite2D, >=2 junto ao warrior) ATIVO animation=='idle'; RESCUED -> warrior_asp.animation=='rescue' (rescue! ACIONA hero_rescue). 467/467, 0-warnings, 0-regressão. Aceite PO cmqy5pyt7, integrado na main (merge 0be3e46). reviewer=usuario = aceite REAL do PO (git-author NÃO usado como prova).",
+        command: "bash scripts/check.sh + chat_query cmqy5pyt7 (aceite PO)",
+        passed: true,
+      },
+    ],
+    findings: [],
+    reviewer: "usuario",
+    reviewedAt: "2026-06-28",
+  },
 ];

@@ -19,6 +19,6 @@ export const feature: IFeature = {
     "Re-implementar o comportamento glitch (overlay/pós-processo/corrupção de UI): isso é a feature 015 (separada por coesão).",
   ],
   productDecisions: [],
-  phase: "implementing",
+  phase: "done",
   createdAt: "2026-06-28",
 };

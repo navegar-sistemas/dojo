@@ -214,7 +214,7 @@ export const stories: IUserStory[] = [
     requirementKeys: ["RF-160", "RF-163", "RNF-160"],
     priority: "medium",
     storyPoints: 3,
-    status: "todo",
+    status: "done",
     assignee: null,
   },
 ];

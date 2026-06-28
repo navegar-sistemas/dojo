@@ -156,7 +156,7 @@ export const tasks: ITask[] = [
       "Estender o AnimatedEntityRegistry (de T-160) p/ hero_rescue + captive (idle/rescue): adicionar as 3 entradas ao manifest runtime (hero_rescue 6f, captive_idle 4f, captive_rescue 5f — sheets já na main em assets/v1/anim) + acionar pelo turn_event de resgate. NÃO reabre T-160 (done); é extensão aditiva.",
     definitionOfDone:
       "Manifest com as 3 entradas; o registro carrega hero_rescue + captive idle/rescue; render-proof COUNT-LEVEL (instanciar+renderizar+asserir o AnimatedSprite2D de hero_rescue e de captive idle/rescue posicionado/ativo, sem pending); rescue! aciona hero_rescue; check.sh verde, 0 regressão.",
-    status: "todo",
+    status: "done",
     dependsOn: ["T-160"],
     parallel: true,
     assignee: null,
