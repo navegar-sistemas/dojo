@@ -88,8 +88,9 @@ export const stories: IUserStory[] = [
     acceptanceCriteria: [
       "Dado o menu inicial, quando renderizado, então mostra fundo void + boot log fake ($ ./42warrior --boot, [WARN] corruption detected) + key_art.png + opções (Jogar/Continuar destacada ciano, Selecionar nível, Áudio, Sobre/Créditos), fiel ao mockup.",
       "Dado as opções do menu, quando exibidas, então usam o componente de botões 4-estados e a tipografia do Theme.",
+      "Dado o título do menu (key art / '42 WARRIOR'), quando renderizado, então o texto neutro aparece em BRANCO com RGB-split (sombra ciano à esquerda + magenta #FF2BD6 à direita) e nenhum amarelo no título — âmbar #FFD23F só como acento mínimo (gemas/estrelas), conforme RF-165.",
     ],
-    requirementKeys: ["RF-164", "RF-163", "RNF-160"],
+    requirementKeys: ["RF-164", "RF-165", "RF-163", "RNF-160"],
     priority: "high",
     storyPoints: 5,
     status: "todo",
@@ -119,8 +120,9 @@ export const stories: IUserStory[] = [
     acceptanceCriteria: [
       "Dado o fim de um andar com VITÓRIA, quando a tela de resultado renderiza, então mostra >> RUN COMPLETE, exit 0 em VERDE #00FF66, a grade (S/A/…) grande + estrelas (ui_star), stats alinhados (SCORE/TIME BONUS/TURNS/ACE) e botões PRÓXIMO/REPLAY, fiel ao mockup com a tipografia do Theme.",
       "Dado uma DERROTA, quando a tela renderiza, então mostra SIGKILL em RUBI #FF003C, efeito de morte (glitch/datamosh + screen-shake mínimo) e a opção de re-exec/retry, fiel ao mockup (sem amarelo).",
+      "Dado o título neutro do resultado (ex.: >> RUN COMPLETE), quando renderizado, então aparece em BRANCO com RGB-split (ciano à esquerda + magenta #FF2BD6 à direita), com âmbar #FFD23F apenas como acento mínimo (estrelas/gemas) e nenhum amarelo de título, conforme RF-165.",
     ],
-    requirementKeys: ["RF-164", "RF-163", "RNF-160"],
+    requirementKeys: ["RF-164", "RF-165", "RF-163", "RNF-160"],
     priority: "medium",
     storyPoints: 3,
     status: "todo",
@@ -190,8 +192,9 @@ export const stories: IUserStory[] = [
     acceptanceCriteria: [
       "Dado a conclusão do jogo, quando a tela renderiza, então mostra o terminal SYSTEM RESTORED / exit 0 (verde) com os créditos rolando, fiel ao mockup e com a tipografia do Theme.",
       "CORREÇÃO FACTUAL (must-fix): Dado os créditos, quando exibidos, então NÃO contêm a linha falsa 'CC0 assets by freesound.org / opengameart.org' (arte e áudio são ORIGINAIS deste projeto) — em vez disso mostram 'Arte e áudio originais', MANTENDO 'Inspired by Ruby Warrior (Ryan Bates)' e 'Built with Godot 4 + GDScript'.",
+      "Dado o título de conclusão (ex.: 'Torre Concluída' / SYSTEM RESTORED), quando renderizado, então aparece em BRANCO com RGB-split (ciano à esquerda + magenta #FF2BD6 à direita) ou verde sucesso — nunca amarelo de título — com âmbar #FFD23F só como acento mínimo, conforme RF-165.",
     ],
-    requirementKeys: ["RF-164", "RF-163", "RNF-160"],
+    requirementKeys: ["RF-164", "RF-165", "RF-163", "RNF-160"],
     priority: "medium",
     storyPoints: 2,
     status: "todo",
