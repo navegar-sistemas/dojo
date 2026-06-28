@@ -1,6 +1,6 @@
 class_name AnimatedEntityRegistry
 extends Node2D
-## Registro de sprites animados dos 4 personagens (hero/enemy_cadet/enemy_dev/boss_director).
+## Registro de sprites animados (hero/captive/enemy_cadet/enemy_dev/boss_director).
 ## Data-driven: lê assets/v1/anim/manifest.json e constrói SpriteFrames por código —
 ## trocar arte = trocar o arquivo, 0 path hardcoded (RNF-060).
 ## Mantém a mesma interface pública do EntitySpriteRegistry para substituição transparente.
@@ -24,6 +24,7 @@ const _ANIM_FPS: Dictionary = {
 	"attack": _FPS_ACTION,
 	"shoot": _FPS_ACTION,
 	"cast": _FPS_ACTION,
+	"rescue": _FPS_ACTION,
 	"hurt": _FPS_HURT,
 	"death": _FPS_DEATH,
 }
@@ -31,6 +32,7 @@ const _ANIM_FPS: Dictionary = {
 ## Mapeamento class_name de domínio → nome no manifest.json.
 const _TYPE_TO_MANIFEST: Dictionary = {
 	"Warrior": "hero",
+	"Captive": "captive",
 	"Sludge": "enemy_cadet",
 	"ThickSludge": "enemy_cadet",
 	"Archer": "enemy_dev",
@@ -198,7 +200,13 @@ func _beat_factories(event: TurnEvent, floor_layer: TileMapLayer) -> Array:
 			]
 		TurnEvent.Kind.DAMAGED:
 			result = [func() -> Tween: return _tween_anim("warrior", "hurt")]
-		TurnEvent.Kind.ENEMY_DEFEATED, TurnEvent.Kind.RESCUED:
+		TurnEvent.Kind.RESCUED:
+			var ck := "unit_%d" % event.position
+			result = [
+				func() -> Tween: return _tween_anim("warrior", "rescue"),
+				func() -> Tween: return _tween_die(ck),
+			]
+		TurnEvent.Kind.ENEMY_DEFEATED:
 			var dk := "unit_%d" % event.position
 			result = [func() -> Tween: return _tween_die(dk)]
 		TurnEvent.Kind.DIED:

@@ -35,6 +35,27 @@
   "fh": 48
  },
  {
+  "name": "hero",
+  "anim": "rescue",
+  "frames": 6,
+  "fw": 48,
+  "fh": 48
+ },
+ {
+  "name": "captive",
+  "anim": "idle",
+  "frames": 4,
+  "fw": 48,
+  "fh": 48
+ },
+ {
+  "name": "captive",
+  "anim": "rescue",
+  "frames": 5,
+  "fw": 48,
+  "fh": 48
+ },
+ {
   "name": "enemy_cadet",
   "anim": "idle",
   "frames": 4,
