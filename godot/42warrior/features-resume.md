@@ -59,9 +59,9 @@ Remake do **Ruby Warrior** (beginner tower, 9 níveis) reambientado no universo 
 - [x] **017 — Correções pós-code-review** · spec `done` · **INTEGRADA na main** (merge `1057e51`, push `1057e51`) · check.sh 190/190
   - Bug #2 (`_attack`/`_shoot` respeitam `is_captive()` — cativo não pontua) + Bug #3 (`RangedBehavior._facing` não-zero quando inimigo == escada — Archer do `_level_6` volta a disparar) + Bug #1 (prova de cena do turno no-op; fix já na 013). 5 testes novos. Implementada pelo **dev**, integrada por mim.
 
-- [~] **016 — Fidelidade visual animada (glitch/42)** · spec `implementing` · **fundações parciais na main**
-  - **Sprint 1 (fundações P0):** **T-160** AnimatedEntityRegistry (sprites animados data-driven, `f7f556a`) **+ T-161** TileMapArena 32px **+ T-162** FourStateButton 4-estados (merge `2bc9b2f`, check.sh **226/226** verde) — **integrados**, isolados (sem `game.tscn`), aceitos pelo PO, render-proof verde. **T-172/F4** (GlobalDesignSystem: paleta void, fontes Press Start 2P/JetBrains Mono, cores por contexto, overlay, subsume RNF-063) em `feature/016-theme @ 73cfefd` — fix das fontes (`.import` committado + assert hard) entregue, **aguardando re-aceite do PO**.
-  - **Falta:** integrar F4 (pós-aceite); telas S2 (T-163 jogo/arena reusa T-160/161/162 + glitch 015) e S3 (P1); correção factual dos créditos (US-171).
+- [~] **016 — Fidelidade visual animada (glitch/42)** · spec `implementing` · **Sprint 1 (fundações P0) COMPLETO na main**
+  - **Sprint 1 — 4/4 fundações INTEGRADAS** (todas aceitas pelo PO, reviewer=usuario, render-proof verde): **T-160** AnimatedEntityRegistry (sprites animados data-driven, `f7f556a`) · **T-161** TileMapArena 32px · **T-162** FourStateButton 4-estados (merge `2bc9b2f`) · **T-172/F4** GlobalDesignSystem (Theme global: paleta void #0A0A0B, fontes Press Start 2P/JetBrains Mono via `.import` + assert hard, cores por contexto, overlay glitch, botões/sliders; **subsume e FECHA a RNF-063**) — merge `41a8704`, check.sh **238/238** verde (fontes carregam de verdade em checkout limpo).
+  - **Falta:** telas S2 (T-163 jogo/arena reusa T-160/161/162 + F4 + glitch 015 — **alocada ao agente-dev-two**; depois US-164 menu, US-165 seleção) e S3 (P1); correção factual dos créditos (US-171).
 
 ## O que falta (visão rápida)
 

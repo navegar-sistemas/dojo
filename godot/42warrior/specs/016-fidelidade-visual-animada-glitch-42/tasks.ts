@@ -20,7 +20,7 @@ export const tasks: ITask[] = [
     summary: "F1: TileMapArena 32px nativo consumindo os tiles do pack, célula→tile do estado do nível.",
     definitionOfDone:
       "TileMapArena (TileMapLayer 32px, TileSet com tile_floor/tile_wall/tile_stairs — e void/corrupt quando aplicável) mapeia célula→tile a partir do estado/dimensões do nível, um personagem por célula, sem reamostrar (Nearest), escala inteira (TILE_SIZE=32, sem regredir a 64). Não altera regra. DoD = PROVA DE RENDER (renderiza ≥1 frame, assere floor_layer com tiles REALMENTE desenhados na grade 32px) + GUT; suíte 100% verde, 0 regressão.",
-    status: "todo",
+    status: "done",
     dependsOn: [],
     parallel: true,
     assignee: null,
@@ -31,7 +31,7 @@ export const tasks: ITask[] = [
     summary: "F3: FourStateButton (4 estados via ui_*) e migração dos controles existentes.",
     definitionOfDone:
       "Componente FourStateButton com StyleBox/textura por estado data-driven dos ui_*: normal (borda ciano) / hover (preenchido+glow) / pressed (escurecido, +1px) / disabled (cinza). Os controles existentes migram para ele. DoD = teste que assere os 4 estados refletem a interação real + PROVA DE RENDER da barra de controles; suíte 100% verde, 0 regressão.",
-    status: "todo",
+    status: "done",
     dependsOn: [],
     parallel: true,
     assignee: null,
