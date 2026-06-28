@@ -136,9 +136,9 @@ value = 0.45
 [node name="DebugPanel" type="PanelContainer" parent="DebugLayer"]
 visible = false
 anchor_left = 0.0
-anchor_top = 0.60
+anchor_top = 0.40
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.60
 grow_horizontal = 2
 grow_vertical = 2
 

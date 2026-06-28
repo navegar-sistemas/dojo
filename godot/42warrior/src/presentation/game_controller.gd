@@ -17,17 +17,17 @@ var _initial_state: LevelState
 var _state: LevelState
 
 ## Sequência pré-computada de TurnResult — um por turno executado.
-var _turn_history: Array = []
+var _turn_history: Array[TurnResult] = []
 ## Texto de erro do PlayerScriptRunner para cada turno (paralelo a _turn_history).
-var _turn_errors: Array = []
+var _turn_errors: Array[String] = []
 
 var _display_index := -1
-var _level_events: Array = []
+var _level_events: Array[TurnEvent] = []
 var _initial_enemy_count := 0
 var _finished := false
 var _animating := false
 var _last_outcome: TurnResult.Outcome = TurnResult.Outcome.ONGOING
-var _last_score: Score
+var _last_score: Score = null
 var _last_turns: int = 0
 var _timer: Timer
 
@@ -46,7 +46,7 @@ func _ready() -> void:
 	_timer.timeout.connect(_on_tick)
 	add_child(_timer)
 	_editor.run_pressed.connect(_on_run_pressed)
-	_editor.debug_toggled.connect(_on_toggle_debug)
+	_editor.debug_toggled.connect(_on_debug_toggled)
 	_controls.play_pause_toggled.connect(_on_play_pause_toggled)
 	_controls.step_requested.connect(_on_step_requested)
 	_controls.speed_changed.connect(_on_speed_changed)
@@ -168,7 +168,7 @@ func _finish() -> void:
 	_finished = true
 	_timer.stop()
 	_controls.set_playing(false)
-	if _last_outcome == TurnResult.Outcome.VICTORY:
+	if _last_outcome == TurnResult.Outcome.VICTORY and _last_score != null:
 		level_won.emit(_last_score.total, _last_turns, _last_score.is_ace())
 	elif _last_outcome == TurnResult.Outcome.DEFEAT:
 		level_lost.emit()
@@ -194,7 +194,7 @@ func _on_speed_changed(interval: float) -> void:
 		_timer.start()
 
 
-func _on_toggle_debug(open: bool) -> void:
+func _on_debug_toggled(open: bool) -> void:
 	_debug_panel.visible = open
 
 
