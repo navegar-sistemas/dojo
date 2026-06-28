@@ -5,7 +5,7 @@ set -euo pipefail
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$HERE/godot_env.sh"
 ensure_gdtoolkit_path
-PROJECT="$(cd "$HERE/.." && pwd)"
+PROJECT="${PROJECT_OVERRIDE:-$(cd "$HERE/.." && pwd)}"
 cd "$PROJECT"
 
 targets=()

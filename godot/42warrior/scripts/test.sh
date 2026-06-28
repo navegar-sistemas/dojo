@@ -4,12 +4,11 @@ set -euo pipefail
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$HERE/godot_env.sh"
 GODOT="$(resolve_godot)"
-PROJECT="$(cd "$HERE/.." && pwd)"
+PROJECT="${PROJECT_OVERRIDE:-$(cd "$HERE/.." && pwd)}"
 
-# Garante que os recursos (incl. class_names do GUT) estejam importados num checkout limpo.
-if [[ ! -d "$PROJECT/.godot/imported" ]]; then
-  "$GODOT" --headless --path "$PROJECT" --import >/dev/null 2>&1 || true
-fi
+# Reimport incremental garante que arquivos .gd criados após o import inicial
+# sejam registrados no filesystem virtual do Godot (evita silêncio de testes novos).
+"$GODOT" --headless --path "$PROJECT" --import >/dev/null 2>&1 || true
 
 "$GODOT" --headless --path "$PROJECT" \
   -s res://addons/gut/gut_cmdln.gd \

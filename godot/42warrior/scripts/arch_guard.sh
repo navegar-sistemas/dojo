@@ -6,7 +6,7 @@
 # A dependência deve apontar para dentro: Presentation → Application → Domain.
 set -euo pipefail
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT="$(cd "$HERE/.." && pwd)"
+PROJECT="${PROJECT_OVERRIDE:-$(cd "$HERE/.." && pwd)}"
 cd "$PROJECT"
 
 violations=0
