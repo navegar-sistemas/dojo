@@ -12,6 +12,8 @@ var _position_2d: Vector2i = Vector2i(-1, -1)
 ## quando um GlitchRuleModel está configurado; false por padrão (sem regressão).
 var _glitch_active: bool = false
 var _glitch_next: bool = false
+## true quando a célula é uma parede corrompida (GlitchExploits T-192, no-clip seedado).
+var _is_corrupted_wall: bool = false
 
 
 func _init(unit: Unit, is_stairs: bool, is_wall: bool, position: int) -> void:
@@ -23,6 +25,13 @@ func _init(unit: Unit, is_stairs: bool, is_wall: bool, position: int) -> void:
 
 static func wall(position: int) -> Space:
 	return Space.new(null, false, true, position)
+
+
+## Parede corrompida: is_wall=true mas atravessável via no-clip na janela (T-192).
+static func corrupted_wall(position: int) -> Space:
+	var s := Space.new(null, false, true, position)
+	s._is_corrupted_wall = true
+	return s
 
 
 static func of(unit: Unit, is_stairs: bool, position: int) -> Space:
@@ -87,3 +96,8 @@ func glitch_active() -> bool:
 ## true se a janela de glitch abrirá no próximo turno (antecipação ≥1 turno, T-191).
 func glitch_next() -> bool:
 	return _glitch_next
+
+
+## true se esta célula é uma parede corrompida (no-clip seedado, T-192).
+func is_corrupted_wall() -> bool:
+	return _is_corrupted_wall
