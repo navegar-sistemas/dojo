@@ -59,7 +59,8 @@ Remake do **Ruby Warrior** (beginner tower, 9 níveis) reambientado no universo 
 - [x] **017 — Correções pós-code-review** · spec `done` · **INTEGRADA na main** (merge `1057e51`, push `1057e51`) · check.sh 190/190
   - Bug #2 (`_attack`/`_shoot` respeitam `is_captive()` — cativo não pontua) + Bug #3 (`RangedBehavior._facing` não-zero quando inimigo == escada — Archer do `_level_6` volta a disparar) + Bug #1 (prova de cena do turno no-op; fix já na 013). 5 testes novos. Implementada pelo **dev**, integrada por mim.
 
-- [~] **016 — Fidelidade visual animada (glitch/42)** · spec `implementing` · **Sprints 1+2+3 (fundações + telas P0 + telas P1) COMPLETOS na main**
+- [x] **016 — Fidelidade visual animada (glitch/42)** · spec `done` · **COMPLETA na main** (Sprints 1+2+3+4 — fundações + telas P0 + telas P1 + delta-A animações)
+  - **Sprint 4 — delta-A (T-173) INTEGRADO + FECHADO** (merge `0be3e46`, done-marking `cab4c83`, aceite PO cmqy5pyt7): AnimatedEntityRegistry com rescue/captive — cativo vira `AnimatedSprite2D` (manifest +3: hero rescue 6f, captive idle 4f / rescue 5f), `rescue!` aciona animação do herói (RESCUED separado de ENEMY_DEFEATED). check.sh **467/467** verde, 0-regressão. Higiene orphan-nodes absorvida no merge.
   - **Sprint 1 — 4/4 fundações INTEGRADAS** (aceitas pelo PO, reviewer=usuario, render-proof verde): **T-160** AnimatedEntityRegistry (`f7f556a`) · **T-161** TileMapArena 32px · **T-162** FourStateButton (merge `2bc9b2f`) · **T-172/F4** GlobalDesignSystem (Theme global: void #0A0A0B, Press Start 2P/JetBrains Mono via `.import`, cores por contexto, overlay glitch; **fecha RNF-063**) — merge `41a8704`, 238/238.
   - **Sprint 2 — 3/3 telas P0 INTEGRADAS** (count-level render-proof, aceitas PO reviewer=usuario): **T-163** tela de JOGO/arena (`072909d`) · **T-164** menu (`e64c3f0`) · **T-165** seleção de níveis (`c5d42cb`, bugfix do botão-boss travado pego pelo count-level) — check.sh **274/274**. Regra firmada: render-proof **COUNT-LEVEL** (tiles contados / sprite posicionado / fonte real != default), não node-level.
   - **Pack v2 (deltas)** landados na main (`a9fdeb1`): 3 sheets (hero_rescue/captive) + 4 tiles de cenário, sem duplicar v1. Delta-C (RGB-split/magenta/âmbar nos títulos) na RF-165.
@@ -123,9 +124,9 @@ Tema **OBRIGATÓRIO** da game jam ("glitch"). Narrativa: **Kernel corrompido da 
 **P2 — backlog (nice-to-have):**
 - [ ] **US-157** — glitch-through-walls / falso crash encenado / variação "o warrior é o glitch" (RF-159)
 
-### Glitch como ferramenta do jogador (019) — spec IMPLEMENT-READY, sprint FUTURE
+### Glitch como ferramenta do jogador (019) — spec `implementing`, **Sprint 1 ATIVO** (última feature do pipeline)
 
-Evolução do tema: o glitch deixa de ser só efeito e vira **ferramenta** que o jogador detecta e explora a favor. Cadeia aprovada pelo PO (cmqxyjjd8); implementação **GATED na 018** (domínio 2D = done) e **sequenciada P3** (após 016 telas P1 + 018 apresentação); aguarda GO de ativação do PO. Reusa GlitchRule/GlitchPostProcess (015) + sentidos 2D/LevelState (018). Fonte de verdade: `specs/019-glitch-como-ferramenta-do-jogador-exploits-a-favor/`.
+Evolução do tema: o glitch deixa de ser só efeito e vira **ferramenta** que o jogador detecta e explora a favor. Cadeia aprovada pelo PO (cmqxyjjd8); GO de ativação dado pelo PO (cmqy5xkbx) — gates 016 (done) + 018 (done) satisfeitos. Sprint 1 `active` (commit `cab4c83`); **T-190 (GlitchRuleModel) em HANDOFF ao 42warrior**. Reusa GlitchRule/GlitchPostProcess (015) + sentidos 2D/LevelState (018). Fonte de verdade: `specs/019-glitch-como-ferramenta-do-jogador-exploits-a-favor/`.
 - [ ] **T-190** GlitchRuleModel — modelo **seedado** comum (estende a GlitchRule da 015); janela = f(seed, turno) publicada nos `turn_events`; sinalização via GlitchPostProcess
 - [ ] **T-191** GlitchDetection — feel/look revelam a janela/padrão do glitch (sentidos 2D da 018), CQS, **≥1 turno de antecedência** (justiça)
 - [ ] **T-192** GlitchExploits — 4 mecânicas de domínio: no-clip seedado · buffer-overflow→dano dobrado · memory-leak→cura dobrada · inimigo intangível piscante (efeito só na janela)
