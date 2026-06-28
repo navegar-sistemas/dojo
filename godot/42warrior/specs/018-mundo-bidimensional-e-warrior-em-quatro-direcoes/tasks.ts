@@ -9,7 +9,7 @@ export const tasks: ITask[] = [
       "Refatorar LevelState para coordenada 2D (linha,coluna) sobre grade R×C; 1×N = caso R=1 (modelo unificado, sem caminho 1D duplicado); posições fora de [0,R-1]×[0,C-1] = parede.",
     definitionOfDone:
       "Testes de domínio do LevelState 2D verdes: posição como (linha,coluna), nível 1×N lido como R=1 com comportamento idêntico ao corredor, e coordenada fora dos limites classificada como parede.",
-    status: "todo",
+    status: "done",
     dependsOn: [],
     parallel: false,
     assignee: null,
@@ -22,7 +22,7 @@ export const tasks: ITask[] = [
       "Estender Direction para as 4 direções absolutas (norte/sul/leste/oeste) com delta de passo 2D por direção; pivot() gira o facing entre as 4 (não só 180°).",
     definitionOfDone:
       "Testes de Direction verdes: delta correto por direção (ex.: cima=(-1,0), direita=(0,+1)), pivot gira entre as 4 direções, e cálculo de passo determinístico (sem RNG).",
-    status: "todo",
+    status: "done",
     dependsOn: [],
     parallel: true,
     assignee: null,
