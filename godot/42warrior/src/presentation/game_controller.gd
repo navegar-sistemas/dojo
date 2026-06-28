@@ -62,7 +62,9 @@ func _ready() -> void:
 func _load_level(index: int) -> void:
 	_level_index = index
 	_last_outcome = TurnResult.Outcome.ONGOING
-	_definition = BeginnerTower.definition(index)
+	_definition = (
+		BeginnerTower.sandbox_definition() if index == 0 else BeginnerTower.definition(index)
+	)
 	_initial_state = _loader.load_definition(_definition)
 	_state = _initial_state
 	_turn_history = []
@@ -75,10 +77,12 @@ func _load_level(index: int) -> void:
 	_timer.stop()
 	_dungeon.refresh_level(_state)
 	_hud.update_hud(_state, 0, _definition.description, 0)
+	_hud.setup_hint(_definition.hint_text)
 	_state_panel.update_state(_state, 0, _initial_enemy_count)
 	_console.clear()
 	_controls.set_playing(false)
-	_editor.setup_level(index, ReferenceSolutions.for_level(index))
+	var ref_source := "" if index == 0 else ReferenceSolutions.for_level(index)
+	_editor.setup_level(index, ref_source)
 
 
 func _on_run_pressed(source: String) -> void:

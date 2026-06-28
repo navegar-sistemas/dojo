@@ -38,6 +38,9 @@ func on_level_won(score_total: int, turns: int, is_ace: bool) -> void:
 	_last_turns = turns
 	_last_is_ace = is_ace
 	_last_won = true
+	if _current_level == 0:
+		start(1)
+		return
 	_level_store.save_result(_current_level, score_total, true, is_ace)
 	if _current_level < BeginnerTower.LEVEL_COUNT:
 		_store.save_level(_current_level + 1)

@@ -13,6 +13,8 @@ var description: String
 var abilities: PackedStringArray
 var time_bonus: int
 var ace_score: int
+var is_sandbox: bool = false
+var hint_text: String = ""
 ## position:int -> Callable que devolve uma Unit nova.
 var _unit_makers: Dictionary
 
@@ -27,6 +29,8 @@ func _init(config: Dictionary) -> void:
 	abilities = config["abilities"]
 	time_bonus = config["time_bonus"]
 	ace_score = config["ace_score"]
+	is_sandbox = config.get("is_sandbox", false)
+	hint_text = config.get("hint_text", "")
 	_unit_makers = config["units"]
 
 
