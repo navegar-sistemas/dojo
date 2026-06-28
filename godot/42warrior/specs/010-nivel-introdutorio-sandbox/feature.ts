@@ -17,6 +17,6 @@ export const feature: IFeature = {
     "Mudar mecânica de combate ou regras de pontuação.",
   ],
   productDecisions: [],
-  phase: "implementing",
+  phase: "done",
   createdAt: "2026-06-28",
 };
