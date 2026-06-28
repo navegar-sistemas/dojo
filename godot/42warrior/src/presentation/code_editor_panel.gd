@@ -2,17 +2,20 @@ class_name CodeEditorPanel
 extends PanelContainer
 
 signal run_pressed(source: String)
+signal debug_toggled(open: bool)
 
 var _level_index := 1
 var _store := PlayerCodeStore.new()
 var _skeleton_provider := LevelSkeletonProvider.new()
 var _ref_source := ""
 var _player_source := ""
+var _debug_open := false
 
 @onready var _editor: CodeEdit = $VBox/Tabs/Editor/CodeArea
 @onready var _run_btn: Button = $VBox/Tabs/Editor/Buttons/RunBtn
 @onready var _reset_btn: Button = $VBox/Tabs/Editor/Buttons/ResetBtn
 @onready var _ref_btn: Button = $VBox/Tabs/Editor/Buttons/RefBtn
+@onready var _debug_btn: Button = $VBox/Tabs/Editor/Buttons/DebugBtn
 @onready var _error_view: ErrorView = $VBox/Tabs/Editor/ErrorView
 @onready var _api_tab: ApiReferenceTab = $VBox/Tabs/API
 @onready var _glossary_tab: GlossaryTab = $VBox/Tabs/Glossario
@@ -22,6 +25,7 @@ func _ready() -> void:
 	_run_btn.pressed.connect(_on_run)
 	_reset_btn.pressed.connect(_on_reset)
 	_ref_btn.pressed.connect(_on_view_ref)
+	_debug_btn.pressed.connect(_on_debug_toggle)
 	_setup_editor_style()
 
 
@@ -66,6 +70,11 @@ func _on_view_ref() -> void:
 	else:
 		_player_source = _editor.text
 		_editor.text = _ref_source
+
+
+func _on_debug_toggle() -> void:
+	_debug_open = not _debug_open
+	debug_toggled.emit(_debug_open)
 
 
 func _setup_editor_style() -> void:

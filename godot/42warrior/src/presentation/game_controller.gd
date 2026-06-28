@@ -33,11 +33,10 @@ var _timer: Timer
 
 @onready var _dungeon: DungeonView = $DungeonView
 @onready var _hud: HudView = $HudView
-@onready var _editor: CodeEditorPanel = $EditorLayer/CodeEditorPanel
+@onready var _editor: CodeEditorPanel = $DebugLayer/DebugPanel/VBox/CodeEditorPanel
 @onready var _console: TurnConsole = $DebugLayer/DebugPanel/VBox/TurnConsole
 @onready var _state_panel: WarriorStatePanel = $DebugLayer/DebugPanel/VBox/WarriorStatePanel
 @onready var _controls: ExecutionControls = $DebugLayer/DebugPanel/VBox/ExecutionControls
-@onready var _toggle_editor_btn: Button = $HudView/ToggleEditorBtn
 
 
 func _ready() -> void:
@@ -46,10 +45,10 @@ func _ready() -> void:
 	_timer.timeout.connect(_on_tick)
 	add_child(_timer)
 	_editor.run_pressed.connect(_on_run_pressed)
+	_editor.debug_toggled.connect(_on_toggle_debug)
 	_controls.play_pause_toggled.connect(_on_play_pause_toggled)
 	_controls.step_requested.connect(_on_step_requested)
 	_controls.speed_changed.connect(_on_speed_changed)
-	_toggle_editor_btn.pressed.connect(_on_toggle_editor)
 	var flow: Node = get_node_or_null("/root/TowerFlow")
 	var start_level := 1
 	if flow:
@@ -194,8 +193,8 @@ func _on_speed_changed(interval: float) -> void:
 		_timer.start()
 
 
-func _on_toggle_editor() -> void:
-	_editor.visible = not _editor.visible
+func _on_toggle_debug(open: bool) -> void:
+	_console.visible = open
 
 
 func _unhandled_input(event: InputEvent) -> void:
