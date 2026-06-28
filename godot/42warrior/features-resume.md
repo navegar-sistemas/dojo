@@ -27,24 +27,22 @@ Remake do **Ruby Warrior** (beginner tower, 9 níveis) reambientado no universo 
 - [x] **006 — Aprimoramento de UI/UX e fluxo de telas** · spec `done` · **na main**
   - ScreenManager (1 tela ativa por vez), EntityAssetRegistry data-driven, editor retrátil (inicia **visível**, fix tech-lead), console de controles, Theme único. _Aceite comportamental/runtime ainda pendente de validação rodando o jogo._
 
-- [ ] **007 — Referência da API do warrior in-game** · spec `done` · **código em branch `feature/007` (NÃO integrado)** · prioridade #1 do PO
-  - Aba/painel de API no editor (`warrior_api_catalog` + `api_reference_tab`) p/ o jogador descobrir sentidos/ações disponíveis.
-  - ⚠️ Não-integrável ainda: a branch `feature/007` **empilha 007 + 008** (commits `de9295e` + `b6ce230`) e **falta `review.ts`**. Roteado ao dev/PO (separar escopo + revisar) antes do merge.
+- [x] **007 — Referência da API do warrior in-game** · spec `done` · **INTEGRADA na main** (merge `c2c911d`, push `b783ada`)
+  - Aba API no editor de código (`warrior_api_catalog` + `api_reference_tab`); review.ts verde; `check.sh` 147/147.
 
-- [ ] **008 — Glossário de termos in-game** · spec `done` · **código empilhado na branch `feature/007`** (commit `b6ce230`, sem branch própria)
-  - Aba Glossário no editor. Precisa ser separada da branch 007 p/ integração na ordem do PO.
+- [x] **008 — Glossário de termos in-game** · spec `done` · **INTEGRADA na main** (pilha com 007)
+  - Aba Glossário no editor (`glossary_catalog` + `glossary_tab`); review.ts verde.
 
-- [ ] **009 — Seleção e replay de níveis** · spec `done` · **código em branch `feature/009` (NÃO integrado)**
-  - Escolher/refazer níveis já jogados. Falta: review + **integrar na main** (na vez, após 007/008).
+- [ ] **009 — Seleção e replay de níveis** · spec `done` · **código em branch `feature/009` (próxima a integrar)**
+  - Escolher/refazer níveis já jogados. review.ts verde; aguardando merge na main (após 007/008 ✓).
 
-- [ ] **010 — Nível introdutório sandbox** · spec `done` · **código não iniciado** · **bloqueado por prioridade do PO** (só após 007→008→009)
-  - Nível de onboarding/sandbox (menor valor). Implementa por último.
+- [ ] **010 — Nível introdutório sandbox** · spec `done` · **código em branch `feature/010` (NÃO integrado)** · último na ordem
+  - Nível de onboarding/sandbox. review.ts verde; integra por último (conflitos esperados em game.tscn/game_controller/tower_flow — resolvidos na integração).
 
 ## O que falta (visão rápida)
 
-1. Implementar/integrar **007 → 008 → 009 → 010** nesta ordem (definida pelo PO). Specs prontas; falta **código na main** (007/009 já em branch; 008/010 não iniciados).
-2. Cada feature: review da feature → merge na main → push.
-3. Fechar o **aceite runtime da 006** (rodar o jogo: 1 tela após transição, sem vazamento de nós, animações, console).
+1. Integrar **009 → 010** na main (007 ✓, 008 ✓). Cada merge: `godot --import` (regenera cache de classes) → `check.sh` verde → push → atualiza este resumo.
+2. Fechar o **aceite runtime da 006** (rodar o jogo: 1 tela após transição, sem vazamento de nós, animações, console).
 
 ## Cobertura dos requisitos de produto (PR → feature)
 
