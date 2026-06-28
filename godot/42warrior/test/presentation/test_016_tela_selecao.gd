@@ -68,6 +68,30 @@ func test_theme_global_design_system_aplicado() -> void:
 	assert_not_null(title, "Label Title deve existir na tela de seleção")
 
 
+func test_grid_tem_9_botoes_criados() -> void:
+	var root := _load_scene()
+	await get_tree().process_frame
+	var grid := root.find_child("LevelGrid", true, false) as GridContainer
+	assert_not_null(grid, "LevelGrid deve existir")
+	assert_true(
+		grid.get_child_count() >= 9,
+		"LevelGrid deve ter >=9 botoes criados por _populate() (conteudo real, nao grade vazia)"
+	)
+
+
+func test_theme_fonte_press_start_2p_aplicada() -> void:
+	var root := _load_scene()
+	await get_tree().process_frame
+	var title := root.find_child("Title", true, false) as Label
+	assert_not_null(title, "Title Label deve existir")
+	var font := title.get_theme_font("font", "Label")
+	assert_not_null(font, "Label deve ter fonte do Theme aplicada (nao null)")
+	assert_true(
+		font.resource_path.length() > 0,
+		"fonte deve ser Press Start 2P (resource_path nao vazio — nao default Godot)"
+	)
+
+
 func _load_scene() -> Node:
 	var packed := load(_SCENE) as PackedScene
 	var root := packed.instantiate()
