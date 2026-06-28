@@ -89,9 +89,32 @@ func test_about_btn_presente() -> void:
 func test_theme_global_design_system_aplicado() -> void:
 	var root := _load_menu()
 	await get_tree().process_frame
-	# Verifica que algum Label/Control filho tem theme não-nulo herdado
 	var title := root.find_child("Title", true, false)
 	assert_not_null(title, "Label Title deve existir no menu")
+
+
+func test_key_art_texture_carregada() -> void:
+	var root := _load_menu()
+	await get_tree().process_frame
+	var key_art := root.find_child("KeyArt", true, false) as TextureRect
+	assert_not_null(key_art, "KeyArt TextureRect deve existir")
+	assert_not_null(
+		key_art.texture,
+		"key_art.png deve estar REALMENTE carregado (texture != null, nao TextureRect vazio)"
+	)
+
+
+func test_theme_fonte_press_start_2p_aplicada() -> void:
+	var root := _load_menu()
+	await get_tree().process_frame
+	var title := root.find_child("Title", true, false) as Label
+	assert_not_null(title, "Title Label deve existir")
+	var font := title.get_theme_font("font", "Label")
+	assert_not_null(font, "Label deve ter fonte do Theme aplicada (nao null)")
+	assert_true(
+		font.resource_path.length() > 0,
+		"fonte deve ser Press Start 2P (resource_path nao vazio — nao default Godot)"
+	)
 
 
 func _load_menu() -> Node:
