@@ -45,7 +45,7 @@ export const stories: IUserStory[] = [
     requirementKeys: ["RNF-210", "RNF-211", "RNF-212"],
     priority: "highest",
     storyPoints: 5,
-    status: "todo",
+    status: "done",
     assignee: null,
   },
 ];

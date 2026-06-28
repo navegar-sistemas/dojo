@@ -56,7 +56,7 @@ export const tasks: ITask[] = [
       "WebSmokeHarness: montar o smoke web — abrir o build no navegador, executar ≥1 turno do código do jogador no WASM (runtime GDScript), conferir persistência user://, validar o glitch shader (WebGL2) + perf; rodar check.sh desktop p/ 0-regressão.",
     definitionOfDone:
       "Smoke web REAL verde (sem pending): o warrior executa ≥1 turno do código do jogador no WASM + progresso salvo + glitch shader renderiza no WebGL2 com ≥30 fps alvo; check.sh desktop 100% verde, 0 regressão 001–020.",
-    status: "todo",
+    status: "done",
     dependsOn: ["T-210", "T-211", "T-212", "T-213"],
     parallel: false,
     assignee: null,

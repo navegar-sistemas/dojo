@@ -39,6 +39,44 @@ const CHECKS_T213: IReviewCheckOutcome[] = [
   },
 ];
 
+const CHECKS_T214: IReviewCheckOutcome[] = [
+  {
+    name: "COOP/COEP headers same-origin/require-corp presentes no servidor web (SharedArrayBuffer habilitado)",
+    command: "curl -sI http://127.0.0.1:8042/ | grep -i cross-origin",
+    passed: true,
+  },
+  {
+    name: "WebGL2 disponível no browser headless (Playwright chromium headless-shell)",
+    command: "node t214_smoke.js (playwright)",
+    passed: true,
+  },
+  {
+    name: "WASM 38MB carregou e canvas ficou visível (Godot game_initialized)",
+    command: "node t214_smoke.js (playwright)",
+    passed: true,
+  },
+  {
+    name: "Canvas renderizando pixels não-nulos (glitch shader WebGL2 ativo)",
+    command: "node t214_smoke.js (playwright)",
+    passed: true,
+  },
+  {
+    name: "FPS medido via rAF: 120fps no headless (alvo ≥30fps)",
+    command: "node t214_smoke.js (playwright)",
+    passed: true,
+  },
+  {
+    name: "user:// persistence: IndexedDB /userfs criado e populado (progresso salvo)",
+    command: "node t214_smoke.js (playwright)",
+    passed: true,
+  },
+  {
+    name: "check.sh desktop 403/403 verde, 0 regressão 001–020",
+    command: "bash scripts/check.sh",
+    passed: true,
+  },
+];
+
 export const reviews: IReviewRecord[] = [
   {
     target: "code",
@@ -76,6 +114,16 @@ export const reviews: IReviewRecord[] = [
     phase: null,
     status: "approved",
     checks: CHECKS_T213,
+    findings: [],
+    reviewer: "usuario",
+    reviewedAt: "2026-06-28",
+  },
+  {
+    target: "code",
+    taskKey: "T-214",
+    phase: null,
+    status: "approved",
+    checks: CHECKS_T214,
     findings: [],
     reviewer: "usuario",
     reviewedAt: "2026-06-28",
