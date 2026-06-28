@@ -126,9 +126,9 @@ Tema **OBRIGATÓRIO** da game jam ("glitch"). Narrativa: **Kernel corrompido da 
 
 ### Glitch como ferramenta do jogador (019) — spec `implementing`, **Sprint 1 ATIVO** (última feature do pipeline)
 
-Evolução do tema: o glitch deixa de ser só efeito e vira **ferramenta** que o jogador detecta e explora a favor. Cadeia aprovada pelo PO (cmqxyjjd8); GO de ativação dado pelo PO (cmqy5xkbx) — gates 016 (done) + 018 (done) satisfeitos. Sprint 1 `active` (commit `cab4c83`); **T-190 (GlitchRuleModel) em HANDOFF ao 42warrior**. Reusa GlitchRule/GlitchPostProcess (015) + sentidos 2D/LevelState (018). Fonte de verdade: `specs/019-glitch-como-ferramenta-do-jogador-exploits-a-favor/`.
-- [ ] **T-190** GlitchRuleModel — modelo **seedado** comum (estende a GlitchRule da 015); janela = f(seed, turno) publicada nos `turn_events`; sinalização via GlitchPostProcess
-- [ ] **T-191** GlitchDetection — feel/look revelam a janela/padrão do glitch (sentidos 2D da 018), CQS, **≥1 turno de antecedência** (justiça)
+Evolução do tema: o glitch deixa de ser só efeito e vira **ferramenta** que o jogador detecta e explora a favor. Cadeia aprovada pelo PO (cmqxyjjd8); GO de ativação dado pelo PO (cmqy5xkbx) — gates 016 (done) + 018 (done) satisfeitos. Sprint 1 `active`; **T-190 INTEGRADO** (`8edc3a7`), **T-191 (GlitchDetection) em HANDOFF ao 42warrior**. Reusa GlitchRule/GlitchPostProcess (015) + sentidos 2D/LevelState (018). Fonte de verdade: `specs/019-glitch-como-ferramenta-do-jogador-exploits-a-favor/`.
+- [x] **T-190** GlitchRuleModel — modelo **seedado** comum determinístico (`window_open(seed,turno)=(seed+turno)%7<3`, RefCounted puro 0-RNG); `build_turn_events` emite `GLITCH_WINDOW`; `GlitchRule.model` aditivo (null=legado 015). **INTEGRADO `8edc3a7`** (merge feature/019-sprint1-t190, check.sh 479/479, aceite PO cmqy6s0sg, +12 testes comportamentais)
+- [ ] **T-191** GlitchDetection — feel/look revelam a janela/padrão do glitch (sentidos 2D da 018), CQS, **≥1 turno de antecedência** (justiça) · _em HANDOFF ao dev (cmqy6vty0)_
 - [ ] **T-192** GlitchExploits — 4 mecânicas de domínio: no-clip seedado · buffer-overflow→dano dobrado · memory-leak→cura dobrada · inimigo intangível piscante (efeito só na janela)
 - [ ] **T-193** GlitchTeleport2D — teleporte corrompido p/ célula-alvo determinística na grade R×C (018); gated na 018
 - [ ] **T-194** Invariantes — determinismo seedado (≥1 teste/mecânica, 0 RNG injusto) + aditivo 0-regressão 001–016/018 (janela fechada = motor base) + detectabilidade 100% via feel/look
