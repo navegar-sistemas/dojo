@@ -65,11 +65,14 @@ Remake do **Ruby Warrior** (beginner tower, 9 níveis) reambientado no universo 
   - **Pack v2 (deltas)** landados na main (`a9fdeb1`): 3 sheets (hero_rescue/captive) + 4 tiles de cenário, sem duplicar v1. Delta-C (RGB-split/magenta/âmbar nos títulos) na RF-165.
   - **Sprint 3 ATIVO** (telas P1 US-166..171: resultado/transição/sandbox/glossário/API/créditos — **correção factual dos créditos** no US-171). Falta: delta-A (RF-160 amplia rescue/captive), telas P1.
 
-- [~] **018 — Mundo bidimensional + warrior 4 direções** · spec `implementing` · **Sprint 1 (domínio P0) quase fechado** (direção do Usuário)
-  - Grade R×C (corredor 1×N = caso especial R=1, retrocompat por construção). **T-181** Direction 4-dir (N/S/E/W + pivot, merge `62407aa`) + **T-180** LevelState 2D (from_2d/space_at_2d, R=1 preservado+testado, merge `417c96e`) — DONE, aceitos PO, 0-regressão. **T-182** (Space + sentidos 2D) em implementação. Domínio puro, 0-RNG determinista.
+- [x] **018 — Mundo bidimensional + warrior 4 direções** · spec `implementing` · **Sprint 1 (domínio 2D, P0) FECHADO e INTEGRADO** (main `78ab331`, push) · 343/343
+  - Grade R×C (corredor 1×N = caso especial R=1, retrocompat por construção). **T-180** LevelState 2D + **T-181** Direction 4-dir + **T-182** Space/sentidos 2D — todos DONE, aceitos PO, 0-regressão. **Coverage gaps** (zero-delta, diagonal tie-break, S/W via feel_2d + guard 1D/2D no warrior_facade) integrado (`78ab331`, PO autorizou). Domínio puro, 0-RNG determinista. Sprints 2 (P1 API-retrocompat) e 3 (P2 apresentação + tiles) `future`, aguardam OK do PO.
 
 - [x] **020 — Robustez contra recursão infinita** · spec `done` · **INTEGRADA na main** (merge `3662408`, push) · 278/278 — **P0 reportado pelo Matheus, FECHADO**
   - Código do jogador com **recursão infinita** crashava o app (stack overflow → Engine Bug "Stack underflow" → VM corrompida); a 014 só guardava `while`, não recursão (premissa "aborta nativamente" era FALSA). Fix: **depth-guard** (`__enter_func`, `CALL_DEPTH_LIMIT=64`) corta antes de estourar → no-op + erro reportado. + teste de recursão E de **sintaxe-inválida** (gap histórico que deixou o defeito passar verde). Reproduzido e verificado na main: recursão "SURVIVED".
+
+- [~] **021 — Export do jogo para o navegador (Web/HTML5)** · spec `implementing` · **Sprint 1 ATIVO** (GO PO) · rastreia PR-014
+  - 42warrior entregou **T-210/211/212/213** (`feature/021-export-web @53a1da7`, 338/338): renderer `gl_compatibility`, export preset Web, audio-gesture gate (autoplay), persistência IndexedDB. **T-214 (smoke web REAL) BLOQUEADO**: `export_templates/` vazio (Godot 4.7 não instalado no ambiente) — **escalado ao Matheus** (instalar templates HTML5/WASM). Bar de aceite da feature = T-214 verde.
 
 ## O que falta (visão rápida)
 
