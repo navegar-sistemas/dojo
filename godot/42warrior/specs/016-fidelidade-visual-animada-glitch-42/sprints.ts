@@ -16,7 +16,7 @@ export const sprints: ISprint[] = [
     name: "Telas P0 (fluxo principal: jogo, menu, seleção)",
     goal:
       "As telas onde o jogador passa o tempo, fiéis aos mockups, reusando as fundações: US-163 (tela de JOGO/arena), US-164 (menu inicial), US-165 (seleção de níveis). Valor visível cedo. DoD por tela = prova de render de cena.",
-    state: "active",
+    state: "closed",
     startDate: "",
     endDate: "",
     storyKeys: ["US-163", "US-164", "US-165"],
@@ -26,7 +26,7 @@ export const sprints: ISprint[] = [
     name: "Telas P1 (secundárias)",
     goal:
       "As telas secundárias, fiéis aos mockups: US-166 (resultado), US-167 (transição), US-168 (sandbox/tutorial), US-169 (glossário), US-170 (referência da API), US-171 (conclusão/créditos). Paralelizáveis por tela. DoD por tela = prova de render de cena.",
-    state: "future",
+    state: "active",
     startDate: "",
     endDate: "",
     storyKeys: ["US-166", "US-167", "US-168", "US-169", "US-170", "US-171"],
