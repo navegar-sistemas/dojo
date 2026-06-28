@@ -14,7 +14,7 @@ export const sprints: ISprint[] = [
     id: 2,
     name: "P1 — API do jogador nas 4 direções (retrocompat)",
     goal: "Fachada/catálogo/glossário expõem as 4 direções e o pivot 4-direções, preservando os scripts e níveis beginner (1×N como R=1) sem alteração do código do jogador.",
-    state: "active",
+    state: "closed",
     startDate: "",
     endDate: "",
     storyKeys: ["US-183"],

@@ -48,7 +48,7 @@ export const tasks: ITask[] = [
       "Atualizar warrior_facade/warrior_api_catalog/glossário para expor as 4 direções e o pivot 4-direções, preservando os scripts e níveis beginner (1×N como R=1) sem alteração do código do jogador.",
     definitionOfDone:
       "Catálogo/glossário descrevem as 4 direções e o pivot; suíte dos scripts beginner 1×N permanece verde sem alteração; semântica forward/backward preservada no subcaso R=1.",
-    status: "todo",
+    status: "done",
     dependsOn: ["T-182"],
     parallel: false,
     assignee: null,

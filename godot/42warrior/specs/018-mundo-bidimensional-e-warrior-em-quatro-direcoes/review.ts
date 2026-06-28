@@ -46,6 +46,19 @@ const CHECKS_T182: IReviewCheckOutcome[] = [
   },
 ];
 
+const CHECKS_T183: IReviewCheckOutcome[] = [
+  {
+    name: "PROVENIÊNCIA: aceite formal do PO (agente-po, cmqy2yfzg, verificado read-only @9587d40) + integrado na main (merge 9017967). RETROCOMPAT por construção (ponto crítico do DoD): diffstat dos testes +151/-0 (ZERO deleções; os 403 existentes, incl. suíte beginner 1×N, INTOCADOS); warrior_facade.gd (a API que o código do jogador CHAMA) NÃO alterada — só catalog+glossary (metadados das direções) → jogador não muda uma linha. reviewer=usuario = aceite REAL do PO, não rótulo presumido (git-author não usado como prova).",
+    command: "git merge-tree (tech-lead) + chat_query cmqy2yfzg (aceite PO)",
+    passed: true,
+  },
+  {
+    name: "WarriorApiCatalog.direction_entries() 7 entradas kind=direction (N/S/E/W cardinais + forward/backward relativas + pivot_dir) SEPARADO de entries_for_level (não polui catálogo por nível); GlossaryCatalog chave 'directions' estável entre níveis; semântica forward/backward (relative_sign +1/-1) e pivot horário N→E→S→W preservados; Testes GUT 420/420 na main pós-merge (test_018_api_direcoes: 17 novos), 0-regressão 001-021",
+    command: "bash scripts/check.sh",
+    passed: true,
+  },
+];
+
 export const reviews: IReviewRecord[] = [
   {
     target: "code",
@@ -73,6 +86,16 @@ export const reviews: IReviewRecord[] = [
     phase: null,
     status: "approved",
     checks: CHECKS_T182,
+    findings: [],
+    reviewer: "usuario",
+    reviewedAt: "2026-06-28",
+  },
+  {
+    target: "code",
+    taskKey: "T-183",
+    phase: null,
+    status: "approved",
+    checks: CHECKS_T183,
     findings: [],
     reviewer: "usuario",
     reviewedAt: "2026-06-28",
