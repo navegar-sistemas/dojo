@@ -1,0 +1,72 @@
+class_name TestTelaResultado016
+extends GutTest
+## T-166 (016) — PROVA DE RENDER DE CENA: tela de RESULTADO fiel ao mockup.
+## Instancia level_result.tscn + renderiza >=1 frame + assere elementos-chave
+## (Title, ScoreLabel, AceLabel, NextBtn, RetryBtn) sem depender de TowerFlow.
+
+const _SCENE := "res://scenes/level_result.tscn"
+
+
+func test_level_result_instancia_sem_crash() -> void:
+	var packed := load(_SCENE) as PackedScene
+	assert_not_null(packed, "level_result.tscn deve existir e ser carregável")
+	var root := packed.instantiate()
+	add_child_autoqfree(root)
+	await get_tree().process_frame
+	assert_not_null(root, "level_result.tscn deve instanciar sem crash")
+
+
+func test_title_label_presente() -> void:
+	var root := _load_scene()
+	await get_tree().process_frame
+	var title := root.find_child("Title", true, false)
+	assert_not_null(title, "Label Title deve existir em level_result.tscn")
+
+
+func test_score_label_presente() -> void:
+	var root := _load_scene()
+	await get_tree().process_frame
+	var lbl := root.find_child("ScoreLabel", true, false)
+	assert_not_null(lbl, "Label ScoreLabel deve existir em level_result.tscn")
+
+
+func test_ace_label_presente() -> void:
+	var root := _load_scene()
+	await get_tree().process_frame
+	var lbl := root.find_child("AceLabel", true, false)
+	assert_not_null(lbl, "Label AceLabel deve existir em level_result.tscn")
+
+
+func test_next_btn_presente() -> void:
+	var root := _load_scene()
+	await get_tree().process_frame
+	var btn := root.find_child("NextBtn", true, false)
+	assert_not_null(btn, "NextBtn (Próximo Nível) deve existir em level_result.tscn")
+
+
+func test_retry_btn_presente() -> void:
+	var root := _load_scene()
+	await get_tree().process_frame
+	var btn := root.find_child("RetryBtn", true, false)
+	assert_not_null(btn, "RetryBtn (Tentar Novamente) deve existir em level_result.tscn")
+
+
+func test_menu_btn_presente() -> void:
+	var root := _load_scene()
+	await get_tree().process_frame
+	var btn := root.find_child("MenuBtn", true, false)
+	assert_not_null(btn, "MenuBtn (Menu) deve existir em level_result.tscn")
+
+
+func test_sem_tower_flow_nao_crasha() -> void:
+	# TowerFlow ausente no contexto de teste — _ready() deve ser tolerante
+	var root := _load_scene()
+	await get_tree().process_frame
+	assert_not_null(root, "level_result deve renderizar sem crash mesmo sem TowerFlow")
+
+
+func _load_scene() -> Node:
+	var packed := load(_SCENE) as PackedScene
+	var root := packed.instantiate()
+	add_child_autoqfree(root)
+	return root
