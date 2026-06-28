@@ -82,7 +82,11 @@ func test_theme_aplicado_a_control_persiste_apos_1_frame() -> void:
 	root.add_child(btn)
 	await get_tree().process_frame
 	assert_eq(root.theme, theme, "theme deve permanecer após 1 frame")
-	assert_not_null(label.get_theme_color("font_color"), "Label deve resolver cor do theme")
+	assert_eq(
+		label.get_theme_color("font_color"),
+		GlobalDesignSystem.COLOR_BRANCO,
+		"Label deve herdar COLOR_BRANCO do theme injetado no pai"
+	)
 
 
 func test_heading_font_carregavel_se_importado() -> void:
