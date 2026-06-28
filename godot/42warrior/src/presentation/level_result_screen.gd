@@ -26,9 +26,9 @@ func _ready() -> void:
 
 
 func _show_won(res: Dictionary) -> void:
-	_title.text = "Vitória!"
-	_score_label.text = "Pontuação: %d  (%d turnos)" % [res.score_total, res.turns]
-	_ace_label.text = "⭐ Ace!" if res.get("is_ace", false) else ""
+	_title.text = ThemeCatalog.message("victory")
+	_score_label.text = ThemeCatalog.message("score_label", [res.score_total, res.turns])
+	_ace_label.text = ThemeCatalog.message("ace") if res.get("is_ace", false) else ""
 	_next_btn.visible = true
 	_retry_btn.visible = true
 	var flow: Node = get_node_or_null("/root/TowerFlow")
@@ -37,8 +37,8 @@ func _show_won(res: Dictionary) -> void:
 
 
 func _show_lost() -> void:
-	_title.text = "Derrota"
-	_score_label.text = "Tente novamente!"
+	_title.text = ThemeCatalog.message("defeat")
+	_score_label.text = ThemeCatalog.message("retry")
 	_ace_label.text = ""
 	_next_btn.visible = false
 	_retry_btn.visible = true
