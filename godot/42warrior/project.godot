@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+ScreenManager="*res://src/presentation/screen_manager.gd"
 TowerFlow="*res://src/presentation/tower_flow.gd"
 AudioManager="*res://src/presentation/audio_manager.gd"
 
