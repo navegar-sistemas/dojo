@@ -9,3 +9,5 @@ var post_process_intensity: float = 0.0
 var warrior_corrupted: bool = false
 ## Flash de corrupção de tela inteira?
 var screen_glitch: bool = false
+## Janela de glitch seedada está ativa neste turno (GlitchRuleModel)?
+var window_active: bool = false
