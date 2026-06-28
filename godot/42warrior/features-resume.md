@@ -44,8 +44,8 @@ Remake do **Ruby Warrior** (beginner tower, 9 níveis) reambientado no universo 
 - [x] **011 — Câmera que acompanha o warrior (estilo SMW)** · spec `done` · **INTEGRADA na main** (merge, push `ede7ec7`) · aceita pelo PO
   - CameraFollowController: trilha o sprite por frame, dead-zone, lookahead com histerese, clamp nas bordas, zoom 1:1 constante. check.sh 185/185.
 
-- [ ] **012 — Ajuste de layout editor/debug na tela de jogo** · **REJEITADA pelo PO** (f669a43, RF-121: debug precisa ocultar como unidade, editor não pode ficar aninhado) · **re-implementação pelo dev** · NÃO integrar
-  - Editor no painel principal; DebugBtn na barra; debug (WarriorState+Console) oculto **como unidade**; ExecutionControls **sempre visíveis**.
+- [x] **012 — Ajuste de layout editor/debug na tela de jogo** · spec `done` · **INTEGRADA na main** (re-impl `cbeaaad`, merge `895055c`) · aceita pelo PO (reviewer=usuario) · render-smoke RF-121 verde
+  - Editor no painel principal (independente); DebugBtn na barra; debug (WarriorState+Console) oculto **como unidade** retrátil; ExecutionControls **sempre visíveis**. 1ª impl (f669a43) rejeitada por aninhar o editor no debug; re-implementada com editor independente. Prova de runtime: `DebugPanel.hidden=true, editor/controles visíveis`.
 
 - [x] **013 — Ordenação sequencial de animações de turno** · spec `done` · **INTEGRADA na main** (merge `ecf7eec`) · aceita pelo PO
   - AnimationSequencer: beats sequenciais (N+1 só após N), ATTACKED = beat concorrente, `all_done` ao fim. **+ fix do DEADLOCK** (all_done diferido em turno sem animação — bug do code review). check.sh 172/172→185/185.
