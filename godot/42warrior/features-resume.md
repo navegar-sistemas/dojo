@@ -50,17 +50,20 @@ Remake do **Ruby Warrior** (beginner tower, 9 níveis) reambientado no universo 
 - [x] **013 — Ordenação sequencial de animações de turno** · spec `done` · **INTEGRADA na main** (merge `ecf7eec`) · aceita pelo PO
   - AnimationSequencer: beats sequenciais (N+1 só após N), ATTACKED = beat concorrente, `all_done` ao fim. **+ fix do DEADLOCK** (all_done diferido em turno sem animação — bug do code review). check.sh 172/172→185/185.
 
-- [ ] **014 — Robustez de execução do código do jogador (sem crash)** · spec `done` · **DONE** (feature/014 @ `d8a1b77`, check.sh 169/169) · **aguarda aceite do PO**
+- [ ] **014 — Robustez de execução do código do jogador (sem crash)** · spec `done` · **ACEITA pelo PO** (cmqxo4kcf) · **merge pendente** (branch @ `d8a1b77` tem merge-base antigo → exige rebase sobre a main atual antes do merge)
   - PlayerScriptRunner: instrumentação de loop guard (teto 1M via `__guard()`); erro de sintaxe/runtime/loop não crasha → no-op + reporte; 4 cenários testados. Limitação honesta: reporte de runtime error é silencioso (GDScript sem try/catch).
 
-- [ ] **015 — Tema Glitch Game Jam** · spec `done` · **DONE** (feature/015 @ `ba3b430`, check.sh 181/181) · **aguarda aceite do PO**
+- [ ] **015 — Tema Glitch Game Jam** · spec `done` · **ACEITA-condicionada pelo PO** (cmqxo50z5: valor+determinismo OK; falta o smoke de cena na integração) · **merge pendente** (branch @ `ba3b430` merge-base antigo → rebase)
   - GlitchRule (domínio, determinístico); ThemeCatalog; GlitchPostProcess (RGB split + scanlines); UiCorruption por andar; textos temáticos.
+
+- [x] **017 — Correções pós-code-review** · spec `done` · **INTEGRADA na main** (merge `1057e51`, push `1057e51`) · check.sh 190/190
+  - Bug #2 (`_attack`/`_shoot` respeitam `is_captive()` — cativo não pontua) + Bug #3 (`RangedBehavior._facing` não-zero quando inimigo == escada — Archer do `_level_6` volta a disparar) + Bug #1 (prova de cena do turno no-op; fix já na 013). 5 testes novos. Implementada pelo **dev**, integrada por mim.
 
 ## O que falta (visão rápida)
 
-1. **001, 002-010, 011, 013 integradas na main** (`ede7ec7`). **014 e 015** prontas, **aguardam aceite do PO** para integrar (a salvaguarda exige review verde). **012** rejeitada → re-implementação pelo dev.
-2. **016 — Fidelidade visual animada (glitch/42)**: asset-pack importado na main (`assets/v1`, swap dos 9 sprites/tiles + filter Nearest, `aa579a5`). Telas/animações fiéis = trabalho em curso (spec/dev).
-3. **Bugs do code review**: #1 deadlock CORRIGIDO (na 013). #2 (captive pontua) e #3 (archer na escada não atira) → HANDOFF ao dev (domínio).
+1. **001, 002-010, 011, 013, 017 integradas na main** (HEAD `1057e51`). **014 e 015** ACEITAS pelo PO mas com **merge pendente**: as branches têm merge-base antigo (pré-011/013/arena) e tocam `dungeon_view`/`entity_sprite_registry`/`game_controller` — merge às cegas conflitaria/reverteria o fix da arena e a 013. Caminho seguro: **rebasear feature/014 e feature/015 sobre a main atual, resolver conflito, revalidar check.sh** e então merge. **012** rejeitada → re-implementação pelo dev.
+2. **016 — Fidelidade visual animada (glitch/42)**: asset-pack importado na main (`assets/v1`, swap dos 9 sprites/tiles + filter Nearest, `aa579a5`); fix da arena (`TILE_SIZE 32`, `659ef14`). Telas/animações fiéis = trabalho em curso (dev).
+3. **Bugs do code review**: #1 deadlock CORRIGIDO (na 013). #2 (captive pontua) e #3 (archer na escada não atira) **CORRIGIDOS + INTEGRADOS** na 017 (`1057e51`).
 4. Aceite runtime da **006**: ressalva **RNF-063** (Theme), **deferido** pelo PO até 011-015 integradas.
 
 ## Cobertura dos requisitos de produto (PR → feature)
