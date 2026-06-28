@@ -17,6 +17,7 @@ func _ready() -> void:
 func _populate() -> void:
 	for child in _list.get_children():
 		child.queue_free()
+	_list.add_child(_build_sandbox_row())
 	for entry: Dictionary in _store.all_levels_summary():
 		_list.add_child(_build_row(entry))
 
@@ -52,6 +53,26 @@ func _build_row(entry: Dictionary) -> Control:
 		var level_index: int = entry["index"]
 		btn.pressed.connect(func() -> void: _on_select(level_index))
 		hbox.add_child(btn)
+
+	return hbox
+
+
+func _build_sandbox_row() -> Control:
+	var hbox := HBoxContainer.new()
+	hbox.add_theme_constant_override("separation", 8)
+
+	var lbl := Label.new()
+	lbl.text = "🎯 Treinamento — Pratique a API sem pontuação"
+	lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	lbl.add_theme_font_size_override("font_size", 13)
+	lbl.add_theme_color_override("font_color", Color(0.7, 0.9, 0.7))
+	hbox.add_child(lbl)
+
+	var btn := Button.new()
+	btn.text = "Jogar"
+	btn.add_theme_font_size_override("font_size", 12)
+	btn.pressed.connect(func() -> void: _on_select(0))
+	hbox.add_child(btn)
 
 	return hbox
 

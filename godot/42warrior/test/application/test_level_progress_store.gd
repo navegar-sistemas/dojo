@@ -68,3 +68,11 @@ func test_all_levels_summary_tem_campos_obrigatorios() -> void:
 	assert_has(item, "score_best")
 	assert_has(item, "is_ace")
 	assert_has(item, "description")
+
+
+func test_sandbox_nivel_0_sempre_desbloqueado() -> void:
+	assert_eq(
+		_store.level_status(0),
+		LevelProgressStore.STATUS_UNLOCKED,
+		"sandbox (nivel 0) deve ser sempre unlocked"
+	)

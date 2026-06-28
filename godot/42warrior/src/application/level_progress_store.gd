@@ -14,6 +14,8 @@ const _KEY_ACE := "is_ace"
 
 
 func level_status(level: int) -> String:
+	if level == 0:
+		return STATUS_UNLOCKED
 	return _cfg_get(_section(level), _KEY_STATUS, STATUS_LOCKED)
 
 
@@ -26,6 +28,8 @@ func is_ace_for(level: int) -> bool:
 
 
 func unlock_level(level: int) -> void:
+	if level == 0:
+		return
 	if level < 1 or level > BeginnerTower.LEVEL_COUNT:
 		return
 	var current := level_status(level)
