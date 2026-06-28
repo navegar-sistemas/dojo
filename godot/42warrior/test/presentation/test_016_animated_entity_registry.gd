@@ -1,8 +1,10 @@
 extends GutTest
-## T-160 (016) — PROVA DE RENDER ISOLADA: AnimatedEntityRegistry como componente standalone.
-## Instancia o registro diretamente (sem game.tscn), injeta um LevelState mínimo e assere
-## que o warrior tem AnimatedSprite2D ativo com SpriteFrames+idle e ancoragem pelos pés.
+## T-160 (016) — PROVA DE RENDER DE CENA: AnimatedEntityRegistry em game.tscn headless.
+## Instancia game.tscn, aguarda _ready carregar o nível 1 e assere que o warrior
+## tem AnimatedSprite2D ativo com SpriteFrames+idle e ancoragem pelos pés (offset.y != 0).
+## Arena render proof exigida pelo PO (render-rule): exercita o caminho integrado completo.
 
+const _GAME_SCENE := "res://scenes/game.tscn"
 const _MANIFEST_PATH := "res://assets/v1/anim/manifest.json"
 
 
@@ -11,18 +13,22 @@ func test_warrior_tem_animated_sprite2d_ativo() -> void:
 		pending("manifest.json ausente — prova de render de sprite pulada (sem assets de arte)")
 		return
 
-	var registry := AnimatedEntityRegistry.new()
-	add_child_autoqfree(registry)
+	var packed: PackedScene = load(_GAME_SCENE)
+	var game_view: Node = packed.instantiate()
+	add_child_autoqfree(game_view)
+
+	await get_tree().process_frame
 	await get_tree().process_frame
 
-	var floor_layer := TileMapLayer.new()
-	add_child_autoqfree(floor_layer)
-
-	var state := LevelState.new(8, 7, Warrior.new(), 0, 1, {}, 0)
-	registry.update_from_state(state, floor_layer)
+	var registry := game_view.get_node_or_null("DungeonView/Entities")
+	assert_not_null(registry, "nó Entities (AnimatedEntityRegistry) deve existir em game.tscn")
+	if registry == null:
+		return
 
 	var warrior_sprite := _find_animated_sprite2d(registry)
-	assert_not_null(warrior_sprite, "deve existir ao menos um AnimatedSprite2D (warrior)")
+	assert_not_null(
+		warrior_sprite, "deve existir ao menos um AnimatedSprite2D (warrior) em Entities"
+	)
 	if warrior_sprite == null:
 		return
 
