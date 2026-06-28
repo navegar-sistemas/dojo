@@ -56,6 +56,7 @@ export const product: IProduct = {
       rule: "As mecânicas, a API, as entidades e os 9 níveis seguem o comportamento do Ruby Warrior beginner tower; divergências só por decisão de produto registrada.",
       rationale:
         "É um remake: a paridade funcional com a referência é o critério de sucesso. Customização é na pele (assets/tema 42), não nas regras, salvo decisão explícita.",
+      provenance: { author: "usuario", reason: "Decisao do Usuario (clarify feature 018): ampliar a fidelidade alem do beginner — o Ruby Warrior original e 2D nas torres Intermediate/Advanced; o 2D e evolucao deliberada, nao ruptura.", at: "2026-06-28" },
     },
   ],
 };

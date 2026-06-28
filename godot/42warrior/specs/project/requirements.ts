@@ -85,4 +85,11 @@ export const requirements: IProductRequirement[] = [
     priority: "highest",
     provenance: { author: "usuario", reason: "Decisao direta do Matheus: tema obrigatorio da game jam (glitch) e o criterio central da jam; registrar como PR de tema cross-cutting para rastreabilidade.", at: "2026-06-28" },
   },
+  {
+    key: "PR-013",
+    title: "Mundo bidimensional — torres Intermediate/Advanced (grade RxC + 4 direcoes)",
+    description: "O mundo evolui de corredor 1xN (beginner) para grade bidimensional linha x coluna (RxC), e o warrior aponta/anda nas 4 direcoes absolutas (cima/baixo/esquerda/direita), espelhando as torres Intermediate/Advanced do Ruby Warrior original. A beginner tower (1xN) permanece compativel como caso especial (R=1). Mantem turno deterministico e dominio independente de engine.",
+    priority: "high",
+    provenance: { author: "usuario", reason: "Decisao do Usuario (clarify feature 018): capacidade nova de produto — mundo 2D + 4 direcoes espelhando Intermediate/Advanced tower.", at: "2026-06-28" },
+  },
 ];
