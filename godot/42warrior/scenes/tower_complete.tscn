@@ -1,11 +1,16 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://src/presentation/tower_complete_screen.gd" id="1_complete"]
+[ext_resource type="Script" path="res://src/presentation/four_state_button.gd" id="2_fsbutton"]
 
 [node name="TowerComplete" type="PanelContainer"]
 script = ExtResource("1_complete")
 anchor_right = 1.0
 anchor_bottom = 1.0
+
+[node name="VoidBackground" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.039, 0.039, 0.043, 1)
 
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -14,10 +19,17 @@ theme_override_constants/separation = 24
 
 [node name="Title" type="Label" parent="VBox"]
 layout_mode = 2
-text = "Torre Concluída!"
+text = "SYSTEM RESTORED"
 horizontal_alignment = 1
 theme_override_font_sizes/font_size = 48
-theme_override_colors/font_color = Color(0.9, 0.8, 0.4, 1)
+theme_override_colors/font_color = Color(0, 1, 0.4, 1)
+
+[node name="ExitCode" type="Label" parent="VBox"]
+layout_mode = 2
+text = "exit 0"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0, 1, 0.4, 1)
 
 [node name="Subtitle" type="Label" parent="VBox"]
 layout_mode = 2
@@ -28,12 +40,13 @@ theme_override_font_sizes/font_size = 18
 
 [node name="Credits" type="Label" parent="VBox"]
 layout_mode = 2
-text = "42 Warrior — Game Jam 42SP\nInspired by Ruby Warrior (Ryan Bates)\nBuilt with Godot 4 + GDScript\nCC0 assets by freesound.org / opengameart.org"
+text = "42 Warrior — Game Jam 42SP\nInspired by Ruby Warrior (Ryan Bates)\nBuilt with Godot 4 + GDScript\nArte e áudio originais"
 horizontal_alignment = 1
 theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
 
 [node name="MenuBtn" type="Button" parent="VBox"]
+script = ExtResource("2_fsbutton")
 layout_mode = 2
 text = "⌂ Menu Principal"
 theme_override_font_sizes/font_size = 20

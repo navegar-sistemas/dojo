@@ -1,0 +1,90 @@
+class_name TestTelaTransicao016
+extends GutTest
+## T-167 (016) — PROVA DE RENDER DE CENA: tela de TRANSIÇÃO fiel ao mockup.
+## Instancia level_transition.tscn + renderiza >=1 frame + assere elementos-chave:
+## Title do andar, Description, Abilities badge, StartBtn.
+
+const _SCENE := "res://scenes/level_transition.tscn"
+
+
+func test_level_transition_instancia_sem_crash() -> void:
+	var packed := load(_SCENE) as PackedScene
+	assert_not_null(packed, "level_transition.tscn deve existir e ser carregável")
+	var root := packed.instantiate()
+	add_child_autoqfree(root)
+	await get_tree().process_frame
+	assert_not_null(root, "level_transition.tscn deve instanciar sem crash")
+
+
+func test_title_label_presente() -> void:
+	var root := _load_scene()
+	await get_tree().process_frame
+	var title := root.find_child("Title", true, false)
+	assert_not_null(title, "Label Title (segmento/andar) deve existir em level_transition.tscn")
+
+
+func test_description_label_presente() -> void:
+	var root := _load_scene()
+	await get_tree().process_frame
+	var lbl := root.find_child("Description", true, false)
+	assert_not_null(lbl, "Label Description deve existir em level_transition.tscn")
+
+
+func test_abilities_label_presente() -> void:
+	var root := _load_scene()
+	await get_tree().process_frame
+	var lbl := root.find_child("Abilities", true, false)
+	assert_not_null(
+		lbl, "Label Abilities (badge nova habilidade) deve existir em level_transition.tscn"
+	)
+
+
+func test_start_btn_presente() -> void:
+	var root := _load_scene()
+	await get_tree().process_frame
+	var btn := root.find_child("StartBtn", true, false)
+	assert_not_null(btn, "StartBtn (Iniciar Nível / > ENTER) deve existir em level_transition.tscn")
+
+
+func test_sem_tower_flow_nao_crasha() -> void:
+	# TowerFlow ausente no contexto de teste — _ready() deve ser tolerante
+	var root := _load_scene()
+	await get_tree().process_frame
+	assert_not_null(root, "level_transition deve renderizar sem crash mesmo sem TowerFlow")
+
+
+func test_fundo_void_presente() -> void:
+	var root := _load_scene()
+	await get_tree().process_frame
+	var bg := root.find_child("VoidBackground", true, false)
+	assert_not_null(bg, "VoidBackground (fundo void) deve existir em level_transition.tscn")
+
+
+func test_start_btn_e_four_state_button() -> void:
+	var root := _load_scene()
+	await get_tree().process_frame
+	var btn := root.find_child("StartBtn", true, false)
+	assert_not_null(btn, "StartBtn deve existir")
+	assert_true(
+		btn is FourStateButton, "StartBtn deve ser FourStateButton (T-162) — nao Button base"
+	)
+
+
+func test_theme_fonte_real_aplicada() -> void:
+	var root := _load_scene()
+	await get_tree().process_frame
+	var title := root.find_child("Title", true, false) as Label
+	assert_not_null(title, "Title Label deve existir")
+	var font := title.get_theme_font("font", "Label")
+	assert_not_null(font, "Label deve ter fonte do Theme aplicada (nao null)")
+	assert_true(
+		font.resource_path.length() > 0,
+		"fonte deve ser real do GlobalDesignSystem (resource_path nao vazio — nao default Godot)"
+	)
+
+
+func _load_scene() -> Node:
+	var packed := load(_SCENE) as PackedScene
+	var root := packed.instantiate()
+	add_child_autoqfree(root)
+	return root

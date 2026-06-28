@@ -1,11 +1,16 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://src/presentation/level_result_screen.gd" id="1_result"]
+[ext_resource type="Script" path="res://src/presentation/four_state_button.gd" id="2_fsbutton"]
 
 [node name="LevelResult" type="PanelContainer"]
 script = ExtResource("1_result")
 anchor_right = 1.0
 anchor_bottom = 1.0
+
+[node name="VoidBackground" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.039, 0.039, 0.043, 1)
 
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -16,7 +21,6 @@ theme_override_constants/separation = 18
 layout_mode = 2
 horizontal_alignment = 1
 theme_override_font_sizes/font_size = 40
-theme_override_colors/font_color = Color(0.9, 0.8, 0.4, 1)
 
 [node name="ScoreLabel" type="Label" parent="VBox"]
 layout_mode = 2
@@ -27,19 +31,21 @@ theme_override_font_sizes/font_size = 18
 layout_mode = 2
 horizontal_alignment = 1
 theme_override_font_sizes/font_size = 16
-theme_override_colors/font_color = Color(1.0, 0.9, 0.2, 1)
 
 [node name="NextBtn" type="Button" parent="VBox"]
+script = ExtResource("2_fsbutton")
 layout_mode = 2
 text = "▶ Próximo Nível"
 theme_override_font_sizes/font_size = 20
 
 [node name="RetryBtn" type="Button" parent="VBox"]
+script = ExtResource("2_fsbutton")
 layout_mode = 2
 text = "↩ Tentar Novamente"
 theme_override_font_sizes/font_size = 20
 
 [node name="MenuBtn" type="Button" parent="VBox"]
+script = ExtResource("2_fsbutton")
 layout_mode = 2
 text = "⌂ Menu"
 theme_override_font_sizes/font_size = 18
