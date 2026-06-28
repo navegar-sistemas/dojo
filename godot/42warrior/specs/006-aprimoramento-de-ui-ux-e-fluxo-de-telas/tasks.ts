@@ -66,7 +66,7 @@ export const tasks: ITask[] = [
     summary: "Definir o recurso EntityAssetRegistry mapeando entidade→sprite, (entidade, ação)→animação e tiles do corredor por ID/caminho",
     definitionOfDone:
       "EntityAssetRegistry existe como recurso de dados e resolve sprite/animação/tile por ID; busca por caminho de asset hardcoded em scripts de cena retorna 0 ocorrências.",
-    status: "todo",
+    status: "done",
     dependsOn: [],
     parallel: false,
     assignee: null,
@@ -77,7 +77,7 @@ export const tasks: ITask[] = [
     summary: "Fazer a cena (DungeonTileView/EntityAnimator) resolver todo sprite/animação/tile via o EntityAssetRegistry",
     definitionOfDone:
       "Trocar o sprite de uma entidade alterando apenas o registro ou o arquivo referenciado reflete no jogo com 0 edições em scripts .gd de cena (teste de troca via registro).",
-    status: "todo",
+    status: "done",
     dependsOn: ["T-065"],
     parallel: false,
     assignee: null,
@@ -89,7 +89,7 @@ export const tasks: ITask[] = [
     summary: "Obter da internet e registrar sprites coesos (inspirados no Ruby Warrior) das 7 entidades: warrior, sludge, thick sludge, archer, wizard, captive, escada",
     definitionOfDone:
       "As 7 entidades têm sprite definido no EntityAssetRegistry, com arquivos de arte presentes no projeto; nenhuma entidade fica sem sprite no registro.",
-    status: "todo",
+    status: "done",
     dependsOn: ["T-065"],
     parallel: false,
     assignee: null,
@@ -100,7 +100,7 @@ export const tasks: ITask[] = [
     summary: "Renderizar cada entidade por Sprite2D resolvido do registro, substituindo qualquer render por forma geométrica procedural",
     definitionOfDone:
       "Em execução, cada uma das 7 entidades aparece com seu sprite do registro e há 0 desenho procedural de entidade por _draw (inspeção visual + grep).",
-    status: "todo",
+    status: "done",
     dependsOn: ["T-067"],
     parallel: false,
     assignee: null,
@@ -112,7 +112,7 @@ export const tasks: ITask[] = [
     summary: "Renderizar o corredor com tiles de masmorra (chão/parede/fundo) do registro em TileMap dimensionado pelo width do LevelState",
     definitionOfDone:
       "O corredor usa tiles do registro e reflete o width do LevelState; busca por render procedural por _draw do corredor retorna 0 ocorrências (inspeção visual + grep).",
-    status: "todo",
+    status: "done",
     dependsOn: ["T-065"],
     parallel: true,
     assignee: null,
@@ -124,7 +124,7 @@ export const tasks: ITask[] = [
     summary: "Mapear cada TurnEvent (attacked/rested/pivoted/moved/took_damage/rescued/shot/died) para sua animação no EntityAnimator e dispará-la na sprite da entidade afetada",
     definitionOfDone:
       "Cada tipo de TurnEvent aciona a animação correspondente na sprite certa, com ataque, cura e defesa entre elas (teste/inspeção por tipo de evento).",
-    status: "todo",
+    status: "done",
     dependsOn: ["T-067"],
     parallel: false,
     assignee: null,
@@ -135,9 +135,56 @@ export const tasks: ITask[] = [
     summary: "Garantir que os scripts de cena consomem o estado só via a camada Application, sem importar classes de src/domain",
     definitionOfDone:
       "Busca por load/preload/new de classes de src/domain em scripts de cena retorna 0 ocorrências; a cena consome o TurnResult via a camada Application.",
-    status: "todo",
+    status: "done",
     dependsOn: [],
     parallel: true,
+    assignee: null,
+  },
+  // ── US-066 — Editor como overlay toggleável (RF-063) ─────────────────────────────
+  {
+    key: "T-072",
+    storyKey: "US-066",
+    summary: "Adicionar botão toggle no HUD para abrir/fechar o painel de código como overlay sobre a arena",
+    definitionOfDone:
+      "HUD exibe botão '</> Código'; ao pressionar, CodeEditorPanel alterna visibilidade sem trocar de tela; arena permanece visível ao fundo.",
+    status: "done",
+    dependsOn: [],
+    parallel: false,
+    assignee: null,
+  },
+  {
+    key: "T-073",
+    storyKey: "US-066",
+    summary: "Preservar texto do editor ao fechar e reabrir o overlay",
+    definitionOfDone:
+      "Fechar e reabrir o painel de código mantém intacto o texto digitado no CodeEdit (não reinicia nem apaga o conteúdo).",
+    status: "done",
+    dependsOn: ["T-072"],
+    parallel: false,
+    assignee: null,
+  },
+  // ── US-067 — Controles de reprodução e console de eventos (RF-064) ───────────────
+  {
+    key: "T-074",
+    storyKey: "US-067",
+    summary: "Verificar que play/pause/passo-a-passo/velocidade e listagem de turn_events já estão funcionais",
+    definitionOfDone:
+      "ExecutionControls (play/pause, step, speed slider) e TurnConsole (lista eventos por turno em ordem) funcionam conforme RF-064; verificado por inspeção de código e teste manual.",
+    status: "done",
+    dependsOn: [],
+    parallel: false,
+    assignee: null,
+  },
+  // ── US-068 — Theme consistente em todas as telas (RNF-063) ───────────────────────
+  {
+    key: "T-075",
+    storyKey: "US-068",
+    summary: "Criar Theme.tres e aplicar como tema padrão a todas as 5 telas e ao HUD",
+    definitionOfDone:
+      "Arquivo assets/theme/game_theme.tres existe; todas as 5 cenas (main_menu, game, level_transition, level_result, tower_complete) e o HUD referenciam o tema; 0 cores/fontes hardcoded avulsas fora do tema.",
+    status: "done",
+    dependsOn: [],
+    parallel: false,
     assignee: null,
   },
 ];

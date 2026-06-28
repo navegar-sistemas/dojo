@@ -46,7 +46,7 @@ export const stories: IUserStory[] = [
     requirementKeys: ["RF-068", "RNF-060"],
     priority: "highest",
     storyPoints: 5,
-    status: "todo",
+    status: "done",
     assignee: null,
   },
   {
@@ -61,7 +61,7 @@ export const stories: IUserStory[] = [
     requirementKeys: ["RF-065", "RF-069"],
     priority: "highest",
     storyPoints: 5,
-    status: "todo",
+    status: "done",
     assignee: null,
   },
   {
@@ -75,7 +75,7 @@ export const stories: IUserStory[] = [
     requirementKeys: ["RF-066"],
     priority: "high",
     storyPoints: 3,
-    status: "todo",
+    status: "done",
     assignee: null,
   },
   {
@@ -90,7 +90,7 @@ export const stories: IUserStory[] = [
     requirementKeys: ["RF-067", "RNF-061"],
     priority: "highest",
     storyPoints: 5,
-    status: "todo",
+    status: "done",
     assignee: null,
   },
   // ── Bloco 3 — Imersão / polish (editor retrátil, console, Theme) ─────────────────
@@ -105,7 +105,7 @@ export const stories: IUserStory[] = [
     requirementKeys: ["RF-063"],
     priority: "high",
     storyPoints: 3,
-    status: "todo",
+    status: "done",
     assignee: null,
   },
   {
@@ -119,7 +119,7 @@ export const stories: IUserStory[] = [
     requirementKeys: ["RF-064"],
     priority: "high",
     storyPoints: 5,
-    status: "todo",
+    status: "done",
     assignee: null,
   },
   {
@@ -133,7 +133,7 @@ export const stories: IUserStory[] = [
     requirementKeys: ["RNF-063"],
     priority: "medium",
     storyPoints: 3,
-    status: "todo",
+    status: "done",
     assignee: null,
   },
 ];

@@ -26,6 +26,6 @@ export const feature: IFeature = {
     "Assets gráficos livres da internet — jogo não-comercial, licença não importa (CLR-005).",
     "Apresentação data-driven (registro de assets/animações) para troca e evolução fáceis (CLR-001).",
   ],
-  phase: "implementing",
+  phase: "done",
   createdAt: "2026-06-28",
 };
