@@ -87,13 +87,3 @@ func glitch_active() -> bool:
 ## true se a janela de glitch abrirá no próximo turno (antecipação ≥1 turno, T-191).
 func glitch_next() -> bool:
 	return _glitch_next
-
-
-## Janela de glitch está ativa no turno atual? (GlitchDetection T-191)
-func glitch_active() -> bool:
-	return _glitch_active
-
-
-## Janela de glitch estará ativa no PRÓXIMO turno? (antecipação ≥1 turno, CQS)
-func glitch_next() -> bool:
-	return _glitch_next
