@@ -3,7 +3,9 @@ extends RefCounted
 ## Descreve algo observável que ocorreu durante um turno — consumido pela
 ## pontuação e pela apresentação. Imutável.
 
-enum Kind { MOVED, ATTACKED, DAMAGED, RESTED, RESCUED, SHOT, ENEMY_DEFEATED, WON, DIED }
+enum Kind {
+	MOVED, ATTACKED, DAMAGED, RESTED, RESCUED, SHOT, ENEMY_DEFEATED, WON, DIED, GLITCH_WINDOW
+}
 
 var kind: Kind
 ## Quem originou o evento: "warrior" ou o tipo do inimigo (ex.: "Sludge").
