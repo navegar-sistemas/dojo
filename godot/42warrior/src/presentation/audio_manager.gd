@@ -18,6 +18,7 @@ var _vol_sfx := 1.0
 var _vol_music := 1.0
 var _players: Array = []
 var _music: AudioStreamPlayer
+var _gesture_received: bool = false
 
 
 func _ready() -> void:
@@ -34,6 +35,18 @@ func _ready() -> void:
 	_music.volume_db = linear_to_db(_vol_music)
 	for p: AudioStreamPlayer in _players:
 		p.volume_db = linear_to_db(_vol_sfx)
+	if OS.has_feature("web"):
+		# Browsers block autoplay; defer music until the user's first gesture.
+		set_process_unhandled_input(true)
+	else:
+		play_music()
+
+
+func _unhandled_input(_event: InputEvent) -> void:
+	if not OS.has_feature("web") or _gesture_received:
+		return
+	_gesture_received = true
+	set_process_unhandled_input(false)
 	play_music()
 
 
