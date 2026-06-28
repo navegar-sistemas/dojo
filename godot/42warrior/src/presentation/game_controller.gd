@@ -33,10 +33,11 @@ var _timer: Timer
 
 @onready var _dungeon: DungeonView = $DungeonView
 @onready var _hud: HudView = $HudView
-@onready var _editor: CodeEditorPanel = $DebugLayer/DebugPanel/VBox/CodeEditorPanel
+@onready var _editor: CodeEditorPanel = $DebugLayer/EditorBar/HBox/CodeEditorPanel
 @onready var _console: TurnConsole = $DebugLayer/DebugPanel/VBox/TurnConsole
 @onready var _state_panel: WarriorStatePanel = $DebugLayer/DebugPanel/VBox/WarriorStatePanel
-@onready var _controls: ExecutionControls = $DebugLayer/DebugPanel/VBox/ExecutionControls
+@onready var _controls: ExecutionControls = $DebugLayer/EditorBar/HBox/ExecutionControls
+@onready var _debug_panel: PanelContainer = $DebugLayer/DebugPanel
 
 
 func _ready() -> void:
@@ -194,7 +195,7 @@ func _on_speed_changed(interval: float) -> void:
 
 
 func _on_toggle_debug(open: bool) -> void:
-	_console.visible = open
+	_debug_panel.visible = open
 
 
 func _unhandled_input(event: InputEvent) -> void:

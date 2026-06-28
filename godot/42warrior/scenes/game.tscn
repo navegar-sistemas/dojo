@@ -89,7 +89,52 @@ theme_override_colors/font_color = Color(0.9, 0.8, 0.4, 1)
 [node name="DebugLayer" type="CanvasLayer" parent="."]
 layer = 2
 
+[node name="EditorBar" type="PanelContainer" parent="DebugLayer"]
+anchor_left = 0.0
+anchor_top = 0.60
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBox" type="HBoxContainer" parent="DebugLayer/EditorBar"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="CodeEditorPanel" parent="DebugLayer/EditorBar/HBox" instance=ExtResource("5_panel")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ExecutionControls" type="PanelContainer" parent="DebugLayer/EditorBar/HBox"]
+script = ExtResource("9_controls")
+layout_mode = 2
+custom_minimum_size = Vector2(220, 0)
+
+[node name="HBox" type="HBoxContainer" parent="DebugLayer/EditorBar/HBox/ExecutionControls"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="PlayBtn" type="Button" parent="DebugLayer/EditorBar/HBox/ExecutionControls/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "▶ Retomar"
+theme_override_font_sizes/font_size = 11
+
+[node name="StepBtn" type="Button" parent="DebugLayer/EditorBar/HBox/ExecutionControls/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "⏭ Passo"
+theme_override_font_sizes/font_size = 11
+
+[node name="SpeedSlider" type="HSlider" parent="DebugLayer/EditorBar/HBox/ExecutionControls/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.1
+max_value = 2.0
+value = 0.45
+
 [node name="DebugPanel" type="PanelContainer" parent="DebugLayer"]
+visible = false
 anchor_left = 0.0
 anchor_top = 0.60
 anchor_right = 1.0
@@ -141,12 +186,7 @@ layout_mode = 2
 text = "Inimigos: —"
 theme_override_font_sizes/font_size = 11
 
-[node name="CodeEditorPanel" parent="DebugLayer/DebugPanel/VBox" instance=ExtResource("5_panel")]
-layout_mode = 2
-size_flags_horizontal = 3
-
 [node name="TurnConsole" type="ScrollContainer" parent="DebugLayer/DebugPanel/VBox"]
-visible = false
 script = ExtResource("8_console")
 layout_mode = 2
 size_flags_horizontal = 3
@@ -154,31 +194,3 @@ size_flags_horizontal = 3
 [node name="List" type="VBoxContainer" parent="DebugLayer/DebugPanel/VBox/TurnConsole"]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="ExecutionControls" type="PanelContainer" parent="DebugLayer/DebugPanel/VBox"]
-script = ExtResource("9_controls")
-layout_mode = 2
-custom_minimum_size = Vector2(220, 0)
-
-[node name="HBox" type="HBoxContainer" parent="DebugLayer/DebugPanel/VBox/ExecutionControls"]
-layout_mode = 2
-theme_override_constants/separation = 4
-
-[node name="PlayBtn" type="Button" parent="DebugLayer/DebugPanel/VBox/ExecutionControls/HBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "▶ Retomar"
-theme_override_font_sizes/font_size = 11
-
-[node name="StepBtn" type="Button" parent="DebugLayer/DebugPanel/VBox/ExecutionControls/HBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "⏭ Passo"
-theme_override_font_sizes/font_size = 11
-
-[node name="SpeedSlider" type="HSlider" parent="DebugLayer/DebugPanel/VBox/ExecutionControls/HBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-min_value = 0.1
-max_value = 2.0
-value = 0.45
