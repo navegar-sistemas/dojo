@@ -5,7 +5,7 @@ export const sprints: ISprint[] = [
     id: 1,
     name: "P0 — Domínio 2D (mundo, direções, sentidos)",
     goal: "Núcleo do domínio operando em 2D: LevelState unificado (R×C, 1×N=R=1), 4 direções absolutas com pivot, e sentidos/passo 2D — determinístico e engine-independente.",
-    state: "active",
+    state: "closed",
     startDate: "",
     endDate: "",
     storyKeys: ["US-180", "US-181", "US-182"],

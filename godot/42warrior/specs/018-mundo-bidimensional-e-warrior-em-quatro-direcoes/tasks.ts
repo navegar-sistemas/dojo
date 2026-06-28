@@ -35,7 +35,7 @@ export const tasks: ITask[] = [
       "Adaptar Space e os sentidos (feel/look/direction_of/direction_of_stairs) e o cálculo de passo (step_of/position_toward) para operar em coordenadas 2D, sem efeito colateral (sentidos não consomem turno).",
     definitionOfDone:
       "Testes verdes dos sentidos 2D (feel/look inspecionam a célula na direção; direction_of/_stairs apontam o alvo 2D) e do passo por direção; asserção de que sentidos não alteram estado/turno.",
-    status: "todo",
+    status: "done",
     dependsOn: ["T-180", "T-181"],
     parallel: false,
     assignee: null,

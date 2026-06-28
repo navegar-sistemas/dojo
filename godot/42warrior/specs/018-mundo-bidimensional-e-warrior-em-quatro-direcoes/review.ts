@@ -33,6 +33,19 @@ const CHECKS_T180: IReviewCheckOutcome[] = [
   },
 ];
 
+const CHECKS_T182: IReviewCheckOutcome[] = [
+  {
+    name: "Sentidos 2D (feel_2d/look_2d/direction_of_2d por eixo dominante |Δrow|≥|Δcol|→N/S senão E/W + direction_of_stairs_2d + step_of_2d/position_toward_2d) expostos ao código do jogador (WarriorFacade); domínio puro (RefCounted), 0-RNG, CQS; API 1D INTACTA → 0-regressão por construção; merge-tree limpo",
+    command: "git merge-tree (verificação do tech-lead) + arch_guard",
+    passed: true,
+  },
+  {
+    name: "Testes GUT — 338/338 na main pós-merge (test_018_space_sentidos_2d: 21 testes feel/look/direction/step/CQS + diretos em Senses); teste POR DIREÇÃO ✓, 0-regressão 001-016 ✓",
+    command: "bash scripts/check.sh",
+    passed: true,
+  },
+];
+
 export const reviews: IReviewRecord[] = [
   {
     target: "code",
@@ -50,6 +63,16 @@ export const reviews: IReviewRecord[] = [
     phase: null,
     status: "approved",
     checks: CHECKS_T181,
+    findings: [],
+    reviewer: "usuario",
+    reviewedAt: "2026-06-28",
+  },
+  {
+    target: "code",
+    taskKey: "T-182",
+    phase: null,
+    status: "approved",
+    checks: CHECKS_T182,
     findings: [],
     reviewer: "usuario",
     reviewedAt: "2026-06-28",
