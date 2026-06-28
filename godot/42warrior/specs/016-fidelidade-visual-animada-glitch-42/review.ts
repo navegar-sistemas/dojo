@@ -154,4 +154,100 @@ export const reviews: IReviewRecord[] = [
     reviewer: "usuario",
     reviewedAt: "2026-06-28",
   },
+  {
+    target: "code",
+    taskKey: "T-166",
+    phase: null,
+    status: "approved",
+    checks: [
+      {
+        name: "Tela Resultado (vitória/derrota) count-level: Next/Retry/Menu btn is FourStateButton + get_theme_font('font','Label').resource_path>0 (fonte REAL). FIX DE PRODUÇÃO confirmado: level_result_screen.gd chama GlobalDesignSystem.build_theme() (pegou o gap da fonte default). Integrado na main (merge 5a4308a), 399/399",
+        command: "bash scripts/check.sh",
+        passed: true,
+      },
+    ],
+    findings: [],
+    reviewer: "usuario",
+    reviewedAt: "2026-06-28",
+  },
+  {
+    target: "code",
+    taskKey: "T-167",
+    phase: null,
+    status: "approved",
+    checks: [
+      {
+        name: "Tela Transição count-level: StartBtn is FourStateButton + fonte real (get_theme_font resource_path>0); FIX DE PRODUÇÃO level_transition_screen.gd build_theme(). Integrado 5a4308a, 399/399",
+        command: "bash scripts/check.sh",
+        passed: true,
+      },
+    ],
+    findings: [],
+    reviewer: "usuario",
+    reviewedAt: "2026-06-28",
+  },
+  {
+    target: "code",
+    taskKey: "T-168",
+    phase: null,
+    status: "approved",
+    checks: [
+      {
+        name: "Tela Sandbox count-level: floor_layer.get_used_cells().size()>0 (tiles desenhados) + TooltipList get_child_count()>=2 + badge SANDBOX por texto + VoidBackground/Entities. Integrado 5a4308a, 399/399",
+        command: "bash scripts/check.sh",
+        passed: true,
+      },
+    ],
+    findings: [],
+    reviewer: "usuario",
+    reviewedAt: "2026-06-28",
+  },
+  {
+    target: "code",
+    taskKey: "T-169",
+    phase: null,
+    status: "approved",
+    checks: [
+      {
+        name: "Tela Glossário count-level: list.get_child_count()>0 + score_terms>=7 (conteúdo real, lista não-vazia). Integrado 5a4308a, 399/399",
+        command: "bash scripts/check.sh",
+        passed: true,
+      },
+    ],
+    findings: [],
+    reviewer: "usuario",
+    reviewedAt: "2026-06-28",
+  },
+  {
+    target: "code",
+    taskKey: "T-170",
+    phase: null,
+    status: "approved",
+    checks: [
+      {
+        name: "Tela Referência da API count-level: get_child_count()==_SENTIDOS/_ACOES.size() (uma entrada por item, conteúdo real). Integrado 5a4308a, 399/399",
+        command: "bash scripts/check.sh",
+        passed: true,
+      },
+    ],
+    findings: [],
+    reviewer: "usuario",
+    reviewedAt: "2026-06-28",
+  },
+  {
+    target: "code",
+    taskKey: "T-171",
+    phase: null,
+    status: "approved",
+    checks: [
+      {
+        name: "Tela Conclusão/Créditos count-level: 'SYSTEM RESTORED' + 'exit 0' no texto + assert_false freesound/opengameart (CORREÇÃO FACTUAL must-fix PROVADA: CC0 falso removido, mantém Inspired/Godot). Integrado 5a4308a, 399/399",
+        command: "bash scripts/check.sh",
+        passed: true,
+      },
+    ],
+    findings: [],
+    reviewer: "usuario",
+    reviewedAt: "2026-06-28",
+  },
 ];

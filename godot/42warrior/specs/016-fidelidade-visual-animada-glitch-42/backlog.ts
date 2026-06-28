@@ -125,7 +125,7 @@ export const stories: IUserStory[] = [
     requirementKeys: ["RF-164", "RF-165", "RF-163", "RNF-160"],
     priority: "medium",
     storyPoints: 3,
-    status: "todo",
+    status: "done",
     assignee: null,
   },
   {
@@ -139,7 +139,7 @@ export const stories: IUserStory[] = [
     requirementKeys: ["RF-164", "RF-163", "RNF-160"],
     priority: "medium",
     storyPoints: 3,
-    status: "todo",
+    status: "done",
     assignee: null,
   },
   {
@@ -153,7 +153,7 @@ export const stories: IUserStory[] = [
     requirementKeys: ["RF-164", "RF-163", "RNF-160"],
     priority: "medium",
     storyPoints: 5,
-    status: "todo",
+    status: "done",
     assignee: null,
   },
   {
@@ -167,7 +167,7 @@ export const stories: IUserStory[] = [
     requirementKeys: ["RF-164", "RF-163", "RNF-160"],
     priority: "medium",
     storyPoints: 2,
-    status: "todo",
+    status: "done",
     assignee: null,
   },
   {
@@ -181,7 +181,7 @@ export const stories: IUserStory[] = [
     requirementKeys: ["RF-164", "RF-163", "RNF-160"],
     priority: "medium",
     storyPoints: 3,
-    status: "todo",
+    status: "done",
     assignee: null,
   },
   {
@@ -197,6 +197,23 @@ export const stories: IUserStory[] = [
     requirementKeys: ["RF-164", "RF-165", "RF-163", "RNF-160"],
     priority: "medium",
     storyPoints: 2,
+    status: "done",
+    assignee: null,
+  },
+  // ── EXTENSÃO DE ANIMAÇÃO (delta-A v2): rescue + captive ──
+  {
+    key: "US-173",
+    asA: "Jogador",
+    iWant: "ver o herói executando o resgate (hero_rescue) e o cativo animado (idle + sendo resgatado)",
+    soThat: "o momento de resgate ganhe vida fiel ao pack v2, não um sprite estático",
+    acceptanceCriteria: [
+      "Dado um turno de resgate (rescue!), quando o turn_event ocorre, então o AnimatedSprite2D do herói toca hero_rescue (6 frames 48x48 do manifest), pelo mesmo registro data-driven.",
+      "Dado a entidade cativo na arena, quando renderizada, então toca captive_idle (4 frames) parado e captive_rescue (5 frames) ao ser resgatada, ancorada pelos pés na célula de 32px.",
+      "Dado as 3 novas entradas, quando a arte/manifest mudar, então é só trocar arquivo/entrada do manifest (data-driven, RF-163), sem nova lógica de cena.",
+    ],
+    requirementKeys: ["RF-160", "RF-163", "RNF-160"],
+    priority: "medium",
+    storyPoints: 3,
     status: "todo",
     assignee: null,
   },

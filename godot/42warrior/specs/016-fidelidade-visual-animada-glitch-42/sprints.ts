@@ -26,9 +26,19 @@ export const sprints: ISprint[] = [
     name: "Telas P1 (secundárias)",
     goal:
       "As telas secundárias, fiéis aos mockups: US-166 (resultado), US-167 (transição), US-168 (sandbox/tutorial), US-169 (glossário), US-170 (referência da API), US-171 (conclusão/créditos). Paralelizáveis por tela. DoD por tela = prova de render de cena.",
-    state: "active",
+    state: "closed",
     startDate: "",
     endDate: "",
     storyKeys: ["US-166", "US-167", "US-168", "US-169", "US-170", "US-171"],
+  },
+  {
+    id: 4,
+    name: "Extensão de animação — rescue + captive (delta-A v2)",
+    goal:
+      "Estender o registro de animação (de US-160/T-160, já done) para hero_rescue + captive (idle/rescue), do pack v2 do Matheus: US-173. Aditivo, data-driven, render-proof count-level. Prioridade MÉDIA (sequenciado pelo PO após o trabalho visível).",
+    state: "future",
+    startDate: "",
+    endDate: "",
+    storyKeys: ["US-173"],
   },
 ];

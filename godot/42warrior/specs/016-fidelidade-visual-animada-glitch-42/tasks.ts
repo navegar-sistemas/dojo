@@ -88,7 +88,7 @@ export const tasks: ITask[] = [
     summary: "Tela Resultado de nível (vitória E derrota/SIGKILL) fiel ao mockup.",
     definitionOfDone:
       "VITÓRIA: `>> RUN COMPLETE`, exit 0 em VERDE #00FF66, grade (S/A/…) grande + estrelas (ui_star), stats alinhados (SCORE/TIME BONUS/TURNS/ACE), botões PRÓXIMO/REPLAY (T-162). DERROTA: SIGKILL em RUBI #FF003C + efeito de morte (glitch/datamosh + screen-shake mínimo) + re-exec/retry. Tipografia/cores via Theme (F4), sem amarelo. DoD = PROVA DE RENDER (renderiza ≥1 frame, assere os elementos-chave de cada estado) + suíte verde, 0 regressão.",
-    status: "todo",
+    status: "done",
     dependsOn: ["T-162"],
     parallel: true,
     assignee: null,
@@ -99,7 +99,7 @@ export const tasks: ITask[] = [
     summary: "Tela Transição de nível fiel ao mockup (card com glitch).",
     definitionOfDone:
       "Transição: card central `/sys/memory/segment_NN`, ANDAR NN com RGB split, descrição curta, badge de nova habilidade, prompt `> ENTER` (entra/sai com glitch, reusa FX da 015). Tipografia via Theme. DoD = PROVA DE RENDER (renderiza ≥1 frame, assere elementos-chave) + suíte verde, 0 regressão.",
-    status: "todo",
+    status: "done",
     dependsOn: [],
     parallel: true,
     assignee: null,
@@ -110,7 +110,7 @@ export const tasks: ITask[] = [
     summary: "Tela Sandbox/Tutorial fiel ao mockup (grade limpa).",
     definitionOfDone:
       "Sandbox/tutorial: grade LIMPA (sem corrupção) com herói + portal (reusa T-160/T-161), tooltips passo a passo, badge MODO SANDBOX. Tipografia via Theme. DoD = PROVA DE RENDER (renderiza ≥1 frame, assere a grade limpa + tooltips) + suíte verde, 0 regressão.",
-    status: "todo",
+    status: "done",
     dependsOn: ["T-160", "T-161"],
     parallel: true,
     assignee: null,
@@ -121,7 +121,7 @@ export const tasks: ITask[] = [
     summary: "Tela Glossário fiel ao mockup.",
     definitionOfDone:
       "Glossário: lista de termos (cadete, cativo, ace, turno, andar, corrupção, daemon) + definição, fiel ao mockup. Tipografia via Theme. DoD = PROVA DE RENDER (renderiza ≥1 frame, assere a lista) + suíte verde, 0 regressão.",
-    status: "todo",
+    status: "done",
     dependsOn: [],
     parallel: true,
     assignee: null,
@@ -132,7 +132,7 @@ export const tasks: ITask[] = [
     summary: "Tela Referência da API fiel ao mockup (man-page).",
     definitionOfDone:
       "Referência da API: painel man-page com SENTIDOS (feel/look/health/listen/direction_of_stairs) e AÇÕES (walk!/attack!/rest!/rescue!/pivot!/shoot!) e direção :forward/:backward, fiel ao mockup. Tipografia via Theme. DoD = PROVA DE RENDER (renderiza ≥1 frame, assere as seções) + suíte verde, 0 regressão.",
-    status: "todo",
+    status: "done",
     dependsOn: [],
     parallel: true,
     assignee: null,
@@ -143,8 +143,21 @@ export const tasks: ITask[] = [
     summary: "Tela Conclusão/Créditos fiel ao mockup + CORREÇÃO FACTUAL dos créditos (must-fix).",
     definitionOfDone:
       "Conclusão: terminal `SYSTEM RESTORED` / `exit 0` (verde) com créditos rolando, fiel ao mockup, tipografia via Theme. CORREÇÃO FACTUAL (ALTA prioridade): REMOVER a linha falsa 'CC0 assets by freesound.org / opengameart.org' (arte e áudio são ORIGINAIS) → 'Arte e áudio originais'; MANTER 'Inspired by Ruby Warrior (Ryan Bates)' + 'Built with Godot 4 + GDScript'. DoD = PROVA DE RENDER (renderiza ≥1 frame, assere o terminal + créditos SEM a linha freesound/opengameart) + suíte verde, 0 regressão.",
-    status: "todo",
+    status: "done",
     dependsOn: [],
+    parallel: true,
+    assignee: null,
+  },
+  // ── EXTENSÃO DE ANIMAÇÃO (delta-A v2): rescue + captive ──
+  {
+    key: "T-173",
+    storyKey: "US-173",
+    summary:
+      "Estender o AnimatedEntityRegistry (de T-160) p/ hero_rescue + captive (idle/rescue): adicionar as 3 entradas ao manifest runtime (hero_rescue 6f, captive_idle 4f, captive_rescue 5f — sheets já na main em assets/v1/anim) + acionar pelo turn_event de resgate. NÃO reabre T-160 (done); é extensão aditiva.",
+    definitionOfDone:
+      "Manifest com as 3 entradas; o registro carrega hero_rescue + captive idle/rescue; render-proof COUNT-LEVEL (instanciar+renderizar+asserir o AnimatedSprite2D de hero_rescue e de captive idle/rescue posicionado/ativo, sem pending); rescue! aciona hero_rescue; check.sh verde, 0 regressão.",
+    status: "todo",
+    dependsOn: ["T-160"],
     parallel: true,
     assignee: null,
   },
