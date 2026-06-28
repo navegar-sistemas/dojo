@@ -7,6 +7,7 @@ var _unit: Unit
 var _is_stairs: bool
 var _is_wall: bool
 var _position: int
+var _position_2d: Vector2i = Vector2i(-1, -1)
 
 
 func _init(unit: Unit, is_stairs: bool, is_wall: bool, position: int) -> void:
@@ -24,9 +25,26 @@ static func of(unit: Unit, is_stairs: bool, position: int) -> Space:
 	return Space.new(unit, is_stairs, false, position)
 
 
-## Posição desta casa na grade — usada por direction_of(space).
+static func wall_2d(pos: Vector2i) -> Space:
+	var s := Space.new(null, false, true, -1)
+	s._position_2d = pos
+	return s
+
+
+static func of_2d(unit: Unit, is_stairs: bool, pos: Vector2i) -> Space:
+	var s := Space.new(unit, is_stairs, false, -1)
+	s._position_2d = pos
+	return s
+
+
+## Posição desta casa na grade 1D — usada por direction_of(space).
 func position() -> int:
 	return _position
+
+
+## Posição desta casa na grade 2D.
+func position_2d() -> Vector2i:
+	return _position_2d
 
 
 func is_wall() -> bool:

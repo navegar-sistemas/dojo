@@ -132,24 +132,35 @@ func space_at(position: int) -> Space:
 
 
 ## Consulta espacial 2D: retorna parede se pos estiver fora de [0,rows-1]×[0,cols-1].
+## O Space retornado carrega a posição 2D em position_2d() (para direction_of_2d).
 func space_at_2d(pos: Vector2i) -> Space:
 	var r := rows()
 	var c := cols()
 	if pos.x < 0 or pos.x >= r or pos.y < 0 or pos.y >= c:
-		return Space.wall(0)
+		return Space.wall_2d(pos)
 	var unit: Unit = _units_2d.get(pos, null)
 	var is_stairs: bool = pos == stairs_position_2d()
-	return Space.of(unit, is_stairs, 0)
+	return Space.of_2d(unit, is_stairs, pos)
 
 
-## Passo absoluto na grade para uma direção relativa ao warrior.
+## Passo absoluto na grade para uma direção relativa ao warrior (1D).
 func step_of(direction: Direction) -> int:
 	return _warrior_facing * direction.relative_sign()
 
 
-## Posição a `distance` passos do warrior na direção dada.
+## Posição a `distance` passos do warrior na direção dada (1D).
 func position_toward(direction: Direction, distance: int) -> int:
 	return _warrior_position + step_of(direction) * distance
+
+
+## Delta Vector2i para uma direção absoluta cardeal (2D).
+func step_of_2d(direction: Direction) -> Vector2i:
+	return direction.delta()
+
+
+## Posição 2D a `distance` passos do warrior na direção absoluta dada.
+func position_toward_2d(direction: Direction, distance: int) -> Vector2i:
+	return warrior_position_2d() + direction.delta() * distance
 
 
 # ── Construtores derivados (imutáveis) ───────────────────────────────────────
