@@ -143,6 +143,44 @@ func test_position_toward_2d_um_passo_north() -> void:
 	assert_eq(_state_3x5(Vector2i(2, 2)).position_toward_2d(Direction.north(), 1), Vector2i(1, 2))
 
 
+# ── direction_of_2d: casos edge (zero-delta, diagonal tie-break, S/W via feel) ──
+
+
+func test_direction_of_2d_zero_delta_retorna_north() -> void:
+	# warrior NA escada → delta = ZERO → NORTH por convenção
+	var state := LevelState.from_2d(3, 5, Vector2i(1, 2), Warrior.new(), Vector2i(1, 2), 1, {}, 0)
+	var facade := WarriorFacade.new(state)
+	assert_true(facade.direction_of_stairs_2d().equals(Direction.north()))
+
+
+func test_direction_of_2d_diagonal_tie_sul() -> void:
+	# warrior (0,0), escada (2,2): |Δrow|==|Δcol|==2, tie → N/S, Δrow>0 → SOUTH
+	var state := LevelState.from_2d(3, 5, Vector2i(2, 2), Warrior.new(), Vector2i(0, 0), 1, {}, 0)
+	assert_true(WarriorFacade.new(state).direction_of_stairs_2d().equals(Direction.south()))
+
+
+func test_direction_of_2d_diagonal_tie_norte() -> void:
+	# warrior (2,0), escada (0,2): |Δrow|==|Δcol|==2, tie → N/S, Δrow<0 → NORTH
+	var state := LevelState.from_2d(3, 5, Vector2i(0, 2), Warrior.new(), Vector2i(2, 0), 1, {}, 0)
+	assert_true(WarriorFacade.new(state).direction_of_stairs_2d().equals(Direction.north()))
+
+
+func test_direction_of_2d_via_feel_south() -> void:
+	# warrior (0,2); inimigo em (1,2); feel_2d(south) → Space; direction_of_2d → SOUTH
+	var units := {Vector2i(1, 2): Sludge.new()}
+	var facade := _facade(Vector2i(0, 2), units)
+	var space := facade.feel_2d(Direction.south())
+	assert_true(facade.direction_of_2d(space).equals(Direction.south()))
+
+
+func test_direction_of_2d_via_feel_west() -> void:
+	# warrior (1,3); inimigo em (1,2); feel_2d(west) → Space; direction_of_2d → WEST
+	var units := {Vector2i(1, 2): Sludge.new()}
+	var facade := _facade(Vector2i(1, 3), units)
+	var space := facade.feel_2d(Direction.west())
+	assert_true(facade.direction_of_2d(space).equals(Direction.west()))
+
+
 # ── CQS: sentidos não alteram estado nem turno ──────────────────────────────
 
 

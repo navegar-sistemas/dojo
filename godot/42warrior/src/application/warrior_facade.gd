@@ -50,6 +50,10 @@ func direction_of_stairs_2d() -> Direction:
 
 
 func direction_of_2d(space: Space) -> Direction:
+	assert(
+		space.position_2d() != Vector2i(-1, -1),
+		"direction_of_2d requer Space obtido via feel_2d/look_2d (2D), nao feel/look (1D)"
+	)
 	return _senses.direction_of_2d(space.position_2d())
 
 
