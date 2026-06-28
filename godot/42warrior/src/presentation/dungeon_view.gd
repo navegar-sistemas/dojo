@@ -12,7 +12,7 @@ var _pending_state: LevelState
 var _cam_controller: CameraFollowController
 
 @onready var _floor_layer: TileMapLayer = $Floor
-@onready var _entities: AnimatedEntityRegistry = $Entities
+@onready var _entities: EntitySpriteRegistry = $Entities
 @onready var _camera: Camera2D = $Camera
 
 
