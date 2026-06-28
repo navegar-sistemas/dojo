@@ -1,9 +1,7 @@
 extends GutTest
 ## Robustez da fronteira de execução (014): código do jogador com erro de RUNTIME
-## (método inexistente, acesso a null) NÃO crasha o jogo — o turno vira no-op (RF-141).
-## Erro de SINTAXE: coberto por test_player_script_runner.gd (RF-140).
-## Loop/recursão infinita (RF-142): NÃO coberto — sem mecanismo seguro em GDScript
-## single-thread (síncrono trava; Thread crasha com Bus error). Ver doc do runner.
+## (RF-141) ou LOOP INFINITO (RF-142) não crasha nem trava — vira no-op + reporte.
+## Erro de SINTAXE (RF-140): coberto por test_player_script_runner.gd.
 
 
 func _facade() -> WarriorFacade:
@@ -36,3 +34,37 @@ func play_turn(warrior):
 	assert_true(instance != null)
 	var action: Action = runner.play_turn(instance, _facade())
 	assert_null(action, "acesso a null vira no-op sem crash")
+
+
+func test_loop_infinito_e_cortado_sem_travar() -> void:
+	var source := """
+extends RefCounted
+func play_turn(warrior):
+	while true:
+		pass
+"""
+	var runner := PlayerScriptRunner.new()
+	var instance := runner.compile(source)
+	assert_true(instance != null)
+	# Sem a guarda de iteração injetada, esta chamada penduraria a suíte para sempre.
+	var action: Action = runner.play_turn(instance, _facade())
+	assert_null(action, "loop infinito vira no-op")
+	assert_true(runner.has_error(), "o corte do loop é reportado")
+
+
+func test_while_legitimo_termina_e_age_normalmente() -> void:
+	# A instrumentação NÃO pode quebrar um laço legítimo (que termina sozinho).
+	var source := """
+extends RefCounted
+func play_turn(warrior):
+	var passos = 0
+	while passos < 3:
+		passos += 1
+	warrior.walk()
+"""
+	var runner := PlayerScriptRunner.new()
+	var instance := runner.compile(source)
+	assert_true(instance != null)
+	var action: Action = runner.play_turn(instance, _facade())
+	assert_true(action is WalkAction, "o laço termina e a ação seguinte é registrada")
+	assert_false(runner.has_error(), "laço legítimo não dispara o corte")
