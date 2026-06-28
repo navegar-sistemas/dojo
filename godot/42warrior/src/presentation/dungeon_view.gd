@@ -41,18 +41,27 @@ func _on_animations_done() -> void:
 
 
 func _init_camera(state: LevelState) -> void:
-	var level_w := float(state.width() * TILE_SIZE)
+	var level_w := float(state.cols() * TILE_SIZE)
+	var level_h := float(state.rows() * TILE_SIZE)
 	var vp_size := get_viewport_rect().size
-	_cam_controller.initialize(_camera, level_w, vp_size, _entities.warrior_global_position)
+	_cam_controller.initialize(
+		_camera, level_w, vp_size, _entities.warrior_global_position, level_h
+	)
 
 
 func _update_floor(state: LevelState) -> void:
 	_floor_layer.clear()
-	var width := state.width()
-	for col: int in range(width):
-		_floor_layer.set_cell(Vector2i(col, 0), _floor_source_id, ATLAS_COORD)
-	_floor_layer.set_cell(Vector2i(-1, 0), _wall_source_id, ATLAS_COORD)
-	_floor_layer.set_cell(Vector2i(width, 0), _wall_source_id, ATLAS_COORD)
+	var rows := state.rows()
+	var cols := state.cols()
+	for row: int in range(rows):
+		for col: int in range(cols):
+			_floor_layer.set_cell(Vector2i(col, row), _floor_source_id, ATLAS_COORD)
+	for col: int in range(-1, cols + 1):
+		_floor_layer.set_cell(Vector2i(col, -1), _wall_source_id, ATLAS_COORD)
+		_floor_layer.set_cell(Vector2i(col, rows), _wall_source_id, ATLAS_COORD)
+	for row: int in range(rows):
+		_floor_layer.set_cell(Vector2i(-1, row), _wall_source_id, ATLAS_COORD)
+		_floor_layer.set_cell(Vector2i(cols, row), _wall_source_id, ATLAS_COORD)
 
 
 func _setup_tiles() -> void:

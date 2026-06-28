@@ -55,15 +55,33 @@ func _setup_tile_set() -> void:
 
 func _update_cells(state: LevelState) -> void:
 	_floor_layer.clear()
+	if state.rows() > 1:
+		_update_cells_2d(state)
+		return
 	var width := state.width()
-
 	for col: int in range(width):
 		_floor_layer.set_cell(Vector2i(col, 0), _floor_source_id, ATLAS_COORD)
-
 	_floor_layer.set_cell(Vector2i(-1, 0), _wall_source_id, ATLAS_COORD)
 	_floor_layer.set_cell(Vector2i(width, 0), _wall_source_id, ATLAS_COORD)
-
 	_floor_layer.set_cell(Vector2i(state.stairs_position(), 0), _stairs_source_id, ATLAS_COORD)
+
+
+## Grade R×C: itera rows×cols, adiciona paredes ao redor e posiciona a escada.
+## Convenção domínio → TileMap: Vector2i(row, col) → TileMap cell (col, row).
+func _update_cells_2d(state: LevelState) -> void:
+	var r := state.rows()
+	var c := state.cols()
+	for row: int in range(r):
+		for col: int in range(c):
+			_floor_layer.set_cell(Vector2i(col, row), _floor_source_id, ATLAS_COORD)
+	for row: int in range(r):
+		_floor_layer.set_cell(Vector2i(-1, row), _wall_source_id, ATLAS_COORD)
+		_floor_layer.set_cell(Vector2i(c, row), _wall_source_id, ATLAS_COORD)
+	for col: int in range(-1, c + 1):
+		_floor_layer.set_cell(Vector2i(col, -1), _wall_source_id, ATLAS_COORD)
+		_floor_layer.set_cell(Vector2i(col, r), _wall_source_id, ATLAS_COORD)
+	var stairs := state.stairs_position_2d()
+	_floor_layer.set_cell(Vector2i(stairs.y, stairs.x), _stairs_source_id, ATLAS_COORD)
 
 
 func _load_or_color(path: String, fallback: Color) -> Texture2D:
