@@ -18,17 +18,19 @@ func update_from_state(state: LevelState, floor_layer: TileMapLayer) -> void:
 	var active: Dictionary = {}
 
 	var stairs_world := _cell_world(state.stairs_position(), floor_layer)
-	_ensure_sprite("stairs", stairs_world, AssetPaths.STAIRS_SPRITE)
+	_ensure_sprite("stairs", stairs_world, EntityAssetRegistry.sprite_for_type("stairs"))
 	active["stairs"] = true
 
 	for pos: int in state.unit_positions():
 		var key := "unit_%d" % pos
 		var type_name: String = state.unit_at(pos).get_script().get_global_name()
-		_ensure_sprite(key, _cell_world(pos, floor_layer), EntityAssetRegistry.sprite_for_type(type_name))
+		_ensure_sprite(
+			key, _cell_world(pos, floor_layer), EntityAssetRegistry.sprite_for_type(type_name)
+		)
 		active[key] = true
 
 	var warrior_world := _cell_world(state.warrior_position(), floor_layer)
-	_ensure_sprite("warrior", warrior_world, AssetPaths.WARRIOR_SPRITE)
+	_ensure_sprite("warrior", warrior_world, EntityAssetRegistry.sprite_for_type("Warrior"))
 	active["warrior"] = true
 
 	for key: String in _sprites.keys():
