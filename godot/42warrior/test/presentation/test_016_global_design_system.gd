@@ -89,17 +89,23 @@ func test_theme_aplicado_a_control_persiste_apos_1_frame() -> void:
 	)
 
 
-func test_heading_font_carregavel_se_importado() -> void:
+func test_heading_font_carregavel() -> void:
 	var font := GlobalDesignSystem.heading_font()
-	if font == null:
-		pending("PressStart2P não importado — prova de font object pulada (assets ausentes)")
-		return
-	assert_not_null(font, "heading_font() deve retornar FontFile quando importado")
+	assert_not_null(
+		font,
+		"heading_font() deve retornar FontFile — PressStart2P deve estar em design_files/v1/fonts/"
+	)
 
 
-func test_body_font_carregavel_se_importado() -> void:
+func test_body_font_carregavel() -> void:
 	var font := GlobalDesignSystem.body_font()
-	if font == null:
-		pending("JetBrainsMono não importado — prova de font object pulada (assets ausentes)")
-		return
-	assert_not_null(font, "body_font() deve retornar FontFile quando importado")
+	assert_not_null(
+		font,
+		"body_font() deve retornar FontFile — JetBrainsMono deve estar em design_files/v1/fonts/"
+	)
+
+
+func test_build_theme_tem_fonte_aplicada_no_label() -> void:
+	var theme := GlobalDesignSystem.build_theme()
+	var font := theme.get_font("font", "Label")
+	assert_not_null(font, "build_theme() deve aplicar JetBrainsMono como fonte do Label")
