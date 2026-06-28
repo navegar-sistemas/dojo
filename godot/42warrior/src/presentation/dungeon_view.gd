@@ -66,13 +66,13 @@ func _setup_tiles() -> void:
 	tile_set.tile_size = Vector2i(TILE_SIZE, TILE_SIZE)
 
 	var floor_src := TileSetAtlasSource.new()
-	floor_src.texture = _load_or_color(AssetPaths.FLOOR_TILE, Color(0.137, 0.169, 0.212))
+	floor_src.texture = _load_or_color(EntityAssetRegistry.floor_tile(), Color(0.137, 0.169, 0.212))
 	floor_src.texture_region_size = Vector2i(TILE_SIZE, TILE_SIZE)
 	floor_src.create_tile(ATLAS_COORD)
 	_floor_source_id = tile_set.add_source(floor_src)
 
 	var wall_src := TileSetAtlasSource.new()
-	wall_src.texture = _load_or_color(AssetPaths.WALL_TILE, Color(0.227, 0.176, 0.290))
+	wall_src.texture = _load_or_color(EntityAssetRegistry.wall_tile(), Color(0.227, 0.176, 0.290))
 	wall_src.texture_region_size = Vector2i(TILE_SIZE, TILE_SIZE)
 	wall_src.create_tile(ATLAS_COORD)
 	_wall_source_id = tile_set.add_source(wall_src)
