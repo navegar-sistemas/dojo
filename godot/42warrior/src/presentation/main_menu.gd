@@ -1,16 +1,15 @@
 class_name MainMenu
 extends PanelContainer
-## Menu principal: iniciar/continuar, controles de volume música e SFX (DoD T-055).
 
 signal start_requested(level: int)
 
 var _store: ProgressStore
 
-@onready var _start_btn: Button = $VBox/StartBtn
-@onready var _continue_btn: Button = $VBox/ContinueBtn
-@onready var _select_btn: Button = $VBox/SelectLevelsBtn
-@onready var _music_slider: HSlider = $VBox/VolumeBox/MusicSlider
-@onready var _sfx_slider: HSlider = $VBox/VolumeBox/SfxSlider
+@onready var _start_btn: FourStateButton = $VBox/StartBtn
+@onready var _continue_btn: FourStateButton = $VBox/ContinueBtn
+@onready var _select_btn: FourStateButton = $VBox/SelectLevelsBtn
+@onready var _audio_btn: FourStateButton = $VBox/AudioBtn
+@onready var _about_btn: FourStateButton = $VBox/AboutBtn
 
 
 func _ready() -> void:
@@ -18,11 +17,10 @@ func _ready() -> void:
 	_start_btn.pressed.connect(_on_start_pressed)
 	_continue_btn.pressed.connect(_on_continue_pressed)
 	_select_btn.pressed.connect(_on_select_levels_pressed)
+	_audio_btn.pressed.connect(_on_audio_pressed)
+	_about_btn.pressed.connect(_on_about_pressed)
 	_continue_btn.disabled = not _store.has_save()
-	_music_slider.value = _store.vol_music()
-	_sfx_slider.value = _store.vol_sfx()
-	_music_slider.value_changed.connect(_on_music_vol_changed)
-	_sfx_slider.value_changed.connect(_on_sfx_vol_changed)
+	_apply_theme()
 
 
 func _on_start_pressed() -> void:
@@ -48,15 +46,13 @@ func _on_continue_pressed() -> void:
 		start_requested.emit(_store.current_level())
 
 
-func _on_music_vol_changed(value: float) -> void:
-	var audio: Node = get_node_or_null("/root/AudioManager")
-	if audio:
-		audio.set_vol_music(value)
-	_store.save_volume(value, _sfx_slider.value)
+func _on_audio_pressed() -> void:
+	pass
 
 
-func _on_sfx_vol_changed(value: float) -> void:
-	var audio: Node = get_node_or_null("/root/AudioManager")
-	if audio:
-		audio.set_vol_sfx(value)
-	_store.save_volume(_music_slider.value, value)
+func _on_about_pressed() -> void:
+	pass
+
+
+func _apply_theme() -> void:
+	theme = GlobalDesignSystem.build_theme()
