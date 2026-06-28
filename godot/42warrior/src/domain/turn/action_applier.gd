@@ -37,10 +37,22 @@ func _no_op(state: LevelState) -> Dictionary:
 
 func _walk(state: LevelState, direction: Direction) -> Dictionary:
 	var target := state.position_toward(direction, 1)
-	if not state.space_at(target).is_empty():
-		return _no_op(state)
-	var moved := state.with_warrior_position(target)
-	return {"state": moved, "events": [TurnEvent.new(TurnEvent.Kind.MOVED, "warrior", 0, target)]}
+	var space := state.space_at(target)
+	if space.is_empty():
+		var moved := state.with_warrior_position(target)
+		return {
+			"state": moved, "events": [TurnEvent.new(TurnEvent.Kind.MOVED, "warrior", 0, target)]
+		}
+	# GlitchExploits (T-192): no-clip (parede corrompida) e inimigo intangível na janela.
+	if _glitch_active(state) and (space.is_corrupted_wall() or space.is_enemy()):
+		var beyond := state.position_toward(direction, 2)
+		if state.space_at(beyond).is_empty():
+			var moved := state.with_warrior_position(beyond)
+			return {
+				"state": moved,
+				"events": [TurnEvent.new(TurnEvent.Kind.MOVED, "warrior", 0, beyond)]
+			}
+	return _no_op(state)
 
 
 func _attack(state: LevelState, direction: Direction) -> Dictionary:
@@ -49,6 +61,9 @@ func _attack(state: LevelState, direction: Direction) -> Dictionary:
 	if unit == null or unit.is_captive():
 		return _no_op(state)
 	var power := _attack_power(state.warrior().attack_power, direction)
+	# GlitchExploits (T-192): buffer-overflow → dano dobrado na janela de glitch.
+	if _glitch_active(state):
+		power *= 2
 	var wounded := unit.damaged_by(power)
 	var events := [TurnEvent.new(TurnEvent.Kind.ATTACKED, "warrior", power, target)]
 	if wounded.is_alive():
@@ -74,6 +89,9 @@ func _attack_power(base_power: int, direction: Direction) -> int:
 func _rest(state: LevelState) -> Dictionary:
 	var hero := state.warrior()
 	var heal := roundi(hero.max_health * 0.1)
+	# GlitchExploits (T-192): memory-leak → cura dobrada na janela de glitch.
+	if _glitch_active(state):
+		heal *= 2
 	var new_health := mini(hero.max_health, hero.health + heal)
 	var healed := hero.clone_with_health(new_health)
 	var restored := new_health - hero.health
@@ -119,6 +137,11 @@ func _shoot(state: LevelState, direction: Direction) -> Dictionary:
 		)
 	)
 	return {"state": state.with_unit_at(target, null), "events": events}
+
+
+## true se a janela de glitch está ativa no turno atual do estado.
+func _glitch_active(state: LevelState) -> bool:
+	return state.space_at(state.warrior_position()).glitch_active()
 
 
 ## Posição da primeira unidade na linha de tiro (até SHOOT_RANGE), ou -1; para na parede.

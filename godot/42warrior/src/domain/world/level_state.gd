@@ -19,6 +19,8 @@ var _turn: int
 ## Campos de GlitchDetection (T-191). Opcionais: null preserva comportamento legado.
 var _glitch_model: GlitchRuleModel = null
 var _glitch_seed: int = 0
+## Posições de paredes corrompidas — passáveis via no-clip na janela (T-192, GlitchExploits).
+var _corrupted_walls: Dictionary = {}
 
 ## Campos 2D (preenchidos via from_2d(); em LevelStates 1D ficam em -1/null).
 var _rows: int = -1
@@ -169,6 +171,8 @@ func space_at(position: int) -> Space:
 	var s: Space
 	if position < 0 or position >= _width:
 		s = Space.wall(position)
+	elif _corrupted_walls.has(position):
+		s = Space.corrupted_wall(position)
 	else:
 		s = Space.of(_units.get(position, null), position == _stairs_position, position)
 	_apply_glitch(s)
@@ -324,6 +328,25 @@ func with_glitch_model(model: GlitchRuleModel, seed: int) -> LevelState:
 		)
 	result._glitch_model = model
 	result._glitch_seed = seed
+	return result
+
+
+## Retorna novo estado com posições de paredes corrompidas (no-clip seedado, T-192).
+## Preserva glitch_model/seed e tipo de estado (1D). CQS: não muta o receptor.
+func with_corrupted_walls(positions: Array) -> LevelState:
+	var result := LevelState.new(
+		_width,
+		_stairs_position,
+		_warrior,
+		_warrior_position,
+		_warrior_facing,
+		_clone_units(),
+		_turn
+	)
+	result._glitch_model = _glitch_model
+	result._glitch_seed = _glitch_seed
+	for pos: int in positions:
+		result._corrupted_walls[pos] = true
 	return result
 
 
