@@ -37,6 +37,22 @@ func direction_of(space: Space) -> Direction:
 	return _senses.direction_of_position(space.position())
 
 
+func feel_2d(direction: Direction) -> Space:
+	return _senses.feel_2d(direction)
+
+
+func look_2d(direction: Direction) -> Array:
+	return _senses.look_2d(direction)
+
+
+func direction_of_stairs_2d() -> Direction:
+	return _senses.direction_of_stairs_2d()
+
+
+func direction_of_2d(space: Space) -> Direction:
+	return _senses.direction_of_2d(space.position_2d())
+
+
 func walk(direction: Direction = Direction.forward()) -> void:
 	_record(WalkAction.new(direction))
 
