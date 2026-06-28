@@ -28,10 +28,11 @@ Remake do **Ruby Warrior** (beginner tower, 9 níveis) reambientado no universo 
   - ScreenManager (1 tela ativa por vez), EntityAssetRegistry data-driven, editor retrátil (inicia **visível**, fix tech-lead), console de controles, Theme único. _Aceite comportamental/runtime ainda pendente de validação rodando o jogo._
 
 - [ ] **007 — Referência da API do warrior in-game** · spec `done` · **código em branch `feature/007` (NÃO integrado)** · prioridade #1 do PO
-  - Aba/painel de API no editor (`warrior_api_catalog` + `api_reference_tab`) p/ o jogador descobrir sentidos/ações disponíveis. Falta: concluir tasks + review + **integrar na main**.
+  - Aba/painel de API no editor (`warrior_api_catalog` + `api_reference_tab`) p/ o jogador descobrir sentidos/ações disponíveis.
+  - ⚠️ Não-integrável ainda: a branch `feature/007` **empilha 007 + 008** (commits `de9295e` + `b6ce230`) e **falta `review.ts`**. Roteado ao dev/PO (separar escopo + revisar) antes do merge.
 
-- [ ] **008 — Glossário de termos in-game** · spec `done` · **código não iniciado**
-  - Glossário dos termos do jogo. Aguardando implementação (após 007).
+- [ ] **008 — Glossário de termos in-game** · spec `done` · **código empilhado na branch `feature/007`** (commit `b6ce230`, sem branch própria)
+  - Aba Glossário no editor. Precisa ser separada da branch 007 p/ integração na ordem do PO.
 
 - [ ] **009 — Seleção e replay de níveis** · spec `done` · **código em branch `feature/009` (NÃO integrado)**
   - Escolher/refazer níveis já jogados. Falta: review + **integrar na main** (na vez, após 007/008).
