@@ -21,6 +21,6 @@ export const feature: IFeature = {
     "Princípio 'Fidelidade ao Ruby Warrior beginner' AMPLIADO para 'Fidelidade ao Ruby Warrior' (beginner + Intermediate/Advanced 2D), por decisão do Usuário (project-mutate, proveniência usuario) — 2D é evolução, não ruptura.",
     "Modelo de mundo UNIFICADO (1×N = R×C com R=1) em vez de caminho dual — decisão técnica do agente-spec sob delegação do Usuário ('o mais rápido de implementar'); evita duplicar lógica de mundo/sentidos.",
   ],
-  phase: "implementing",
+  phase: "done",
   createdAt: "2026-06-28",
 };

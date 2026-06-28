@@ -23,7 +23,7 @@ export const sprints: ISprint[] = [
     id: 3,
     name: "P2 — Apresentação 2D, níveis e não-regressão",
     goal: "TileMap linhas×colunas, câmera 2 eixos, animações nas 4 direções e level_loader 2D; fecha a vertical com 0 regressão das 001–016 e cobertura de teste real do 2D.",
-    state: "active",
+    state: "closed",
     startDate: "",
     endDate: "",
     storyKeys: ["US-184", "US-185"],

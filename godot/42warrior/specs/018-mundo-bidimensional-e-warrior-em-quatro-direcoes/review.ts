@@ -59,6 +59,40 @@ const CHECKS_T183: IReviewCheckOutcome[] = [
   },
 ];
 
+const CHECKS_T184: IReviewCheckOutcome[] = [
+  {
+    name: "PROVENIÊNCIA: aceite formal do PO (agente-po, cmqy4ho3d, verificado read-only na branch) + integrado na main (merge ca137a6). reviewer=usuario = aceite REAL do PO (git-author NÃO usado como prova).",
+    command: "git log ca137a6 + chat_query cmqy4ho3d (aceite PO)",
+    passed: true,
+  },
+  {
+    name: "RENDER-RULE COUNT-LEVEL (conteúdo, não node-presence): floor_layer.get_used_cells().size()>=27 numa grade 3×9 (tiles REALMENTE desenhados); câmera segue o warrior em Y em nível alto (test_camera_segue_warrior_em_y_em_nivel_alto) + NÃO move quando nível<viewport (retrocompat sem level_height); animação 4-dir: flip_h Leste≠Oeste + rotation Norte≠Sul, AnimatedSprite2D ATIVO pós-refresh (o sprite MUDA conforme a direção). Testes GUT 461/461 na main, 0-regressão 001-021.",
+    command: "bash scripts/check.sh",
+    passed: true,
+  },
+];
+
+const CHECKS_T185: IReviewCheckOutcome[] = [
+  {
+    name: "LevelLoader 2D R×C: level_loader detecta rows>1 → LevelState.from_2d() (rows/warrior_position_2d/stairs_position_2d corretos); 1D INTACTO (rows()=1, cols=width). RETROCOMPAT EXEMPLAR: as reference_solutions dos 9 níveis continuam VENCIDAS pelas soluções (não só 'carrega' — joga). Aceite PO cmqy4ho3d, integrado ca137a6.",
+    command: "bash scripts/check.sh",
+    passed: true,
+  },
+  {
+    name: "Testes GUT 461/461 na main pós-merge (13 domain T-185 + 8 retrocompat 1D); level_definition campos rows/warrior_position_2d/build_units_2d; LevelState API 2D completa; 0-regressão.",
+    command: "bash scripts/check.sh",
+    passed: true,
+  },
+];
+
+const CHECKS_T186: IReviewCheckOutcome[] = [
+  {
+    name: "US-185 (Jurado, não-regressão/cobertura) MATERIALMENTE CUMPRIDO pela bateria embutida da entrega (PO cmqy4ho3d, integrado ca137a6): 4 direções (flip E/W + rotation N/S presentation + feel_2d N/S/E/W domain); paredes nas bordas R×C (space fora da grade = parede); sentidos 2D (test_018_space_sentidos_2d); R=1 beginner preservado (retrocompat 1D + reference_solutions verdes). check.sh 461/461, 0-regressão (os 420 anteriores INTACTOS).",
+    command: "bash scripts/check.sh",
+    passed: true,
+  },
+];
+
 export const reviews: IReviewRecord[] = [
   {
     target: "code",
@@ -96,6 +130,36 @@ export const reviews: IReviewRecord[] = [
     phase: null,
     status: "approved",
     checks: CHECKS_T183,
+    findings: [],
+    reviewer: "usuario",
+    reviewedAt: "2026-06-28",
+  },
+  {
+    target: "code",
+    taskKey: "T-184",
+    phase: null,
+    status: "approved",
+    checks: CHECKS_T184,
+    findings: [],
+    reviewer: "usuario",
+    reviewedAt: "2026-06-28",
+  },
+  {
+    target: "code",
+    taskKey: "T-185",
+    phase: null,
+    status: "approved",
+    checks: CHECKS_T185,
+    findings: [],
+    reviewer: "usuario",
+    reviewedAt: "2026-06-28",
+  },
+  {
+    target: "code",
+    taskKey: "T-186",
+    phase: null,
+    status: "approved",
+    checks: CHECKS_T186,
     findings: [],
     reviewer: "usuario",
     reviewedAt: "2026-06-28",

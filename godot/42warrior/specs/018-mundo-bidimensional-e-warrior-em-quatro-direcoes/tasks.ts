@@ -61,7 +61,7 @@ export const tasks: ITask[] = [
       "TileMap 2D linhas×colunas (estende a TileMapArena 32px da 016 para R×C) + câmera (011) acompanhando o warrior nos 2 eixos + animações de virar/andar nas 4 direções.",
     definitionOfDone:
       "Prova de render headless da cena 2D verde: TileMap exibe R×C, câmera segue nos 2 eixos, e a animação correspondente é exibida ao virar/andar em cada uma das 4 direções.",
-    status: "todo",
+    status: "done",
     dependsOn: ["T-180"],
     parallel: true,
     assignee: null,
@@ -73,7 +73,7 @@ export const tasks: ITask[] = [
       "level_loader aceita layout de nível 2D (grade R×C), mantendo a leitura de níveis 1×N como R=1; reference_solutions dos níveis refletem o mundo 2D.",
     definitionOfDone:
       "Testes verdes de carregamento de um layout 2D R×C e de leitura de um layout 1×N como R=1; reference_solutions 2D validados pelo runner.",
-    status: "todo",
+    status: "done",
     dependsOn: ["T-180"],
     parallel: true,
     assignee: null,
@@ -86,7 +86,7 @@ export const tasks: ITask[] = [
       "Bateria de não-regressão e cobertura do 2D: ≥1 teste por direção (4), paredes nas bordas de uma grade R×C, sentidos 2D, e o caso R=1 (beginner) preservado; rodar check.sh.",
     definitionOfDone:
       "check.sh verde com a suíte de domínio 100% e features 001–016 sem regressão; cobertura 2D presente (4 direções, bordas R×C, sentidos 2D) e o corredor 1×N coberto.",
-    status: "todo",
+    status: "done",
     dependsOn: ["T-182", "T-183", "T-184", "T-185"],
     parallel: false,
     assignee: null,
