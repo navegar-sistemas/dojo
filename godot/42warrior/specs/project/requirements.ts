@@ -92,4 +92,11 @@ export const requirements: IProductRequirement[] = [
     priority: "high",
     provenance: { author: "usuario", reason: "Decisao do Usuario (clarify feature 018): capacidade nova de produto — mundo 2D + 4 direcoes espelhando Intermediate/Advanced tower.", at: "2026-06-28" },
   },
+  {
+    key: "PR-014",
+    title: "O jogo roda no navegador (Web/HTML5) sem perder a experiencia desktop",
+    description: "O 42warrior e exportavel e jogavel no NAVEGADOR (Godot 4 Web/HTML5/WASM): renderer Compatibility no web (Forward+ preservado no desktop), preset Web, audio iniciando no 1o gesto do usuario, e persistencia user:// (codigo do jogador + progresso) via IndexedDB. O PILAR e que o warrior EXECUTA o codigo do jogador no WASM (GDScript em runtime) — provado por smoke-test web. Zero regressao na experiencia desktop.",
+    priority: "high",
+    provenance: { author: "usuario", reason: "Ordem direta do Matheus ('o projeto precisa ser exportado em html'); recorte do PO cmqxwb2zw produtizando como feature+PR.", at: "2026-06-28" },
+  },
 ];
