@@ -22,6 +22,6 @@ export const feature: IFeature = {
     "Robustez contra 'código ruim' do produto INCLUI recursão, não só while — decisão do PO (cmqxwb2yr) ratificando o report do Matheus.",
     "É PRÉ-REQUISITO do web export (cmqxwb2zw): o smoke web do código do jogador só vale após este fix.",
   ],
-  phase: "implementing",
+  phase: "done",
   createdAt: "2026-06-28",
 };
