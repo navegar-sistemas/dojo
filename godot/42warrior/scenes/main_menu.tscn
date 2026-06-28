@@ -29,6 +29,11 @@ layout_mode = 2
 text = "↩ Continuar"
 theme_override_font_sizes/font_size = 22
 
+[node name="SelectLevelsBtn" type="Button" parent="VBox"]
+layout_mode = 2
+text = "≡ Selecionar Nível"
+theme_override_font_sizes/font_size = 22
+
 [node name="VolumeBox" type="VBoxContainer" parent="VBox"]
 layout_mode = 2
 theme_override_constants/separation = 6
