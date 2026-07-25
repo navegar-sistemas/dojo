@@ -6,4 +6,4 @@ C/libft/**/*.bin
 
 # macOS
 .DS_Store
-C/push-swap/docs
+C/push-swap/docs/private

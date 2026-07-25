@@ -1,0 +1,91 @@
+# T07 — Desordem
+
+## Objetivo
+
+`compute_disorder` devolvendo a densidade de inversões da pilha inicial.
+
+## Depende de
+
+T05.
+
+## Arquivos
+
+- `disorder.c`
+- `main.c` (substituir o `0.0` provisório do passo 8)
+
+## Especificação
+
+- [../04-algoritmos/desordem.md](../04-algoritmos/desordem.md)
+
+## Implementação
+
+```c
+double	compute_disorder(t_stack *a)
+{
+	long	erros;
+	long	pares;
+	int		i;
+	int		j;
+
+	erros = 0;
+	pares = 0;
+	i = 0;
+	while (i < a->size)
+	{
+		j = i + 1;
+		while (j < a->size)
+		{
+			pares++;
+			if (a->data[i] > a->data[j])
+				erros++;
+			j++;
+		}
+		i++;
+	}
+	if (pares == 0)
+		return (0.0);
+	return ((double)erros / (double)pares);
+}
+```
+
+Quatro variáveis, quatro declarações separadas — a norma proíbe declaração com atribuição.
+
+Os dois pontos que quebram silenciosamente:
+
+- **A divisão precisa dos dois operandos em `double`.** Em inteiro o resultado é sempre 0, e o
+  `--adaptive` do T11 cairia sempre na rota O(n²) sem nenhum sintoma visível até o benchmark.
+- **`pares == 0`** acontece com 0 ou 1 elemento. Sem o teste, divisão por zero.
+
+No `main`, trocar o `0.0` provisório pela chamada real, mantendo-a **antes** do despacho: a
+conversão em ranks das estratégias de T09 e T10 substitui os valores da pilha.
+
+## Pronto quando
+
+```bash
+make re
+norminette *.c *.h
+```
+
+Um `main` temporário ou a inspeção via T12 precisa reproduzir:
+
+| Entrada | Desordem |
+|---|---|
+| `1 2 3` | 0.0000 |
+| `3 2 1` | 1.0000 |
+| `4 67 3 87 23` | 0.4000 |
+| `2 1` | 1.0000 |
+| `42` | 0.0000 |
+| nenhum elemento | 0.0000 |
+
+O valor de `4 67 3 87 23` é o que aparece como `40.00%` no `--bench` do enunciado — confirma de
+uma vez a fórmula e a conversão para porcentagem que vem em T12.
+
+Faixa em entrada aleatória, para conferir que a medida não está saturando em 0 ou 1:
+
+```bash
+# após T12, com --bench disponível
+for i in 1 2 3 4 5; do
+  ./push_swap --bench $(shuf -i 1-10000 -n 100 | tr '\n' ' ') 2>&1 >/dev/null | grep disorder
+done
+# todos entre 40% e 60%
+```
