@@ -58,10 +58,10 @@ metas** — qual dos dois roda depende do sorteio, e não há como escolher.
 
 Pior caso do `--adaptive` em 40 amostras aleatórias:
 
-| n | mínimo | máximo | meta "passa" | meta "bom" |
-|---|---|---|---|---|
-| 100 | 696 | 1084 | < 2000 | < 1500 |
-| 500 | 6784 | 7555 | < 12 000 | < 8000 |
+| n | faixa observada | meta "passa" | meta "bom" |
+|---|---|---|---|
+| 100 | ~680 – 1084 | < 2000 | < 1500 |
+| 500 | 6784 – ~7590 | < 12 000 | < 8000 |
 
 Os dois tamanhos ficam dentro de "bom". "Excelente" (< 700 e < 5500) exigiria uma estratégia
 gulosa de custo mínimo, que não está entre as quatro especificadas — ver

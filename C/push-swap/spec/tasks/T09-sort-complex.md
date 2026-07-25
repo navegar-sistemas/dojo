@@ -84,12 +84,12 @@ norminette *.c *.h
 
 ```bash
 for i in 1 2 3 4 5; do
-  ./push_swap --complex $(shuf -i 0-9999 -n 100 | tr '\n' ' ') | wc -l
+  ./push_swap --complex $(shuf -i 1-10000 -n 100 | tr '\n' ' ') | wc -l
 done    # cinco vezes 1084
 
 for i in 1 2 3; do
-  shuf -i 0-9999 -n 500 > /tmp/a.txt
-  ./push_swap --complex $(cat /tmp/a.txt) | wc -l
+  shuf -i 0-9999 -n 500 > args.txt
+  ./push_swap --complex $(cat args.txt) | wc -l
 done    # três vezes 6784
 ```
 
@@ -99,7 +99,7 @@ done    # três vezes 6784
 i=0; falhas=0
 while [ $i -lt 200 ]; do
   ARG=$(shuf -i 1-1000 -n $((RANDOM % 30 + 1)) | tr '\n' ' ')
-  [ "$(./push_swap --complex $ARG | ./assets/checker_Mac $ARG)" = "OK" ] || { echo "FALHOU: $ARG"; falhas=$((falhas+1)); }
+  [ "$(./push_swap --complex $ARG | ./assets/checker_linux $ARG)" = "OK" ] || { echo "FALHOU: $ARG"; falhas=$((falhas+1)); }
   i=$((i+1))
 done
 echo "falhas: $falhas"
@@ -109,9 +109,10 @@ echo "falhas: $falhas"
 
 ```bash
 for n in 1 2 3 4 5 7 8 9 15 16 17 31 32 33 255 256 257; do
-  ARG=$(shuf -i 1-10000 -n $n | tr '\n' ' ')
+  ARG=$(shuf -i 1-10000 -n $n | tr '
+' ' ')
   echo -n "n=$n: "
-  ./push_swap --complex $ARG | ./assets/checker_Mac $ARG
+  ./push_swap --complex $ARG | ./assets/checker_linux $ARG
 done
 ```
 
@@ -119,9 +120,9 @@ done
 
 ```bash
 ARG="-2147483648 2147483647 0 -1 1"
-./push_swap --complex $ARG | ./assets/checker_Mac $ARG    # OK
+./push_swap --complex $ARG | ./assets/checker_linux $ARG    # OK
 ```
 
 ```bash
-leaks --atExit -- ./push_swap --complex $(shuf -i 1-1000 -n 200 | tr '\n' ' ')
+valgrind --leak-check=full ./push_swap --complex $(shuf -i 1-10000 -n 200 | tr '\n' ' ')
 ```

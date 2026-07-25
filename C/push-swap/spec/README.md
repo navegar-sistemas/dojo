@@ -59,8 +59,8 @@
 - Pseudocódigo usa `while` e nunca `for`, porque `for` é proibido pela norma. O que está
   escrito no pseudocódigo é traduzível linha a linha.
 - Em qualquer notação `a = [1 2 3]`, o índice 0 é o **topo** da pilha.
-- Contagens de operações são valores medidos por simulação dos algoritmos exatos aqui
-  especificados, não estimativas de complexidade.
+- Contagens de operações são valores medidos numa implementação em C desta spec, não
+  estimativas de complexidade.
 - "Movimento" e "operação" são a mesma coisa: uma das 11 siglas impressas em stdout.
 
 ## Estado do repositório

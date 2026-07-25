@@ -6,7 +6,8 @@
 
 ## Depende de
 
-T02.
+T02. O `main` passa a chamá-la em T05 ou depois — ver
+[../03-arquitetura/fluxo.md](../03-arquitetura/fluxo.md).
 
 ## Arquivos
 
@@ -54,8 +55,12 @@ e o índice é único. Busca linear daria o mesmo resultado; a binária cabe no 
 **A escrita é in place**: `a->data[i]` é lido e sobrescrito na mesma iteração. Como o valor lido
 é usado imediatamente na busca antes da escrita, não há corrupção.
 
-**Retorno 0 só em falha de alocação**, e nesse caso a pilha fica intacta — o chamador ainda não
-emitiu nenhum movimento, então pode encerrar por `Error` sem deixar meia receita.
+**Retorno 0 só em falha de alocação**, e nesse caso a pilha fica intacta.
+
+**Quem chama é o `main`**, entre `compute_disorder` e o despacho, para as quatro estratégias.
+Dentro de uma `sort_*` não funcionaria: elas devolvem `void`, não têm como sinalizar a falha nem
+acesso às pilhas para liberá-las. No `main` a falha cai no mesmo `fail()` dos outros erros, e
+nenhuma linha foi impressa ainda.
 
 ## Pronto quando
 
@@ -81,5 +86,5 @@ Propriedades a verificar sobre entrada aleatória de 500 elementos:
 - para todo par de posições, `valor[i] < valor[j]` se e somente se `rank[i] < rank[j]`.
 
 ```bash
-leaks --atExit -- ./push_swap ...   # a cópia auxiliar precisa ser liberada
+valgrind --leak-check=full ./push_swap ...   # a cópia auxiliar precisa ser liberada
 ```

@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Chunk sort com `k = max(2, isqrt(n / 2))`, dentro de 7027–7576 movimentos para n = 500.
+Chunk sort com `k = max(2, isqrt(n / 2))`, abaixo de 8000 movimentos para n = 500.
 
 ## Depende de
 
@@ -20,14 +20,16 @@ T06, T08.
 
 ## Implementação
 
-Quatro funções, três `static`:
+Cinco funções, quatro `static` — a cota inteira. Com os laços embutidos em `sort_medium`, o
+corpo passa de 25 linhas:
 
 | Função | Papel |
 |---|---|
 | `count_in_range` (static) | quantos elementos de `a` têm rank entre `lo` e `hi` |
 | `collect_chunk` (static) | fase 1 de um bloco |
+| `collect_all` (static) | laço sobre os `k` blocos |
 | `drain_b` (static) | fase 2 completa |
-| `sort_medium` | rótulos, casos base, ranks, laço de blocos |
+| `sort_medium` | rótulos, casos base, cálculo de `k` e `width` |
 
 ```c
 static void	collect_chunk(t_ctx *c, int lo, int hi)
@@ -60,17 +62,37 @@ static void	drain_b(t_ctx *c)
 }
 ```
 
-`sort_medium` grava `"Medium"` / `"O(n√n)"`, trata `size <= 3`, retorna se ordenada, chama
-`build_ranks`, calcula:
+```c
+static void	collect_all(t_ctx *c, int n, int k, int width)
+{
+	int	bloco;
+	int	lo;
+	int	hi;
+
+	bloco = 0;
+	while (bloco < k)
+	{
+		lo = bloco * width;
+		hi = lo + width - 1;
+		if (hi > n - 1)
+			hi = n - 1;
+		collect_chunk(c, lo, hi);
+		bloco++;
+	}
+}
+```
+
+`sort_medium` grava `"Medium"` / `"O(n√n)"`, trata `size <= 3`, retorna se ordenada, calcula:
 
 ```
 k = isqrt(n / 2)
 se k < 2: k = 2
-width = (n + k - 1) / k
 ```
 
-e percorre `bloco` de 0 a `k - 1` chamando `collect_chunk(c, bloco * width, min(lo + width - 1, n - 1))`.
-Ao final, `drain_b`.
+e chama `collect_all(c, n, k, (n + k - 1) / k)` seguido de `drain_b(c)`.
+
+A pilha já chega convertida em ranks — o `main` fez isso antes do despacho, e a estratégia não
+aloca nada.
 
 **Pontos que decidem o desempenho:**
 
@@ -108,15 +130,16 @@ norminette *.c *.h
 for n in 100 500; do
   pior=0; i=0
   while [ $i -lt 20 ]; do
-    ARG=$(shuf -i 0-9999 -n $n | tr '\n' ' ')
+    ARG=$(shuf -i 1-10000 -n $n | tr '
+' ' ')
     m=$(./push_swap --medium $ARG | wc -l | tr -d ' ')
     [ "$m" -gt "$pior" ] && pior=$m
     i=$((i+1))
   done
   echo "n=$n pior=$pior"
 done
-# n=100 esperado entre 696 e 802
-# n=500 esperado entre 7027 e 7576, e obrigatoriamente abaixo de 8000
+# n=100 esperado em torno de 700-810
+# n=500 esperado em torno de 7000-7600, e obrigatoriamente abaixo de 8000
 ```
 
 Pior caso acima de 8000 em n = 500 significa que `k` ou a fase 1 divergiram da spec.
@@ -127,7 +150,7 @@ Pior caso acima de 8000 em n = 500 significa que `k` ou a fase 1 divergiram da s
 i=0; falhas=0
 while [ $i -lt 200 ]; do
   ARG=$(shuf -i 1-1000 -n $((RANDOM % 30 + 1)) | tr '\n' ' ')
-  [ "$(./push_swap --medium $ARG | ./assets/checker_Mac $ARG)" = "OK" ] || { echo "FALHOU: $ARG"; falhas=$((falhas+1)); }
+  [ "$(./push_swap --medium $ARG | ./assets/checker_linux $ARG)" = "OK" ] || { echo "FALHOU: $ARG"; falhas=$((falhas+1)); }
   i=$((i+1))
 done
 echo "falhas: $falhas"
@@ -137,12 +160,13 @@ echo "falhas: $falhas"
 
 ```bash
 for n in 1 2 3 4 5 6 7 8 9 10 11 12 13 49 50 51; do
-  ARG=$(shuf -i 1-10000 -n $n | tr '\n' ' ')
+  ARG=$(shuf -i 1-10000 -n $n | tr '
+' ' ')
   echo -n "n=$n: "
-  ./push_swap --medium $ARG | ./assets/checker_Mac $ARG
+  ./push_swap --medium $ARG | ./assets/checker_linux $ARG
 done
 ```
 
 ```bash
-leaks --atExit -- ./push_swap --medium $(shuf -i 1-1000 -n 200 | tr '\n' ' ')
+valgrind --leak-check=full ./push_swap --medium $(shuf -i 1-10000 -n 200 | tr '\n' ' ')
 ```

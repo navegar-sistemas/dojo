@@ -7,8 +7,8 @@ entrada:  -5   1000000   3
 ranks:     0      2      1
 ```
 
-Pré-requisito de [medium.md](medium.md) e [complex.md](complex.md). O `--simple` não precisa:
-ele só compara valores entre si.
+Pré-requisito de [medium.md](medium.md) e [complex.md](complex.md), executado pelo `main` para
+**todas** as estratégias — ver [../03-arquitetura/fluxo.md](../03-arquitetura/fluxo.md).
 
 ## Algoritmo
 
@@ -62,6 +62,13 @@ movimentos push_swap, então o insertion sort interno não entra em O(n²) do `-
 
 ## Momento da chamada
 
-Dentro da estratégia, depois de gravar `conf->name`/`conf->cclass` e antes do primeiro
-movimento. Se `build_ranks` falhar, nenhuma linha foi impressa ainda e o programa pode encerrar
-por `Error` sem deixar meia receita em stdout.
+No `main`, logo depois de `compute_disorder` e antes do despacho.
+
+Dentro da estratégia não funcionaria: as funções `sort_*` devolvem `void`, não têm como
+sinalizar falha de alocação e não têm acesso às pilhas para liberá-las. No `main` a falha cai no
+mesmo `fail()` de todos os outros erros, e nenhuma linha foi impressa ainda.
+
+Rodar para as quatro estratégias, inclusive `--simple`, que não precisa de ranks, custa uma
+ordenação em memória e nenhum movimento. E não altera o que o `--simple` emite: ele decide por
+`stack_min_index` e `stack_is_sorted`, ambos função apenas da ordem relativa, que os ranks
+preservam.

@@ -24,12 +24,16 @@ T12.
 ### `read_ops_bonus.c`
 
 ```c
-char	*read_all(int fd);
+static char	*grow(char *buf, int total, char *tmp, int n);
+char		*read_all(int fd);
 ```
 
 Lê em blocos com `read` até EOF, acumulando num buffer que cresce por realocação. Termina com
 `\0`. Devolve `NULL` em falha de alocação ou se `read` devolver `-1`. `read` devolvendo `0` é o
 EOF normal.
+
+A realocação vai numa `static` separada: embutida em `read_all`, o corpo fica com 27 linhas,
+acima do limite. `grow` tem 4 parâmetros — o teto.
 
 Ler tudo antes de aplicar é o que o enunciado descreve, e simplifica o erro: uma instrução
 inválida no meio aborta antes de qualquer aplicação.
@@ -37,14 +41,20 @@ inválida no meio aborta antes de qualquer aplicação.
 ### `apply_op_bonus.c`
 
 ```c
-int	apply_line(t_ctx *c, const char *s, int len);
+static int	same(const char *s, int len, char *lit);
+int			apply_line(t_ctx *c, const char *s, int len);
+void		apply_rot(t_ctx *c, t_op op);
 ```
 
-Traduz o trecho de `len` bytes na sigla correspondente e chama a operação. Devolve 0 se a sigla
-não existir.
+`apply_line` traduz o trecho de `len` bytes na sigla correspondente e chama a operação. Devolve
+0 se a sigla não existir, inclusive para `len == 0` (linha vazia).
 
-A comparação é exata sobre os `len` bytes: `ra` é válido, `ra ` com espaço, `RA` e `ra;` não.
-Linha vazia no meio da entrada é erro.
+`same` compara exatamente `len` bytes contra o literal **e** exige que o literal termine ali —
+sem isso, `r` casaria com `ra`. A comparação é exata: `ra` é válido, `ra ` com espaço, `RA` e
+`ra;` não.
+
+`apply_rot` leva as seis rotações porque `apply_line` despachando as 11 siglas sozinha passa de
+25 linhas.
 
 ### `checker_bonus.c`
 
@@ -56,6 +66,8 @@ Linha vazia no meio da entrada é erro.
 3. `b = stack_new(a->size)`; contexto com **`counts = NULL`**.
 4. `read_all(0)`.
 5. Percorre o buffer separando por `\n` e chamando `apply_line`. Falha → `Error`, saída 255.
+   **Sobra de bytes sem `\n` final também é erro** — a referência responde `Error` a
+   `printf 'ra'`, não `KO`. O laço termina com `devolve (i == ini)`.
 6. `stack_is_sorted(a) && b->size == 0` → `OK`, senão `KO`. Saída 0.
 7. Libera tudo, inclusive o buffer.
 
@@ -101,7 +113,7 @@ while [ $i -lt 100 ]; do
   ARG=$(shuf -i 1-1000 -n $((RANDOM % 15 + 2)) | tr '\n' ' ')
   OPS=$(./push_swap $ARG)
   meu=$(printf '%s\n' "$OPS" | ./checker $ARG)
-  ref=$(printf '%s\n' "$OPS" | ./assets/checker_Mac $ARG)
+  ref=$(printf '%s\n' "$OPS" | ./assets/checker_linux $ARG)
   [ "$meu" = "$ref" ] || { echo "DIFERE: $ARG meu=$meu ref=$ref"; difere=$((difere+1)); }
   i=$((i+1))
 done
@@ -114,7 +126,7 @@ Receitas propositalmente erradas também precisam concordar:
 for ops in "sa" "ra" "pb" "sa
 pb" ""; do
   meu=$(printf '%s\n' "$ops" | ./checker 3 2 1)
-  ref=$(printf '%s\n' "$ops" | ./assets/checker_Mac 3 2 1)
+  ref=$(printf '%s\n' "$ops" | ./assets/checker_linux 3 2 1)
   [ "$meu" = "$ref" ] && echo "ok   [$ops] $meu" || echo "DIFERE [$ops] meu=$meu ref=$ref"
 done
 ```
@@ -128,7 +140,7 @@ cat /tmp/bench.txt
 ```
 
 ```bash
-leaks --atExit -- ./checker 3 2 1 </dev/null
-printf 'sa\nrra\n' | leaks --atExit -- ./checker 3 2 1
-leaks --atExit -- ./checker 3 2 one </dev/null
+valgrind --leak-check=full ./checker 3 2 1 </dev/null
+printf 'sa\nrra\n' | valgrind --leak-check=full ./checker 3 2 1
+valgrind --leak-check=full ./checker 3 2 one </dev/null
 ```

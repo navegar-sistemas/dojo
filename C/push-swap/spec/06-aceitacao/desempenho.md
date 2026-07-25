@@ -12,23 +12,27 @@ Verificadas com entrada aleatória e o comportamento padrão do programa, ou sej
 
 ## Contagens medidas
 
-40 permutações aleatórias por tamanho, valores mínimo e máximo observados:
+Faixas observadas numa implementação em C desta spec, sobre 20 a 40 permutações aleatórias por
+tamanho. São faixas amostrais: um extremo pode se deslocar algumas dezenas de movimentos com
+outras amostras, e é por isso que a coluna que importa é a última.
 
-| Estratégia | n = 100 | n = 500 |
-|---|---|---|
-| `--simple` | 1269 – 1732 | 30 313 – 34 319 |
-| `--medium` | 696 – 802 | 7027 – 7576 |
-| `--complex` | 1084 (fixo) | 6784 (fixo) |
-| `--adaptive` | 696 – 1084 | 6784 – 7555 |
+| Estratégia | n = 100 | n = 500 | teto que precisa respeitar |
+|---|---|---|---|
+| `--simple` | ~1270 – 1730 | ~30 300 – 34 300 | nenhum (rota forçada) |
+| `--medium` | ~695 – 805 | ~7020 – 7590 | < 8000 |
+| `--complex` | 1084 (fixo) | 6784 (fixo) | < 8000 |
+| `--adaptive` | ~680 – 1084 | 6784 – ~7590 | < 1500 e < 8000 |
+
+`--complex` é o único com valor exato: a contagem não depende da entrada.
 
 ## Leitura
 
-**O `--adaptive` fica em "bom" nos dois tamanhos.** O pior caso é 1084 em n = 100 e 7555 em
-n = 500, contra os limites de 1500 e 8000.
+**O `--adaptive` fica em "bom" nos dois tamanhos.** O pior caso observado é 1084 em n = 100 e
+cerca de 7590 em n = 500, contra os limites de 1500 e 8000.
 
 **O pior caso do `--adaptive` é o pior entre medium e complex**, porque com entrada aleatória a
 desordem straddle o limiar de 0.5 e as duas rotas são usadas — 22/18 e 20/20 nas amostras. Em
-n = 100 o teto vem do complex (1084); em n = 500 vem do medium (7555).
+n = 100 o teto vem do complex (1084); em n = 500 vem do medium (~7590).
 
 **"Excelente" não é alcançado** e não é alcançável com estas quatro estratégias. Em n = 500 o
 melhor resultado é 6784, contra a meta de 5500. Chegar lá exige a estratégia gulosa de custo
@@ -45,7 +49,7 @@ regime em que ela custa de 294 a 4225 movimentos.
 | n | pior caso medido | limite "bom" | folga |
 |---|---|---|---|
 | 100 | 1084 | 1500 | 28% |
-| 500 | 7555 | 8000 | 6% |
+| 500 | ~7590 | 8000 | 5% |
 
 A folga em n = 500 é estreita. Duas mudanças a evitar sem medir de novo:
 
@@ -62,8 +66,8 @@ Uma amostra só não vale — a variação entre entradas é de centenas de movi
 pior=0
 i=0
 while [ $i -lt 20 ]; do
-  shuf -i 0-9999 -n 500 > /tmp/a.txt
-  n=$(./push_swap $(cat /tmp/a.txt) | wc -l)
+  shuf -i 0-9999 -n 500 > args.txt
+  n=$(./push_swap $(cat args.txt) | wc -l)
   [ "$n" -gt "$pior" ] && pior=$n
   i=$((i + 1))
 done

@@ -77,7 +77,8 @@ echo "falhas: $falhas"
 
 ```bash
 for n in 1 2 3 4 5 6 7 10 50 100 500; do
-  ARG=$(shuf -i 1-10000 -n $n | tr '\n' ' ')
+  ARG=$(shuf -i 1-10000 -n $n | tr '
+' ' ')
   for f in --simple --medium --complex --adaptive; do
     r=$(./push_swap $f $ARG | ./checker $ARG)
     [ "$r" = "OK" ] || echo "FALHOU n=$n $f"
@@ -92,7 +93,8 @@ echo "cobertura concluída"
 for n in 100 500; do
   pior=0; i=0
   while [ $i -lt 20 ]; do
-    ARG=$(shuf -i 0-9999 -n $n | tr '\n' ' ')
+    ARG=$(shuf -i 1-10000 -n $n | tr '
+' ' ')
     m=$(./push_swap $ARG | wc -l | tr -d ' ')
     [ "$m" -gt "$pior" ] && pior=$m
     i=$((i+1))
@@ -105,13 +107,13 @@ done
 **Memória — inclusive nos caminhos de erro:**
 
 ```bash
-leaks --atExit -- ./push_swap 4 67 3 87 23
-leaks --atExit -- ./push_swap $(shuf -i 1-1000 -n 500 | tr '\n' ' ')
-leaks --atExit -- ./push_swap --simple $(shuf -i 1-1000 -n 100 | tr '\n' ' ')
-leaks --atExit -- ./push_swap 0 one 2 3
-leaks --atExit -- ./push_swap "1 2" 3 four
-leaks --atExit -- ./push_swap 1 1
-leaks --atExit -- ./checker 3 2 1 </dev/null
+valgrind --leak-check=full ./push_swap 4 67 3 87 23
+valgrind --leak-check=full ./push_swap $(shuf -i 1-10000 -n 500 | tr '\n' ' ')
+valgrind --leak-check=full ./push_swap --simple $(shuf -i 1-10000 -n 100 | tr '\n' ' ')
+valgrind --leak-check=full ./push_swap 0 one 2 3
+valgrind --leak-check=full ./push_swap "1 2" 3 four
+valgrind --leak-check=full ./push_swap 1 1
+valgrind --leak-check=full ./checker 3 2 1 </dev/null
 ```
 
 Zero vazamento em todos.

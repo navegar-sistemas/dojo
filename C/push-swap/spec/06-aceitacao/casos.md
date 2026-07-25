@@ -34,9 +34,9 @@ critério de desempate `i <= size / 2` na rotação até o topo — ver
 ## A2 — `--adaptive` com o exemplo do enunciado
 
 ```
-$ ARG="4 67 3 87 23"; ./push_swap --adaptive $ARG | wc -l
+$ ./push_swap --adaptive 4 67 3 87 23 | wc -l
 13
-$ ./push_swap --bench --adaptive $ARG 2>&1 >/dev/null
+$ ./push_swap --bench --adaptive 4 67 3 87 23 2>&1 >/dev/null
 [bench] disorder:  40.00%
 [bench] strategy:  Adaptive / O(n√n)
 [bench] total_ops: 13
@@ -60,8 +60,8 @@ Sem variação entre entradas do mesmo tamanho.
 
 ```bash
 for i in 1 2 3; do
-  shuf -i 0-9999 -n 500 > /tmp/a500.txt
-  ./push_swap --complex $(cat /tmp/a500.txt) | wc -l
+  shuf -i 0-9999 -n 500 > args.txt
+  ./push_swap --complex $(cat args.txt) | wc -l
 done   # precisa imprimir 6784 três vezes
 ```
 
@@ -92,9 +92,9 @@ Todos produzem `Error\n` em stderr, stdout vazio, saída 1:
 ./push_swap 4.2                        # ponto não é dígito
 ./push_swap +                          # sinal sem dígito
 ./push_swap ""                         # argumento sem token
-./push_swap --simple --medium 3 2 1    # dois seletores
-./push_swap --simple --simple 3 2 1    # seletor repetido
+./push_swap --simple --medium 3 2 1    # dois seletores diferentes
 ./push_swap --foo 3 2 1                # flag desconhecida
+./push_swap --                         # flag desconhecida
 ```
 
 ## A6 — Casos silenciosos
@@ -102,11 +102,12 @@ Todos produzem `Error\n` em stderr, stdout vazio, saída 1:
 Saída 0, stdout e stderr vazios:
 
 ```bash
-./push_swap                # nenhum argumento
-./push_swap --bench        # só flag, nenhum número
-./push_swap 42             # um elemento
-./push_swap 1 2 3          # já ordenada
-./push_swap --complex 1 2 3 4 5   # já ordenada, qualquer flag
+./push_swap                          # nenhum argumento
+./push_swap --bench                  # só flag, nenhum número
+./push_swap 42                       # um elemento
+./push_swap 1 2 3                    # já ordenada
+./push_swap --complex 1 2 3 4 5      # já ordenada, qualquer flag
+./push_swap --simple --simple 1 2 3  # seletor repetido, já ordenada
 ```
 
 Com `--bench` e entrada já ordenada não vazia, o bloco de métricas sai com tudo zerado:
@@ -125,7 +126,7 @@ $ ./push_swap --bench 1 2 3 2>&1 >/dev/null
 Para qualquer entrada válida:
 
 ```bash
-ARG=$(shuf -i 1-1000 -n 50 | tr '\n' ' ')
+ARG=$(shuf -i 0-9999 -n 50 | tr '\n' ' ')
 linhas=$(./push_swap $ARG | wc -l)
 total=$(./push_swap --bench $ARG 2>&1 >/dev/null | grep total_ops | tr -dc '0-9')
 [ "$linhas" -eq "$total" ] && echo A7 ok || echo A7 FALHOU

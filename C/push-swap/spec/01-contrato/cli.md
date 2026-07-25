@@ -20,10 +20,10 @@
   `./push_swap 3 --bench 2 1` é válido e equivale a `./push_swap --bench 3 2 1`.
 - Sem nenhum seletor de estratégia, vale `--adaptive`.
 - `--bench` combina com qualquer seletor, e também sozinho.
-- Repetir o **mesmo** seletor (`--simple --simple`) é erro, pelo mesmo caminho que dois
-  seletores diferentes: o campo de estratégia só pode ser gravado uma vez.
-- Dois seletores diferentes na mesma linha é erro.
-- Repetir `--bench` é erro, pela mesma regra.
+- Dois seletores **diferentes** na mesma linha é erro: a intenção é ambígua.
+- Repetir o **mesmo** seletor (`--simple --simple`) é aceito, assim como repetir `--bench`.
+  Não há ambiguidade, e o enunciado não pede erro. A regra é: só é erro o que não dá para
+  resolver.
 - Qualquer token que comece com `--` e não esteja na tabela é erro, inclusive `--` sozinho.
 
 Um token que começa com `-` seguido de dígito (`-42`) é um número negativo, não uma flag. A
@@ -44,8 +44,10 @@ importa para quem lê o código.
 ./push_swap --bench 3 2 1              # adaptive + métricas em stderr
 ./push_swap --bench --medium 3 2 1     # chunk sort + métricas
 ./push_swap 3 --medium 2 --bench 1     # idem, flags intercaladas
-./push_swap --simple --medium 3 2 1    # Error (dois seletores)
+./push_swap --simple --medium 3 2 1    # Error (dois seletores diferentes)
 ./push_swap --foo 3 2 1                # Error (flag desconhecida)
+./push_swap --simple --simple 3 2 1    # ok, equivale a --simple
+./push_swap --bench --bench 3 2 1      # ok, equivale a --bench
 ```
 
 Relacionado: [entrada.md](entrada.md) para a validação dos números, [saida.md](saida.md) para

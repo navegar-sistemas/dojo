@@ -92,7 +92,7 @@ diff /tmp/meu.txt /tmp/esperado.txt && echo "A2 bench ok" || echo "A2 bench DIFE
 **A7 — invariantes:**
 
 ```bash
-ARG=$(shuf -i 1-1000 -n 50 | tr '\n' ' ')
+ARG=$(shuf -i 0-9999 -n 50 | tr '\n' ' ')
 linhas=$(./push_swap $ARG | wc -l | tr -d ' ')
 total=$(./push_swap --bench $ARG 2>&1 >/dev/null | grep total_ops | tr -dc '0-9')
 soma=$(./push_swap --bench $ARG 2>&1 >/dev/null | tail -2 | tr -dc '0-9 ' | tr ' ' '\n' | grep -v '^$' | paste -sd+ - | bc)

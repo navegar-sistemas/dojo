@@ -90,11 +90,21 @@ recebessem `(t_stack *a, t_stack *b)`, `op_sa` não usaria `b` e a compilação 
 ```c
 typedef struct s_conf
 {
-	int			strategy;
-	int			bench;
-	const char	*name;
-	const char	*cclass;
+	int		strategy;
+	int		bench;
+	char	*name;
+	char	*cclass;
 }	t_conf;
+```
+
+`name` e `cclass` são `char *`, **não** `const char *`. Receber literais de string num `char *`
+é legal em C e não gera aviso; já declarar os campos como `const char *` faz
+`ft_putstr_fd(conf->name, 2)` falhar na compilação, porque o parâmetro da libft é `char *` e o
+descarte do qualificador é erro sob `-Werror`:
+
+```
+error: passing 'const char *' to parameter of type 'char *' discards qualifiers
+       [-Werror,-Wincompatible-pointer-types-discards-qualifiers]
 ```
 
 | Campo | Origem | Uso |

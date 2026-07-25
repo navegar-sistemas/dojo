@@ -67,9 +67,8 @@ echo "medium:   $(./push_swap --medium $ARG | wc -l)"
 echo "complex:  $(./push_swap --complex $ARG | wc -l)"
 # o valor do adaptive precisa ser idêntico a um dos dois
 
-# desordem baixa: quase ordenada, deve bater com --simple
-ARG=$(seq 1 100 | tr '\n' ' ')
-ARG=$(echo $ARG | awk '{t=$3; $3=$70; $70=t; print}')
+# desordem baixa: quase ordenada (duas posições trocadas), deve bater com --simple
+ARG=$(seq 1 100 | tr '\n' ' ' | awk '{t=$3; $3=$70; $70=t; print}')
 echo "adaptive: $(./push_swap $ARG | wc -l)"
 echo "simple:   $(./push_swap --simple $ARG | wc -l)"
 # idênticos
@@ -88,7 +87,8 @@ echo "simple:   $(./push_swap --simple $ARG | wc -l)"
 for n in 100 500; do
   pior=0; i=0
   while [ $i -lt 20 ]; do
-    ARG=$(shuf -i 0-9999 -n $n | tr '\n' ' ')
+    ARG=$(shuf -i 1-10000 -n $n | tr '
+' ' ')
     m=$(./push_swap $ARG | wc -l | tr -d ' ')
     [ "$m" -gt "$pior" ] && pior=$m
     i=$((i+1))
@@ -96,16 +96,16 @@ for n in 100 500; do
   echo "n=$n pior=$pior"
 done
 # n=100 precisa ficar abaixo de 1500; esperado até 1084
-# n=500 precisa ficar abaixo de 8000; esperado até 7555
+# n=500 precisa ficar abaixo de 8000; esperado em torno de 7600
 ```
 
 **Corretude nas quatro flags:**
 
 ```bash
-shuf -i 0-9999 -n 500 > /tmp/a500.txt
+shuf -i 0-9999 -n 500 > args.txt
 for f in --simple --medium --complex --adaptive; do
   echo -n "$f: "
-  ./push_swap $f $(cat /tmp/a500.txt) | ./assets/checker_Mac $(cat /tmp/a500.txt)
+  ./push_swap $f $(cat args.txt) | ./assets/checker_linux $(cat args.txt)
 done
 ```
 

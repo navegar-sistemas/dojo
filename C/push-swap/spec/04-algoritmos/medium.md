@@ -1,6 +1,7 @@
 # `--medium` — O(n√n)
 
-Ordenação por blocos (chunk sort) sobre [ranks](ranks.md).
+Ordenação por blocos (chunk sort) sobre [ranks](ranks.md), que o `main` já converteu antes de
+chamar a estratégia.
 
 ```
 sort_medium(c, conf):
@@ -10,33 +11,46 @@ sort_medium(c, conf):
         sort_tiny(c); devolve
     se stack_is_sorted(a):
         devolve
-    se build_ranks(a) falhar:
-        sinaliza erro
 
     n     = a.size
     k     = isqrt(n / 2)
     se k < 2: k = 2
     width = (n + k - 1) / k
 
+    collect_all(c, n, k, width)
+    drain_b(c)
+```
+
+As duas fases ficam em funções `static` próprias — `sort_medium` com os laços embutidos passaria
+de 25 linhas:
+
+```
+collect_all(c, n, k, width):
     bloco = 0
     enquanto bloco < k:
         lo = bloco * width
         hi = lo + width - 1
         se hi > n - 1: hi = n - 1
-        rest = quantos elementos de a têm rank entre lo e hi
-        enquanto rest > 0:
-            se lo <= a.data[0] e a.data[0] <= hi:
-                op_pb(c)
-                rest -= 1
-            senão:
-                op_ra(c)
+        collect_chunk(c, lo, hi)
         bloco += 1
 
+collect_chunk(c, lo, hi):
+    rest = count_in_range(a, lo, hi)
+    enquanto rest > 0:
+        se lo <= a.data[0] e a.data[0] <= hi:
+            op_pb(c)
+            rest -= 1
+        senão:
+            op_ra(c)
+
+drain_b(c):
     enquanto b.size > 0:
         i = stack_max_index(b)
         rotate_b_to_top(c, i)
         op_pa(c)
 ```
+
+Com `count_in_range`, são cinco funções no arquivo — a cota inteira.
 
 Raiz inteira sem `math.h`:
 
@@ -140,9 +154,9 @@ Total: `pb ra pb ra pb pb pb pa pa pa rb pa pa` — 13 movimentos, com `pa: 5`, 
 
 `k` varreduras de O(n) rotações cada, com `k` proporcional a √n: **O(n√n) movimentos**.
 
-40 permutações aleatórias por tamanho:
+Faixas observadas em 20 a 40 permutações aleatórias por tamanho:
 
-| n | mínimo | máximo |
-|---|---|---|
-| 100 | 696 | 802 |
-| 500 | 7027 | 7576 |
+| n | faixa |
+|---|---|
+| 100 | ~695 – 805 |
+| 500 | ~7020 – 7590 |

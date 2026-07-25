@@ -8,7 +8,7 @@
 | [T02](T02-pilha.md) | Pilha | T01 | `stack.c` | [ ] |
 | [T03](T03-operacoes.md) | Operações e emissão | T02 | `emit.c`, `ops_*.c` | [ ] |
 | [T04](T04-parsing.md) | Parsing e validação | T02 | `parse.c`, `parse_utils.c` | [ ] |
-| [T05](T05-orquestracao.md) | Orquestração do `main` | T03, T04 | `main.c` | [ ] |
+| [T05](T05-orquestracao.md) | Orquestração do `main` | T03, T04 | `main.c`, `utils.c` (`zero_counts`) | [ ] |
 | [T06](T06-sort-tiny-simple.md) | Caso base e `--simple` | T05 | `sort_tiny.c`, `sort_simple.c`, `utils.c` | [ ] |
 | [T07](T07-desordem.md) | Desordem | T05 | `disorder.c` | [ ] |
 | [T08](T08-ranks.md) | Ranks | T02 | `rank.c` | [ ] |

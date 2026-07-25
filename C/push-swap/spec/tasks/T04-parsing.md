@@ -28,7 +28,11 @@ int		is_int_token(const char *s);
 int		token_to_int(const char *s, int *out);
 int		has_duplicates(t_stack *s);
 void	free_split(char **parts);
+int		flag_id(const char *s);
 ```
+
+Cinco funções — a cota inteira do arquivo. `flag_id` mora aqui, e não em `parse.c`, porque lá a
+cota já está tomada pelas três `static` de contagem e preenchimento.
 
 **`is_int_token`** — devolve 1 se a string casa com `[+-]?[0-9]+` inteira. Rejeita string
 vazia, só sinal, e qualquer caractere fora de `0-9` depois do sinal.
@@ -44,6 +48,17 @@ repetição.
 **`free_split`** — percorre o array até o `NULL`, libera cada string e depois o array. Aceita
 `NULL`.
 
+**`flag_id`** — devolve `STRAT_SIMPLE`..`STRAT_ADAPTIVE`, `FLAG_BENCH`, ou 0 se não for
+nenhuma flag conhecida. Compara com o comprimento do literal **mais um**, para incluir o
+terminador:
+
+```c
+if (!ft_strncmp(s, "--simple", 9))
+    return (STRAT_SIMPLE);
+```
+
+Sem o `+1`, `--simpleX` casaria como prefixo e seria aceito.
+
 ### `parse.c`
 
 ```c
@@ -52,11 +67,21 @@ t_stack	*parse_numbers(int argc, char **argv);
 ```
 
 **`parse_flags`** — percorre `argv[1..argc-1]`. Token que não começa com `--` é ignorado.
-Token que começa com `--`:
+Token que começa com `--` passa por `flag_id`:
 
-- `--bench` → se `conf->bench` já é 1, erro; senão marca 1.
-- um dos quatro seletores → se `conf->strategy != STRAT_NONE`, erro; senão grava.
-- qualquer outro, inclusive `--` sozinho → erro.
+- resultado 0 → erro (flag desconhecida, inclusive `--` sozinho).
+- `FLAG_BENCH` → marca `conf->bench = 1`, mesmo que já estivesse marcado.
+- um dos quatro seletores → erro **apenas** se `conf->strategy` já tiver um valor **diferente**;
+  repetir o mesmo seletor é aceito.
+
+```c
+if (s == FLAG_BENCH)
+    conf->bench = 1;
+else if (conf->strategy != STRAT_NONE && conf->strategy != s)
+    return (0);
+else
+    conf->strategy = s;
+```
 
 Devolve 0 em erro, 1 em sucesso. Não mexe em `name`/`cclass`.
 
@@ -78,8 +103,15 @@ adiciona código de crescimento — a escolha é livre desde que a liberação n
 Um `argv` de zero tokens numéricos no total (só flags) não é erro: devolve pilha com
 `size == 0`, e o `main` encerra em silêncio.
 
-O arquivo tem duas funções públicas e cabem até três `static` — use-as para separar contagem de
-preenchimento e manter cada corpo abaixo de 25 linhas.
+As três `static` que fecham o arquivo em 5 funções:
+
+| Função | Papel |
+|---|---|
+| `count_tokens(argc, argv, *total)` | primeira passada, dimensiona a pilha |
+| `add_tokens(arg, a)` | divide um argumento, valida e empilha os tokens |
+| `fill_all(argc, argv, a)` | laço sobre `argv` chamando `add_tokens` |
+
+Sem essa separação `parse_numbers` passa de 25 linhas.
 
 ## Pronto quando
 
@@ -92,14 +124,31 @@ Todos os casos de erro de [../06-aceitacao/casos.md](../06-aceitacao/casos.md) A
 imprimindo `Error` em stderr, nada em stdout, saída 1:
 
 ```bash
-for arg in "0 one 2 3" "3 2 3" "2147483648" "-2147483649" "4.2" "+" "--foo 3 2 1" \
-           "--simple --medium 3 2 1" "--simple --simple 3 2 1" "--bench --bench 3 2 1"; do
-  out=$(./push_swap $arg 2>/dev/null)
-  err=$(./push_swap $arg 2>&1 >/dev/null)
-  code=$?
-  echo "[$arg] stdout=[$out] stderr=[$err]"
-done
-./push_swap "" ; echo "exit=$?"          # Error, 1
+err_case() {
+  out=$(./push_swap "$@" 2>/dev/null)
+  err=$(./push_swap "$@" 2>&1 >/dev/null)
+  ./push_swap "$@" >/dev/null 2>&1
+  printf '%-32s stdout=[%s] stderr=[%s] exit=%s\n' "$*" "$out" "$err" "$?"
+}
+err_case 0 one 2 3
+err_case 3 2 3
+err_case 2147483648
+err_case -2147483649
+err_case 4.2
+err_case +
+err_case ""
+err_case --foo 3 2 1
+err_case --simple --medium 3 2 1
+err_case --
+```
+
+Todos precisam sair com `stdout=[]`, `stderr=[Error]` e `exit=1`.
+
+Flags repetidas **não** são erro:
+
+```bash
+./push_swap --simple --simple 3 2 1 ; echo "exit=$?"   # equivale a --simple
+./push_swap --bench --bench 3 2 1   ; echo "exit=$?"   # equivale a --bench
 ```
 
 Casos silenciosos (A6):
@@ -112,14 +161,14 @@ Casos silenciosos (A6):
 Aceitação de números colados num argumento:
 
 ```bash
-./push_swap "4 67 3" 87 23 | ./assets/checker_Mac 4 67 3 87 23    # OK (após T06)
+./push_swap "4 67 3" 87 23 | ./assets/checker_linux 4 67 3 87 23    # OK (após T06)
 ```
 
 Memória em todos os caminhos de erro:
 
 ```bash
-leaks --atExit -- ./push_swap 0 one 2 3
-leaks --atExit -- ./push_swap "1 2" 3 four
-leaks --atExit -- ./push_swap 1 1
-leaks --atExit -- ./push_swap 2147483648
+valgrind --leak-check=full ./push_swap 0 one 2 3
+valgrind --leak-check=full ./push_swap "1 2" 3 four
+valgrind --leak-check=full ./push_swap 1 1
+valgrind --leak-check=full ./push_swap 2147483648
 ```

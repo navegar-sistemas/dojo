@@ -1,6 +1,8 @@
 # `--simple` — O(n²)
 
-Selection sort por extração de mínimo.
+Selection sort por extração de mínimo. Opera sobre a pilha como o `main` a entrega — já
+convertida em [ranks](ranks.md) —, o que não muda nada: as decisões dependem só da ordem
+relativa.
 
 ```
 sort_simple(c, conf):
@@ -64,12 +66,12 @@ rotações é O(n²) movimentos.
 
 ## Contagens medidas
 
-40 permutações aleatórias por tamanho:
+Faixas observadas em 20 a 40 permutações aleatórias por tamanho:
 
-| n | mínimo | máximo |
-|---|---|---|
-| 100 | 1269 | 1732 |
-| 500 | 30 313 | 34 319 |
+| n | faixa |
+|---|---|
+| 100 | ~1270 – 1730 |
+| 500 | ~30 300 – 34 300 |
 
 Em n = 500 isso está muito acima do limite de 12 000 — o `--simple` só é viável no regime para
 o qual o `--adaptive` o reserva.

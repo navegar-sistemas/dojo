@@ -1,6 +1,7 @@
 # `--complex` — O(n log n)
 
-Radix sort binário LSD sobre [ranks](ranks.md).
+Radix sort binário LSD sobre [ranks](ranks.md), que o `main` já converteu antes de chamar a
+estratégia.
 
 ```
 sort_complex(c, conf):
@@ -10,8 +11,6 @@ sort_complex(c, conf):
         sort_tiny(c); devolve
     se stack_is_sorted(a):
         devolve
-    se build_ranks(a) falhar:
-        sinaliza erro
 
     n = a.size
     bits = 0

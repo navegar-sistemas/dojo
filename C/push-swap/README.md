@@ -329,24 +329,14 @@ ARG="4 67 3 87 23"; ./push_swap $ARG | ./checker $ARG
 
 ### O checker de referência em `assets/`
 
-Não é preciso esperar ter um `checker` escrito para testar o `push_swap`: `assets/` contém o
-binário de referência já compilado, em três versões — use a do seu sistema:
+Não é preciso esperar ter um `checker` escrito para testar o `push_swap`: `assets/` traz o
+binário de referência já compilado, em três builds — `checker_linux`, `fedora_checker` e
+`checker_Mac`. Todos são x86-64. Os arquivos chegam sem permissão de execução:
 
-| Arquivo | Plataforma |
-|---|---|
-| `checker_Mac` | macOS (build x86_64; roda em Apple Silicon via Rosetta) |
-| `checker_linux` | Linux |
-| `fedora_checker` | Linux/Fedora |
+```bash
+chmod +x assets/checker_linux
+printf 'sa\nrra\n' | ./assets/checker_linux 3 2 1   # OK
+```
 
 Escrever a própria versão desse programa é a parte opcional do projeto — o comportamento
 esperado é o mesmo descrito acima, que é justamente o que o binário de referência exibe.
-
-No macOS, os arquivos chegam sem permissão de execução e marcados com a quarentena do
-Gatekeeper; sem tratar os dois, o binário é morto sem imprimir nada (código de saída 137, que
-parece um travamento do checker mas não é):
-
-```bash
-chmod +x assets/checker_Mac
-xattr -d com.apple.quarantine assets/checker_Mac
-printf 'sa\nrra\n' | ./assets/checker_Mac 3 2 1   # OK
-```

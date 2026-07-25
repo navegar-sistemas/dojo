@@ -61,7 +61,7 @@ A receita vai para o descritor 1 e as métricas para o 2, o que permite consumir
 separadamente na mesma execução:
 
 ```bash
-./push_swap --bench $(cat args.txt) 2> bench.txt | ./assets/checker_Mac $(cat args.txt)
+./push_swap --bench $(cat args.txt) 2> bench.txt | ./assets/checker_linux $(cat args.txt)
 ```
 
 Relacionado: [bench.md](bench.md) para o formato das métricas.

@@ -67,5 +67,5 @@ Casos que o teste temporário precisa cobrir:
 | `stack_min_index` com `{7}` | 0 |
 
 ```bash
-leaks --atExit -- ./push_swap    # zero leaks no teste temporário
+valgrind --leak-check=full ./push_swap    # "All heap blocks were freed"
 ```

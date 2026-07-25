@@ -11,13 +11,8 @@ make bonus && make bonus     # idem
 
 ## Checker de referência
 
-Os binários em `assets/` são o gabarito. No macOS eles chegam sem permissão de execução e sob
-quarentena do Gatekeeper; sem tratar os dois, o processo é morto sem imprimir nada, com código
-137:
-
 ```bash
-chmod +x assets/checker_Mac
-xattr -d com.apple.quarantine assets/checker_Mac
+chmod +x assets/checker_linux
 ```
 
 ## Corretude
@@ -27,7 +22,7 @@ i=0
 falhas=0
 while [ $i -lt 200 ]; do
   ARG=$(shuf -i 1-1000 -n $((RANDOM % 20 + 1)) | tr '\n' ' ')
-  r=$(./push_swap $ARG | ./assets/checker_Mac $ARG)
+  r=$(./push_swap $ARG | ./assets/checker_linux $ARG)
   [ "$r" = "OK" ] || { echo "FALHOU: $ARG"; falhas=$((falhas + 1)); }
   i=$((i + 1))
 done
@@ -38,18 +33,19 @@ Cobertura por tamanho, incluindo as bordas:
 
 ```bash
 for n in 1 2 3 4 5 6 7 10 50 100 500; do
-  ARG=$(shuf -i 1-10000 -n $n | tr '\n' ' ')
+  ARG=$(shuf -i 1-10000 -n $n | tr '
+' ' ')
   echo -n "n=$n: "
-  ./push_swap $ARG | ./assets/checker_Mac $ARG
+  ./push_swap $ARG | ./assets/checker_linux $ARG
 done
 ```
 
 Casos degenerados:
 
 ```bash
-./push_swap 1 2 3 4 5 | ./assets/checker_Mac 1 2 3 4 5     # já ordenada
-./push_swap 5 4 3 2 1 | ./assets/checker_Mac 5 4 3 2 1     # inversa
-./push_swap -2147483648 2147483647 0 | ./assets/checker_Mac -2147483648 2147483647 0
+./push_swap 1 2 3 4 5 | ./assets/checker_linux 1 2 3 4 5     # já ordenada
+./push_swap 5 4 3 2 1 | ./assets/checker_linux 5 4 3 2 1     # inversa
+./push_swap -2147483648 2147483647 0 | ./assets/checker_linux -2147483648 2147483647 0
 ```
 
 ## Cada estratégia em entrada grande
@@ -58,10 +54,10 @@ As quatro precisam devolver `OK` com 500 elementos. O `--simple` demora e gera d
 milhares de linhas — é esperado.
 
 ```bash
-shuf -i 0-9999 -n 500 > /tmp/a500.txt
+shuf -i 0-9999 -n 500 > args.txt
 for f in --simple --medium --complex --adaptive; do
   echo -n "$f: "
-  ./push_swap $f $(cat /tmp/a500.txt) | ./assets/checker_Mac $(cat /tmp/a500.txt)
+  ./push_swap $f $(cat args.txt) | ./assets/checker_linux $(cat args.txt)
 done
 ```
 
@@ -81,14 +77,12 @@ Verificação de que o erro não vaza para stdout:
 
 ## Memória
 
-O `valgrind` não roda em Apple Silicon; a ferramenta equivalente é o `leaks`:
-
 ```bash
-leaks --atExit -- ./push_swap 4 67 3 87 23
-leaks --atExit -- ./push_swap $(shuf -i 1-1000 -n 200 | tr '\n' ' ')
-leaks --atExit -- ./push_swap 0 one 2 3
-leaks --atExit -- ./push_swap "1 2" 3 four
-leaks --atExit -- ./push_swap 1 1
+valgrind --leak-check=full ./push_swap 4 67 3 87 23
+valgrind --leak-check=full ./push_swap $(shuf -i 1-10000 -n 200 | tr '\n' ' ')
+valgrind --leak-check=full ./push_swap 0 one 2 3
+valgrind --leak-check=full ./push_swap "1 2" 3 four
+valgrind --leak-check=full ./push_swap 1 1
 ```
 
 Os três últimos são os que costumam falhar: no caminho de erro, o array do `ft_split` em curso
@@ -105,15 +99,11 @@ printf 'xx\n'      | ./checker 3 2 1     # Error
 ./checker          </dev/null            # nada
 ```
 
-O `</dev/null` nos casos sem movimentos não é decoração: sem ele o `checker` fica esperando
-entrada até o EOF e o terminal trava.
-
 Comparação direta com a referência em [../05-bonus/checker.md](../05-bonus/checker.md).
 
 ## Ciclo completo
 
 ```bash
-ARG="4 67 3 87 23"
-./push_swap --bench $ARG 2> /tmp/bench.txt | ./checker $ARG
+./push_swap --bench 4 67 3 87 23 2> /tmp/bench.txt | ./checker 4 67 3 87 23
 cat /tmp/bench.txt
 ```
