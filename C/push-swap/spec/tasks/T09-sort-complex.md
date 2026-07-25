@@ -59,8 +59,9 @@ static void	radix_pass(t_ctx *c, int bit)
 ```
 
 `sort_complex` grava `"Complex"` / `"O(n log n)"`, trata `size <= 3` com `sort_tiny`, retorna se
-já ordenada, chama `build_ranks` (falha → sinaliza erro), calcula `bits` e roda `radix_pass`
-para `bit` de 0 até `bits - 1`.
+já ordenada, calcula `bits` e roda `radix_pass` para `bit` de 0 até `bits - 1`. A pilha já chega
+convertida em ranks — o `main` chamou `build_ranks` antes do despacho
+([../03-arquitetura/fluxo.md](../03-arquitetura/fluxo.md)); a estratégia não aloca nada.
 
 **Três armadilhas:**
 

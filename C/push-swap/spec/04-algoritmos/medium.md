@@ -123,7 +123,8 @@ movimentos.
 
 Girar sempre para cima é mais simples e mais barato do que procurar o membro mais próximo do
 bloco e girar pelo caminho mais curto. Nas mesmas amostras de 500 elementos com k entre 14 e
-16, a versão de caminho mais curto gasta 150 a 200 movimentos **a mais**: girar para trás
+16, a versão de caminho mais curto gasta em média na ordem de 100 a 200 movimentos **a mais**
+(amostras isoladas podem inverter o sinal; o pior caso fica com ela): girar para trás
 desorganiza a ordem em que os elementos chegam em `b` e encarece a fase 2 mais do que economiza
 na fase 1.
 

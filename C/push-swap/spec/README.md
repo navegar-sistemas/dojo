@@ -56,8 +56,7 @@
 
 ## Convenções deste documento
 
-- Pseudocódigo usa `while` e nunca `for`, porque `for` é proibido pela norma. O que está
-  escrito no pseudocódigo é traduzível linha a linha.
+- Pseudocódigo usa `while` e nunca `for`, porque `for` é proibido pela norma.
 - Em qualquer notação `a = [1 2 3]`, o índice 0 é o **topo** da pilha.
 - Contagens de operações são valores medidos numa implementação em C desta spec, não
   estimativas de complexidade.

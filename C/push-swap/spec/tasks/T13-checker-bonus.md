@@ -43,7 +43,7 @@ inválida no meio aborta antes de qualquer aplicação.
 ```c
 static int	same(const char *s, int len, char *lit);
 int			apply_line(t_ctx *c, const char *s, int len);
-void		apply_rot(t_ctx *c, t_op op);
+int			apply_rot(t_ctx *c, const char *s, int len);
 ```
 
 `apply_line` traduz o trecho de `len` bytes na sigla correspondente e chama a operação. Devolve
@@ -53,15 +53,18 @@ void		apply_rot(t_ctx *c, t_op op);
 sem isso, `r` casaria com `ra`. A comparação é exata: `ra` é válido, `ra ` com espaço, `RA` e
 `ra;` não.
 
-`apply_rot` leva as seis rotações porque `apply_line` despachando as 11 siglas sozinha passa de
-25 linhas.
+`apply_rot` casa e aplica as seis siglas de rotação; `apply_line` trata as cinco restantes e
+termina em `return (apply_rot(c, s, len));`. Despachar as 11 numa função só fecha em exatamente
+25 linhas — o limite da norma, sem folga nenhuma; a divisão deixa os dois corpos bem abaixo.
 
 ### `checker_bonus.c`
 
 `main` mais os `static` que couberem:
 
-1. `parse_numbers` sobre `argv`. Erro → `Error` em stderr, saída 255. O `checker` não tem
-   flags, então um argumento começando com `--` é token numérico inválido.
+1. Rejeitar qualquer `argv` que comece com `--` (→ `Error`, saída 255) **antes** de chamar
+   `parse_numbers` — o `parse_numbers` compartilhado pula tokens com esse prefixo, e sem a
+   rejeição `./checker --simple 3 2 1` responderia `KO` onde a referência responde `Error`.
+   Em seguida, `parse_numbers` sobre `argv`. Erro → `Error` em stderr, saída 255.
 2. Zero números → nada, saída 0.
 3. `b = stack_new(a->size)`; contexto com **`counts = NULL`**.
 4. `read_all(0)`.

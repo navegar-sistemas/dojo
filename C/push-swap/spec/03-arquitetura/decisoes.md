@@ -88,7 +88,9 @@ em "passa"; com `isqrt(n / 2)` fica em 7576 e alcança "bom".
 
 Girar sempre para cima é mais simples **e** mais barato que escolher o caminho mais curto até o
 próximo membro do bloco. Medido nas mesmas amostras de 500 elementos, com k entre 14 e 16, a
-versão que usa `ra`/`rra` pelo caminho mais curto gasta de 150 a 200 movimentos a mais.
+versão que usa `ra`/`rra` pelo caminho mais curto gasta em média na ordem de 100 a 200
+movimentos a mais; amostras isoladas podem inverter o sinal, mas o pior caso — que é o que o
+benchmark mede — ficou com a variante de caminho mais curto em todas as rodadas medidas.
 
 A razão é que girar para trás embaralha a ordem em que os elementos chegam em `b`, encarecendo
 a fase 2 mais do que economiza na fase 1.

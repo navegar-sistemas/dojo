@@ -1,6 +1,6 @@
 # Casos de aceitação
 
-Entradas com saída exata. Divergir de qualquer um exige entender a causa antes de seguir.
+Entradas com saída exata.
 
 ## A1 — `--simple` com 5 elementos
 

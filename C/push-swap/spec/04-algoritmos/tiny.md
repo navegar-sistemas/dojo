@@ -40,9 +40,6 @@ sort_three(c):
 As condições são avaliadas sobre `data[0..2]` a cada teste, e o ponteiro `data` não muda com as
 rotações — as operações mexem no conteúdo do buffer, não realocam.
 
-Verificado sobre as 6 permutações de `1 2 3` e as 2 de `1 2`: todas ordenam, pior caso 2
-movimentos.
-
 ## Por que 3 e não 5
 
 O limite maior seria melhor em contagem de movimentos, e é o que a maioria das implementações
@@ -57,7 +54,7 @@ Sem o caso base, as estratégias gerais gastam muito em entradas mínimas:
 
 | Entrada | `--simple` sem caso base | `--complex` sem caso base | com `sort_tiny` |
 |---|---|---|---|
-| `3 2 1` | 8 | 3 | 2 |
+| `3 2 1` | 8 | 10 | 2 |
 | `3 1 2` | 7 | 10 | 1 |
 | `2 1` | 5 | 3 | 1 |
 

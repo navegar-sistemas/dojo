@@ -55,8 +55,8 @@ A folga em n = 500 é estreita. Duas mudanças a evitar sem medir de novo:
 
 - Trocar `k = max(2, isqrt(n / 2))` por `isqrt(n)` no chunk sort leva o pior caso a 8258 e
   perde o "bom".
-- Trocar a fase 1 do chunk sort para rotação de caminho mais curto acrescenta de 150 a 200
-  movimentos.
+- Trocar a fase 1 do chunk sort para rotação de caminho mais curto acrescenta em média na
+  ordem de 100 a 200 movimentos ao pior caso.
 
 ## Como medir
 

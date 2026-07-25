@@ -121,7 +121,9 @@ norminette *.c *.h
 ```
 
 Todos os casos de erro de [../06-aceitacao/casos.md](../06-aceitacao/casos.md) A5, cada um
-imprimindo `Error` em stderr, nada em stdout, saída 1:
+imprimindo `Error` em stderr, nada em stdout, saída 1. A bateria exige o `main` com o caminho
+de erro, que só chega em T05 — registre-a aqui e execute-a ao fechar T05 (T02 e T03 usam a
+mesma tática do `main` temporário; aqui ele teria de duplicar o `fail` de T05, sem ganho):
 
 ```bash
 err_case() {

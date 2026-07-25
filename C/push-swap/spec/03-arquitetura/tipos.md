@@ -10,10 +10,14 @@ Tudo em `push_swap.h`.
 # define STRAT_MEDIUM   2
 # define STRAT_COMPLEX  3
 # define STRAT_ADAPTIVE 4
+# define FLAG_BENCH     5
 ```
 
 `STRAT_NONE` é o valor inicial durante o parsing e serve para detectar dois seletores: gravar
 por cima de qualquer coisa diferente de `STRAT_NONE` é erro.
+
+`FLAG_BENCH` é o retorno de `flag_id` para `--bench` — fora da faixa dos seletores para nunca
+colidir com um valor gravável em `conf->strategy`.
 
 ## Pilha
 

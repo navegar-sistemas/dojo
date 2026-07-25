@@ -53,13 +53,15 @@ Comportamento do binário de referência, que é o alvo:
 
 | Arquivo | Funções | Responsabilidade |
 |---|---|---|
-| `checker_bonus.c` | `fail_ck`, `run_all`, `cleanup_ck` (static) + `main` | orquestração, laço de linhas, veredito |
+| `checker_bonus.c` | `reject_flags`, `fail_ck`, `run_all`, `cleanup_ck` (static) + `main` | rejeição de `--`, orquestração, laço de linhas, veredito |
 | `read_ops_bonus.c` | `grow` (static) + `read_all` | leitura de stdin até EOF |
 | `apply_op_bonus.c` | `same` (static) + `apply_line`, `apply_rot` | sigla → `t_op` → chamada da operação |
 
 A separação não é estética: `read_all` com a realocação embutida tem 27 linhas de corpo, acima
-do limite da norma, e `apply_line` despachando as 11 siglas sozinha também estoura — daí
-`apply_rot` levar as seis rotações.
+do limite da norma, e `apply_line` despachando as 11 siglas fecha em exatamente 25 linhas — o
+limite, sem folga nenhuma. `apply_rot` recebe o casamento das seis siglas de rotação
+(`apply_line` termina em `return (apply_rot(c, s, len));`), o que deixa os dois corpos bem
+abaixo do limite.
 
 Reaproveita sem alteração: `parse.c`, `parse_utils.c`, `stack.c`, `emit.c` e os quatro
 `ops_*.c`. A lista de objetos compartilhados está em
@@ -118,8 +120,10 @@ inválida no meio aborta antes de qualquer aplicação.
 
 ## Fluxo
 
-1. `parse_flags` não se aplica — o checker não tem flags. Um argumento começando com `--` é
-   token numérico inválido, portanto erro.
+1. `parse_flags` não se aplica — o checker não tem flags. O `main` rejeita qualquer argumento
+   que comece com `--` **antes** de chamar `parse_numbers` (→ `Error`, saída 255). A rejeição
+   explícita é obrigatória: o `parse_numbers` compartilhado pula tokens com esse prefixo, e sem
+   ela `./checker --simple 3 2 1` responderia `KO` onde a referência responde `Error`.
 2. `parse_numbers` monta `a`; erro → `Error`, saída 255.
 3. Zero números → não imprime nada, saída 0.
 4. `b = stack_new(a->size)`, contexto com `counts = NULL`.

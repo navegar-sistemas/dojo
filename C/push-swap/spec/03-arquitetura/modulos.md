@@ -29,9 +29,9 @@ Bônus:
 
 | Arquivo | Funções | Maior corpo | Responsabilidade |
 |---|---|---|---|
-| `checker_bonus.c` | 4 | 23 | orquestração e veredito |
+| `checker_bonus.c` | 5 | 25 | orquestração e veredito |
 | `read_ops_bonus.c` | 2 | 22 | leitura de stdin até EOF |
-| `apply_op_bonus.c` | 3 | 24 | sigla → operação |
+| `apply_op_bonus.c` | 3 | 15 | sigla → operação |
 
 ## Assinaturas públicas
 
@@ -96,7 +96,7 @@ void	bench_print(t_ctx *c, t_conf *conf, double disorder);
 /* bônus */
 char	*read_all(int fd);
 int		apply_line(t_ctx *c, const char *s, int len);
-void	apply_rot(t_ctx *c, t_op op);
+int		apply_rot(t_ctx *c, const char *s, int len);
 ```
 
 ## Funções `static` por arquivo
@@ -118,7 +118,7 @@ de 5 funções do arquivo.
 | `sort_medium.c` | `count_in_range`, `collect_chunk`, `collect_all`, `drain_b` | fases 1 e 2 |
 | `sort_complex.c` | `bit_count`, `radix_pass` | bits necessários e uma passada |
 | `bench.c` | `put_percent`, `put_counts` | percentual e as duas linhas de contagem |
-| `checker_bonus.c` | `fail_ck`, `run_all`, `cleanup_ck` | erro, laço de linhas, liberação |
+| `checker_bonus.c` | `reject_flags`, `fail_ck`, `run_all`, `cleanup_ck` | rejeição de `--`, erro, laço de linhas, liberação |
 | `read_ops_bonus.c` | `grow` | realocação do buffer de leitura |
 | `apply_op_bonus.c` | `same` | comparação exata de `len` bytes |
 
@@ -171,7 +171,14 @@ delegam para `sort_tiny` quando `a->size <= 3`. Nunca alocam.
 com `"Adaptive"` preservando o `cclass` gravado pela rota.
 
 **`apply_line`** devolve 0 se os `len` bytes não formarem exatamente uma das 11 siglas.
-Comprimento 0 (linha vazia) devolve 0.
+Comprimento 0 (linha vazia) devolve 0. Trata as cinco siglas que não são rotação e delega o
+resto com `return (apply_rot(c, s, len));` — despachar as 11 numa função só fecharia em
+exatamente 25 linhas, o limite da norma sem folga nenhuma.
+
+**`reject_flags`** (static de `checker_bonus.c`) roda antes de `parse_numbers`: qualquer `argv`
+com prefixo `--` imprime `Error` e sai com 255. Nada foi alocado ainda, então não há o que
+liberar. Sem ela, o `parse_numbers` compartilhado pularia o token e `./checker --simple 3 2 1`
+responderia `KO` onde a referência responde `Error`.
 
 ## Direção das dependências
 

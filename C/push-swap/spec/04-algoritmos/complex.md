@@ -73,9 +73,8 @@ total = bits × n + Σ (quantidade de ranks em 0..n-1 com o bit b zerado)
 | 100 | 7 | 700 | 384 | **1084** |
 | 500 | 9 | 4500 | 2284 | **6784** |
 
-Os dois valores foram confirmados por simulação: em amostras aleatórias distintas do mesmo
-tamanho, a contagem observada foi sempre a mesma. **Qualquer variação entre execuções indica
-bug** — tipicamente na contagem de bits ou no `size` capturado.
+**Qualquer variação entre execuções do mesmo tamanho indica bug** — tipicamente na contagem de
+bits ou no `size` capturado.
 
 6784 é também o número que o enunciado publica no exemplo de entrada grande.
 
