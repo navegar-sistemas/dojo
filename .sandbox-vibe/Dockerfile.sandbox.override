@@ -6,8 +6,18 @@ FROM sandbox-vibe-base:latest
 USER root
 
 # Always: npm + Claude Code
+#
+# O postinstall do @anthropic-ai/claude-code (install.cjs) troca o stub
+# bin/claude.exe pelo binario nativo da plataforma. Rodando `npm install -g`
+# como root, o npm reduz privilegios ao executar scripts de lifecycle e o
+# install.cjs falha com EACCES ao sobrescrever o stub — o `claude` fica
+# instalado mas inutilizavel ("claude native binary not installed"). Chamar o
+# install.cjs explicitamente como root corrige; `claude --version` faz o build
+# falhar aqui em vez de so quebrar no bootstrap do container.
 RUN npm install -g npm@latest \
- && npm install -g @anthropic-ai/claude-code@latest
+ && npm install -g @anthropic-ai/claude-code@latest \
+ && node "$(npm root -g)/@anthropic-ai/claude-code/install.cjs" \
+ && claude --version
 
 # --- Projeto 42 (libft): toolchain C + man pages + norminette ---
 

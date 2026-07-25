@@ -23,6 +23,14 @@ npx sandbox-vibe up           # sobe o container e entra no Claude
 npx sandbox-vibe up --shell   # ou apenas um shell
 ```
 
+Cada `up` cria um container **novo** (`docker compose run --rm`) — não anexa a
+um já em execução. Para abrir um shell adicional no container que já está
+rodando (ex.: compilar enquanto o Claude trabalha):
+
+```bash
+docker exec -it "$(docker ps -q -f name=dojo-sandbox | head -1)" bash -l
+```
+
 ## Clonando (com submódulos)
 
 O tester de terceiros `libft-god` é um submódulo git:

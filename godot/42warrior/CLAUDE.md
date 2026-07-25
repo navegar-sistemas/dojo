@@ -132,3 +132,12 @@ dar negativo — nunca como atalho que pula a verificação).
 | `agente-tech-lead` | 42warrior | `83f9ca41ecc2625ff2a5348fbaf3bf0a905a31d16b93c796` |
 | `agente-po` | 42warrior | `c307e9414927c2df073a7706f0f0dd92dd22136e699cf4ee` |
 | `agente-spec` | 42warrior | `bc0cbc08047523ecf48198ff058e39732fc01f0fc7cadc67` |
+
+> **`42warrior` — SEGUNDO agente de desenvolvimento (par do `agente-dev`).** Correção do Usuário
+> (2026-06-28): o segundo dev SEMPRE foi o `42warrior` — está VIVO e ativo (entregou T-160/T-161/T-162
+> e o fix da F4/T-172 da feature 016). O registro anterior dizendo "`42warrior` morreu, substituído por
+> `agente-dev-two`" estava ERRADO; `agente-dev-two` é uma identidade equivocada que nunca produziu
+> trabalho (branch parada). Mesmo papel que `agente-dev`: implementa código/testes nas worktrees de
+> feature e faz os gates ficarem verdes, em features/worktrees **DISJUNTAS** do `agente-dev` (nunca os
+> dois na mesma worktree, p/ não conflitar). **Endereçe `chat_post to:["42warrior"]`** ao distribuir
+> trabalho de código ao segundo dev (NÃO `agente-dev-two`). Dois devs em paralelo: `agente-dev` + `42warrior`.
