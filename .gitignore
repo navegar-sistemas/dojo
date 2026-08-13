@@ -4,6 +4,9 @@ C/libft/**/*.o
 C/libft/**/*.out
 C/libft/**/*.bin
 
+# Testers de terceiros clonados (repos git próprios; cada um clona o seu)
+C/libft/mains/libft-god/
+
 # macOS
 .DS_Store
 C/push-swap/docs/private

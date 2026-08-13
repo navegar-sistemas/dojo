@@ -4,8 +4,8 @@
 
 | # | Tarefa | Depende de | Entrega | Estado |
 |---|---|---|---|---|
-| [T01](T01-esqueleto-build.md) | Esqueleto de build | — | `Makefile`, `push_swap.h`, `libft/` | [ ] |
-| [T02](T02-pilha.md) | Pilha | T01 | `stack.c` | [ ] |
+| [T01](T01-esqueleto-build.md) | Esqueleto de build | — | `Makefile`, `push_swap.h`, `libft/` | [x] |
+| [T02](T02-pilha.md) | Pilha | T01 | `stack.c` | [x] |
 | [T03](T03-operacoes.md) | Operações e emissão | T02 | `emit.c`, `ops_*.c` | [ ] |
 | [T04](T04-parsing.md) | Parsing e validação | T02 | `parse.c`, `parse_utils.c` | [ ] |
 | [T05](T05-orquestracao.md) | Orquestração do `main` | T03, T04 | `main.c`, `utils.c` (`zero_counts`) | [ ] |
@@ -37,6 +37,13 @@ Cada arquivo tem:
 - **Especificação** — links para os documentos que definem o comportamento.
 - **Implementação** — o que fazer, na granularidade de função.
 - **Pronto quando** — comandos com a saída esperada. Todos verdes, sem exceção.
+
+## Header incremental
+
+`push_swap.h` nasce mínimo em T01 (apenas a guarda de inclusão) e cresce junto com as tarefas: a
+tarefa que cria um tipo ou função pública é a que acrescenta a declaração ao header, guiada
+por [tipos.md](../03-arquitetura/tipos.md) e [modulos.md](../03-arquitetura/modulos.md).
+Nenhuma tarefa transcreve declarações de código que ainda não existe.
 
 ## Regra de conclusão
 
