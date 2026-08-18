@@ -4,7 +4,8 @@ CFLAGS 	= -Wall -Wextra -Werror
 LIBFT	= libft/libft.a
 
 SRCS	= main.c \
-			stack.c 
+			utils.c \
+			validate.c
 OBJS	= $(SRCS:.c=.o)
 
 all: $(NAME)

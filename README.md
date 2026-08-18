@@ -31,6 +31,36 @@ rodando (ex.: compilar enquanto o Claude trabalha):
 docker exec -it "$(docker ps -q -f name=dojo-sandbox | head -1)" bash -l
 ```
 
+## Atualizando as dependências
+
+`npm`, `@anthropic-ai/claude-code`, o toolchain C e a `norminette` vêm da
+**imagem**, presos em `@latest` no momento do build. O cache de camadas do
+Docker faz `up`/`build` reaproveitarem a versão antiga; para puxar as novas:
+
+```bash
+npx sandbox-vibe@latest build --no-cache   # reconstrói as imagens do zero
+npx sandbox-vibe up                        # entra no container já atualizado
+```
+
+Conferir o que ficou na imagem:
+
+```bash
+docker run --rm --entrypoint sh sandbox-vibe:dojo -c 'claude --version'
+```
+
+Atualizar de dentro do container não adianta: o `claude` fica em
+`/usr/local/lib` (imagem), e cada `up` cria um container novo com `--rm`.
+
+### As sessões do Claude sobrevivem ao rebuild
+
+Histórico, `~/.claude/projects`, credenciais e plugins moram no volume
+`sandbox-vibe_dojo-sandbox-home`, montado em `/home/sandbox` — separado da
+imagem. Reconstruir a imagem não o toca.
+
+O único comando que apaga esses dados é `npx sandbox-vibe reset --all`. Para
+reinstalar plugins/MCPs preservando as sessões, use
+`npx sandbox-vibe reset --marker` (ou `npx sandbox-vibe bump-marker`).
+
 ## Clonando (com submódulos)
 
 O tester de terceiros `libft-god` é um submódulo git:

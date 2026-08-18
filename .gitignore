@@ -10,3 +10,10 @@ C/libft/mains/libft-god/
 # macOS
 .DS_Store
 C/push-swap/docs/private
+
+# Artefatos de build do push-swap (gerados; nunca versionar)
+C/push-swap/**/*.a
+C/push-swap/**/*.o
+C/push-swap/**/*.out
+C/push-swap/**/*.bin
+C/push-swap/project/push_swap
