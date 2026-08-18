@@ -17,7 +17,7 @@ sort_adaptive(c, conf, d):
 `Adaptive / O(n log n)` ou `Adaptive / O(n²)` conforme o caminho tomado. A sobrescrita do nome
 acontece **depois** da chamada, porque a rota grava os dois campos.
 
-Os limiares e as classes exigidas em cada faixa vêm do enunciado:
+Limiares e classe exigida por faixa:
 
 | Desordem | Classe exigida | Rota |
 |---|---|---|
@@ -51,8 +51,9 @@ distribuição. Em 40 amostras por tamanho:
 | 100 | 0.4335 – 0.5715 | 22 medium, 18 complex |
 | 500 | 0.4648 – 0.5312 | 20 medium, 20 complex |
 
-O benchmark oficial usa entrada aleatória, então **medium e complex precisam ambos bater as
-metas** — qual dos dois roda depende do sorteio, e não há como escolher.
+O benchmark de desempenho ([../06-aceitacao/desempenho.md](../06-aceitacao/desempenho.md))
+usa entrada aleatória, então **medium e complex precisam ambos bater as metas** — qual dos dois
+roda depende do sorteio, e não há como escolher.
 
 ## Resultado combinado
 

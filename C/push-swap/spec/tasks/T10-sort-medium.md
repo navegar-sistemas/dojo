@@ -117,7 +117,7 @@ make re
 norminette *.c *.h
 ```
 
-**A2 — o exemplo do enunciado, movimento a movimento:**
+**A2 — movimento a movimento:**
 
 ```bash
 [ "$(./push_swap --medium 4 67 3 87 23 | tr '\n' ' ')" = "pb ra pb ra pb pb pb pa pa pa rb pa pa " ] \
@@ -130,8 +130,7 @@ norminette *.c *.h
 for n in 100 500; do
   pior=0; i=0
   while [ $i -lt 20 ]; do
-    ARG=$(shuf -i 1-10000 -n $n | tr '
-' ' ')
+    ARG=$(shuf -i 1-10000 -n $n | tr '\n' ' ')
     m=$(./push_swap --medium $ARG | wc -l | tr -d ' ')
     [ "$m" -gt "$pior" ] && pior=$m
     i=$((i+1))
@@ -150,7 +149,7 @@ Pior caso acima de 8000 em n = 500 significa que `k` ou a fase 1 divergiram da s
 i=0; falhas=0
 while [ $i -lt 200 ]; do
   ARG=$(shuf -i 1-1000 -n $((RANDOM % 30 + 1)) | tr '\n' ' ')
-  [ "$(./push_swap --medium $ARG | ./assets/checker_linux $ARG)" = "OK" ] || { echo "FALHOU: $ARG"; falhas=$((falhas+1)); }
+  [ "$(./push_swap --medium $ARG | ../assets/checker_linux $ARG)" = "OK" ] || { echo "FALHOU: $ARG"; falhas=$((falhas+1)); }
   i=$((i+1))
 done
 echo "falhas: $falhas"
@@ -160,10 +159,9 @@ echo "falhas: $falhas"
 
 ```bash
 for n in 1 2 3 4 5 6 7 8 9 10 11 12 13 49 50 51; do
-  ARG=$(shuf -i 1-10000 -n $n | tr '
-' ' ')
+  ARG=$(shuf -i 1-10000 -n $n | tr '\n' ' ')
   echo -n "n=$n: "
-  ./push_swap --medium $ARG | ./assets/checker_linux $ARG
+  ./push_swap --medium $ARG | ../assets/checker_linux $ARG
 done
 ```
 

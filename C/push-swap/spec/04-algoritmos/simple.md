@@ -36,7 +36,7 @@ rotate_a_to_top(c, i):
 ## O critério de desempate é observável
 
 `i <= size / 2` com divisão inteira: no empate, escolhe `ra`. Isso não é detalhe estético — é o
-que reproduz exatamente a saída de referência do enunciado.
+que reproduz exatamente a saída fixada no caso A1.
 
 Rodando `--simple 5 4 3 2 1`:
 
@@ -49,7 +49,7 @@ Rodando `--simple 5 4 3 2 1`:
 | 5 | `5` | 0 | 1 | `0 <= 0` → nada | `pb` |
 | — | devolução | | | | `pa` × 5 |
 
-Resultado: `rra pb rra pb rra pb ra pb pb pa pa pa pa pa`, 14 movimentos, idêntico ao enunciado.
+Resultado: `rra pb rra pb rra pb ra pb pb pa pa pa pa pa`, 14 movimentos, idêntico ao caso A1.
 A rodada 4 é a que discrimina: com `i < size / 2` em vez de `i <= size / 2`, sairia `rra` no
 lugar de `ra`.
 

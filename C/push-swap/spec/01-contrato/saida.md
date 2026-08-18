@@ -45,8 +45,7 @@ causa, sem ponto final. Sempre em stderr, nunca em stdout.
 ./push_swap 0 one 2 3 1>/dev/null    # imprime Error
 ```
 
-O código de saída em erro não é verificado pelo enunciado; 1 é a escolha deste projeto e vale
-para todos os casos de erro, inclusive falha de alocação.
+O código de saída em erro é 1 e vale para todos os casos, inclusive falha de alocação.
 
 ## Falha de alocação
 
@@ -61,7 +60,7 @@ A receita vai para o descritor 1 e as métricas para o 2, o que permite consumir
 separadamente na mesma execução:
 
 ```bash
-./push_swap --bench $(cat args.txt) 2> bench.txt | ./assets/checker_linux $(cat args.txt)
+./push_swap --bench $(cat args.txt) 2> bench.txt | ../assets/checker_linux $(cat args.txt)
 ```
 
 Relacionado: [bench.md](bench.md) para o formato das métricas.

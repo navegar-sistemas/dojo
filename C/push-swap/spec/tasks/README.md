@@ -2,22 +2,22 @@
 
 ## Quadro
 
-| # | Tarefa | Depende de | Entrega | Estado |
-|---|---|---|---|---|
-| [T01](T01-esqueleto-build.md) | Esqueleto de build | — | `Makefile`, `push_swap.h`, `libft/` | [x] |
-| [T02](T02-pilha.md) | Pilha | T01 | `stack.c` | [x] |
-| [T03](T03-operacoes.md) | Operações e emissão | T02 | `emit.c`, `ops_*.c` | [ ] |
-| [T04](T04-parsing.md) | Parsing e validação | T02 | `parse.c`, `parse_utils.c` | [ ] |
-| [T05](T05-orquestracao.md) | Orquestração do `main` | T03, T04 | `main.c`, `utils.c` (`zero_counts`) | [ ] |
-| [T06](T06-sort-tiny-simple.md) | Caso base e `--simple` | T05 | `sort_tiny.c`, `sort_simple.c`, `utils.c` | [ ] |
-| [T07](T07-desordem.md) | Desordem | T05 | `disorder.c` | [ ] |
-| [T08](T08-ranks.md) | Ranks | T02 | `rank.c` | [ ] |
-| [T09](T09-sort-complex.md) | `--complex` | T06, T08 | `sort_complex.c` | [ ] |
-| [T10](T10-sort-medium.md) | `--medium` | T06, T08 | `sort_medium.c` | [ ] |
-| [T11](T11-sort-adaptive.md) | `--adaptive` | T07, T09, T10 | `sort_adaptive.c` | [ ] |
-| [T12](T12-bench.md) | `--bench` | T11 | `bench.c` | [ ] |
-| [T13](T13-checker-bonus.md) | `checker` | T12 | `*_bonus.c` | [ ] |
-| [T14](T14-fechamento.md) | Fechamento | T13 | README, validação final | [ ] |
+| # | Tarefa | Depende de | Entrega |
+|---|---|---|---|
+| [T01](T01-esqueleto-build.md) | Esqueleto de build | — | `Makefile`, `push_swap.h`, `libft/` |
+| [T02](T02-pilha.md) | Pilha | T01 | `stack.c` |
+| [T03](T03-operacoes.md) | Operações e emissão | T02 | `emit.c`, `ops_*.c` |
+| [T04](T04-parsing.md) | Parsing e validação | T02 | `parse.c`, `parse_utils.c` |
+| [T05](T05-orquestracao.md) | Orquestração do `main` | T03, T04 | `main.c`, `utils.c` (`zero_counts`) |
+| [T06](T06-sort-tiny-simple.md) | Caso base e `--simple` | T05 | `sort_tiny.c`, `sort_simple.c`, `utils.c` |
+| [T07](T07-desordem.md) | Desordem | T05 | `disorder.c` |
+| [T08](T08-ranks.md) | Ranks | T02 | `rank.c` |
+| [T09](T09-sort-complex.md) | `--complex` | T06, T08 | `sort_complex.c` |
+| [T10](T10-sort-medium.md) | `--medium` | T06, T08 | `sort_medium.c` |
+| [T11](T11-sort-adaptive.md) | `--adaptive` | T07, T09, T10 | `sort_adaptive.c` |
+| [T12](T12-bench.md) | `--bench` | T11 | `bench.c` |
+| [T13](T13-checker-bonus.md) | `checker` | T12 | `*_bonus.c` |
+| [T14](T14-fechamento.md) | Fechamento | T13 | validação final |
 
 ## Ordem
 

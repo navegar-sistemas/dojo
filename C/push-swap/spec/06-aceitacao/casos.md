@@ -22,7 +22,7 @@ pa
 pa
 ```
 
-14 movimentos, nessa ordem exata. É a saída publicada no enunciado, e o que discrimina é o
+14 movimentos, nessa ordem exata, fixados como gabarito. O que discrimina é o
 critério de desempate `i <= size / 2` na rotação até o topo — ver
 [../04-algoritmos/simple.md](../04-algoritmos/simple.md).
 
@@ -31,7 +31,7 @@ critério de desempate `i <= size / 2` na rotação até o topo — ver
   && echo A1 ok || echo A1 FALHOU
 ```
 
-## A2 — `--adaptive` com o exemplo do enunciado
+## A2 — `--adaptive` com 5 elementos
 
 ```
 $ ./push_swap --adaptive 4 67 3 87 23 | wc -l

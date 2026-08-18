@@ -101,7 +101,7 @@ make re
 norminette *.c *.h
 ```
 
-**A1 — saída exata do enunciado:**
+**A1 — saída exata:**
 
 ```bash
 [ "$(./push_swap --simple 5 4 3 2 1 | tr '\n' ' ')" = "rra pb rra pb rra pb ra pb pb pa pa pa pa pa " ] \
@@ -124,7 +124,7 @@ done
 i=0; falhas=0
 while [ $i -lt 200 ]; do
   ARG=$(shuf -i 1-1000 -n $((RANDOM % 20 + 1)) | tr '\n' ' ')
-  [ "$(./push_swap --simple $ARG | ./assets/checker_linux $ARG)" = "OK" ] || { echo "FALHOU: $ARG"; falhas=$((falhas+1)); }
+  [ "$(./push_swap --simple $ARG | ../assets/checker_linux $ARG)" = "OK" ] || { echo "FALHOU: $ARG"; falhas=$((falhas+1)); }
   i=$((i+1))
 done
 echo "falhas: $falhas"
@@ -134,7 +134,7 @@ echo "falhas: $falhas"
 
 ```bash
 shuf -i 0-9999 -n 500 > args.txt
-./push_swap --simple $(cat args.txt) | ./assets/checker_linux $(cat args.txt)   # OK
+./push_swap --simple $(cat args.txt) | ../assets/checker_linux $(cat args.txt)   # OK
 ./push_swap --simple $(cat args.txt) | wc -l    # entre 30000 e 35000, é esperado
 ```
 

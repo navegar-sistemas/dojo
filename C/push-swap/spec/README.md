@@ -43,7 +43,7 @@
 
 | Documento | Conteúdo |
 |---|---|
-| [05-bonus/checker.md](05-bonus/checker.md) | o `checker` próprio, espelhando o binário de referência |
+| [05-bonus/checker.md](05-bonus/checker.md) | o `checker` próprio, espelhando o checker de referência |
 | [06-aceitacao/casos.md](06-aceitacao/casos.md) | entradas com saída exata esperada |
 | [06-aceitacao/desempenho.md](06-aceitacao/desempenho.md) | contagens medidas por estratégia e tamanho |
 | [06-aceitacao/validacao.md](06-aceitacao/validacao.md) | comandos de verificação |
@@ -52,7 +52,7 @@
 
 | Documento | Conteúdo |
 |---|---|
-| [tasks/README.md](tasks/README.md) | quadro das 14 tarefas, ordem, dependências e estado |
+| [tasks/README.md](tasks/README.md) | quadro das 14 tarefas, ordem e dependências |
 
 ## Convenções deste documento
 
@@ -62,7 +62,7 @@
   estimativas de complexidade.
 - "Movimento" e "operação" são a mesma coisa: uma das 11 siglas impressas em stdout.
 
-## Estado do repositório
+## Layout
 
-`project/` contém um `main.c` vazio. Nenhum módulo desta spec existe ainda. O ponto de partida
-é [tasks/T01-esqueleto-build.md](tasks/T01-esqueleto-build.md).
+- Implementação: `../project/`. Os comandos desta spec rodam de dentro dela.
+- Checker de referência: executável em `../assets/checker_linux`, gabarito da validação.

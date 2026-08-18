@@ -43,8 +43,8 @@ troca apenas o nome e preserva a classe, que é o que faz o `--bench` imprimir
 **A desordem chega pronta do `main`**, medida antes de qualquer movimento e antes da conversão
 em ranks. Recalcular aqui daria valor errado se a pilha já tivesse sido convertida.
 
-**Os limiares são do enunciado**, com `<` estrito nos dois cortes: `0.2` exato cai na rota
-O(n√n), `0.5` exato cai na O(n log n).
+**Os limiares são os do contrato** ([adaptive.md](../04-algoritmos/adaptive.md)), com `<`
+estrito nos dois cortes: `0.2` exato cai na rota O(n√n), `0.5` exato cai na O(n log n).
 
 No `main`, `run_strategy` passa a chamar `sort_adaptive` para `STRAT_ADAPTIVE`, removendo o
 desvio provisório para `sort_simple` do T06.
@@ -87,8 +87,7 @@ echo "simple:   $(./push_swap --simple $ARG | wc -l)"
 for n in 100 500; do
   pior=0; i=0
   while [ $i -lt 20 ]; do
-    ARG=$(shuf -i 1-10000 -n $n | tr '
-' ' ')
+    ARG=$(shuf -i 1-10000 -n $n | tr '\n' ' ')
     m=$(./push_swap $ARG | wc -l | tr -d ' ')
     [ "$m" -gt "$pior" ] && pior=$m
     i=$((i+1))
@@ -105,7 +104,7 @@ done
 shuf -i 0-9999 -n 500 > args.txt
 for f in --simple --medium --complex --adaptive; do
   echo -n "$f: "
-  ./push_swap $f $(cat args.txt) | ./assets/checker_linux $(cat args.txt)
+  ./push_swap $f $(cat args.txt) | ../assets/checker_linux $(cat args.txt)
 done
 ```
 

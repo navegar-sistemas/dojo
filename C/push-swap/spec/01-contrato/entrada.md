@@ -37,8 +37,8 @@ números:
 ./push_swap "4 67" 3     # idem
 ```
 
-Um argumento que produza **zero** tokens após a divisão é erro. Isso cobre `""` e `"   "`, e é
-o caso `./checker "" 1` do enunciado.
+Um argumento que produza **zero** tokens após a divisão é erro. Isso cobre `""` e `"   "`,
+no `push_swap` e no `checker` (`./checker "" 1` é erro).
 
 A ordem final é a ordem de leitura da esquerda para a direita, achatando as divisões: o
 primeiro token do primeiro argumento é o topo da pilha `a`.

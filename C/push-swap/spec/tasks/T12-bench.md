@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Bloco de métricas em stderr, byte a byte no formato do enunciado.
+Bloco de métricas em stderr, byte a byte no formato do contrato.
 
 ## Depende de
 
@@ -75,7 +75,7 @@ make re
 norminette *.c *.h
 ```
 
-**A2 — comparação byte a byte com o enunciado:**
+**A2 — comparação byte a byte:**
 
 ```bash
 ./push_swap --bench --adaptive 4 67 3 87 23 2> /tmp/meu.txt >/dev/null

@@ -1,7 +1,7 @@
 # `checker` (bônus)
 
 Programa separado que **executa** a receita em vez de calculá-la. Espelha o comportamento do
-binário de referência em `assets/`.
+binário de referência em `../assets/`.
 
 ## Contrato
 
@@ -23,7 +23,7 @@ As regras de validação dos argumentos são as mesmas do `push_swap`
 ([../01-contrato/entrada.md](../01-contrato/entrada.md)), incluindo a divisão por espaços que
 faz `./checker "" 1` ser erro.
 
-Esses valores foram observados no binário de referência `assets/checker_linux`, e são o alvo do
+Esses valores foram observados no binário de referência `../assets/checker_linux`, e são o alvo do
 programa próprio.
 
 ## Instruções aceitas
@@ -112,9 +112,8 @@ read_all(fd):
 `grow` existe porque a realocação embutida em `read_all` levaria o corpo a 27 linhas. São
 quatro parâmetros — o teto da norma.
 
-Ler tudo antes de aplicar é o que o enunciado descreve ("depois que todas as instruções forem
-lidas, o programa deve executá-las"). Também simplifica o tratamento de erro: uma instrução
-inválida no meio aborta antes de qualquer aplicação.
+Ler tudo antes de aplicar simplifica o tratamento de erro: uma instrução inválida no meio
+aborta antes de qualquer aplicação.
 
 `read` devolvendo `-1` é tratado como erro. `0` é o EOF normal.
 
@@ -160,7 +159,7 @@ for caso in "3 2 1|sa
 rra" "3 2 1|sa" "1 2 3|" "3 2 one|" "|"; do
   args="${caso%%|*}"; ops="${caso#*|}"
   meu=$(printf '%s\n' "$ops" | ./checker $args 2>&1; echo "exit=$?")
-  ref=$(printf '%s\n' "$ops" | ./assets/checker_linux $args 2>&1; echo "exit=$?")
+  ref=$(printf '%s\n' "$ops" | ../assets/checker_linux $args 2>&1; echo "exit=$?")
   [ "$meu" = "$ref" ] && echo "OK  $args" || echo "DIFERE  $args: meu=[$meu] ref=[$ref]"
 done
 ```

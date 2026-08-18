@@ -102,11 +102,11 @@ make re
 norminette *.c *.h
 ```
 
-Sequência de referência do enunciado: partindo de `2 1 3 6 5 8`, a receita
+Sequência de verificação: partindo de `2 1 3 6 5 8`, a receita
 `sa pb pb pb ra rb rra rrb sa pa pa pa` precisa deixar `a = 1 2 3 5 6 8` e `b` vazia.
 
 ```bash
-./push_swap 2 1 3 6 5 8 | ./assets/checker_linux 2 1 3 6 5 8    # OK
+./push_swap 2 1 3 6 5 8 | ../assets/checker_linux 2 1 3 6 5 8    # OK
 ./push_swap 2 1 3 6 5 8 | wc -l                                # 12
 ./push_swap 2 1 3 6 5 8 | cat -A                               # só siglas e $
 ```

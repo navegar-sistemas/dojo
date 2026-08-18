@@ -40,8 +40,8 @@ mínimo descrita em [../03-arquitetura/decisoes.md](../03-arquitetura/decisoes.m
 escopo desta spec.
 
 **`--simple` com 500 elementos estoura todos os limites por larga margem.** Isso não é defeito:
-a flag força explicitamente a rota O(n²), e o enunciado exige que ela funcione em qualquer
-entrada, não que bata as metas. O `--adaptive` só a escolhe quando a desordem é menor que 0.2,
+a flag força explicitamente a rota O(n²), e o que se exige dela é funcionar em qualquer
+entrada, não bater as metas. O `--adaptive` só a escolhe quando a desordem é menor que 0.2,
 regime em que ela custa de 294 a 4225 movimentos.
 
 ## Margem para regressão

@@ -11,8 +11,11 @@ make bonus && make bonus     # idem
 
 ## Checker de referência
 
+Os comandos rodam do diretório da implementação; o gabarito executável fica em
+`../assets/checker_linux`.
+
 ```bash
-chmod +x assets/checker_linux
+chmod +x ../assets/checker_linux
 ```
 
 ## Corretude
@@ -22,7 +25,7 @@ i=0
 falhas=0
 while [ $i -lt 200 ]; do
   ARG=$(shuf -i 1-1000 -n $((RANDOM % 20 + 1)) | tr '\n' ' ')
-  r=$(./push_swap $ARG | ./assets/checker_linux $ARG)
+  r=$(./push_swap $ARG | ../assets/checker_linux $ARG)
   [ "$r" = "OK" ] || { echo "FALHOU: $ARG"; falhas=$((falhas + 1)); }
   i=$((i + 1))
 done
@@ -33,19 +36,18 @@ Cobertura por tamanho, incluindo as bordas:
 
 ```bash
 for n in 1 2 3 4 5 6 7 10 50 100 500; do
-  ARG=$(shuf -i 1-10000 -n $n | tr '
-' ' ')
+  ARG=$(shuf -i 1-10000 -n $n | tr '\n' ' ')
   echo -n "n=$n: "
-  ./push_swap $ARG | ./assets/checker_linux $ARG
+  ./push_swap $ARG | ../assets/checker_linux $ARG
 done
 ```
 
 Casos degenerados:
 
 ```bash
-./push_swap 1 2 3 4 5 | ./assets/checker_linux 1 2 3 4 5     # já ordenada
-./push_swap 5 4 3 2 1 | ./assets/checker_linux 5 4 3 2 1     # inversa
-./push_swap -2147483648 2147483647 0 | ./assets/checker_linux -2147483648 2147483647 0
+./push_swap 1 2 3 4 5 | ../assets/checker_linux 1 2 3 4 5     # já ordenada
+./push_swap 5 4 3 2 1 | ../assets/checker_linux 5 4 3 2 1     # inversa
+./push_swap -2147483648 2147483647 0 | ../assets/checker_linux -2147483648 2147483647 0
 ```
 
 ## Cada estratégia em entrada grande
@@ -57,7 +59,7 @@ milhares de linhas — é esperado.
 shuf -i 0-9999 -n 500 > args.txt
 for f in --simple --medium --complex --adaptive; do
   echo -n "$f: "
-  ./push_swap $f $(cat args.txt) | ./assets/checker_linux $(cat args.txt)
+  ./push_swap $f $(cat args.txt) | ../assets/checker_linux $(cat args.txt)
 done
 ```
 

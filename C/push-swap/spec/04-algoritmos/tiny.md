@@ -43,9 +43,9 @@ rotações — as operações mexem no conteúdo do buffer, não realocam.
 ## Por que 3 e não 5
 
 O limite maior seria melhor em contagem de movimentos, e é o que a maioria das implementações
-de push_swap faz. Aqui ele é 3 porque o enunciado publica a saída exata de
-`./push_swap --simple 5 4 3 2 1`: 14 movimentos do selection sort completo. Um caso especial em
-n = 5 mudaria essa saída e destruiria a única verificação exata disponível para o `--simple`
+de push_swap faz. Aqui ele é 3 porque a saída exata de `./push_swap --simple 5 4 3 2 1` — 14
+movimentos do selection sort completo — está fixada como caso A1. Um caso especial em n = 5
+mudaria essa saída e destruiria a única verificação exata disponível para o `--simple`
 (ver [../06-aceitacao/casos.md](../06-aceitacao/casos.md)).
 
 ## Ganho

@@ -21,9 +21,8 @@
 - Sem nenhum seletor de estratégia, vale `--adaptive`.
 - `--bench` combina com qualquer seletor, e também sozinho.
 - Dois seletores **diferentes** na mesma linha é erro: a intenção é ambígua.
-- Repetir o **mesmo** seletor (`--simple --simple`) é aceito, assim como repetir `--bench`.
-  Não há ambiguidade, e o enunciado não pede erro. A regra é: só é erro o que não dá para
-  resolver.
+- Repetir o **mesmo** seletor (`--simple --simple`) é aceito, assim como repetir `--bench`:
+  não há ambiguidade. A regra é: só é erro o que não dá para resolver.
 - Qualquer token que comece com `--` e não esteja na tabela é erro, inclusive `--` sozinho.
 
 Um token que começa com `-` seguido de dígito (`-42`) é um número negativo, não uma flag. A

@@ -100,7 +100,7 @@ done    # três vezes 6784
 i=0; falhas=0
 while [ $i -lt 200 ]; do
   ARG=$(shuf -i 1-1000 -n $((RANDOM % 30 + 1)) | tr '\n' ' ')
-  [ "$(./push_swap --complex $ARG | ./assets/checker_linux $ARG)" = "OK" ] || { echo "FALHOU: $ARG"; falhas=$((falhas+1)); }
+  [ "$(./push_swap --complex $ARG | ../assets/checker_linux $ARG)" = "OK" ] || { echo "FALHOU: $ARG"; falhas=$((falhas+1)); }
   i=$((i+1))
 done
 echo "falhas: $falhas"
@@ -110,10 +110,9 @@ echo "falhas: $falhas"
 
 ```bash
 for n in 1 2 3 4 5 7 8 9 15 16 17 31 32 33 255 256 257; do
-  ARG=$(shuf -i 1-10000 -n $n | tr '
-' ' ')
+  ARG=$(shuf -i 1-10000 -n $n | tr '\n' ' ')
   echo -n "n=$n: "
-  ./push_swap --complex $ARG | ./assets/checker_linux $ARG
+  ./push_swap --complex $ARG | ../assets/checker_linux $ARG
 done
 ```
 
@@ -121,7 +120,7 @@ done
 
 ```bash
 ARG="-2147483648 2147483647 0 -1 1"
-./push_swap --complex $ARG | ./assets/checker_linux $ARG    # OK
+./push_swap --complex $ARG | ../assets/checker_linux $ARG    # OK
 ```
 
 ```bash

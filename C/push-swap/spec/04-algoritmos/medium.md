@@ -128,8 +128,6 @@ bloco e girar pelo caminho mais curto. Nas mesmas amostras de 500 elementos com 
 desorganiza a ordem em que os elementos chegam em `b` e encarece a fase 2 mais do que economiza
 na fase 1.
 
-O perfil do enunciado confirma: `rra: 0` na saída de referência para 500 elementos.
-
 ## Traço do caso de aceitação
 
 `4 67 3 87 23` → ranks `1 3 0 4 2`, n = 5, k = 2, width = 3.
@@ -149,7 +147,7 @@ O perfil do enunciado confirma: `rra: 0` na saída de referência para 500 eleme
 `pa`.
 
 Total: `pb ra pb ra pb pb pb pa pa pa rb pa pa` — 13 movimentos, com `pa: 5`, `pb: 5`, `ra: 2`,
-`rb: 1`, exatamente o perfil publicado no enunciado.
+`rb: 1`, exatamente o perfil do caso A2 ([../06-aceitacao/casos.md](../06-aceitacao/casos.md)).
 
 ## Custo e contagens medidas
 

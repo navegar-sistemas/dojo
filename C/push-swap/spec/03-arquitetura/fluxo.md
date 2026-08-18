@@ -96,10 +96,11 @@ static int	cleanup(t_ctx *c)
 
 ## Ordens que não podem ser trocadas
 
-**A desordem é medida antes de `build_ranks`.** O enunciado exige a medida antes de qualquer
+**A desordem é medida antes de `build_ranks`.** O contrato fixa a medida antes de qualquer
 movimento; medir também antes da conversão elimina a dúvida. Os dois valores seriam idênticos —
 a função valor → rank é estritamente crescente, então preserva todas as comparações par a par —
-mas a ordem escrita é a que corresponde literalmente ao pseudocódigo do enunciado.
+mas a ordem escrita corresponde literalmente ao pseudocódigo de
+[../04-algoritmos/desordem.md](../04-algoritmos/desordem.md).
 
 **`build_ranks` roda no `main`, não dentro das estratégias.** É a única alocação depois do
 parsing, e é aqui que existe caminho de erro: as funções `sort_*` devolvem `void` e não têm como

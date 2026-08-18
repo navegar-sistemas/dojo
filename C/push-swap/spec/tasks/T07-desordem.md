@@ -77,7 +77,7 @@ Um `main` temporário ou a inspeção via T12 precisa reproduzir:
 | `42` | 0.0000 |
 | nenhum elemento | 0.0000 |
 
-O valor de `4 67 3 87 23` é o que aparece como `40.00%` no `--bench` do enunciado — confirma de
+O valor de `4 67 3 87 23` é o que aparece como `40.00%` no `--bench` do caso A2 — confirma de
 uma vez a fórmula e a conversão para porcentagem que vem em T12.
 
 Faixa em entrada aleatória, para conferir que a medida não está saturando em 0 ou 1:

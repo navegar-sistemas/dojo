@@ -1,6 +1,6 @@
 # Decisões de desenho
 
-Escolhas que não são óbvias a partir do enunciado, com a evidência que as sustenta.
+Escolhas que não são óbvias a partir do contrato, com a evidência que as sustenta.
 
 ## Pilha em array, não em lista encadeada
 
@@ -42,8 +42,9 @@ um `pa`:
 | `--complex` | `ra` ou `pb` alternando, depois `pa` em sequência |
 
 Nunca aparecem `ra` e `rra` adjacentes, nem `ra` e `rb` adjacentes — e sem `a` e `b` girando ao
-mesmo tempo, `rr`, `rrr` e `ss` nunca são gerados. O `--bench` de referência do enunciado
-confirma o mesmo perfil: `rr: 0`, `rrr: 0`, `ss: 0`.
+mesmo tempo, `rr`, `rrr` e `ss` nunca são gerados. O perfil de contagens do caso A2
+([../06-aceitacao/casos.md](../06-aceitacao/casos.md)) mostra o mesmo: `rr`, `rrr` e `ss`
+zerados.
 
 Um otimizador aqui seria código morto que ainda assim precisaria passar na norma e no teste.
 Ele só passa a valer a pena junto com uma estratégia gulosa, que gira as duas pilhas em direção
@@ -51,54 +52,29 @@ a um alvo comum e produz `rr`/`rrr` naturalmente.
 
 ## Caso base em n ≤ 3, não em n ≤ 5
 
-As quatro estratégias delegam para `sort_tiny` quando restam 3 elementos ou menos.
-
-O limite é 3 e não 5 por causa do exemplo de referência do enunciado: `--simple 5 4 3 2 1`
-produz 14 movimentos rodando o selection sort completo. Um caso especial em n ≤ 5 mudaria essa
-saída e perderia a única verificação exata que existe para o `--simple`.
-
-Sem o caso base, as estratégias gastam muito em entradas mínimas — `--simple` com `3 2 1`
-gastaria 8 movimentos, e `--complex` com `3 1 2` gastaria 10. Com ele, o pior caso de 3
-elementos é 2 movimentos, medido sobre as 6 permutações.
+As quatro estratégias delegam para `sort_tiny` quando restam 3 elementos ou menos. O limite é
+3, e não os 5 usuais, para preservar a saída exata do caso A1: o selection sort completo
+rodando em `--simple 5 4 3 2 1` é a única verificação exata do `--simple`. Números e ganho em
+[../04-algoritmos/tiny.md](../04-algoritmos/tiny.md).
 
 ## Número de blocos do chunk sort: `max(2, isqrt(n / 2))`
 
-A escolha aparentemente natural, `k = isqrt(n)`, não é a melhor. Varrendo k sobre 8 entradas
-aleatórias de 500 elementos:
-
-| k | movimentos |
-|---|---|
-| 11 | 7317 – 7714 |
-| 14 | **7049 – 7442** |
-| 16 | 7221 – 7530 |
-| 20 | 7751 – 8186 |
-| 22 = `isqrt(500)` | 7940 – 8258 |
-| 25 | 8526 – 8735 |
-
-O mesmo em 15 entradas de 100 elementos aponta k = 7, contra `isqrt(100) = 10`.
-
-`isqrt(n / 2)` dá 15 para n = 500 e 7 para n = 100 — nos dois casos em cima do ótimo medido. O
-piso de 2 preserva o comportamento em entradas pequenas, incluindo o exemplo de 5 elementos do
-enunciado. Dedução do formato em [../04-algoritmos/medium.md](../04-algoritmos/medium.md).
-
-Consequência prática: com `isqrt(n)` o pior caso de 500 elementos passa de 8000 e o projeto fica
-em "passa"; com `isqrt(n / 2)` fica em 7576 e alcança "bom".
+A escolha aparentemente natural, `k = isqrt(n)`, não é a melhor: com ela o pior caso de 500
+elementos passa de 8000 movimentos e o projeto cai para a faixa "passa"; com `isqrt(n / 2)`
+fica em ~7590 e alcança "bom". A varredura de k que sustenta a escolha e o papel do piso de 2
+estão em [../04-algoritmos/medium.md](../04-algoritmos/medium.md).
 
 ## Fase 1 do chunk sort só com `ra`
 
 Girar sempre para cima é mais simples **e** mais barato que escolher o caminho mais curto até o
-próximo membro do bloco. Medido nas mesmas amostras de 500 elementos, com k entre 14 e 16, a
-versão que usa `ra`/`rra` pelo caminho mais curto gasta em média na ordem de 100 a 200
-movimentos a mais; amostras isoladas podem inverter o sinal, mas o pior caso — que é o que o
-benchmark mede — ficou com a variante de caminho mais curto em todas as rodadas medidas.
-
-A razão é que girar para trás embaralha a ordem em que os elementos chegam em `b`, encarecendo
-a fase 2 mais do que economiza na fase 1.
+próximo membro do bloco: girar para trás embaralha a ordem em que os elementos chegam em `b` e
+encarece a fase 2 mais do que economiza na fase 1. Medições em
+[../04-algoritmos/medium.md](../04-algoritmos/medium.md).
 
 ## Tabela de nomes por cadeia de `if`
 
 Ver [../02-restricoes/norma.md](../02-restricoes/norma.md): array local com inicializador viola
-`DECL_ASSIGN_LINE` e tabela em escopo de arquivo é variável global, proibida pelo enunciado. A
+`DECL_ASSIGN_LINE` e tabela em escopo de arquivo é variável global, proibida neste projeto. A
 cadeia de 11 `if` cabe em 23 linhas.
 
 ## Radix como estratégia O(n log n), não guloso

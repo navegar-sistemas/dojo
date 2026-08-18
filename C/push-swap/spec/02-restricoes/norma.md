@@ -4,7 +4,7 @@ Regras da `norminette 3.3.59`, com o identificador do erro que cada violação p
 
 | Regra | Erro |
 |---|---|
-| Header 42 no topo de todo `.c` e `.h` | `INVALID_HEADER` |
+| Cabeçalho padrão no topo de todo `.c` e `.h` | `INVALID_HEADER` |
 | Máximo 5 funções por arquivo, contando as `static` | `TOO_MANY_FUNCS` |
 | Máximo 25 linhas no corpo de uma função | `TOO_MANY_LINES` |
 | Máximo 4 parâmetros por função | `TOO_MANY_ARGS` |
@@ -15,8 +15,8 @@ Regras da `norminette 3.3.59`, com o identificador do erro que cada violação p
 | Espaço onde se espera tabulação e vice-versa | `TAB_REPLACE_SPACE`, `SPACE_REPLACE_TAB` |
 
 Variável em escopo de arquivo produz o aviso `GLOBAL_VAR_DETECTED`, que a norminette classifica
-como *Notice* e não como erro — mas o enunciado do push_swap proíbe variáveis globais
-explicitamente, então elas continuam fora.
+como *Notice* e não como erro — mas este projeto proíbe variáveis globais, então elas
+continuam fora.
 
 ## O que isso impõe ao desenho
 
@@ -57,12 +57,12 @@ Onze pares mais o retorno final dão 23 linhas de corpo, dentro do limite. As du
 mais naturais não passam:
 
 - `char *names[] = {"sa", "sb", ...};` dentro da função viola `DECL_ASSIGN_LINE`.
-- A mesma tabela em escopo de arquivo é variável global, proibida pelo enunciado.
+- A mesma tabela em escopo de arquivo é variável global, proibida neste projeto.
 
-## Header 42
+## Cobertura
 
-Os arquivos de bônus entram na checagem da norma junto com os obrigatórios. Um erro de norma
-em qualquer arquivo, inclusive `_bonus`, zera o projeto.
+Os arquivos de bônus entram na checagem da norma junto com os obrigatórios, cabeçalho padrão
+incluído. Nenhum arquivo, nem os `_bonus`, pode ter linha `Error:`.
 
 ## Verificação
 

@@ -163,7 +163,7 @@ Casos silenciosos (A6):
 Aceitação de números colados num argumento:
 
 ```bash
-./push_swap "4 67 3" 87 23 | ./assets/checker_linux 4 67 3 87 23    # OK (após T06)
+./push_swap "4 67 3" 87 23 | ../assets/checker_linux 4 67 3 87 23    # OK (após T06)
 ```
 
 Memória em todos os caminhos de erro:

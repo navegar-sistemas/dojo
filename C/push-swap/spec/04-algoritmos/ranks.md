@@ -58,7 +58,7 @@ sinal em valores negativos.
 
 A conversão não emite nenhum movimento. A classe declarada de cada estratégia conta apenas
 movimentos push_swap, então o insertion sort interno não entra em O(n²) do `--medium` nem do
-`--complex`. Esse é o modelo de custo definido pelo enunciado.
+`--complex`. Esse é o modelo de custo deste projeto.
 
 ## Momento da chamada
 

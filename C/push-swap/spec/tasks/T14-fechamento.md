@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Projeto inteiro verde e entregável.
+Projeto inteiro verde na bateria completa de validação.
 
 ## Depende de
 
@@ -10,8 +10,7 @@ T13.
 
 ## Arquivos
 
-- `README.md` na raiz do repositório
-- Nenhuma alteração de código, salvo o que a validação apontar
+- Nenhuma alteração de código, salvo o que a validação apontar.
 
 ## Especificação
 
@@ -24,30 +23,7 @@ T13.
 ### Limpeza
 
 Remover todo `main` temporário criado nas tarefas anteriores, qualquer arquivo de teste que não
-faça parte da entrega, e arquivos gerados (`a100.txt`, `a500.txt`, binários) do controle de
-versão.
-
-### README na raiz
-
-Exigências do Capítulo VII do enunciado:
-
-- Primeira linha em itálico: *This project has been created as part of the 42 curriculum by
-  \<login1\>, \<login2\>.*
-- **Description** — o que é o projeto e o que ele resolve.
-- **Instructions** — compilação e execução.
-- **Resources** — referências, e **como a IA foi usada**: para quais tarefas e em quais partes.
-- Explicação e justificativa dos algoritmos escolhidos.
-- Raciocínio dos limiares do adaptativo com argumento de complexidade para tempo e espaço no
-  modelo push_swap.
-- Contribuições de cada um dos 2 alunos.
-
-O `README.md` atual da raiz cobre o funcionamento e serve de base; falta acrescentar a linha do
-currículo, Instructions, Resources, a justificativa dos limiares e a divisão do trabalho.
-
-### Repositório
-
-- Os dois alunos como colaboradores.
-- Os dois logins na submissão.
+faça parte da entrega, e arquivos gerados (`args.txt`, binários) do controle de versão.
 
 ## Pronto quando
 
@@ -77,8 +53,7 @@ echo "falhas: $falhas"
 
 ```bash
 for n in 1 2 3 4 5 6 7 10 50 100 500; do
-  ARG=$(shuf -i 1-10000 -n $n | tr '
-' ' ')
+  ARG=$(shuf -i 1-10000 -n $n | tr '\n' ' ')
   for f in --simple --medium --complex --adaptive; do
     r=$(./push_swap $f $ARG | ./checker $ARG)
     [ "$r" = "OK" ] || echo "FALHOU n=$n $f"
@@ -93,8 +68,7 @@ echo "cobertura concluída"
 for n in 100 500; do
   pior=0; i=0
   while [ $i -lt 20 ]; do
-    ARG=$(shuf -i 1-10000 -n $n | tr '
-' ' ')
+    ARG=$(shuf -i 1-10000 -n $n | tr '\n' ' ')
     m=$(./push_swap $ARG | wc -l | tr -d ' ')
     [ "$m" -gt "$pior" ] && pior=$m
     i=$((i+1))
@@ -118,7 +92,7 @@ valgrind --leak-check=full ./checker 3 2 1 </dev/null
 
 Zero vazamento em todos.
 
-**Checklist de entrega:**
+**Checklist final:**
 
 - [ ] Compila com `-Wall -Wextra -Werror`, sem warning
 - [ ] Não relinka
@@ -131,5 +105,3 @@ Zero vazamento em todos.
 - [ ] `--bench` só com a flag, sempre em stderr, soma das contagens igual a `total_ops`
 - [ ] Metas de 100 e 500 batidas no pior caso de várias rodadas
 - [ ] Zero vazamento, inclusive nos caminhos de erro
-- [ ] README na raiz com todas as seções do Capítulo VII
-- [ ] Os dois alunos como colaboradores no repositório

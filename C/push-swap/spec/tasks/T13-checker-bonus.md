@@ -35,8 +35,8 @@ EOF normal.
 A realocação vai numa `static` separada: embutida em `read_all`, o corpo fica com 27 linhas,
 acima do limite. `grow` tem 4 parâmetros — o teto.
 
-Ler tudo antes de aplicar é o que o enunciado descreve, e simplifica o erro: uma instrução
-inválida no meio aborta antes de qualquer aplicação.
+Ler tudo antes de aplicar simplifica o erro: uma instrução inválida no meio aborta antes de
+qualquer aplicação.
 
 ### `apply_op_bonus.c`
 
@@ -82,7 +82,7 @@ operações do `push_swap` sem alteração.
 ```bash
 make bonus && make bonus    # a segunda não pode relinkar
 make re
-norminette *.c *.h          # inclui os _bonus; erro neles zera o projeto
+norminette *.c *.h          # inclui os _bonus
 ```
 
 **Comportamento básico:**
@@ -116,7 +116,7 @@ while [ $i -lt 100 ]; do
   ARG=$(shuf -i 1-1000 -n $((RANDOM % 15 + 2)) | tr '\n' ' ')
   OPS=$(./push_swap $ARG)
   meu=$(printf '%s\n' "$OPS" | ./checker $ARG)
-  ref=$(printf '%s\n' "$OPS" | ./assets/checker_linux $ARG)
+  ref=$(printf '%s\n' "$OPS" | ../assets/checker_linux $ARG)
   [ "$meu" = "$ref" ] || { echo "DIFERE: $ARG meu=$meu ref=$ref"; difere=$((difere+1)); }
   i=$((i+1))
 done
@@ -129,7 +129,7 @@ Receitas propositalmente erradas também precisam concordar:
 for ops in "sa" "ra" "pb" "sa
 pb" ""; do
   meu=$(printf '%s\n' "$ops" | ./checker 3 2 1)
-  ref=$(printf '%s\n' "$ops" | ./assets/checker_linux 3 2 1)
+  ref=$(printf '%s\n' "$ops" | ../assets/checker_linux 3 2 1)
   [ "$meu" = "$ref" ] && echo "ok   [$ops] $meu" || echo "DIFERE [$ops] meu=$meu ref=$ref"
 done
 ```

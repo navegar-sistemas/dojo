@@ -76,8 +76,6 @@ total = bits × n + Σ (quantidade de ranks em 0..n-1 com o bit b zerado)
 **Qualquer variação entre execuções do mesmo tamanho indica bug** — tipicamente na contagem de
 bits ou no `size` capturado.
 
-6784 é também o número que o enunciado publica no exemplo de entrada grande.
-
 ## Custo
 
 `log₂(n)` passadas de O(n) movimentos: **O(n log n)**.
