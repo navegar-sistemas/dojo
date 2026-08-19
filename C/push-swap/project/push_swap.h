@@ -125,24 +125,24 @@ void	prog_flush(t_ctx *c);
 ///* portfolio.c */
 //void	run_portfolio(t_ctx *c, t_conf *conf, t_sortfn alt);
 
-///* ops_swap.c */
-//void	op_sa(t_ctx *c);
-//void	op_sb(t_ctx *c);
-//void	op_ss(t_ctx *c);
+/* ops_swap.c */
+void	op_sa(t_ctx *c);
+void	op_sb(t_ctx *c);
+void	op_ss(t_ctx *c);
 
-///* ops_push.c */
-//void	op_pa(t_ctx *c);
-//void	op_pb(t_ctx *c);
+/* ops_push.c */
+void	op_pa(t_ctx *c);
+void	op_pb(t_ctx *c);
 
-///* ops_rotate.c */
-//void	op_ra(t_ctx *c);
-//void	op_rb(t_ctx *c);
-//void	op_rr(t_ctx *c);
+/* ops_rotate.c */
+void	op_ra(t_ctx *c);
+void	op_rb(t_ctx *c);
+void	op_rr(t_ctx *c);
 
-///* ops_rrotate.c */
-//void	op_rra(t_ctx *c);
-//void	op_rrb(t_ctx *c);
-//void	op_rrr(t_ctx *c);
+/* ops_rrotate.c */
+void	op_rra(t_ctx *c);
+void	op_rrb(t_ctx *c);
+void	op_rrr(t_ctx *c);
 
 ///* parse.c */
 //int		parse_flags(int argc, char **argv, t_conf *conf);
