@@ -58,7 +58,9 @@ destino se sobrepõem.
 ## Pronto quando
 
 O `main` temporário de T03 passa a aplicar uma receita à mão e o resultado é conferido contra o
-checker de referência.
+checker de referência. O parsing só existe em T05, então esse `main` **ignora `argv`** e monta
+a pilha `2 1 3 6 5 8` escrevendo direto em `data` — os números na linha de comando abaixo
+existem só para o `checker_linux` receber a lista dele.
 
 ```bash
 make re

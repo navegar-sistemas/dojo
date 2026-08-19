@@ -28,8 +28,10 @@ T02. T04 segue T03. De T06 em diante a coluna de dependências manda; T15 usa s�
 compartilhados, mas roda por último antes do fechamento — bônus só interessa com a parte
 obrigatória inteira verde.
 
-O primeiro ponto verificável de ponta a ponta é **T07**: antes disso não existe receita para
-conferir contra o checker de referência.
+T03 vem antes das operações de propósito: os `op_*` chamam `emit`, então o gravador de
+programa nasce primeiro e nada é reescrito depois. O preço é T03 ser pura infraestrutura — o
+primeiro comportamento visível chega em T04, e o primeiro ponto verificável de ponta a ponta é
+**T07**: antes disso não existe receita para conferir contra o checker de referência.
 
 ## Formato de uma tarefa
 
