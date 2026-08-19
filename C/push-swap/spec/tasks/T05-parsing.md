@@ -117,8 +117,57 @@ norminette *.c *.h
 ```
 
 Todos os casos de erro de [../06-aceitacao/casos.md](../06-aceitacao/casos.md) A5, cada um
-imprimindo `Error` em stderr, nada em stdout, saída 1. A bateria exige o `main` com o caminho
-de erro, que só chega em T06 — registre-a aqui e execute-a ao fechar T06:
+imprimindo `Error` em stderr, nada em stdout, saída 1. O `main` temporário abaixo (no lugar do
+vigente; some em T06) liga os dois parses ao contrato de erro e, em sucesso, imprime o que o
+parse produziu — a bateria roda **agora** e de novo em T06 com o `main` definitivo:
+
+```c
+#include "push_swap.h"
+
+static int	fail(void)
+{
+	ft_putendl_fd("Error", 2);
+	return (1);
+}
+
+static void	put_conf(t_conf *conf)
+{
+	ft_putstr_fd("strategy=", 1);
+	ft_putnbr_fd(conf->strategy, 1);
+	ft_putstr_fd(" bench=", 1);
+	ft_putnbr_fd(conf->bench, 1);
+}
+
+int	main(int argc, char **argv)
+{
+	t_conf	conf;
+	t_stack	*a;
+	int		i;
+
+	conf.strategy = STRAT_NONE;
+	conf.bench = 0;
+	if (!parse_flags(argc, argv, &conf))
+		return (fail());
+	a = parse_numbers(argc, argv);
+	if (a == NULL)
+		return (fail());
+	put_conf(&conf);
+	ft_putstr_fd(" n=", 1);
+	ft_putnbr_fd(a->size, 1);
+	i = -1;
+	while (++i < a->size)
+	{
+		ft_putchar_fd(' ', 1);
+		ft_putnbr_fd(a->data[i], 1);
+	}
+	ft_putchar_fd('\n', 1);
+	stack_free(a);
+	return (0);
+}
+```
+
+`strategy=0` é `STRAT_NONE`: o desvio para `STRAT_ADAPTIVE` é papel do `setup` de T06, não do
+parse. Sem argumentos imprime `n=0` — o silêncio nesse caso também é do `main` definitivo.
 
 ```bash
 err_case() {
@@ -141,16 +190,17 @@ err_case --
 
 Todos precisam sair com `stdout=[]`, `stderr=[Error]` e `exit=1`.
 
-Flags repetidas **não** são erro:
+Flags repetidas **não** são erro — a equivalência fica visível na linha impressa:
 
 ```bash
-./push_swap --simple --simple 3 2 1 ; echo "exit=$?"   # equivale a --simple
-./push_swap --bench --bench 3 2 1   ; echo "exit=$?"   # equivale a --bench
+./push_swap --simple --simple 3 2 1 ; echo "exit=$?"   # strategy=1 bench=0 n=3 3 2 1, exit=0
+./push_swap --bench --bench 3 2 1   ; echo "exit=$?"   # strategy=0 bench=1 n=3 3 2 1, exit=0
 ```
 
 Aceitação de números colados num argumento:
 
 ```bash
+./push_swap "4 67 3" 87 23    # strategy=0 bench=0 n=5 4 67 3 87 23
 ./push_swap "4 67 3" 87 23 | ../assets/checker_linux 4 67 3 87 23    # OK (após T07)
 ```
 

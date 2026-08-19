@@ -3,12 +3,12 @@
 
 # include "libft/libft.h"
 
-//# define STRAT_NONE 0
-//# define STRAT_SIMPLE 1
-//# define STRAT_MEDIUM 2
-//# define STRAT_COMPLEX 3
-//# define STRAT_ADAPTIVE 4
-//# define FLAG_BENCH 5
+# define STRAT_NONE 0
+# define STRAT_SIMPLE 1
+# define STRAT_MEDIUM 2
+# define STRAT_COMPLEX 3
+# define STRAT_ADAPTIVE 4
+# define FLAG_BENCH 5
 //# define GREEDY_MAX_N 1500
 
 /*
@@ -89,19 +89,19 @@ typedef struct s_ctx
 	struct s_ctx	*up;
 }	t_ctx;
 
-///*
-//** name e cclass são char *, não const char *: ft_putstr_fd recebe um
-//** char *, e descartar o qualificador é erro sob -Werror. Ambos são
-//** escritos pela estratégia que roda, para que o --adaptive possa
-//** reportar a classe da rota que de fato tomou.
-//*/
-//typedef struct s_conf
-//{
-//	int		strategy;
-//	int		bench;
-//	char	*name;
-//	char	*cclass;
-//}	t_conf;
+/*
+** name e cclass são char *, não const char *: ft_putstr_fd recebe um
+** char *, e descartar o qualificador é erro sob -Werror. Ambos são
+** escritos pela estratégia que roda, para que o --adaptive possa
+** reportar a classe da rota que de fato tomou.
+*/
+typedef struct s_conf
+{
+	int		strategy;
+	int		bench;
+	char	*name;
+	char	*cclass;
+}	t_conf;
 
 //typedef void	(*t_sortfn)(t_ctx *c, t_conf *conf);
 
@@ -144,16 +144,16 @@ void	op_rra(t_ctx *c);
 void	op_rrb(t_ctx *c);
 void	op_rrr(t_ctx *c);
 
-///* parse.c */
-//int		parse_flags(int argc, char **argv, t_conf *conf);
-//t_stack	*parse_numbers(int argc, char **argv);
+/* parse.c */
+int		parse_flags(int argc, char **argv, t_conf *conf);
+t_stack	*parse_numbers(int argc, char **argv);
 
-///* parse_utils.c */
-//int		is_int_token(const char *s);
-//int		token_to_int(const char *s, int *out);
-//int		has_duplicates(t_stack *s);
-//void	free_split(char **parts);
-//int		flag_id(const char *s);
+/* parse_utils.c */
+int		is_int_token(const char *s);
+int		token_to_int(const char *s, int *out);
+int		has_duplicates(t_stack *s);
+void	free_split(char **parts);
+int		flag_id(const char *s);
 
 /* utils.c */
 int		isqrt(int n);

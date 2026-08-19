@@ -66,16 +66,34 @@ make re
 norminette *.c *.h
 ```
 
-Um `main` temporário ou a inspeção via T14 precisa reproduzir:
+O `main` real já existe (T06), então aqui não entra `main` novo, e sim uma **sonda
+temporária**: duas linhas logo depois de `d = compute_disorder(c.a);`, imprimindo a desordem
+×10000 no stderr (libft não imprime `double`; o inteiro é exato). O `main` fica com 21 linhas
+e a norminette continua verde. **Apague depois de conferir** — o contrato só permite stderr
+com `--bench`.
 
-| Entrada | Desordem |
-|---|---|
-| `1 2 3` | 0.0000 |
-| `3 2 1` | 1.0000 |
-| `4 67 3 87 23` | 0.4000 |
-| `2 1` | 1.0000 |
-| `42` | 0.0000 |
-| nenhum elemento | 0.0000 |
+```c
+	ft_putnbr_fd((int)(d * 10000.0 + 0.5), 2);
+	ft_putchar_fd('\n', 2);
+```
+
+| Entrada | Desordem | Sonda |
+|---|---|---|
+| `1 2 3` | 0.0000 | `0` |
+| `3 2 1` | 1.0000 | `10000` |
+| `4 67 3 87 23` | 0.4000 | `4000` |
+| `2 1` | 1.0000 | `10000` |
+| `42` | 0.0000 | `0` |
+| nenhum elemento | 0.0000 | — |
+
+```bash
+for arg in "1 2 3" "3 2 1" "4 67 3 87 23" "2 1" "42"; do
+  printf '%-16s -> %s\n' "$arg" "$(./push_swap $arg 2>&1 >/dev/null)"
+done    # 0, 10000, 4000, 10000, 0
+```
+
+A linha "nenhum elemento" não passa pela sonda — o `main` encerra antes com `n = 0`. A guarda
+`pares == 0` é exercitada em execução pelo `42` (1 elemento, zero pares).
 
 O valor de `4 67 3 87 23` é o que aparece como `40.00%` no `--bench` do caso A2 — confirma de
 uma vez a fórmula e a conversão para porcentagem que vem em T14.

@@ -22,8 +22,9 @@ T15.
 
 ### Limpeza
 
-Remover todo `main` temporário criado nas tarefas anteriores, qualquer arquivo de teste que não
-faça parte da entrega, e arquivos gerados (`args.txt`, binários) do controle de versão.
+Remover todo `main` temporário e toda sonda de depuração criados nas tarefas anteriores (T08 e
+T09 imprimem no stderr — o contrato proíbe), qualquer arquivo de teste que não faça parte da
+entrega, e arquivos gerados (`args.txt`, binários) do controle de versão.
 
 ## Pronto quando
 
