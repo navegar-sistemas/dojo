@@ -168,11 +168,11 @@ void	ps_die(t_ctx *c);
 ///* rank.c */
 //int		build_ranks(t_stack *a);
 
-///* sort_tiny.c, sort_simple.c, sort_medium.c, sort_complex.c */
-//void	sort_tiny(t_ctx *c);
-//void	sort_simple(t_ctx *c, t_conf *conf);
-//void	sort_medium(t_ctx *c, t_conf *conf);
-//void	sort_complex(t_ctx *c, t_conf *conf);
+/* sort_tiny.c, sort_simple.c, sort_medium.c, sort_complex.c */
+void	sort_tiny(t_ctx *c);
+void	sort_simple(t_ctx *c, t_conf *conf);
+void	sort_medium(t_ctx *c, t_conf *conf);
+void	sort_complex(t_ctx *c, t_conf *conf);
 
 ///* sort_greedy.c, greedy_exec.c */
 //void	sort_greedy_run(t_ctx *c, t_conf *conf);

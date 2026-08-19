@@ -36,9 +36,11 @@ static int	setup(int argc, char **argv, t_conf *conf, t_ctx *c)
 
 static void	run_strategy(t_ctx *c, t_conf *conf, double d)
 {
-	(void)c;
-	(void)conf;
 	(void)d;
+	if (conf->strategy == STRAT_SIMPLE)
+		sort_simple(c, conf);
+	else if (conf->strategy == STRAT_ADAPTIVE)
+		sort_simple(c, conf);
 }
 
 int	main(int argc, char **argv)

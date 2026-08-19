@@ -13,6 +13,7 @@ T06.
 - `sort_tiny.c`
 - `sort_simple.c`
 - `utils.c` (completa: `rotate_a_to_top`, `rotate_b_to_top`, `isqrt`)
+- `main.c` (ligar o despacho provisório em `run_strategy`)
 
 ## Especificação
 
@@ -92,8 +93,26 @@ void	sort_simple(t_ctx *c, t_conf *conf)
 Gravar `name` e `cclass` **antes** dos retornos antecipados: o `--bench` precisa deles mesmo
 quando nada é emitido.
 
-Ligar `run_strategy` do T06 a `sort_simple` para `STRAT_SIMPLE` e, provisoriamente, também para
-`STRAT_ADAPTIVE` até T13.
+### `run_strategy` (`main.c`)
+
+Ligar `STRAT_SIMPLE` a `sort_simple` e, provisoriamente até T13, também `STRAT_ADAPTIVE`:
+
+```c
+static void	run_strategy(t_ctx *c, t_conf *conf, double d)
+{
+	(void)d;
+	if (conf->strategy == STRAT_SIMPLE)
+		sort_simple(c, conf);
+	else if (conf->strategy == STRAT_ADAPTIVE)
+		sort_simple(c, conf);
+}
+```
+
+O `(void)d` sai só em T13, quando o desvio final entrega `d` ao `sort_adaptive`; `--medium` e
+`--complex` continuam mudos até T11 e T10 acrescentarem seus ramos. **Não** copie o
+`run_strategy` final de [fluxo.md](../03-arquitetura/fluxo.md): ele chama `sort_medium`,
+`sort_complex` e `sort_adaptive`, que ainda não existem — o build morre em
+`implicit declaration`.
 
 ## Pronto quando
 
