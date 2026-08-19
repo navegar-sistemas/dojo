@@ -11,6 +11,7 @@ T07, T09.
 ## Arquivos
 
 - `sort_complex.c`
+- `main.c` (ligar o ramo de `STRAT_COMPLEX`)
 
 ## Especificação
 
@@ -72,7 +73,13 @@ nada por conta própria.
 - A contagem precisa ser **idêntica** entre entradas não ordenadas do mesmo tamanho (n > 3).
   Variação indica bug em um dos dois pontos acima.
 
-Ligar `run_strategy` a `sort_complex` para `STRAT_COMPLEX`.
+Ligar o ramo no `run_strategy`, antes do ramo de `STRAT_ADAPTIVE` — sem isso a flag cai no
+vazio e o `--complex` emite 0 linhas:
+
+```c
+	else if (conf->strategy == STRAT_COMPLEX)
+		sort_complex(c, conf);
+```
 
 ## Pronto quando
 

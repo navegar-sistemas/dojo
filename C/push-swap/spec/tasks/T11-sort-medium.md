@@ -11,6 +11,7 @@ T07, T09.
 ## Arquivos
 
 - `sort_medium.c`
+- `main.c` (ligar o ramo de `STRAT_MEDIUM`)
 
 ## Especificação
 
@@ -83,7 +84,14 @@ e chama `collect_all(c, n, k, (n + k - 1) / k)` seguido de `drain_b(c)`.
 - **`hi` limitado a `n - 1`.** O último bloco é mais curto quando `n` não é múltiplo de
   `width`.
 
-Ligar `run_strategy` a `sort_medium` para `STRAT_MEDIUM`.
+Ligar o ramo no `run_strategy`, entre o de `STRAT_SIMPLE` e o de `STRAT_COMPLEX` (a ordem
+final do [fluxo](../03-arquitetura/fluxo.md)) — sem isso a flag cai no vazio e o `--medium`
+emite 0 linhas:
+
+```c
+	else if (conf->strategy == STRAT_MEDIUM)
+		sort_medium(c, conf);
+```
 
 ## Pronto quando
 

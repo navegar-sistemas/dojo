@@ -39,6 +39,10 @@ static void	run_strategy(t_ctx *c, t_conf *conf, double d)
 	(void)d;
 	if (conf->strategy == STRAT_SIMPLE)
 		sort_simple(c, conf);
+	else if (conf->strategy == STRAT_MEDIUM)
+		sort_medium(c, conf);
+	else if (conf->strategy == STRAT_COMPLEX)
+		sort_complex(c, conf);
 	else if (conf->strategy == STRAT_ADAPTIVE)
 		sort_simple(c, conf);
 }

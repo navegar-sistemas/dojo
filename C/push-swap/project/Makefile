@@ -10,9 +10,8 @@ SRCS	= main.c \
 			sort_tiny.c sort_simple.c \
 			disorder.c \
 			rank.c \
-			sort_complex.c
+			sort_complex.c sort_medium.c  \
 #			 portfolio.c 
-#		  sort_medium.c  \
 #		  sort_greedy.c greedy_cost.c greedy_pick.c greedy_exec.c \
 #		  sort_adaptive.c bench.c
 OBJS	= $(SRCS:.c=.o)
