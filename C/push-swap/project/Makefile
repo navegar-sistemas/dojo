@@ -8,8 +8,9 @@ SRCS	= main.c \
 			ops_swap.c ops_push.c ops_rotate.c ops_rrotate.c \
 			parse.c parse_utils.c \
 			sort_tiny.c sort_simple.c \
-			disorder.c 
-#			rank.c  portfolio.c 
+			disorder.c \
+			rank.c 
+#			 portfolio.c 
 #		  sort_medium.c sort_complex.c \
 #		  sort_greedy.c greedy_cost.c greedy_pick.c greedy_exec.c \
 #		  sort_adaptive.c bench.c

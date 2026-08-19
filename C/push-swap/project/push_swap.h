@@ -165,8 +165,8 @@ void	ps_die(t_ctx *c);
 /* disorder.c */
 double	compute_disorder(t_stack *a);
 
-///* rank.c */
-//int		build_ranks(t_stack *a);
+/* rank.c */
+int		build_ranks(t_stack *a);
 
 /* sort_tiny.c, sort_simple.c, sort_medium.c, sort_complex.c */
 void	sort_tiny(t_ctx *c);

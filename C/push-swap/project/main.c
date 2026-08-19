@@ -57,6 +57,8 @@ int	main(int argc, char **argv)
 	zero_counts(counts);
 	c.counts = counts;
 	d = compute_disorder(c.a);
+	if (!build_ranks(c.a))
+		ps_die(&c);
 	run_strategy(&c, &conf, d);
 	prog_flush(&c);
 	return (cleanup(&c));
