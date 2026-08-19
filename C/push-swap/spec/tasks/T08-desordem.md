@@ -11,7 +11,7 @@ T06.
 ## Arquivos
 
 - `disorder.c`
-- `main.c` (trocar o stub `0.0` pela chamada real)
+- `main.c` (trocar `d = 0.0;` por `d = compute_disorder(c.a);` — o ponto marcado em T06)
 
 ## Especificação
 
@@ -56,8 +56,9 @@ Os dois pontos que quebram silenciosamente:
   `--adaptive` do T13 cairia sempre no regime O(n²) sem nenhum sintoma visível até o benchmark.
 - **`pares == 0`** acontece com 0 ou 1 elemento. Sem o teste, divisão por zero.
 
-No `main`, trocar o `0.0` provisório pela chamada real, mantendo-a **antes** do despacho e de
-`build_ranks` — ver [../03-arquitetura/fluxo.md](../03-arquitetura/fluxo.md).
+No `main`, a troca é uma linha, no ponto marcado em T06: `d = 0.0;` vira
+`d = compute_disorder(c.a);` — mesmo lugar, depois de `c.counts = counts;`, antes do despacho.
+Nada mais muda no arquivo.
 
 ## Pronto quando
 

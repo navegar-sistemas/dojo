@@ -56,7 +56,7 @@ int	main(int argc, char **argv)
 		return (cleanup(&c));
 	zero_counts(counts);
 	c.counts = counts;
-	d = 0.0;
+	d = compute_disorder(c.a);
 	run_strategy(&c, &conf, d);
 	prog_flush(&c);
 	return (cleanup(&c));

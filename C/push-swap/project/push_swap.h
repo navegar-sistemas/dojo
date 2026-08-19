@@ -162,8 +162,8 @@ void	rotate_b_to_top(t_ctx *c, int i);
 void	zero_counts(int *counts);
 void	ps_die(t_ctx *c);
 
-///* disorder.c */
-//double	compute_disorder(t_stack *a);
+/* disorder.c */
+double	compute_disorder(t_stack *a);
 
 ///* rank.c */
 //int		build_ranks(t_stack *a);
