@@ -18,6 +18,11 @@ int	is_int_token(const char *s)
 	return (1);
 }
 
+/*
+** Acumula em long e verifica o intervalo de int a cada dígito, não
+** só ao final: um token de 30 dígitos estouraria o próprio long
+** antes do loop terminar.
+*/
 int	token_to_int(const char *s, int *out)
 {
 	long	acc;
@@ -79,6 +84,10 @@ void	free_split(char **parts)
 	free(parts);
 }
 
+/*
+** O tamanho do literal mais um inclui o terminador, então
+** "--simpleX" não é aceito como prefixo.
+*/
 int	flag_id(const char *s)
 {
 	if (!ft_strncmp(s, "--simple", 9))

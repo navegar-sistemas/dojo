@@ -1,5 +1,11 @@
 #include "push_swap.h"
 
+/*
+** Primeira passada: quantos tokens numéricos existem no total, para
+** que a pilha seja alocada uma única vez. Um argumento que se divide
+** em zero tokens ("" ou "   ") é um erro, que é o caso ./push_swap
+** "".
+*/
 static int	count_tokens(int argc, char **argv, int *total)
 {
 	char	**parts;
@@ -70,6 +76,11 @@ static int	fill_all(int argc, char **argv, t_stack *a)
 	return (1);
 }
 
+/*
+** Um token começando com um único '-' é um número negativo; apenas
+** dois hífens formam uma flag. Repetir o mesmo seletor é aceito,
+** dois diferentes é erro.
+*/
 int	parse_flags(int argc, char **argv, t_conf *conf)
 {
 	int	i;

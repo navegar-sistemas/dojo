@@ -1,17 +1,9 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: macoelho <macoelho@student.42sp.org.br>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/17 10:00:00 by macoelho          #+#    #+#             */
-/*   Updated: 2026/08/18 10:00:00 by macoelho         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "push_swap.h"
 
+/*
+** Raiz quadrada inteira, porque math.h não é uma dependência
+** permitida.
+*/
 int	isqrt(int n)
 {
 	int	i;
@@ -73,6 +65,12 @@ void	zero_counts(int *counts)
 	}
 }
 
+/*
+** Ponto único de saída por erro para falhas após o setup. Percorre a
+** cadeia de simulação para que uma morte dentro das execuções
+** candidatas do --adaptive também libere o contexto real. Libera o
+** heap, reporta e sai com status 1.
+*/
 void	ps_die(t_ctx *c)
 {
 	ft_putendl_fd("Error", 2);

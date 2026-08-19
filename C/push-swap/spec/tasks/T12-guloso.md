@@ -15,6 +15,7 @@ T07, T09.
 - `greedy_pick.c`
 - `greedy_exec.c`
 - `sort_greedy.c`
+- `main.c` (desvio provisório no ramo de `STRAT_ADAPTIVE`)
 
 ## Especificação
 
@@ -69,7 +70,15 @@ rotate_a_to_top(min)
 ```
 
 O guloso não tem flag própria: até T13, ligue-o **provisoriamente** em `run_strategy` no lugar
-do desvio de `STRAT_ADAPTIVE` para testá-lo de ponta a ponta.
+do desvio de `STRAT_ADAPTIVE` para testá-lo de ponta a ponta — sem isso ele fica no build sem
+nunca rodar, e a bateria abaixo mede o `sort_simple`:
+
+```c
+	else if (conf->strategy == STRAT_ADAPTIVE)
+		sort_greedy(c, conf);
+```
+
+T13 remove este desvio ao ligar o `sort_adaptive` real.
 
 ## Pronto quando
 

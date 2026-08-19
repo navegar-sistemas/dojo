@@ -1,5 +1,10 @@
 #include "push_swap.h"
 
+/*
+** 64 é um início confortável: entradas minúsculas nunca crescem, e a
+** duplicação alcança os poucos milhares de operações de n = 500 em
+** uma dezena de realocações.
+*/
 t_prog	*prog_new(void)
 {
 	t_prog	*p;
@@ -26,6 +31,11 @@ void	prog_free(t_prog *p)
 	free(p);
 }
 
+/*
+** A duplicação mantém prog_push amortizado O(1). Falha de alocação
+** aborta via ps_die, que libera todo contexto ao longo da cadeia de
+** simulação.
+*/
 static void	prog_grow(t_ctx *c)
 {
 	t_op	*next;
@@ -49,6 +59,11 @@ void	prog_push(t_ctx *c, t_op op)
 	c->prog->len++;
 }
 
+/*
+** Imprime o programa escolhido e preenche os contadores do --bench
+** na mesma passada, para que os contadores nunca possam divergir do
+** stdout.
+*/
 void	prog_flush(t_ctx *c)
 {
 	int	i;

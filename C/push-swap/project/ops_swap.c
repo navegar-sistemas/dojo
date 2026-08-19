@@ -23,6 +23,10 @@ void	op_sb(t_ctx *c)
 	emit(c, OP_SB);
 }
 
+/*
+** Chama o auxiliar estático nas duas pilhas, nunca op_sa e op_sb:
+** duas operações emitiriam duas linhas.
+*/
 void	op_ss(t_ctx *c)
 {
 	swap_top(c->a);

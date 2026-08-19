@@ -1,4 +1,3 @@
-
 #include "push_swap.h"
 
 static void	rotate_up(t_stack *s)

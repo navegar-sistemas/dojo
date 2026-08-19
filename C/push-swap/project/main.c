@@ -1,5 +1,8 @@
 #include "push_swap.h"
 
+/*
+** Retorna int para que main possa escrever return (cleanup(&c));
+*/
 static int	cleanup(t_ctx *c)
 {
 	stack_free(c->a);
@@ -8,6 +11,12 @@ static int	cleanup(t_ctx *c)
 	return (0);
 }
 
+/*
+** As flags são lidas antes dos números: um token --foo precisa ser
+** recusado como flag desconhecida, não tratado como tentativa de
+** número. setup zera todo o contexto logo nas primeiras linhas, para
+** que ps_die seja seguro a partir de qualquer ponto de falha.
+*/
 static int	setup(int argc, char **argv, t_conf *conf, t_ctx *c)
 {
 	c->a = NULL;
@@ -36,17 +45,24 @@ static int	setup(int argc, char **argv, t_conf *conf, t_ctx *c)
 
 static void	run_strategy(t_ctx *c, t_conf *conf, double d)
 {
-	(void)d;
 	if (conf->strategy == STRAT_SIMPLE)
 		sort_simple(c, conf);
 	else if (conf->strategy == STRAT_MEDIUM)
 		sort_medium(c, conf);
 	else if (conf->strategy == STRAT_COMPLEX)
 		sort_complex(c, conf);
-	else if (conf->strategy == STRAT_ADAPTIVE)
-		sort_simple(c, conf);
+	else
+		sort_adaptive(c, conf, d);
 }
 
+/*
+** A desordem é medida antes de build_ranks, que é o que o subject
+** pede: antes de qualquer movimento. build_ranks roda aqui e não
+** dentro das estratégias porque sort_* retornam void, sem como
+** reportar uma falha. A estratégia registra suas operações em
+** c->prog; prog_flush imprime o programa final de uma vez e preenche
+** os contadores do --bench a partir dele.
+*/
 int	main(int argc, char **argv)
 {
 	t_conf	conf;
@@ -65,5 +81,7 @@ int	main(int argc, char **argv)
 		ps_die(&c);
 	run_strategy(&c, &conf, d);
 	prog_flush(&c);
+	if (conf.bench)
+		bench_print(&c, &conf, d);
 	return (cleanup(&c));
 }

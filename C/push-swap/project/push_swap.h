@@ -9,7 +9,7 @@
 # define STRAT_COMPLEX 3
 # define STRAT_ADAPTIVE 4
 # define FLAG_BENCH 5
-//# define GREEDY_MAX_N 1500
+# define GREEDY_MAX_N 1500
 
 /*
 ** Pilha apoiada em um array fixo. data[0] é o TOPO, data[size - 1] é
@@ -103,7 +103,7 @@ typedef struct s_conf
 	char	*cclass;
 }	t_conf;
 
-//typedef void	(*t_sortfn)(t_ctx *c, t_conf *conf);
+typedef void	(*t_sortfn)(t_ctx *c, t_conf *conf);
 
 /* stack.c */
 t_stack	*stack_new(int cap);
@@ -122,8 +122,8 @@ void	prog_free(t_prog *p);
 void	prog_push(t_ctx *c, t_op op);
 void	prog_flush(t_ctx *c);
 
-///* portfolio.c */
-//void	run_portfolio(t_ctx *c, t_conf *conf, t_sortfn alt);
+/* portfolio.c */
+void	run_portfolio(t_ctx *c, t_conf *conf, t_sortfn alt);
 
 /* ops_swap.c */
 void	op_sa(t_ctx *c);
@@ -192,15 +192,15 @@ t_move	best_insert(t_ctx *c);
 
 void	exec_move(t_ctx *c, t_move m);
 
-///* sort_adaptive.c */
-//void	sort_adaptive(t_ctx *c, t_conf *conf, double d);
+/* sort_adaptive.c */
+void	sort_adaptive(t_ctx *c, t_conf *conf, double d);
 
-///* bench.c */
-//void	bench_print(t_ctx *c, t_conf *conf, double d);
+/* bench.c */
+void	bench_print(t_ctx *c, t_conf *conf, double d);
 
-///* read_ops_bonus.c, apply_op_bonus.c */
-//char	*read_all(int fd);
-//int		apply_line(t_ctx *c, const char *s, int len);
-//int		apply_rot(t_ctx *c, const char *s, int len);
+/* read_ops_bonus.c, apply_op_bonus.c */
+char	*read_all(int fd);
+int		apply_line(t_ctx *c, const char *s, int len);
+int		apply_rot(t_ctx *c, const char *s, int len);
 
 #endif
