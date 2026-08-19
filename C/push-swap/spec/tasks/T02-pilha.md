@@ -51,9 +51,10 @@ entrega — apague ou substitua em T06.
 ```bash
 make re
 norminette *.c *.h
+./push_swap; echo "exit=$?"    # exit=0
 ```
 
-Casos que o teste temporário precisa cobrir:
+Casos que o teste cobre:
 
 | Chamada | Esperado |
 |---|---|
@@ -65,6 +66,72 @@ Casos que o teste temporário precisa cobrir:
 | `stack_min_index` com `{5,4,3,2,1}` | 4 |
 | `stack_max_index` com `{5,4,3,2,1}` | 0 |
 | `stack_min_index` com `{7}` | 0 |
+
+`main` temporária para validar T02
+
+```c
+#include "push_swap.h"
+
+static void	put(char *label, int n)
+{
+	ft_putstr_fd(label, 1);
+	ft_putnbr_fd(n, 1);
+	ft_putchar_fd('\n', 1);
+}
+
+static void	fill3(t_stack *s, int a, int b, int c)
+{
+	s->data[0] = a;
+	s->data[1] = b;
+	s->data[2] = c;
+	s->size = 3;
+}
+
+int	main(void)
+{
+	t_stack	*s;
+	int		i;
+
+	stack_free(NULL);
+	s = stack_new(5);
+	put("new size: ", s->size);
+	put("new cap: ", s->cap);
+	put("sorted vazia: ", stack_is_sorted(s));
+	s->size = 1;
+	s->data[0] = 7;
+	put("sorted {7}: ", stack_is_sorted(s));
+	put("min {7}: ", stack_min_index(s));
+	fill3(s, 1, 2, 3);
+	put("sorted {1 2 3}: ", stack_is_sorted(s));
+	fill3(s, 1, 3, 2);
+	put("sorted {1 3 2}: ", stack_is_sorted(s));
+	i = 0;
+	while (i < 5)
+	{
+		s->data[i] = 5 - i;
+		i++;
+	}
+	s->size = 5;
+	put("min {5 4 3 2 1}: ", stack_min_index(s));
+	put("max {5 4 3 2 1}: ", stack_max_index(s));
+	stack_free(s);
+	return (0);
+}
+```
+
+Saída esperada:
+
+```
+new size: 0
+new cap: 5
+sorted vazia: 1
+sorted {7}: 1
+min {7}: 0
+sorted {1 2 3}: 1
+sorted {1 3 2}: 0
+min {5 4 3 2 1}: 4
+max {5 4 3 2 1}: 0
+```
 
 ```bash
 valgrind --leak-check=full ./push_swap    # "All heap blocks were freed"

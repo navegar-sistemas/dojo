@@ -10,6 +10,13 @@
             },
             "group": "build",
             "problemMatcher": ["$gcc"]
+        },
+        {
+            "label": "build-push-swap-debug",
+            "type": "shell",
+            "command": "make -C ${workspaceFolder}/C/push-swap/project CFLAGS=\"-Wall -Wextra -Werror -g3 -O0\" re",
+            "group": "build",
+            "problemMatcher": ["$gcc"]
         }
     ],
     "inputs": [
