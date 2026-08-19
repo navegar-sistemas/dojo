@@ -11,7 +11,8 @@ T13.
 ## Arquivos
 
 - `bench.c`
-- `main.c` (trocar o stub de `bench_print` pela chamada real, depois do `prog_flush`)
+- `main.c` (inserir `if (conf.bench) bench_print(&c, &conf, d);` depois do `prog_flush` — a
+  linha marcada como ausente em T06)
 
 ## Especificação
 

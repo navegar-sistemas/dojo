@@ -1,42 +1,61 @@
 #include "push_swap.h"
 
-static int	fail(void)
+static int	cleanup(t_ctx *c)
 {
-	ft_putendl_fd("Error", 2);
+	stack_free(c->a);
+	stack_free(c->b);
+	prog_free(c->prog);
+	return (0);
+}
+
+static int	setup(int argc, char **argv, t_conf *conf, t_ctx *c)
+{
+	c->a = NULL;
+	c->b = NULL;
+	c->counts = NULL;
+	c->bias = 0;
+	c->prog = NULL;
+	c->up = NULL;
+	conf->strategy = STRAT_NONE;
+	conf->bench = 0;
+	conf->name = "";
+	conf->cclass = "";
+	if (!parse_flags(argc, argv, conf))
+		return (0);
+	if (conf->strategy == STRAT_NONE)
+		conf->strategy = STRAT_ADAPTIVE;
+	c->a = parse_numbers(argc, argv);
+	if (!c->a)
+		return (0);
+	c->b = stack_new(c->a->size);
+	c->prog = prog_new();
+	if (!c->b || !c->prog)
+		return (0);
 	return (1);
 }
 
-static void	put_conf(t_conf *conf)
+static void	run_strategy(t_ctx *c, t_conf *conf, double d)
 {
-	ft_putstr_fd("strategy=", 1);
-	ft_putnbr_fd(conf->strategy, 1);
-	ft_putstr_fd(" bench=", 1);
-	ft_putnbr_fd(conf->bench, 1);
+	(void)c;
+	(void)conf;
+	(void)d;
 }
 
 int	main(int argc, char **argv)
 {
 	t_conf	conf;
-	t_stack	*a;
-	int		i;
+	t_ctx	c;
+	int		counts[11];
+	double	d;
 
-	conf.strategy = STRAT_NONE;
-	conf.bench = 0;
-	if (!parse_flags(argc, argv, &conf))
-		return (fail());
-	a = parse_numbers(argc, argv);
-	if (a == NULL)
-		return (fail());
-	put_conf(&conf);
-	ft_putstr_fd(" n=", 1);
-	ft_putnbr_fd(a->size, 1);
-	i = -1;
-	while (++i < a->size)
-	{
-		ft_putchar_fd(' ', 1);
-		ft_putnbr_fd(a->data[i], 1);
-	}
-	ft_putchar_fd('\n', 1);
-	stack_free(a);
-	return (0);
+	if (!setup(argc, argv, &conf, &c))
+		ps_die(&c);
+	if (c.a->size == 0)
+		return (cleanup(&c));
+	zero_counts(counts);
+	c.counts = counts;
+	d = 0.0;
+	run_strategy(&c, &conf, d);
+	prog_flush(&c);
+	return (cleanup(&c));
 }

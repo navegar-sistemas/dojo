@@ -12,7 +12,7 @@ T02. O `main` passa a chamá-la em T06 ou depois — ver
 ## Arquivos
 
 - `rank.c`
-- `main.c` (trocar o stub pela chamada real)
+- `main.c` (inserir `if (!build_ranks(c.a)) ps_die(&c);` — a linha marcada como ausente em T06)
 
 ## Especificação
 
