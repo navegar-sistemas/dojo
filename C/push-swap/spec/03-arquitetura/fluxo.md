@@ -2,16 +2,16 @@
 
 ## Funções de `main.c`
 
-O `main` não cabe em 25 linhas sozinho. A divisão abaixo é a que fecha nos dois limites da
-norma, com 5 funções e nenhum corpo passando de 18 linhas.
-
 | Função | Papel |
 |---|---|
-| `setup` (static) | zera `conf` e `ctx`, lê flags, monta as pilhas |
+| `setup` (static) | zera `conf` e o contexto inteiro, lê flags, monta as pilhas e o programa |
 | `run_strategy` (static) | cadeia de `if` sobre `conf.strategy` |
-| `fail` (static) | `Error` em stderr, liberação, `exit(1)` |
-| `cleanup` (static) | liberação, devolve 0 |
+| `cleanup` (static) | libera pilhas e programa, devolve 0 |
 | `main` | sequência principal |
+
+O caminho de erro não mora aqui: `ps_die` vive em `utils.c`, porque `prog.c` também precisa
+dele (falha de alocação em `prog_grow`) e porque as quatro funções acima mais o `main`
+fechariam a cota de 5 do arquivo sem espaço para ele.
 
 ## `main`
 
@@ -24,15 +24,16 @@ int	main(int argc, char **argv)
 	double	d;
 
 	if (!setup(argc, argv, &conf, &c))
-		fail(&c);
+		ps_die(&c);
 	if (c.a->size == 0)
 		return (cleanup(&c));
 	zero_counts(counts);
 	c.counts = counts;
 	d = compute_disorder(c.a);
 	if (!build_ranks(c.a))
-		fail(&c);
+		ps_die(&c);
 	run_strategy(&c, &conf, d);
+	prog_flush(&c);
 	if (conf.bench)
 		bench_print(&c, &conf, d);
 	return (cleanup(&c));
@@ -50,6 +51,9 @@ static int	setup(int argc, char **argv, t_conf *conf, t_ctx *c)
 	c->a = NULL;
 	c->b = NULL;
 	c->counts = NULL;
+	c->bias = 0;
+	c->prog = NULL;
+	c->up = NULL;
 	conf->strategy = STRAT_NONE;
 	conf->bench = 0;
 	conf->name = "";
@@ -62,39 +66,37 @@ static int	setup(int argc, char **argv, t_conf *conf, t_ctx *c)
 	if (!c->a)
 		return (0);
 	c->b = stack_new(c->a->size);
-	if (!c->b)
+	c->prog = prog_new();
+	if (!c->b || !c->prog)
 		return (0);
 	return (1);
 }
 ```
 
-Zerar `c->a` e `c->b` na primeira linha é o que torna `fail(&c)` seguro a partir de qualquer
-ponto de falha, inclusive antes de qualquer alocação.
+Zerar o contexto **inteiro** nas primeiras linhas — inclusive `bias`, `prog` e `up` — é o que
+torna `ps_die(&c)` seguro a partir de qualquer ponto de falha, inclusive antes de qualquer
+alocação.
 
 Quatro parâmetros — o teto da norma. Não há espaço para um quinto.
 
-## `fail` e `cleanup`
+## `cleanup`
 
 ```c
-static void	fail(t_ctx *c)
-{
-	ft_putendl_fd("Error", 2);
-	stack_free(c->a);
-	stack_free(c->b);
-	exit(1);
-}
-
 static int	cleanup(t_ctx *c)
 {
 	stack_free(c->a);
 	stack_free(c->b);
+	prog_free(c->prog);
 	return (0);
 }
 ```
 
-`cleanup` devolver `int` permite `return (cleanup(&c));` no `main`, economizando duas linhas.
+Devolver `int` permite `return (cleanup(&c));` no `main`, economizando duas linhas.
 
 ## Ordens que não podem ser trocadas
+
+**As flags são lidas antes dos números.** Um token `--foo` precisa ser rejeitado como flag
+desconhecida, não tentado como número.
 
 **A desordem é medida antes de `build_ranks`.** O contrato fixa a medida antes de qualquer
 movimento; medir também antes da conversão elimina a dúvida. Os dois valores seriam idênticos —
@@ -102,32 +104,34 @@ a função valor → rank é estritamente crescente, então preserva todas as co
 mas a ordem escrita corresponde literalmente ao pseudocódigo de
 [../04-algoritmos/desordem.md](../04-algoritmos/desordem.md).
 
-**`build_ranks` roda no `main`, não dentro das estratégias.** É a única alocação depois do
-parsing, e é aqui que existe caminho de erro: as funções `sort_*` devolvem `void` e não têm como
-sinalizar falha nem acesso às pilhas para liberá-las. Rodá-la sempre — inclusive para
-`--simple`, que não precisa de ranks — custa uma ordenação em memória e nenhum movimento, e
-mantém as estratégias sem alocação.
+**`build_ranks` roda no `main`, não dentro das estratégias.** As funções `sort_*` devolvem
+`void` e não têm como sinalizar falha; no `main` a falha cai no mesmo `ps_die` dos outros
+erros. Rodá-la sempre — inclusive para `--simple`, que não precisa de ranks — custa uma
+ordenação em memória e nenhum movimento, e não muda o que o `--simple` emite: ele decide por
+`stack_min_index` e `stack_is_sorted`, ambos função apenas da ordem relativa, que os ranks
+preservam.
 
-Converter para ranks não muda o que o `--simple` emite: ele decide por `stack_min_index` e
-`stack_is_sorted`, ambos função apenas da ordem relativa, que os ranks preservam.
+**`prog_flush` vem depois da estratégia e antes de `bench_print`.** Nada é impresso durante a
+ordenação: a estratégia grava em `c->prog`, e é o flush que imprime o programa e preenche
+`counts`. Um `bench_print` antes do flush reportaria tudo zerado.
 
-**As flags são lidas antes dos números.** Um token `--foo` precisa ser rejeitado como flag
-desconhecida, não tentado como número.
-
-**A validação inteira acontece antes do primeiro movimento.** Nunca sai metade da receita
-seguida de `Error`.
+**A validação inteira acontece antes de qualquer gravação**, e a impressão é atômica no flush:
+não existe caminho em que meia receita foi impressa e então algo falha — uma falha de alocação
+durante a gravação morre em `ps_die` com stdout ainda vazio.
 
 ## Entrada já ordenada
 
-O `main` não testa: cada `sort_*` grava `conf->name`/`conf->cclass` e então retorna cedo se
-`stack_is_sorted(c->a)`. Assim o rótulo do `--bench` existe mesmo quando nada é emitido, e o
-`main` fica menor.
+O `main` não testa: cada `sort_*` grava `conf->name`/`conf->cclass` e retorna cedo se
+`stack_is_sorted(c->a)`. Assim o rótulo do `--bench` existe mesmo quando nada é emitido.
 
-Em `--adaptive`, a rota continua sendo escolhida pela desordem mesmo com a pilha ordenada:
-desordem 0 cai em `< 0.2`, então o rótulo reportado é `Adaptive / O(n²)`.
+Em `--adaptive`, desordem 0 cai no regime baixo e o portfólio roda normalmente: o guloso
+devolve um programa vazio para pilha ordenada, o vencedor tem comprimento 0, e o `--bench`
+reporta `Adaptive / O(n²)` com `total_ops: 0`.
 
 ## Caminho de erro
 
-Um ponto único, `fail`, chamado de três lugares: falha de `setup` (flags inválidas, números
-inválidos, `malloc` da pilha) e falha de `build_ranks`. Sempre escreve exatamente `Error\n` em
-stderr, libera as duas pilhas e sai com 1.
+Um ponto único, `ps_die` (`utils.c`): escreve exatamente `Error\n` em stderr, percorre a
+cadeia `up` liberando as duas pilhas e o programa de cada contexto, e sai com 1. É chamado de
+quatro lugares: falha de `setup` (flags, números, `malloc` de pilha ou programa), falha de
+`build_ranks`, falha de `prog_grow` durante a gravação, e falha da `simulate` do portfólio ao
+montar uma simulação — este último é o motivo da cadeia `up` existir.

@@ -7,56 +7,55 @@
 | 100 | < 2000 | < 1500 | < 700 |
 | 500 | < 12 000 | < 8000 | < 5500 |
 
-Verificadas com entrada aleatória e o comportamento padrão do programa, ou seja
-`--adaptive`.
+Verificadas com entrada aleatória e o comportamento padrão do programa, ou seja `--adaptive`.
 
 ## Contagens medidas
 
-Faixas observadas numa implementação em C desta spec, sobre 20 a 40 permutações aleatórias por
-tamanho. São faixas amostrais: um extremo pode se deslocar algumas dezenas de movimentos com
-outras amostras, e é por isso que a coluna que importa é a última.
+Faixas observadas na implementação de referência. São faixas amostrais: um extremo pode se
+deslocar com outras amostras, e é por isso que a margem é medida no pior caso de várias
+rodadas, nunca numa execução só.
 
 | Estratégia | n = 100 | n = 500 | teto que precisa respeitar |
 |---|---|---|---|
+| `--adaptive` (padrão) | 498 – 589, média ~544 | 4789 – 5208, média ~5035 | < 700 e < 5500 |
 | `--simple` | ~1270 – 1730 | ~30 300 – 34 300 | nenhum (rota forçada) |
-| `--medium` | ~695 – 805 | ~7020 – 7590 | < 8000 |
-| `--complex` | 1084 (fixo) | 6784 (fixo) | < 8000 |
-| `--adaptive` | ~680 – 1084 | 6784 – ~7590 | < 1500 e < 8000 |
+| `--medium` | ~680 – 800 | ~6970 – 7590 | teto do regime médio |
+| `--complex` | 1084 (fixo) | 6784 (fixo) | teto do regime alto |
 
-`--complex` é o único com valor exato: a contagem não depende da entrada.
+O `--adaptive` foi medido em 60 entradas por tamanho; as rotas forçadas, em 20 a 40. O
+`--complex` é o único com valor exato: a contagem não depende da entrada (não ordenada,
+n > 3).
 
 ## Leitura
 
-**O `--adaptive` fica em "bom" nos dois tamanhos.** O pior caso observado é 1084 em n = 100 e
-cerca de 7590 em n = 500, contra os limites de 1500 e 8000.
+**A meta "excelente" é atingida nos dois tamanhos.** Quem responde por ela é o
+[guloso](../04-algoritmos/greedy.md) dentro do portfólio — os certificadores sozinhos ficariam
+em 1084 e ~7600.
 
-**O pior caso do `--adaptive` é o pior entre medium e complex**, porque com entrada aleatória a
-desordem straddle o limiar de 0.5 e as duas rotas são usadas — 22/18 e 20/20 nas amostras. Em
-n = 100 o teto vem do complex (1084); em n = 500 vem do medium (~7590).
+**A margem em n = 100 é folgada** (pior caso 589 contra 700, ~16%).
 
-**"Excelente" não é alcançado** e não é alcançável com estas quatro estratégias. Em n = 500 o
-melhor resultado é 6784, contra a meta de 5500. Chegar lá exige a estratégia gulosa de custo
-mínimo descrita em [../03-arquitetura/decisoes.md](../03-arquitetura/decisoes.md), fora do
-escopo desta spec.
+**A margem em n = 500 é real, mas a cauda existe.** Média ~5035 contra 5500 (~8%); em ~250
+execuções acumuladas o pior caso observado foi **5507**, uma vez — acima da meta. Numa
+medição por média de várias rodadas a meta fecha com folga; numa rodada única e azarada, a
+cauda pode custar o "excelente" (nunca o "bom", que passa de largo).
 
-**`--simple` com 500 elementos estoura todos os limites por larga margem.** Isso não é defeito:
-a flag força explicitamente a rota O(n²), e o que se exige dela é funcionar em qualquer
-entrada, não bater as metas. O `--adaptive` só a escolhe quando a desordem é menor que 0.2,
-regime em que ela custa de 294 a 4225 movimentos.
+**`--simple` com 500 elementos estoura todos os limites por larga margem.** Isso não é
+defeito: a flag força explicitamente a rota O(n²), e o que se exige dela é funcionar em
+qualquer entrada, não bater as metas. No `--adaptive` o selection só aparece como certificador
+do regime de desordem baixa, onde custa pouco.
 
 ## Margem para regressão
 
-| n | pior caso medido | limite "bom" | folga |
-|---|---|---|---|
-| 100 | 1084 | 1500 | 28% |
-| 500 | ~7590 | 8000 | 5% |
+Mudanças que mexem com a cauda do `--adaptive` e não devem entrar sem medir de novo:
 
-A folga em n = 500 é estreita. Duas mudanças a evitar sem medir de novo:
-
-- Trocar `k = max(2, isqrt(n / 2))` por `isqrt(n)` no chunk sort leva o pior caso a 8258 e
-  perde o "bom".
-- Trocar a fase 1 do chunk sort para rotação de caminho mais curto acrescenta em média na
-  ordem de 100 a 200 movimentos ao pior caso.
+- **Poda ou desempate do guloso** (`best_push`/`best_insert`, `move_better`): a poda é
+  comprovadamente neutra; qualquer "melhoria" que altere a resposta muda a distribuição
+  inteira.
+- **Remover uma das variantes de `bias`**: é o mínimo entre as duas que corta a cauda.
+- **`GREEDY_MAX_N` abaixo de 500**: os benchmarks passariam a medir só o certificador — n = 500
+  cairia para ~6800–7600 e perderia o "excelente".
+- **`k` do chunk sort e fase 1 só com `ra`** ([medium.md](../04-algoritmos/medium.md)): afetam
+  o teto do regime médio e a rota forçada `--medium`.
 
 ## Como medir
 

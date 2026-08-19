@@ -1,4 +1,4 @@
-# T14 — Fechamento
+# T16 — Fechamento
 
 ## Objetivo
 
@@ -6,7 +6,7 @@ Projeto inteiro verde na bateria completa de validação.
 
 ## Depende de
 
-T13.
+T15.
 
 ## Arquivos
 
@@ -35,7 +35,8 @@ make bonus && make bonus
 norminette *.c *.h                # nenhuma linha "Error:"
 ```
 
-**Todos os casos de aceitação**, A1 a A8 de [casos.md](../06-aceitacao/casos.md).
+**Todos os casos de aceitação**, A1 a A8 de [casos.md](../06-aceitacao/casos.md) — incluindo os
+dois invariantes de A7.
 
 **Corretude — 200 permutações aleatórias:**
 
@@ -49,11 +50,11 @@ done
 echo "falhas: $falhas"
 ```
 
-**Cobertura por tamanho, cada flag:**
+**Cobertura por tamanho, cada flag — cruzando o `GREEDY_MAX_N`:**
 
 ```bash
-for n in 1 2 3 4 5 6 7 10 50 100 500; do
-  ARG=$(shuf -i 1-10000 -n $n | tr '\n' ' ')
+for n in 1 2 3 4 5 6 7 10 50 100 500 1499 1500 1501; do
+  ARG=$(shuf -i 1-100000 -n $n | tr '\n' ' ')
   for f in --simple --medium --complex --adaptive; do
     r=$(./push_swap $f $ARG | ./checker $ARG)
     [ "$r" = "OK" ] || echo "FALHOU n=$n $f"
@@ -75,10 +76,10 @@ for n in 100 500; do
   done
   echo "n=$n pior=$pior"
 done
-# n=100 abaixo de 1500, n=500 abaixo de 8000
+# n=100 abaixo de 700; n=500 abaixo de 5500 — a cauda pode encostar, ver desempenho.md
 ```
 
-**Memória — inclusive nos caminhos de erro:**
+**Memória — inclusive nos caminhos de erro e no portfólio:**
 
 ```bash
 valgrind --leak-check=full ./push_swap 4 67 3 87 23
@@ -100,8 +101,9 @@ Zero vazamento em todos.
 - [ ] Nenhuma variável global
 - [ ] `Error\n` em stderr para token inválido, estouro de `int`, duplicata e flag inválida
 - [ ] Sem argumento → não imprime nada
-- [ ] `OK` no checker para n = 1, 2, 3, 5, 100, 500, já ordenada e inversa
+- [ ] `OK` no checker para n = 1, 2, 3, 5, 100, 500, 1501, já ordenada e inversa
 - [ ] As quatro estratégias no mesmo binário, todas funcionando em qualquer entrada
+- [ ] `--adaptive` nunca emite mais que o certificador do regime
 - [ ] `--bench` só com a flag, sempre em stderr, soma das contagens igual a `total_ops`
 - [ ] Metas de 100 e 500 batidas no pior caso de várias rodadas
 - [ ] Zero vazamento, inclusive nos caminhos de erro

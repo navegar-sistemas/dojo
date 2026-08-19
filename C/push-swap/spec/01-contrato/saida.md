@@ -6,6 +6,7 @@
 |---|---|---|---|
 | Ordenação normal | receita, um movimento por linha | — | 0 |
 | Entrada já ordenada | nada | — | 0 |
+| Entrada já ordenada com `--bench` | nada | bloco de métricas zerado | 0 |
 | Zero números (com ou sem flags) | nada | — | 0 |
 | `--bench` presente e há o que ordenar | receita | bloco de métricas | 0 |
 | Erro de entrada | nada | `Error\n` | 1 |
@@ -18,6 +19,10 @@
 - A última linha também termina em `\n`.
 - Siglas em minúsculas, exatamente: `sa sb ss pa pb ra rb rr rra rrb rrr`.
 
+A receita é impressa **de uma vez, ao final**, depois de escolhido o programa definitivo —
+nada sai em stdout durante o cálculo ([../03-arquitetura/fluxo.md](../03-arquitetura/fluxo.md)).
+Para quem consome a saída não há diferença observável além da atomicidade em caso de falha.
+
 Verificação byte a byte:
 
 ```bash
@@ -28,17 +33,16 @@ Não pode aparecer nada além das siglas e do `$` que o `cat -A` usa para marcar
 
 ## Entrada já ordenada
 
-Nenhum movimento é emitido, para qualquer uma das quatro flags. A verificação acontece no
-despachante, antes da estratégia rodar — sem ela, o selection sort do `--simple` emitiria
-`2n` movimentos numa pilha que já está pronta.
+Nenhum movimento é emitido, para qualquer uma das quatro flags. Cada estratégia grava seu
+rótulo e retorna cedo; no `--adaptive`, o portfólio converge para o programa vazio do guloso.
 
 Com `--bench`, o bloco de métricas ainda sai, com `total_ops: 0` e todas as contagens zeradas.
 A estratégia reportada é a que teria rodado.
 
 ## Erro
 
-A mensagem é exatamente cinco bytes: `E`, `r`, `r`, `o`, `r`, `\n`. Sem prefixo, sem detalhe da
-causa, sem ponto final. Sempre em stderr, nunca em stdout.
+A mensagem tem exatamente seis bytes: `E`, `r`, `r`, `o`, `r`, `\n`. Sem prefixo, sem detalhe
+da causa, sem ponto final. Sempre em stderr, nunca em stdout.
 
 ```bash
 ./push_swap 0 one 2 3 2>/dev/null    # não imprime nada
@@ -49,10 +53,10 @@ O código de saída em erro é 1 e vale para todos os casos, inclusive falha de 
 
 ## Falha de alocação
 
-Tratada como erro de entrada: `Error` em stderr e saída 1. Todas as alocações que podem
-falhar acontecem antes do primeiro movimento ser emitido — a conversão em ranks, que é a única
-alocação dentro de uma estratégia, roda antes de qualquer `pb`. Não existe caminho em que
-parte da receita foi impressa e depois a alocação falha.
+Tratada como erro de entrada: `Error` em stderr e saída 1. Como nada é impresso antes do
+`prog_flush`, uma alocação que falhe em qualquer ponto — parsing, ranks, crescimento do
+programa gravado, simulações do portfólio — morre em `ps_die` com stdout ainda vazio: não
+existe caminho em que parte da receita foi impressa e depois vem `Error`.
 
 ## Independência dos canais
 

@@ -23,8 +23,8 @@ As regras de validação dos argumentos são as mesmas do `push_swap`
 ([../01-contrato/entrada.md](../01-contrato/entrada.md)), incluindo a divisão por espaços que
 faz `./checker "" 1` ser erro.
 
-Esses valores foram observados no binário de referência `../assets/checker_linux`, e são o alvo do
-programa próprio.
+Esses valores foram observados no binário de referência `../assets/checker_linux`, e são o
+alvo do programa próprio.
 
 ## Instruções aceitas
 
@@ -53,38 +53,30 @@ Comportamento do binário de referência, que é o alvo:
 
 | Arquivo | Funções | Responsabilidade |
 |---|---|---|
-| `checker_bonus.c` | `reject_flags`, `fail_ck`, `run_all`, `cleanup_ck` (static) + `main` | rejeição de `--`, orquestração, laço de linhas, veredito |
+| `checker_bonus.c` | `reject_flags`, `fail_ck`, `run_all`, `cleanup_ck` (static) + `main` | rejeição de `--`, erro, laço de linhas, veredito |
 | `read_ops_bonus.c` | `grow` (static) + `read_all` | leitura de stdin até EOF |
-| `apply_op_bonus.c` | `same` (static) + `apply_line`, `apply_rot` | sigla → `t_op` → chamada da operação |
+| `apply_op_bonus.c` | `same` (static) + `apply_line`, `apply_rot` | sigla → operação |
 
-A separação não é estética: `read_all` com a realocação embutida tem 27 linhas de corpo, acima
-do limite da norma, e `apply_line` despachando as 11 siglas fecha em exatamente 25 linhas — o
-limite, sem folga nenhuma. `apply_rot` recebe o casamento das seis siglas de rotação
-(`apply_line` termina em `return (apply_rot(c, s, len));`), o que deixa os dois corpos bem
-abaixo do limite.
+A separação não é estética: `read_all` fecha em exatamente 25 linhas de corpo — o limite da
+norma, sem folga — mesmo com a realocação extraída para `grow`; embutida, passaria. E
+`apply_line` despachando as 11 siglas numa função só também fecharia em 25: as seis rotações
+vão para `apply_rot` (`apply_line` termina em `return (apply_rot(c, s, len));`).
 
-Reaproveita sem alteração: `parse.c`, `parse_utils.c`, `stack.c`, `emit.c` e os quatro
-`ops_*.c`. A lista de objetos compartilhados está em
-[../02-restricoes/build.md](../02-restricoes/build.md).
+Reaproveita sem alteração: `parse.c`, `parse_utils.c`, `stack.c`, `emit.c`, `prog.c`,
+`utils.c` e os quatro `ops_*.c`. A lista de objetos compartilhados e o motivo de `prog.o` e
+`utils.o` entrarem nela estão em [../02-restricoes/build.md](../02-restricoes/build.md).
 
 ## Modo silencioso
 
-O contexto é montado com `counts = NULL`:
-
-```c
-ctx.a = a;
-ctx.b = b;
-ctx.counts = NULL;
-```
-
-Com isso `emit` retorna sem imprimir nem contar, e as mesmas 11 operações do `push_swap`
-aplicam o efeito nas pilhas sem produzir saída. É esse ponteiro que permite o reaproveitamento
-— ver [../03-arquitetura/tipos.md](../03-arquitetura/tipos.md).
+O contexto inteiro é zerado com `ft_memset(&c, 0, sizeof(t_ctx))`, o que deixa
+**`prog == NULL`**: `emit` retorna sem gravar nada, e as mesmas 11 operações do `push_swap`
+aplicam o efeito nas pilhas sem produzir saída nem alocação. É esse ponteiro que permite o
+reaproveitamento — ver [../03-arquitetura/tipos.md](../03-arquitetura/tipos.md).
 
 ## Leitura de stdin
 
-Sem `get_next_line` disponível, a leitura é feita com `read` em blocos até EOF, acumulando num
-buffer que cresce por realocação:
+Sem `get_next_line` disponível, a leitura é feita com `read` em blocos de 1024 bytes até EOF,
+acumulando num buffer que cresce por realocação:
 
 ```
 grow(buf, total, tmp, n):
@@ -109,8 +101,7 @@ read_all(fd):
     devolve buf
 ```
 
-`grow` existe porque a realocação embutida em `read_all` levaria o corpo a 27 linhas. São
-quatro parâmetros — o teto da norma.
+`grow` tem 4 parâmetros — o teto da norma.
 
 Ler tudo antes de aplicar simplifica o tratamento de erro: uma instrução inválida no meio
 aborta antes de qualquer aplicação.
@@ -119,14 +110,14 @@ aborta antes de qualquer aplicação.
 
 ## Fluxo
 
-1. `parse_flags` não se aplica — o checker não tem flags. O `main` rejeita qualquer argumento
-   que comece com `--` **antes** de chamar `parse_numbers` (→ `Error`, saída 255). A rejeição
-   explícita é obrigatória: o `parse_numbers` compartilhado pula tokens com esse prefixo, e sem
-   ela `./checker --simple 3 2 1` responderia `KO` onde a referência responde `Error`.
-2. `parse_numbers` monta `a`; erro → `Error`, saída 255.
-3. Zero números → não imprime nada, saída 0.
-4. `b = stack_new(a->size)`, contexto com `counts = NULL`.
-5. `read_all(0)`; erro de leitura → `Error`, saída 255.
+1. O contexto é zerado com `ft_memset` e `buf` começa `NULL` — `fail_ck(&c, buf)` é seguro a
+   partir de qualquer ponto.
+2. `reject_flags`: qualquer `argv` com prefixo `--` imprime `Error` e sai com 255, **antes**
+   de `parse_numbers` — o parser compartilhado pula tokens com esse prefixo, e sem a rejeição
+   `./checker --simple 3 2 1` responderia `KO` onde a referência responde `Error`.
+3. `parse_numbers` monta `a`; erro → `Error`, saída 255.
+4. Zero números → não imprime nada, saída 0, sem ler stdin.
+5. `b = stack_new(a->size)` e `read_all(0)`; falha em qualquer um → `Error`, saída 255.
 6. Percorre o buffer separando por `\n` e aplicando cada linha; linha inválida → `Error`,
    saída 255. Sobra de bytes sem `\n` final também é `Error`:
 
@@ -147,7 +138,7 @@ aborta antes de qualquer aplicação.
    responderia `KO` onde a referência responde `Error`.
 
 7. `stack_is_sorted(a) && b->size == 0` → `OK`, senão `KO`. Saída 0.
-8. Libera tudo, inclusive o buffer.
+8. `fail_ck` e `cleanup_ck` liberam tudo, inclusive o buffer.
 
 ## Verificação contra a referência
 

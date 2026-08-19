@@ -66,7 +66,7 @@ No `main`, logo depois de `compute_disorder` e antes do despacho.
 
 Dentro da estratégia não funcionaria: as funções `sort_*` devolvem `void`, não têm como
 sinalizar falha de alocação e não têm acesso às pilhas para liberá-las. No `main` a falha cai no
-mesmo `fail()` de todos os outros erros, e nenhuma linha foi impressa ainda.
+mesmo `ps_die` de todos os outros erros, e nenhuma linha foi impressa ainda.
 
 Rodar para as quatro estratégias, inclusive `--simple`, que não precisa de ranks, custa uma
 ordenação em memória e nenhum movimento. E não altera o que o `--simple` emite: ele decide por

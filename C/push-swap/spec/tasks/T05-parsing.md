@@ -1,4 +1,4 @@
-# T04 — Parsing e validação
+# T05 — Parsing e validação
 
 ## Objetivo
 
@@ -37,10 +37,9 @@ cota já está tomada pelas três `static` de contagem e preenchimento.
 **`is_int_token`** — devolve 1 se a string casa com `[+-]?[0-9]+` inteira. Rejeita string
 vazia, só sinal, e qualquer caractere fora de `0-9` depois do sinal.
 
-**`token_to_int`** — acumula em `long`. Rejeita se o acumulado sair de
+**`token_to_int`** — acumula em `long` com o sinal aplicado. Rejeita se o acumulado sair de
 `-2147483648..2147483647` **durante** a acumulação, não só no fim: um token de 30 dígitos
-estoura o `long` antes de terminar. Testar a cada dígito contra os limites de `int` resolve os
-dois problemas de uma vez. Devolve 1 em sucesso, gravando em `*out`.
+estoura o `long` antes de terminar. Devolve 1 em sucesso, gravando em `*out`.
 
 **`has_duplicates`** — dois `while` aninhados comparando todos os pares. Devolve 1 se achar
 repetição.
@@ -97,11 +96,8 @@ Cuidado: `-42` começa com um hífen só, é número. A distinção é o prefixo
 Ao final, `has_duplicates`. Qualquer falha: liberar o split em curso, liberar a pilha, devolver
 `NULL`.
 
-Duas passadas evitam realocação. A alternativa é uma passada só com pilha crescente, o que
-adiciona código de crescimento — a escolha é livre desde que a liberação no erro esteja certa.
-
-Um `argv` de zero tokens numéricos no total (só flags) não é erro: devolve pilha com
-`size == 0`, e o `main` encerra em silêncio.
+Duas passadas evitam realocação. Um `argv` de zero tokens numéricos no total (só flags) não é
+erro: devolve pilha com `size == 0`, e o `main` encerra em silêncio.
 
 As três `static` que fecham o arquivo em 5 funções:
 
@@ -122,8 +118,7 @@ norminette *.c *.h
 
 Todos os casos de erro de [../06-aceitacao/casos.md](../06-aceitacao/casos.md) A5, cada um
 imprimindo `Error` em stderr, nada em stdout, saída 1. A bateria exige o `main` com o caminho
-de erro, que só chega em T05 — registre-a aqui e execute-a ao fechar T05 (T02 e T03 usam a
-mesma tática do `main` temporário; aqui ele teria de duplicar o `fail` de T05, sem ganho):
+de erro, que só chega em T06 — registre-a aqui e execute-a ao fechar T06:
 
 ```bash
 err_case() {
@@ -153,17 +148,10 @@ Flags repetidas **não** são erro:
 ./push_swap --bench --bench 3 2 1   ; echo "exit=$?"   # equivale a --bench
 ```
 
-Casos silenciosos (A6):
-
-```bash
-./push_swap;         echo "exit=$?"      # nada, 0
-./push_swap --bench; echo "exit=$?"      # nada, 0
-```
-
 Aceitação de números colados num argumento:
 
 ```bash
-./push_swap "4 67 3" 87 23 | ../assets/checker_linux 4 67 3 87 23    # OK (após T06)
+./push_swap "4 67 3" 87 23 | ../assets/checker_linux 4 67 3 87 23    # OK (após T07)
 ```
 
 Memória em todos os caminhos de erro:

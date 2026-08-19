@@ -1,4 +1,4 @@
-# T09 — `--complex`
+# T10 — `--complex`
 
 ## Objetivo
 
@@ -6,7 +6,7 @@ Radix binário LSD com contagem determinística: 1084 movimentos para n = 100, 6
 
 ## Depende de
 
-T06, T08.
+T07, T09.
 
 ## Arquivos
 
@@ -25,7 +25,7 @@ Três funções, duas `static`:
 |---|---|
 | `bit_count` (static) | quantos bits o maior rank precisa |
 | `radix_pass` (static) | uma passada sobre um bit |
-| `sort_complex` | rótulos, casos base, ranks, laço de bits |
+| `sort_complex` | rótulos, casos base, laço de bits |
 
 ```c
 static int	bit_count(int n)
@@ -60,8 +60,8 @@ static void	radix_pass(t_ctx *c, int bit)
 
 `sort_complex` grava `"Complex"` / `"O(n log n)"`, trata `size <= 3` com `sort_tiny`, retorna se
 já ordenada, calcula `bits` e roda `radix_pass` para `bit` de 0 até `bits - 1`. A pilha já chega
-convertida em ranks — o `main` chamou `build_ranks` antes do despacho
-([../03-arquitetura/fluxo.md](../03-arquitetura/fluxo.md)); a estratégia não aloca nada.
+convertida em ranks — o `main` chamou `build_ranks` antes do despacho; a estratégia não aloca
+nada por conta própria.
 
 **Três armadilhas:**
 
@@ -69,8 +69,8 @@ convertida em ranks — o `main` chamou `build_ranks` antes do despacho
   encurtar a cada `pb` e deixar elementos sem examinar — a pilha sai desordenada.
 - `bit_count` usa `n - 1`, o maior rank. Com `n` em vez de `n - 1`, uma entrada de 256
   elementos gastaria 9 passadas em vez de 8.
-- A contagem precisa ser **idêntica** entre entradas do mesmo tamanho. Variação indica bug em
-  um dos dois pontos acima.
+- A contagem precisa ser **idêntica** entre entradas não ordenadas do mesmo tamanho (n > 3).
+  Variação indica bug em um dos dois pontos acima.
 
 Ligar `run_strategy` a `sort_complex` para `STRAT_COMPLEX`.
 

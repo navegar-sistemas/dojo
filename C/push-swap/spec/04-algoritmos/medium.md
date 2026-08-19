@@ -62,6 +62,9 @@ isqrt(n):
     devolve i
 ```
 
+O domínio de uso é n ≥ 2 (a estratégia só chega aqui com `a->size >= 4`); fora dele a função
+devolveria 1 para n = 0.
+
 ## Como funciona
 
 **Fase 1 — espalhar.** Os ranks são divididos em `k` faixas contíguas. Percorrendo as faixas da
@@ -99,36 +102,37 @@ varreduras) e a fase 2 gasta cerca de `n·width/8` (blocos maiores, buscas mais 
 `width = n/k`, minimizar `k/2 + n/(8k)` dá `k ≈ √n / 2`, e `isqrt(n / 2)` é a forma inteira mais
 simples que cai nessa região.
 
-Medido sobre 8 entradas aleatórias de 500 elementos:
+Medido sobre 8 entradas aleatórias de 500 elementos, as mesmas para todo k:
 
 | k | movimentos |
 |---|---|
-| 11 | 7317 – 7714 |
-| 14 | **7049 – 7442** |
-| 16 | 7221 – 7530 |
-| 18 | 7416 – 7776 |
-| 20 | 7751 – 8186 |
-| 22 = `isqrt(500)` | 7940 – 8258 |
-| 23 | 8226 – 8514 |
-| 25 | 8526 – 8735 |
+| 11 | 7295 – 7652 |
+| 14 | 7142 – 7663 |
+| 15 = `isqrt(250)` | **7104 – 7542** |
+| 16 | 7301 – 7568 |
+| 18 | 7382 – 7732 |
+| 20 | 7729 – 7987 |
+| 22 = `isqrt(500)` | 7927 – 8151 |
+| 25 | 8493 – 8694 |
 
-Em 15 entradas de 100 elementos, o ótimo fica em k = 7 (694 – 757) contra
-`isqrt(100) = 10` (777 – 835).
+A região 11–16 é plana — a variação entre amostras é maior que a diferença entre esses k — e
+`isqrt(n / 2)` cai dentro dela; a partir de `isqrt(n)` o custo sobe degrau a degrau. Em 15
+entradas de 100 elementos, a mesma varredura dá 687 – 796 para k entre 5 e 9, contra 764 – 850
+em `isqrt(100) = 10`.
 
 O piso de 2 preserva o comportamento em entradas pequenas: para n = 5, `isqrt(2) = 1` daria um
-único bloco e degeneraria a fase 2 em busca linear, quebrando o caso de aceitação de 13
-movimentos.
+único bloco e degeneraria a fase 2 em busca linear, quebrando a rota forçada de 13 movimentos
+do caso A2.
 
 ## Fase 1 só com `ra`
 
-Girar sempre para cima é mais simples e mais barato do que procurar o membro mais próximo do
-bloco e girar pelo caminho mais curto. Nas mesmas amostras de 500 elementos com k entre 14 e
-16, a versão de caminho mais curto gasta em média na ordem de 100 a 200 movimentos **a mais**
-(amostras isoladas podem inverter o sinal; o pior caso fica com ela): girar para trás
-desorganiza a ordem em que os elementos chegam em `b` e encarece a fase 2 mais do que economiza
-na fase 1.
+Girar sempre para cima é mais simples e não perde para o caminho mais curto: girar para trás
+desorganiza a ordem em que os elementos chegam em `b` e encarece a fase 2, devolvendo em média
+o que economizou na fase 1 — com cauda pior. Medido em 20 entradas de 500 elementos (k = 15),
+a variante de caminho mais curto gastou em média ~60 movimentos **a mais**, variando de −108 a
++257 por entrada.
 
-## Traço do caso de aceitação
+## Traço da rota forçada do caso A2
 
 `4 67 3 87 23` → ranks `1 3 0 4 2`, n = 5, k = 2, width = 3.
 
@@ -147,7 +151,8 @@ na fase 1.
 `pa`.
 
 Total: `pb ra pb ra pb pb pb pa pa pa rb pa pa` — 13 movimentos, com `pa: 5`, `pb: 5`, `ra: 2`,
-`rb: 1`, exatamente o perfil do caso A2 ([../06-aceitacao/casos.md](../06-aceitacao/casos.md)).
+`rb: 1` — os 13 movimentos exatos da rota forçada `--medium` do caso A2
+([../06-aceitacao/casos.md](../06-aceitacao/casos.md)).
 
 ## Custo e contagens medidas
 
@@ -157,5 +162,5 @@ Faixas observadas em 20 a 40 permutações aleatórias por tamanho:
 
 | n | faixa |
 |---|---|
-| 100 | ~695 – 805 |
-| 500 | ~7020 – 7590 |
+| 100 | ~680 – 800 |
+| 500 | ~6970 – 7590 |

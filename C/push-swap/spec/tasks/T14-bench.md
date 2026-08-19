@@ -1,4 +1,4 @@
-# T12 — `--bench`
+# T14 — `--bench`
 
 ## Objetivo
 
@@ -6,12 +6,12 @@ Bloco de métricas em stderr, byte a byte no formato do contrato.
 
 ## Depende de
 
-T11.
+T13.
 
 ## Arquivos
 
 - `bench.c`
-- `main.c` (chamar `bench_print` no passo 10)
+- `main.c` (trocar o stub de `bench_print` pela chamada real, depois do `prog_flush`)
 
 ## Especificação
 
@@ -31,15 +31,15 @@ Três funções, duas `static`:
 ```c
 static void	put_percent(double d)
 {
-	int	centesimos;
+	int	cents;
 
-	centesimos = (int)(d * 10000.0 + 0.5);
-	ft_putnbr_fd(centesimos / 100, 2);
-	ft_putstr_fd(".", 2);
-	if (centesimos % 100 < 10)
-		ft_putstr_fd("0", 2);
-	ft_putnbr_fd(centesimos % 100, 2);
-	ft_putstr_fd("%", 2);
+	cents = (int)(d * 10000.0 + 0.5);
+	ft_putnbr_fd(cents / 100, 2);
+	ft_putchar_fd('.', 2);
+	if (cents % 100 < 10)
+		ft_putchar_fd('0', 2);
+	ft_putnbr_fd(cents % 100, 2);
+	ft_putchar_fd('%', 2);
 }
 ```
 
@@ -59,14 +59,12 @@ As cinco linhas, todas no descritor 2:
 **Espaçamento:** dois espaços depois de `disorder:` e `strategy:`, um depois de `total_ops:`.
 Dois espaços entre os pares das duas últimas linhas. Nenhum espaço no fim da linha.
 
-**`total_ops`** é a soma de `counts[0..10]`, não um contador separado — assim o invariante A7
-vale por construção.
+**`total_ops`** é a soma de `counts[0..10]`, preenchidos pelo `prog_flush` — assim o invariante
+A7 vale por construção. `put_counts(c, OP_SA, OP_PB)` e `put_counts(c, OP_RA, OP_RRR)` imprimem
+as duas linhas na ordem do enum.
 
-As contagens saem de `c->counts`, indexadas pelo enum. A ordem das duas linhas de contagem é a
-ordem de declaração de `t_op`.
-
-No `main`, chamar `bench_print(&ctx, &conf, d)` depois do despacho e antes da liberação, apenas
-se `conf.bench`.
+No `main`, chamar `bench_print(&c, &conf, d)` depois do `prog_flush` e antes da liberação,
+apenas se `conf.bench`.
 
 ## Pronto quando
 
@@ -79,13 +77,13 @@ norminette *.c *.h
 
 ```bash
 ./push_swap --bench --adaptive 4 67 3 87 23 2> /tmp/meu.txt >/dev/null
-cat > /tmp/esperado.txt <<'EOF'
+cat > /tmp/esperado.txt <<'FIM'
 [bench] disorder:  40.00%
 [bench] strategy:  Adaptive / O(n√n)
-[bench] total_ops: 13
-[bench] sa: 0  sb: 0  ss: 0  pa: 5  pb: 5
-[bench] ra: 2  rb: 1  rr: 0  rra: 0  rrb: 0  rrr: 0
-EOF
+[bench] total_ops: 9
+[bench] sa: 1  sb: 0  ss: 0  pa: 2  pb: 2
+[bench] ra: 1  rb: 0  rr: 0  rra: 2  rrb: 0  rrr: 1
+FIM
 diff /tmp/meu.txt /tmp/esperado.txt && echo "A2 bench ok" || echo "A2 bench DIFERE"
 ```
 
@@ -130,8 +128,9 @@ Esperado, nessa ordem:
 [bench] strategy:  Adaptive / O(n log n)
 ```
 
-`5 4 3 2 1` está em ordem exatamente inversa, então a desordem é 1.0 e o adaptativo escolhe a
-rota O(n log n). Uma entrada já ordenada tem desordem 0 e imprime `Adaptive / O(n²)`.
+`5 4 3 2 1` está em ordem exatamente inversa, então a desordem é 1.0 e o adaptativo certifica o
+regime O(n log n) — ainda que o programa vencedor venha do guloso. Uma entrada já ordenada tem
+desordem 0 e imprime `Adaptive / O(n²)`.
 
 **Entrada ordenada com `--bench`:**
 

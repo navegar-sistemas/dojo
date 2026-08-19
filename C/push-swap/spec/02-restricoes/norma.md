@@ -27,8 +27,10 @@ branco, e percorrido com `while`. O pseudocódigo desta spec já está escrito a
 
 **Corpo de 25 linhas.** Funções que fariam três coisas precisam virar três funções. Como cada
 extração consome a cota de 5 funções do arquivo, o par de limites é o que determina a
-granularidade dos módulos em [../03-arquitetura/modulos.md](../03-arquitetura/modulos.md) — por
-exemplo, as 11 operações não cabem num arquivo só e ocupam quatro.
+granularidade dos módulos em [../03-arquitetura/modulos.md](../03-arquitetura/modulos.md) — as
+11 operações não cabem num arquivo só e ocupam quatro, `ps_die` mora em `utils.c` porque
+`main.c` e `prog.c` fecham as próprias cotas, e as variantes `sort_greedy`/`sort_greedy_alt`
+moram em `greedy_exec.c` porque `sort_greedy.c` esgotou a dele.
 
 **Quatro parâmetros.** Toda operação recebe um único `t_ctx *`, que carrega as duas pilhas e o
 destino das contagens.

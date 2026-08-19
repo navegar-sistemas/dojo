@@ -1,4 +1,4 @@
-# T13 — `checker` (bônus)
+# T15 — `checker` (bônus)
 
 ## Objetivo
 
@@ -6,13 +6,15 @@ Segundo binário que executa a receita, com respostas idênticas às do binário
 
 ## Depende de
 
-T12.
+T04, T05 (módulos compartilhados). Roda por último antes do fechamento: bônus só interessa com
+a parte obrigatória inteira verde.
 
 ## Arquivos
 
 - `checker_bonus.c`
 - `read_ops_bonus.c`
 - `apply_op_bonus.c`
+- `Makefile` (regra `bonus`, variáveis `BSRCS`/`BOBJS`/`SHARED`)
 
 ## Especificação
 
@@ -28,15 +30,10 @@ static char	*grow(char *buf, int total, char *tmp, int n);
 char		*read_all(int fd);
 ```
 
-Lê em blocos com `read` até EOF, acumulando num buffer que cresce por realocação. Termina com
-`\0`. Devolve `NULL` em falha de alocação ou se `read` devolver `-1`. `read` devolvendo `0` é o
-EOF normal.
-
-A realocação vai numa `static` separada: embutida em `read_all`, o corpo fica com 27 linhas,
-acima do limite. `grow` tem 4 parâmetros — o teto.
-
-Ler tudo antes de aplicar simplifica o erro: uma instrução inválida no meio aborta antes de
-qualquer aplicação.
+Lê em blocos de 1024 com `read` até EOF, acumulando num buffer que cresce por realocação.
+Termina com `\0`. Devolve `NULL` em falha de alocação ou se `read` devolver `-1`; `0` é o EOF
+normal. `grow` tem 4 parâmetros — o teto — e `read_all` fecha em exatamente 25 linhas de
+corpo, o limite sem folga.
 
 ### `apply_op_bonus.c`
 
@@ -46,42 +43,35 @@ int			apply_line(t_ctx *c, const char *s, int len);
 int			apply_rot(t_ctx *c, const char *s, int len);
 ```
 
-`apply_line` traduz o trecho de `len` bytes na sigla correspondente e chama a operação. Devolve
-0 se a sigla não existir, inclusive para `len == 0` (linha vazia).
-
-`same` compara exatamente `len` bytes contra o literal **e** exige que o literal termine ali —
-sem isso, `r` casaria com `ra`. A comparação é exata: `ra` é válido, `ra ` com espaço, `RA` e
-`ra;` não.
-
-`apply_rot` casa e aplica as seis siglas de rotação; `apply_line` trata as cinco restantes e
-termina em `return (apply_rot(c, s, len));`. Despachar as 11 numa função só fecha em exatamente
-25 linhas — o limite da norma, sem folga nenhuma; a divisão deixa os dois corpos bem abaixo.
+`same` compara exatamente `len` bytes **e** exige que o literal termine ali (`lit[len] == '\0'`)
+— sem isso, `r` casaria com `ra`. `apply_line` devolve 0 para sigla inexistente e para
+`len == 0` (linha vazia); trata as cinco siglas que não são rotação e termina em
+`return (apply_rot(c, s, len));`.
 
 ### `checker_bonus.c`
 
-`main` mais os `static` que couberem:
+`main` mais as quatro `static` (`reject_flags`, `fail_ck`, `run_all`, `cleanup_ck`):
 
-1. Rejeitar qualquer `argv` que comece com `--` (→ `Error`, saída 255) **antes** de chamar
-   `parse_numbers` — o `parse_numbers` compartilhado pula tokens com esse prefixo, e sem a
-   rejeição `./checker --simple 3 2 1` responderia `KO` onde a referência responde `Error`.
-   Em seguida, `parse_numbers` sobre `argv`. Erro → `Error` em stderr, saída 255.
-2. Zero números → nada, saída 0.
-3. `b = stack_new(a->size)`; contexto com **`counts = NULL`**.
-4. `read_all(0)`.
-5. Percorre o buffer separando por `\n` e chamando `apply_line`. Falha → `Error`, saída 255.
-   **Sobra de bytes sem `\n` final também é erro** — a referência responde `Error` a
-   `printf 'ra'`, não `KO`. O laço termina com `devolve (i == ini)`.
+1. Zerar o contexto com `ft_memset` — `prog == NULL` é o modo executor: `emit` não grava nada
+   e as 11 operações compartilhadas aplicam só o efeito.
+2. `reject_flags` **antes** de `parse_numbers`: `argv` com prefixo `--` → `Error`, saída 255.
+3. `parse_numbers`; erro → `Error`, 255. Zero números → nada, saída 0, sem ler stdin.
+4. `b = stack_new(a->size)` e `read_all(0)`; falha → `Error`, 255.
+5. `run_all` separa por `\n` e aplica cada linha; falha → `Error`, 255. **Sobra de bytes sem
+   `\n` final também é erro** — o laço termina com `devolve (i == ini)`.
 6. `stack_is_sorted(a) && b->size == 0` → `OK`, senão `KO`. Saída 0.
-7. Libera tudo, inclusive o buffer.
+7. `fail_ck` e `cleanup_ck` liberam tudo, inclusive o buffer.
 
-O `counts = NULL` é o que faz `emit` não imprimir nada, permitindo reaproveitar as mesmas 11
-operações do `push_swap` sem alteração.
+No `Makefile`, a regra `bonus: checker` linka `BOBJS` + `SHARED` + libft, com `SHARED`
+incluindo `prog.o` e `utils.o` — a cadeia `emit → prog_push → ps_die` exige os dois no link
+mesmo que o checker nunca grave nada.
 
 ## Pronto quando
 
 ```bash
+make re                     # obrigatório continua verde
 make bonus && make bonus    # a segunda não pode relinkar
-make re
+make && make bonus          # nenhuma das duas relinca
 norminette *.c *.h          # inclui os _bonus
 ```
 
@@ -98,6 +88,7 @@ printf 'ra \n'     | ./checker 3 2 1     ; echo "exit=$?"   # Error, 255
 ./checker 3 2 one  </dev/null            ; echo "exit=$?"   # Error, 255
 ./checker 3 2 3    </dev/null            ; echo "exit=$?"   # Error, 255
 ./checker ""       </dev/null            ; echo "exit=$?"   # Error, 255
+./checker --simple 3 2 1 </dev/null      ; echo "exit=$?"   # Error, 255
 ./checker          </dev/null            ; echo "exit=$?"   # nada,  0
 ```
 

@@ -1,4 +1,4 @@
-# T06 — Caso base e `--simple`
+# T07 — Caso base e `--simple`
 
 ## Objetivo
 
@@ -6,13 +6,13 @@ Primeira receita real. Fim do ciclo `push_swap | checker` com veredito `OK`.
 
 ## Depende de
 
-T05.
+T06.
 
 ## Arquivos
 
 - `sort_tiny.c`
 - `sort_simple.c`
-- `utils.c`
+- `utils.c` (completa: `rotate_a_to_top`, `rotate_b_to_top`, `isqrt`)
 
 ## Especificação
 
@@ -30,7 +30,8 @@ void	rotate_a_to_top(t_ctx *c, int i);
 void	rotate_b_to_top(t_ctx *c, int i);
 ```
 
-`isqrt` só é usado em T10; escreva agora para não voltar ao arquivo.
+`isqrt` só é usado em T11; escreva agora para não voltar ao arquivo — com as duas de T03 ele
+fecha em 5 funções, a cota exata.
 
 ```c
 void	rotate_a_to_top(t_ctx *c, int i)
@@ -91,8 +92,8 @@ void	sort_simple(t_ctx *c, t_conf *conf)
 Gravar `name` e `cclass` **antes** dos retornos antecipados: o `--bench` precisa deles mesmo
 quando nada é emitido.
 
-Ligar `run_strategy` do T05 a `sort_simple` para `STRAT_SIMPLE` e, provisoriamente, também para
-`STRAT_ADAPTIVE` até T11.
+Ligar `run_strategy` do T06 a `sort_simple` para `STRAT_SIMPLE` e, provisoriamente, também para
+`STRAT_ADAPTIVE` até T13.
 
 ## Pronto quando
 

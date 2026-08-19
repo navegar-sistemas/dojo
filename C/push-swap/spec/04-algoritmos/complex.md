@@ -73,8 +73,9 @@ total = bits × n + Σ (quantidade de ranks em 0..n-1 com o bit b zerado)
 | 100 | 7 | 700 | 384 | **1084** |
 | 500 | 9 | 4500 | 2284 | **6784** |
 
-**Qualquer variação entre execuções do mesmo tamanho indica bug** — tipicamente na contagem de
-bits ou no `size` capturado.
+**Qualquer variação entre entradas não ordenadas do mesmo tamanho (com n > 3) indica bug** —
+tipicamente na contagem de bits ou no `size` capturado. As duas exceções são de contrato:
+entrada já ordenada retorna cedo com 0 movimentos, e n ≤ 3 cai no caso base.
 
 ## Custo
 

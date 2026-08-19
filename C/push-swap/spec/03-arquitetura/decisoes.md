@@ -13,42 +13,55 @@ o pior caso do projeto é `--simple` com 500 elementos, ~34000 rotações de no 
 `stack_min_index` vira um `while` sobre índices, e cada função fica bem abaixo do limite de 25
 linhas.
 
-## Contagens por ponteiro em vez de flag booleana
+## Programa gravado, impressão única no fim
 
-`t_ctx.counts` sendo `NULL` significa "não imprime, não conta". O `checker` monta o contexto
-com `NULL` e reaproveita as 11 operações intactas.
+Nenhuma operação é impressa quando acontece: tudo entra num `t_prog` e `prog_flush` imprime o
+programa final de uma vez.
 
-A alternativa — um campo `int silent` — exigiria que o `checker` também linkasse o vetor de
-contagens sem usá-lo. O ponteiro carrega as duas informações numa coisa só.
+O motivo de existir é o portfólio do `--adaptive`: para imprimir só o mais curto entre três
+candidatos, os candidatos precisam existir inteiros antes de qualquer byte sair em stdout. O
+desenho traz mais dois efeitos:
 
-## Sem buffer de operações e sem passe de otimização
+- as contagens do `--bench` são preenchidas pelo próprio flush, na mesma passada que imprime —
+  stdout e métricas não têm como divergir;
+- a saída é atômica em relação a falhas: uma alocação que falha no meio da gravação morre em
+  `ps_die` com stdout ainda vazio, nunca com meia receita impressa.
 
-Cada operação imprime a sigla no momento em que acontece e incrementa a contagem. Não existe
-buffer intermediário nem otimizador de pares.
+O custo é o buffer: O(comprimento do programa) inteiros por candidato vivo, com pico no regime
+baixo (teto quadrático do selection). Não há passe de otimização sobre o programa gravado: o
+guloso já emite `rr`/`rrr` nativamente pela fusão do `exec_move`, e os certificadores não
+produzem pares de rotação canceláveis adjacentes.
 
-Um otimizador que cancela `ra`+`rra` e funde `ra`+`rb` em `rr` é a extensão natural, e foi
-descartado por medição: simulando as três estratégias sobre 5 entradas aleatórias de 200
-elementos cada, o número de pares adjacentes canceláveis ou fundíveis produzidos foi **zero**
-em todas elas.
+## Modo executor por `prog == NULL`
 
-O motivo é estrutural. Toda rotação emitida pelas três estratégias é seguida de um `pb` ou de
-um `pa`:
+O `checker` zera o contexto inteiro e roda com `prog == NULL`: `emit` retorna sem gravar, e as
+mesmas 11 operações aplicam o efeito em silêncio. Um campo booleano `silent` daria no mesmo,
+mas o ponteiro que já existe carrega as duas informações — onde gravar e se deve gravar — numa
+coisa só.
 
-| Estratégia | Padrão emitido |
-|---|---|
-| `--simple` | `ra`×i ou `rra`×j, depois `pb` |
-| `--medium` fase 1 | `ra` até o topo pertencer ao bloco, depois `pb` |
-| `--medium` fase 2 | `rb`×i ou `rrb`×j, depois `pa` |
-| `--complex` | `ra` ou `pb` alternando, depois `pa` em sequência |
+## Portfólio com certificador, em vez de guloso puro
 
-Nunca aparecem `ra` e `rra` adjacentes, nem `ra` e `rb` adjacentes — e sem `a` e `b` girando ao
-mesmo tempo, `rr`, `rrr` e `ss` nunca são gerados. O perfil de contagens do caso A2
-([../06-aceitacao/casos.md](../06-aceitacao/casos.md)) mostra o mesmo: `rr`, `rrr` e `ss`
-zerados.
+O guloso por custo é quem entrega os programas curtos, mas sozinho ele não tem teto melhor que
+O(n²) operações no pior caso — declará-lo como a rota O(n√n) ou O(n log n) seria falso. A
+saída é rodá-lo **junto** de um certificador: `run_portfolio` gera os candidatos em cópias
+privadas das pilhas e fica com o mais curto, então o programa emitido nunca excede o do
+certificador do regime. O limite de complexidade vale por construção, no pior caso — e não
+apenas na média — enquanto o guloso responde pelos benchmarks (ele vence em praticamente toda
+entrada aleatória). Ver [../04-algoritmos/adaptive.md](../04-algoritmos/adaptive.md).
 
-Um otimizador aqui seria código morto que ainda assim precisaria passar na norma e no teste.
-Ele só passa a valer a pena junto com uma estratégia gulosa, que gira as duas pilhas em direção
-a um alvo comum e produz `rr`/`rrr` naturalmente.
+## Duas variantes do guloso, por política de desempate
+
+`bias` decide qual lado fica com o empate em `move_better`. Duas execuções com políticas
+opostas divergem logo no primeiro empate e descorrelacionam as trajetórias; o mínimo entre as
+duas corta a cauda da distribuição de operações por um custo marginal — uma simulação a mais,
+sem nenhum movimento extra no programa final.
+
+## `GREEDY_MAX_N = 1500`
+
+A varredura de candidatos do guloso é O(n²) em CPU mesmo com a poda. Acima de 1500 elementos o
+tempo de parede começa a pesar e os benchmarks param em 500, então o portfólio passa a rodar só
+o certificador. O teto preserva o contrato — a seleção de estratégia funciona para qualquer
+tamanho — sem deixar o binário lento em entradas gigantes.
 
 ## Caso base em n ≤ 3, não em n ≤ 5
 
@@ -59,31 +72,28 @@ rodando em `--simple 5 4 3 2 1` é a única verificação exata do `--simple`. N
 
 ## Número de blocos do chunk sort: `max(2, isqrt(n / 2))`
 
-A escolha aparentemente natural, `k = isqrt(n)`, não é a melhor: com ela o pior caso de 500
-elementos passa de 8000 movimentos e o projeto cai para a faixa "passa"; com `isqrt(n / 2)`
-fica em ~7590 e alcança "bom". A varredura de k que sustenta a escolha e o papel do piso de 2
-estão em [../04-algoritmos/medium.md](../04-algoritmos/medium.md).
+`isqrt(n)` parece natural e é pior: leva o pior caso do certificador médio em 500 elementos
+para além de 8000 movimentos, enquanto `isqrt(n / 2)` fica na região plana do ótimo medido. A
+varredura de k que sustenta a escolha e o papel do piso de 2 estão em
+[../04-algoritmos/medium.md](../04-algoritmos/medium.md).
 
 ## Fase 1 do chunk sort só com `ra`
 
-Girar sempre para cima é mais simples **e** mais barato que escolher o caminho mais curto até o
-próximo membro do bloco: girar para trás embaralha a ordem em que os elementos chegam em `b` e
-encarece a fase 2 mais do que economiza na fase 1. Medições em
+Girar sempre para cima é mais simples **e** não perde para o caminho mais curto: o giro para
+trás embaralha a ordem de chegada em `b` e encarece a fase 2, devolvendo em média o que
+economizou na fase 1 — com cauda pior. Medições em
 [../04-algoritmos/medium.md](../04-algoritmos/medium.md).
+
+## Radix como estratégia O(n log n) declarada
+
+O radix binário tem contagem fechada e demonstrável: `bits × n` mais um `pa` por elemento com
+bit zero, o que dá exatamente 1084 movimentos para n = 100 e 6784 para n = 500, sem variação
+entre entradas não ordenadas do mesmo tamanho. É essa previsibilidade que o qualifica como
+certificador do regime alto e como a rota da flag `--complex` — o guloso, que gasta menos,
+não tem classe declarável melhor que O(n²) e por isso só roda dentro do portfólio.
 
 ## Tabela de nomes por cadeia de `if`
 
 Ver [../02-restricoes/norma.md](../02-restricoes/norma.md): array local com inicializador viola
 `DECL_ASSIGN_LINE` e tabela em escopo de arquivo é variável global, proibida neste projeto. A
 cadeia de 11 `if` cabe em 23 linhas.
-
-## Radix como estratégia O(n log n), não guloso
-
-O radix binário tem contagem fechada e demonstrável: `bits × n` mais um `pa` por elemento com
-bit zero, o que dá exatamente 1084 movimentos para n = 100 e 6784 para n = 500, sem variação
-entre entradas.
-
-A estratégia gulosa de custo mínimo gasta menos (é o caminho para "excelente"), mas seu número
-de movimentos depende da entrada e o limite superior no modelo push_swap é O(n²), não
-O(n log n) — declará-la como O(n log n) seria falso, e a classe declarada precisa ser válida no
-modelo.

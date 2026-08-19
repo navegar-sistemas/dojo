@@ -1,0 +1,90 @@
+# T04 — Operações
+
+## Objetivo
+
+As 11 operações aplicando o efeito nas pilhas e gravando a sigla no programa.
+
+## Depende de
+
+T03.
+
+## Arquivos
+
+- `ops_swap.c`, `ops_push.c`, `ops_rotate.c`, `ops_rrotate.c`
+
+## Especificação
+
+- [../03-arquitetura/modulos.md](../03-arquitetura/modulos.md) — contratos
+- [../01-contrato/saida.md](../01-contrato/saida.md) — formato da receita
+
+## Implementação
+
+Todas com assinatura `void op_xx(t_ctx *c)` — um parâmetro só, por causa de
+`-Wunused-parameter`.
+
+| Arquivo | Conteúdo |
+|---|---|
+| `ops_swap.c` | `swap_top` (static), `op_sa`, `op_sb`, `op_ss` |
+| `ops_push.c` | `move_top` (static), `op_pa`, `op_pb` |
+| `ops_rotate.c` | `rotate_up` (static), `op_ra`, `op_rb`, `op_rr` |
+| `ops_rrotate.c` | `rotate_down` (static), `op_rra`, `op_rrb`, `op_rrr` |
+
+```c
+static void	rotate_up(t_stack *s)
+{
+	int	tmp;
+
+	if (s->size < 2)
+		return ;
+	tmp = s->data[0];
+	ft_memmove(s->data, s->data + 1, (s->size - 1) * sizeof(int));
+	s->data[s->size - 1] = tmp;
+}
+```
+
+`rotate_down` é o espelho (último vira primeiro). `ft_memmove` e não `ft_memcpy`: origem e
+destino se sobrepõem.
+
+`move_top(from, to)` abre espaço em `to` com `ft_memmove`, grava `from->data[0]` em
+`to->data[0]` e fecha o buraco em `from`. Retorna sem fazer nada se `from->size == 0`.
+
+**Regras que valem para todas:**
+
+- Movimento sem efeito possível não altera nada mas **ainda chama `emit`** — a sigla entra no
+  programa.
+- `op_ss`, `op_rr` e `op_rrr` chamam os helpers `static` nas duas pilhas e emitem **uma**
+  operação. Chamar `op_ra` e `op_rb` dentro de `op_rr` gravaria duas.
+
+## Pronto quando
+
+O `main` temporário de T03 passa a aplicar uma receita à mão e o resultado é conferido contra o
+checker de referência.
+
+```bash
+make re
+norminette *.c *.h
+```
+
+Sequência de verificação: partindo de `2 1 3 6 5 8`, a receita
+`sa pb pb pb ra rb rra rrb sa pa pa pa` precisa deixar `a = 1 2 3 5 6 8` e `b` vazia.
+
+```bash
+./push_swap 2 1 3 6 5 8 | ../assets/checker_linux 2 1 3 6 5 8    # OK (main temporário)
+./push_swap 2 1 3 6 5 8 | wc -l                                  # 12
+./push_swap 2 1 3 6 5 8 | cat -A                                 # só siglas e $
+```
+
+Verificações pontuais no teste temporário:
+
+| Cenário | Esperado |
+|---|---|
+| `op_ra` n vezes numa pilha de n | pilha idêntica à original |
+| `op_ra` seguido de `op_rra` | pilha idêntica à original |
+| `op_sa` com 1 elemento | não altera, mas grava `sa` |
+| `op_pa` com `b` vazia | não altera, mas grava `pa` |
+| `op_rr` | grava uma operação, gira as duas pilhas |
+| contexto com `prog = NULL` | nada é gravado, pilhas mudam |
+
+```bash
+valgrind --leak-check=full ./push_swap 2 1 3 6 5 8
+```

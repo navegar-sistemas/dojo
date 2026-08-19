@@ -1,25 +1,25 @@
 # Formato do `--bench`
 
-Cinco linhas em stderr, escritas depois da receita ser calculada, só quando a flag está
+Cinco linhas em stderr, escritas depois do programa final ser impresso, só quando a flag está
 presente.
 
 ```
 [bench] disorder:  40.00%
 [bench] strategy:  Adaptive / O(n√n)
-[bench] total_ops: 13
-[bench] sa: 0  sb: 0  ss: 0  pa: 5  pb: 5
-[bench] ra: 2  rb: 1  rr: 0  rra: 0  rrb: 0  rrr: 0
+[bench] total_ops: 9
+[bench] sa: 1  sb: 0  ss: 0  pa: 2  pb: 2
+[bench] ra: 1  rb: 0  rr: 0  rra: 2  rrb: 0  rrr: 1
 ```
 
 ## Regras de formatação
 
 - Toda linha começa com `[bench] ` — colchetes, a palavra, colchete, um espaço.
-- `disorder:` e `strategy:` são seguidos de **dois** espaços; `total_ops:` de **um**. Os três
-  rótulos têm larguras diferentes (9, 9 e 10 caracteres) e o espaçamento faz os três valores
-  começarem na mesma coluna.
+- `disorder:` e `strategy:` são seguidos de **dois** espaços; `total_ops:` de **um**. Os dois
+  primeiros rótulos têm 9 caracteres e `total_ops:` tem 10; o espaçamento compensa a diferença
+  e os três valores começam na mesma coluna.
 - Nas duas últimas linhas, cada par é `nome: valor` e os pares são separados por **dois**
   espaços. Não há espaço no fim da linha.
-- Primeira linha de contagens: `sa sb ss pa pb`. Segunda: `ra rb rr rra rrb`. A ordem é a
+- Primeira linha de contagens: `sa sb ss pa pb`. Segunda: `ra rb rr rra rrb rrr`. A ordem é a
   mesma do enum `t_op`.
 
 ## Campos
@@ -34,10 +34,12 @@ duas casas decimais, seguida de `%`. Ver [../04-algoritmos/desordem.md](../04-al
 | `--simple` | `Simple` | `O(n²)` |
 | `--medium` | `Medium` | `O(n√n)` |
 | `--complex` | `Complex` | `O(n log n)` |
-| `--adaptive` | `Adaptive` | a classe da rota escolhida em tempo de execução |
+| `--adaptive` | `Adaptive` | a classe do regime certificado |
 
-Em `--adaptive`, a classe reflete o que rodou de fato: uma entrada com desordem 0.40 imprime
-`Adaptive / O(n√n)`, e a mesma execução com desordem 0.60 imprime `Adaptive / O(n log n)`.
+Em `--adaptive`, a classe reflete o **regime** da desordem medida, não o candidato que venceu
+o portfólio: desordem 0.40 imprime `Adaptive / O(n√n)`, desordem 0.60 imprime
+`Adaptive / O(n log n)` — mesmo quando o programa emitido veio do guloso. Ver
+[../04-algoritmos/adaptive.md](../04-algoritmos/adaptive.md).
 
 Os símbolos `²` e `√` são UTF-8 dentro de literais de string; saem por `write` como qualquer
 outro byte.
@@ -73,6 +75,7 @@ A parte decimal precisa do zero à esquerda: 5 centésimos imprime `.05`, não `
 
 ## Momento da coleta
 
-As contagens são incrementadas no mesmo ponto em que cada movimento é impresso, então stdout e
-métricas não podem divergir por construção. Ver
-[../03-arquitetura/tipos.md](../03-arquitetura/tipos.md) para o mecanismo.
+As contagens são preenchidas pelo `prog_flush`, na mesma passada que imprime o programa final —
+stdout e métricas não têm como divergir por construção. O `bench_print` roda depois do flush;
+antes dele, reportaria tudo zerado. Ver
+[../03-arquitetura/tipos.md](../03-arquitetura/tipos.md) para o mecanismo do programa gravado.

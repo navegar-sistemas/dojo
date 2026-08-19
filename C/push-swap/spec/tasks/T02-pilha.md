@@ -46,7 +46,7 @@ Cinco funções: o arquivo está na cota exata, sem espaço para helper `static`
 ## Pronto quando
 
 Um `main` temporário exercita as cinco funções e imprime os resultados. Não faz parte da
-entrega — apague ou substitua em T05.
+entrega — apague ou substitua em T06.
 
 ```bash
 make re

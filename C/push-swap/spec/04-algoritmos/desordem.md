@@ -25,7 +25,7 @@ compute_disorder(a):
 - Os dois contadores são `long`. Para n = 500 são 124 750 pares, o que cabe em `int`, mas o
   tipo maior remove qualquer limite prático de tamanho de entrada.
 - A divisão precisa dos dois operandos convertidos para `double`. Em inteiro o resultado seria
-  sempre 0, e o `--adaptive` cairia sempre na rota O(n²).
+  sempre 0, e o `--adaptive` cairia sempre no regime O(n²).
 - `n < 2` produz `pares == 0`; devolver 0.0 evita a divisão.
 
 ## Valores de referência
@@ -54,9 +54,9 @@ A concentração em torno de 0.5 é esperada: em uma permutação aleatória cad
 probabilidade 1/2 de estar invertido, e a dispersão encolhe conforme n cresce.
 
 A consequência para o `--adaptive` é direta: o limiar de 0.5 corta bem no meio dessa
-distribuição, então entrada aleatória cai ora na rota O(n√n), ora na O(n log n). Nas 40
-amostras de 500 elementos a divisão foi 20 para cada lado. **As duas rotas precisam bater as
-metas de desempenho** — nenhuma delas é caminho secundário.
+distribuição, então entrada aleatória cai ora no regime O(n√n), ora no O(n log n). Nas 40
+amostras de 500 elementos a divisão foi 20 para cada lado. **Os dois regimes respondem pelos
+benchmarks** — nenhum é caminho secundário.
 
 ## Por que essa métrica e não outra
 

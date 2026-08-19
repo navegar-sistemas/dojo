@@ -1,4 +1,4 @@
-# T07 — Desordem
+# T08 — Desordem
 
 ## Objetivo
 
@@ -6,12 +6,12 @@
 
 ## Depende de
 
-T05.
+T06.
 
 ## Arquivos
 
 - `disorder.c`
-- `main.c` (substituir o `0.0` provisório do passo 8)
+- `main.c` (trocar o stub `0.0` pela chamada real)
 
 ## Especificação
 
@@ -53,11 +53,11 @@ Quatro variáveis, quatro declarações separadas — a norma proíbe declaraç�
 Os dois pontos que quebram silenciosamente:
 
 - **A divisão precisa dos dois operandos em `double`.** Em inteiro o resultado é sempre 0, e o
-  `--adaptive` do T11 cairia sempre na rota O(n²) sem nenhum sintoma visível até o benchmark.
+  `--adaptive` do T13 cairia sempre no regime O(n²) sem nenhum sintoma visível até o benchmark.
 - **`pares == 0`** acontece com 0 ou 1 elemento. Sem o teste, divisão por zero.
 
-No `main`, trocar o `0.0` provisório pela chamada real, mantendo-a **antes** do despacho: a
-conversão em ranks das estratégias de T09 e T10 substitui os valores da pilha.
+No `main`, trocar o `0.0` provisório pela chamada real, mantendo-a **antes** do despacho e de
+`build_ranks` — ver [../03-arquitetura/fluxo.md](../03-arquitetura/fluxo.md).
 
 ## Pronto quando
 
@@ -66,7 +66,7 @@ make re
 norminette *.c *.h
 ```
 
-Um `main` temporário ou a inspeção via T12 precisa reproduzir:
+Um `main` temporário ou a inspeção via T14 precisa reproduzir:
 
 | Entrada | Desordem |
 |---|---|
@@ -78,12 +78,12 @@ Um `main` temporário ou a inspeção via T12 precisa reproduzir:
 | nenhum elemento | 0.0000 |
 
 O valor de `4 67 3 87 23` é o que aparece como `40.00%` no `--bench` do caso A2 — confirma de
-uma vez a fórmula e a conversão para porcentagem que vem em T12.
+uma vez a fórmula e a conversão para porcentagem que vem em T14.
 
 Faixa em entrada aleatória, para conferir que a medida não está saturando em 0 ou 1:
 
 ```bash
-# após T12, com --bench disponível
+# após T14, com --bench disponível
 for i in 1 2 3 4 5; do
   ./push_swap --bench $(shuf -i 1-10000 -n 100 | tr '\n' ' ') 2>&1 >/dev/null | grep disorder
 done

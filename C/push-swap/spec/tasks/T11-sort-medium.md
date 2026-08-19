@@ -1,4 +1,4 @@
-# T10 — `--medium`
+# T11 — `--medium`
 
 ## Objetivo
 
@@ -6,7 +6,7 @@ Chunk sort com `k = max(2, isqrt(n / 2))`, abaixo de 8000 movimentos para n = 50
 
 ## Depende de
 
-T06, T08.
+T07, T09.
 
 ## Arquivos
 
@@ -14,8 +14,8 @@ T06, T08.
 
 ## Especificação
 
-- [../04-algoritmos/medium.md](../04-algoritmos/medium.md) — algoritmo, escolha de `k`, traço do caso A2
-- [../06-aceitacao/casos.md](../06-aceitacao/casos.md) — A2
+- [../04-algoritmos/medium.md](../04-algoritmos/medium.md) — algoritmo, escolha de `k`, traço da rota forçada do A2
+- [../06-aceitacao/casos.md](../06-aceitacao/casos.md) — A2 (rota forçada)
 - [../06-aceitacao/desempenho.md](../06-aceitacao/desempenho.md) — margem de regressão
 
 ## Implementação
@@ -62,26 +62,6 @@ static void	drain_b(t_ctx *c)
 }
 ```
 
-```c
-static void	collect_all(t_ctx *c, int n, int k, int width)
-{
-	int	bloco;
-	int	lo;
-	int	hi;
-
-	bloco = 0;
-	while (bloco < k)
-	{
-		lo = bloco * width;
-		hi = lo + width - 1;
-		if (hi > n - 1)
-			hi = n - 1;
-		collect_chunk(c, lo, hi);
-		bloco++;
-	}
-}
-```
-
 `sort_medium` grava `"Medium"` / `"O(n√n)"`, trata `size <= 3`, retorna se ordenada, calcula:
 
 ```
@@ -91,20 +71,15 @@ se k < 2: k = 2
 
 e chama `collect_all(c, n, k, (n + k - 1) / k)` seguido de `drain_b(c)`.
 
-A pilha já chega convertida em ranks — o `main` fez isso antes do despacho, e a estratégia não
-aloca nada.
-
 **Pontos que decidem o desempenho:**
 
-- **`k = isqrt(n / 2)`, não `isqrt(n)`.** Com `isqrt(n)` o pior caso em n = 500 passa de 8000 e
-  o projeto perde a faixa "bom". A varredura completa de k está em
+- **`k = isqrt(n / 2)`, não `isqrt(n)`.** Com `isqrt(n)` o pior caso em n = 500 passa de 8000.
+  A varredura completa de k está em [medium.md](../04-algoritmos/medium.md).
+- **O piso `k >= 2`.** Sem ele, n = 5 daria `isqrt(2) = 1`, um bloco único, e a rota forçada do
+  caso A2 sairia com mais de 13 movimentos.
+- **Fase 1 só com `ra`.** Mais simples e sem perda medida — ver
   [medium.md](../04-algoritmos/medium.md).
-- **O piso `k >= 2`.** Sem ele, n = 5 daria `isqrt(2) = 1`, um bloco único, e o caso A2 sairia
-  com mais de 13 movimentos.
-- **Fase 1 só com `ra`.** Girar pelo caminho mais curto até o próximo membro custa de 150 a 200
-  movimentos a mais em n = 500.
-- **`rest` calculado uma vez por bloco.** É a condição de parada do laço; recalcular a cada
-  iteração é desperdício de CPU, e não ter o contador deixa o laço sem parada natural.
+- **`rest` calculado uma vez por bloco.** É a condição de parada do laço.
 - **`hi` limitado a `n - 1`.** O último bloco é mais curto quando `n` não é múltiplo de
   `width`.
 
@@ -117,11 +92,11 @@ make re
 norminette *.c *.h
 ```
 
-**A2 — movimento a movimento:**
+**A2 — rota forçada, movimento a movimento:**
 
 ```bash
 [ "$(./push_swap --medium 4 67 3 87 23 | tr '\n' ' ')" = "pb ra pb ra pb pb pb pa pa pa rb pa pa " ] \
-  && echo "A2 ok" || echo "A2 FALHOU: $(./push_swap --medium 4 67 3 87 23 | tr '\n' ' ')"
+  && echo "A2-medium ok" || echo "A2-medium FALHOU: $(./push_swap --medium 4 67 3 87 23 | tr '\n' ' ')"
 ```
 
 **Desempenho — pior caso de 20 rodadas:**
@@ -137,7 +112,7 @@ for n in 100 500; do
   done
   echo "n=$n pior=$pior"
 done
-# n=100 esperado em torno de 700-810
+# n=100 esperado em torno de 680-800
 # n=500 esperado em torno de 7000-7600, e obrigatoriamente abaixo de 8000
 ```
 

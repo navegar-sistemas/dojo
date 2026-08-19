@@ -37,7 +37,8 @@
 | [04-algoritmos/simple.md](04-algoritmos/simple.md) | O(n²), extração de mínimo |
 | [04-algoritmos/medium.md](04-algoritmos/medium.md) | O(n√n), ordenação por blocos |
 | [04-algoritmos/complex.md](04-algoritmos/complex.md) | O(n log n), radix binário |
-| [04-algoritmos/adaptive.md](04-algoritmos/adaptive.md) | despacho por desordem |
+| [04-algoritmos/greedy.md](04-algoritmos/greedy.md) | guloso por custo, candidato do portfólio |
+| [04-algoritmos/adaptive.md](04-algoritmos/adaptive.md) | despacho por desordem + portfólio certificado |
 
 ### Bônus e verificação
 
@@ -52,7 +53,7 @@
 
 | Documento | Conteúdo |
 |---|---|
-| [tasks/README.md](tasks/README.md) | quadro das 14 tarefas, ordem e dependências |
+| [tasks/README.md](tasks/README.md) | quadro das 16 tarefas, ordem e dependências |
 
 ## Convenções deste documento
 

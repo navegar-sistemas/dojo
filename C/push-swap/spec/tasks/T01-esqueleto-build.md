@@ -37,7 +37,7 @@ Nada.
 4. `SRCS` começa contendo só `main.c`, com um `main` que retorna 0. Cada tarefa seguinte,
    ao criar um arquivo novo, o acrescenta ao `SRCS` — o Makefile cresce junto com o código,
    e nenhum arquivo existe antes de ter conteúdo. As regras `bonus`/`checker` e as variáveis
-   `BSRCS`/`BOBJS`/`SHARED` entram só em T13, quando o checker existe; até lá, `make bonus`
+   `BSRCS`/`BOBJS`/`SHARED` entram só em T15, quando o checker existe; até lá, `make bonus`
    não faz parte da verificação.
 
 ## Pronto quando
@@ -52,5 +52,5 @@ norminette *.c *.h          # nenhuma linha "Error:"
 ls libft/libft.a            # existe após make
 ```
 
-A verificação de `make bonus && make bonus` (segunda chamada sem relink) acontece em T13,
+A verificação de `make bonus && make bonus` (segunda chamada sem relink) acontece em T15,
 quando a regra passa a existir.

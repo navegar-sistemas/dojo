@@ -86,5 +86,6 @@ Medido em 8 entradas com desordem entre 0.01 e 0.13:
 | 100 | 0.036 – 0.131 | 294 – 470 | 1084 |
 | 500 | 0.011 – 0.071 | 1634 – 4225 | 6784 |
 
-É esse cruzamento que o [adaptive.md](adaptive.md) explora: abaixo de 0.2 o quadrático é 2 a 4
-vezes mais barato que o radix.
+É esse cruzamento que o despacho por desordem explora: abaixo de 0.2 o certificador
+quadrático é 2 a 4 vezes mais barato que o radix — e o guloso, mais barato ainda
+([adaptive.md](adaptive.md)).

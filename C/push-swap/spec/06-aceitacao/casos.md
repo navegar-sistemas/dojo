@@ -31,23 +31,41 @@ critério de desempate `i <= size / 2` na rotação até o topo — ver
   && echo A1 ok || echo A1 FALHOU
 ```
 
-## A2 — `--adaptive` com 5 elementos
+## A2 — caminho padrão com 5 elementos
+
+A invocação padrão sobre `4 67 3 87 23` (desordem 0.40, regime médio) emite o programa do
+guloso, vencedor do portfólio — 9 movimentos, determinísticos:
 
 ```
+$ ./push_swap 4 67 3 87 23 | tr '\n' ' '
+pb pb sa ra rra pa rrr pa rra
 $ ./push_swap --adaptive 4 67 3 87 23 | wc -l
-13
-$ ./push_swap --bench --adaptive 4 67 3 87 23 2>&1 >/dev/null
+9
+$ ./push_swap --bench 4 67 3 87 23 2>&1 >/dev/null
 [bench] disorder:  40.00%
 [bench] strategy:  Adaptive / O(n√n)
-[bench] total_ops: 13
-[bench] sa: 0  sb: 0  ss: 0  pa: 5  pb: 5
-[bench] ra: 2  rb: 1  rr: 0  rra: 0  rrb: 0  rrr: 0
+[bench] total_ops: 9
+[bench] sa: 1  sb: 0  ss: 0  pa: 2  pb: 2
+[bench] ra: 1  rb: 0  rr: 0  rra: 2  rrb: 0  rrr: 1
 ```
 
-Sequência completa: `pb ra pb ra pb pb pb pa pa pa rb pa pa`. Traço passo a passo em
-[../04-algoritmos/medium.md](../04-algoritmos/medium.md).
+O rótulo certifica o regime (`O(n√n)`), não o candidato vencedor — ver
+[../04-algoritmos/adaptive.md](../04-algoritmos/adaptive.md).
 
-Desordem 0.40 cai na faixa média, então a rota é a O(n√n).
+**Rota certificadora forçada** na mesma entrada — o chunk sort emite 13 movimentos exatos
+(traço passo a passo em [../04-algoritmos/medium.md](../04-algoritmos/medium.md)):
+
+```
+$ ./push_swap --medium 4 67 3 87 23 | tr '\n' ' '
+pb ra pb ra pb pb pb pa pa pa rb pa pa
+```
+
+```bash
+[ "$(./push_swap 4 67 3 87 23 | tr '\n' ' ')" = "pb pb sa ra rra pa rrr pa rra " ] \
+  && echo A2 ok || echo A2 FALHOU
+[ "$(./push_swap --medium 4 67 3 87 23 | tr '\n' ' ')" = "pb ra pb ra pb pb pb pa pa pa rb pa pa " ] \
+  && echo A2-medium ok || echo A2-medium FALHOU
+```
 
 ## A3 — `--complex` determinístico
 
@@ -56,7 +74,8 @@ Desordem 0.40 cai na faixa média, então a rota é a O(n√n).
 | 100 | 1084 |
 | 500 | 6784 |
 
-Sem variação entre entradas do mesmo tamanho.
+Sem variação entre entradas **não ordenadas** do mesmo tamanho (com n > 3): entrada já
+ordenada retorna cedo com 0 movimentos, e n ≤ 3 cai no caso base.
 
 ```bash
 for i in 1 2 3; do
@@ -78,7 +97,8 @@ done   # precisa imprimir 6784 três vezes
 | `2 1` | 1 | `sa` |
 | `1 2` | 0 | — |
 
-Vale para as quatro flags: o caso base é consultado antes da estratégia.
+Vale para as quatro flags: o caso base é consultado antes da estratégia, e no `--adaptive` o
+portfólio converge para o mesmo programa mínimo.
 
 ## A5 — Erros
 
@@ -121,9 +141,10 @@ $ ./push_swap --bench 1 2 3 2>&1 >/dev/null
 [bench] ra: 0  rb: 0  rr: 0  rra: 0  rrb: 0  rrr: 0
 ```
 
-## A7 — Invariantes do `--bench`
+## A7 — Invariantes
 
-Para qualquer entrada válida:
+**Bench**: para qualquer entrada válida, o número de linhas em stdout, o `total_ops` e a soma
+das 11 contagens são o mesmo número:
 
 ```bash
 ARG=$(shuf -i 0-9999 -n 50 | tr '\n' ' ')
@@ -132,7 +153,18 @@ total=$(./push_swap --bench $ARG 2>&1 >/dev/null | grep total_ops | tr -dc '0-9'
 [ "$linhas" -eq "$total" ] && echo A7 ok || echo A7 FALHOU
 ```
 
-A soma das 11 contagens também precisa ser igual a `total_ops`.
+**Portfólio**: a invocação padrão nunca emite mais que a rota certificadora do seu regime,
+forçada sobre a mesma entrada:
+
+```bash
+ARG=$(shuf -i 0-9999 -n 500 | tr '\n' ' ')
+d=$(./push_swap --bench $ARG 2>&1 >/dev/null | grep disorder | tr -dc '0-9')
+ad=$(./push_swap $ARG | wc -l)
+if [ "$d" -lt 2000 ]; then cert=$(./push_swap --simple $ARG | wc -l)
+elif [ "$d" -lt 5000 ]; then cert=$(./push_swap --medium $ARG | wc -l)
+else cert=$(./push_swap --complex $ARG | wc -l); fi
+[ "$ad" -le "$cert" ] && echo A7-portfolio ok || echo A7-portfolio FALHOU
+```
 
 ## A8 — Formato da saída
 
