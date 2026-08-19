@@ -57,17 +57,17 @@ typedef struct s_prog
 	int		cap;
 }	t_prog;
 
-///*
-//** Um par de rotações a executar antes de um push: contagens
-//** positivas significam rotações para frente (ra / rb), contagens
-//** negativas significam rotações reversas (rra / rrb). exec_move
-//** funde as partes de mesmo sinal em rr / rrr.
-//*/
-//typedef struct s_move
-//{
-//	int	a;
-//	int	b;
-//}	t_move;
+/*
+** Um par de rotações a executar antes de um push: contagens
+** positivas significam rotações para frente (ra / rb), contagens
+** negativas significam rotações reversas (rra / rrb). exec_move
+** funde as partes de mesmo sinal em rr / rrr.
+*/
+typedef struct s_move
+{
+	int	a;
+	int	b;
+}	t_move;
 
 /*
 ** Contexto de execução compartilhado por toda operação. prog
@@ -174,23 +174,23 @@ void	sort_simple(t_ctx *c, t_conf *conf);
 void	sort_medium(t_ctx *c, t_conf *conf);
 void	sort_complex(t_ctx *c, t_conf *conf);
 
-///* sort_greedy.c, greedy_exec.c */
-//void	sort_greedy_run(t_ctx *c, t_conf *conf);
-//void	sort_greedy(t_ctx *c, t_conf *conf);
-//void	sort_greedy_alt(t_ctx *c, t_conf *conf);
+/* sort_greedy.c, greedy_exec.c */
+void	sort_greedy_run(t_ctx *c, t_conf *conf);
+void	sort_greedy(t_ctx *c, t_conf *conf);
+void	sort_greedy_alt(t_ctx *c, t_conf *conf);
 
-///* greedy_cost.c */
-//int		move_cost(t_move m);
-//t_move	move_better(t_ctx *c, t_move x, t_move y);
-//t_move	pair_best(t_ctx *c, int ia, int ib);
-//int		target_in_b(t_stack *b, int value);
-//int		target_in_a(t_stack *a, int value);
+/* greedy_cost.c */
+int		move_cost(t_move m);
+t_move	move_better(t_ctx *c, t_move x, t_move y);
+t_move	pair_best(t_ctx *c, int ia, int ib);
+int		target_in_b(t_stack *b, int value);
+int		target_in_a(t_stack *a, int value);
 
-///* greedy_pick.c */
-//t_move	best_push(t_ctx *c);
-//t_move	best_insert(t_ctx *c);
+/* greedy_pick.c */
+t_move	best_push(t_ctx *c);
+t_move	best_insert(t_ctx *c);
 
-//void	exec_move(t_ctx *c, t_move m);
+void	exec_move(t_ctx *c, t_move m);
 
 ///* sort_adaptive.c */
 //void	sort_adaptive(t_ctx *c, t_conf *conf, double d);
