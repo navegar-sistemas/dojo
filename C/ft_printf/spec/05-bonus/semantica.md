@@ -1,9 +1,8 @@
 # Semântica flag × conversão
 
-Tudo aqui é comportamento **medido** na referência
-([../03-arquitetura/decisoes.md](../03-arquitetura/decisoes.md)); as linhas
-`[…]` citadas estão, com retorno, em
-[../06-aceitacao/casos.md](../06-aceitacao/casos.md).
+O que sai, para cada combinação. Como cada função produz isso está em
+[conversoes.md](conversoes.md) e [montagem.md](montagem.md); as linhas com
+retorno estão em [../06-aceitacao/casos.md](../06-aceitacao/casos.md).
 
 ## Visão geral
 
@@ -18,83 +17,80 @@ Tudo aqui é comportamento **medido** na referência
 | `%p` ≠ NULL | esquerda | zeros | ign. (`0x` já é inerente) | **prefixo de sinal** | sim | mínimo de dígitos |
 | `%p` = NULL | esquerda | **ignorada** (espaços) | ign. | ign. | espaços | **ignorada** |
 
-## Regras transversais (numéricas)
+## Regras transversais dos numéricos
 
-- **`-` vence `0`**: `%-05d` com 42 → `[42   ]`.
-- **`+` vence espaço**: `% +d` ≡ `%+ d` ≡ `%+d` → `[+42]`.
-- **Precisão desliga `0`**: `%05.3d` com 42 → `[  042]` — os 3 zeros são da
-  precisão, o resto é espaço. Vale para `%p`: `%08.3p` → `[  0x1234]`.
-- **Precisão 0 com valor 0 imprime vazio**, e o prefixo de sinal sobrevive:
-  `%.0d` com 0 → `[]`; `%+.0d` com 0 → `[+]`; `% .0d` → `[ ]`;
-  `%5.0d` → `[     ]`.
-- O prefixo **nunca** conta como dígito: `%.5d` com −42 → `[-00042]`
-  (5 dígitos + sinal, retorno 6).
+| Regra | Exemplo |
+|---|---|
+| `-` vence `0` | `%-05d` com 42 → `[42   ]` |
+| `+` vence espaço | `% +d` ≡ `%+ d` ≡ `%+d` → `[+42]` |
+| precisão desliga `0` | `%05.3d` com 42 → `[  042]`; `%08.3p` → `[  0x1234]` |
+| precisão 0 com valor 0 não imprime dígito | `%.0d` com 0 → `[]` |
+| o prefixo de sinal sobrevive ao valor vazio | `%+.0d` → `[+]`; `% .0d` → `[ ]`; `%5.0d` → `[     ]` |
+| o prefixo nunca conta como dígito | `%.5d` com −42 → `[-00042]`, retorno 6 |
 
 ## `%c` e `%s`
 
-Campo de texto: só `-` e largura, padding **sempre** com espaço — `%05c` com
-`'a'` → `[    a]`, `%05s` com `"hi"` → `[   hi]`. Precisão trunca `%s`
-(`%5.3s` com `"hello"` → `[  hel]`, `%.0s` → `[]`) e é ignorada em `%c`.
+Campo de texto: só `-` e largura têm efeito, e o preenchimento é **sempre**
+espaço — `%05c` com `'a'` → `[    a]`, `%05s` com `"hi"` → `[   hi]`. A
+precisão trunca `%s` (`%5.3s` com `"hello"` → `[  hel]`, `%.0s` → `[]`) e é
+ignorada em `%c`.
 
-**`%s` com `NULL`** — a regra medida tem um degrau:
+**`%s` com `NULL`** tem um degrau:
 
 | Precisão | Saída |
 |---|---|
 | ausente, ou ≥ 6 | `(null)` |
-| 0 a 5 | vazio (retorno 0) |
+| 0 a 5 | vazio, retorno 0 |
 
 `(null)` nunca é truncado pela metade: ou inteiro, ou nada. Com largura,
 alinha como string comum (`%8s` → `[  (null)]`).
 
 ## `%d` `%i` `%u` `%x` `%X`
 
-O prefixo por conversão (montagem em [montagem.md](montagem.md)):
+O prefixo por conversão:
 
 | Conversão | Prefixo |
 |---|---|
 | `%d` `%i` negativo | `-` |
 | `%d` `%i` ≥ 0 | `+` se `plus`; senão espaço se `space`; senão nada |
 | `%u` | nunca |
-| `%x` / `%X` | `0x` / `0X` se `hash` **e valor ≠ 0** |
+| `%x` / `%X` | `0x` / `0X` se `hash` **e** valor ≠ 0 |
 
 `%#x` com 0 → `[0]`, sem prefixo; `%#.0x` com 0 → `[]` — as duas regras se
-compõem. `+`/espaço em `%u`/`%x`/`%X` são ignorados (`%+u` → `[42]`,
+compõem. `+` e espaço em `%u`, `%x` e `%X` não têm efeito (`%+u` → `[42]`,
 `% x` → `[ff]`).
 
 ## `%p`
 
-**Não nulo:** hexadecimal minúsculo com `0x` inerente — e, diferente de
-`%x`, os prefixos de sinal **funcionam**: `%+p` → `[+0x1234]`,
-`% p` → `[ 0x1234]`. O prefixo composto vai inteiro antes dos zeros:
-`% 015p` → `[ 0x000000001234]`, `%.20p` → `[0x00000000000000001234]`.
-`#` não muda nada.
+**Não nulo:** hexadecimal minúsculo com `0x` inerente e, diferente de `%x`,
+os prefixos de sinal funcionam: `%+p` → `[+0x1234]`, `% p` → `[ 0x1234]`. O
+prefixo composto vai inteiro antes dos zeros: `% 015p` →
+`[ 0x000000001234]`, `%.20p` → `[0x00000000000000001234]`. `#` não muda
+nada.
 
-**`NULL`:** vira o texto `(nil)` no caminho de string — largura e `-`
+**`NULL`:** vira o texto `(nil)` e segue o caminho de string — largura e `-`
 funcionam, `0` alinha com espaços (`%08p` → `[   (nil)]`), precisão e sinais
-são ignorados (`%.3p` → `[(nil)]`, inteiro). Implementação: `conv_ptr` zera a
-precisão (`prec = -1`) e delega a `conv_s`
-([../03-arquitetura/tipos.md](../03-arquitetura/tipos.md)).
+são ignorados (`%.3p` → `[(nil)]`, inteiro).
 
 ## `%%`
 
-`%` seco, sempre: flags, largura e precisão são todos ignorados — `%5%`,
+`%` seco, sempre: flags, largura e precisão são todos ignorados. `%5%`,
 `%05%`, `%-5%`, `%.3%` → `[%]`, retorno 1.
 
-## Diretiva desconhecida — reimpressão canônica
+## Diretiva desconhecida
 
 Conversão fora de `cspdiuxX%` não consome argumento e reimprime a diretiva
-**reconstruída do estado analisado**, nunca o texto original:
+**reconstruída da struct**, nunca o texto original. A forma é fixa:
 
 ```
-'%'
-'#'  se hash
-'+'  se plus            (senão ' ' se space)
-'-'  se minus
-'0'  se zero e não minus
-largura em decimal      se ≠ 0
-'.' + precisão          se presente (0 imprime ".0")
-byte de conversão
+'%'  flags em ordem canônica  largura  '.' precisão  byte de conversão
 ```
+
+| Parte | Regra |
+|---|---|
+| flags | `#`, depois `+` (ou espaço, se não houver `+`), depois `-`, depois `0` (se não houver `-`) |
+| largura | em decimal, omitida quando 0 |
+| precisão | `.` seguido do valor, inclusive `.0`; omitida quando ausente |
 
 | Formato | Saída | O que mostra |
 |---|---|---|
@@ -104,5 +100,5 @@ byte de conversão
 | `%.r` | `[%.0r]` | precisão vazia vira `.0` |
 | `%++--00##  9.12w` | `[%#+-9.12w]` | tudo junto |
 
-`a%rb%d` com 42 → `[a%rb42]`: o argumento sobrevive para o `%d` — desconhecida
-não toca a lista variádica.
+`a%rb%d` com 42 → `[a%rb42]`: o argumento sobrevive para o `%d`, porque a
+desconhecida não toca a lista variádica.

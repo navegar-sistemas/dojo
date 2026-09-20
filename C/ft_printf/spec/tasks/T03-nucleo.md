@@ -19,7 +19,7 @@ T02.
 
 - [../03-arquitetura/fluxo.md](../03-arquitetura/fluxo.md) — o laço obrigatório, `va_list` por ponteiro
 - [../01-contrato/diretivas.md](../01-contrato/diretivas.md) — desconhecida, incompleta, consumo
-- [../01-contrato/conversoes.md](../01-contrato/conversoes.md) — semântica das nove
+- [../01-contrato/diretivas.md](../01-contrato/diretivas.md) — semântica das nove
 - [../04-emissao/numeros.md](../04-emissao/numeros.md) — sinal em `long` (`pf_putnbr`)
 
 ## Implementação

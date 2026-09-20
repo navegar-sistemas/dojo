@@ -18,7 +18,7 @@ T01.
 
 - [../04-emissao/escritores.md](../04-emissao/escritores.md) — `pf_putstr` e o contrato de retorno
 - [../04-emissao/numeros.md](../04-emissao/numeros.md) — recursão de `pf_putnbr_base`, `pf_putptr`
-- [../01-contrato/conversoes.md](../01-contrato/conversoes.md) — `(null)`, `(nil)`, bases
+- [../01-contrato/diretivas.md](../01-contrato/diretivas.md) — `(null)`, `(nil)`, bases
 
 ## Implementação
 

@@ -4,14 +4,14 @@
 
 A implementação inteira usa, de fora, **apenas**:
 
-- `write` (via `<unistd.h>`) — toda a saída;
-- o mecanismo variádico de `<stdarg.h>` — `va_start`, `va_arg`, `va_end`
-  (`va_copy` disponível, não usado).
+- `write`, de `<unistd.h>` — toda a saída;
+- o mecanismo variádico de `<stdarg.h>`: `va_start`, `va_arg`, `va_end`
+  (`va_copy` está disponível e não é usado).
 
-`malloc`/`free` são permitidos mas não usados — decisão com justificativa em
-[../03-arquitetura/decisoes.md](../03-arquitetura/decisoes.md). Nenhuma outra
-função de biblioteca aparece: comprimento de string, dígitos e padding são do
-projeto.
+`malloc` e `free` são permitidos e não são usados
+([../03-arquitetura/decisoes.md](../03-arquitetura/decisoes.md)). Nenhuma
+outra função de biblioteca aparece: comprimento de string, dígitos e padding
+são do projeto.
 
 ## Estrutura de arquivos
 
@@ -74,18 +74,7 @@ re: fclean all
 .PHONY: all bonus clean fclean re
 ```
 
-## Propriedades exigidas
-
-**Não relinka.** `make && make` responde `Nothing to be done for 'all'.` na
-segunda chamada; `make bonus && make bonus` responde o mesmo para `bonus`.
-
-**Regras obrigatórias.** `all`, `bonus`, `clean`, `fclean`, `re` e `$(NAME)`.
-Fontes nomeados um a um — sem `*.c`.
-
-**Dependência do header.** As regras de padrão estático fazem cada `.o`
-depender do header da sua variante: mudar `ft_printf.h` recompila a parte
-obrigatória; mudar `ft_printf_bonus.h` recompila o bônus. Sem isso, uma
-mudança em `t_fmt` deixaria objetos incompatíveis linkando em silêncio.
+## Por que cada peça incomum está lá
 
 **`rm -f $(NAME)` antes de cada `ar`.** `ar rcs` **acrescenta** a um arquivo
 existente. Sem o `rm`, `make` seguido de `make bonus` produziria um `.a` com
@@ -94,15 +83,29 @@ escolhendo por ordem de membro. As duas receitas recriam o arquivo do zero,
 então `ar t libftprintf.a` lista só os objetos da variante corrente.
 
 **O marcador `.bonus`.** A regra `bonus` não tem como comparar datas com o
-`.a` (a regra `all` também o produz). O arquivo vazio `.bonus` registra "o
-`.a` atual é o do bônus": é ele o alvo real da regra, e é removido tanto pelo
-`fclean` quanto pela receita de `$(NAME)` — assim `make` depois de
-`make bonus` volta a montar a variante obrigatória e o próximo `make bonus`
+`.a`, porque a regra `all` também o produz. O arquivo vazio `.bonus` registra
+"o `.a` atual é o do bônus": é ele o alvo real da regra, e é removido tanto
+pelo `fclean` quanto pela receita de `$(NAME)`. Assim `make` depois de
+`make bonus` volta a montar a variante obrigatória, e o próximo `make bonus`
 reconstrói de fato.
+
+**Regras de padrão estático por header.** Cada `.o` depende do header da sua
+variante: mudar `ft_printf.h` recompila a parte obrigatória, mudar
+`ft_printf_bonus.h` recompila o bônus. Sem isso, uma mudança em `t_fmt`
+deixaria objetos incompatíveis linkando em silêncio.
+
+## Propriedades exigidas
+
+| Propriedade | Verificação |
+|---|---|
+| não relinka | `make && make` responde `Nothing to be done for 'all'.`; `make bonus && make bonus`, o mesmo para `bonus` |
+| regras obrigatórias | `all`, `bonus`, `clean`, `fclean`, `re` e `$(NAME)` |
+| fontes nomeados um a um | sem `*.c` em lugar nenhum |
+| `.a` de uma variante só | `ar t libftprintf.a` lista ou os 2 objetos da obrigatória, ou os 7 do bônus |
 
 | Sequência | Resultado |
 |---|---|
-| `make` → `make` | segunda chamada não faz nada |
+| `make` → `make` | a segunda chamada não faz nada |
 | `make bonus` → `make bonus` | idem |
 | `make` → `make bonus` | `.a` refeito só com objetos `_bonus` |
 | `make bonus` → `touch ft_printf.c` → `make` | `.a` refeito só com objetos da obrigatória |

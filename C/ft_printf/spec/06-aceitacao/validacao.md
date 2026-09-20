@@ -1,7 +1,16 @@
 # Validação
 
-Comandos de `../project/`, salvo indicação. Arquivos de teste ficam **fora**
-do diretório da implementação (aqui, `/tmp/ftpf-check/`): não são entregáveis.
+Cinco etapas, todas executáveis. Os comandos rodam de `../project/`, salvo
+indicação; os arquivos de teste ficam **fora** do diretório da implementação
+— aqui, `/tmp/ftpf-check/` — porque não são entregáveis.
+
+| Etapa | O que prova |
+|---|---|
+| estado limpo | compila sem nenhum aviso e não relinka |
+| harness diferencial | saída e retornos idênticos aos da referência, caso a caso |
+| fuzz | o mesmo, sobre milhares de formatos gerados |
+| sanitizers | nenhum acesso inválido nem comportamento indefinido |
+| memória | nenhuma alocação, nenhum vazamento |
 
 ## Estado limpo
 

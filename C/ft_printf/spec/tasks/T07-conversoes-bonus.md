@@ -22,33 +22,30 @@ T04, T06.
 
 ## Especificação
 
+- [../05-bonus/conversoes.md](../05-bonus/conversoes.md) — algoritmo de cada `conv_*` e de `unk_head`
 - [../05-bonus/semantica.md](../05-bonus/semantica.md) — matriz flag × conversão, `(null)`, `(nil)`, canônica
-- [../05-bonus/montagem.md](../05-bonus/montagem.md) — prefixo por conversão, campos de texto
+- [../05-bonus/montagem.md](../05-bonus/montagem.md) — o que `put_num` espera receber
 - [../03-arquitetura/fluxo.md](../03-arquitetura/fluxo.md) — laço, diretiva, despacho, `va_list *`
-- [../03-arquitetura/tipos.md](../03-arquitetura/tipos.md) — quem consome cada campo
+- [../03-arquitetura/tipos.md](../03-arquitetura/tipos.md) — quem lê cada campo
 
 ## Implementação
 
-Ordem sugerida: `conv_c`/`conv_s`/`conv_percent` (campos de texto) →
-`conv_int`/`conv_uint`/`conv_hex`/`conv_ptr` (prefixo + `put_num`) →
-`conv_unknown` (reconstrução canônica, largura e precisão via `render_base`
-no próprio buffer) → `ft_printf_bonus.c` (laço idêntico ao de
-[fluxo.md](../03-arquitetura/fluxo.md), `pf_directive` devolvendo −1 para
-`conv == '\0'`).
+Cada função tem o algoritmo em
+[conversoes.md](../05-bonus/conversoes.md); a ordem sugerida é campos de
+texto (`conv_c`, `conv_s`, `conv_percent`) → numéricos (`conv_int`,
+`conv_uint`, `conv_hex`, `conv_ptr`) → `conv_unknown` com `unk_head` →
+`ft_printf_bonus.c`.
 
-Pontos que derrubam implementações apressadas, todos medidos:
+Os seis pontos onde uma implementação apressada diverge da referência:
 
-- `conv_s`: o degrau do `NULL` é **antes** do truncamento — precisão < 6
-  troca por `""`, senão por `"(null)"`; depois a precisão trunca normalmente.
-- `conv_ptr` com `NULL`: `f->prec = -1` e delegar a `conv_s` — precisão
-  ignorada, largura com espaços.
-- `conv_hex`: prefixo só com `hash && n != 0`; o esvaziamento
-  `prec == 0 && n == 0` vem **depois** de renderizar.
-- `conv_int`: negar no `long`; o sinal nunca entra no buffer de dígitos.
-- `unk_head`: `0` suprimida por `minus`, espaço por `plus` — ordem
-  `# + espaço - 0`.
-- `pf_dispatch`: `va_arg` só dentro do ramo — `%%` e desconhecida não tocam a
-  lista.
+| Função | Armadilha |
+|---|---|
+| `conv_s` | a troca do `NULL` vem **antes** do truncamento, senão `(null)` sai cortado |
+| `conv_ptr` | `NULL` precisa de `f->prec = -1` antes de delegar a `conv_s` |
+| `conv_hex` | o prefixo exige `hash` **e** valor ≠ 0; o esvaziamento vem **depois** de renderizar |
+| `conv_int` | negar em `long`, e o sinal nunca entra no buffer de dígitos |
+| `unk_head` | `-` suprime o `0` e `+` suprime o espaço; a ordem é fixa |
+| `pf_dispatch` | `va_arg` só dentro do ramo, senão `%%` e desconhecida consomem argumento |
 
 ## Pronto quando
 

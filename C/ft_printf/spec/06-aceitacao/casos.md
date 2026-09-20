@@ -1,10 +1,8 @@
 # Casos de aceitação
 
-Entradas com saída e retorno exatos, **medidos** na `printf` da glibc 2.36 —
-o gabarito do espelho ([../03-arquitetura/decisoes.md](../03-arquitetura/decisoes.md)).
-Colchetes delimitam os bytes da saída e não fazem parte dela; espaços dentro
-deles são bytes reais. A implementação reproduz cada linha, byte a byte e
-retorno a retorno, pelo harness de [validacao.md](validacao.md).
+O gabarito: entradas com a saída e o retorno exatos da `printf` da glibc
+2.36. A implementação reproduz cada linha byte a byte e retorno a retorno; o
+harness que faz a comparação está em [validacao.md](validacao.md).
 
 ## Encadeamento (parte obrigatória)
 
@@ -16,7 +14,7 @@ ft_printf("%c|%s|%p|%d|%i|%u|%x|%X|%%", 'q', "str", (void *)0x42,
 
 Uma diretiva de cada conversão na mesma chamada; o retorno soma literais e
 campos. As linhas por conversão sem flags estão em
-[../01-contrato/conversoes.md](../01-contrato/conversoes.md); daqui para baixo
+[../01-contrato/diretivas.md](../01-contrato/diretivas.md); daqui para baixo
 está a matriz do bônus.
 
 ## `%p`
@@ -40,9 +38,9 @@ está a matriz do bônus.
 | `"% 015p"` | `0x1234` | `[ 0x000000001234]` | 15 |
 | `"%p"` | `0xffffffffffffffff` | `[0xffffffffffffffff]` | 18 |
 
-As quatro últimas linhas de `NULL` mostram o caminho de string: largura com
-espaços (mesmo com `0`), precisão e sinais ignorados. Nas não nulas, o
-prefixo de sinal vem **antes** do `0x` e os zeros depois dele.
+As linhas de `NULL` mostram o caminho de string: largura com espaços mesmo
+com a flag `0`, precisão e sinais ignorados. Nas não nulas, o prefixo de
+sinal vem **antes** do `0x`, e os zeros depois dele.
 
 ## `%c`
 
@@ -170,8 +168,9 @@ em campo de texto.
 | `"a%rb%d"` | `42` (nao consumido) | `[a%rb42]` | 6 |
 
 Regras da reconstrução em
-[../05-bonus/semantica.md](../05-bonus/semantica.md). A última linha comprova
-que desconhecida não consome argumento.
+[../05-bonus/semantica.md](../05-bonus/semantica.md), algoritmo em
+[../05-bonus/conversoes.md](../05-bonus/conversoes.md). A última linha
+comprova que desconhecida não consome argumento.
 
 ## Diretivas incompletas
 

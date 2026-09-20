@@ -1,17 +1,18 @@
 # Módulos
 
-Uma responsabilidade por arquivo, respeitando o teto de 5 funções (contando
-`static`) e 25 linhas por corpo. As contagens são as da implementação de
-referência, que compila com `-Wall -Wextra -Werror` e cabe nos dois limites.
+Uma responsabilidade por arquivo, dentro do teto de 5 funções — `static`
+contam — e 25 linhas por corpo
+([../02-restricoes/estilo.md](../02-restricoes/estilo.md)). As colunas
+"Funções" e "Maior corpo" são os valores reais do código.
 
-## Parte obrigatória
+## Parte obrigatória — 7 funções
 
 | Arquivo | Funções | Maior corpo | Responsabilidade |
 |---|---|---|---|
 | `ft_printf.c` | 3 | 23 | laço, despacho por conversão, inteiro com sinal |
 | `pf_put.c` | 4 | 16 | byte, string, dígitos por base (recursivo), ponteiro |
 
-## Bônus
+## Bônus — 21 funções
 
 | Arquivo | Funções | Maior corpo | Responsabilidade |
 |---|---|---|---|
@@ -23,11 +24,53 @@ referência, que compila com `-Wall -Wextra -Werror` e cabe nos dois limites.
 | `conv_hex_bonus.c` | 2 | 15 | `%x`/`%X`, `%p` |
 | `num_render_bonus.c` | 2 | 23 | dígitos em buffer, montador de campo |
 
-`conv_text_bonus.c` fecha em 5 funções — o teto — porque `conv_unknown`
-precisa do ajudante `unk_head` para caber em 25 linhas
-([../02-restricoes/estilo.md](../02-restricoes/estilo.md)).
+`conv_text_bonus.c` chega ao teto de 5 porque `conv_unknown` precisa do
+ajudante `unk_head` para caber em 25 linhas. `ft_printf_bonus.c` fica em 3
+para não disputar espaço.
 
-## Assinaturas públicas — obrigatória (`ft_printf.h`)
+## Onde está cada função
+
+### Obrigatória
+
+| Função | Arquivo | Visibilidade | Algoritmo em |
+|---|---|---|---|
+| `ft_printf` | `ft_printf.c` | pública | [fluxo.md](fluxo.md) |
+| `pf_conv` | `ft_printf.c` | `static` | [fluxo.md](fluxo.md) |
+| `pf_putnbr` | `ft_printf.c` | `static` | [../04-emissao/numeros.md](../04-emissao/numeros.md) |
+| `pf_putchar` | `pf_put.c` | pública | [../04-emissao/escritores.md](../04-emissao/escritores.md) |
+| `pf_putstr` | `pf_put.c` | pública | [../04-emissao/escritores.md](../04-emissao/escritores.md) |
+| `pf_putnbr_base` | `pf_put.c` | pública | [../04-emissao/numeros.md](../04-emissao/numeros.md) |
+| `pf_putptr` | `pf_put.c` | pública | [../04-emissao/numeros.md](../04-emissao/numeros.md) |
+
+### Bônus
+
+| Função | Arquivo | Visibilidade | Algoritmo em |
+|---|---|---|---|
+| `ft_printf` | `ft_printf_bonus.c` | pública | [fluxo.md](fluxo.md) |
+| `pf_directive` | `ft_printf_bonus.c` | `static` | [fluxo.md](fluxo.md) |
+| `pf_dispatch` | `ft_printf_bonus.c` | `static` | [fluxo.md](fluxo.md) |
+| `fmt_init` | `parse_bonus.c` | `static` | [../05-bonus/formato.md](../05-bonus/formato.md) |
+| `parse_flags` | `parse_bonus.c` | `static` | [../05-bonus/formato.md](../05-bonus/formato.md) |
+| `parse_fmt` | `parse_bonus.c` | pública | [../05-bonus/formato.md](../05-bonus/formato.md) |
+| `pf_putchar` | `put_bonus.c` | pública | [../04-emissao/escritores.md](../04-emissao/escritores.md) |
+| `pf_putn` | `put_bonus.c` | pública | [../04-emissao/escritores.md](../04-emissao/escritores.md) |
+| `pf_pad` | `put_bonus.c` | pública | [../04-emissao/escritores.md](../04-emissao/escritores.md) |
+| `pf_strlen` | `put_bonus.c` | pública | [../04-emissao/escritores.md](../04-emissao/escritores.md) |
+| `render_base` | `num_render_bonus.c` | pública | [../04-emissao/numeros.md](../04-emissao/numeros.md) |
+| `put_num` | `num_render_bonus.c` | pública | [../05-bonus/montagem.md](../05-bonus/montagem.md) |
+| `unk_head` | `conv_text_bonus.c` | `static` | [../05-bonus/conversoes.md](../05-bonus/conversoes.md) |
+| `conv_unknown` | `conv_text_bonus.c` | pública | [../05-bonus/conversoes.md](../05-bonus/conversoes.md) |
+| `conv_c` | `conv_text_bonus.c` | pública | [../05-bonus/conversoes.md](../05-bonus/conversoes.md) |
+| `conv_s` | `conv_text_bonus.c` | pública | [../05-bonus/conversoes.md](../05-bonus/conversoes.md) |
+| `conv_percent` | `conv_text_bonus.c` | pública | [../05-bonus/conversoes.md](../05-bonus/conversoes.md) |
+| `conv_int` | `conv_num_bonus.c` | pública | [../05-bonus/conversoes.md](../05-bonus/conversoes.md) |
+| `conv_uint` | `conv_num_bonus.c` | pública | [../05-bonus/conversoes.md](../05-bonus/conversoes.md) |
+| `conv_hex` | `conv_hex_bonus.c` | pública | [../05-bonus/conversoes.md](../05-bonus/conversoes.md) |
+| `conv_ptr` | `conv_hex_bonus.c` | pública | [../05-bonus/conversoes.md](../05-bonus/conversoes.md) |
+
+## Headers
+
+`ft_printf.h`:
 
 ```c
 int	ft_printf(const char *format, ...);
@@ -37,10 +80,7 @@ int	pf_putnbr_base(unsigned long n, const char *base);
 int	pf_putptr(void *ptr);
 ```
 
-`static` em `ft_printf.c`: `pf_putnbr(int n)` (sinal + dígitos) e
-`pf_conv(char conv, va_list *ap)` (despacho).
-
-## Assinaturas públicas — bônus (`ft_printf_bonus.h`)
+`ft_printf_bonus.h` — a `t_fmt` está em [tipos.md](tipos.md):
 
 ```c
 int			ft_printf(const char *format, ...);
@@ -61,30 +101,32 @@ int			conv_hex(t_fmt *f, unsigned int n);
 int			conv_ptr(t_fmt *f, void *p);
 ```
 
-`static`: `fmt_init` e `parse_flags` em `parse_bonus.c`; `pf_dispatch` e
-`pf_directive` em `ft_printf_bonus.c`; `unk_head` em `conv_text_bonus.c`.
+Cada header só inclui `<stdarg.h>`; `<unistd.h>` fica nos dois `.c` que
+chamam `write`.
 
 ## Contrato de retorno comum
 
 Toda função que escreve devolve o número de bytes que escreveu, ou `-1` se
-qualquer `write` falhou. É um contrato só, do `pf_putchar` até a `ft_printf` —
-a soma no laço e a propagação de erro caem da mesma convenção
-([fluxo.md](fluxo.md)).
+qualquer `write` falhou. É um contrato só, do `pf_putchar` até a
+`ft_printf`: a soma no laço e a propagação de erro caem dele
+([fluxo.md](fluxo.md)). `render_base` é a única exceção — não escreve, não
+devolve nada.
 
 ## Quem chama quem
 
 ```
-ft_printf ──► pf_directive ──► parse_fmt
+ft_printf ──► pf_directive ──► parse_fmt ──► fmt_init, parse_flags
                     │
                     ▼
-               pf_dispatch ──► conv_c / conv_s / conv_percent / conv_unknown
-                    │                conv_int / conv_uint / conv_hex / conv_ptr
-                    │                        │
-                    │                        ▼
-                    │                  render_base + put_num
+               pf_dispatch ──► conv_c / conv_s / conv_percent
+                    │          conv_unknown ──► unk_head
+                    │          conv_int / conv_uint / conv_hex / conv_ptr
+                    │                  │
+                    │                  ▼
+                    │            render_base ──► put_num
                     ▼
-              (todos) ──► pf_putchar / pf_putn / pf_pad
+              (todos) ──► pf_putchar / pf_putn / pf_pad / pf_strlen
 ```
 
-Na obrigatória a cadeia é mais curta: `ft_printf → pf_conv → pf_put*`, sem
-struct e sem montador — os escritores emitem direto.
+Na obrigatória a cadeia é mais curta — `ft_printf → pf_conv → pf_put*`, sem
+struct e sem montador: os escritores emitem direto.

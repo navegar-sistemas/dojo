@@ -1,44 +1,78 @@
-# Montagem de campo numérico — `put_num`
+# Montagem do campo numérico — `put_num`
 
-Um único montador para `%d` `%i` `%u` `%x` `%X` `%p`(≠ NULL). Recebe a
-`t_fmt`, o **prefixo** pronto (string) e os **dígitos** prontos (string, sem
-sinal, saídos de `render_base`).
+Um montador único para `%d`, `%i`, `%u`, `%x`, `%X` e `%p` não nulo. Recebe a
+`t_fmt`, o **prefixo** pronto e os **dígitos** prontos, as duas coisas como
+string; quem os produz são as conversões
+([conversoes.md](conversoes.md)).
 
 ```c
 int	put_num(t_fmt *f, char *pre, char *digits);
 ```
 
-## As três contagens
-
 ```
-zeros  = max(0, prec - strlen(digits))          # zeros de precisão
-se zero e não minus e prec ausente:
-    zeros = max(zeros, largura - strlen(pre) - strlen(digits))
-                                                # zeros de largura
-total  = strlen(pre) + zeros + strlen(digits)
-espacos = max(0, largura - total)               # sempre espaços
+put_num(f, pre, digits):
+    zeros = f->prec - pf_strlen(digits)
+    se zeros < 0:
+        zeros = 0
+    se f->zero e não f->minus e f->prec < 0:
+        total = pf_strlen(pre) + pf_strlen(digits)
+        se f->width - total > zeros:
+            zeros = f->width - total
+    total = pf_strlen(pre) + zeros + pf_strlen(digits)
+    se não f->minus e pf_pad(' ', f->width - total) < 0:
+        devolve -1
+    se pf_putn(pre, pf_strlen(pre)) < 0 ou pf_pad('0', zeros) < 0
+       ou pf_putn(digits, pf_strlen(digits)) < 0:
+        devolve -1
+    se f->minus e pf_pad(' ', f->width - total) < 0:
+        devolve -1
+    se f->width > total:
+        devolve f->width
+    devolve total
 ```
 
-A flag `0` é literalmente "precisão até encher a largura": entra na mesma
-variável `zeros`, já descontando o prefixo. As condições de validade — não com
-`-`, não com precisão — ficam no `se`, e o resto do montador não sabe que a
-flag existe.
+## As duas contagens
+
+**`zeros`** é a única variável que os dois tipos de preenchimento disputam:
+
+| Origem | Quando | Valor |
+|---|---|---|
+| precisão | sempre | `prec - len(digits)`, nunca negativo |
+| flag `0` | `zero` e não `minus` e `prec` ausente | `width - len(pre) - len(digits)`, se for maior |
+
+A flag `0` é literalmente "precisão até encher a largura", já descontando o
+prefixo — por isso entra na mesma variável. As três condições de validade
+ficam no `se`, e o resto do montador não sabe que a flag existe. É daí que
+saem, sem caso especial, as duas regras transversais: `-` vence `0`, e
+precisão desliga `0`.
+
+**`total`** aparece duas vezes com sentidos diferentes, para economizar uma
+variável: dentro do `se` é o comprimento **sem** zeros, usado só para medir
+quantos zeros a largura pede; na linha seguinte é recalculado como o
+comprimento real do campo. Os espaços nunca ganham variável — são
+`width - total`, entregues direto a `pf_pad`, que aceita negativo.
 
 ## Ordem de emissão
 
 ```
-se não minus: espacos vezes ' '
-pre, zeros vezes '0', digits
-se minus:     espacos vezes ' '
-devolve max(largura, total)      # na prática: total, ou largura se maior
+espaços à esquerda   se não minus
+prefixo
+zeros
+dígitos
+espaços à direita    se minus
 ```
 
-Zeros **sempre** entre o prefixo e os dígitos — é o que produz `[+0042]` e
-nunca `[0+042]`.
+Zeros **sempre** entre o prefixo e os dígitos: `[+0042]`, nunca `[0+042]`.
+As três emissões do meio compartilham um único `se` com `ou` — não é estilo,
+é o que mantém o corpo em 23 linhas
+([../02-restricoes/estilo.md](../02-restricoes/estilo.md)).
+
+O retorno é `max(width, total)`: quando a largura venceu, o campo tem
+exatamente `width` bytes; quando não, tem `total`.
 
 ## As linhas medidas, explicadas pelas contagens
 
-| Caso | pre | digits | zeros | espaços | Saída |
+| Caso | `pre` | `digits` | `zeros` | espaços | Saída |
 |---|---|---|---|---|---|
 | `%+05d`, 42 | `+` | `42` | 2 (largura) | 0 | `[+0042]` |
 | `% 05d`, 42 | ` ` | `42` | 2 (largura) | 0 | `[ 0042]` |
@@ -50,33 +84,16 @@ nunca `[0+042]`.
 | `% 015p`, 0x1234 | ` 0x` | `1234` | 8 (largura) | 0 | `[ 0x000000001234]` |
 | `%+.8p`, 0x1234 | `+0x` | `1234` | 4 (precisão) | 0 | `[+0x00001234]` |
 | `%-8.5d`, −42 | `-` | `42` | 3 | 2 à direita | `[-00042  ]` |
-| `%.0d`, 0 | `` | `` (esvaziado) | 0 | 0 | `[]` |
+| `%.0d`, 0 | `` | `` | 0 | 0 | `[]` |
 | `%+.0d`, 0 | `+` | `` | 0 | 0 | `[+]` |
 
-"Esvaziado": com precisão 0 e valor 0, o **chamador** faz `buf[0] = '\0'`
-antes de entregar os dígitos ([../04-emissao/numeros.md](../04-emissao/numeros.md)).
-
-## Quem monta o prefixo
-
-| Chamador | Prefixos possíveis |
-|---|---|
-| `conv_int` | `-`, `+`, ` `, `` |
-| `conv_uint` | `` |
-| `conv_hex` | `0x`, `0X`, `` |
-| `conv_ptr` | `0x`, `+0x`, ` 0x` |
+Nas duas últimas, `digits` chega vazio: com precisão 0 e valor 0 o chamador
+esvazia o buffer antes de entregá-lo
+([../04-emissao/numeros.md](../04-emissao/numeros.md)). O prefixo sobrevive,
+e é por isso que `%+.0d` escreve um byte.
 
 ## Campos de texto não passam por aqui
 
-`conv_c` e `conv_s` alinham com espaços dos dois lados possíveis e nada mais —
-sem zeros, sem prefixo:
-
-```
-se não minus: pad(' ', largura - len)
-conteúdo
-se minus:     pad(' ', largura - len)
-devolve max(largura, len)
-```
-
-com `len` = 1 em `%c`, e em `%s` o comprimento já truncado pela precisão. O
-`pf_pad` aceitando contagem negativa é o que dispensa o caso "conteúdo maior
-que a largura" ([../04-emissao/escritores.md](../04-emissao/escritores.md)).
+`conv_c` e `conv_s` alinham com espaços dos dois lados possíveis e nada mais
+— sem prefixo, sem zeros, sem precisão de dígitos
+([conversoes.md](conversoes.md)).

@@ -17,12 +17,12 @@ Nenhum novo — a tarefa é de verificação.
 
 - [../06-aceitacao/validacao.md](../06-aceitacao/validacao.md) — harness, fuzz, sanitizers, valgrind
 - [../06-aceitacao/casos.md](../06-aceitacao/casos.md) — linhas do encadeamento, desconhecidas de um byte, incompletas
-- [../01-contrato/conversoes.md](../01-contrato/conversoes.md) — linhas por conversão
+- [../01-contrato/diretivas.md](../01-contrato/diretivas.md) — linhas por conversão
 
 ## Implementação
 
 1. Montar `/tmp/ftpf-check/lote_obrig.h` transcrevendo em `T(...)`:
-   os exemplos de [conversoes.md](../01-contrato/conversoes.md) (valores de
+   os exemplos de [diretivas.md](../01-contrato/diretivas.md) (valores de
    borda incluídos: `INT_MIN`, `INT_MAX`, `UINT_MAX`, `'\0'`, `NULL`),
    o encadeamento de [casos.md](../06-aceitacao/casos.md), `"%r"`/`"%y"`
    (desconhecidas de um byte), `"%"`/`"abc%"` (incompletas) e literais puros.
