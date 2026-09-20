@@ -1,26 +1,32 @@
 # Validação
 
-Cinco etapas, todas executáveis. Os comandos rodam de `../project/`, salvo
+Sete etapas, todas executáveis. Os comandos rodam de `../project/`, salvo
 indicação; os arquivos de teste ficam **fora** do diretório da implementação
 — aqui, `/tmp/ftpf-check/` — porque não são entregáveis.
 
 | Etapa | O que prova |
 |---|---|
-| estado limpo | compila sem nenhum aviso e não relinka |
+| estado limpo | compila sem nenhum aviso, não relinka, passa na `norminette` |
 | harness diferencial | saída e retornos idênticos aos da referência, caso a caso |
 | fuzz | o mesmo, sobre milhares de formatos gerados |
 | sanitizers | nenhum acesso inválido nem comportamento indefinido |
+| array sem terminador | `%.Ns` não lê além de N |
+| limites de `int` | retorno e bytes acima de 2 GB, sem escrever 2 GB |
 | memória | nenhuma alocação, nenhum vazamento |
 
 ## Estado limpo
 
 ```bash
-make re                     # zero warning com -Wall -Wextra -Werror
+make re 2>&1 | grep -cE 'warning:|error:'    # 0
 make && make                # 2ª chamada: Nothing to be done for 'all'.
 make bonus && make bonus    # 2ª chamada: Nothing to be done for 'bonus'.
+norminette *.c *.h          # só INVALID_HEADER enquanto faltar o header da 42
 ```
 
-Auditoria mecânica de estilo em
+O `grep` procura `warning:` e `error:` **com os dois-pontos**: sem eles, casa
+com o próprio `-Werror` de cada linha de compilação e conta falsos positivos.
+
+Regras de estilo e a fonte de cada uma em
 [../02-restricoes/estilo.md](../02-restricoes/estilo.md).
 
 ## O harness diferencial
@@ -157,6 +163,127 @@ $D/t_san2 > /dev/null 2> $D/san.err \
 `grep`, nunca o silêncio de stderr: o stderr do harness sempre carrega o log
 de retornos (`case N ret R`). O `-fno-sanitize-recover=all` faz o UBSan
 abortar com status ≠ 0 em vez de só avisar e seguir.
+
+## Array sem terminador
+
+Em C, `%.3s` aceita um array de 3 bytes sem `'\0'`. O teste aloca buffers de
+heap do tamanho exato, para que qualquer leitura a mais caia em memória que o
+ASan vigia.
+
+`/tmp/ftpf-check/t_naoterm.c`:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+int	ft_printf(const char *format, ...);
+#ifdef USE_FT
+# define PRINTF ft_printf
+#else
+# define PRINTF printf
+#endif
+
+static void	roda(int n, const char *fmt)
+{
+	char	*b;
+	int		r;
+
+	b = malloc(n + (n == 0));
+	memset(b, 'a' + (n % 26), n);
+	dprintf(1, "%d|%s[", n, fmt);
+	r = PRINTF(fmt, b);
+	dprintf(1, "] ret %d\n", r);
+	free(b);
+}
+
+int	main(void)
+{
+	setvbuf(stdout, NULL, _IONBF, 0);
+	roda(0, "%.0s");
+	roda(0, "%5.0s");
+	roda(3, "%.3s");
+	roda(3, "%8.3s");
+	roda(3, "%-8.3s");
+	roda(3, "%.2s");
+	roda(9, "%.9s");
+	roda(9, "%20.9s");
+	roda(9, "%.4s");
+	return (0);
+}
+```
+
+```bash
+cc -w $D/t_naoterm.c -o $D/nt_ref                       # referência: SEM sanitizer
+cc -w -g -fsanitize=address,undefined -fno-sanitize-recover=all \
+   -DUSE_FT $D/t_naoterm.c *_bonus.c -o $D/nt_ft
+$D/nt_ref > $D/nt_ref.out
+$D/nt_ft  > $D/nt_ft.out 2> $D/nt_ft.err
+cmp $D/nt_ref.out $D/nt_ft.out \
+  && ! grep -qE 'runtime error|Sanitizer' $D/nt_ft.err && echo naoterm-ok
+```
+
+O binário de referência é compilado **sem** sanitizer de propósito. Com ASan,
+quem acusa erro nele é o interceptor de `printf` do próprio ASan, que
+inspeciona o argumento de `%s` antes de repassar a chamada — não a glibc. A
+prova é que o aviso some com `ASAN_OPTIONS=check_printf=0` e a saída continua
+idêntica.
+
+## Limites de `int`
+
+Conferir o que sai acima de 2 GB escrevendo de verdade leva minutos por caso,
+porque a implementação faz um `write` por byte. O teste define a própria
+`write`, que só **conta**: o código do projeto roda intacto — laço, `pf_add`,
+`put_num`, `pf_pad` —, sem a syscall. A bateria inteira leva segundos.
+
+`/tmp/ftpf-check/t_limites.c`:
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/syscall.h>
+
+int			ft_printf(const char *format, ...);
+static long	g_bytes;
+
+ssize_t	write(int fd, const void *buf, size_t n)
+{
+	(void)fd;
+	(void)buf;
+	g_bytes += (long)n;
+	return ((ssize_t)n);
+}
+
+static void	diz(const char *nome, int ret, int exp_ret, long exp_bytes)
+{
+	char	l[160];
+	int		n;
+
+	n = snprintf(l, sizeof(l), "%-28s ret=%-11d bytes=%-11ld %s\n", nome, ret,
+			g_bytes, (ret == exp_ret && g_bytes == exp_bytes) ? "ok" : "KO");
+	syscall(SYS_write, 2, l, n);
+	g_bytes = 0;
+}
+
+int	main(void)
+{
+	diz("%2147483647d", ft_printf("%2147483647d", 1), 2147483647, 2147483647L);
+	diz("%.2147483647d neg", ft_printf("%.2147483647d", -1), -1, 2147483648L);
+	diz("a%2147483647d", ft_printf("a%2147483647d", 1), -1, 2147483648L);
+	diz("%#.2147483646x", ft_printf("%#.2147483646x", 255u), -1, 2147483648L);
+	diz("%2147483647s", ft_printf("%2147483647s", ""), 2147483647, 2147483647L);
+	diz("%2147483647c", ft_printf("%2147483647c", 'a'), 2147483647, 2147483647L);
+	return (0);
+}
+```
+
+```bash
+cc -O2 -w $D/t_limites.c *_bonus.c -o $D/t_lim
+$D/t_lim 2> $D/lim.out; ! grep -q KO $D/lim.out && echo limites-ok
+```
+
+Os valores esperados são os da referência, medidos com a saída real e
+tabelados em [casos.md](casos.md). O resultado sai por `syscall` direto em
+stderr, para não passar pela `write` que o teste substituiu.
 
 ## Memória
 

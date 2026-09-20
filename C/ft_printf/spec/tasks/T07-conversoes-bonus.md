@@ -40,7 +40,7 @@ Os seis pontos onde uma implementação apressada diverge da referência:
 
 | Função | Armadilha |
 |---|---|
-| `conv_s` | a troca do `NULL` vem **antes** do truncamento, senão `(null)` sai cortado |
+| `conv_s` | a troca do `NULL` vem **antes** da medição, senão `(null)` sai cortado; a medição é `pf_strnlen(s, prec)`, nunca `pf_strlen` — `%.3s` sobre 3 bytes sem terminador é entrada válida |
 | `conv_ptr` | `NULL` precisa de `f->prec = -1` antes de delegar a `conv_s` |
 | `conv_hex` | o prefixo exige `hash` **e** valor ≠ 0; o esvaziamento vem **depois** de renderizar |
 | `conv_int` | negar em `long`, e o sinal nunca entra no buffer de dígitos |

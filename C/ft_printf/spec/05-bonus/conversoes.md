@@ -66,23 +66,40 @@ int	conv_s(t_fmt *f, char *s);
 
 ```
 conv_s(f, s):
+    len é long
     se s é NULL e f->prec >= 0 e f->prec < 6:
         s = ""
     senão se s é NULL:
         s = "(null)"
-    len = pf_strlen(s)
-    se f->prec >= 0 e f->prec < len:
-        len = f->prec
-    se não f->minus e pf_pad(' ', f->width - len) < 0:
+    len = pf_strnlen(s, f->prec)
+    pad = 0
+    se f->width > len:
+        pad = f->width - len
+    se não f->minus e pf_pad(' ', pad) < 0:
         devolve -1
     se pf_putn(s, len) < 0:
         devolve -1
-    se f->minus e pf_pad(' ', f->width - len) < 0:
+    se f->minus e pf_pad(' ', pad) < 0:
         devolve -1
-    se f->width > len:
-        devolve f->width
-    devolve len
+    se len + pad > PF_INT_MAX:
+        devolve -1
+    devolve len + pad
 ```
+
+**O comprimento vem de `pf_strnlen`, nunca de `pf_strlen`.** Medir a string
+inteira e truncar depois leria além do array quando ele não tem terminador —
+`%.3s` com 3 bytes sem `'\0'` é C válido, e a referência o aceita
+([../04-emissao/escritores.md](../04-emissao/escritores.md)). Passar a
+precisão direto resolve também o caso ausente: −1 significa "sem limite".
+
+**`pad` é calculado uma vez, e só quando é positivo.** `len` é `long` porque a
+string pode passar de `INT_MAX` bytes; nesse caso `f->width - len` não cabe
+em `int`, e a conversão o transformaria num número positivo enorme — bilhões
+de espaços. A comparação `f->width > len` é feita em `long` e garante que a
+subtração só acontece quando o resultado cabe.
+
+O retorno é `len + pad`, que é `max(width, len)`; se não cabe em `int` é −1,
+depois de a string inteira já ter sido escrita — como a referência.
 
 A troca de `NULL` acontece **antes** do truncamento, e é isso que produz o
 degrau do `(null)`: com precisão de 0 a 5 a string já virou `""` e não há o
@@ -156,12 +173,12 @@ conv_unknown(f):
         render_base(f->prec, "0123456789", buf + i)
         i = i + pf_strlen(buf + i)
     buf[i] = f->conv
-    devolve pf_putn(buf, i + 1)
+    devolve (int)pf_putn(buf, i + 1)
 ```
 
 | Detalhe | Razão |
 |---|---|
-| `char buf[40]` | pior caso: `%` + 5 flags + 10 dígitos de largura + `.` + 10 de precisão + a conversão = 28 bytes, mais o `'\0'` de `render_base` |
+| `char buf[40]` | pior caso medido: 26 bytes — `%` + 3 flags + 10 dígitos de largura + `.` + 10 de precisão + a conversão —, mais o `'\0'` de `render_base`. São 3 flags e não 5 porque as supressões de `unk_head` nunca deixam sair `+` com espaço, nem `-` com `0` |
 | largura 0 não é escrita | largura 0 é indistinguível de ausente ([../03-arquitetura/tipos.md](../03-arquitetura/tipos.md)) |
 | precisão 0 **é** escrita | `%.r` vira `[%.0r]`; o sentinela de ausente é −1 |
 | `render_base` escreve no meio do buffer | recebe `buf + i` e termina em `'\0'`; `pf_strlen(buf + i)` mede o que ela pôs |

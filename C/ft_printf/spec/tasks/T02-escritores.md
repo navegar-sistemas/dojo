@@ -12,7 +12,7 @@ T01.
 ## Arquivos
 
 - `pf_put.c` — ganha `pf_putstr`, `pf_putnbr_base`, `pf_putptr`
-- `ft_printf.h` — ganha os três protótipos
+- `ft_printf.h` — ganha os três protótipos e `# define PF_INT_MAX 2147483647`
 
 ## Especificação
 
@@ -23,7 +23,8 @@ T01.
 ## Implementação
 
 Na ordem do arquivo: `pf_putchar` (já existe), `pf_putstr` (NULL vira
-`"(null)"` aqui mesmo), `pf_putnbr_base` (recursivo, alfabeto por parâmetro),
+`"(null)"` aqui mesmo; contador `long`, −1 se passar de `PF_INT_MAX`),
+`pf_putnbr_base` (recursivo, alfabeto por parâmetro),
 `pf_putptr` (`(nil)` para NULL; senão `0x` + hexadecimal minúsculo do
 `(unsigned long)`). Toda falha de escrita devolve `-1` imediatamente —
 inclusive no meio da recursão.

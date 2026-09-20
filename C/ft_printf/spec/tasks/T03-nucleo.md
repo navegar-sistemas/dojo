@@ -11,7 +11,8 @@ T02.
 
 ## Arquivos
 
-- `ft_printf.c` — `pf_putnbr` (static), `pf_conv` (static), `ft_printf`
+- `ft_printf.c` — `pf_putnbr` (static), `pf_conv` (static), `pf_add`
+  (static), `ft_printf`
 - `ft_printf.h` — ganha `# include <stdarg.h>` e o protótipo de `ft_printf`
 - `Makefile` — `SRCS` ganha `ft_printf.c`
 
@@ -24,8 +25,8 @@ T02.
 
 ## Implementação
 
-Ordem no arquivo: `pf_putnbr` → `pf_conv` → `ft_printf` (statics definidas
-antes do uso dispensam protótipos).
+Ordem no arquivo: `pf_putnbr` → `pf_conv` → `pf_add` → `ft_printf` (statics
+definidas antes do uso dispensam protótipos).
 
 - `pf_putnbr(int n)`: copia para `long`, imprime `-` e nega no `long` se
   negativo, delega os dígitos a `pf_putnbr_base`; devolve sinal + dígitos ou
@@ -33,11 +34,13 @@ antes do uso dispensam protótipos).
 - `pf_conv(char conv, va_list *ap)`: cadeia de `if` — `c s p d i u x X %` —
   cada ramo consome o argumento com o tipo certo **dentro** do ramo;
   desconhecida imprime `%` e o byte (2 bytes, nenhum argumento consumido).
-- `ft_printf`: `va_start`, laço de
-  [fluxo.md](../03-arquitetura/fluxo.md#o-laço-da-parte-obrigatória) —
+- `pf_add(int *total, int r)`: devolve −1 se `r < 0` ou se
+  `r > PF_INT_MAX - *total`; senão soma e devolve `r`. A comparação vem antes
+  da soma, do lado que não estoura.
+- `ft_printf`: `va_start`, laço de [fluxo.md](../03-arquitetura/fluxo.md) —
   literal → `pf_putchar`; `%` com `format[1] == '\0'` → `r = -1`; senão
-  `pf_conv(*(++format), &ap)` — soma `r > 0`, para em `r < 0`, `va_end`,
-  devolve total ou `-1`.
+  `pf_conv(*(++format), &ap)`; depois `r = pf_add(&total, r)` — para em
+  `r < 0`, `va_end`, devolve total ou `-1`.
 
 ## Pronto quando
 

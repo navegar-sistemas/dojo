@@ -3,6 +3,8 @@
 
 # include <stdarg.h>
 
+# define PF_INT_MAX 2147483647
+
 typedef struct s_fmt
 {
 	int		minus;
@@ -18,9 +20,10 @@ typedef struct s_fmt
 int			ft_printf(const char *format, ...);
 const char	*parse_fmt(const char *s, t_fmt *f);
 int			pf_putchar(char c);
-int			pf_putn(const char *s, int n);
+long		pf_putn(const char *s, long n);
 int			pf_pad(char c, int n);
 int			pf_strlen(const char *s);
+long		pf_strnlen(const char *s, long max);
 void		render_base(unsigned long n, const char *base, char *buf);
 int			put_num(t_fmt *f, char *pre, char *digits);
 int			conv_c(t_fmt *f, char c);

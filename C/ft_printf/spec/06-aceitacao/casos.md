@@ -172,6 +172,92 @@ Regras da reconstrução em
 [../05-bonus/conversoes.md](../05-bonus/conversoes.md). A última linha
 comprova que desconhecida não consome argumento.
 
+## Limites de `int`
+
+O retorno é `int`, então nada pode passar de `INT_MAX` = 2147483647. A
+referência devolve −1 com `errno = EOVERFLOW`; o que já foi escrito fica.
+
+### Largura ou precisão que não cabe
+
+Nada da diretiva é impresso. Os literais anteriores ficam, e o processamento
+para — na última linha o `%d` inicial sai, e o resto não.
+
+| Formato | Argumento | Saída | Retorno |
+|---|---|---|---|
+| `"%2147483648d"` | `1` | `[]` | -1 |
+| `"%.2147483648d"` | `1` | `[]` | -1 |
+| `"%99999999999d"` | `42` | `[]` | -1 |
+| `"%.99999999999d"` | `42` | `[]` | -1 |
+| `"%4294967296d"` | `42` | `[]` | -1 |
+| `"%99999999999999999999d"` | `42` | `[]` | -1 |
+| `"%.99999999999s"` | `"hi"` | `[]` | -1 |
+| `"abc%2147483648d"` | `1` | `[abc]` | -1 |
+| `"%-0 +#99999999999x"` | `255u` | `[]` | -1 |
+| `"%5.99999999999d"` | `1` | `[]` | -1 |
+| `"%99999999999.5d"` | `1` | `[]` | -1 |
+| `"%99999999999r"` | — | `[]` | -1 |
+| `"%.99999999999r"` | — | `[]` | -1 |
+| `"%2147483647r"` | — | `[%2147483647r]` | 12 |
+| `"%2147483647%"` | — | `[%]` | 1 |
+| `"%.2147483647s"` | `"hi"` | `[hi]` | 2 |
+| `"%d%99999999999d%d"` | `1, 2, 3` | `[1]` | -1 |
+
+`INT_MAX` exato é aceito: `%2147483647r` reconstrói a diretiva normalmente, e
+`%.2147483647s` só limita a string.
+
+### Campo ou total que não cabe
+
+As saídas têm gigabytes, então a coluna é a **quantidade** de bytes emitidos.
+
+| Formato | Argumento | Bytes emitidos | Retorno |
+|---|---|---|---|
+| `"%2147483647d"` | `1` | 2147483647 | 2147483647 |
+| `"%.2147483646d"` | `-1` | 2147483647 | 2147483647 |
+| `"%.2147483647d"` | `-1` | 2147483648 | -1 |
+| `"%#.2147483646x"` | `255` | 2147483648 | -1 |
+| `"a%2147483647d"` | `1` | 2147483648 | -1 |
+| `"%2147483647s"` | `""` | 2147483647 | 2147483647 |
+| `"%2147483647c"` | `'a'` | 2147483647 | 2147483647 |
+| `"%s"` | string de 2147483647 bytes | 2147483647 | 2147483647 |
+| `"%s"` | string de 2147483648 bytes | 2147483648 | -1 |
+| `"%.5s"` | string de 2147483648 bytes | 5 | 5 |
+| `"%s%s"` | duas de 1500000000 bytes | 3000000000 | -1 |
+| `"%1500000000d%1500000000d"` | `1, 2` | 2999999999 | -1 |
+
+A regra que explica todas: a referência **escreve o pedaço e só depois
+confere o contador**. Por isso o campo de 2147483648 bytes sai inteiro antes
+do −1.
+
+A última linha é a única em que `ft_printf` difere, e só na quantidade: emite
+3000000000 bytes, um a mais. A referência confere depois do preenchimento do
+segundo campo e para ali, sem escrever o dígito; `ft_printf` confere depois
+da diretiva inteira. O retorno é −1 nas duas
+([../01-contrato/api.md](../01-contrato/api.md)).
+
+## `%.Ns` sobre array sem terminador
+
+Com precisão, a linguagem não exige `'\0'` — só que o array tenha ao menos N
+bytes. A referência não lê além de N, e `ft_printf` também não
+([../04-emissao/escritores.md](../04-emissao/escritores.md)).
+
+| Formato | Argumento | Saída | Retorno |
+|---|---|---|---|
+| `"%.0s"` | array de 0 bytes, sem `'\0'` | `[]` | 0 |
+| `"%5.0s"` | array de 0 bytes, sem `'\0'` | `[     ]` | 5 |
+| `"%-5.0s"` | array de 0 bytes, sem `'\0'` | `[     ]` | 5 |
+| `"%05.0s"` | array de 0 bytes, sem `'\0'` | `[     ]` | 5 |
+| `"%.3s"` | array de 3 bytes, sem `'\0'` | `[ddd]` | 3 |
+| `"%8.3s"` | array de 3 bytes, sem `'\0'` | `[     ddd]` | 8 |
+| `"%-8.3s"` | array de 3 bytes, sem `'\0'` | `[ddd     ]` | 8 |
+| `"%.2s"` | array de 3 bytes, sem `'\0'` | `[dd]` | 2 |
+| `"%.1s"` | array de 3 bytes, sem `'\0'` | `[d]` | 1 |
+| `"%2.3s"` | array de 3 bytes, sem `'\0'` | `[ddd]` | 3 |
+| `"%.9s"` | array de 9 bytes, sem `'\0'` | `[jjjjjjjjj]` | 9 |
+| `"%20.9s"` | array de 9 bytes, sem `'\0'` | `[           jjjjjjjjj]` | 20 |
+| `"%-20.9s"` | array de 9 bytes, sem `'\0'` | `[jjjjjjjjj           ]` | 20 |
+| `"%.8s"` | array de 9 bytes, sem `'\0'` | `[jjjjjjjj]` | 8 |
+| `"%.4s"` | array de 9 bytes, sem `'\0'` | `[jjjj]` | 4 |
+
 ## Diretivas incompletas
 
 | Formato | Argumento | Saída | Retorno |

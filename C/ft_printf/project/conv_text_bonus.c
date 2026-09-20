@@ -38,7 +38,7 @@ int	conv_unknown(t_fmt *f)
 		i = i + pf_strlen(buf + i);
 	}
 	buf[i] = f->conv;
-	return (pf_putn(buf, i + 1));
+	return ((int)pf_putn(buf, i + 1));
 }
 
 int	conv_c(t_fmt *f, char c)
@@ -56,24 +56,26 @@ int	conv_c(t_fmt *f, char c)
 
 int	conv_s(t_fmt *f, char *s)
 {
-	int	len;
+	long	len;
+	int		pad;
 
 	if (!s && f->prec >= 0 && f->prec < 6)
 		s = "";
 	else if (!s)
 		s = "(null)";
-	len = pf_strlen(s);
-	if (f->prec >= 0 && f->prec < len)
-		len = f->prec;
-	if (!f->minus && pf_pad(' ', f->width - len) < 0)
+	len = pf_strnlen(s, f->prec);
+	pad = 0;
+	if (f->width > len)
+		pad = (int)(f->width - len);
+	if (!f->minus && pf_pad(' ', pad) < 0)
 		return (-1);
 	if (pf_putn(s, len) < 0)
 		return (-1);
-	if (f->minus && pf_pad(' ', f->width - len) < 0)
+	if (f->minus && pf_pad(' ', pad) < 0)
 		return (-1);
-	if (f->width > len)
-		return (f->width);
-	return (len);
+	if (len + pad > PF_INT_MAX)
+		return (-1);
+	return ((int)(len + pad));
 }
 
 int	conv_percent(void)

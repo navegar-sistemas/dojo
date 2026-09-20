@@ -25,10 +25,11 @@ T05.
 frente — o pseudocódigo de [numeros.md](../04-emissao/numeros.md) é literal.
 
 `put_num` calcula `zeros` (precisão; largura se `zero && !minus && prec`
-ausente), `total` e emite: espaços à esquerda se não-`minus`, prefixo, zeros,
-dígitos, espaços à direita se `minus`; devolve a largura se ela venceu, senão
-`total`. As três emissões centrais compartilham um único `if` de erro com
-`||` — é o que mantém o corpo em 23 linhas
+ausente), `total` em `long`, `pad` só quando a largura vence, e emite:
+espaços à esquerda se não-`minus`, prefixo, zeros, dígitos, espaços à direita
+se `minus`; devolve `total + pad`, ou −1 se isso não cabe em `int`. As três
+emissões centrais compartilham um único `if` de erro com `||` — é o que
+mantém o corpo em 24 linhas
 ([../02-restricoes/estilo.md](../02-restricoes/estilo.md)).
 
 ## Pronto quando

@@ -7,10 +7,11 @@ O andar de baixo das duas variantes: as únicas funções que tocam o descritor
 | Função | Variante | Arquivo | Devolve | Pré-condição |
 |---|---|---|---|---|
 | `pf_putchar` | as duas | `pf_put.c`, `put_bonus.c` | 1 | — |
-| `pf_putstr` | obrigatória | `pf_put.c` | comprimento escrito | `NULL` é aceito |
-| `pf_putn` | bônus | `put_bonus.c` | `n` | `n ≥ 0`, `s` com ao menos `n` bytes |
+| `pf_putstr` | obrigatória | `pf_put.c` | comprimento escrito, ou −1 se passar de `INT_MAX` | `NULL` é aceito |
+| `pf_putn` | bônus | `put_bonus.c` | `n`, em `long` | `n ≥ 0`, `s` com ao menos `n` bytes |
 | `pf_pad` | bônus | `put_bonus.c` | `n`, ou 0 se `n < 0` | — |
-| `pf_strlen` | bônus | `put_bonus.c` | comprimento | `s` não é `NULL` |
+| `pf_strlen` | bônus | `put_bonus.c` | comprimento | só strings do projeto, sempre curtas |
+| `pf_strnlen` | bônus | `put_bonus.c` | comprimento limitado a `max`, em `long` | `max < 0` = sem limite |
 
 ## `pf_putchar` — as duas variantes
 
@@ -25,8 +26,8 @@ pf_putchar(c):
     devolve 1
 ```
 
-Todo byte do projeto sai por aqui, um `write` por byte. É o único código
-idêntico nas duas variantes
+Todo byte do projeto sai por aqui, um `write` por byte. Junto com `pf_add`,
+é o único código idêntico nas duas variantes
 ([../03-arquitetura/decisoes.md](../03-arquitetura/decisoes.md)).
 
 ## Obrigatória: `pf_putstr`
@@ -37,6 +38,7 @@ int	pf_putstr(char *s);
 
 ```
 pf_putstr(s):
+    i é long
     se s é NULL:
         s = "(null)"
     i = 0
@@ -44,8 +46,14 @@ pf_putstr(s):
         se pf_putchar(s[i]) < 0:
             devolve -1
         i += 1
+    se i > PF_INT_MAX:
+        devolve -1
     devolve i
 ```
+
+O contador é `long` porque uma string pode ter mais de `INT_MAX` bytes, e um
+`int` estouraria no meio do laço. A referência escreve a string inteira e só
+então devolve −1; aqui é igual — a conferência vem depois do laço.
 
 A substituição de `NULL` é incondicional porque na parte obrigatória não
 existe precisão. No bônus a mesma regra depende dela e mora em `conv_s`
@@ -57,11 +65,12 @@ escrever nada.
 ## Bônus: `pf_putn`
 
 ```c
-int	pf_putn(const char *s, int n);
+long	pf_putn(const char *s, long n);
 ```
 
 ```
 pf_putn(s, n):
+    i é long
     i = 0
     enquanto i < n:
         se pf_putchar(s[i]) < 0:
@@ -74,6 +83,10 @@ Escreve por contagem, não por terminador — é o truncamento de `%.3s` e a
 emissão da diretiva desconhecida, que carrega bytes depois do `'\0'` deixado
 por `render_base`. Os chamadores nunca passam `n` negativo: `conv_s` limita
 `len` à precisão, e `conv_unknown` conta o que montou.
+
+`n` e o retorno são `long` porque `conv_s` pode mandar escrever uma string de
+mais de `INT_MAX` bytes; devolver esse `n` como `int` o transformaria num
+número negativo, que o chamador leria como falha de escrita.
 
 ## Bônus: `pf_pad`
 
@@ -113,6 +126,32 @@ pf_strlen(s):
 ```
 
 Comprimento de string do projeto — nenhuma função de biblioteca entra no
-build ([../02-restricoes/build.md](../02-restricoes/build.md)). `put_num` a
-chama sete vezes no pior caminho, sempre sobre prefixos de até 3 bytes e
-dígitos de até 20.
+build ([../02-restricoes/build.md](../02-restricoes/build.md)). Só mede
+strings que o próprio projeto montou: prefixos de até 3 bytes, dígitos de até
+20, o buffer da diretiva desconhecida. `put_num` a chama cinco vezes. A
+string do usuário, em `%s`, passa por `pf_strnlen`.
+
+## Bônus: `pf_strnlen`
+
+```c
+long	pf_strnlen(const char *s, long max);
+```
+
+```
+pf_strnlen(s, max):
+    i é long
+    i = 0
+    enquanto (max < 0 ou i < max) e s[i]:
+        i += 1
+    devolve i
+```
+
+Comprimento que **para em `max`**. `conv_s` a chama com a precisão, e o −1 de
+"precisão ausente" vira "sem limite" sem nenhum teste extra.
+
+A ordem da condição é o ponto: o limite é conferido **antes** de `s[i]` ser
+lido. Em C é legal passar a `%.3s` um array de 3 bytes sem terminador — a
+linguagem só exige o `'\0'` quando a precisão é ausente ou maior que o array
+— e um `strlen` comum andaria pela memória vizinha até achar um zero. Com
+ASan, essa leitura é `heap-buffer-overflow`; sem ele, pode ser um segfault,
+que o subject pune com nota 0.

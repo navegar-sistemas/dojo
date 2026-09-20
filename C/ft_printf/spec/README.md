@@ -5,7 +5,7 @@ da glibc **byte a byte** — saída e valor de retorno — em todo o domínio qu
 projeto suporta.
 
 A spec é completa no sentido forte: contrato, restrições, arquitetura e o
-algoritmo de cada uma das 28 funções. Quem a seguir inteira chega a uma
+algoritmo de cada uma das 32 funções. Quem a seguir inteira chega a uma
 implementação indistinguível da referência dentro do domínio.
 
 ## Por onde começar

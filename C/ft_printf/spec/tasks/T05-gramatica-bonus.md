@@ -10,10 +10,13 @@ T01.
 
 ## Arquivos
 
-- `ft_printf_bonus.h` — guarda, `# include <stdarg.h>`, `t_fmt`, protótipos
-  de `parse_fmt`, `pf_putchar`, `pf_putn`, `pf_pad`, `pf_strlen`
-- `parse_bonus.c` — `fmt_init` (static), `parse_flags` (static), `parse_fmt`
-- `put_bonus.c` — `pf_putchar`, `pf_putn`, `pf_pad`, `pf_strlen`
+- `ft_printf_bonus.h` — guarda, `# include <stdarg.h>`,
+  `# define PF_INT_MAX 2147483647`, `t_fmt`, protótipos de `parse_fmt`,
+  `pf_putchar`, `pf_putn`, `pf_pad`, `pf_strlen`, `pf_strnlen`
+- `parse_bonus.c` — `fmt_init` (static), `parse_flags` (static), `parse_num`
+  (static), `parse_fmt`
+- `put_bonus.c` — `pf_putchar`, `pf_putn`, `pf_pad`, `pf_strlen`,
+  `pf_strnlen`
 - `Makefile` — ganha `BSRCS = parse_bonus.c put_bonus.c`, `BOBJS`, a regra de
   padrão dos `BOBJS` (dependendo de `ft_printf_bonus.h`), `bonus`, `.bonus`,
   e o `clean`/`fclean` passam a remover `$(BOBJS)`/`.bonus` — forma final em
@@ -29,10 +32,14 @@ T01.
 ## Implementação
 
 `parse_fmt` segue o pseudocódigo de [formato.md](../05-bonus/formato.md) ao
-pé da letra: `fmt_init` primeiro (é ela que põe `prec = -1`), flags em laço
-com deduplicação natural (atribuir 1 duas vezes), largura, precisão com o `.`
-tornando-a 0 antes dos dígitos, e `conv = *s` sem avançar. `pf_pad` devolve 0
-para contagem negativa — os chamadores dependem disso
+pé da letra: `fmt_init` primeiro (é ela que põe `prec = -1` e `conv = '\0'`),
+flags em laço com deduplicação natural (atribuir 1 duas vezes), largura e
+precisão por `parse_num`, e `conv = *s` sem avançar. Quando `parse_num`
+devolve −1, `parse_fmt` retorna na hora — `conv` fica `'\0'` e a diretiva
+falha pelo caminho da incompleta.
+
+`pf_pad` devolve 0 para contagem negativa, e `pf_strnlen` confere o limite
+**antes** de ler o byte — os chamadores dependem das duas coisas
 ([escritores.md](../04-emissao/escritores.md)).
 
 Neste ponto o `.a` do bônus contém só dois objetos e não linka um programa
@@ -71,6 +78,16 @@ int	main(void)
 	parse_fmt("++--  ##00x", &f);
 	ko("dedup", f.plus && f.minus && f.space && f.hash && f.zero
 		&& f.width == 0 && f.conv == 'x');
+	parse_fmt("2147483647d", &f);
+	ko("int max", f.width == 2147483647 && f.conv == 'd');
+	parse_fmt("2147483648d", &f);
+	ko("estouro largura", f.conv == '\0');
+	parse_fmt(".4294967296d", &f);
+	ko("estouro precisao", f.conv == '\0');
+	ko("strnlen limite", pf_strnlen("abcdef", 3) == 3);
+	ko("strnlen curta", pf_strnlen("ab", 9) == 2);
+	ko("strnlen livre", pf_strnlen("abcdef", -1) == 6);
+	ko("strnlen zero", pf_strnlen("abc", 0) == 0);
 	ko("putn", pf_putn("abcdef", 3) == 3);
 	ko("pad", pf_pad('.', 4) == 4);
 	ko("pad neg", pf_pad('.', -3) == 0);

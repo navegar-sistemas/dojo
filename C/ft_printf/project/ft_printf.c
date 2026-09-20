@@ -44,6 +44,14 @@ static int	pf_conv(char conv, va_list *ap)
 	return (2);
 }
 
+static int	pf_add(int *total, int r)
+{
+	if (r < 0 || r > PF_INT_MAX - *total)
+		return (-1);
+	*total += r;
+	return (r);
+}
+
 int	ft_printf(const char *format, ...)
 {
 	va_list	ap;
@@ -62,8 +70,7 @@ int	ft_printf(const char *format, ...)
 		else
 			r = pf_putchar(*format);
 		format++;
-		if (r > 0)
-			total += r;
+		r = pf_add(&total, r);
 	}
 	va_end(ap);
 	if (r < 0)

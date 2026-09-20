@@ -75,7 +75,19 @@ cc -Wall -Wextra -Werror main.c -L. -lftprintf && ./a.out
   sinal/base, zeros de precisão, zeros de largura e espaços numa ordem fixa.
   Toda a matriz flag × conversão colapsa em "escolha o prefixo certo" — `%d`
   negativo passa `"-"`, `%#x` passa `"0x"`, `%p` passa `"+0x"`/`" 0x"`/`"0x"`.
-- **Duas implementações independentes.** A parte obrigatória fica em 3 + 4
+- **Limites de `int` devolvem `-1`, nunca estouram.** O retorno é `int`, então
+  largura ou precisão acima de `INT_MAX` (`%2147483648d`), saída total acima
+  de 2 GB e strings gigantes em `%s` terminam em `-1` — o `EOVERFLOW` da
+  referência. Cada guarda é escrita do lado que não estoura
+  (`r > PF_INT_MAX - total`, nunca `total + r > PF_INT_MAX`), porque overflow
+  de `int` com sinal é comportamento indefinido. `PF_INT_MAX` é constante do
+  próprio header: a Norma (III.7) só admite macro de biblioteca padrão quando
+  o projeto a permite, e `<limits.h>` não está na lista do subject.
+- **`%.Ns` não lê além de N.** `conv_s` mede a string com um `strnlen` próprio
+  que confere o limite antes de ler cada byte. `%.3s` sobre um array de 3
+  bytes sem terminador é C válido, e um `strlen` comum leria a memória
+  vizinha.
+- **Duas implementações independentes.** A parte obrigatória fica em 4 + 4
   funções diretas (dígitos por recursão, sem buffer); o bônus reconstrói a
   biblioteca inteira via `make bonus` com os arquivos `*_bonus.c`. Nenhum
   arquivo é compartilhado entre as duas variantes, e o Makefile remove o

@@ -114,6 +114,18 @@ Essa é a **única** região onde a parte obrigatória diverge da referência, e
 deliberado: o contrato obrigatório cobre diretivas de dois bytes, e o espelho
 fica total quando a variante bônus é construída.
 
+**A divergência não é só visual.** Como `%5` é tratado como desconhecida e não
+consome argumento, toda diretiva posterior lê o argumento **anterior** ao que
+deveria. Com `%s` no caminho, isso é ponteiro inválido:
+
+```
+ft_printf("[%-8.3d|%s]", 42, "ok")     (obrigatória)
+→ o %s recebe o int 42 como endereço → SEGV em 0x2a
+```
+
+Formato com flag, largura ou precisão é entrada fora do contrato da variante
+obrigatória — quem precisa deles constrói com `make bonus`.
+
 Os lotes de aceitação da parte obrigatória
 ([../06-aceitacao/validacao.md](../06-aceitacao/validacao.md)) não contêm
 flags por isso — inclusive `"% "`, que parece inofensivo mas começa com a

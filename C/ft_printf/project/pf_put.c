@@ -10,7 +10,7 @@ int	pf_putchar(char c)
 
 int	pf_putstr(char *s)
 {
-	int	i;
+	long	i;
 
 	if (!s)
 		s = "(null)";
@@ -21,7 +21,9 @@ int	pf_putstr(char *s)
 			return (-1);
 		i++;
 	}
-	return (i);
+	if (i > PF_INT_MAX)
+		return (-1);
+	return ((int)i);
 }
 
 int	pf_putnbr_base(unsigned long n, const char *base)

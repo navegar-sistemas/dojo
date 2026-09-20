@@ -32,24 +32,30 @@ static const char	*parse_flags(const char *s, t_fmt *f)
 	return (s);
 }
 
+static int	parse_num(const char **s, int *n)
+{
+	*n = 0;
+	while (**s >= '0' && **s <= '9')
+	{
+		if (*n > (PF_INT_MAX - (**s - '0')) / 10)
+			return (-1);
+		*n = *n * 10 + (**s - '0');
+		(*s)++;
+	}
+	return (0);
+}
+
 const char	*parse_fmt(const char *s, t_fmt *f)
 {
 	fmt_init(f);
 	s = parse_flags(s, f);
-	while (*s >= '0' && *s <= '9')
-	{
-		f->width = f->width * 10 + (*s - '0');
-		s++;
-	}
+	if (parse_num(&s, &f->width) < 0)
+		return (s);
 	if (*s == '.')
 	{
 		s++;
-		f->prec = 0;
-		while (*s >= '0' && *s <= '9')
-		{
-			f->prec = f->prec * 10 + (*s - '0');
-			s++;
-		}
+		if (parse_num(&s, &f->prec) < 0)
+			return (s);
 	}
 	f->conv = *s;
 	return (s);

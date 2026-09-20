@@ -8,9 +8,9 @@ int	pf_putchar(char c)
 	return (1);
 }
 
-int	pf_putn(const char *s, int n)
+long	pf_putn(const char *s, long n)
 {
-	int	i;
+	long	i;
 
 	i = 0;
 	while (i < n)
@@ -44,6 +44,16 @@ int	pf_strlen(const char *s)
 
 	i = 0;
 	while (s[i])
+		i++;
+	return (i);
+}
+
+long	pf_strnlen(const char *s, long max)
+{
+	long	i;
+
+	i = 0;
+	while ((max < 0 || i < max) && s[i])
 		i++;
 	return (i);
 }

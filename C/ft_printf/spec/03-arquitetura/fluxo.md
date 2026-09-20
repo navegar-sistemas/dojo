@@ -7,9 +7,33 @@ por conversão, e o valor `r` carregando o resultado de cada passo.
 |---|---|---|
 | > 0 | bytes escritos pelo passo | soma em `total` |
 | 0 | passo válido que não escreveu nada (`%.0d` com 0) | nada a somar |
-| −1 | `write` falhou **ou** diretiva incompleta | o laço para, retorno −1 |
+| −1 | `write` falhou, diretiva incompleta, **ou** um limite de `int` foi estourado | o laço para, retorno −1 |
 
 Os bytes já escritos ficam escritos: `"abc%"` imprime `[abc]` e devolve −1.
+
+## A soma, nas duas variantes
+
+```c
+static int	pf_add(int *total, int r);
+```
+
+```
+pf_add(total, r):
+    se r < 0 ou r > PF_INT_MAX - *total:
+        devolve -1
+    *total += r
+    devolve r
+```
+
+O retorno de `ft_printf` é `int`, então a saída inteira tem que caber em
+`INT_MAX` bytes. A comparação é feita **antes** da soma e do lado que não
+estoura — `r > PF_INT_MAX - *total` em vez de `*total + r > PF_INT_MAX`, que
+já seria o overflow. Como `r < 0` também devolve −1, o laço troca o par
+`se r > 0: total += r` por uma chamada só.
+
+A referência se comporta igual: quando o total passaria de `INT_MAX`, devolve
+−1 com `errno = EOVERFLOW`, e o que já foi escrito fica escrito
+([../06-aceitacao/casos.md](../06-aceitacao/casos.md)).
 
 ## Bônus: o laço
 
@@ -27,8 +51,7 @@ ft_printf(format, ...):
             r = pf_directive(&format, &ap)
         senão:
             r = pf_putchar(*format++)
-        se r > 0:
-            total += r
+        r = pf_add(&total, r)
     va_end(ap)
     se r < 0:
         devolve -1
@@ -94,9 +117,11 @@ pf_dispatch(f, ap):
     devolve conv_unknown(f)
 ```
 
-Cadeia de `if`, não tabela: um vetor de ponteiros para função seria variável
-global em escopo de arquivo, ou inicialização na declaração em escopo local —
-as duas proibidas ([../02-restricoes/estilo.md](../02-restricoes/estilo.md)).
+Cadeia de `if` por escolha, não por imposição: a Norma permitiria uma tabela
+`static const` de ponteiros para função
+([../02-restricoes/estilo.md](../02-restricoes/estilo.md)), mas nove ramos não
+pagam uma tabela de 256 entradas, e a cadeia mantém o `va_arg` de cada tipo
+visível no ponto em que acontece.
 
 Cada ramo faz o `va_arg` com o tipo da sua conversão, **dentro** do ramo. É
 assim que `%%` e as desconhecidas não consomem argumento: o caminho delas não
@@ -120,8 +145,7 @@ ft_printf(format, ...):
         senão:
             r = pf_putchar(*format)
         format += 1
-        se r > 0:
-            total += r
+        r = pf_add(&total, r)
     va_end(ap)
     se r < 0:
         devolve -1
@@ -170,18 +194,20 @@ consumido.
 ## `va_list` por ponteiro
 
 O laço declara `va_list ap` e passa `&ap` adiante; **todo** `va_arg`
-acontece via `*ap`, dentro do despacho. O motivo é de ABI:
+acontece via `*ap`, dentro do despacho. Passar o `va_list` por valor a uma
+função que faz `va_arg` e depois continuar usando-o no chamador dá resultados
+diferentes por plataforma — medido com dois `int` variádicos, 1 e 2:
 
-- no x86-64 (SysV), `va_list` é um array de uma struct; passá-lo "por valor"
-  na prática passa um ponteiro, e o cursor avança para o chamador — funciona
-  por acidente;
-- no ARM64 da Apple, `va_list` é um `char *` simples. Por valor, a função
-  chamada avança uma **cópia**, o chamador não vê nada, e o segundo `%d` relê
-  o primeiro argumento.
+| Plataforma | `sizeof(va_list)` | Por valor, o chamador lê | Por ponteiro |
+|---|---|---|---|
+| x86-64 SysV | 24 (array de uma struct) | 2 — o array decai em ponteiro e o cursor avança "por acidente" | 2 |
+| ARM64 Linux (AAPCS64) | 32 (struct) | **1** — a struct foi copiada, o chamador relê o primeiro | 2 |
+| ARM64 Apple | 8 (`char *`) | **1** — o ponteiro foi copiado, idem | 2 |
 
-`&ap` elimina a diferença: existe um só `va_list` vivo, o do laço, e todos o
-avançam através do ponteiro. Vale nas duas variantes — `pf_conv` e
-`pf_dispatch` recebem `va_list *`.
+Por valor, o segundo `%d` de um formato imprimiria o primeiro argumento de
+novo em duas das três. `&ap` elimina a diferença: existe um só `va_list`
+vivo, o do laço, e todos o avançam através do ponteiro. Vale nas duas
+variantes — `pf_conv` e `pf_dispatch` recebem `va_list *`.
 
 ## Caminho de erro
 

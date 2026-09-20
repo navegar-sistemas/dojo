@@ -42,9 +42,47 @@ o custo é de desempenho, irrelevante no domínio do projeto.
 ## `va_list` por ponteiro
 
 Todo `va_arg` acontece via `va_list *`. Passar `va_list` por valor entre
-funções funciona no x86-64 por acidente da ABI e quebra no ARM64 da Apple; o
-ponteiro funciona nos dois. O argumento completo está em
-[fluxo.md](fluxo.md).
+funções funciona no x86-64 por acidente da ABI e relê o primeiro argumento
+no ARM64 — tanto no da Apple quanto no Linux; o ponteiro funciona nos três.
+As medições estão em [fluxo.md](fluxo.md).
+
+## Limites de `int`: devolver −1, nunca estourar
+
+Todo contador do projeto é `int`, porque o retorno de `ft_printf` é `int`.
+Quatro deles podem receber mais do que `INT_MAX` com entrada perfeitamente
+legal:
+
+| Onde | Entrada que estoura | Guarda |
+|---|---|---|
+| `parse_num` | `%2147483648d` | confere antes de multiplicar; diretiva falha |
+| `pf_add` (as duas variantes) | saída total acima de 2 GB | confere antes de somar |
+| `put_num` | `%.2147483647d` com número negativo | total em `long` |
+| `pf_putstr`, `conv_s` | string de mais de 2 GB em `%s` | contador em `long` |
+
+Em todos, a referência devolve −1 com `errno = EOVERFLOW`, e o projeto
+devolve −1. Overflow de `int` com sinal é comportamento indefinido: o
+compilador pode assumir que não acontece e otimizar em cima disso, então
+"deu a volta e ficou negativo" não é um resultado com que se possa contar.
+Antes das guardas, `%4294967296d` dava a volta exata em 32 bits e imprimia
+como `%d`, e `%99999999999d` pedia 1,2 bilhão de espaços.
+
+A regra de escrita é a mesma nos quatro: **a conferência é feita do lado que
+não estoura**. `r > PF_INT_MAX - total`, nunca `total + r > PF_INT_MAX`.
+
+As guardas que contam em `long` dependem de `long` ser mais largo que `int`.
+É o caso nas plataformas-alvo — Linux e macOS de 64 bits são LP64, com `int`
+de 4 bytes e `long` de 8 — e é a mesma premissa que o projeto já assume ao
+passar ponteiros por `unsigned long` e ao negar `INT_MIN` em `long`.
+
+## `%.Ns` não lê além de N
+
+`conv_s` mede a string com `pf_strnlen(s, prec)`, que para na precisão. Medir
+inteira e truncar depois seria mais simples e está errado: a linguagem só
+exige terminador quando a precisão é ausente ou maior que o array, então
+`%.3s` sobre 3 bytes sem `'\0'` é entrada válida — e um `strlen` comum
+sairia lendo a memória vizinha. É o único ponto do projeto em que um formato
+legal podia causar leitura inválida
+([../04-emissao/escritores.md](../04-emissao/escritores.md)).
 
 ## Obrigatória e bônus como implementações separadas
 
@@ -53,9 +91,9 @@ funções diretas, o bônus reconstrói a biblioteca com outros 7 arquivos. A
 alternativa — uma implementação só, onde a obrigatória é o bônus sem flags —
 faria a metade simples do projeto depender da metade difícil.
 
-O custo é duplicar o núcleo de escrita, e ele é pequeno: `pf_putchar`, com 3
-linhas, é o único código idêntico nos dois lados; o resto diverge de verdade
-(recursão contra buffer, string contra campo). O que se compra é isolamento
+O custo é duplicar o que é comum, e é pouco: `pf_putchar` (3 linhas) e
+`pf_add` (4 linhas) são as únicas funções idênticas nos dois lados; o resto
+diverge de verdade (recursão contra buffer, string contra campo). O que se compra é isolamento
 total — um defeito introduzido no bônus não tem como quebrar a variante
 obrigatória.
 

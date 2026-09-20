@@ -11,24 +11,27 @@ int	put_num(t_fmt *f, char *pre, char *digits);
 
 ```
 put_num(f, pre, digits):
+    total é long
     zeros = f->prec - pf_strlen(digits)
     se zeros < 0:
         zeros = 0
-    se f->zero e não f->minus e f->prec < 0:
-        total = pf_strlen(pre) + pf_strlen(digits)
-        se f->width - total > zeros:
-            zeros = f->width - total
-    total = pf_strlen(pre) + zeros + pf_strlen(digits)
-    se não f->minus e pf_pad(' ', f->width - total) < 0:
+    total = pf_strlen(pre) + pf_strlen(digits)
+    se f->zero e não f->minus e f->prec < 0 e f->width - total > zeros:
+        zeros = f->width - total
+    total = total + zeros
+    pad = 0
+    se f->width > total:
+        pad = f->width - total
+    se não f->minus e pf_pad(' ', pad) < 0:
         devolve -1
     se pf_putn(pre, pf_strlen(pre)) < 0 ou pf_pad('0', zeros) < 0
        ou pf_putn(digits, pf_strlen(digits)) < 0:
         devolve -1
-    se f->minus e pf_pad(' ', f->width - total) < 0:
+    se f->minus e pf_pad(' ', pad) < 0:
         devolve -1
-    se f->width > total:
-        devolve f->width
-    devolve total
+    se total + pad > PF_INT_MAX:
+        devolve -1
+    devolve total + pad
 ```
 
 ## As duas contagens
@@ -46,11 +49,19 @@ ficam no `se`, e o resto do montador não sabe que a flag existe. É daí que
 saem, sem caso especial, as duas regras transversais: `-` vence `0`, e
 precisão desliga `0`.
 
-**`total`** aparece duas vezes com sentidos diferentes, para economizar uma
-variável: dentro do `se` é o comprimento **sem** zeros, usado só para medir
-quantos zeros a largura pede; na linha seguinte é recalculado como o
-comprimento real do campo. Os espaços nunca ganham variável — são
-`width - total`, entregues direto a `pf_pad`, que aceita negativo.
+**`total`** cresce em dois tempos: primeiro é o comprimento **sem** zeros —
+o que a flag `0` precisa para medir quantos zeros a largura pede —, depois
+ganha os zeros e vira o comprimento real do campo.
+
+Ele é `long` porque o campo pode não caber em `int`: `%.2147483647d` com −42
+pede `INT_MAX` dígitos **mais** o sinal. Em `int` essa soma estoura, e
+overflow com sinal é comportamento indefinido.
+
+**`pad`** existe pelo mesmo motivo. `f->width - total` com `total` acima de
+`INT_MAX` não cabe em `int`; convertido, viraria um número positivo de
+bilhões, e `pf_pad` escreveria isso em espaços. A comparação
+`f->width > total` é feita em `long` e só deixa a subtração acontecer quando
+o resultado cabe — por isso `pad` nasce em 0 e só é atribuído dentro do `se`.
 
 ## Ordem de emissão
 
@@ -64,11 +75,12 @@ espaços à direita    se minus
 
 Zeros **sempre** entre o prefixo e os dígitos: `[+0042]`, nunca `[0+042]`.
 As três emissões do meio compartilham um único `se` com `ou` — não é estilo,
-é o que mantém o corpo em 23 linhas
+é o que mantém o corpo em 24 linhas
 ([../02-restricoes/estilo.md](../02-restricoes/estilo.md)).
 
-O retorno é `max(width, total)`: quando a largura venceu, o campo tem
-exatamente `width` bytes; quando não, tem `total`.
+O retorno é `total + pad`, que é `max(width, total)`. Se não cabe em `int`,
+é −1 — **depois** de o campo inteiro ter sido escrito, que é o que a
+referência faz: `%.2147483647d` com −1 emite os 2147483648 bytes e devolve −1.
 
 ## As linhas medidas, explicadas pelas contagens
 

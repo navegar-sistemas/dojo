@@ -27,27 +27,28 @@ void	render_base(unsigned long n, const char *base, char *buf)
 
 int	put_num(t_fmt *f, char *pre, char *digits)
 {
-	int	zeros;
-	int	total;
+	int		zeros;
+	int		pad;
+	long	total;
 
 	zeros = f->prec - pf_strlen(digits);
 	if (zeros < 0)
 		zeros = 0;
-	if (f->zero && !f->minus && f->prec < 0)
-	{
-		total = pf_strlen(pre) + pf_strlen(digits);
-		if (f->width - total > zeros)
-			zeros = f->width - total;
-	}
-	total = pf_strlen(pre) + zeros + pf_strlen(digits);
-	if (!f->minus && pf_pad(' ', f->width - total) < 0)
+	total = pf_strlen(pre) + pf_strlen(digits);
+	if (f->zero && !f->minus && f->prec < 0 && f->width - total > zeros)
+		zeros = (int)(f->width - total);
+	total = total + zeros;
+	pad = 0;
+	if (f->width > total)
+		pad = (int)(f->width - total);
+	if (!f->minus && pf_pad(' ', pad) < 0)
 		return (-1);
 	if (pf_putn(pre, pf_strlen(pre)) < 0 || pf_pad('0', zeros) < 0
 		|| pf_putn(digits, pf_strlen(digits)) < 0)
 		return (-1);
-	if (f->minus && pf_pad(' ', f->width - total) < 0)
+	if (f->minus && pf_pad(' ', pad) < 0)
 		return (-1);
-	if (f->width > total)
-		return (f->width);
-	return (total);
+	if (total + pad > PF_INT_MAX)
+		return (-1);
+	return ((int)(total + pad));
 }
