@@ -17,3 +17,5 @@ C/push-swap/**/*.o
 C/push-swap/**/*.out
 C/push-swap/**/*.bin
 C/push-swap/project/push_swap
+
+**/a.out
