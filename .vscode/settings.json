@@ -2,6 +2,13 @@
     "editor.insertSpaces": false,
     "editor.tabSize": 4,
     "peacock.color": "#832561",
+    "python.defaultInterpreterPath": "${workspaceFolder}/python/a-maze-ing/tests/.venv/bin/python",
+    "python.testing.pytestEnabled": true,
+    "python.testing.unittestEnabled": false,
+    "python.testing.cwd": "${workspaceFolder}/python/a-maze-ing/tests",
+    "python.testing.pytestArgs": [
+        "${workspaceFolder}/python/a-maze-ing/tests"
+    ],
     "workbench.colorCustomizations": {
         "activityBar.activeBackground": "#ab307e",
         "activityBar.background": "#ab307e",
@@ -30,5 +37,37 @@
         "activityBar.activeBorder": "#e7e7e7",
         "activityBarTop.activeBorder": "#e7e7e7",
         "statusBar.inactiveBackground": "#832561"
-    }
+    },
+    "cucumber.features": [
+        "python/a-maze-ing/tests/features/**/*.feature"
+    ],
+    "cucumber.glue": [
+        "python/a-maze-ing/tests/step_defs/**/*.py"
+    ],
+    "cucumber.parameterTypes": [
+        {
+            "name": "nome:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "texto:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "comandos:L",
+            "regexp": "\"(?:[^\"\\\\]|\\\\.)*\"(?:(?:, | e )\"(?:[^\"\\\\]|\\\\.)*\")*"
+        },
+        {
+            "name": "textos:L",
+            "regexp": "\"(?:[^\"\\\\]|\\\\.)*\"(?:(?:, | e )\"(?:[^\"\\\\]|\\\\.)*\")*"
+        },
+        {
+            "name": "fluxo:Fluxo",
+            "regexp": "a saída padrão|a saída de erro|a saída"
+        },
+        {
+            "name": "verbo:Contem",
+            "regexp": "não contém|contém"
+        }
+    ]
 }

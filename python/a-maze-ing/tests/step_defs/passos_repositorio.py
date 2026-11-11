@@ -5,7 +5,7 @@ from dataclasses import dataclass
 import pytest
 from pytest_bdd import given, parsers
 
-from conftest import PROJECT_DIR, PYTHON, TIPOS, Estado, Execucao
+from conftest import PROJECT_DIR, TIPOS, Estado, Execucao
 
 
 @dataclass
@@ -21,8 +21,7 @@ class Instalacao:
             A execução do ``make install``.
         """
         if self.execucao is None:
-            comando = f"make install PYTHON={PYTHON}"
-            self.execucao = Estado().executar(comando)
+            self.execucao = Estado().executar("make install")
         return self.execucao
 
 

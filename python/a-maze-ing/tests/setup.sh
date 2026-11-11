@@ -3,16 +3,10 @@
 # Pode rodar de novo: arquivos que já existem não são sobrescritos.
 set -eu
 
-PYTHON=python3.14
 TESTS_DIR=$(cd "$(dirname "$0")" && pwd)
 ANALYZER="$(dirname "$TESTS_DIR")/private/maze_analyzer.py"
 
 cd "$TESTS_DIR"
-
-if ! command -v "$PYTHON" > /dev/null 2>&1; then
-    echo "Erro: $PYTHON não encontrado (o projeto exige Python 3.10 ou posterior)." >&2
-    exit 1
-fi
 
 if [ ! -f "$ANALYZER" ]; then
     echo "Erro: maze_analyzer.py não encontrado em $ANALYZER." >&2
@@ -30,7 +24,7 @@ if [ ! -f maze_analyzer.py ]; then
 fi
 
 if [ ! -f requirements.txt ]; then
-    printf 'pytest==9.2.0\npytest-bdd==9.0.1\nflake8==7.5.0\nmypy==2.4.1\n' \
+    printf 'pytest==9.2.0\npytest-bdd==9.0.1\nflake8==7.4.1\nmypy==2.4.1\n' \
         > requirements.txt
 fi
 
@@ -77,7 +71,7 @@ EOF
 fi
 
 if [ ! -d .venv ]; then
-    "$PYTHON" -m venv .venv
+    python3 -m venv .venv
 fi
 # O pip que vem com o venv grava o cache num formato que o pip atualizado não lê;
 # sem cache neste passo, o pip novo não encontra entradas que não consegue ler.

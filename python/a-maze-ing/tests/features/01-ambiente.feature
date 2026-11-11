@@ -25,7 +25,7 @@ Funcionalidade: Ambiente de desenvolvimento
   @recomendado @automatizado @decisao-I14 @pdf-p07-L10-L11 @md-L132
   Cenário: As dependências ficam isoladas num ambiente virtual
     Dado o repositório no estado "clone limpo"
-    Quando eu executo "make install PYTHON=python3.14"
+    Quando eu executo "make install"
     Então o código de saída é 0
     E o caminho ".venv" existe
     E o comando ".venv/bin/python -m flake8 --version" termina com código 0

@@ -13,7 +13,6 @@ import pytest
 TESTS_DIR = Path(__file__).resolve().parent
 PROJECT_DIR = TESTS_DIR.parent / "project"
 ANALYZER = TESTS_DIR / "maze_analyzer.py"
-PYTHON = "python3.14"
 TIMEOUT = 30
 
 pytest_plugins = [

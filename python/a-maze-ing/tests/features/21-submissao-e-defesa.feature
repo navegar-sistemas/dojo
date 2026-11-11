@@ -18,7 +18,7 @@ Funcionalidade: Submissão e avaliação entre pares (Capítulo IX)
   @informativo @automatizado @pdf-p20-L03-L04 @md-L351
   Cenário: Um clone limpo tem tudo o que a avaliação usa
     Dado o repositório no estado "clone do remoto"
-    Quando eu executo "make install PYTHON=python3.14" e "make lint"
+    Quando eu executo "make install" e "make lint"
     Então todos os comandos terminam com código 0
     Quando eu executo "make run" com a entrada "4"
     Então o código de saída é 0

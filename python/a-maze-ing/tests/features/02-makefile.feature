@@ -20,7 +20,7 @@ Funcionalidade: Makefile
   @obrigatorio @automatizado @decisao-I14 @pdf-p06-L21-L22 @md-L110
   Cenário: make install instala as dependências do projeto
     Dado o repositório no estado "clone limpo"
-    Quando eu executo "make install PYTHON=python3.14"
+    Quando eu executo "make install"
     Então o código de saída é 0
     E o comando ".venv/bin/python -m flake8 --version" termina com código 0
     E o comando ".venv/bin/python -m mypy --version" termina com código 0
