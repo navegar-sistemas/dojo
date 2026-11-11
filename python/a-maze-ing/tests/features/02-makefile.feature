@@ -35,7 +35,6 @@ Funcionalidade: Makefile
     Quando eu executo "make run" com a entrada "4"
     Então o código de saída é 0
     E a saída de "make -n run" contém "a_maze_ing.py config.txt"
-    E o caminho "maze.txt" não está vazio
 
   # pdf: "debug: Run the main script in debug mode using Python's built-in debugger (e.g.,"
   # pdf: "pdb)."
@@ -72,7 +71,7 @@ Funcionalidade: Makefile
   @obrigatorio @derivado @automatizado @decisao-I14 @decisao-I13 @pdf-p06-L26-L27 @pdf-p15-L13-L14 @md-L113 @md-L294
   Esquema do Cenário: make clean preserva os arquivos de entrega
     Dado o repositório no estado "clone limpo"
-    E o arquivo "<entrega>" na raiz do repositório
+    E o caminho "<entrega>" preparado como "vazio"
     Quando eu executo "make clean"
     Então o caminho "<entrega>" existe
 

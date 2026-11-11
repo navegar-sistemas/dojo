@@ -152,7 +152,7 @@ class Estado:
     resultados: list[Execucao] = field(default_factory=list)
     fontes: list[Path] = field(default_factory=list)
     arvores: dict[Path, ast.Module] = field(default_factory=dict)
-    preparados: list[Path] = field(default_factory=list)
+    preparados: list[tuple[Path, Path | None]] = field(default_factory=list)
 
     @property
     def resultado(self) -> Execucao:
@@ -222,11 +222,17 @@ def remover(caminho: Path) -> None:
 
 @pytest.fixture
 def estado() -> Iterator[Estado]:
-    """Estado novo para cada cenário; apaga os caminhos preparados no fim."""
+    """Estado novo para cada cenário; desfaz os caminhos preparados no fim.
+
+    Cada caminho preparado é apagado; se havia um original guardado na
+    reserva, ele volta para o lugar.
+    """
     novo = Estado()
     yield novo
-    for caminho in novo.preparados:
+    for caminho, reserva in reversed(novo.preparados):
         remover(caminho)
+        if reserva is not None:
+            shutil.move(reserva, caminho)
 
 
 Verificacao = Callable[[Estado], None]

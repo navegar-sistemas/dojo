@@ -8,14 +8,7 @@ from pathlib import Path
 import pytest
 from pytest_bdd import given, parsers, then
 
-from conftest import (
-    PROJECT_DIR,
-    TIMEOUT,
-    TIPOS,
-    Estado,
-    Execucao,
-    remover,
-)
+from conftest import PROJECT_DIR, TIMEOUT, TIPOS, Estado, Execucao
 
 # O clone e as consultas ao git não podem herdar a configuração de quem roda
 # a suíte: o ignore global mascararia um .gitignore incompleto, e hooks ou
@@ -186,29 +179,41 @@ def arquivo_na_raiz(estado: Estado, arquivo: str) -> None:
         'o caminho "{caminho:Q}" preparado como "{tipo:Q}"', extra_types=TIPOS
     )
 )
-def caminho_preparado(estado: Estado, caminho: str, tipo: str) -> None:
-    """V16: cria ou apaga o caminho; a fixture estado o apaga no fim.
+def caminho_preparado(
+    estado: Estado, tmp_path: Path, caminho: str, tipo: str
+) -> None:
+    """V16: prepara o caminho; a fixture estado desfaz tudo no fim.
+
+    Um original que exista no caminho vai para a reserva em tmp_path e
+    volta no fim do teste.
 
     Args:
         estado: Estado do cenário.
+        tmp_path: Pasta temporária do cenário, onde fica a reserva.
         caminho: Caminho relativo ao repositório.
-        tipo: "inexistente" ou "diretório"; os demais tipos ainda não
-            existem.
+        tipo: "inexistente", "vazio" ou "diretório"; os demais tipos ainda
+            não existem.
     """
     alvo = estado.cwd / caminho
-    if tipo == "inexistente":
-        remover(alvo)
-        estado.preparados.append(alvo)
-        return
     if tipo == "diretório":
         criado = alvo
         while not criado.parent.exists():
             criado = criado.parent
         if not alvo.exists():
-            estado.preparados.append(criado)
+            estado.preparados.append((criado, None))
         alvo.mkdir(parents=True, exist_ok=True)
         return
-    pytest.fail(f'tipo "{tipo}" ainda não implementado (V16 no README)')
+    if tipo not in ("inexistente", "vazio"):
+        pytest.fail(f'tipo "{tipo}" ainda não implementado (V16 no README)')
+    reserva = None
+    if alvo.exists() or alvo.is_symlink():
+        reserva = tmp_path / "reserva" / str(len(estado.preparados))
+        reserva.parent.mkdir(parents=True, exist_ok=True)
+        shutil.move(alvo, reserva)
+    estado.preparados.append((alvo, reserva))
+    if tipo == "vazio":
+        alvo.parent.mkdir(parents=True, exist_ok=True)
+        alvo.write_bytes(b"")
 
 
 @then(
