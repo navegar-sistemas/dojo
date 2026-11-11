@@ -39,7 +39,8 @@ Funcionalidade: Ambiente de desenvolvimento
   # md:  "Inclua um arquivo `.gitignore` para excluir artefatos do Python."
   @obrigatorio @automatizado @decisao-I14 @pdf-p07-L09 @md-L131
   Esquema do Cenário: O .gitignore exclui artefatos do Python
-    Dado o arquivo ".gitignore" na raiz do repositório
+    Dado o repositório no estado "clone limpo"
+    E o arquivo ".gitignore" na raiz do repositório
     Quando eu executo "git check-ignore <caminho>"
     Então o caminho "<caminho>" é ignorado pelo git
 
@@ -62,7 +63,8 @@ Funcionalidade: Ambiente de desenvolvimento
   # md:  "Um arquivo de configuração padrão deve estar disponível no seu repositório Git."
   @obrigatorio @derivado @automatizado @pdf-p07-L09 @pdf-p15-L13-L14 @pdf-p09-L03 @md-L131 @md-L294 @md-L176
   Esquema do Cenário: O .gitignore não esconde arquivos que precisam ser entregues
-    Dado o arquivo ".gitignore" na raiz do repositório
+    Dado o repositório no estado "clone limpo"
+    E o arquivo ".gitignore" na raiz do repositório
     Quando eu executo "git check-ignore <arquivo>"
     Então o caminho "<arquivo>" não é ignorado pelo git
 

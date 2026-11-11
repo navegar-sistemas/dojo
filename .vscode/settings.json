@@ -54,6 +54,18 @@
             "regexp": "(?:[^\"\\\\]|\\\\.)*"
         },
         {
+            "name": "arquivo:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "caminho:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "comando:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
             "name": "comandos:L",
             "regexp": "\"(?:[^\"\\\\]|\\\\.)*\"(?:(?:, | e )\"(?:[^\"\\\\]|\\\\.)*\")*"
         },
@@ -62,12 +74,28 @@
             "regexp": "\"(?:[^\"\\\\]|\\\\.)*\"(?:(?:, | e )\"(?:[^\"\\\\]|\\\\.)*\")*"
         },
         {
+            "name": "alvos:L",
+            "regexp": "\"(?:[^\"\\\\]|\\\\.)*\"(?:(?:, | e )\"(?:[^\"\\\\]|\\\\.)*\")*"
+        },
+        {
+            "name": "codigo:d",
+            "regexp": "-?\\d+"
+        },
+        {
             "name": "fluxo:Fluxo",
             "regexp": "a saída padrão|a saída de erro|a saída"
         },
         {
             "name": "verbo:Contem",
             "regexp": "não contém|contém"
+        },
+        {
+            "name": "situacao:EstadoCaminho",
+            "regexp": "não é ignorado pelo git|é ignorado pelo git|está versionado no git|não está vazio|não existe|existe"
+        },
+        {
+            "name": "sujeito:Sujeito",
+            "regexp": "o catálogo de casos de erro|o validador da suíte|a análise estática|o módulo mazegen|a renderização"
         }
     ]
 }

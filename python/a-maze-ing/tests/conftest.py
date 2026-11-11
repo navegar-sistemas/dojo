@@ -1,5 +1,6 @@
 """Configuração da suíte: hook de tags, tipos de parâmetro e estado."""
 
+import ast
 import os
 import re
 import subprocess
@@ -18,6 +19,8 @@ TIMEOUT = 30
 pytest_plugins = [
     "step_defs.passos_repositorio",
     "step_defs.passos_execucao",
+    "step_defs.passos_analise",
+    "step_defs.passos_propriedades",
 ]
 
 REFERENCIAS = ("pdf-", "md-", "regua-", "decisao-")
@@ -96,6 +99,21 @@ TIPOS: dict[str, Callable[[str], object]] = {
     "L": parse.with_pattern(rf"{_ITEM}(?:(?:, | e ){_ITEM})*")(_lista),
     "Fluxo": _enum("a saída", "a saída padrão", "a saída de erro"),
     "Contem": _enum("contém", "não contém"),
+    "EstadoCaminho": _enum(
+        "existe",
+        "não existe",
+        "é ignorado pelo git",
+        "não é ignorado pelo git",
+        "está versionado no git",
+        "não está vazio",
+    ),
+    "Sujeito": _enum(
+        "o validador da suíte",
+        "a renderização",
+        "a análise estática",
+        "o módulo mazegen",
+        "o catálogo de casos de erro",
+    ),
 }
 
 
@@ -131,6 +149,8 @@ class Estado:
     cwd: Path = PROJECT_DIR
     caminhos_extras: list[Path] = field(default_factory=list)
     resultados: list[Execucao] = field(default_factory=list)
+    fontes: list[Path] = field(default_factory=list)
+    arvores: dict[Path, ast.Module] = field(default_factory=dict)
 
     @property
     def resultado(self) -> Execucao:
@@ -176,3 +196,28 @@ class Estado:
 def estado() -> Estado:
     """Estado novo para cada cenário."""
     return Estado()
+
+
+Verificacao = Callable[[Estado], None]
+
+PROPRIEDADES: dict[tuple[str, str], Verificacao] = {}
+
+
+def propriedade(
+    sujeito: str, nome: str
+) -> Callable[[Verificacao], Verificacao]:
+    """Registra a verificação de uma propriedade da V72.
+
+    Args:
+        sujeito: Valor do tipo Sujeito, como escrito no passo.
+        nome: Propriedade da lista fechada do sujeito.
+
+    Returns:
+        Decorador que guarda a função em PROPRIEDADES e a devolve.
+    """
+
+    def registrar(funcao: Verificacao) -> Verificacao:
+        PROPRIEDADES[(sujeito, nome)] = funcao
+        return funcao
+
+    return registrar

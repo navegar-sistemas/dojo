@@ -41,6 +41,59 @@ def saida_contem(
             assert texto not in saida, f"{fluxo} contém {texto!r}:\n{saida}"
 
 
+@then(parsers.parse("o código de saída é {codigo:d}"))
+def codigo_de_saida(estado: Estado, codigo: int) -> None:
+    """V48: confere o código de saída do último comando.
+
+    Args:
+        estado: Estado do cenário.
+        codigo: Código esperado.
+    """
+    resultado = estado.resultado
+    assert resultado.codigo == codigo, (
+        f"'{resultado.comando}' terminou com código {resultado.codigo}, "
+        f"esperado {codigo}\n{resultado.saida_padrao}{resultado.saida_erro}"
+    )
+
+
+@then(
+    parsers.parse(
+        'o comando "{comando:Q}" termina com código {codigo:d}',
+        extra_types=TIPOS,
+    )
+)
+def comando_termina_com(estado: Estado, comando: str, codigo: int) -> None:
+    """V50: roda o comando agora e confere o código de saída.
+
+    Args:
+        estado: Estado do cenário.
+        comando: Linha de comando.
+        codigo: Código esperado.
+    """
+    resultado = estado.executar(comando)
+    assert resultado.codigo == codigo, (
+        f"'{comando}' terminou com código {resultado.codigo}, esperado "
+        f"{codigo}\n{resultado.saida_padrao}{resultado.saida_erro}"
+    )
+
+
+@then(
+    parsers.parse(
+        'a saída de "{comando:Q}" é "{texto:Q}"', extra_types=TIPOS
+    )
+)
+def saida_do_comando_igual(estado: Estado, comando: str, texto: str) -> None:
+    """V55: roda o comando agora e compara a saída, sem espaços nas pontas.
+
+    Args:
+        estado: Estado do cenário.
+        comando: Linha de comando.
+        texto: Saída esperada (stdout e stderr juntos).
+    """
+    saida = estado.executar(comando).fluxo("a saída").strip()
+    assert saida == texto, f"'{comando}' mostrou {saida!r}, esperado {texto!r}"
+
+
 @then(parsers.parse('{fluxo:Fluxo} é "{texto:Q}"', extra_types=TIPOS))
 def saida_igual(estado: Estado, fluxo: str, texto: str) -> None:
     """V53: confere o fluxo inteiro, sem espaços nas pontas.

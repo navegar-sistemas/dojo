@@ -199,6 +199,9 @@ os IDs existentes não mudam. Os cenários `@manual` têm texto livre e são pul
 - Comandos (inclusive os de V50 e V55) rodam com `cwd` = `project/`, ou a cópia criada por V02
   (`clone limpo`, `clone do remoto`), ou a pasta definida por V05; `PATH` começando por
   `.venv/bin`; tempo limite de 30 s.
+- O git da suíte (clone limpo, V60) roda sem a configuração global de quem executa:
+  `core.excludesFile`, hooks e assinatura de commit desligados, para que um ignore global não
+  esconda um `.gitignore` incompleto do projeto.
 - O config é um objeto (linhas + destino, padrão `cfg.txt` em `project/`, apagado no fim do
   teste); só é gravado em disco num passo `Quando` ou ao iniciar o programa, para que o `Contexto`
   possa ser alterado pelo cenário. O destino nunca é `config.txt`.
