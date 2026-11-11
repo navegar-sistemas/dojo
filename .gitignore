@@ -19,3 +19,8 @@ C/push-swap/**/*.bin
 C/push-swap/project/push_swap
 
 **/a.out
+private
+python/a-maze-ing/private
+python/a-maze-ing/project-validate
+python/a-maze-ing/spec
+.mypy_cache
