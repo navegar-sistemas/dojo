@@ -3,8 +3,9 @@
 import ast
 import os
 import re
+import shutil
 import subprocess
-from collections.abc import Callable
+from collections.abc import Callable, Iterator
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -151,6 +152,7 @@ class Estado:
     resultados: list[Execucao] = field(default_factory=list)
     fontes: list[Path] = field(default_factory=list)
     arvores: dict[Path, ast.Module] = field(default_factory=dict)
+    preparados: list[Path] = field(default_factory=list)
 
     @property
     def resultado(self) -> Execucao:
@@ -158,6 +160,20 @@ class Estado:
         if not self.resultados:
             pytest.fail("nenhum comando foi executado antes deste passo")
         return self.resultados[-1]
+
+    def resultado_de(self, comando: str) -> Execucao:
+        """Última execução do comando no cenário; se não houver, roda agora.
+
+        Args:
+            comando: Linha de comando, como escrita no .feature.
+
+        Returns:
+            A execução encontrada ou a nova.
+        """
+        for execucao in reversed(self.resultados):
+            if execucao.comando == comando:
+                return execucao
+        return self.executar(comando)
 
     def executar(self, comando: str, entrada: str = "") -> Execucao:
         """Roda um comando no shell, na pasta e com o PATH do cenário.
@@ -192,10 +208,25 @@ class Estado:
         return execucao
 
 
+def remover(caminho: Path) -> None:
+    """Apaga um arquivo ou uma pasta, se existir.
+
+    Args:
+        caminho: Caminho a apagar.
+    """
+    if caminho.is_dir() and not caminho.is_symlink():
+        shutil.rmtree(caminho)
+    else:
+        caminho.unlink(missing_ok=True)
+
+
 @pytest.fixture
-def estado() -> Estado:
-    """Estado novo para cada cenário."""
-    return Estado()
+def estado() -> Iterator[Estado]:
+    """Estado novo para cada cenário; apaga os caminhos preparados no fim."""
+    novo = Estado()
+    yield novo
+    for caminho in novo.preparados:
+        remover(caminho)
 
 
 Verificacao = Callable[[Estado], None]

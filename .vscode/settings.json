@@ -96,6 +96,22 @@
         {
             "name": "sujeito:Sujeito",
             "regexp": "o catálogo de casos de erro|o validador da suíte|a análise estática|o módulo mazegen|a renderização"
+        },
+        {
+            "name": "tipo:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "a:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "b:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "linhas:L",
+            "regexp": "\"(?:[^\"\\\\]|\\\\.)*\"(?:(?:, | e )\"(?:[^\"\\\\]|\\\\.)*\")*"
         }
     ]
 }

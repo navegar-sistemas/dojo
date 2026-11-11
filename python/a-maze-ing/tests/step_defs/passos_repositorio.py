@@ -8,7 +8,14 @@ from pathlib import Path
 import pytest
 from pytest_bdd import given, parsers, then
 
-from conftest import PROJECT_DIR, TIMEOUT, TIPOS, Estado, Execucao
+from conftest import (
+    PROJECT_DIR,
+    TIMEOUT,
+    TIPOS,
+    Estado,
+    Execucao,
+    remover,
+)
 
 # O clone e as consultas ao git não podem herdar a configuração de quem roda
 # a suíte: o ignore global mascararia um .gitignore incompleto, e hooks ou
@@ -172,6 +179,36 @@ def arquivo_na_raiz(estado: Estado, arquivo: str) -> None:
     """
     if not casar(estado, arquivo):
         pytest.fail(f'"{arquivo}" não existe em {estado.cwd}')
+
+
+@given(
+    parsers.parse(
+        'o caminho "{caminho:Q}" preparado como "{tipo:Q}"', extra_types=TIPOS
+    )
+)
+def caminho_preparado(estado: Estado, caminho: str, tipo: str) -> None:
+    """V16: cria ou apaga o caminho; a fixture estado o apaga no fim.
+
+    Args:
+        estado: Estado do cenário.
+        caminho: Caminho relativo ao repositório.
+        tipo: "inexistente" ou "diretório"; os demais tipos ainda não
+            existem.
+    """
+    alvo = estado.cwd / caminho
+    if tipo == "inexistente":
+        remover(alvo)
+        estado.preparados.append(alvo)
+        return
+    if tipo == "diretório":
+        criado = alvo
+        while not criado.parent.exists():
+            criado = criado.parent
+        if not alvo.exists():
+            estado.preparados.append(criado)
+        alvo.mkdir(parents=True, exist_ok=True)
+        return
+    pytest.fail(f'tipo "{tipo}" ainda não implementado (V16 no README)')
 
 
 @then(

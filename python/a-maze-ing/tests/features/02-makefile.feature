@@ -52,7 +52,8 @@ Funcionalidade: Makefile
   # md:  "clean: Remove arquivos temporários ou caches (ex.: `__pycache__`, `.mypy_cache`) para manter o ambiente do projeto limpo."
   @obrigatorio @automatizado @decisao-I14 @pdf-p06-L26-L27 @md-L113
   Esquema do Cenário: make clean remove arquivos temporários e caches
-    Dado o caminho "<temporario>" preparado como "diretório"
+    Dado o repositório no estado "clone limpo"
+    E o caminho "<temporario>" preparado como "diretório"
     Quando eu executo "make clean"
     Então o caminho "<temporario>" não existe
 
