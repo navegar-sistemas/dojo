@@ -108,7 +108,8 @@ def main() -> None:
     closed = [[15] * 6 for _ in range(4)]
     save(maze_svg(closed, coords=True, cell=44, labels={
         (0, 0): "0,0", (5, 0): "5,0", (2, 1): "2,1", (0, 3): "0,3",
-        (5, 3): "5,3"}, caption="x é a coluna, y é a linha"),
+        (5, 3): "5,3"},
+        caption="a célula 5,3: 5 casas na horizontal, 3 na vertical"),
         OUT / "coordenadas.svg")
 
     save(cell_bits_svg(9, caption="Norte e Oeste fechados: 1 + 8 = 9"),

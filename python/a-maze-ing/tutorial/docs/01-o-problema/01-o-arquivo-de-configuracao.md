@@ -46,10 +46,19 @@ PERFECT=False
 
 ## Coordenadas `x,y`
 
-`x` é a **coluna** e `y` é a **linha**, ambos contados a partir de 0, com a origem no canto de
-cima à esquerda:
+É a convenção do plano cartesiano: `x` é a posição na **horizontal** e `y` é a posição na
+**vertical**, ambos contados a partir de 0, com a origem no canto de cima à esquerda. Andar na
+horizontal troca de coluna, então o `x` diz **em qual coluna** a célula está; andar na vertical
+troca de linha, então o `y` diz **em qual linha** ela está.
 
 ![Grade 6 por 4 com as coordenadas x,y de algumas células](/img/problema/coordenadas.svg)
+
+O config padrão confirma a ordem: com `WIDTH=20` e `HEIGHT=15`, a saída é `EXIT=19,14`. O `19` só
+pode ser horizontal, porque vai até `WIDTH − 1`; o `14` só pode ser vertical, porque vai até
+`HEIGHT − 1`.
+
+Diferente de uma matriz, que se indexa com a linha primeiro: no código, a célula `(x, y)` é
+`grid[y][x]`.
 
 Essa convenção vale em todo o projeto: no config, no arquivo de saída, nas mensagens de erro e no
 código. Nunca existe `(linha, coluna)`.

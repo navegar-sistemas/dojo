@@ -183,8 +183,9 @@ def maze_svg(
     """
     height = len(grid)
     width = len(grid[0])
-    left: float = 34 if coords else 16
-    top = 30 if coords else 16
+    base_left = 58 if coords else 16
+    left: float = base_left
+    top = 54 if coords else 16
     bottom = 34 if caption else 16
     left += _caption_overflow(left + width * cell + 16, caption) / 2
     body: list[str] = []
@@ -229,7 +230,17 @@ def maze_svg(
         for y in range(height):
             body.append(_text(left - 16, top + y * cell + cell / 2, str(y),
                               size=12, fill="muted"))
-    total_w = left * 2 - (34 if coords else 16) + width * cell + 16
+        body.append(_text(left + width * cell / 2, top - 38,
+                          "x: horizontal →", size=13, fill="text",
+                          weight="bold"))
+        middle = top + height * cell / 2
+        body.append(
+            f'<g transform="rotate(90 {left - 40:g} {middle:g})">'
+            + _text(left - 40, middle, "y: vertical →", size=13, fill="text",
+                    weight="bold")
+            + "</g>"
+        )
+    total_w = left * 2 - base_left + width * cell + 16
     total_h = top + height * cell + bottom
     if caption:
         body.append(_text(total_w / 2, total_h - 17, caption, size=13,

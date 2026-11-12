@@ -1,361 +1,363 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="490" height="424" viewBox="0 0 490 424">
-<rect width="490" height="424" fill="#ffffff" rx="8"/>
-<rect x="194" y="190" width="40" height="40" fill="#9ca3af"/>
-<rect x="314" y="190" width="40" height="40" fill="#9ca3af"/>
-<rect x="274" y="110" width="40" height="40" fill="#9ca3af"/>
-<rect x="114" y="190" width="40" height="40" fill="#9ca3af"/>
-<rect x="354" y="190" width="40" height="40" fill="#9ca3af"/>
-<rect x="154" y="190" width="40" height="40" fill="#9ca3af"/>
-<rect x="274" y="230" width="40" height="40" fill="#9ca3af"/>
-<rect x="194" y="270" width="40" height="40" fill="#9ca3af"/>
-<rect x="274" y="190" width="40" height="40" fill="#9ca3af"/>
-<rect x="114" y="150" width="40" height="40" fill="#9ca3af"/>
-<rect x="354" y="150" width="40" height="40" fill="#9ca3af"/>
-<rect x="194" y="230" width="40" height="40" fill="#9ca3af"/>
-<rect x="314" y="270" width="40" height="40" fill="#9ca3af"/>
-<rect x="314" y="110" width="40" height="40" fill="#9ca3af"/>
-<rect x="114" y="110" width="40" height="40" fill="#9ca3af"/>
-<rect x="274" y="270" width="40" height="40" fill="#9ca3af"/>
-<rect x="354" y="110" width="40" height="40" fill="#9ca3af"/>
-<rect x="354" y="270" width="40" height="40" fill="#9ca3af"/>
-<rect x="34" y="30" width="40" height="40" fill="#d946ef"/>
-<rect x="434" y="350" width="40" height="40" fill="#ef4444"/>
-<line x1="34" y1="30" x2="74" y2="30" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="34" y1="30" x2="34" y2="70" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="74" y1="30" x2="114" y2="30" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="74" y1="70" x2="114" y2="70" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="114" y1="30" x2="154" y2="30" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="154" y1="30" x2="154" y2="70" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="154" y1="30" x2="194" y2="30" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="154" y1="30" x2="154" y2="70" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="194" y1="30" x2="234" y2="30" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="194" y1="70" x2="234" y2="70" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="234" y1="30" x2="274" y2="30" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="274" y1="30" x2="274" y2="70" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="274" y1="30" x2="314" y2="30" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="274" y1="30" x2="274" y2="70" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="314" y1="30" x2="354" y2="30" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="354" y1="30" x2="394" y2="30" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="354" y1="70" x2="394" y2="70" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="394" y1="30" x2="434" y2="30" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="394" y1="70" x2="434" y2="70" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="434" y1="30" x2="474" y2="30" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="474" y1="30" x2="474" y2="70" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="74" y1="70" x2="74" y2="110" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="34" y1="70" x2="34" y2="110" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="74" y1="70" x2="114" y2="70" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="74" y1="70" x2="74" y2="110" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="154" y1="70" x2="154" y2="110" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="114" y1="110" x2="154" y2="110" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="154" y1="70" x2="154" y2="110" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="194" y1="70" x2="234" y2="70" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="194" y1="110" x2="234" y2="110" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="234" y1="110" x2="274" y2="110" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="314" y1="70" x2="314" y2="110" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="274" y1="110" x2="314" y2="110" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="314" y1="110" x2="354" y2="110" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="314" y1="70" x2="314" y2="110" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="354" y1="70" x2="394" y2="70" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="354" y1="110" x2="394" y2="110" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="394" y1="70" x2="434" y2="70" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="394" y1="110" x2="434" y2="110" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="474" y1="70" x2="474" y2="110" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="74" y1="110" x2="74" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="34" y1="110" x2="34" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="114" y1="110" x2="114" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="74" y1="110" x2="74" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="114" y1="110" x2="154" y2="110" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="154" y1="110" x2="154" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="114" y1="150" x2="154" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="114" y1="110" x2="114" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="194" y1="110" x2="194" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="154" y1="110" x2="154" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="194" y1="110" x2="234" y2="110" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="194" y1="110" x2="194" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="234" y1="110" x2="274" y2="110" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="274" y1="110" x2="274" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="274" y1="110" x2="314" y2="110" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="314" y1="110" x2="314" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="274" y1="150" x2="314" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="274" y1="110" x2="274" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="314" y1="110" x2="354" y2="110" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="354" y1="110" x2="354" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="314" y1="150" x2="354" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="314" y1="110" x2="314" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="354" y1="110" x2="394" y2="110" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="394" y1="110" x2="394" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="354" y1="150" x2="394" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="354" y1="110" x2="354" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="394" y1="110" x2="434" y2="110" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="394" y1="110" x2="394" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="474" y1="110" x2="474" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="434" y1="150" x2="474" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="34" y1="150" x2="34" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="114" y1="150" x2="114" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="74" y1="190" x2="114" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="114" y1="150" x2="154" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="154" y1="150" x2="154" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="114" y1="190" x2="154" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="114" y1="150" x2="114" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="154" y1="190" x2="194" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="154" y1="150" x2="154" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="234" y1="150" x2="234" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="194" y1="190" x2="234" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="234" y1="150" x2="234" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="274" y1="150" x2="314" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="274" y1="190" x2="314" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="314" y1="150" x2="354" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="354" y1="150" x2="354" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="314" y1="190" x2="354" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="354" y1="150" x2="394" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="394" y1="150" x2="394" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="354" y1="190" x2="394" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="354" y1="150" x2="354" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="394" y1="190" x2="434" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="394" y1="150" x2="394" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="434" y1="150" x2="474" y2="150" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="474" y1="150" x2="474" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="34" y1="230" x2="74" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="34" y1="190" x2="34" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="74" y1="190" x2="114" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="114" y1="190" x2="114" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="114" y1="190" x2="154" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="154" y1="190" x2="154" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="114" y1="230" x2="154" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="114" y1="190" x2="114" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="154" y1="190" x2="194" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="194" y1="190" x2="194" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="154" y1="230" x2="194" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="154" y1="190" x2="154" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="194" y1="190" x2="234" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="234" y1="190" x2="234" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="194" y1="230" x2="234" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="194" y1="190" x2="194" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="274" y1="190" x2="274" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="234" y1="190" x2="234" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="274" y1="190" x2="314" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="314" y1="190" x2="314" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="274" y1="230" x2="314" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="274" y1="190" x2="274" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="314" y1="190" x2="354" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="354" y1="190" x2="354" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="314" y1="230" x2="354" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="314" y1="190" x2="314" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="354" y1="190" x2="394" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="394" y1="190" x2="394" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="354" y1="230" x2="394" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="354" y1="190" x2="354" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="394" y1="190" x2="434" y2="190" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="394" y1="190" x2="394" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="474" y1="190" x2="474" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="34" y1="230" x2="74" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="34" y1="230" x2="34" y2="270" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="114" y1="230" x2="114" y2="270" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="74" y1="270" x2="114" y2="270" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="114" y1="230" x2="154" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="114" y1="230" x2="114" y2="270" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="154" y1="230" x2="194" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="194" y1="230" x2="194" y2="270" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="194" y1="230" x2="234" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="234" y1="230" x2="234" y2="270" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="194" y1="270" x2="234" y2="270" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="194" y1="230" x2="194" y2="270" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="274" y1="230" x2="274" y2="270" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="234" y1="230" x2="234" y2="270" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="274" y1="230" x2="314" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="314" y1="230" x2="314" y2="270" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="274" y1="270" x2="314" y2="270" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="274" y1="230" x2="274" y2="270" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="314" y1="230" x2="354" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="314" y1="270" x2="354" y2="270" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="314" y1="230" x2="314" y2="270" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="354" y1="230" x2="394" y2="230" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="354" y1="270" x2="394" y2="270" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="434" y1="230" x2="434" y2="270" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="474" y1="230" x2="474" y2="270" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="434" y1="230" x2="434" y2="270" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="74" y1="270" x2="74" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="34" y1="270" x2="34" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="74" y1="270" x2="114" y2="270" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="74" y1="270" x2="74" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="154" y1="270" x2="154" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="194" y1="270" x2="194" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="154" y1="270" x2="154" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="194" y1="270" x2="234" y2="270" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="234" y1="270" x2="234" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="194" y1="310" x2="234" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="194" y1="270" x2="194" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="274" y1="270" x2="274" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="234" y1="270" x2="234" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="274" y1="270" x2="314" y2="270" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="314" y1="270" x2="314" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="274" y1="310" x2="314" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="274" y1="270" x2="274" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="314" y1="270" x2="354" y2="270" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="354" y1="270" x2="354" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="314" y1="310" x2="354" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="314" y1="270" x2="314" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="354" y1="270" x2="394" y2="270" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="394" y1="270" x2="394" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="354" y1="310" x2="394" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="354" y1="270" x2="354" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="434" y1="270" x2="434" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="394" y1="270" x2="394" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="474" y1="270" x2="474" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="434" y1="270" x2="434" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="74" y1="310" x2="74" y2="350" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="34" y1="310" x2="34" y2="350" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="114" y1="310" x2="114" y2="350" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="74" y1="310" x2="74" y2="350" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="114" y1="310" x2="114" y2="350" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="194" y1="310" x2="194" y2="350" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="194" y1="310" x2="234" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="194" y1="310" x2="194" y2="350" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="234" y1="350" x2="274" y2="350" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="274" y1="310" x2="314" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="274" y1="350" x2="314" y2="350" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="314" y1="310" x2="354" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="354" y1="310" x2="394" y2="310" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="354" y1="350" x2="394" y2="350" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="394" y1="350" x2="434" y2="350" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="474" y1="310" x2="474" y2="350" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="34" y1="390" x2="74" y2="390" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="34" y1="350" x2="34" y2="390" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="114" y1="350" x2="114" y2="390" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="74" y1="390" x2="114" y2="390" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="114" y1="390" x2="154" y2="390" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="114" y1="350" x2="114" y2="390" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="154" y1="390" x2="194" y2="390" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="194" y1="390" x2="234" y2="390" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="234" y1="350" x2="274" y2="350" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="234" y1="390" x2="274" y2="390" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="274" y1="350" x2="314" y2="350" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="274" y1="390" x2="314" y2="390" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="314" y1="390" x2="354" y2="390" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="354" y1="350" x2="394" y2="350" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="354" y1="390" x2="394" y2="390" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="394" y1="350" x2="434" y2="350" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="394" y1="390" x2="434" y2="390" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="474" y1="350" x2="474" y2="390" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="434" y1="390" x2="474" y2="390" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<text x="54" y="50" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">9</text>
-<text x="94" y="50" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
-<text x="134" y="50" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">3</text>
-<text x="174" y="50" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">9</text>
-<text x="214" y="50" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
-<text x="254" y="50" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">3</text>
-<text x="294" y="50" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">9</text>
-<text x="334" y="50" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">1</text>
-<text x="374" y="50" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
-<text x="414" y="50" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
-<text x="454" y="50" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">3</text>
-<text x="54" y="90" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
-<text x="94" y="90" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">9</text>
-<text x="134" y="90" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">6</text>
-<text x="174" y="90" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">8</text>
-<text x="214" y="90" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
-<text x="254" y="90" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">4</text>
-<text x="294" y="90" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">6</text>
-<text x="334" y="90" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">c</text>
-<text x="374" y="90" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
-<text x="414" y="90" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
-<text x="454" y="90" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2</text>
-<text x="54" y="130" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
-<text x="94" y="130" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
-<text x="134" y="130" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
-<text x="174" y="130" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
-<text x="214" y="130" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">9</text>
-<text x="254" y="130" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">3</text>
-<text x="294" y="130" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
-<text x="334" y="130" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
-<text x="374" y="130" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
-<text x="414" y="130" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">9</text>
-<text x="454" y="130" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">6</text>
-<text x="54" y="170" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">8</text>
-<text x="94" y="170" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">6</text>
-<text x="134" y="170" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
-<text x="174" y="170" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">c</text>
-<text x="214" y="170" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">6</text>
-<text x="254" y="170" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">8</text>
-<text x="294" y="170" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
-<text x="334" y="170" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">7</text>
-<text x="374" y="170" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
-<text x="414" y="170" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">c</text>
-<text x="454" y="170" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">3</text>
-<text x="54" y="210" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">c</text>
-<text x="94" y="210" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">3</text>
-<text x="134" y="210" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
-<text x="174" y="210" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
-<text x="214" y="210" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
-<text x="254" y="210" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
-<text x="294" y="210" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
-<text x="334" y="210" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
-<text x="374" y="210" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
-<text x="414" y="210" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">9</text>
-<text x="454" y="210" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2</text>
-<text x="54" y="250" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">9</text>
-<text x="94" y="250" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">6</text>
-<text x="134" y="250" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">9</text>
-<text x="174" y="250" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">3</text>
-<text x="214" y="250" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
-<text x="254" y="250" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
-<text x="294" y="250" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
-<text x="334" y="250" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">d</text>
-<text x="374" y="250" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
-<text x="414" y="250" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2</text>
-<text x="454" y="250" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
-<text x="54" y="290" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
-<text x="94" y="290" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">9</text>
-<text x="134" y="290" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2</text>
-<text x="174" y="290" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
-<text x="214" y="290" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
-<text x="254" y="290" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
-<text x="294" y="290" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
-<text x="334" y="290" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
-<text x="374" y="290" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
-<text x="414" y="290" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
-<text x="454" y="290" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
-<text x="54" y="330" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
-<text x="94" y="330" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
-<text x="134" y="330" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">8</text>
-<text x="174" y="330" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2</text>
-<text x="214" y="330" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">9</text>
-<text x="254" y="330" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">4</text>
-<text x="294" y="330" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
-<text x="334" y="330" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">1</text>
-<text x="374" y="330" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
-<text x="414" y="330" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">4</text>
-<text x="454" y="330" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2</text>
-<text x="54" y="370" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">c</text>
-<text x="94" y="370" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">6</text>
-<text x="134" y="370" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">c</text>
-<text x="174" y="370" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">4</text>
-<text x="214" y="370" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">4</text>
-<text x="254" y="370" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
-<text x="294" y="370" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
-<text x="334" y="370" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">4</text>
-<text x="374" y="370" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
-<text x="414" y="370" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
-<text x="454" y="370" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">6</text>
-<text x="54" y="16" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">0</text>
-<text x="94" y="16" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">1</text>
-<text x="134" y="16" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">2</text>
-<text x="174" y="16" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">3</text>
-<text x="214" y="16" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">4</text>
-<text x="254" y="16" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">5</text>
-<text x="294" y="16" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">6</text>
-<text x="334" y="16" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">7</text>
-<text x="374" y="16" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">8</text>
-<text x="414" y="16" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">9</text>
-<text x="454" y="16" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">10</text>
-<text x="18" y="50" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">0</text>
-<text x="18" y="90" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">1</text>
-<text x="18" y="130" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">2</text>
-<text x="18" y="170" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">3</text>
-<text x="18" y="210" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">4</text>
-<text x="18" y="250" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">5</text>
-<text x="18" y="290" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">6</text>
-<text x="18" y="330" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">7</text>
-<text x="18" y="370" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">8</text>
-<text x="245" y="407" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">11 x 9, seed 3: o dígito de cada célula</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="514" height="448" viewBox="0 0 514 448">
+<rect width="514" height="448" fill="#ffffff" rx="8"/>
+<rect x="218" y="214" width="40" height="40" fill="#9ca3af"/>
+<rect x="338" y="214" width="40" height="40" fill="#9ca3af"/>
+<rect x="298" y="134" width="40" height="40" fill="#9ca3af"/>
+<rect x="138" y="214" width="40" height="40" fill="#9ca3af"/>
+<rect x="378" y="214" width="40" height="40" fill="#9ca3af"/>
+<rect x="178" y="214" width="40" height="40" fill="#9ca3af"/>
+<rect x="298" y="254" width="40" height="40" fill="#9ca3af"/>
+<rect x="218" y="294" width="40" height="40" fill="#9ca3af"/>
+<rect x="298" y="214" width="40" height="40" fill="#9ca3af"/>
+<rect x="138" y="174" width="40" height="40" fill="#9ca3af"/>
+<rect x="378" y="174" width="40" height="40" fill="#9ca3af"/>
+<rect x="218" y="254" width="40" height="40" fill="#9ca3af"/>
+<rect x="338" y="294" width="40" height="40" fill="#9ca3af"/>
+<rect x="338" y="134" width="40" height="40" fill="#9ca3af"/>
+<rect x="138" y="134" width="40" height="40" fill="#9ca3af"/>
+<rect x="298" y="294" width="40" height="40" fill="#9ca3af"/>
+<rect x="378" y="134" width="40" height="40" fill="#9ca3af"/>
+<rect x="378" y="294" width="40" height="40" fill="#9ca3af"/>
+<rect x="58" y="54" width="40" height="40" fill="#d946ef"/>
+<rect x="458" y="374" width="40" height="40" fill="#ef4444"/>
+<line x1="58" y1="54" x2="98" y2="54" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="58" y1="54" x2="58" y2="94" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="98" y1="54" x2="138" y2="54" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="98" y1="94" x2="138" y2="94" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="138" y1="54" x2="178" y2="54" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="178" y1="54" x2="178" y2="94" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="178" y1="54" x2="218" y2="54" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="178" y1="54" x2="178" y2="94" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="218" y1="54" x2="258" y2="54" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="218" y1="94" x2="258" y2="94" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="258" y1="54" x2="298" y2="54" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="298" y1="54" x2="298" y2="94" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="298" y1="54" x2="338" y2="54" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="298" y1="54" x2="298" y2="94" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="338" y1="54" x2="378" y2="54" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="378" y1="54" x2="418" y2="54" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="378" y1="94" x2="418" y2="94" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="418" y1="54" x2="458" y2="54" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="418" y1="94" x2="458" y2="94" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="458" y1="54" x2="498" y2="54" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="498" y1="54" x2="498" y2="94" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="98" y1="94" x2="98" y2="134" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="58" y1="94" x2="58" y2="134" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="98" y1="94" x2="138" y2="94" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="98" y1="94" x2="98" y2="134" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="178" y1="94" x2="178" y2="134" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="138" y1="134" x2="178" y2="134" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="178" y1="94" x2="178" y2="134" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="218" y1="94" x2="258" y2="94" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="218" y1="134" x2="258" y2="134" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="258" y1="134" x2="298" y2="134" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="338" y1="94" x2="338" y2="134" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="298" y1="134" x2="338" y2="134" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="338" y1="134" x2="378" y2="134" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="338" y1="94" x2="338" y2="134" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="378" y1="94" x2="418" y2="94" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="378" y1="134" x2="418" y2="134" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="418" y1="94" x2="458" y2="94" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="418" y1="134" x2="458" y2="134" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="498" y1="94" x2="498" y2="134" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="98" y1="134" x2="98" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="58" y1="134" x2="58" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="138" y1="134" x2="138" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="98" y1="134" x2="98" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="138" y1="134" x2="178" y2="134" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="178" y1="134" x2="178" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="138" y1="174" x2="178" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="138" y1="134" x2="138" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="218" y1="134" x2="218" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="178" y1="134" x2="178" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="218" y1="134" x2="258" y2="134" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="218" y1="134" x2="218" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="258" y1="134" x2="298" y2="134" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="298" y1="134" x2="298" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="298" y1="134" x2="338" y2="134" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="338" y1="134" x2="338" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="298" y1="174" x2="338" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="298" y1="134" x2="298" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="338" y1="134" x2="378" y2="134" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="378" y1="134" x2="378" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="338" y1="174" x2="378" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="338" y1="134" x2="338" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="378" y1="134" x2="418" y2="134" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="418" y1="134" x2="418" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="378" y1="174" x2="418" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="378" y1="134" x2="378" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="418" y1="134" x2="458" y2="134" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="418" y1="134" x2="418" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="498" y1="134" x2="498" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="458" y1="174" x2="498" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="58" y1="174" x2="58" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="138" y1="174" x2="138" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="98" y1="214" x2="138" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="138" y1="174" x2="178" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="178" y1="174" x2="178" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="138" y1="214" x2="178" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="138" y1="174" x2="138" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="178" y1="214" x2="218" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="178" y1="174" x2="178" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="258" y1="174" x2="258" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="218" y1="214" x2="258" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="258" y1="174" x2="258" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="298" y1="174" x2="338" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="298" y1="214" x2="338" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="338" y1="174" x2="378" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="378" y1="174" x2="378" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="338" y1="214" x2="378" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="378" y1="174" x2="418" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="418" y1="174" x2="418" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="378" y1="214" x2="418" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="378" y1="174" x2="378" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="418" y1="214" x2="458" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="418" y1="174" x2="418" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="458" y1="174" x2="498" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="498" y1="174" x2="498" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="58" y1="254" x2="98" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="58" y1="214" x2="58" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="98" y1="214" x2="138" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="138" y1="214" x2="138" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="138" y1="214" x2="178" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="178" y1="214" x2="178" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="138" y1="254" x2="178" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="138" y1="214" x2="138" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="178" y1="214" x2="218" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="218" y1="214" x2="218" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="178" y1="254" x2="218" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="178" y1="214" x2="178" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="218" y1="214" x2="258" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="258" y1="214" x2="258" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="218" y1="254" x2="258" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="218" y1="214" x2="218" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="298" y1="214" x2="298" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="258" y1="214" x2="258" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="298" y1="214" x2="338" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="338" y1="214" x2="338" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="298" y1="254" x2="338" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="298" y1="214" x2="298" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="338" y1="214" x2="378" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="378" y1="214" x2="378" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="338" y1="254" x2="378" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="338" y1="214" x2="338" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="378" y1="214" x2="418" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="418" y1="214" x2="418" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="378" y1="254" x2="418" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="378" y1="214" x2="378" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="418" y1="214" x2="458" y2="214" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="418" y1="214" x2="418" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="498" y1="214" x2="498" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="58" y1="254" x2="98" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="58" y1="254" x2="58" y2="294" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="138" y1="254" x2="138" y2="294" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="98" y1="294" x2="138" y2="294" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="138" y1="254" x2="178" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="138" y1="254" x2="138" y2="294" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="178" y1="254" x2="218" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="218" y1="254" x2="218" y2="294" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="218" y1="254" x2="258" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="258" y1="254" x2="258" y2="294" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="218" y1="294" x2="258" y2="294" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="218" y1="254" x2="218" y2="294" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="298" y1="254" x2="298" y2="294" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="258" y1="254" x2="258" y2="294" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="298" y1="254" x2="338" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="338" y1="254" x2="338" y2="294" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="298" y1="294" x2="338" y2="294" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="298" y1="254" x2="298" y2="294" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="338" y1="254" x2="378" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="338" y1="294" x2="378" y2="294" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="338" y1="254" x2="338" y2="294" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="378" y1="254" x2="418" y2="254" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="378" y1="294" x2="418" y2="294" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="458" y1="254" x2="458" y2="294" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="498" y1="254" x2="498" y2="294" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="458" y1="254" x2="458" y2="294" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="98" y1="294" x2="98" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="58" y1="294" x2="58" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="98" y1="294" x2="138" y2="294" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="98" y1="294" x2="98" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="178" y1="294" x2="178" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="218" y1="294" x2="218" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="178" y1="294" x2="178" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="218" y1="294" x2="258" y2="294" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="258" y1="294" x2="258" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="218" y1="334" x2="258" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="218" y1="294" x2="218" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="298" y1="294" x2="298" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="258" y1="294" x2="258" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="298" y1="294" x2="338" y2="294" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="338" y1="294" x2="338" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="298" y1="334" x2="338" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="298" y1="294" x2="298" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="338" y1="294" x2="378" y2="294" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="378" y1="294" x2="378" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="338" y1="334" x2="378" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="338" y1="294" x2="338" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="378" y1="294" x2="418" y2="294" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="418" y1="294" x2="418" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="378" y1="334" x2="418" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="378" y1="294" x2="378" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="458" y1="294" x2="458" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="418" y1="294" x2="418" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="498" y1="294" x2="498" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="458" y1="294" x2="458" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="98" y1="334" x2="98" y2="374" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="58" y1="334" x2="58" y2="374" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="138" y1="334" x2="138" y2="374" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="98" y1="334" x2="98" y2="374" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="138" y1="334" x2="138" y2="374" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="218" y1="334" x2="218" y2="374" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="218" y1="334" x2="258" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="218" y1="334" x2="218" y2="374" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="258" y1="374" x2="298" y2="374" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="298" y1="334" x2="338" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="298" y1="374" x2="338" y2="374" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="338" y1="334" x2="378" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="378" y1="334" x2="418" y2="334" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="378" y1="374" x2="418" y2="374" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="418" y1="374" x2="458" y2="374" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="498" y1="334" x2="498" y2="374" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="58" y1="414" x2="98" y2="414" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="58" y1="374" x2="58" y2="414" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="138" y1="374" x2="138" y2="414" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="98" y1="414" x2="138" y2="414" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="138" y1="414" x2="178" y2="414" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="138" y1="374" x2="138" y2="414" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="178" y1="414" x2="218" y2="414" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="218" y1="414" x2="258" y2="414" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="258" y1="374" x2="298" y2="374" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="258" y1="414" x2="298" y2="414" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="298" y1="374" x2="338" y2="374" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="298" y1="414" x2="338" y2="414" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="338" y1="414" x2="378" y2="414" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="378" y1="374" x2="418" y2="374" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="378" y1="414" x2="418" y2="414" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="418" y1="374" x2="458" y2="374" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="418" y1="414" x2="458" y2="414" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="498" y1="374" x2="498" y2="414" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="458" y1="414" x2="498" y2="414" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<text x="78" y="74" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">9</text>
+<text x="118" y="74" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
+<text x="158" y="74" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">3</text>
+<text x="198" y="74" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">9</text>
+<text x="238" y="74" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
+<text x="278" y="74" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">3</text>
+<text x="318" y="74" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">9</text>
+<text x="358" y="74" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="398" y="74" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
+<text x="438" y="74" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
+<text x="478" y="74" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">3</text>
+<text x="78" y="114" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
+<text x="118" y="114" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">9</text>
+<text x="158" y="114" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">6</text>
+<text x="198" y="114" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">8</text>
+<text x="238" y="114" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
+<text x="278" y="114" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">4</text>
+<text x="318" y="114" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">6</text>
+<text x="358" y="114" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">c</text>
+<text x="398" y="114" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
+<text x="438" y="114" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
+<text x="478" y="114" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="78" y="154" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
+<text x="118" y="154" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
+<text x="158" y="154" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
+<text x="198" y="154" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
+<text x="238" y="154" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">9</text>
+<text x="278" y="154" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">3</text>
+<text x="318" y="154" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
+<text x="358" y="154" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
+<text x="398" y="154" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
+<text x="438" y="154" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">9</text>
+<text x="478" y="154" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">6</text>
+<text x="78" y="194" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">8</text>
+<text x="118" y="194" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">6</text>
+<text x="158" y="194" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
+<text x="198" y="194" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">c</text>
+<text x="238" y="194" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">6</text>
+<text x="278" y="194" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">8</text>
+<text x="318" y="194" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
+<text x="358" y="194" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">7</text>
+<text x="398" y="194" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
+<text x="438" y="194" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">c</text>
+<text x="478" y="194" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">3</text>
+<text x="78" y="234" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">c</text>
+<text x="118" y="234" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">3</text>
+<text x="158" y="234" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
+<text x="198" y="234" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
+<text x="238" y="234" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
+<text x="278" y="234" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
+<text x="318" y="234" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
+<text x="358" y="234" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
+<text x="398" y="234" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
+<text x="438" y="234" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">9</text>
+<text x="478" y="234" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="78" y="274" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">9</text>
+<text x="118" y="274" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">6</text>
+<text x="158" y="274" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">9</text>
+<text x="198" y="274" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">3</text>
+<text x="238" y="274" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
+<text x="278" y="274" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
+<text x="318" y="274" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
+<text x="358" y="274" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">d</text>
+<text x="398" y="274" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
+<text x="438" y="274" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="478" y="274" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
+<text x="78" y="314" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
+<text x="118" y="314" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">9</text>
+<text x="158" y="314" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="198" y="314" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
+<text x="238" y="314" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
+<text x="278" y="314" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
+<text x="318" y="314" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
+<text x="358" y="314" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
+<text x="398" y="314" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">f</text>
+<text x="438" y="314" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
+<text x="478" y="314" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
+<text x="78" y="354" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
+<text x="118" y="354" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a</text>
+<text x="158" y="354" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">8</text>
+<text x="198" y="354" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="238" y="354" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">9</text>
+<text x="278" y="354" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">4</text>
+<text x="318" y="354" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
+<text x="358" y="354" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="398" y="354" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
+<text x="438" y="354" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">4</text>
+<text x="478" y="354" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="78" y="394" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">c</text>
+<text x="118" y="394" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">6</text>
+<text x="158" y="394" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">c</text>
+<text x="198" y="394" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">4</text>
+<text x="238" y="394" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">4</text>
+<text x="278" y="394" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
+<text x="318" y="394" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
+<text x="358" y="394" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">4</text>
+<text x="398" y="394" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
+<text x="438" y="394" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
+<text x="478" y="394" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">6</text>
+<text x="78" y="40" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="118" y="40" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="158" y="40" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="198" y="40" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">3</text>
+<text x="238" y="40" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">4</text>
+<text x="278" y="40" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">5</text>
+<text x="318" y="40" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">6</text>
+<text x="358" y="40" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">7</text>
+<text x="398" y="40" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">8</text>
+<text x="438" y="40" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">9</text>
+<text x="478" y="40" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">10</text>
+<text x="42" y="74" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="42" y="114" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="42" y="154" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="42" y="194" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">3</text>
+<text x="42" y="234" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">4</text>
+<text x="42" y="274" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">5</text>
+<text x="42" y="314" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">6</text>
+<text x="42" y="354" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">7</text>
+<text x="42" y="394" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">8</text>
+<text x="278" y="16" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">x: horizontal →</text>
+<g transform="rotate(90 18 234)"><text x="18" y="234" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">y: vertical →</text></g>
+<text x="257" y="431" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">11 x 9, seed 3: o dígito de cada célula</text>
 </svg>

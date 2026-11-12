@@ -1,33 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="365.6" height="208" viewBox="0 0 365.6 208">
-<rect width="365.6" height="208" fill="#ffffff" rx="8"/>
-<line x1="83.8" y1="30" x2="155.8" y2="30" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="155.8" y1="30" x2="155.8" y2="102" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
-<line x1="83.8" y1="102" x2="155.8" y2="102" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
-<line x1="83.8" y1="30" x2="83.8" y2="102" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="155.8" y1="30" x2="227.8" y2="30" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="227.8" y1="30" x2="227.8" y2="102" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
-<line x1="155.8" y1="102" x2="227.8" y2="102" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
-<line x1="155.8" y1="30" x2="155.8" y2="102" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
-<line x1="227.8" y1="30" x2="299.8" y2="30" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="299.8" y1="30" x2="299.8" y2="102" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="227.8" y1="102" x2="299.8" y2="102" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
-<line x1="227.8" y1="30" x2="227.8" y2="102" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
-<line x1="83.8" y1="102" x2="155.8" y2="102" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
-<line x1="155.8" y1="102" x2="155.8" y2="174" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
-<line x1="83.8" y1="174" x2="155.8" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="83.8" y1="102" x2="83.8" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="155.8" y1="102" x2="227.8" y2="102" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
-<line x1="227.8" y1="102" x2="227.8" y2="174" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
-<line x1="155.8" y1="174" x2="227.8" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="155.8" y1="102" x2="155.8" y2="174" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
-<line x1="227.8" y1="102" x2="299.8" y2="102" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
-<line x1="299.8" y1="102" x2="299.8" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="227.8" y1="174" x2="299.8" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="227.8" y1="102" x2="227.8" y2="174" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
-<text x="119.8" y="16" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">0</text>
-<text x="191.8" y="16" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">1</text>
-<text x="263.8" y="16" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">2</text>
-<text x="67.8" y="66" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">0</text>
-<text x="67.8" y="138" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">1</text>
-<text x="182.8" y="191" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">6 células, 7 passagens: 7 - 6 + 1 = 2 ciclos</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="365.6" height="232" viewBox="0 0 365.6 232">
+<rect width="365.6" height="232" fill="#ffffff" rx="8"/>
+<line x1="95.8" y1="54" x2="167.8" y2="54" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="167.8" y1="54" x2="167.8" y2="126" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="95.8" y1="126" x2="167.8" y2="126" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="95.8" y1="54" x2="95.8" y2="126" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="167.8" y1="54" x2="239.8" y2="54" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="239.8" y1="54" x2="239.8" y2="126" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="167.8" y1="126" x2="239.8" y2="126" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="167.8" y1="54" x2="167.8" y2="126" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="239.8" y1="54" x2="311.8" y2="54" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="311.8" y1="54" x2="311.8" y2="126" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="239.8" y1="126" x2="311.8" y2="126" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="239.8" y1="54" x2="239.8" y2="126" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="95.8" y1="126" x2="167.8" y2="126" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="167.8" y1="126" x2="167.8" y2="198" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="95.8" y1="198" x2="167.8" y2="198" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="95.8" y1="126" x2="95.8" y2="198" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="167.8" y1="126" x2="239.8" y2="126" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="239.8" y1="126" x2="239.8" y2="198" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="167.8" y1="198" x2="239.8" y2="198" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="167.8" y1="126" x2="167.8" y2="198" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="239.8" y1="126" x2="311.8" y2="126" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="311.8" y1="126" x2="311.8" y2="198" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="239.8" y1="198" x2="311.8" y2="198" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="239.8" y1="126" x2="239.8" y2="198" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<text x="131.8" y="40" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="203.8" y="40" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="275.8" y="40" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="79.8" y="90" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="79.8" y="162" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="203.8" y="16" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">x: horizontal →</text>
+<g transform="rotate(90 55.8 126)"><text x="55.8" y="126" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">y: vertical →</text></g>
+<text x="182.8" y="215" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">6 células, 7 passagens: 7 - 6 + 1 = 2 ciclos</text>
 </svg>
