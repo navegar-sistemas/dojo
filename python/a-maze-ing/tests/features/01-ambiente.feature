@@ -84,10 +84,10 @@ Funcionalidade: Ambiente de desenvolvimento
   # md:  "Crie programas de teste para verificar a funcionalidade do projeto (não são submetidos nem avaliados). Use frameworks como `pytest` ou `unittest` para testes unitários, cobrindo casos de borda."
   @obrigatorio @manual @decisao-I15 @pdf-p07-L07-L08 @md-L130
   Cenário: Existe uma suíte de testes automatizados que passa
-    Dada a suíte em "a-maze-ing/tests/", com o virtualenv dela instalado
-    Quando eu executo ".venv/bin/pytest -m "not manual"" nessa pasta
-    Então todos os testes automatizados passam
-    E nenhum warning é emitido durante a suíte
+    - Dada a suíte em "a-maze-ing/tests/", com o virtualenv dela instalado
+    - Quando eu executo ".venv/bin/pytest -m "not manual"" nessa pasta
+    - Então todos os testes automatizados passam
+    - E nenhum warning é emitido durante a suíte
 
   # pdf: "frameworks like pytest or unittest for unit tests, covering edge cases."
   # md:  "Use frameworks como `pytest` ou `unittest` para testes unitários, cobrindo casos de borda."
@@ -101,28 +101,28 @@ Funcionalidade: Ambiente de desenvolvimento
   # md:  "Use frameworks como `pytest` ou `unittest` para testes unitários, cobrindo casos de borda."
   @obrigatorio @manual @pdf-p07-L08 @md-L130
   Cenário: A suíte cobre casos de borda
-    Dada cada função pública do projeto
-    Quando eu procuro os testes dela
-    Então existe teste para o caminho feliz
-    E existe teste para cada entrada inválida que ela trata
-    E existe teste para os limites dos valores aceitos
+    - Dada cada função pública do projeto
+    - Quando eu procuro os testes dela
+    - Então existe teste para o caminho feliz
+    - E existe teste para cada entrada inválida que ela trata
+    - E existe teste para os limites dos valores aceitos
 
   # pdf: "Create test programs to verify project functionality (not submitted or graded). Use"
   # md:  "Crie programas de teste para verificar a funcionalidade do projeto (não são submetidos nem avaliados)."
   @informativo @manual @pdf-p07-L07 @md-L130
   Cenário: O resultado do pytest não é avaliado
-    Dada a entrega do projeto
-    Quando a avaliação acontece
-    Então a nota não depende do resultado do pytest
-    E a suíte fica em "a-maze-ing/tests/", fora do repositório de entrega, que não tem pasta "tests/" (D20)
-    Mas a suíte passa no flake8 e no mypy rodados na própria pasta (D20)
-    E a suíte roda verde antes de cada entrega
+    - Dada a entrega do projeto
+    - Quando a avaliação acontece
+    - Então a nota não depende do resultado do pytest
+    - E a suíte fica em "a-maze-ing/tests/", fora do repositório de entrega, que não tem pasta "tests/" (D20)
+    - Mas a suíte passa no flake8 e no mypy rodados na própria pasta (D20)
+    - E a suíte roda verde antes de cada entrega
 
   # pdf: "If any additional project-specific requirements apply, they will be stated immediately below"
   # pdf: "this section."
   # md:  "Se houver requisitos adicionais específicos do projeto, eles serão declarados imediatamente abaixo desta seção."
   @informativo @manual @pdf-p07-L12-L13 @md-L134
   Cenário: Os requisitos específicos do projeto começam no Capítulo IV
-    Dado o fim das Instruções Comuns
-    Quando eu procuro requisitos adicionais logo abaixo da seção III.3
-    Então os requisitos específicos do projeto são os dos Capítulos IV a IX
+    - Dado o fim das Instruções Comuns
+    - Quando eu procuro requisitos adicionais logo abaixo da seção III.3
+    - Então os requisitos específicos do projeto são os dos Capítulos IV a IX

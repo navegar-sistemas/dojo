@@ -147,9 +147,9 @@ Funcionalidade: Interações do usuário
   # md:  "Alterar as cores das paredes do labirinto."
   @recomendado @derivado @decisao-I04 @manual @pdf-p12-L11 @md-L267
   Cenário: Toda cor da paleta é visível no terminal
-    Dado o programa aberto num terminal de fundo claro e depois num de fundo escuro
-    Quando eu percorro as cores das paredes
-    Então em todas as cores as paredes ficam visíveis contra o fundo do terminal
+    - Dado o programa aberto num terminal de fundo claro e depois num de fundo escuro
+    - Quando eu percorro as cores das paredes
+    - Então em todas as cores as paredes ficam visíveis contra o fundo do terminal
 
   # pdf: "Re-generate a new maze and display it."
   # pdf: "Change maze wall colours."
@@ -168,36 +168,36 @@ Funcionalidade: Interações do usuário
   # regua-md: "Interações extras são possíveis (ex.: mudar a cor do padrão "42", sair do programa, ...)."
   @opcional @manual @decisao-I19 @pdf-p12-L12 @md-L268 @regua-p2
   Cenário: Cor própria para o "42"
-    Dado o programa iniciado com "python3 a_maze_ing.py cfg.txt"
-    Quando eu escolho a opção de trocar a cor do "42"
-    Então as células do "42" são desenhadas com uma cor diferente da anterior
-    E a cor das paredes não muda
+    - Dado o programa iniciado com "python3 a_maze_ing.py cfg.txt"
+    - Quando eu escolho a opção de trocar a cor do "42"
+    - Então as células do "42" são desenhadas com uma cor diferente da anterior
+    - E a cor das paredes não muda
 
   # pdf: "You can add extra user interactions."
   # md:  "Você pode adicionar interações extras."
   @opcional @manual @pdf-p12-L13 @md-L270
   Cenário: Interações extras são permitidas
-    Dada uma interação extra implementada
-    Quando eu a uso
-    Então ela não quebra as três interações obrigatórias
-    E ela está descrita no README
+    - Dada uma interação extra implementada
+    - Quando eu a uso
+    - Então ela não quebra as três interações obrigatórias
+    - E ela está descrita no README
 
   # figura: "=== A-Maze-ing ===" "1. Re-generate a new maze" "2. Show / Hide the shortest path"
   # figura: "3. Rotate the wall colours" "4. Quit" "Choice? (1-4): "
   # md:  "Figura: Renderização padrão do labirinto no terminal."
   @informativo @manual @decisao-I03 @pdf-p13-figura @md-L272
   Cenário: O menu da figura do subject
-    Dada a figura "Terminal default rendering of the maze"
-    Quando eu comparo com o menu do meu programa
-    Então o meu menu oferece regenerar, mostrar/ocultar o caminho, trocar a cor das paredes e sair
+    - Dada a figura "Terminal default rendering of the maze"
+    - Quando eu comparo com o menu do meu programa
+    - Então o meu menu oferece regenerar, mostrar/ocultar o caminho, trocar a cor das paredes e sair
 
   # figura: "3. Rotate the wall colours"
   # md:  "Figura: Renderização padrão do labirinto no terminal."
   @informativo @manual @decisao-I04 @pdf-p13-figura @md-L272
   Cenário: "Rotate" sugere alternar entre cores predefinidas
-    Dada a opção "Rotate the wall colours" da figura
-    Quando eu implemento a troca de cor
-    Então alternar por uma paleta fixa atende ao requisito
+    - Dada a opção "Rotate the wall colours" da figura
+    - Quando eu implemento a troca de cor
+    - Então alternar por uma paleta fixa atende ao requisito
 
   # figura: "4. Quit" / "4: quit"
   # md:  "Figura: Renderização padrão do labirinto no terminal."

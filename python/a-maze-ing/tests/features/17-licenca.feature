@@ -28,9 +28,9 @@ Funcionalidade: Licença do gerador
   # md:  "Escolher e escrever essa licença faz parte da tarefa: é o seu primeiro contato com licenciamento de software e propriedade intelectual."
   @informativo @manual @pdf-p15-L23-L24 @md-L302
   Cenário: A escolha da licença é justificável na defesa
-    Dada a licença escolhida
-    Quando o avaliador pergunta por que ela foi escolhida
-    Então eu explico o que ela permite, o que exige de quem reutiliza e por que serve ao projeto
+    - Dada a licença escolhida
+    - Quando o avaliador pergunta por que ela foi escolhida
+    - Então eu explico o que ela permite, o que exige de quem reutiliza e por que serve ao projeto
 
   # pdf: "The license you pick must"
   # pdf: "explicitly allow the reuse and distribution of your maze generator by the later project(s)"
@@ -38,9 +38,9 @@ Funcionalidade: Licença do gerador
   # md:  "A licença escolhida deve permitir explicitamente a reutilização e distribuição do seu gerador de labirintos pelo(s) projeto(s) posterior(es) que se basearem nele."
   @obrigatorio @manual @decisao-I17 @pdf-p15-L24-L25 @pdf-p16-L02 @md-L302
   Esquema do Cenário: A licença permite explicitamente <permissao>
-    Dado o texto do "LICENSE.md", com a licença MIT
-    Quando eu procuro a concessão de <permissao>
-    Então o texto concede "<termo>" de forma explícita
+    - Dado o texto do "LICENSE.md", com a licença MIT
+    - Quando eu procuro a concessão de <permissao>
+    - Então o texto concede "<termo>" de forma explícita
 
     Exemplos:
       | permissao                    | termo      |

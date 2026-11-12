@@ -1,0 +1,25 @@
+[tool.pytest.ini_options]
+testpaths = ["cenarios", "autoteste"]
+pythonpath = [".", "../project"]
+bdd_features_base_dir = "features"
+addopts = ["-m", "not manual and not adiado"]
+filterwarnings = ["error"]
+markers = [
+    'obrigatorio: requisito "must" do subject',
+    'recomendado: requisito "should" do subject',
+    'opcional: requisito "may" do subject',
+    "bonus: bônus do Capítulo VIII",
+    "informativo: contexto sem exigência própria",
+    "derivado: consequência de requisito, exemplo ou figura",
+    "automatizado: executado pela suíte",
+    "manual: verificado por inspeção ou na defesa",
+    "adiado: fora da primeira versão (I19)",
+]
+
+[tool.mypy]
+python_version = "3.10"
+exclude = ['^\.venv/']
+
+[[tool.mypy.overrides]]
+module = "parse"
+follow_untyped_imports = true

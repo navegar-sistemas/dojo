@@ -207,7 +207,7 @@ Funcionalidade: Arquivo de saída
     Dado o config base
     Quando eu gero o labirinto
     Então cada linha de coordenadas do rodapé casa com a expressão "^\d+,\d+$"
-    E a linha "Entry" do maze_analyzer.py contém "(0, 0)" e "Exit: (19, 14) (reachable)"
+    E a linha "Entry" do maze_analyzer contém "(0, 0)" e "Exit: (19, 14) (reachable)"
 
   # pdf: "the entry coordinates, the exit coordinates, and the shortest valid path from"
   # pdf: "entry to exit, using the four letters N , E , S , W ."
@@ -242,7 +242,7 @@ Funcionalidade: Arquivo de saída
   @obrigatorio @derivado @decisao-D14 @automatizado @pdf-p10-L06 @md-L204
   Cenário: Os dígitos de a a f são gravados em minúsculas
     Dado o config base
-    Quando eu gero o labirinto e o analiso com o maze_analyzer.py
+    Quando eu gero o labirinto e o analiso com o maze_analyzer
     Então cada linha da grade casa com a expressão "^[0-9a-f]+$"
     E a saída não contém "Malformed maze file"
 
@@ -264,7 +264,7 @@ Funcionalidade: Arquivo de saída
   @informativo @automatizado @pdf-p11-L03-L04 @md-L220
   Cenário: O maze_analyzer.py lê o arquivo sem erro de formato
     Dado o config base
-    Quando eu gero o labirinto e o analiso com o maze_analyzer.py
+    Quando eu gero o labirinto e o analiso com o maze_analyzer
     Então o código de saída é 0
     E a saída não contém "Malformed maze file"
     E a saída não contém "no valid entry in footer"
@@ -275,8 +275,8 @@ Funcionalidade: Arquivo de saída
   @informativo @automatizado @pdf-p11-L04-L05 @md-L220
   Cenário: O maze_analyzer.py confirma a coerência das paredes
     Dado o config base
-    Quando eu gero o labirinto e o analiso com o maze_analyzer.py
-    Então a linha "Wall coherence" do maze_analyzer.py contém "OK (all shared walls match)"
+    Quando eu gero o labirinto e o analiso com o maze_analyzer
+    Então a linha "Wall coherence" do maze_analyzer contém "OK (all shared walls match)"
 
   # pdf: "You may use it to check that your generator produces the mode requested by"
   # pdf: "the configuration file."
@@ -286,8 +286,8 @@ Funcionalidade: Arquivo de saída
   @opcional @automatizado @pdf-p11-L08-L09 @md-L220 @regua-p3
   Esquema do Cenário: O modo gerado é o modo pedido no config
     Dado o config base com "PERFECT=<perfeito>"
-    Quando eu gero o labirinto e o analiso com o maze_analyzer.py
-    Então a linha "Verdict:" do maze_analyzer.py começa com "<veredito>"
+    Quando eu gero o labirinto e o analiso com o maze_analyzer
+    Então a linha "Verdict:" do maze_analyzer começa com "<veredito>"
 
     Exemplos:
       | perfeito | veredito       |
@@ -324,8 +324,8 @@ Funcionalidade: Arquivo de saída
     E o validador da suíte conta 482 "células alcançáveis"
     E o validador da suíte conta 33 "letras da solução"
     E o validador da suíte confirma "solução válida e mais curta"
-    E a linha "Verdict:" do maze_analyzer.py começa com "Pac-Man-USABLE"
-    E a linha "Verdict:" do maze_analyzer.py contém "no real dead-end -> bonus-grade"
+    E a linha "Verdict:" do maze_analyzer começa com "Pac-Man-USABLE"
+    E a linha "Verdict:" do maze_analyzer contém "no real dead-end -> bonus-grade"
 
   # figura: "1,1        # entry  (x,y)"
   # md:  "1,1        # entry  (x,y)"
@@ -337,5 +337,5 @@ Funcionalidade: Arquivo de saída
   @informativo @derivado @decisao-D13 @automatizado @pdf-p11-figura @md-L247-L248 @regua-p3
   Cenário: As anotações do exemplo não fazem parte do arquivo
     Dado o labirinto de teste "exemplo do subject com o rodapé anotado"
-    Quando eu analiso o labirinto com o maze_analyzer.py
+    Quando eu analiso o labirinto com o maze_analyzer
     Então a saída contém "no valid entry in footer"

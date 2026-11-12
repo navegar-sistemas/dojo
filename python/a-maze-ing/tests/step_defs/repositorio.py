@@ -10,15 +10,9 @@ from pathlib import Path
 import pytest
 from pytest_bdd import given, parsers, then, when
 
-from conftest import (
-    CONFIG_BASE,
-    PROJECT_DIR,
-    TIMEOUT,
-    TIPOS,
-    Config,
-    Estado,
-    Execucao,
-)
+from suporte.config import CONFIG_BASE, Config
+from suporte.estado import PROJECT_DIR, TIMEOUT, Estado, Execucao
+from suporte.tipos import TIPOS
 
 # O clone e as consultas ao git não podem herdar a configuração de quem roda
 # a suíte: o ignore global mascararia um .gitignore incompleto, e hooks ou
@@ -52,7 +46,11 @@ class Instalacao:
 
 @pytest.fixture(scope="session")
 def instalacao() -> Instalacao:
-    """Instalação compartilhada por todos os cenários da sessão."""
+    """Instalação compartilhada por todos os cenários da sessão.
+
+    Returns:
+        A instalação, ainda sem o ``make install`` executado.
+    """
     return Instalacao()
 
 
@@ -137,7 +135,7 @@ def casar(estado: Estado, padrao: str) -> list[Path]:
 def repositorio_no_estado(
     estado: Estado, instalacao: Instalacao, tmp_path: Path, nome: str
 ) -> None:
-    """V02: prepara o repositório no estado pedido.
+    """Prepara o repositório no estado pedido.
 
     Args:
         estado: Estado do cenário.
@@ -165,7 +163,7 @@ def repositorio_no_estado(
         estado.cwd = clone
         estado.caminhos_extras = [clone / ".venv" / "bin"]
         return
-    pytest.fail(f'estado "{nome}" ainda não implementado (V02 no README)')
+    pytest.fail(f'estado "{nome}" ainda não implementado')
 
 
 @given(
@@ -174,7 +172,7 @@ def repositorio_no_estado(
     )
 )
 def arquivo_na_raiz(estado: Estado, arquivo: str) -> None:
-    """V01: confere que o arquivo existe no repositório.
+    """Confere que o arquivo existe no repositório.
 
     Args:
         estado: Estado do cenário.
@@ -190,22 +188,29 @@ def arquivo_na_raiz(estado: Estado, arquivo: str) -> None:
     )
 )
 def caminho_preparado(estado: Estado, caminho: str, tipo: str) -> None:
-    """V16: prepara o caminho; a fixture estado desfaz tudo no fim.
+    """Prepara o caminho; a fixture estado desfaz tudo no fim.
 
     Args:
         estado: Estado do cenário.
         caminho: Caminho relativo ao repositório.
-        tipo: Tipo da lista fechada da V16.
+        tipo: "inexistente", "diretório" ou uma chave de CONTEUDOS.
     """
     preparar(estado, estado.cwd / caminho, tipo)
 
 
 def _texto(linhas: list[str]) -> bytes:
-    """Linhas de config como bytes UTF-8, uma por linha."""
+    """Linhas de config como bytes UTF-8, uma por linha.
+
+    Args:
+        linhas: Linhas do config, sem a quebra de linha.
+
+    Returns:
+        O conteúdo do arquivo.
+    """
     return ("\n".join(linhas) + "\n").encode("utf-8")
 
 
-# Conteúdo de cada tipo de arquivo da V16. O primeiro byte 0xFF nunca
+# Conteúdo de cada tipo de arquivo preparado. O primeiro byte 0xFF nunca
 # aparece em UTF-8, então os bytes aleatórios são sempre inválidos.
 CONTEUDOS: dict[str, Callable[[], bytes]] = {
     "vazio": lambda: b"",
@@ -225,7 +230,7 @@ CONTEUDOS: dict[str, Callable[[], bytes]] = {
 
 
 def preparar(estado: Estado, alvo: Path, tipo: str) -> None:
-    """Prepara o alvo conforme o tipo da V16.
+    """Prepara o alvo conforme o tipo.
 
     O original vai para a reserva e o destino deixa de receber o config
     automático do cenário.
@@ -233,7 +238,7 @@ def preparar(estado: Estado, alvo: Path, tipo: str) -> None:
     Args:
         estado: Estado do cenário.
         alvo: Caminho absoluto.
-        tipo: Tipo da lista fechada da V16.
+        tipo: "inexistente", "diretório" ou uma chave de CONTEUDOS.
     """
     if tipo == "diretório":
         criado = alvo
@@ -244,7 +249,7 @@ def preparar(estado: Estado, alvo: Path, tipo: str) -> None:
         alvo.mkdir(parents=True, exist_ok=True)
         return
     if tipo != "inexistente" and tipo not in CONTEUDOS:
-        pytest.fail(f'tipo "{tipo}" ainda não implementado (V16 no README)')
+        pytest.fail(f'tipo "{tipo}" ainda não implementado')
     estado.proteger(alvo)
     estado.sem_gravacao.add(alvo)
     if tipo == "inexistente":
@@ -257,7 +262,7 @@ def preparar(estado: Estado, alvo: Path, tipo: str) -> None:
 
 @given(parsers.parse("o config {origem:Origem}", extra_types=TIPOS))
 def config_de(estado: Estado, origem: str) -> None:
-    """V07: carrega o config base do README ou o config.txt do repositório.
+    """Carrega o config base ou o config.txt do repositório.
 
     Args:
         estado: Estado do cenário.
@@ -274,7 +279,7 @@ def config_de(estado: Estado, origem: str) -> None:
     )
 
 
-# Valores concretos de cada situação de erro (V18 no README).
+# O que cada situação de erro faz com o config e com o seu destino.
 SITUACOES: dict[str, Callable[[Estado, Config], None]] = {
     "arquivo de configuração inexistente": lambda estado, config: preparar(
         estado, estado.cwd / config.destino, "inexistente"
@@ -300,17 +305,20 @@ SITUACOES: dict[str, Callable[[Estado, Config], None]] = {
 @given(parsers.parse('a situação de erro "{situacao:Q}"', extra_types=TIPOS))
 @when(parsers.parse('a situação de erro "{situacao:Q}"', extra_types=TIPOS))
 def situacao_de_erro(estado: Estado, situacao: str) -> None:
-    """V18: aplica a situação de erro ao config atual e ao seu destino.
+    """Aplica a situação de erro ao config atual e ao seu destino.
 
     Args:
         estado: Estado do cenário.
-        situacao: Situação da lista fechada da V18.
+        situacao: Uma das chaves de SITUACOES.
     """
     if estado.config is None:
         pytest.fail("a situação de erro precisa de um config antes")
     aplicar = SITUACOES.get(situacao)
     if aplicar is None:
-        pytest.fail(f'situação "{situacao}" não existe (V18 no README)')
+        pytest.fail(
+            f'situação "{situacao}" não existe; as válidas são: '
+            f"{', '.join(SITUACOES)}"
+        )
     aplicar(estado, estado.config)
 
 
@@ -320,7 +328,7 @@ def situacao_de_erro(estado: Estado, situacao: str) -> None:
     )
 )
 def caminho_na_situacao(estado: Estado, caminho: str, situacao: str) -> None:
-    """V60: confere a existência, o conteúdo ou a situação no git.
+    """Confere a existência, o conteúdo ou a situação no git.
 
     Args:
         estado: Estado do cenário.

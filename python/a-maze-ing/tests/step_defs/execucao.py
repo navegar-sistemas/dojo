@@ -5,7 +5,18 @@ import re
 import pytest
 from pytest_bdd import parsers, then, when
 
-from conftest import MOTIVOS, TIPOS, Estado, Execucao
+from suporte.estado import Estado, Execucao
+from suporte.tipos import TIPOS
+
+# Palavra-chave que a mensagem de erro traz para cada motivo (I21).
+MOTIVOS = {
+    "arquivo não encontrado": "not found",
+    "arquivo não é UTF-8": "UTF-8",
+    "chave obrigatória ausente": "missing",
+    "entrada igual à saída": "differ",
+    "tamanho sem tabuleiro Pac-Man": "Pac-Man",
+    "coordenada no padrão 42": '"42"',
+}
 
 
 def conferir_mensagem_de_erro(execucao: Execucao, itens: list[str]) -> str:
@@ -42,18 +53,21 @@ def conferir_motivo(mensagem: str, motivo: str) -> None:
 
     Args:
         mensagem: Linha da mensagem de erro.
-        motivo: Motivo da lista fechada da V58.
+        motivo: Uma das chaves de MOTIVOS.
     """
     chave = MOTIVOS.get(motivo)
     if chave is None:
-        pytest.fail(f'motivo "{motivo}" não existe (V58 no README)')
+        pytest.fail(
+            f'motivo "{motivo}" não existe; os válidos são: '
+            f"{', '.join(MOTIVOS)}"
+        )
     if not re.search(re.escape(chave), mensagem, re.IGNORECASE):
         pytest.fail(f"a mensagem não contém {chave!r}: {mensagem!r}")
 
 
 @when(parsers.parse("eu executo {comandos:L}", extra_types=TIPOS))
 def eu_executo(estado: Estado, comandos: list[str]) -> None:
-    """V29: grava o config e roda cada comando, com stdin vazio.
+    """Grava o config e roda cada comando, com stdin vazio.
 
     Args:
         estado: Estado do cenário.
@@ -72,7 +86,7 @@ def eu_executo(estado: Estado, comandos: list[str]) -> None:
 def eu_executo_com_entrada(
     estado: Estado, comandos: list[str], linhas: list[str]
 ) -> None:
-    """V30: grava o config e roda cada comando com as linhas no stdin.
+    """Grava o config e roda cada comando com as linhas no stdin.
 
     Args:
         estado: Estado do cenário.
@@ -93,7 +107,7 @@ def eu_executo_com_entrada(
 def saida_contem(
     estado: Estado, fluxo: str, verbo: str, textos: list[str]
 ) -> None:
-    """V52: confere se o fluxo contém (ou não) cada texto.
+    """Confere se o fluxo contém (ou não) cada texto.
 
     Args:
         estado: Estado do cenário.
@@ -111,7 +125,7 @@ def saida_contem(
 
 @then(parsers.parse("o código de saída é {codigo:d}"))
 def codigo_de_saida(estado: Estado, codigo: int) -> None:
-    """V48: confere o código de saída do último comando.
+    """Confere o código de saída do último comando.
 
     Args:
         estado: Estado do cenário.
@@ -131,7 +145,7 @@ def codigo_de_saida(estado: Estado, codigo: int) -> None:
     )
 )
 def comando_termina_com(estado: Estado, comando: str, codigo: int) -> None:
-    """V50: roda o comando agora e confere o código de saída.
+    """Roda o comando agora e confere o código de saída.
 
     Args:
         estado: Estado do cenário.
@@ -151,7 +165,7 @@ def comando_termina_com(estado: Estado, comando: str, codigo: int) -> None:
     )
 )
 def saida_do_comando_igual(estado: Estado, comando: str, texto: str) -> None:
-    """V55: compara a saída do comando, sem espaços nas pontas.
+    """Compara a saída do comando, sem espaços nas pontas.
 
     Args:
         estado: Estado do cenário.
@@ -168,7 +182,7 @@ def saida_do_comando_igual(estado: Estado, comando: str, texto: str) -> None:
     )
 )
 def saida_do_comando_contem(estado: Estado, comando: str, texto: str) -> None:
-    """V54: confere que a saída do comando contém o texto.
+    """Confere que a saída do comando contém o texto.
 
     Args:
         estado: Estado do cenário.
@@ -186,7 +200,7 @@ def saida_do_comando_contem(estado: Estado, comando: str, texto: str) -> None:
     )
 )
 def linha_da_saida_contem(estado: Estado, a: str, b: str) -> None:
-    """V56: toda linha da última saída que contém a também contém b.
+    """Toda linha da última saída que contém a também contém b.
 
     Args:
         estado: Estado do cenário.
@@ -202,7 +216,7 @@ def linha_da_saida_contem(estado: Estado, a: str, b: str) -> None:
 
 @then(parsers.parse('{fluxo:Fluxo} é "{texto:Q}"', extra_types=TIPOS))
 def saida_igual(estado: Estado, fluxo: str, texto: str) -> None:
-    """V53: confere o fluxo inteiro, sem espaços nas pontas.
+    """Confere o fluxo inteiro, sem espaços nas pontas.
 
     Args:
         estado: Estado do cenário.
@@ -215,7 +229,7 @@ def saida_igual(estado: Estado, fluxo: str, texto: str) -> None:
 
 @then("o processo termina dentro do tempo limite")
 def termina_no_tempo(estado: Estado) -> None:
-    """V51: confere que o último comando não estourou o tempo limite.
+    """Confere que o último comando não estourou o tempo limite.
 
     Args:
         estado: Estado do cenário.
@@ -231,14 +245,14 @@ def termina_no_tempo(estado: Estado) -> None:
     )
 )
 def resultado_da_execucao(estado: Estado, resultado: str) -> None:
-    """V59: confere "sucesso" ou "erro citando A, B[; motivo: M]".
+    """Confere "sucesso" ou "erro citando A, B[; motivo: M]".
 
     Sucesso exige código 0, nenhum "Error:" e o OUTPUT_FILE do config
     gravado com conteúdo; erro exige código 1 e a mensagem da D01.
 
     Args:
         estado: Estado do cenário.
-        resultado: Resultado esperado, na forma do README.
+        resultado: "sucesso" ou "erro citando A, B[; motivo: M]".
     """
     execucao = estado.resultado
     if execucao.estourou:
@@ -257,7 +271,10 @@ def resultado_da_execucao(estado: Estado, resultado: str) -> None:
         return
     prefixo = "erro citando "
     if not resultado.startswith(prefixo):
-        pytest.fail(f'resultado "{resultado}" fora do formato do README')
+        pytest.fail(
+            f'resultado "{resultado}" não é "sucesso" nem começa com '
+            f'"{prefixo}"'
+        )
     citados, _, motivo = resultado[len(prefixo):].partition("; motivo: ")
     if execucao.codigo != 1:
         pytest.fail(

@@ -12,8 +12,8 @@ Funcionalidade: Modo Pac-Man (PERFECT=False, o padrão)
   @obrigatorio @automatizado @decisao-I06 @pdf-p09-L22-L23 @md-L190
   Esquema do Cenário: O labirinto é um tabuleiro utilizável por um jogo tipo Pac-Man
     Dado o config com "WIDTH=<largura>", "HEIGHT=<altura>", "EXIT=<saida>" e "SEED=<seed>"
-    Quando eu gero o labirinto e o analiso com o maze_analyzer.py
-    Então a linha "Verdict:" do maze_analyzer.py começa com "Pac-Man-USABLE"
+    Quando eu gero o labirinto e o analiso com o maze_analyzer
+    Então a linha "Verdict:" do maze_analyzer começa com "Pac-Man-USABLE"
 
     Exemplos:
       | largura | altura | saida | seed |
@@ -30,16 +30,16 @@ Funcionalidade: Modo Pac-Man (PERFECT=False, o padrão)
   @obrigatorio @decisao-D03 @automatizado @decisao-I20 @pdf-p09-L22 @md-L190 @regua-p3
   Cenário: O modo Pac-Man é o modo padrão do projeto
     Dado o config do repositório
-    Quando eu gero o labirinto e o analiso com o maze_analyzer.py
-    Então a linha "Verdict:" do maze_analyzer.py começa com "Pac-Man-USABLE"
+    Quando eu gero o labirinto e o analiso com o maze_analyzer
+    Então a linha "Verdict:" do maze_analyzer começa com "Pac-Man-USABLE"
 
   # pdf: "every corridor is reachable (full connectivity), so the whole board can be filled"
   # pdf: "with pac-gums and remains winnable"
   # md:  "todo corredor é alcançável (conectividade total), de modo que o tabuleiro inteiro pode ser preenchido com pac-gums e continua vencível;"
   @obrigatorio @automatizado @pdf-p09-L24-L25 @md-L191
   Cenário: Todo corredor é alcançável
-    Quando eu gero o labirinto e o analiso com o maze_analyzer.py
-    Então a linha "Reachable region" do maze_analyzer.py contém "(0 corridor(s) unreachable)"
+    Quando eu gero o labirinto e o analiso com o maze_analyzer
+    Então a linha "Reachable region" do maze_analyzer contém "(0 corridor(s) unreachable)"
     E o validador da suíte confirma "toda célula fora do 42 alcançável"
 
   # pdf: "the four corners and the centre are open corridors (the ghosts and super-pac-"
@@ -68,7 +68,7 @@ Funcionalidade: Modo Pac-Man (PERFECT=False, o padrão)
     Dado o config com "WIDTH=<largura>", "HEIGHT=<altura>" e "EXIT=<saida>"
     Quando eu gero o labirinto
     Então pelo menos uma das células <candidatas> é alcançável a partir da entrada
-    E a linha "Corners + centre" do maze_analyzer.py contém "all reachable"
+    E a linha "Corners + centre" do maze_analyzer contém "all reachable"
 
     Exemplos:
       | largura | altura | saida | candidatas                    |
@@ -87,8 +87,8 @@ Funcionalidade: Modo Pac-Man (PERFECT=False, o padrão)
   @obrigatorio @automatizado @decisao-D10 @decisao-I06 @pdf-p09-L28-L29 @md-L193 @regua-p3
   Esquema do Cenário: Há pelo menos duas rotas independentes
     Dado o config com "SEED=<seed>"
-    Quando eu gero o labirinto e o analiso com o maze_analyzer.py
-    Então o número na linha "Independent loops" do maze_analyzer.py é pelo menos 2
+    Quando eu gero o labirinto e o analiso com o maze_analyzer
+    Então o número na linha "Independent loops" do maze_analyzer é pelo menos 2
     E o validador da suíte confirma "pelo menos 2 rotas independentes"
 
     Exemplos:
@@ -107,7 +107,7 @@ Funcionalidade: Modo Pac-Man (PERFECT=False, o padrão)
     Dado o labirinto de teste "<modelo>"
     Quando o validador da suíte lê o labirinto
     Então o validador da suíte relata "recusado: <loops> rota(s) independente(s)" em "modo Pac-Man"
-    E a linha "Verdict:" do maze_analyzer.py começa com "<veredito>"
+    E a linha "Verdict:" do maze_analyzer começa com "<veredito>"
 
     Exemplos:
       | modelo                                                | loops | veredito          |
@@ -123,8 +123,8 @@ Funcionalidade: Modo Pac-Man (PERFECT=False, o padrão)
   @recomendado @automatizado @decisao-D09 @decisao-I06 @pdf-p09-L31 @md-L194 @regua-p3
   Esquema do Cenário: Becos sem saída são raros
     Dado o config com "SEED=<seed>"
-    Quando eu gero o labirinto e o analiso com o maze_analyzer.py
-    Então o número na linha "Dead-ends" do maze_analyzer.py é no máximo 2
+    Quando eu gero o labirinto e o analiso com o maze_analyzer
+    Então o número na linha "Dead-ends" do maze_analyzer é no máximo 2
     E o validador da suíte confirma "no máximo 2 becos reais"
 
     Exemplos:
@@ -139,8 +139,8 @@ Funcionalidade: Modo Pac-Man (PERFECT=False, o padrão)
   @bonus @automatizado @decisao-I06 @pdf-p09-L31-L32 @md-L194
   Cenário: O ideal é nenhum beco sem saída
     Quando eu gero o labirinto
-    E eu analiso o labirinto com o maze_analyzer.py "--max-dead-ends 0"
-    Então a linha "Verdict:" do maze_analyzer.py contém "no real dead-end -> bonus-grade"
+    E eu analiso o labirinto com o maze_analyzer "--max-dead-ends 0"
+    Então a linha "Verdict:" do maze_analyzer contém "no real dead-end -> bonus-grade"
 
   # pdf: "while the default PERFECT=False keeps at least two independent routes open so"
   # pdf: "a chased player always has an alternative."
@@ -149,16 +149,16 @@ Funcionalidade: Modo Pac-Man (PERFECT=False, o padrão)
   # regua-md: "e pelo menos duas rotas independentes."
   @informativo @derivado @automatizado @decisao-D10 @pdf-p10-L03-L04 @md-L200 @regua-p3
   Cenário: A legenda da figura confirma ao menos duas rotas abertas
-    Quando eu gero o labirinto e o analiso com o maze_analyzer.py
-    Então o número na linha "Independent loops" do maze_analyzer.py é pelo menos 2
+    Quando eu gero o labirinto e o analiso com o maze_analyzer
+    Então o número na linha "Independent loops" do maze_analyzer é pelo menos 2
 
   # figura: "playable board · loops, no dead-ends · Pac-Man"
   # md:  "à direita, `PERFECT = False (default)` (tabuleiro jogável · ciclos, sem becos sem saída · Pac-Man)."
   @informativo @manual @pdf-p10-figura @md-L198
   Cenário: A figura do subject mostra o modo Pac-Man como tabuleiro jogável
-    Dada a figura "A-Maze-ing — the two generation modes" do subject
-    Quando eu comparo com o labirinto exibido pelo meu programa com PERFECT=False
-    Então os dois mostram ciclos, quase nenhum beco e o caminho mais curto destacado
+    - Dada a figura "A-Maze-ing — the two generation modes" do subject
+    - Quando eu comparo com o labirinto exibido pelo meu programa com PERFECT=False
+    - Então os dois mostram ciclos, quase nenhum beco e o caminho mais curto destacado
 
   # pdf: "or a playable board"
   # pdf: "(no dead-ends besides the "42" pattern and several independent routes, as required by"
@@ -169,16 +169,16 @@ Funcionalidade: Modo Pac-Man (PERFECT=False, o padrão)
   @informativo @automatizado @pdf-p11-L06-L08 @md-L220 @regua-p3
   Cenário: O maze_analyzer.py classifica o labirinto como tabuleiro jogável
     Quando eu gero o labirinto
-    E eu analiso o labirinto com o maze_analyzer.py
-    Então a linha "Verdict:" do maze_analyzer.py começa com "Pac-Man-USABLE"
+    E eu analiso o labirinto com o maze_analyzer
+    Então a linha "Verdict:" do maze_analyzer começa com "Pac-Man-USABLE"
 
   # pdf: "the four corners and the centre are open corridors (the ghosts and super-pac-"
   # md:  "os quatro cantos e o centro são corredores abertos"
   @obrigatorio @derivado @automatizado @pdf-p09-L26 @md-L192
   Esquema do Cenário: Entrada e saída podem ficar em canto ou no centro
     Dado o config com "WIDTH=<largura>", "HEIGHT=<altura>", "ENTRY=<entrada>" e "EXIT=<saida>"
-    Quando eu gero o labirinto e o analiso com o maze_analyzer.py
-    Então a linha "Verdict:" do maze_analyzer.py começa com "Pac-Man-USABLE"
+    Quando eu gero o labirinto e o analiso com o maze_analyzer
+    Então a linha "Verdict:" do maze_analyzer começa com "Pac-Man-USABLE"
 
     Exemplos:
       | largura | altura | entrada | saida |

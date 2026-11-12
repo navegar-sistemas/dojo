@@ -7,9 +7,9 @@ Funcionalidade: Padrão "42"
   # md:  "Quando representado visualmente (veja abaixo), o labirinto deve conter um "42" visível"
   @obrigatorio @manual @pdf-p09-L18 @md-L188
   Esquema do Cenário: O "42" é visível na representação visual
-    Dado o config base com "PERFECT=<perfeito>"
-    Quando eu executo "python3 a_maze_ing.py cfg.txt"
-    Então eu leio "42" no labirinto exibido sem precisar procurar
+    - Dado o config base com "PERFECT=<perfeito>"
+    - Quando eu executo "python3 a_maze_ing.py cfg.txt"
+    - Então eu leio "42" no labirinto exibido sem precisar procurar
 
     Exemplos:
       | perfeito |
@@ -102,9 +102,9 @@ Funcionalidade: Padrão "42"
   @obrigatorio @derivado @decisao-D06 @decisao-D07 @automatizado @pdf-p09-L33-L34 @md-L196 @regua-p3
   Esquema do Cenário: O "42" aparece a partir de 9 colunas por 7 linhas
     Dado o config base com "WIDTH=<largura>", "HEIGHT=<altura>", "EXIT=<saida>" e "PERFECT=<perfeito>"
-    Quando eu gero o labirinto e o analiso com o maze_analyzer.py
+    Quando eu gero o labirinto e o analiso com o maze_analyzer
     Então o validador da suíte confirma "42 <presenca>"
-    E o veredito do maze_analyzer.py corresponde ao PERFECT do config
+    E o veredito do maze_analyzer corresponde ao PERFECT do config
 
     Exemplos:
       | largura | altura | saida | perfeito | presenca |

@@ -162,7 +162,7 @@ Funcionalidade: Grade, paredes e validade estrutural
     Dado o labirinto de teste com a grade "<grade>", entrada "0,0" e saída "<saida>"
     Quando o validador da suíte lê o labirinto
     Então o validador da suíte relata "<resultado>" em "coerência das paredes"
-    E a linha "Wall coherence" do maze_analyzer.py contém "<analyzer>"
+    E a linha "Wall coherence" do maze_analyzer contém "<analyzer>"
 
     Exemplos:
       | grade | saida | resultado                      | analyzer                                |
@@ -176,5 +176,5 @@ Funcionalidade: Grade, paredes e validade estrutural
   @obrigatorio @automatizado @pdf-p09-L13 @md-L186
   Cenário: O maze_analyzer.py confirma a coerência do labirinto gerado
     Dado um labirinto gerado pelo programa com o config base
-    Quando eu analiso o labirinto com o maze_analyzer.py
-    Então a linha "Wall coherence" do maze_analyzer.py contém "OK (all shared walls match)"
+    Quando eu analiso o labirinto com o maze_analyzer
+    Então a linha "Wall coherence" do maze_analyzer contém "OK (all shared walls match)"

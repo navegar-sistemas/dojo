@@ -85,9 +85,9 @@ Funcionalidade: Representação visual
   # md:  "O visual deve mostrar claramente as paredes, a entrada, a saída e o caminho da solução."
   @recomendado @manual @decisao-I02 @pdf-p12-L06 @md-L261
   Cenário: Paredes, entrada, saída e caminho são distinguíveis à primeira vista
-    Dado o labirinto exibido com o caminho visível
-    Quando uma pessoa que não conhece o projeto olha a tela
-    Então ela aponta as paredes, a entrada, a saída e o caminho sem explicação
+    - Dado o labirinto exibido com o caminho visível
+    - Quando uma pessoa que não conhece o projeto olha a tela
+    - Então ela aponta as paredes, a entrada, a saída e o caminho sem explicação
 
   # pdf: "The shortest path is highlighted in both."
   # md:  "O caminho mais curto está destacado em ambos."
@@ -131,27 +131,27 @@ Funcionalidade: Representação visual
   # md:  "Figura: Renderização padrão do labirinto no terminal."
   @informativo @manual @pdf-p13-L02 @pdf-p13-figura @md-L272
   Cenário: A figura da renderização padrão no terminal
-    Dada a figura "Terminal default rendering of the maze"
-    Quando eu comparo com o meu programa logo após "python3 ./a_maze_ing.py config.txt"
-    Então os dois mostram paredes em blocos de cor, entrada, saída e o "42" em cor fixa diferente da das paredes
-    E o menu de interação aparece abaixo do labirinto
+    - Dada a figura "Terminal default rendering of the maze"
+    - Quando eu comparo com o meu programa logo após "python3 ./a_maze_ing.py config.txt"
+    - Então os dois mostram paredes em blocos de cor, entrada, saída e o "42" em cor fixa diferente da das paredes
+    - E o menu de interação aparece abaixo do labirinto
 
   # pdf: "Different maze, shortest path and wall colours"
   # md:  "Figura: Labirinto diferente, caminho mais curto e cores de parede alteradas."
   @informativo @manual @pdf-p13-L03 @pdf-p13-figura @md-L274
   Cenário: A figura após as interações
-    Dada a figura "Different maze, shortest path and wall colours"
-    Quando eu regenero, mostro o caminho e troco a cor das paredes no meu programa
-    Então o resultado mostra outro labirinto, o caminho mais curto e paredes de outra cor
+    - Dada a figura "Different maze, shortest path and wall colours"
+    - Quando eu regenero, mostro o caminho e troco a cor das paredes no meu programa
+    - Então o resultado mostra outro labirinto, o caminho mais curto e paredes de outra cor
 
   # pdf: "Maze rendering using Mlx"
   # md:  "Figura: Renderização do labirinto usando Mlx."
   @informativo @manual @decisao-I01 @pdf-p14-L02 @pdf-p14-figura @md-L276
   Cenário: A figura da renderização com a MiniLibX
-    Dada a figura "Maze rendering using Mlx"
-    Quando a exibição gráfica é a escolhida
-    Então a janela mostra paredes, entrada, saída, caminho, o "42" preenchido
-    E uma barra com os atalhos "1: regen", "2: path", "3: color" e "4: quit"
+    - Dada a figura "Maze rendering using Mlx"
+    - Quando a exibição gráfica é a escolhida
+    - Então a janela mostra paredes, entrada, saída, caminho, o "42" preenchido
+    - E uma barra com os atalhos "1: regen", "2: path", "3: color" e "4: quit"
 
   # pdf: "The visual should clearly show walls, entry, exit, and the solution path."
   # pdf: "It must never crash unexpectedly, and must"

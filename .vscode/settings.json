@@ -50,6 +50,10 @@
             "regexp": "(?:[^\"\\\\]|\\\\.)*"
         },
         {
+            "name": "definicao:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
             "name": "texto:Q",
             "regexp": "(?:[^\"\\\\]|\\\\.)*"
         },
@@ -83,7 +87,7 @@
         },
         {
             "name": "fluxo:Fluxo",
-            "regexp": "a saída padrão|a saída de erro|a saída"
+            "regexp": "a saída de erro|a saída padrão|a saída"
         },
         {
             "name": "verbo:Contem",
@@ -91,11 +95,7 @@
         },
         {
             "name": "situacao:EstadoCaminho",
-            "regexp": "não é ignorado pelo git|é ignorado pelo git|está versionado no git|não está vazio|não existe|existe"
-        },
-        {
-            "name": "sujeito:Sujeito",
-            "regexp": "o catálogo de casos de erro|o validador da suíte|a análise estática|o módulo mazegen|a renderização"
+            "regexp": "não é ignorado pelo git|está versionado no git|é ignorado pelo git|não está vazio|não existe|existe"
         },
         {
             "name": "tipo:Q",

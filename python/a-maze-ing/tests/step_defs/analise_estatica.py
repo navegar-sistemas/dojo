@@ -7,7 +7,8 @@ from pathlib import Path
 import pytest
 from pytest_bdd import given, parsers, then, when
 
-from conftest import TIPOS, Estado, propriedade
+from suporte.estado import Estado
+from suporte.tipos import TIPOS
 
 FORA_DA_ANALISE = {".venv", "build", "dist", "__pycache__"}
 FRAMEWORKS_DE_TESTE = {"pytest", "pytest_bdd", "unittest"}
@@ -17,6 +18,7 @@ SECOES_GOOGLE = {
     "Note:", "Notes:", "Attributes:", "Todo:",
 }
 SEM_RETORNO = {"None", "NoReturn", "Never"}
+DEFINICOES = ("função", "método", "classe")
 
 Definicao = ast.FunctionDef | ast.AsyncFunctionDef | ast.ClassDef
 Documentavel = Definicao | ast.Module
@@ -41,7 +43,7 @@ def arquivos_python(alvo: Path) -> list[Path]:
 
 @given(parsers.parse("o código-fonte de {alvos:L}", extra_types=TIPOS))
 def codigo_fonte_de(estado: Estado, alvos: list[str]) -> None:
-    """V06: lista os .py dos alvos.
+    """Lista os .py dos alvos.
 
     Args:
         estado: Estado do cenário.
@@ -58,7 +60,7 @@ def codigo_fonte_de(estado: Estado, alvos: list[str]) -> None:
 
 @when("a análise estática percorre o código-fonte")
 def analise_percorre(estado: Estado) -> None:
-    """V41: faz o ast.parse de cada fonte.
+    """Faz o ast.parse de cada fonte.
 
     Args:
         estado: Estado do cenário.
@@ -118,8 +120,8 @@ def usa_framework_de_teste(arvore: ast.Module) -> bool:
     )
 
 
-@propriedade("a análise estática", "testes usam pytest ou unittest")
-def testes_usam_framework(estado: Estado) -> None:
+@then('a análise estática confirma "testes usam pytest ou unittest"')
+def todo_teste_usa_framework(estado: Estado) -> None:
     """Há arquivos de teste, e todos usam pytest ou unittest.
 
     Args:
@@ -138,11 +140,12 @@ def testes_usam_framework(estado: Estado) -> None:
 
 @then(
     parsers.parse(
-        'nenhum arquivo .py do projeto contém "{texto:Q}"', extra_types=TIPOS
+        'nenhum arquivo Python do projeto contém "{texto:Q}"',
+        extra_types=TIPOS,
     )
 )
 def nenhum_py_contem(estado: Estado, texto: str) -> None:
-    """V63: procura o texto nos .py do repositório.
+    """Procura o texto nos .py do repositório.
 
     Args:
         estado: Estado do cenário.
@@ -208,6 +211,13 @@ def definicoes(estado: Estado) -> list[tuple[Path, Definicao, str]]:
     achadas: list[tuple[Path, Definicao, str]] = []
 
     def visitar(no: ast.AST, em_classe: bool, arquivo: Path) -> None:
+        """Guarda as definições abaixo do nó, na ordem do arquivo.
+
+        Args:
+            no: Nó cujos filhos são percorridos.
+            em_classe: Se o nó é o corpo de uma classe.
+            arquivo: Arquivo a que o nó pertence.
+        """
         for filho in ast.iter_child_nodes(no):
             if isinstance(filho, ast.ClassDef):
                 achadas.append((arquivo, filho, "classe"))
@@ -283,9 +293,13 @@ def linha_de(no: Documentavel) -> int:
     return 1 if isinstance(no, ast.Module) else no.lineno
 
 
-@propriedade("a análise estática", "open sempre dentro de with")
+@then('a análise estática confirma "open sempre dentro de with"')
 def open_dentro_de_with(estado: Estado) -> None:
-    """Toda chamada open() ou x.open() é a expressão de um with."""
+    """Toda chamada open() ou x.open() é a expressão de um with.
+
+    Args:
+        estado: Estado do cenário, com as árvores da análise.
+    """
     violacoes: list[tuple[Path, int, str]] = []
     for arquivo, arvore in estado.arvores.items():
         em_with = {
@@ -305,9 +319,15 @@ def open_dentro_de_with(estado: Estado) -> None:
     falhar_se(estado, violacoes, "open fora de with")
 
 
-@propriedade("a análise estática", "anotação de retorno em toda definição")
+@then(
+    'a análise estática confirma "anotação de retorno em toda definição"'
+)
 def retorno_anotado(estado: Estado) -> None:
-    """Todo def tem anotação de retorno."""
+    """Todo def tem anotação de retorno.
+
+    Args:
+        estado: Estado do cenário, com as árvores da análise.
+    """
     falhar_se(
         estado,
         [
@@ -319,33 +339,42 @@ def retorno_anotado(estado: Estado) -> None:
     )
 
 
-def _docstring_em(tipo: str) -> None:
-    """Registra a propriedade "docstring em cada <tipo>".
+@then(
+    parsers.parse(
+        'a análise estática confirma "docstring em cada {definicao:Q}"',
+        extra_types=TIPOS,
+    )
+)
+def docstring_em_cada(estado: Estado, definicao: str) -> None:
+    """Toda definição do tipo pedido tem docstring.
 
     Args:
-        tipo: "função", "método" ou "classe".
+        estado: Estado do cenário, com as árvores da análise.
+        definicao: "função", "método" ou "classe".
     """
-
-    @propriedade("a análise estática", f"docstring em cada {tipo}")
-    def verificar(estado: Estado) -> None:
-        falhar_se(
-            estado,
-            [
-                (arquivo, no.lineno, f"{no.name} sem docstring")
-                for arquivo, no, achado in definicoes(estado)
-                if achado == tipo and not ast.get_docstring(no)
-            ],
-            f"{tipo} sem docstring",
+    if definicao not in DEFINICOES:
+        pytest.fail(
+            f'definição "{definicao}" não existe; as válidas são: '
+            f"{', '.join(DEFINICOES)}"
         )
+    falhar_se(
+        estado,
+        [
+            (arquivo, no.lineno, f"{no.name} sem docstring")
+            for arquivo, no, achado in definicoes(estado)
+            if achado == definicao and not ast.get_docstring(no)
+        ],
+        f"{definicao} sem docstring",
+    )
 
 
-for _tipo in ("função", "método", "classe"):
-    _docstring_em(_tipo)
-
-
-@propriedade("a análise estática", "docstrings com aspas triplas duplas")
+@then('a análise estática confirma "docstrings com aspas triplas duplas"')
 def aspas_triplas_duplas(estado: Estado) -> None:
-    """Toda docstring é escrita com três aspas duplas."""
+    """Toda docstring é escrita com três aspas duplas.
+
+    Args:
+        estado: Estado do cenário, com as árvores da análise.
+    """
     violacoes: list[tuple[Path, int, str]] = []
     for arquivo, no in documentaveis(estado):
         fonte = arquivo.read_text(encoding="utf-8")
@@ -359,13 +388,17 @@ def aspas_triplas_duplas(estado: Estado) -> None:
     falhar_se(estado, violacoes, "docstrings sem aspas triplas duplas")
 
 
-@propriedade("a análise estática", "resumo de uma frase terminado em ponto")
+@then('a análise estática confirma "resumo de uma frase terminado em ponto"')
 def resumo_com_ponto(estado: Estado) -> None:
-    """O primeiro parágrafo da docstring é uma linha terminada em ponto."""
+    """O primeiro parágrafo da docstring é uma linha terminada em ponto.
+
+    Args:
+        estado: Estado do cenário, com as árvores da análise.
+    """
     violacoes: list[tuple[Path, int, str]] = []
     for arquivo, no in documentaveis(estado):
         linhas = (ast.get_docstring(no) or "").splitlines()
-        paragrafo = []
+        paragrafo: list[str] = []
         for linha in linhas:
             if not linha.strip():
                 break
@@ -377,9 +410,16 @@ def resumo_com_ponto(estado: Estado) -> None:
     falhar_se(estado, violacoes, "resumo que não é uma frase com ponto")
 
 
-@propriedade("a análise estática", "linha em branco entre resumo e descrição")
+@then(
+    'a análise estática confirma '
+    + '"linha em branco entre resumo e descrição"'
+)
 def linha_em_branco(estado: Estado) -> None:
-    """Docstring de várias linhas tem a segunda linha vazia."""
+    """Docstring de várias linhas tem a segunda linha vazia.
+
+    Args:
+        estado: Estado do cenário, com as árvores da análise.
+    """
     violacoes: list[tuple[Path, int, str]] = []
     for arquivo, no in documentaveis(estado):
         linhas = (ast.get_docstring(no) or "").splitlines()
@@ -401,7 +441,7 @@ def secao(docstring: str, titulo: str) -> str | None:
     linhas = docstring.splitlines()
     for indice, linha in enumerate(linhas):
         if linha.strip() == titulo:
-            corpo = []
+            corpo: list[str] = []
             for seguinte in linhas[indice + 1:]:
                 if seguinte.strip() in SECOES_GOOGLE:
                     break
@@ -436,9 +476,15 @@ def parametros(no: ast.FunctionDef | ast.AsyncFunctionDef,
     return nomes
 
 
-@propriedade("a análise estática", "seção Args: nas funções com parâmetros")
+@then(
+    'a análise estática confirma "seção Args: nas funções com parâmetros"'
+)
 def secao_args(estado: Estado) -> None:
-    """Função com parâmetros tem Args: citando cada um."""
+    """Função com parâmetros tem Args: citando cada um.
+
+    Args:
+        estado: Estado do cenário, com as árvores da análise.
+    """
     violacoes: list[tuple[Path, int, str]] = []
     for arquivo, no, tipo in funcoes(estado):
         nomes = parametros(no, tipo == "método")
@@ -482,11 +528,16 @@ def retorna_valor(no: ast.FunctionDef | ast.AsyncFunctionDef) -> bool:
     )
 
 
-@propriedade(
-    "a análise estática", "seção Returns: nas funções que retornam valor"
+@then(
+    'a análise estática confirma '
+    + '"seção Returns: nas funções que retornam valor"'
 )
 def secao_returns(estado: Estado) -> None:
-    """Função com retorno anotado diferente de None tem Returns: ou Yields:."""
+    """Função com retorno anotado diferente de None tem Returns: ou Yields:.
+
+    Args:
+        estado: Estado do cenário, com as árvores da análise.
+    """
     falhar_se(
         estado,
         [
@@ -522,9 +573,13 @@ def colecao_vazia(valor: ast.expr) -> bool:
     )
 
 
-@propriedade("a análise estática", "coleções vazias com tipo anotado")
+@then('a análise estática confirma "coleções vazias com tipo anotado"')
 def colecoes_anotadas(estado: Estado) -> None:
-    """Coleção vazia só é atribuída com anotação (x: list[int] = [])."""
+    """Coleção vazia só é atribuída com anotação (x: list[int] = []).
+
+    Args:
+        estado: Estado do cenário, com as árvores da análise.
+    """
     falhar_se(
         estado,
         [

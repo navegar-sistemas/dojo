@@ -1,14 +1,15 @@
-"""Propriedades da V72 sobre a renderização do labirinto no terminal."""
+"""Passos que conferem a renderização do labirinto no terminal."""
 
 import pytest
+from pytest_bdd import then
 
-from conftest import Estado, propriedade
+from suporte.estado import Estado
 
 ANSI = "\x1b["
 RESET = "\x1b[0m"
 
 
-@propriedade("a renderização", "cada linha termina com o reset ANSI")
+@then('a renderização confirma "cada linha termina com o reset ANSI"')
 def linhas_com_reset(estado: Estado) -> None:
     """Toda linha colorida da saída padrão termina com o reset ANSI (I02).
 

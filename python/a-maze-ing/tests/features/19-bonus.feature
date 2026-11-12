@@ -7,10 +7,10 @@ Funcionalidade: Bônus
   # md:  "Você pode adicionar vários bônus ao seu projeto. Aqui estão alguns exemplos possíveis:"
   @opcional @manual @pdf-p19-L03 @md-L341
   Cenário: Os bônus são opcionais e os exemplos são sugestões
-    Dado o capítulo de bônus
-    Quando eu escolho quais bônus implementar
-    Então a parte obrigatória continua completa sem nenhum deles
-    E bônus diferentes dos exemplos também são possíveis
+    - Dado o capítulo de bônus
+    - Quando eu escolho quais bônus implementar
+    - Então a parte obrigatória continua completa sem nenhum deles
+    - E bônus diferentes dos exemplos também são possíveis
 
   # pdf: "You may add various bonuses to your project. Here are possible examples:"
   # md:  "Você pode adicionar vários bônus ao seu projeto. Aqui estão alguns exemplos possíveis:"
@@ -20,10 +20,10 @@ Funcionalidade: Bônus
   # regua-md: "Você pode validar até 5 bônus diferentes que funcionem. Cada bônus deve representar uma quantidade justa de trabalho."
   @informativo @manual @pdf-p19-L03 @md-L341 @regua-p4
   Cenário: Os bônus só contam com a parte obrigatória inteira aprovada
-    Dados todos os cenários obrigatórios das funcionalidades 01 a 18 e 21
-    Quando algum deles falha
-    Então nenhum bônus é considerado na avaliação
-    E até 5 bônus que funcionem são validados quando todos passam
+    - Dados todos os cenários obrigatórios das funcionalidades 01 a 18 e 21
+    - Quando algum deles falha
+    - Então nenhum bônus é considerado na avaliação
+    - E até 5 bônus que funcionem são validados quando todos passam
 
   # pdf: "A default (non-perfect) maze with no dead-end at all: a perfectly "braided""
   # pdf: "board, so a chased player is never trapped anywhere (the provided analysis script"
@@ -36,9 +36,9 @@ Funcionalidade: Bônus
   Esquema do Cenário: O modo Pac-Man não tem nenhum beco sem saída
     Dado o config base com "PERFECT=False", "WIDTH=<largura>", "HEIGHT=<altura>", "EXIT=<saida>" e "SEED=<seed>"
     Quando eu gero o labirinto
-    E eu analiso o labirinto com o maze_analyzer.py "--max-dead-ends 0"
-    Então a linha "Verdict:" do maze_analyzer.py começa com "Pac-Man-USABLE"
-    E a linha "Verdict:" do maze_analyzer.py contém "no real dead-end -> bonus-grade (perfectly braided)"
+    E eu analiso o labirinto com o maze_analyzer "--max-dead-ends 0"
+    Então a linha "Verdict:" do maze_analyzer começa com "Pac-Man-USABLE"
+    E a linha "Verdict:" do maze_analyzer contém "no real dead-end -> bonus-grade (perfectly braided)"
 
     Exemplos:
       | largura | altura | saida | seed |
@@ -67,8 +67,8 @@ Funcionalidade: Bônus
   @bonus @automatizado @decisao-I19 @pdf-p19-L07 @pdf-p09-L02 @md-L344 @md-L174
   Esquema do Cenário: Cada algoritmo de geração produz labirintos válidos nos dois modos
     Dado o config base com "ALGORITHM=<algoritmo>" e "PERFECT=<perfeito>"
-    Quando eu gero o labirinto e o analiso com o maze_analyzer.py
-    Então a linha "Verdict:" do maze_analyzer.py começa com "<veredito>"
+    Quando eu gero o labirinto e o analiso com o maze_analyzer
+    Então a linha "Verdict:" do maze_analyzer começa com "<veredito>"
     E o validador da suíte confirma "labirinto válido conforme o config"
     Quando eu gero o labirinto 2 vezes
     Então os resultados são idênticos em "arquivo de saída"
@@ -103,24 +103,24 @@ Funcionalidade: Bônus
   # md:  "Adicionar animação durante a geração do labirinto."
   @bonus @manual @decisao-I19 @pdf-p19-L08 @md-L345
   Cenário: A geração é animada
-    Dada a animação ativada
-    Quando eu gero um labirinto
-    Então eu vejo as paredes sendo abertas passo a passo antes do labirinto final
+    - Dada a animação ativada
+    - Quando eu gero um labirinto
+    - Então eu vejo as paredes sendo abertas passo a passo antes do labirinto final
 
   # pdf: "Add animation during maze generation."
   # md:  "Adicionar animação durante a geração do labirinto."
   @bonus @derivado @manual @decisao-I19 @pdf-p19-L08 @md-L345
   Cenário: A animação não altera o labirinto final
-    Dado o config base
-    Quando eu gero o labirinto com a animação ativada e depois desativada
-    Então os dois arquivos de saída são idênticos
-    E a animação mostra pelo menos um estado intermediário
+    - Dado o config base
+    - Quando eu gero o labirinto com a animação ativada e depois desativada
+    - Então os dois arquivos de saída são idênticos
+    - E a animação mostra pelo menos um estado intermediário
 
   # pdf: "You may add additional keys (e.g., seed, algorithm, display mode) if useful."
   # md:  "Você pode adicionar chaves extras (ex.: seed, algoritmo, modo de exibição) se for útil."
   @opcional @manual @decisao-I19 @pdf-p09-L02 @md-L174
   Cenário: Chave extra de modo de exibição
-    Dado o config base com uma chave extra de modo de exibição
-    Quando eu executo o programa com cada valor aceito dessa chave
-    Então cada execução termina sem "Traceback"
-    E um valor não aceito gera mensagem de erro citando a chave
+    - Dado o config base com uma chave extra de modo de exibição
+    - Quando eu executo o programa com cada valor aceito dessa chave
+    - Então cada execução termina sem "Traceback"
+    - E um valor não aceito gera mensagem de erro citando a chave

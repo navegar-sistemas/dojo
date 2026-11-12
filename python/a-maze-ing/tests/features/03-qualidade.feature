@@ -11,7 +11,7 @@ Funcionalidade: Qualidade de código
     Quando eu executo ".venv/bin/flake8 ."
     Então o código de saída é 0
     E a saída é ""
-    E nenhum arquivo .py do projeto contém "# noqa"
+    E nenhum arquivo Python do projeto contém "# noqa"
 
   # pdf: "Your functions should handle exceptions gracefully to avoid crashes. Use try-except"
   # pdf: "It must never crash unexpectedly, and must"
@@ -38,12 +38,12 @@ Funcionalidade: Qualidade de código
   # md:  "Use blocos `try-except` para gerenciar erros potenciais."
   @obrigatorio @manual @pdf-p06-L06-L07 @md-L101
   Cenário: Operações que podem falhar ficam em blocos try-except
-    Dado o código do projeto
-    Quando eu localizo leitura de arquivo, conversão de número e escrita do arquivo de saída
-    Então cada uma está dentro de um bloco try-except
-    E cada except termina numa mensagem ao usuário ou relança a exceção
-    E nenhum except está vazio ou engole o erro em silêncio
-    Mas o "except" de KeyboardInterrupt e EOFError em "main" só imprime uma linha vazia e encerra com código 0 (D17)
+    - Dado o código do projeto
+    - Quando eu localizo leitura de arquivo, conversão de número e escrita do arquivo de saída
+    - Então cada uma está dentro de um bloco try-except
+    - E cada except termina numa mensagem ao usuário ou relança a exceção
+    - E nenhum except está vazio ou engole o erro em silêncio
+    - Mas o "except" de KeyboardInterrupt e EOFError em "main" só imprime uma linha vazia e encerra com código 0 (D17)
 
   # pdf: "Prefer context managers for resources like files or"
   # pdf: "connections to ensure automatic cleanup."
@@ -79,10 +79,10 @@ Funcionalidade: Qualidade de código
   # md:  "Todos os recursos (ex.: handles de arquivo, conexões de rede) devem ser gerenciados corretamente para evitar vazamentos."
   @obrigatorio @manual @pdf-p06-L10-L11 @md-L102
   Cenário: Nenhum recurso vaza durante a suíte
-    Dada a suíte em "a-maze-ing/tests/", com o virtualenv dela instalado
-    Quando eu executo ".venv/bin/python -X dev -W error::ResourceWarning -m pytest -m "not manual"" nessa pasta
-    Então todos os testes automatizados passam
-    E nenhum "ResourceWarning" é emitido
+    - Dada a suíte em "a-maze-ing/tests/", com o virtualenv dela instalado
+    - Quando eu executo ".venv/bin/python -X dev -W error::ResourceWarning -m pytest -m "not manual"" nessa pasta
+    - Então todos os testes automatizados passam
+    - E nenhum "ResourceWarning" é emitido
 
   # pdf: "All resources (e.g., file handles, network connections) must be properly managed to"
   # pdf: "prevent leaks."
@@ -98,10 +98,10 @@ Funcionalidade: Qualidade de código
   # md:  "Use context managers sempre que possível para tratamento automático."
   @obrigatorio @manual @pdf-p06-L11 @md-L102
   Cenário: Todo recurso que tem context manager é usado com with
-    Dado o código do projeto
-    Quando eu localizo os arquivos abertos
-    Então cada arquivo é aberto e fechado por um "with"
-    E a liberação acontece também quando uma exceção interrompe o bloco
+    - Dado o código do projeto
+    - Quando eu localizo os arquivos abertos
+    - Então cada arquivo é aberto e fechado por um "with"
+    - E a liberação acontece também quando uma exceção interrompe o bloco
 
   # pdf: "Your code must include type hints for function parameters, return types, and vari-"
   # md:  "Seu código deve incluir type hints para parâmetros de função, tipos de retorno e variáveis onde aplicável"
@@ -147,7 +147,7 @@ Funcionalidade: Qualidade de código
     Dado o repositório no estado "instalado"
     Quando eu executo "mypy . --warn-return-any --warn-unused-ignores --ignore-missing-imports --disallow-untyped-defs --check-untyped-defs"
     Então a saída contém "Success: no issues found"
-    E nenhum arquivo .py do projeto contém "# type: ignore"
+    E nenhum arquivo Python do projeto contém "# type: ignore"
 
   # pdf: "Include docstrings in functions and classes following PEP 257"
   # md:  "Inclua docstrings em funções e classes seguindo a PEP 257"
@@ -190,7 +190,7 @@ Funcionalidade: Qualidade de código
   # regua-md: "Além disso, a norma `flake8` deve passar nos arquivos Python, assim como o `mypy`."
   @recomendado @derivado @decisao-D20 @manual @decisao-I16 @pdf-p06-L05 @pdf-p06-L14 @md-L100 @md-L103 @regua-p1
   Cenário: Os arquivos de teste também passam no flake8 e no mypy
-    Dada a suíte em "a-maze-ing/tests/", com o virtualenv dela instalado
-    Quando eu rodo o flake8 e o mypy nessa pasta
-    Então os dois passam sem nenhum erro ou warning
-    Mas as funções de teste dispensam docstring (I16)
+    - Dada a suíte em "a-maze-ing/tests/", com o virtualenv dela instalado
+    - Quando eu rodo o flake8 e o mypy nessa pasta
+    - Então os dois passam sem nenhum erro ou warning
+    - E as funções de teste têm docstring (I16)

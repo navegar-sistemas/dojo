@@ -30,9 +30,9 @@ Funcionalidade: Módulo reutilizável e pacote mazegen
   # md:  "Instanciar e usar seu gerador, com pelo menos um exemplo básico."
   @obrigatorio @manual @decisao-I11 @decisao-I22 @pdf-p15-L05-L06 @md-L284-L286
   Cenário: A documentação explica como instanciar e usar o gerador
-    Dada a docstring de "mazegen/__init__.py", que é a documentação do módulo
-    Quando eu a leio sem conhecer o projeto
-    Então eu sei criar uma instância do gerador e gerar um labirinto
+    - Dada a docstring de "mazegen/__init__.py", que é a documentação do módulo
+    - Quando eu a leio sem conhecer o projeto
+    - Então eu sei criar uma instância do gerador e gerar um labirinto
 
   # pdf: "Instantiate and use your generator, with at least a basic example."
   # md:  "Instanciar e usar seu gerador, com pelo menos um exemplo básico."
@@ -50,9 +50,9 @@ Funcionalidade: Módulo reutilizável e pacote mazegen
   # md:  "Passar parâmetros personalizados (ex.: tamanho, seed)."
   @obrigatorio @manual @decisao-I09 @decisao-I11 @decisao-I22 @pdf-p15-L07 @md-L287
   Cenário: A documentação explica os parâmetros personalizados
-    Dada a docstring de "mazegen/__init__.py", que é a documentação do módulo
-    Quando eu procuro como mudar tamanho e seed
-    Então cada parâmetro aceito tem nome, tipo, valor padrão e um exemplo
+    - Dada a docstring de "mazegen/__init__.py", que é a documentação do módulo
+    - Quando eu procuro como mudar tamanho e seed
+    - Então cada parâmetro aceito tem nome, tipo, valor padrão e um exemplo
 
   # pdf: "Pass custom parameters (e.g., size, seed)."
   # md:  "Passar parâmetros personalizados (ex.: tamanho, seed)."
@@ -73,10 +73,10 @@ Funcionalidade: Módulo reutilizável e pacote mazegen
   # md:  "Acessar a estrutura gerada e acessar pelo menos uma solução."
   @obrigatorio @manual @decisao-I09 @decisao-I11 @decisao-I22 @pdf-p15-L08 @md-L288
   Cenário: A documentação explica como acessar a estrutura e a solução
-    Dada a docstring de "mazegen/__init__.py", que é a documentação do módulo
-    Quando eu procuro como ler o labirinto gerado
-    Então ela mostra como obter as paredes de cada célula
-    E ela mostra como obter pelo menos uma solução
+    - Dada a docstring de "mazegen/__init__.py", que é a documentação do módulo
+    - Quando eu procuro como ler o labirinto gerado
+    - Então ela mostra como obter as paredes de cada célula
+    - E ela mostra como obter pelo menos uma solução
 
   # pdf: "Access the generated structure, and access at least a solution."
   # md:  "Acessar a estrutura gerada e acessar pelo menos uma solução."
@@ -92,10 +92,10 @@ Funcionalidade: Módulo reutilizável e pacote mazegen
   # md:  "O módulo gerador de labirintos dá acesso à estrutura do labirinto, mas não necessariamente no mesmo formato do arquivo de saída."
   @opcional @manual @decisao-I09 @decisao-I22 @pdf-p15-L09-L10 @md-L290
   Cenário: A estrutura da API pode ter formato próprio
-    Dada a estrutura "grid" exposta pela API
-    Quando eu a comparo com o arquivo de saída
-    Então a documentação do módulo descreve os bits de "grid" (N=1, E=2, S=4, W=8)
-    E o programa grava cada célula de "grid" no arquivo com format(valor, "x")
+    - Dada a estrutura "grid" exposta pela API
+    - Quando eu a comparo com o arquivo de saída
+    - Então a documentação do módulo descreve os bits de "grid" (N=1, E=2, S=4, W=8)
+    - E o programa grava cada célula de "grid" no arquivo com format(valor, "x")
 
   # pdf: "This entire reusable module (code and documentation) must be available in a single file"
   # pdf: "suitable for a later installation by pip."
@@ -187,8 +187,8 @@ Funcionalidade: Módulo reutilizável e pacote mazegen
     E eu executo "python a_maze_ing.py config.txt" com a entrada "4"
     Então o código de saída é 0
     E a saída de "python -c 'import mazegen; print(mazegen.__file__)'" contém "site-packages"
-    Quando eu analiso o labirinto com o maze_analyzer.py
-    Então o veredito do maze_analyzer.py corresponde ao PERFECT do config
+    Quando eu analiso o labirinto com o maze_analyzer
+    Então o veredito do maze_analyzer corresponde ao PERFECT do config
 
     Exemplos:
       | arquivo                        |
@@ -213,9 +213,9 @@ Funcionalidade: Módulo reutilizável e pacote mazegen
   # md:  "O arquivo `README.md` principal (que não faz parte do módulo reutilizável) também deve conter essa documentação curta."
   @obrigatorio @manual @decisao-I11 @decisao-I22 @pdf-p16-L03-L04 @md-L304
   Cenário: O README principal também contém a documentação do módulo
-    Dado o "README.md" da raiz do repositório
-    Quando eu procuro a documentação do módulo
-    Então ele explica como instanciar e usar o gerador, com exemplo
-    E ele explica como passar tamanho e seed
-    E ele explica como acessar a estrutura e uma solução
-    E o texto é o mesmo da docstring de "mazegen/__init__.py"
+    - Dado o "README.md" da raiz do repositório
+    - Quando eu procuro a documentação do módulo
+    - Então ele explica como instanciar e usar o gerador, com exemplo
+    - E ele explica como passar tamanho e seed
+    - E ele explica como acessar a estrutura e uma solução
+    - E o texto é o mesmo da docstring de "mazegen/__init__.py"

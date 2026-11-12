@@ -8,8 +8,8 @@ Funcionalidade: Geração aleatória reproduzível por seed
   @obrigatorio @automatizado @decisao-I05 @decisao-I06 @pdf-p08-L04-L05 @md-L142
   Esquema do Cenário: O programa gera um labirinto, perfeito ou não, conforme o config
     Dado o config base com "PERFECT=<perfeito>"
-    Quando eu gero o labirinto e o analiso com o maze_analyzer.py
-    Então a linha "Verdict:" do maze_analyzer.py começa com "<veredito>"
+    Quando eu gero o labirinto e o analiso com o maze_analyzer
+    Então a linha "Verdict:" do maze_analyzer começa com "<veredito>"
 
     Exemplos:
       | perfeito | veredito       |
@@ -85,7 +85,7 @@ Funcionalidade: Geração aleatória reproduzível por seed
     Dado um labirinto gerado pelo programa com o config base mais "SEED=<seed>" e "PERFECT=<perfeito>"
     Quando o validador da suíte lê o labirinto
     Então o validador da suíte confirma "toda célula fora do 42 alcançável"
-    E a linha "Reachable region" do maze_analyzer.py contém "(0 corridor(s) unreachable)"
+    E a linha "Reachable region" do maze_analyzer contém "(0 corridor(s) unreachable)"
 
     Exemplos:
       | seed | perfeito |
@@ -127,16 +127,16 @@ Funcionalidade: Geração aleatória reproduzível por seed
   Cenário: A lógica de geração fica separada do programa
     Dado o gerador "MazeGenerator(width=20, height=15, seed=42)"
     Quando o gerador gera o labirinto
-    Então o módulo mazegen confirma "grid e solution preenchidos após generate()"
+    Então o módulo mazegen confirma "grid e solution preenchidos após generate"
 
   # pdf: "of the maze and organize your code so that the generation logic can be reused later."
   # md:  "organizará seu código de forma que a lógica de geração possa ser reutilizada depois."
   @obrigatorio @derivado @manual @decisao-I11 @pdf-p08-L07 @md-L142
   Cenário: O programa principal usa o módulo reutilizável
-    Dado "a_maze_ing.py" e o código do programa
-    Quando eu procuro o código que gera o labirinto
-    Então o programa gera o labirinto pela classe do módulo reutilizável
-    E não existe uma segunda implementação da geração fora do módulo
+    - Dado "a_maze_ing.py" e o código do programa
+    - Quando eu procuro o código que gera o labirinto
+    - Então o programa gera o labirinto pela classe do módulo reutilizável
+    - E não existe uma segunda implementação da geração fora do módulo
 
   # pdf: "Your program must handle all errors gracefully: invalid configuration, file not found, bad"
   # pdf: "syntax, impossible maze parameters, etc."

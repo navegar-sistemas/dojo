@@ -306,8 +306,8 @@ Funcionalidade: Arquivo de configuração
   @obrigatorio @automatizado @decisao-D03 @pdf-p08-L27 @md-L172 @regua-p2
   Esquema do Cenário: PERFECT aceita True e False sem diferenciar maiúsculas
     Dado o config com "PERFECT=<valor>"
-    Quando eu gero o labirinto e o analiso com o maze_analyzer.py
-    Então a linha "Verdict:" do maze_analyzer.py começa com "<veredito>"
+    Quando eu gero o labirinto e o analiso com o maze_analyzer
+    Então a linha "Verdict:" do maze_analyzer começa com "<veredito>"
 
     Exemplos:
       | valor | veredito       |
