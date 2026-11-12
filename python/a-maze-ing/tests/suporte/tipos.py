@@ -87,4 +87,5 @@ TIPOS: dict[str, Callable[[str], object]] = {
         "não está vazio",
     ),
     "Origem": _enum("base", "do repositório"),
+    "TemLinha": _enum("tem uma linha", "não tem nenhuma linha"),
 }

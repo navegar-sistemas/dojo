@@ -124,6 +124,14 @@
         {
             "name": "resultado:Q",
             "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "regex:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "tem:TemLinha",
+            "regexp": "não tem nenhuma linha|tem uma linha"
         }
     ]
 }

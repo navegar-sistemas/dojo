@@ -101,6 +101,7 @@ class Estado:
     reserva: Path | None = None
     config: Config | None = None
     sem_gravacao: set[Path] = field(default_factory=set)
+    lido: list[Path] = field(default_factory=list)
 
     def proteger(self, caminho: Path) -> None:
         """Guarda o original do caminho até a chamada de ``restaurar``.

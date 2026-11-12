@@ -9,9 +9,12 @@ from step_defs.repositorio import (
     REMOTO,
     Instalacao,
     arquivo_na_raiz,
+    arquivo_tem_linha,
     caminho_na_situacao,
     caminho_preparado,
     config_de,
+    config_salvo_em,
+    eu_leio,
     git_ou_falha,
     repositorio_no_estado,
     situacao_de_erro,
@@ -217,6 +220,99 @@ def test_config_base_e_do_repositorio(cenario: Estado) -> None:
     )
     config_de(cenario, "do repositório")
     assert cenario.config == Config(["# largura", "WIDTH=20"])
+
+
+@pytest.mark.parametrize("origem", ["base", "do repositório"])
+def test_config_salvo_em_troca_o_destino(cenario: Estado, origem: str) -> None:
+    """O config salvo em outro arquivo é gravado lá, com as pastas pai.
+
+    Args:
+        cenario: Estado numa pasta temporária.
+        origem: De onde vem o config.
+    """
+    (cenario.cwd / "config.txt").write_text("WIDTH=20\n", encoding="utf-8")
+    config_salvo_em(cenario, origem, "sub/pasta/meu.txt")
+    assert cenario.config is not None
+    assert cenario.config.destino == "sub/pasta/meu.txt"
+    esperado = list(CONFIG_BASE) if origem == "base" else ["WIDTH=20"]
+    assert cenario.config.linhas == esperado
+    cenario.gravar_config()
+    gravado = cenario.cwd / "sub/pasta/meu.txt"
+    assert gravado.read_text(encoding="utf-8") == "\n".join(esperado) + "\n"
+    cenario.restaurar()
+    assert not (cenario.cwd / "sub").exists()
+
+
+def test_eu_leio_seleciona_arquivos_do_glob(cenario: Estado) -> None:
+    """Só arquivos entram na seleção; glob sem arquivo falha.
+
+    Args:
+        cenario: Estado numa pasta temporária.
+    """
+    (cenario.cwd / "mazegen-1.0.0.tar.gz").write_bytes(b"")
+    (cenario.cwd / "mazegen-1.0.0-py3-none-any.whl").write_bytes(b"")
+    (cenario.cwd / "mazegen").mkdir()
+    eu_leio(cenario, "mazegen-*")
+    assert [caminho.name for caminho in cenario.lido] == [
+        "mazegen-1.0.0-py3-none-any.whl",
+        "mazegen-1.0.0.tar.gz",
+    ]
+    with pytest.raises(pytest.fail.Exception, match="nenhum arquivo"):
+        eu_leio(cenario, "README.md")
+    with pytest.raises(pytest.fail.Exception, match="nenhum arquivo"):
+        eu_leio(cenario, "mazegen")
+
+
+@pytest.mark.parametrize(
+    ("tem", "regex", "passa"),
+    [
+        ("tem uma linha", "^PERFECT=False$", True),
+        ("tem uma linha", "^PERFECT=True$", False),
+        ("tem uma linha", "^False$", False),
+        ("não tem nenhuma linha", "^SEED=", True),
+        ("não tem nenhuma linha", "^# SEED=42$", False),
+    ],
+)
+def test_arquivo_tem_linha(
+    cenario: Estado, tem: str, regex: str, passa: bool
+) -> None:
+    """A expressão casa linha a linha, com ^ e $ em cada linha.
+
+    Args:
+        cenario: Estado numa pasta temporária.
+        tem: Valor do tipo TemLinha.
+        regex: Expressão procurada.
+        passa: Se o passo deve passar.
+    """
+    (cenario.cwd / "config.txt").write_text(
+        "WIDTH=20\nPERFECT=False\n# SEED=42\n", encoding="utf-8"
+    )
+    if passa:
+        arquivo_tem_linha(cenario, "config.txt", tem, regex)
+    else:
+        with pytest.raises(AssertionError, match="config.txt"):
+            arquivo_tem_linha(cenario, "config.txt", tem, regex)
+
+
+def test_arquivo_tem_linha_sem_arquivo(cenario: Estado) -> None:
+    """Arquivo inexistente falha dizendo qual falta.
+
+    Args:
+        cenario: Estado numa pasta temporária.
+    """
+    with pytest.raises(pytest.fail.Exception, match="LICENSE.md"):
+        arquivo_tem_linha(cenario, "LICENSE.md", "tem uma linha", "MIT")
+
+
+def test_config_salvo_em_sem_config_do_repositorio(cenario: Estado) -> None:
+    """Sem config.txt no repositório, o passo falha como ``config_de``.
+
+    Args:
+        cenario: Estado numa pasta temporária.
+    """
+    with pytest.raises(pytest.fail.Exception, match="config.txt"):
+        config_salvo_em(cenario, "do repositório", "outro.txt")
+    assert cenario.config is None
 
 
 @pytest.mark.parametrize(

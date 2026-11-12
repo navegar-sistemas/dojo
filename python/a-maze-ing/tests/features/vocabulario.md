@@ -164,7 +164,7 @@ parte do texto fixo.
 | V91 | then | `o programa aguarda no prompt "{prompt}"` | processo vivo e o prompt é a última coisa impressa | sessao |
 | V92 | then | `o construtor levanta "{excecao}"` | tipo da exceção guardada | excecao |
 | V93 | then | `a mensagem da exceção cita {trechos:L}` | `str(excecao)` contém os trechos | excecao |
-| V94 | when | `eu leio "{arquivo}"` | carrega texto, metadados ou lista de conteúdo; aceita glob | → lido |
+| V94 | when | `eu leio "{arquivo}"` | seleciona os arquivos que casam (aceita glob; nenhum arquivo falha); os passos Então leem deles o texto, os metadados ou a lista de conteúdo | → lido |
 | V95 | given | `o exemplo de uso da docstring de "{modulo}" salvo em "{arquivo}"` | extrai o bloco de código da seção `Example:` da docstring do módulo (I22) e grava no arquivo | → preparados |
 
 ## Listas fechadas

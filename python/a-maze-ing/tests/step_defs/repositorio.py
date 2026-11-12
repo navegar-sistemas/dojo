@@ -2,6 +2,7 @@
 
 import os
 import random
+import re
 import shutil
 import subprocess
 from collections.abc import Callable
@@ -271,6 +272,60 @@ def arquivo_na_raiz(estado: Estado, arquivo: str) -> None:
         pytest.fail(f'"{arquivo}" não existe em {estado.cwd}')
 
 
+@when(parsers.parse('eu leio "{arquivo:Q}"', extra_types=TIPOS))
+def eu_leio(estado: Estado, arquivo: str) -> None:
+    """Seleciona os arquivos que os passos Então vão conferir.
+
+    Args:
+        estado: Estado do cenário.
+        arquivo: Caminho relativo à raiz do repositório; aceita glob.
+    """
+    selecionados = [caminho for caminho in casar(estado, arquivo)
+                    if caminho.is_file()]
+    if not selecionados:
+        pytest.fail(f'nenhum arquivo casa com "{arquivo}" em {estado.cwd}')
+    estado.lido = selecionados
+
+
+@given(
+    parsers.parse(
+        'o arquivo "{arquivo:Q}" {tem:TemLinha} que casa com a expressão '
+        '"{regex:Q}"',
+        extra_types=TIPOS,
+    )
+)
+@then(
+    parsers.parse(
+        'o arquivo "{arquivo:Q}" {tem:TemLinha} que casa com a expressão '
+        '"{regex:Q}"',
+        extra_types=TIPOS,
+    )
+)
+def arquivo_tem_linha(
+    estado: Estado, arquivo: str, tem: str, regex: str
+) -> None:
+    """Procura a expressão nas linhas do arquivo (``re.search`` com ``re.M``).
+
+    Args:
+        estado: Estado do cenário.
+        arquivo: Caminho relativo à raiz do repositório.
+        tem: "tem uma linha" ou "não tem nenhuma linha".
+        regex: Expressão regular procurada.
+    """
+    caminho = estado.cwd / arquivo
+    if not caminho.is_file():
+        pytest.fail(f'"{arquivo}" não existe em {estado.cwd}')
+    texto = caminho.read_text(encoding="utf-8")
+    achado = re.search(regex, texto, re.M)
+    if tem == "tem uma linha":
+        assert achado, f'nenhuma linha de "{arquivo}" casa com {regex!r}'
+    else:
+        assert achado is None, (
+            f'"{arquivo}" tem a linha {achado.group(0)!r}, que casa com '
+            f"{regex!r}"
+        )
+
+
 @given(
     parsers.parse(
         'o caminho "{caminho:Q}" preparado como "{tipo:Q}"', extra_types=TIPOS
@@ -399,6 +454,25 @@ def config_de(estado: Estado, origem: str) -> None:
     estado.config = Config(
         repositorio.read_text(encoding="utf-8").splitlines()
     )
+
+
+@given(
+    parsers.parse('o config {origem:Origem} salvo em "{arquivo}"',
+                  extra_types=TIPOS)
+)
+def config_salvo_em(estado: Estado, origem: str, arquivo: str) -> None:
+    """Carrega o config como em ``config_de`` e troca o destino.
+
+    A gravação, num passo Quando, cria as pastas pai que faltam.
+
+    Args:
+        estado: Estado do cenário.
+        origem: "base" ou "do repositório".
+        arquivo: Destino relativo à pasta do cenário.
+    """
+    config_de(estado, origem)
+    if estado.config is not None:
+        estado.config.destino = arquivo
 
 
 # O que cada situação de erro faz com o config e com o seu destino.
