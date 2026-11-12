@@ -4,8 +4,13 @@ Funcionalidade: Geração aleatória reproduzível por seed
   a mesma seed produz o mesmo labirinto; toda célula fora do "42" é alcançável.
 
   # pdf: "a maze, possibly perfect (with a single path between entrance and exit), and writes it to a"
+  # pdf: "You may use it to check that your generator produces the mode requested by"
+  # pdf: "the configuration file."
   # md:  "gera um labirinto — possivelmente perfeito (com um único caminho entre entrada e saída) — e o escreve em um arquivo"
-  @obrigatorio @automatizado @decisao-I05 @decisao-I06 @pdf-p08-L04-L05 @md-L142
+  # md:  "Você pode usá-lo para verificar se o seu gerador produz o modo solicitado pelo arquivo de configuração."
+  # regua: "Run the provided analysis script "python3 maze_analyzer.py <output_file>": it controls the walls coherence and reports whether the maze matches the mode set in the configuration file (perfect single-path vs. playable board). Any incoherence or mismatch marks this question as failed."
+  # regua-md: "Execute o script de análise fornecido: `python3 maze_analyzer.py <output_file>`; ele controla a coerência das paredes e informa se o labirinto corresponde ao modo definido no arquivo de configuração (perfeito de caminho único vs. tabuleiro jogável). Qualquer incoerência ou divergência marca esta questão como reprovada."
+  @obrigatorio @automatizado @decisao-I05 @decisao-I06 @pdf-p08-L04-L05 @pdf-p11-L08-L09 @md-L142 @md-L220 @regua-p3
   Esquema do Cenário: O programa gera um labirinto, perfeito ou não, conforme o config
     Dado o config base com "PERFECT=<perfeito>"
     Quando eu gero o labirinto e o analiso com o maze_analyzer
@@ -119,7 +124,7 @@ Funcionalidade: Geração aleatória reproduzível por seed
   Cenário: O módulo gerador não depende do programa principal
     Dado o código-fonte de "mazegen"
     Quando a análise estática percorre o código-fonte
-    Então a análise estática confirma "mazegen não importa a_maze_ing"
+    Então a análise estática confirma "mazegen só importa a biblioteca padrão"
 
   # pdf: "of the maze and organize your code so that the generation logic can be reused later."
   # md:  "organizará seu código de forma que a lógica de geração possa ser reutilizada depois."

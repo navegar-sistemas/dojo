@@ -2,6 +2,8 @@
 
 import ast
 import re
+import sys
+import tokenize
 from pathlib import Path
 
 import pytest
@@ -18,7 +20,11 @@ SECOES_GOOGLE = {
     "Note:", "Notes:", "Attributes:", "Todo:",
 }
 SEM_RETORNO = {"None", "NoReturn", "Never"}
-DEFINICOES = ("função", "método", "classe")
+DEFINICOES = ("módulo", "função", "método", "classe")
+SUPRESSAO = re.compile(
+    r"(?i)#\s*noqa\b|#\s*flake8[:=]\s*noqa|#\s*type:\s*ignore|#\s*mypy:"
+)
+PACOTE_DO_MODULO = "mazegen"
 
 Definicao = ast.FunctionDef | ast.AsyncFunctionDef | ast.ClassDef
 Documentavel = Definicao | ast.Module
@@ -62,13 +68,34 @@ def codigo_fonte_de(estado: Estado, alvos: list[str]) -> None:
 def analise_percorre(estado: Estado) -> None:
     """Faz o ast.parse de cada fonte.
 
+    A leitura com utf-8-sig aceita o BOM, que o Python também aceita.
+
     Args:
         estado: Estado do cenário.
     """
     for fonte in estado.fontes:
         estado.arvores[fonte] = ast.parse(
-            fonte.read_text(encoding="utf-8"), filename=str(fonte)
+            fonte.read_text(encoding="utf-8-sig"), filename=str(fonte)
         )
+
+
+def importacoes(arvore: ast.Module) -> list[tuple[str, int]]:
+    """Módulos importados de forma absoluta em qualquer ponto do módulo.
+
+    Args:
+        arvore: Módulo já analisado.
+
+    Returns:
+        Nome completo e linha de cada import; imports relativos
+        ("from . import x") ficam de fora.
+    """
+    achados: list[tuple[str, int]] = []
+    for no in ast.walk(arvore):
+        if isinstance(no, ast.Import):
+            achados += [(apelido.name, no.lineno) for apelido in no.names]
+        elif isinstance(no, ast.ImportFrom) and no.module and not no.level:
+            achados.append((no.module, no.lineno))
+    return achados
 
 
 def modulos_importados(arvore: ast.Module) -> set[str]:
@@ -81,13 +108,7 @@ def modulos_importados(arvore: ast.Module) -> set[str]:
         Os nomes de primeiro nível ("pytest_bdd" para
         "from pytest_bdd.parsers import parse").
     """
-    nomes: set[str] = set()
-    for no in ast.walk(arvore):
-        if isinstance(no, ast.Import):
-            nomes.update(apelido.name.split(".")[0] for apelido in no.names)
-        elif isinstance(no, ast.ImportFrom) and no.module and not no.level:
-            nomes.add(no.module.split(".")[0])
-    return nomes
+    return {nome.split(".")[0] for nome, _ in importacoes(arvore)}
 
 
 def eh_arquivo_de_teste(caminho: Path) -> bool:
@@ -136,33 +157,6 @@ def todo_teste_usa_framework(estado: Estado) -> None:
         if not usa_framework_de_teste(estado.arvores[caminho])
     ]
     assert not sem_framework, f"testes sem pytest ou unittest: {sem_framework}"
-
-
-@then(
-    parsers.parse(
-        'nenhum arquivo Python do projeto contém "{texto:Q}"',
-        extra_types=TIPOS,
-    )
-)
-def nenhum_py_contem(estado: Estado, texto: str) -> None:
-    """Procura o texto nos .py do repositório.
-
-    Args:
-        estado: Estado do cenário.
-        texto: Texto proibido.
-    """
-    achados = [
-        f"{local(estado, arquivo)}:{numero}"
-        for arquivo in arquivos_python(estado.cwd)
-        for numero, linha in enumerate(
-            arquivo.read_text(encoding="utf-8", errors="replace")
-            .splitlines(),
-            start=1,
-        )
-        if texto in linha
-    ]
-    if achados:
-        pytest.fail(f"{texto!r} aparece em: {', '.join(achados)}")
 
 
 def local(estado: Estado, arquivo: Path) -> str:
@@ -350,13 +344,24 @@ def docstring_em_cada(estado: Estado, definicao: str) -> None:
 
     Args:
         estado: Estado do cenário, com as árvores da análise.
-        definicao: "função", "método" ou "classe".
+        definicao: "módulo", "função", "método" ou "classe".
     """
     if definicao not in DEFINICOES:
         pytest.fail(
             f'definição "{definicao}" não existe; as válidas são: '
             f"{', '.join(DEFINICOES)}"
         )
+    if definicao == "módulo":
+        falhar_se(
+            estado,
+            [
+                (arquivo, 1, "sem docstring")
+                for arquivo, arvore in estado.arvores.items()
+                if not ast.get_docstring(arvore)
+            ],
+            "módulo sem docstring",
+        )
+        return
     falhar_se(
         estado,
         [
@@ -377,7 +382,7 @@ def aspas_triplas_duplas(estado: Estado) -> None:
     """
     violacoes: list[tuple[Path, int, str]] = []
     for arquivo, no in documentaveis(estado):
-        fonte = arquivo.read_text(encoding="utf-8")
+        fonte = arquivo.read_text(encoding="utf-8-sig")
         expressao = no.body[0]
         assert isinstance(expressao, ast.Expr)
         trecho = ast.get_source_segment(fonte, expressao.value) or ""
@@ -573,6 +578,29 @@ def colecao_vazia(valor: ast.expr) -> bool:
     )
 
 
+def atribui_colecao_vazia(alvo: ast.expr, valor: ast.expr) -> bool:
+    """Diz se a atribuição põe uma coleção vazia em algum nome.
+
+    Args:
+        alvo: Lado esquerdo; tupla ou lista é desempacotada.
+        valor: Lado direito.
+
+    Returns:
+        True para ``x = []`` e para ``a, b = [], []``, em qualquer
+        profundidade do desempacotamento.
+    """
+    if (
+        isinstance(alvo, ast.Tuple | ast.List)
+        and isinstance(valor, ast.Tuple | ast.List)
+        and len(alvo.elts) == len(valor.elts)
+    ):
+        return any(
+            atribui_colecao_vazia(parte, item)
+            for parte, item in zip(alvo.elts, valor.elts)
+        )
+    return colecao_vazia(valor)
+
+
 @then('a análise estática confirma "coleções vazias com tipo anotado"')
 def colecoes_anotadas(estado: Estado) -> None:
     """Coleção vazia só é atribuída com anotação (x: list[int] = []).
@@ -586,7 +614,53 @@ def colecoes_anotadas(estado: Estado) -> None:
             (arquivo, no.lineno, ast.unparse(no))
             for arquivo, arvore in estado.arvores.items()
             for no in ast.walk(arvore)
-            if isinstance(no, ast.Assign) and colecao_vazia(no.value)
+            if isinstance(no, ast.Assign)
+            and any(
+                atribui_colecao_vazia(alvo, no.value) for alvo in no.targets
+            )
         ],
         "coleções vazias sem anotação de tipo",
+    )
+
+
+@then('a análise estática confirma "sem supressão de flake8 nem mypy"')
+def sem_supressao(estado: Estado) -> None:
+    """Nenhum comentário desliga o flake8 ou o mypy.
+
+    Lê os comentários pelo tokenize, de modo que o texto dentro de uma
+    string não conta; casa ``# noqa``, ``# flake8: noqa``, ``# type:
+    ignore`` e ``# mypy:`` em qualquer caixa e espaçamento.
+
+    Args:
+        estado: Estado do cenário, com as árvores da análise.
+    """
+    violacoes: list[tuple[Path, int, str]] = []
+    for arquivo in estado.arvores:
+        with arquivo.open("rb") as fonte:
+            violacoes += [
+                (arquivo, token.start[0], token.string)
+                for token in tokenize.tokenize(fonte.readline)
+                if token.type == tokenize.COMMENT
+                and SUPRESSAO.search(token.string)
+            ]
+    falhar_se(estado, violacoes, "comentários que desligam o flake8 ou o mypy")
+
+
+@then('a análise estática confirma "mazegen só importa a biblioteca padrão"')
+def so_biblioteca_padrao(estado: Estado) -> None:
+    """Todo import absoluto é da biblioteca padrão ou do próprio mazegen.
+
+    Args:
+        estado: Estado do cenário, com as árvores da análise.
+    """
+    falhar_se(
+        estado,
+        [
+            (arquivo, linha, f"importa {nome}")
+            for arquivo, arvore in estado.arvores.items()
+            for nome, linha in importacoes(arvore)
+            if nome.split(".")[0] != PACOTE_DO_MODULO
+            and nome.split(".")[0] not in sys.stdlib_module_names
+        ],
+        "imports de fora da biblioteca padrão",
     )

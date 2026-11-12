@@ -200,7 +200,7 @@ Funcionalidade: Arquivo de configuração
   # pdf: "EXIT            Exit coordinates (x,y)       EXIT=19,14"
   # md:  "`ENTRY` | Coordenadas da entrada (x,y) | `ENTRY=0,0`"
   # md:  "`EXIT` | Coordenadas da saída (x,y) | `EXIT=19,14`"
-  @obrigatorio @automatizado @pdf-p08-L24-L25 @md-L169-L170
+  @obrigatorio @automatizado @decisao-D13 @pdf-p08-L24-L25 @md-L169-L170
   Esquema do Cenário: ENTRY e EXIT são coordenadas x,y
     Dado o config com "ENTRY=<entrada>" e "EXIT=<saida>"
     Quando eu gero o labirinto
@@ -217,7 +217,7 @@ Funcionalidade: Arquivo de configuração
   # pdf: "EXIT            Exit coordinates (x,y)       EXIT=19,14"
   # md:  "`ENTRY` | Coordenadas da entrada (x,y) | `ENTRY=0,0`"
   # md:  "`EXIT` | Coordenadas da saída (x,y) | `EXIT=19,14`"
-  @obrigatorio @derivado @automatizado @pdf-p08-L22-L25 @md-L167-L170
+  @obrigatorio @derivado @automatizado @decisao-D13 @pdf-p08-L22-L25 @md-L167-L170
   Cenário: x é a coluna e y é a linha, contando a partir de 0
     Dado o config com "WIDTH=20", "HEIGHT=15" e "EXIT=19,14"
     Quando eu gero o labirinto
@@ -292,7 +292,7 @@ Funcionalidade: Arquivo de configuração
 
   # pdf: "OUTPUT_FILE Output filename                  OUTPUT_FILE=maze.txt"
   # md:  "`OUTPUT_FILE` | Nome do arquivo de saída | `OUTPUT_FILE=maze.txt`"
-  @obrigatorio @automatizado @decisao-D01 @pdf-p08-L26 @md-L171
+  @obrigatorio @automatizado @decisao-D01 @decisao-D05 @pdf-p08-L26 @md-L171
   Cenário: OUTPUT_FILE vazio gera erro
     Dado o config com "OUTPUT_FILE="
     Quando eu executo "python3 a_maze_ing.py cfg.txt"
@@ -358,7 +358,8 @@ Funcionalidade: Arquivo de configuração
   # md:  "Você pode adicionar chaves extras (ex.: seed, algoritmo, modo de exibição) se for útil."
   @opcional @automatizado @pdf-p09-L02 @md-L174
   Cenário: Chaves extras conhecidas pelo programa são aceitas
-    Dado o config com "SEED=42"
+    Dado o config sem a chave "SEED"
+    E o config com "SEED=7"
     Quando eu executo "python3 a_maze_ing.py cfg.txt" com a entrada "4"
     Então o código de saída é 0
 

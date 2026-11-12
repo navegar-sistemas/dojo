@@ -11,12 +11,13 @@ from step_defs.analise_estatica import (
     colecoes_anotadas,
     docstring_em_cada,
     linha_em_branco,
-    nenhum_py_contem,
     open_dentro_de_with,
     resumo_com_ponto,
     retorno_anotado,
     secao_args,
     secao_returns,
+    sem_supressao,
+    so_biblioteca_padrao,
     todo_teste_usa_framework,
 )
 from suporte.estado import Estado
@@ -53,6 +54,11 @@ CASOS: list[tuple[Passo, str, str]] = [
         retorno_anotado,
         "def f() -> None:\n    pass\n",
         "class C:\n    def f(self):\n        pass\n",
+    ),
+    (
+        lambda estado: docstring_em_cada(estado, "módulo"),
+        '"""Módulo."""\n\nx = 1\n',
+        "x = 1\n",
     ),
     (
         lambda estado: docstring_em_cada(estado, "função"),
@@ -131,12 +137,34 @@ CASOS: list[tuple[Passo, str, str]] = [
         "conjunto: set[int] = set()\ncopia = list(conjunto)\n",
         "mapa = dict()\n",
     ),
+    (
+        colecoes_anotadas,
+        "a, b = 1, [1]\nc: list[int] = []\n",
+        "a, b = [], []\n",
+    ),
+    (
+        colecoes_anotadas,
+        "(a, [b, c]) = (1, [2, 3])\n",
+        "(a, [b, c]) = (1, [2, set()])\n",
+    ),
+    (
+        so_biblioteca_padrao,
+        "import os.path\nfrom collections import abc\n"
+        "from mazegen.errors import MazeError\nfrom . import gerador\n",
+        "import os\nimport numpy\n",
+    ),
+    (
+        so_biblioteca_padrao,
+        "import mazegen\n",
+        "from a_maze_ing import main\n",
+    ),
 ]
 
 IDS = [
     "open-fora-de-with",
     "caminho-open-fora-de-with",
     "retorno",
+    "docstring-modulo",
     "docstring-funcao",
     "docstring-metodo",
     "docstring-classe",
@@ -152,6 +180,10 @@ IDS = [
     "returns-de-atributo",
     "lista-vazia",
     "dict-vazio",
+    "desempacotada",
+    "desempacotada-aninhada",
+    "pacote-de-terceiros",
+    "programa-principal",
 ]
 
 
@@ -200,7 +232,7 @@ def test_docstring_de_definicao_desconhecida(cenario: Estado) -> None:
         cenario: Estado numa pasta temporária.
     """
     with pytest.raises(pytest.fail.Exception, match="não existe"):
-        docstring_em_cada(analisar(cenario, "x = 1\n"), "módulo")
+        docstring_em_cada(analisar(cenario, "x = 1\n"), "variável")
 
 
 def test_arquivos_de_teste_usam_framework(cenario: Estado) -> None:
@@ -268,14 +300,57 @@ def test_codigo_fonte_inexistente_ou_vazio(cenario: Estado) -> None:
         codigo_fonte_de(cenario, ["."])
 
 
-def test_nenhum_py_contem(cenario: Estado) -> None:
-    """O texto proibido é procurado linha a linha nos .py do repositório.
+# Montados em pedaços: escrito por inteiro, um comentário de supressão dentro
+# de uma string ainda desliga o flake8 nesta linha.
+CERQUILHA = "#"
+SUPRESSOES = [
+    f"x = 1  {CERQUILHA} noqa\n",
+    f"x = 1  {CERQUILHA}NOQA: E501\n",
+    f"{CERQUILHA} flake8: noqa\nx = 1\n",
+    f"x: int = 1  {CERQUILHA} type:ignore[assignment]\n",
+    f"{CERQUILHA} mypy: ignore-errors\nx = 1\n",
+]
+
+
+@pytest.mark.parametrize(
+    "ruim",
+    SUPRESSOES,
+    ids=["noqa", "noqa-maiusculo", "flake8-noqa", "type-ignore", "mypy"],
+)
+def test_supressao_em_comentario(cenario: Estado, ruim: str) -> None:
+    """Cada forma de desligar o flake8 ou o mypy num comentário é recusada.
+
+    Args:
+        cenario: Estado numa pasta temporária.
+        ruim: Fonte com um comentário de supressão.
+    """
+    with pytest.raises(pytest.fail.Exception, match="ruim.py"):
+        sem_supressao(analisar(cenario, ruim, "ruim.py"))
+
+
+def test_supressao_dentro_de_string_nao_conta(cenario: Estado) -> None:
+    """O texto de supressão numa string ou num comentário comum passa.
 
     Args:
         cenario: Estado numa pasta temporária.
     """
-    (cenario.cwd / "limpo.py").write_text("x = 1\n", encoding="utf-8")
-    nenhum_py_contem(cenario, "TODO")
-    (cenario.cwd / "sujo.py").write_text("x = 1\n# TODO\n", encoding="utf-8")
-    with pytest.raises(pytest.fail.Exception, match="sujo.py:2"):
-        nenhum_py_contem(cenario, "TODO")
+    fonte = (
+        f'aviso = "{CERQUILHA} noqa"\n'
+        f"{CERQUILHA} o tipo: ignorado só no texto\n"
+    )
+    sem_supressao(analisar(cenario, fonte))
+
+
+def test_fonte_com_bom_e_analisada(cenario: Estado) -> None:
+    """Arquivo com BOM, que o Python executa, também passa pela análise.
+
+    Args:
+        cenario: Estado numa pasta temporária.
+    """
+    (cenario.cwd / "bom.py").write_bytes(
+        b'\xef\xbb\xbf"""Modulo."""\n\n\ndef f() -> None:\n    """Faz."""\n'
+    )
+    codigo_fonte_de(cenario, ["."])
+    analise_percorre(cenario)
+    aspas_triplas_duplas(cenario)
+    sem_supressao(cenario)

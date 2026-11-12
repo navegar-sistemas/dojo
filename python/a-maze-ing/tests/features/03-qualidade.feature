@@ -8,10 +8,12 @@ Funcionalidade: Qualidade de código
   @obrigatorio @automatizado @decisao-I14 @pdf-p06-L05 @md-L100
   Cenário: Todo o código segue o padrão flake8
     Dado o repositório no estado "instalado"
+    E o código-fonte de "."
     Quando eu executo ".venv/bin/flake8 ."
+    E a análise estática percorre o código-fonte
     Então o código de saída é 0
     E a saída é ""
-    E nenhum arquivo Python do projeto contém "# noqa"
+    E a análise estática confirma "sem supressão de flake8 nem mypy"
 
   # pdf: "Your functions should handle exceptions gracefully to avoid crashes. Use try-except"
   # pdf: "It must never crash unexpectedly, and must"
@@ -110,6 +112,7 @@ Funcionalidade: Qualidade de código
     Dado o repositório no estado "instalado"
     Quando eu executo "mypy . --disallow-untyped-defs"
     Então a saída não contém "Function is missing a type annotation"
+    E a saída contém "Success: no issues found"
 
   # pdf: "Your code must include type hints for function parameters, return types, and vari-"
   # md:  "Seu código deve incluir type hints para parâmetros de função, tipos de retorno e variáveis onde aplicável"
@@ -125,9 +128,10 @@ Funcionalidade: Qualidade de código
   Cenário: Variáveis cujo tipo não é inferível têm type hint
     Dado o repositório no estado "instalado"
     E o código-fonte de "."
-    Quando eu executo "make lint"
+    Quando eu executo "mypy . --warn-return-any --warn-unused-ignores --ignore-missing-imports --disallow-untyped-defs --check-untyped-defs"
     E a análise estática percorre o código-fonte
-    Então a saída não contém "Need type annotation"
+    Então o código de saída é 0
+    E a saída não contém "Need type annotation"
     E a análise estática confirma "coleções vazias com tipo anotado"
 
   # pdf: "Use mypy for static type check-"
@@ -145,9 +149,11 @@ Funcionalidade: Qualidade de código
   @obrigatorio @automatizado @decisao-I14 @pdf-p06-L14 @md-L103
   Cenário: Todas as funções passam no mypy sem erros
     Dado o repositório no estado "instalado"
+    E o código-fonte de "."
     Quando eu executo "mypy . --warn-return-any --warn-unused-ignores --ignore-missing-imports --disallow-untyped-defs --check-untyped-defs"
+    E a análise estática percorre o código-fonte
     Então a saída contém "Success: no issues found"
-    E nenhum arquivo Python do projeto contém "# type: ignore"
+    E a análise estática confirma "sem supressão de flake8 nem mypy"
 
   # pdf: "Include docstrings in functions and classes following PEP 257"
   # md:  "Inclua docstrings em funções e classes seguindo a PEP 257"
@@ -159,6 +165,7 @@ Funcionalidade: Qualidade de código
 
     Exemplos:
       | definicao |
+      | módulo    |
       | função    |
       | método    |
       | classe    |

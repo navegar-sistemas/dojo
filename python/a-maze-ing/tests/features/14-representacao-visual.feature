@@ -54,7 +54,7 @@ Funcionalidade: Representação visual
 
   # pdf: "The visual should clearly show walls, entry, exit, and the solution path."
   # md:  "O visual deve mostrar claramente as paredes, a entrada, a saída e o caminho da solução."
-  @recomendado @automatizado @decisao-I02 @decisao-I21 @pdf-p12-L06 @md-L261
+  @recomendado @automatizado @decisao-D13 @decisao-I02 @decisao-I21 @pdf-p12-L06 @md-L261
   Esquema do Cenário: Entrada e saída aparecem destacadas
     Dado o config base
     Quando eu executo "python3 a_maze_ing.py cfg.txt" com a entrada "4"
@@ -70,7 +70,7 @@ Funcionalidade: Representação visual
 
   # pdf: "The visual should clearly show walls, entry, exit, and the solution path."
   # md:  "O visual deve mostrar claramente as paredes, a entrada, a saída e o caminho da solução."
-  @recomendado @automatizado @decisao-I02 @decisao-I21 @pdf-p12-L06 @md-L261
+  @recomendado @automatizado @decisao-I02 @decisao-I03 @decisao-I21 @pdf-p12-L06 @md-L261
   Cenário: O caminho da solução aparece quando visível
     Dado o config base
     E o programa iniciado com "python3 a_maze_ing.py cfg.txt"
@@ -91,7 +91,7 @@ Funcionalidade: Representação visual
 
   # pdf: "The shortest path is highlighted in both."
   # md:  "O caminho mais curto está destacado em ambos."
-  @informativo @derivado @automatizado @decisao-I02 @decisao-I21 @pdf-p10-L04 @md-L200
+  @informativo @derivado @automatizado @decisao-I02 @decisao-I03 @decisao-I21 @pdf-p10-L04 @md-L200
   Esquema do Cenário: O caminho mais curto pode ser destacado nos dois modos
     Dado o config base com "PERFECT=<perfeito>"
     E o programa iniciado com "python3 a_maze_ing.py cfg.txt"
@@ -105,7 +105,7 @@ Funcionalidade: Representação visual
 
   # figura: legenda "entry", "exit", ""42" pattern", "shortest path"
   # md:  "Legenda: entrada, saída, padrão "42", caminho mais curto."
-  @informativo @derivado @automatizado @decisao-I02 @decisao-I04 @pdf-p10-figura @md-L198
+  @informativo @derivado @automatizado @decisao-I02 @decisao-I03 @decisao-I04 @pdf-p10-figura @md-L198
   Cenário: Entrada, saída, "42" e caminho têm cores distintas
     Dado o config base
     E o programa iniciado com "python3 a_maze_ing.py cfg.txt"

@@ -55,7 +55,7 @@ Funcionalidade: Grade, paredes e validade estrutural
 
   # pdf: "Entry and exit exist and are different, inside the maze bounds."
   # md:  "Entrada e saída existem, são diferentes e estão dentro dos limites do labirinto."
-  @obrigatorio @automatizado @pdf-p09-L09 @md-L183
+  @obrigatorio @automatizado @decisao-D13 @pdf-p09-L09 @md-L183
   Cenário: A entrada existe no labirinto gerado
     Dado um labirinto gerado pelo programa com o config base
     Quando o validador da suíte lê o labirinto
@@ -64,7 +64,7 @@ Funcionalidade: Grade, paredes e validade estrutural
 
   # pdf: "Entry and exit exist and are different, inside the maze bounds."
   # md:  "Entrada e saída existem, são diferentes e estão dentro dos limites do labirinto."
-  @obrigatorio @automatizado @pdf-p09-L09 @md-L183
+  @obrigatorio @automatizado @decisao-D13 @pdf-p09-L09 @md-L183
   Cenário: A saída existe no labirinto gerado
     Dado um labirinto gerado pelo programa com o config base
     Quando o validador da suíte lê o labirinto

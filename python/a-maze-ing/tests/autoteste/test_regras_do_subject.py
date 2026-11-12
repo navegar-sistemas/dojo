@@ -12,12 +12,12 @@ from step_defs.analise_estatica import (
     colecoes_anotadas,
     docstring_em_cada,
     linha_em_branco,
-    nenhum_py_contem,
     open_dentro_de_with,
     resumo_com_ponto,
     retorno_anotado,
     secao_args,
     secao_returns,
+    sem_supressao,
     todo_teste_usa_framework,
 )
 from suporte.estado import TESTS_DIR, Estado
@@ -32,11 +32,8 @@ REGRAS: list[Callable[[Estado], None]] = [
     secao_returns,
     colecoes_anotadas,
     todo_teste_usa_framework,
+    sem_supressao,
 ]
-
-# Montadas em pedaços: escritas por inteiro, este arquivo conteria os
-# próprios textos que procura.
-SUPRESSOES = ["# " + "noqa", "# type" + ": ignore"]
 
 
 @pytest.mark.parametrize("regra", REGRAS, ids=lambda regra: regra.__name__)
@@ -67,15 +64,3 @@ def test_a_suite_tem_docstring_em_cada(estado: Estado, definicao: str) -> None:
     codigo_fonte_de(estado, ["."])
     analise_percorre(estado)
     docstring_em_cada(estado, definicao)
-
-
-@pytest.mark.parametrize("supressao", SUPRESSOES)
-def test_a_suite_nao_suprime_o_lint(estado: Estado, supressao: str) -> None:
-    """Nenhum .py da suíte desliga o flake8 ou o mypy numa linha.
-
-    Args:
-        estado: Estado do cenário.
-        supressao: Comentário que desliga uma verificação.
-    """
-    estado.cwd = TESTS_DIR
-    nenhum_py_contem(estado, supressao)

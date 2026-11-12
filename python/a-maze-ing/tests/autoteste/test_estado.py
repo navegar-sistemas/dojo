@@ -1,6 +1,7 @@
 """Testes do estado do cenário: comandos, proteção de caminhos e config."""
 
 import os
+import signal
 import time
 from pathlib import Path
 
@@ -86,6 +87,32 @@ def test_tempo_limite_mata_o_grupo_do_comando(
     assert processo_morreu(int(execucao.saida_padrao))
 
 
+def test_tempo_limite_com_neto_segurando_a_saida(
+    cenario: Estado, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Neto noutra sessão com o stdout aberto não prende a execução.
+
+    O grupo do shell já acabou quando o tempo estoura; a execução termina
+    perto de TIMEOUT + FECHAMENTO, com a saída lida até ali.
+
+    Args:
+        cenario: Estado numa pasta temporária.
+        monkeypatch: Troca os dois prazos por meio segundo.
+    """
+    monkeypatch.setattr("suporte.estado.TIMEOUT", 0.5)
+    monkeypatch.setattr("suporte.estado.FECHAMENTO", 0.5)
+    comando = (
+        "python3 -c 'import subprocess; print(subprocess.Popen("
+        "[\"sleep\", \"30\"], start_new_session=True).pid)'"
+    )
+    inicio = time.monotonic()
+    execucao = cenario.executar(comando)
+    duracao = time.monotonic() - inicio
+    os.kill(int(execucao.saida_padrao), signal.SIGKILL)
+    assert execucao.estourou
+    assert duracao < 3
+
+
 def test_resultado_sem_execucao_falha(cenario: Estado) -> None:
     """Pedir o último resultado antes de rodar um comando é erro do cenário.
 
@@ -157,6 +184,24 @@ def test_restaurar_duas_vezes_nao_apaga_o_original(cenario: Estado) -> None:
     assert alvo.read_text(encoding="utf-8") == "original"
 
 
+def test_reservado_e_criar_pastas(cenario: Estado) -> None:
+    """Só a pasta mais alta criada é registrada, e ela some no fim.
+
+    Args:
+        cenario: Estado numa pasta temporária.
+    """
+    fundo = cenario.cwd / "a" / "b" / "c"
+    cenario.criar_pastas(fundo)
+    assert fundo.is_dir()
+    assert cenario.preparados == [(cenario.cwd / "a", None)]
+    assert cenario.reservado(cenario.cwd / "a")
+    assert not cenario.reservado(fundo)
+    cenario.criar_pastas(fundo)
+    assert len(cenario.preparados) == 1
+    cenario.restaurar()
+    assert list(cenario.cwd.iterdir()) == []
+
+
 def test_proteger_sem_reserva_falha(tmp_path: Path) -> None:
     """Estado criado sem pasta de reserva não pode proteger caminhos.
 
@@ -178,7 +223,7 @@ def test_gravar_config_escreve_as_linhas(cenario: Estado) -> None:
     destino = cenario.cwd / "sub" / "cfg.txt"
     assert destino.read_text(encoding="utf-8") == "WIDTH=20\nHEIGHT=15\n"
     cenario.restaurar()
-    assert not destino.exists()
+    assert list(cenario.cwd.iterdir()) == []
 
 
 def test_gravar_config_respeita_destino_preparado(cenario: Estado) -> None:

@@ -17,6 +17,7 @@ MOTIVOS = {
     "tamanho sem tabuleiro Pac-Man": "Pac-Man",
     "coordenada no padrão 42": '"42"',
 }
+AVISO_DO_42 = 'Error: maze too small for the "42" pattern'
 
 
 def conferir_mensagem_de_erro(execucao: Execucao, itens: list[str]) -> str:
@@ -247,8 +248,9 @@ def termina_no_tempo(estado: Estado) -> None:
 def resultado_da_execucao(estado: Estado, resultado: str) -> None:
     """Confere "sucesso" ou "erro citando A, B[; motivo: M]".
 
-    Sucesso exige código 0, nenhum "Error:" e o OUTPUT_FILE do config
-    gravado com conteúdo; erro exige código 1 e a mensagem da D01.
+    Sucesso exige código 0, nenhuma linha com "Error:" no stderr além do
+    aviso do "42" omitido (D06, I10) e o OUTPUT_FILE do config gravado com
+    conteúdo; erro exige código 1 e a mensagem da D01.
 
     Args:
         estado: Estado do cenário.
@@ -258,7 +260,11 @@ def resultado_da_execucao(estado: Estado, resultado: str) -> None:
     if execucao.estourou:
         pytest.fail(f"'{execucao.comando}' estourou o tempo limite")
     if resultado == "sucesso":
-        if execucao.codigo != 0 or "Error:" in execucao.saida_erro:
+        erros = [
+            linha for linha in execucao.saida_erro.splitlines()
+            if "Error:" in linha and linha.strip() != AVISO_DO_42
+        ]
+        if execucao.codigo != 0 or erros:
             pytest.fail(
                 f"esperado sucesso, mas terminou com código "
                 f"{execucao.codigo}:\n{execucao.saida_erro}"

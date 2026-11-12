@@ -1,10 +1,16 @@
-"""Conferência do interpretador que os cenários usam."""
+"""Conferência do que os cenários usam fora do projeto: python3 e analyzer."""
 
 import shutil
 import subprocess
+from pathlib import Path
+
+import pytest
 
 MINIMO = (3, 10)
 IMPRIMIR_VERSAO = "import sys; print('%d.%d' % sys.version_info[:2])"
+ANALYZER = (
+    Path(__file__).resolve().parents[2] / "private" / "maze_analyzer.py"
+)
 
 
 def problema_da_versao(caminho: str, versao: str) -> str | None:
@@ -46,3 +52,20 @@ def problema_do_python3() -> str | None:
         check=True,
     )
     return problema_da_versao(caminho, processo.stdout.strip())
+
+
+def caminho_do_analyzer() -> Path:
+    """Caminho do maze_analyzer.py que acompanha o subject.
+
+    O arquivo fica em private/, fora do git: num checkout novo ele falta e
+    o passo que o usa falha dizendo onde colocá-lo.
+
+    Returns:
+        O caminho do analyzer.
+    """
+    if not ANALYZER.is_file():
+        pytest.fail(
+            f"{ANALYZER} não existe: o maze_analyzer.py vem com o subject e "
+            "não é versionado; copie-o para esse caminho"
+        )
+    return ANALYZER

@@ -39,7 +39,7 @@ Funcionalidade: Interações do usuário
 
   # pdf: "Re-generate a new maze and display it."
   # md:  "Regenerar um novo labirinto e exibi-lo."
-  @obrigatorio @derivado @decisao-D16 @automatizado @pdf-p12-L09 @md-L265
+  @obrigatorio @derivado @decisao-D13 @decisao-D16 @automatizado @decisao-I03 @pdf-p12-L09 @md-L265
   Cenário: Regenerar regrava o arquivo de saída
     Dado o programa iniciado com "python3 a_maze_ing.py cfg.txt"
     Quando eu envio ao menu "1"
@@ -53,7 +53,7 @@ Funcionalidade: Interações do usuário
   # pdf: "Re-generate a new maze and display it."
   # md:  "O labirinto deve ser gerado aleatoriamente, mas a reprodutibilidade via seed é obrigatória."
   # md:  "Regenerar um novo labirinto e exibi-lo."
-  @obrigatorio @derivado @decisao-D02 @decisao-D16 @automatizado @pdf-p09-L05 @pdf-p12-L09 @md-L180 @md-L265
+  @obrigatorio @derivado @decisao-D02 @decisao-D16 @automatizado @decisao-I03 @pdf-p09-L05 @pdf-p12-L09 @md-L180 @md-L265
   Cenário: Com SEED, a sequência de regenerações é reproduzível
     Quando eu executo "python3 a_maze_ing.py cfg.txt" 2 vezes com a entrada "1", "1" e "4"
     Então os resultados são idênticos em "saída exibida"
@@ -81,7 +81,7 @@ Funcionalidade: Interações do usuário
 
   # pdf: "Show/Hide a valid shortest path from the entrance to the exit."
   # md:  "Mostrar/Ocultar um caminho mais curto válido da entrada até a saída."
-  @obrigatorio @automatizado @decisao-D15 @decisao-I08 @pdf-p12-L10 @md-L266
+  @obrigatorio @automatizado @decisao-D15 @decisao-I03 @decisao-I08 @pdf-p12-L10 @md-L266
   Cenário: O caminho exibido é válido e mais curto
     Dado o programa iniciado com "python3 a_maze_ing.py cfg.txt"
     Quando eu envio ao menu "2"
@@ -92,7 +92,7 @@ Funcionalidade: Interações do usuário
   # md:  "Mostrar/Ocultar um caminho mais curto válido da entrada até a saída."
   # regua: "Control that the shortest path sequence in the output file matches its visual representation. Any error will mark this question as failed."
   # regua-md: "Verifique que a sequência do caminho mais curto no arquivo de saída corresponde à sua representação visual. Qualquer erro marca esta questão como reprovada."
-  @obrigatorio @automatizado @decisao-D15 @decisao-D16 @decisao-I02 @decisao-I21 @pdf-p12-L10 @md-L266 @regua-p3
+  @obrigatorio @automatizado @decisao-D15 @decisao-D16 @decisao-I02 @decisao-I03 @decisao-I21 @pdf-p12-L10 @md-L266 @regua-p3
   Esquema do Cenário: O caminho exibido é o mesmo gravado no arquivo de saída
     Dado o config com "PERFECT=<perfeito>"
     E o programa iniciado com "python3 a_maze_ing.py cfg.txt"
@@ -136,7 +136,7 @@ Funcionalidade: Interações do usuário
 
   # pdf: "Change maze wall colours."
   # md:  "Alterar as cores das paredes do labirinto."
-  @obrigatorio @derivado @decisao-I04 @automatizado @decisao-I21 @pdf-p12-L11 @md-L267
+  @obrigatorio @derivado @decisao-I04 @automatizado @decisao-I03 @decisao-I21 @pdf-p12-L11 @md-L267
   Cenário: Trocar a cor várias vezes percorre a paleta e volta ao início
     Dado o programa iniciado com "python3 a_maze_ing.py cfg.txt"
     Quando eu envio ao menu "3", "3", "3" e "3"
@@ -155,7 +155,7 @@ Funcionalidade: Interações do usuário
   # pdf: "Change maze wall colours."
   # md:  "Regenerar um novo labirinto e exibi-lo."
   # md:  "Alterar as cores das paredes do labirinto."
-  @obrigatorio @derivado @decisao-D16 @decisao-I04 @automatizado @decisao-I21 @pdf-p12-L09 @pdf-p12-L11 @md-L265 @md-L267
+  @obrigatorio @derivado @decisao-D16 @decisao-I04 @automatizado @decisao-I03 @decisao-I21 @pdf-p12-L09 @pdf-p12-L11 @md-L265 @md-L267
   Cenário: A cor escolhida das paredes se mantém ao regenerar
     Dado o programa iniciado com "python3 a_maze_ing.py cfg.txt"
     Quando eu envio ao menu "3" e "1"
@@ -231,7 +231,7 @@ Funcionalidade: Interações do usuário
 
   # pdf: "It must never crash unexpectedly, and must"
   # md:  "Ele nunca deve travar inesperadamente"
-  @obrigatorio @derivado @decisao-D17 @automatizado @pdf-p08-L15 @md-L155
+  @obrigatorio @derivado @decisao-D17 @automatizado @decisao-I03 @pdf-p08-L15 @md-L155
   Esquema do Cenário: Fim da entrada ou interrupção encerram limpo
     Dado o programa iniciado com "python3 a_maze_ing.py cfg.txt"
     Quando o evento "<evento>" acontece no menu

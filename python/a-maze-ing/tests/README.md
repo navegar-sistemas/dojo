@@ -2,7 +2,14 @@
 
 Executa os cenários de `features/` contra o projeto em `../project/`.
 
-Requisitos: `python3` 3.10 ou posterior no `PATH`, `make` e `git`.
+Requisitos:
+
+- `python3` 3.10 ou posterior no `PATH`, `make`, `git` e `tar`;
+- `../private/maze_analyzer.py`, o script de análise que vem com o subject e não é versionado;
+  sem ele, os passos que o usam falham citando esse caminho;
+- um usuário comum, não root: os cenários que dependem de `chmod` são pulados como root;
+- `AMAZEING_REMOTE` com a URL do repositório de entrega, para o estado `clone do remoto`; sem
+  ela, esses cenários são pulados com a mensagem que diz qual variável falta.
 
 ## Comandos
 
@@ -81,9 +88,15 @@ tests/
 
 ## Onde os cenários rodam
 
-- Os comandos rodam em `../project/`, com o `python3` do `PATH` e tempo limite de 30 s.
-- O estado `clone limpo` roda numa cópia temporária do que está versionado em `project/`.
+- Os comandos rodam em `../project/`, com tempo limite de 30 s.
+- No estado `atual`, o `PATH` é o de quem roda a suíte; nos estados `instalado`, `clone limpo`
+  e `clone do remoto`, ele começa pelo `.venv/bin` do repositório do cenário.
 - O estado `instalado` roda `make install` em `project/` uma vez por rodada.
-- Arquivo que um cenário cria, troca ou apaga em `project/` volta a ser o que era no fim do
-  cenário.
+- O estado `clone limpo` roda numa cópia temporária do último commit de `project/`
+  (`git archive HEAD`): mudanças não commitadas ficam de fora.
+- O estado `clone do remoto` roda num `git clone --depth 1` de `$AMAZEING_REMOTE`.
+- O git da suíte ignora a configuração global e de sistema de quem roda (ignore global,
+  modelo de `git init`, hooks, assinatura).
+- Arquivo ou pasta que um cenário cria, troca ou apaga em `project/` volta a ser o que era no
+  fim do cenário, inclusive as pastas pai que ele criou.
 - Cenários `@manual` e os adiados pela decisão I19 ficam fora de `make run`.

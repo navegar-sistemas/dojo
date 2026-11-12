@@ -3,7 +3,7 @@
 Todo passo de um cenário `@automatizado` (e de um `Contexto`) é uma das frases abaixo, com os
 parâmetros preenchidos. Cada frase vira **uma** função em `tests/step_defs/`, registrada com
 `parsers.parse` do pytest-bdd. `make faltantes` lista as frases que ainda não têm função. Os
-números têm lacunas (V03 e V17 saíram por não serem usados); os IDs existentes não mudam. Os
+números têm lacunas (V03, V17 e V63 saíram por não serem usados); os IDs existentes não mudam. Os
 cenários `@manual` não têm passos: o roteiro de inspeção fica na descrição do cenário, uma
 linha por item começando com `- `, e eles ficam fora de `make run`. Assim nem o pytest-bdd nem
 a extensão Cucumber do VS Code procuram função para esse texto.
@@ -32,16 +32,33 @@ parte do texto fixo.
 ## Regras de execução
 
 - Comandos (inclusive os de V50 e V55) rodam com `cwd` = `project/`, ou a cópia criada por V02
-  (`clone limpo`, `clone do remoto`), ou a pasta definida por V05; `PATH` começando por
-  `.venv/bin`; tempo limite de 30 s, que mata o grupo de processos do comando e marca o
-  resultado como estourado (V51). Antes de rodar `a_maze_ing.py <config>`, o `OUTPUT_FILE`
-  desse config vai para a reserva da V16 e volta no fim do teste.
-- O git da suíte (clone limpo, V60) roda sem a configuração global de quem executa:
-  `core.excludesFile`, hooks e assinatura de commit desligados, para que um ignore global não
-  esconda um `.gitignore` incompleto do projeto.
+  (`clone limpo`, `clone do remoto`), ou a pasta definida por V05.
+- `PATH`: nos estados `instalado`, `clone limpo` e `clone do remoto` começa pelo `.venv/bin` do
+  repositório do cenário; no estado `atual` é o `PATH` de quem roda a suíte, cujo `python3`
+  precisa ser 3.10 ou posterior (a rodada para no início quando não é).
+- Tempo limite de 30 s: o grupo de processos do comando morre e o resultado fica marcado como
+  estourado (V51); a saída é lida por mais 2 s, e um processo noutra sessão que ainda segure o
+  stdout é abandonado com a saída lida até ali.
+- Antes de rodar `a_maze_ing.py <config>`, o `OUTPUT_FILE` desse config vai para a reserva da
+  V16 e volta no fim do teste; um caminho que a V16 já preparou fica como ela deixou.
+- O git da suíte (V02, V60) roda sem a configuração global e de sistema de quem executa
+  (`GIT_CONFIG_GLOBAL=/dev/null`, `GIT_CONFIG_NOSYSTEM=1`, sem as variáveis `GIT_DIR`,
+  `GIT_TEMPLATE_DIR` e afins) e com `core.excludesFile`, hooks e assinatura de commit
+  desligados: nem um ignore global nem o `info/exclude` de um modelo de `git init` escondem um
+  `.gitignore` incompleto do projeto. A URL de `clone do remoto` precisa funcionar sem essa
+  configuração (SSH com a chave em `~/.ssh` ou URL pública).
+- No estado `atual`, o git de `project/` é o do monorepo `dojo`: o `.gitignore` da raiz do
+  `dojo` (que ignora `.mypy_cache` em qualquer pasta) vale também ali. As conferências de
+  `é ignorado pelo git` e `não é ignorado pelo git` usam o estado `clone limpo`.
+- Os tipos da V16 que dependem de `chmod` (`sem permissão de leitura` e `diretório sem
+  permissão de escrita`, inclusive pela situação `arquivo de configuração sem permissão de
+  leitura` da V18) pulam o cenário quando a suíte roda como root, que a permissão não barra.
+- V36–V38 usam `private/maze_analyzer.py`, que vem com o subject e não é versionado; sem ele o
+  passo falha citando o caminho que falta.
 - O config é um objeto (linhas + destino, padrão `cfg.txt` em `project/`, apagado no fim do
-  teste); só é gravado em disco num passo `Quando` ou ao iniciar o programa, para que o `Contexto`
-  possa ser alterado pelo cenário. O destino nunca é `config.txt`.
+  teste junto com as pastas pai que a gravação criou); só é gravado em disco num passo `Quando`
+  ou ao iniciar o programa, para que o `Contexto` possa ser alterado pelo cenário. O destino
+  nunca é `config.txt`.
 - "Labirinto atual" é o último produzido: o `OUTPUT_FILE` de uma execução com código 0, o
   `grid`/`solution`/`pattern` de `generate()` ou um labirinto de teste. Os passos `Então` sobre
   labirinto valem para todos os labirintos gerados no cenário.
@@ -61,9 +78,9 @@ parte do texto fixo.
 | V02 | given | `o repositório no estado "{estado}"` | prepara o repositório (lista de estados) | → repo |
 | V04 | given | `um virtualenv novo "{venv}" em que rodou {comandos:L}` | cria o venv e roda os comandos nele; exige código 0 | repo → venvs |
 | V05 | given, when | `o ambiente de execução é o virtualenv "{venv}" na pasta "{pasta}"` | os próximos comandos usam o `PATH` do venv e o `cwd` pasta (`"."` = repo) | venvs → ambiente |
-| V06 | given | `o código-fonte de {alvos:L}` | lista os `.py` dos alvos; `"."` = `project/` sem `.venv`, `build` e `dist` | → fontes |
+| V06 | given | `o código-fonte de {alvos:L}` | lista os `.py` dos alvos, relativos à raiz do repositório do cenário (`"."` = a raiz inteira); pastas `.venv`, `build`, `dist` e `__pycache__` ficam de fora em qualquer nível; alvo inexistente ou sem nenhum `.py` falha | → fontes |
 | V07 | given | `o config {origem:Origem}` | carrega o config base (`CONFIG_BASE` de `suporte/config.py`) ou o `config.txt` do repositório | → config |
-| V08 | given | `o config {origem:Origem} salvo em "{arquivo}"` | igual a V07, com outro destino; cria a pasta pai se faltar | → config |
+| V08 | given | `o config {origem:Origem} salvo em "{arquivo}"` | igual a V07, com outro destino; a gravação cria as pastas pai que faltam | → config |
 | V09 | given | `o config base com {pares:L}` | parte do config base e aplica cada `CHAVE=valor` (troca a linha da chave ou acrescenta no fim) | → config |
 | V10 | given | `o config com {pares:L}` | aplica os pares sobre o config atual (depois de um `Contexto`) | usa config |
 | V11 | given | `o config sem a chave "{chave}"` | remove as linhas da chave | usa config |
@@ -71,20 +88,20 @@ parte do texto fixo.
 | V13 | given | `o config com a linha da chave "{chave}" trocada por "{linha}"` | troca a linha da chave; `""` equivale a removê-la | usa config |
 | V14 | given | `o config com a linha "{linha}" {posicao:Pos}` | insere a linha no início ou no fim | usa config |
 | V15 | given | `o config escrito com a variação "{variacao}"` | transforma o texto na hora de gravar (lista de variações) | usa config |
-| V16 | given | `o caminho "{caminho}" preparado como "{tipo}"` | cria arquivo ou diretório especial (lista de tipos); um original que existia vai para uma reserva; no fim restaura permissões, apaga o que o teste criou e devolve o original; desliga a gravação automática do config nesse destino | → preparados |
+| V16 | given | `o caminho "{caminho}" preparado como "{tipo}"` | cria arquivo ou diretório especial (lista de tipos) e, menos em `inexistente`, as pastas pai que faltam; um original que existia (arquivo ou pasta) vai para uma reserva; no fim restaura permissões, apaga o que o teste criou, inclusive as pastas pai, e devolve o original; desliga nesse caminho a gravação automática do config e a reserva do `OUTPUT_FILE` (V29) | → preparados |
 | V18 | given, when | `a situação de erro "{situacao}"` | combina V16, V11 e V09 conforme a situação (lista), agindo sobre o config atual e o seu destino: inexistente e sem permissão de leitura → V16 no destino; chave ausente → sem `WIDTH`; valor inválido → `WIDTH=abc`; parâmetros impossíveis → `EXIT=0,0` (igual à entrada); OUTPUT_FILE → `diretorio_inexistente/maze.txt` | config, preparados |
 | V19 | given | `os casos de erro do catálogo da suíte` | carrega o catálogo de casos de erro de `tests/suporte/`: um caso por cenário de erro de 03, 04, 05, 07, 08 e 13 | → catalogo |
 | V20 | given | `um labirinto gerado pelo {gerador:Gerador} com o config base` | gera pelo programa (entrada `"4"`) ou pela classe `MazeGenerator` | → labirintos |
 | V21 | given | `um labirinto gerado pelo {gerador:Gerador} com o config base mais {pares:L}` | igual a V20, com os pares aplicados | → labirintos |
-| V22 | given | `o labirinto de teste com a grade "{grade}", entrada "{entrada}" e saída "{saida}"` | grava um arquivo de saída; linhas da grade separadas por ` / `; caminho do rodapé calculado por BFS | → labirintos |
+| V22 | given | `o labirinto de teste com a grade "{grade}", entrada "{entrada}" e saída "{saida}"` | grava um arquivo de saída; linhas da grade separadas por ` / `; caminho do rodapé calculado por BFS; quando a BFS não chega à saída (grades `F7` e `F / E`), a linha do caminho fica vazia | → labirintos |
 | V23 | given | `o labirinto de teste "{modelo}"` | arquivo pronto (lista de modelos; o exemplo do subject fica em `tests/fixtures/`) | → labirintos |
 | V24 | given | `a célula de dígito "{digito}"` | célula isolada a partir do dígito | → celula |
 | V25 | given | `a célula com as paredes fechadas "{paredes}"` | célula isolada a partir das paredes | → celula |
 | V26 | given | `o gerador "{expressao}"` | avalia `MazeGenerator(...)` com literais (`eval` só com `MazeGenerator` no escopo) e guarda o texto | → gerador |
 | V27 | given | `o programa iniciado com "{comando}"` | grava o config, abre o processo e espera o primeiro prompt | config → sessao |
 | V28 | given | `o programa iniciado com "{comando}", com o caminho {vis:Visib}` | como V27; `visível` envia `"2"`; `oculto` confere que não há ciano | → sessao |
-| V29 | when | `eu executo {comandos:L}` | grava o config e roda cada comando com stdin vazio; se `a_maze_ing.py` saiu com 0, lê o `OUTPUT_FILE` | → resultado, resultados, labirintos |
-| V30 | when | `eu executo {comandos:L} com a entrada {linhas:L}` | como V29, com as linhas no stdin, cada uma terminada em `\n` | → resultado, resultados, labirintos |
+| V29 | when | `eu executo {comandos:L}` | grava o config e roda cada comando com stdin vazio; o resultado guarda o `OUTPUT_FILE` do config passado a `a_maze_ing.py`, reservado antes da execução (regras de execução) | → resultado, resultados |
+| V30 | when | `eu executo {comandos:L} com a entrada {linhas:L}` | como V29, com as linhas no stdin, cada uma terminada em `\n` | → resultado, resultados |
 | V31 | when | `eu executo {comandos:L} {n:d} vezes com a entrada {linhas:L}` | repete V30 n vezes | → execucoes |
 | V32 | when | `eu gero o labirinto` | `python3 a_maze_ing.py <destino do config>` com a entrada `"4"` | → resultado, labirintos |
 | V33 | when | `eu gero o labirinto {n:d} vezes` | repete V32; cada passo `Quando` de repetição (V31, V33–V35, V43, V47) substitui a lista de execuções anterior | → execucoes |
@@ -110,14 +127,13 @@ parte do texto fixo.
 | V53 | then | `{fluxo:Fluxo} é "{texto}"` | igualdade depois de `strip()` | resultado ou sessao |
 | V54 | then | `a saída de "{comando}" contém "{texto}"` | usa o resultado desse comando no cenário, ou roda agora | resultados |
 | V55 | then | `a saída de "{comando}" é "{texto}"` | como V54, com igualdade depois de `strip()` | resultados |
-| V56 | then | `a linha da saída que contém "{a}" também contém "{b}"` | acha a linha com `a` e confere `b` nela | resultado ou sessao |
+| V56 | then | `a linha da saída que contém "{a}" também contém "{b}"` | toda linha de stdout + stderr que contém `a` também contém `b`; falha se nenhuma linha contém `a` | resultado ou sessao |
 | V57 | then | `a mensagem de erro cita {itens:L}` | stderr com uma linha, começando com `Error: `, contendo os itens na ordem | resultado |
 | V58 | then | `a mensagem de erro explica "{motivo}"` | casa a expressão do motivo (I21) | resultado |
-| V59 | then | `o resultado da execução é "{resultado}"` | `sucesso` (código 0, sem `Error:` e o `OUTPUT_FILE` do config gravado com conteúdo) ou `erro citando A, B[; motivo: M]` (código 1 e as regras de V57 e V58) | resultado |
+| V59 | then | `o resultado da execução é "{resultado}"` | `sucesso` (sem estourar o tempo limite, código 0, nenhuma linha de stderr com `Error:` além de `Error: maze too small for the "42" pattern` (D06, I10) e o `OUTPUT_FILE` do config gravado com conteúdo) ou `erro citando A, B[; motivo: M]` (código 1 e as regras de V57 e V58) | resultado |
 | V60 | then | `o caminho "{caminho}" {estado:EstadoCaminho}` | `exists`, `git check-ignore`, `git ls-files` ou tamanho > 0; aceita glob | repo |
 | V61 | then | `o arquivo "{arquivo}" {verbo:Contem} {textos:L}` | procura as strings no arquivo lido sem converter quebras de linha (`newline=""`), para `\r` ser detectável | repo |
 | V62 | given, then | `o arquivo "{arquivo}" {tem:TemLinha} que casa com a expressão "{regex}"` | `re.search` com `re.M` | repo |
-| V63 | then | `nenhum arquivo Python do projeto contém "{texto}"` | percorre os `.py` de `project/` sem `.venv`, `build` e `dist` | repo |
 | V64 | then | `a seção "{secao}" do README contém {textos:L}` | do título `#… secao` até o próximo título do mesmo nível | repo |
 | V65 | then | `o metadado "{campo}" do pacote "{arquivo}" é "{valor}"` | lê `METADATA`/`PKG-INFO` com `email.parser`; aceita glob e confere cada arquivo | repo |
 | V66 | then | `o pacote "{arquivo}" confirma "{propriedade}"` | propriedades do pacote (lista); aceita glob e confere cada arquivo | repo |
@@ -170,9 +186,9 @@ parte do texto fixo.
 | FA | `fechadas`, `abertas` |
 | Op | `começa com`, `contém` |
 | Cmp | `pelo menos`, `no máximo` |
-| V02 estado | `atual` (`cwd` em `project/`); `instalado` (`make install`, uma vez por sessão); `clone limpo` (cópia do que `git -C project ls-files` lista para uma pasta temporária, seguida de `git init`, `git add` e `git commit` só nessa cópia, porque a raiz do git é `dojo`); `clone do remoto` (`git clone $AMAZEING_REMOTE`; o cenário é pulado se a variável não existir) |
+| V02 estado | `atual` (`cwd` em `project/`); `instalado` (`make install`, uma vez por sessão); `clone limpo` (`git archive HEAD` rodado em `project/` e extraído numa pasta temporária, ou seja, o que está commitado, sem as mudanças da árvore de trabalho, seguido de `git init`, `git add` e `git commit` só nessa cópia, porque a raiz do git é `dojo`); `clone do remoto` (`git clone --depth 1 $AMAZEING_REMOTE` numa pasta temporária; sem a variável, ou com ela vazia, o cenário é pulado com a mensagem que diz qual variável falta) |
 | V15 variação | `uma linha vazia entre cada par`, `espaços em volta do igual`, `espaços no fim de cada linha`, `finais de linha CRLF`, `sem quebra de linha depois da última linha`, `chave WIDTH minúscula`, `todas as chaves minúsculas`, `chave HEIGHT capitalizada`, `perfect=true minúsculo` |
-| V16 tipo | `inexistente`, `diretório`, `diretório sem permissão de escrita`, `sem permissão de leitura` (config base com `chmod 000`), `não UTF-8`, `vazio`, `bytes binários aleatórios`, `só espaços e tabulações`, `BOM UTF-8 + config base`, `config base com WIDTH de 100000 dígitos`, `só WÍDTH=20 e HEÍGHT=15, com acento`, `pasta com a_maze_ing.py, amazeing/ e config.txt`, `diretório pai criado` |
+| V16 tipo | `inexistente`, `diretório` (pasta vazia), `diretório sem permissão de escrita` (pasta vazia com `chmod 500`), `sem permissão de leitura` (config base com `chmod 000`), `não UTF-8` (config base precedido de um comentário acentuado, em latin-1), `vazio`, `bytes binários aleatórios`, `só espaços e tabulações`, `BOM UTF-8 + config base`, `config base com WIDTH de 100000 dígitos`, `só WÍDTH=20 e HEÍGHT=15, com acento`, `pasta com a_maze_ing.py, amazeing/ e config.txt` (cópia desses três itens da raiz do repositório do cenário, sem `__pycache__`), `diretório pai criado` (só a pasta pai passa a existir; o caminho continua inexistente) |
 | V18 situação | `arquivo de configuração inexistente`, `arquivo de configuração sem permissão de leitura`, `chave obrigatória ausente`, `valor inválido`, `parâmetros impossíveis`, `OUTPUT_FILE num diretório inexistente` |
 | V23 modelo | `exemplo do subject`, `exemplo do subject com o rodapé anotado`, `perfeito do config base`, `perfeito do config base com uma parede interna aberta` |
 | V46 evento | `EOF`, `SIGINT`, `1 segundo sem entrada` |
@@ -180,7 +196,7 @@ parte do texto fixo.
 | V71 aspecto | `arquivo de saída`, `grade`, `solução`, `células de valor F`, `saída exibida` |
 | V72 o validador da suíte | `valores de 0 a 15`, `bits na convenção N=1, E=2, S=4, W=8`, `x é a coluna e y é a linha`, `entrada e saída válidas`, `entrada diferente da saída`, `x de entrada e saída dentro da largura`, `y de entrada e saída dentro da altura`, `toda célula fora do 42 alcançável`, `borda fechada`, `paredes coerentes`, `vizinhas leste-oeste coerentes` (bit E de (x, y) = bit W de (x+1, y)), `vizinhas norte-sul coerentes` (bit S de (x, y) = bit N de (x, y+1)), `inalcançáveis são as células do 42`, `células F em dois componentes 4-conexos`, `componente da esquerda com a forma do 4`, `componente da direita com a forma do 2`, `células F iguais ao padrão 42`, `nenhuma célula F fora do padrão`, `42 sem passagem aberta`, `glifos 3x5 com uma coluna livre entre os dígitos`, `42 presente`, `42 ausente`, `42 com margem de corredor`, `42 fora dos cantos`, `centro livre do 42`, `árvore geradora fora do 42`, `caminho único entre entrada e saída`, `ramos fora da solução terminam em beco`, `solução atravessa só paredes abertas`, `solução não sai da grade`, `solução não entra no 42`, `solução termina na saída`, `solução mais curta`, `solução sem célula repetida`, `solução válida e mais curta`, `pelo menos 2 rotas independentes`, `no máximo 2 becos reais`, `zero becos reais`, `sem área aberta 3x3`, `blocos 2x2, 2x3 e 3x2 abertos aceitos`, `modo igual ao PERFECT do config`, `rodapé com ENTRY, EXIT e caminho válido`, `labirinto válido conforme o config` (dimensões, valores, borda, coerência, entrada e saída, "42" por D06/D07, conectividade, sem 3x3, solução válida e mais curta, modo), `uma linha vazia logo após a grade`, `exatamente 3 linhas após a linha vazia`, `arquivo termina com quebra de linha`, `linha vazia contém só a quebra de linha`, `nenhuma linha com espaço no fim` |
 | V72 a renderização | `cada renderização seguida do menu`, `nova renderização abaixo da anterior, seguida do menu`, `2 × HEIGHT + 1 linhas`, `2 × WIDTH + 1 posições de 2 caracteres por linha`, `só caracteres ASCII`, `cores por sequências ANSI de fundo`, `cada linha termina com o reset ANSI`, `última sequência ANSI é o reset`, `paredes iguais às do arquivo de saída`, `entrada e saída iguais às do rodapé`, `caminho do arquivo marcado em ciano`, `caminho marcado liga entrada e saída por paredes abertas`, `caminho marcado com o comprimento da busca em largura`, `cinco cores distintas para entrada, saída, 42, caminho e paredes`, `paredes em rodízio branco, amarelo, verde, azul`, `labirinto diferente do da renderização anterior` |
-| V72 a análise estática | `open sempre dentro de with`, `anotação de retorno em toda definição`, `docstring em cada função`, `docstring em cada método`, `docstring em cada classe`, `docstrings com aspas triplas duplas`, `resumo de uma frase terminado em ponto`, `linha em branco entre resumo e descrição`, `seção Args: nas funções com parâmetros`, `seção Returns: nas funções que retornam valor`, `coleções vazias com tipo anotado`, `testes usam pytest ou unittest`, `mazegen não importa a_maze_ing`, `sem MiniLibX` |
+| V72 a análise estática | `open sempre dentro de with`, `anotação de retorno em toda definição`, `docstring em cada módulo`, `docstring em cada função`, `docstring em cada método`, `docstring em cada classe`, `docstrings com aspas triplas duplas`, `resumo de uma frase terminado em ponto`, `linha em branco entre resumo e descrição`, `seção Args: nas funções com parâmetros`, `seção Returns: nas funções que retornam valor`, `coleções vazias com tipo anotado` (também nas atribuições desempacotadas, como `a, b = [], []`), `testes usam pytest ou unittest`, `sem supressão de flake8 nem mypy` (comentários, lidos pelo `tokenize`, que casam com `(?i)#\s*noqa\b\|#\s*flake8[:=]\s*noqa\|#\s*type:\s*ignore\|#\s*mypy:`), `mazegen só importa a biblioteca padrão` (todo import absoluto está em `sys.stdlib_module_names` ou é `mazegen.*`), `sem MiniLibX` |
 | V72 o módulo mazegen | `uma única classe pública de geração`, `grid e solution preenchidos após generate`, `solution pública e documentada`, `grid público com as paredes de cada célula`, `mesmos parâmetros geram a mesma grade`, `grade igual à do arquivo de saída`, `só MazeError escapa do construtor` |
 | V72 o catálogo de casos de erro | `nenhum caso termina com Traceback`, `nenhum caso estoura o tempo limite`, `mensagem começa com Error:`, `mensagem cita o arquivo, a linha ou a chave`, `mensagem sem nome de exceção do Python` (as três últimas pulam o caso de uso errado da linha de comando, I12) |
 | V66 propriedade | `contém o código do módulo`, `contém a docstring de mazegen/__init__.py`, `README como descrição longa`, `instala e importa MazeGenerator num virtualenv novo`, `formato produzido por python -m build`, `mesma versão no nome dos arquivos`, `versão igual à do pyproject.toml`, `LICENSE.md incluído`, `nada do build ignorado pelo git` |

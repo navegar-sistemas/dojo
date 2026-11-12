@@ -28,6 +28,8 @@ Funcionalidade: Bônus
   # pdf: "A default (non-perfect) maze with no dead-end at all: a perfectly "braided""
   # pdf: "board, so a chased player is never trapped anywhere (the provided analysis script"
   # pdf: "confirms it with --max-dead-ends 0)."
+  # pdf: "a board with no dead-end"
+  # pdf: "at all is the ideal and is rewarded as a bonus (see the Bonuses chapter)."
   # md:  "Um labirinto padrão (não perfeito) sem nenhum beco sem saída: um tabuleiro perfeitamente "trançado" (braided), de modo que um jogador perseguido nunca fique preso em lugar algum (o script de análise fornecido confirma isso com `--max-dead-ends 0`)."
   # md:  "um tabuleiro sem nenhum beco sem saída é o ideal e é recompensado como bônus (veja o capítulo de Bônus)."
   # regua: "A default maze with no dead-end at all (a perfectly braided board). Verify with "python3 maze_analyzer.py <output_file> --max-dead-ends 0": the verdict must stay Pac-Man-USABLE and report it as bonus-grade."

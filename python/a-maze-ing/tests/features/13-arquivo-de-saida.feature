@@ -18,7 +18,7 @@ Funcionalidade: Arquivo de saída
   # md:  "e o escreve em um arquivo usando uma representação hexadecimal das paredes. Você também fornecerá uma representação visual do labirinto"
   # regua: "Run the a_maze_ing.py script and verify that the first generated (and displayed) maze is also stored in the defined output file."
   # regua-md: "Execute o script `a_maze_ing.py` e verifique que o primeiro labirinto gerado (e exibido) também é armazenado no arquivo de saída definido."
-  @obrigatorio @automatizado @decisao-I02 @pdf-p08-L05-L06 @md-L142 @regua-p3
+  @obrigatorio @automatizado @decisao-D13 @decisao-I02 @decisao-I03 @pdf-p08-L05-L06 @md-L142 @regua-p3
   Esquema do Cenário: O primeiro labirinto exibido é o que está no arquivo de saída
     Dado o config base com "PERFECT=<perfeito>"
     E o config sem a chave "SEED"
@@ -69,7 +69,7 @@ Funcionalidade: Arquivo de saída
 
   # pdf: "The maze must be written in the output file using one hexadecimal digit per cell, where"
   # md:  "O labirinto deve ser escrito no arquivo de saída usando um dígito hexadecimal por célula"
-  @obrigatorio @automatizado @pdf-p10-L06 @md-L204
+  @obrigatorio @automatizado @decisao-D14 @pdf-p10-L06 @md-L204
   Cenário: Um dígito hexadecimal por célula
     Dado o config base
     Quando eu gero o labirinto
@@ -249,7 +249,7 @@ Funcionalidade: Arquivo de saída
   # pdf: "In conjunction with its specific configuration file, this output file could be tested auto-"
   # pdf: "matically by a Moulinette."
   # md:  "Em conjunto com seu arquivo de configuração específico, este arquivo de saída poderá ser testado automaticamente por uma Moulinette."
-  @informativo @derivado @automatizado @pdf-p11-L02-L03 @md-L220
+  @informativo @derivado @automatizado @decisao-D13 @pdf-p11-L02-L03 @md-L220
   Cenário: O arquivo é estritamente analisável junto com o config
     Dado o config base
     Quando eu gero o labirinto
@@ -277,22 +277,6 @@ Funcionalidade: Arquivo de saída
     Dado o config base
     Quando eu gero o labirinto e o analiso com o maze_analyzer
     Então a linha "Wall coherence" do maze_analyzer contém "OK (all shared walls match)"
-
-  # pdf: "You may use it to check that your generator produces the mode requested by"
-  # pdf: "the configuration file."
-  # md:  "Você pode usá-lo para verificar se o seu gerador produz o modo solicitado pelo arquivo de configuração."
-  # regua: "Run the provided analysis script "python3 maze_analyzer.py <output_file>": it controls the walls coherence and reports whether the maze matches the mode set in the configuration file (perfect single-path vs. playable board). Any incoherence or mismatch marks this question as failed."
-  # regua-md: "Execute o script de análise fornecido: `python3 maze_analyzer.py <output_file>`; ele controla a coerência das paredes e informa se o labirinto corresponde ao modo definido no arquivo de configuração (perfeito de caminho único vs. tabuleiro jogável). Qualquer incoerência ou divergência marca esta questão como reprovada."
-  @opcional @automatizado @pdf-p11-L08-L09 @md-L220 @regua-p3
-  Esquema do Cenário: O modo gerado é o modo pedido no config
-    Dado o config base com "PERFECT=<perfeito>"
-    Quando eu gero o labirinto e o analiso com o maze_analyzer
-    Então a linha "Verdict:" do maze_analyzer começa com "<veredito>"
-
-    Exemplos:
-      | perfeito | veredito       |
-      | True     | PERFECT maze   |
-      | False    | Pac-Man-USABLE |
 
   # pdf: "Output file example"
   # md:  "Exemplo de arquivo de saída (transcrito da captura de tela do subject, `output_maze.txt`):"

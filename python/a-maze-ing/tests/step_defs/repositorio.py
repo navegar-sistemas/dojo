@@ -1,5 +1,6 @@
 """Passos que preparam e conferem o repositório de entrega (project/)."""
 
+import os
 import random
 import shutil
 import subprocess
@@ -15,8 +16,10 @@ from suporte.estado import PROJECT_DIR, TIMEOUT, Estado, Execucao
 from suporte.tipos import TIPOS
 
 # O clone e as consultas ao git não podem herdar a configuração de quem roda
-# a suíte: o ignore global mascararia um .gitignore incompleto, e hooks ou
-# assinatura obrigatória quebrariam o commit da cópia.
+# a suíte: o ignore global (inclusive o padrão em ~/.config/git/ignore, lido
+# mesmo sem config) mascararia um .gitignore incompleto, um templateDir com
+# info/exclude faria o mesmo no git init, e hooks ou assinatura obrigatória
+# quebrariam o commit da cópia.
 GIT = [
     "git",
     "-c", "core.excludesFile=/dev/null",
@@ -25,6 +28,47 @@ GIT = [
     "-c", "user.name=suite",
     "-c", "user.email=suite@localhost",
 ]
+VARIAVEIS_DO_GIT = (
+    "GIT_DIR",
+    "GIT_WORK_TREE",
+    "GIT_INDEX_FILE",
+    "GIT_OBJECT_DIRECTORY",
+    "GIT_TEMPLATE_DIR",
+    "GIT_CONFIG",
+    "GIT_CONFIG_PARAMETERS",
+    "GIT_CONFIG_COUNT",
+    "GIT_CONFIG_SYSTEM",
+)
+REMOTO = "AMAZEING_REMOTE"
+COPIADOS = ("a_maze_ing.py", "amazeing", "config.txt")
+DEPENDEM_DE_PERMISSAO = {
+    "sem permissão de leitura",
+    "diretório sem permissão de escrita",
+}
+ESPECIAIS = {
+    "inexistente",
+    "diretório",
+    "diretório pai criado",
+    "diretório sem permissão de escrita",
+    "pasta com a_maze_ing.py, amazeing/ e config.txt",
+}
+
+
+def ambiente_do_git() -> dict[str, str]:
+    """Ambiente do processo sem a configuração global e de sistema do git.
+
+    Returns:
+        Cópia de os.environ sem as variáveis que redirecionam o git e com
+        GIT_CONFIG_GLOBAL=/dev/null e GIT_CONFIG_NOSYSTEM=1.
+    """
+    ambiente = {
+        chave: valor for chave, valor in os.environ.items()
+        if chave not in VARIAVEIS_DO_GIT
+        and not chave.startswith(("GIT_CONFIG_KEY_", "GIT_CONFIG_VALUE_"))
+    }
+    ambiente["GIT_CONFIG_GLOBAL"] = "/dev/null"
+    ambiente["GIT_CONFIG_NOSYSTEM"] = "1"
+    return ambiente
 
 
 @dataclass
@@ -69,6 +113,7 @@ def git(
     return subprocess.run(
         [*GIT, *argumentos],
         cwd=pasta,
+        env=ambiente_do_git(),
         capture_output=True,
         text=True,
         timeout=TIMEOUT,
@@ -94,23 +139,48 @@ def git_ou_falha(argumentos: list[str], pasta: Path) -> str:
     return processo.stdout
 
 
-def clonar_limpo(destino: Path) -> None:
-    """Recria em destino o repositório de entrega só com o que está no git.
+def falhar_se_terminou_mal(
+    processo: subprocess.CompletedProcess[bytes], comando: str
+) -> None:
+    """Falha o teste se o processo terminou com código diferente de 0.
 
-    A raiz do git é o monorepo dojo; a cópia dos arquivos que
-    ``git ls-files`` lista em project/ reproduz o clone do repositório da
-    instituição, com um git próprio.
+    Args:
+        processo: Processo terminado, com stderr capturado.
+        comando: Comando para a mensagem.
+    """
+    if processo.returncode != 0:
+        pytest.fail(
+            f"'{comando}' terminou com código {processo.returncode}\n"
+            + processo.stderr.decode("utf-8", errors="replace")
+        )
+
+
+def clonar_limpo(destino: Path) -> None:
+    """Recria em destino o repositório de entrega com o que está commitado.
+
+    A raiz do git é o monorepo dojo; ``git archive HEAD`` rodado em
+    project/ extrai só essa pasta, como está no último commit (mudanças
+    não commitadas ficam de fora), e o git próprio da cópia reproduz o
+    clone do repositório da instituição.
 
     Args:
         destino: Pasta vazia que recebe a cópia.
     """
-    listagem = git_ou_falha(["ls-files", "-z"], PROJECT_DIR)
-    for nome in filter(None, listagem.split("\0")):
-        origem = PROJECT_DIR / nome
-        if origem.is_file():
-            alvo = destino / nome
-            alvo.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(origem, alvo)
+    arquivo = subprocess.run(
+        [*GIT, "archive", "--format=tar", "HEAD"],
+        cwd=PROJECT_DIR,
+        env=ambiente_do_git(),
+        capture_output=True,
+        timeout=TIMEOUT,
+    )
+    falhar_se_terminou_mal(arquivo, f"git archive HEAD em {PROJECT_DIR}")
+    extracao = subprocess.run(
+        ["tar", "-x", "-C", str(destino)],
+        input=arquivo.stdout,
+        capture_output=True,
+        timeout=TIMEOUT,
+    )
+    falhar_se_terminou_mal(extracao, f"tar -x -C {destino}")
     git_ou_falha(["init", "-q"], destino)
     git_ou_falha(["add", "-A"], destino)
     git_ou_falha(
@@ -141,8 +211,7 @@ def repositorio_no_estado(
         estado: Estado do cenário.
         instalacao: Instalação da sessão.
         tmp_path: Pasta temporária do cenário.
-        nome: "atual", "instalado" ou "clone limpo"; "clone do remoto"
-            ainda não existe.
+        nome: "atual", "instalado", "clone limpo" ou "clone do remoto".
     """
     estado.cwd = PROJECT_DIR
     if nome == "atual":
@@ -160,10 +229,30 @@ def repositorio_no_estado(
         clone = tmp_path / "clone"
         clone.mkdir()
         clonar_limpo(clone)
-        estado.cwd = clone
-        estado.caminhos_extras = [clone / ".venv" / "bin"]
-        return
-    pytest.fail(f'estado "{nome}" ainda não implementado')
+    elif nome == "clone do remoto":
+        clone = tmp_path / "remoto"
+        clonar_remoto(clone)
+    else:
+        pytest.fail(f'estado "{nome}" ainda não implementado')
+    estado.cwd = clone
+    estado.caminhos_extras = [clone / ".venv" / "bin"]
+
+
+def clonar_remoto(destino: Path) -> None:
+    """Clona em destino o repositório da URL em AMAZEING_REMOTE.
+
+    Args:
+        destino: Pasta que ainda não existe.
+    """
+    url = os.environ.get(REMOTO)
+    if not url:
+        pytest.skip(
+            f"a variável de ambiente {REMOTO} não está definida ou está "
+            "vazia; ela leva a URL do repositório de entrega"
+        )
+    git_ou_falha(
+        ["clone", "-q", "--depth", "1", url, str(destino)], destino.parent
+    )
 
 
 @given(
@@ -193,7 +282,7 @@ def caminho_preparado(estado: Estado, caminho: str, tipo: str) -> None:
     Args:
         estado: Estado do cenário.
         caminho: Caminho relativo ao repositório.
-        tipo: "inexistente", "diretório" ou uma chave de CONTEUDOS.
+        tipo: Uma das chaves de ESPECIAIS ou de CONTEUDOS.
     """
     preparar(estado, estado.cwd / caminho, tipo)
 
@@ -226,38 +315,71 @@ CONTEUDOS: dict[str, Callable[[], bytes]] = {
         lambda: _texto(["WÍDTH=20", "HEÍGHT=15"])
     ),
     "sem permissão de leitura": lambda: _texto(CONFIG_BASE),
+    "não UTF-8": lambda: (
+        "# configuração\n" + "\n".join(CONFIG_BASE) + "\n"
+    ).encode("latin-1"),
 }
+
+
+def copiar_do_repositorio(origem: Path, alvo: Path) -> None:
+    """Copia a_maze_ing.py, amazeing/ e config.txt para a pasta alvo.
+
+    Args:
+        origem: Raiz do repositório do cenário.
+        alvo: Pasta já criada.
+    """
+    for nome in COPIADOS:
+        if (origem / nome).is_dir():
+            shutil.copytree(
+                origem / nome,
+                alvo / nome,
+                ignore=shutil.ignore_patterns("__pycache__"),
+            )
+        else:
+            shutil.copy2(origem / nome, alvo / nome)
 
 
 def preparar(estado: Estado, alvo: Path, tipo: str) -> None:
     """Prepara o alvo conforme o tipo.
 
-    O original vai para a reserva e o destino deixa de receber o config
-    automático do cenário.
+    O original vai para a reserva, as pastas pai que faltam são criadas
+    (menos em "inexistente") e o alvo deixa de receber o config automático
+    do cenário e a proteção do OUTPUT_FILE antes de rodar o programa.
 
     Args:
         estado: Estado do cenário.
         alvo: Caminho absoluto.
-        tipo: "inexistente", "diretório" ou uma chave de CONTEUDOS.
+        tipo: Uma das chaves de ESPECIAIS ou de CONTEUDOS.
     """
-    if tipo == "diretório":
-        criado = alvo
-        while not criado.parent.exists():
-            criado = criado.parent
-        if not alvo.exists():
-            estado.preparados.append((criado, None))
-        alvo.mkdir(parents=True, exist_ok=True)
-        return
-    if tipo != "inexistente" and tipo not in CONTEUDOS:
+    if tipo not in ESPECIAIS and tipo not in CONTEUDOS:
         pytest.fail(f'tipo "{tipo}" ainda não implementado')
+    if tipo in DEPENDEM_DE_PERMISSAO and os.geteuid() == 0:
+        pytest.skip(
+            f'o tipo "{tipo}" depende de chmod, que não barra o root; rode '
+            "a suíte com um usuário comum"
+        )
+    if tipo == "pasta com a_maze_ing.py, amazeing/ e config.txt":
+        faltando = [
+            nome for nome in COPIADOS if not (estado.cwd / nome).exists()
+        ]
+        if faltando:
+            pytest.fail(f"faltam em {estado.cwd}: {', '.join(faltando)}")
+    if tipo != "inexistente":
+        estado.criar_pastas(alvo.parent)
     estado.proteger(alvo)
     estado.sem_gravacao.add(alvo)
-    if tipo == "inexistente":
+    if tipo in ("inexistente", "diretório pai criado"):
         return
-    alvo.parent.mkdir(parents=True, exist_ok=True)
-    alvo.write_bytes(CONTEUDOS[tipo]())
-    if tipo == "sem permissão de leitura":
-        alvo.chmod(0)
+    if tipo in CONTEUDOS:
+        alvo.write_bytes(CONTEUDOS[tipo]())
+        if tipo == "sem permissão de leitura":
+            alvo.chmod(0)
+        return
+    alvo.mkdir()
+    if tipo == "diretório sem permissão de escrita":
+        alvo.chmod(0o500)
+    elif tipo != "diretório":
+        copiar_do_repositorio(estado.cwd, alvo)
 
 
 @given(parsers.parse("o config {origem:Origem}", extra_types=TIPOS))

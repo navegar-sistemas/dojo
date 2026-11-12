@@ -4,8 +4,11 @@ Funcionalidade: Uso pela linha de comando
   configuração) e nunca termina com exceção não tratada.
 
   # pdf: "You will implement a maze generator in Python that takes a configuration file, generates"
+  # pdf: "It is a plain text file that defines the maze"
+  # pdf: "generation options."
   # md:  "Você implementará um gerador de labirintos em Python que recebe um arquivo de configuração, gera um labirinto"
-  @obrigatorio @automatizado @pdf-p08-L04 @md-L142
+  # md:  "É um arquivo de texto simples que define as opções de geração do labirinto."
+  @obrigatorio @automatizado @pdf-p08-L04 @pdf-p08-L12-L13 @md-L142 @md-L153
   Cenário: O gerador é escrito em Python e recebe um arquivo de configuração
     Dado o config base
     Quando eu gero o labirinto
@@ -47,15 +50,6 @@ Funcionalidade: Uso pela linha de comando
       |                        |
       | config.txt outro.txt   |
       | config.txt a.txt b.txt |
-
-  # pdf: "It is a plain text file that defines the maze"
-  # pdf: "generation options."
-  # md:  "É um arquivo de texto simples que define as opções de geração do labirinto."
-  @informativo @automatizado @pdf-p08-L12-L13 @md-L153
-  Cenário: O arquivo de configuração é texto simples
-    Dado o config base
-    Quando eu gero o labirinto
-    Então o validador da suíte confirma "labirinto válido conforme o config"
 
   # pdf: "You can use a different filename."
   # md:  "Você pode usar um nome de arquivo diferente."

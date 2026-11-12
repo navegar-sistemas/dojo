@@ -3,6 +3,7 @@
 import pytest
 
 from step_defs.execucao import (
+    AVISO_DO_42,
     codigo_de_saida,
     comando_termina_com,
     conferir_mensagem_de_erro,
@@ -232,16 +233,38 @@ def test_resultado_sucesso(cenario: Estado) -> None:
     resultado_da_execucao(cenario, "sucesso")
 
 
+def test_resultado_sucesso_aceita_o_aviso_do_42(cenario: Estado) -> None:
+    """O aviso do "42" omitido (D06, I10) não tira o sucesso.
+
+    Args:
+        cenario: Estado numa pasta temporária.
+    """
+    execucao = com_resultado(cenario, saida_erro=f"{AVISO_DO_42}\n")
+    execucao.arquivo_saida = cenario.cwd / "maze.txt"
+    execucao.arquivo_saida.write_text("9\n", encoding="utf-8")
+    resultado_da_execucao(cenario, "sucesso")
+
+
 @pytest.mark.parametrize(
     ("codigo", "saida_erro", "estourou", "arquivo"),
     [
         (1, "", False, "9\n"),
         (0, "Error: aviso\n", False, "9\n"),
+        (0, f"{AVISO_DO_42}\nError: aviso\n", False, "9\n"),
+        (0, f"{AVISO_DO_42} e mais\n", False, "9\n"),
         (0, "", True, "9\n"),
         (0, "", False, ""),
         (0, "", False, None),
     ],
-    ids=["código 1", "Error:", "tempo limite", "arquivo vazio", "sem arquivo"],
+    ids=[
+        "código 1",
+        "Error:",
+        "aviso do 42 e outro Error:",
+        "aviso do 42 alterado",
+        "tempo limite",
+        "arquivo vazio",
+        "sem arquivo",
+    ],
 )
 def test_resultado_que_nao_e_sucesso(
     cenario: Estado,

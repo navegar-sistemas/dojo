@@ -36,8 +36,10 @@ lint-strict:
 	$(PY) -m flake8 .
 	$(PY) -m mypy . --strict
 
+# -m vazio desfaz o filtro do pyproject.toml: cenário deselecionado aparece
+# como "not bound to any test" mesmo tendo test_NN_nome.py.
 faltantes:
-	$(PY) -m pytest --generate-missing --feature features
+	$(PY) -m pytest --generate-missing --feature features -m ""
 
 manuais:
 	$(PY) -m pytest -m manual --collect-only -q
