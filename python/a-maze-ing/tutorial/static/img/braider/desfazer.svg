@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="753.6" height="194" viewBox="0 0 753.6 194">
+<rect width="753.6" height="194" fill="#ffffff" rx="8"/>
+<svg x="0" y="0" width="306.4" height="194" viewBox="0 0 306.4 194">
+<rect width="306.4" height="194" fill="#ffffff" rx="8"/>
+<line x1="81.2" y1="16" x2="129.2" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="129.2" y1="16" x2="129.2" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="81.2" y1="64" x2="129.2" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="81.2" y1="16" x2="81.2" y2="64" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="129.2" y1="16" x2="177.2" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="177.2" y1="16" x2="177.2" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="129.2" y1="64" x2="177.2" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="129.2" y1="16" x2="129.2" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="177.2" y1="16" x2="225.2" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="225.2" y1="16" x2="225.2" y2="64" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="177.2" y1="64" x2="225.2" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="177.2" y1="16" x2="177.2" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="81.2" y1="64" x2="129.2" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="129.2" y1="64" x2="129.2" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="81.2" y1="112" x2="129.2" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="81.2" y1="64" x2="81.2" y2="112" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="129.2" y1="64" x2="177.2" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="177.2" y1="64" x2="177.2" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="129.2" y1="112" x2="177.2" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="129.2" y1="64" x2="129.2" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="177.2" y1="64" x2="225.2" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="225.2" y1="64" x2="225.2" y2="112" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="177.2" y1="112" x2="225.2" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="177.2" y1="64" x2="177.2" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="81.2" y1="112" x2="129.2" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="129.2" y1="112" x2="129.2" y2="160" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="81.2" y1="160" x2="129.2" y2="160" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="81.2" y1="112" x2="81.2" y2="160" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="129.2" y1="112" x2="177.2" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="177.2" y1="112" x2="177.2" y2="160" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="129.2" y1="160" x2="177.2" y2="160" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="129.2" y1="112" x2="129.2" y2="160" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="177.2" y1="112" x2="225.2" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="225.2" y1="112" x2="225.2" y2="160" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="177.2" y1="160" x2="225.2" y2="160" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="177.2" y1="112" x2="177.2" y2="160" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<text x="153.2" y="177" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">11 abertas; a vermelha é a candidata</text>
+<line x1="177.2" y1="64" x2="177.2" y2="112" stroke="#ef4444" stroke-width="6" stroke-linecap="round"/>
+</svg>
+
+<svg x="318.4" y="0" width="247.2" height="194" viewBox="0 0 247.2 194">
+<rect width="247.2" height="194" fill="#ffffff" rx="8"/>
+<rect x="51.6" y="16" width="48" height="48" fill="#fecaca"/>
+<rect x="51.6" y="64" width="48" height="48" fill="#fecaca"/>
+<rect x="51.6" y="112" width="48" height="48" fill="#fecaca"/>
+<rect x="99.6" y="16" width="48" height="48" fill="#fecaca"/>
+<rect x="99.6" y="64" width="48" height="48" fill="#fecaca"/>
+<rect x="99.6" y="112" width="48" height="48" fill="#fecaca"/>
+<rect x="147.6" y="16" width="48" height="48" fill="#fecaca"/>
+<rect x="147.6" y="64" width="48" height="48" fill="#fecaca"/>
+<rect x="147.6" y="112" width="48" height="48" fill="#fecaca"/>
+<line x1="51.6" y1="16" x2="99.6" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="99.6" y1="16" x2="99.6" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="51.6" y1="64" x2="99.6" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="51.6" y1="16" x2="51.6" y2="64" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="99.6" y1="16" x2="147.6" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="147.6" y1="16" x2="147.6" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="99.6" y1="64" x2="147.6" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="99.6" y1="16" x2="99.6" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="147.6" y1="16" x2="195.6" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="195.6" y1="16" x2="195.6" y2="64" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="147.6" y1="64" x2="195.6" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="147.6" y1="16" x2="147.6" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="51.6" y1="64" x2="99.6" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="99.6" y1="64" x2="99.6" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="51.6" y1="112" x2="99.6" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="51.6" y1="64" x2="51.6" y2="112" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="99.6" y1="64" x2="147.6" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="147.6" y1="64" x2="147.6" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="99.6" y1="112" x2="147.6" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="99.6" y1="64" x2="99.6" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="147.6" y1="64" x2="195.6" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="195.6" y1="64" x2="195.6" y2="112" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="147.6" y1="112" x2="195.6" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="147.6" y1="64" x2="147.6" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="51.6" y1="112" x2="99.6" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="99.6" y1="112" x2="99.6" y2="160" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="51.6" y1="160" x2="99.6" y2="160" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="51.6" y1="112" x2="51.6" y2="160" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="99.6" y1="112" x2="147.6" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="147.6" y1="112" x2="147.6" y2="160" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="99.6" y1="160" x2="147.6" y2="160" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="99.6" y1="112" x2="99.6" y2="160" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="147.6" y1="112" x2="195.6" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="195.6" y1="112" x2="195.6" y2="160" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="147.6" y1="160" x2="195.6" y2="160" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="147.6" y1="112" x2="147.6" y2="160" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<text x="123.6" y="177" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">abriu: has_open_3x3() é True</text>
+</svg>
+
+<svg x="577.6" y="0" width="176" height="194" viewBox="0 0 176 194">
+<rect width="176" height="194" fill="#ffffff" rx="8"/>
+<line x1="16" y1="16" x2="64" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="64" y1="16" x2="64" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="64" x2="64" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="16" x2="16" y2="64" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="64" y1="16" x2="112" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="112" y1="16" x2="112" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="64" y1="64" x2="112" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="64" y1="16" x2="64" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="112" y1="16" x2="160" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="160" y1="16" x2="160" y2="64" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="112" y1="64" x2="160" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="112" y1="16" x2="112" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="64" x2="64" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="64" y1="64" x2="64" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="112" x2="64" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="64" x2="16" y2="112" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="64" y1="64" x2="112" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="112" y1="64" x2="112" y2="112" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="64" y1="112" x2="112" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="64" y1="64" x2="64" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="112" y1="64" x2="160" y2="64" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="160" y1="64" x2="160" y2="112" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="112" y1="112" x2="160" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="112" y1="64" x2="112" y2="112" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="16" y1="112" x2="64" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="64" y1="112" x2="64" y2="160" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="160" x2="64" y2="160" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="16" y1="112" x2="16" y2="160" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="64" y1="112" x2="112" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="112" y1="112" x2="112" y2="160" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="64" y1="160" x2="112" y2="160" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="64" y1="112" x2="64" y2="160" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="112" y1="112" x2="160" y2="112" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="160" y1="112" x2="160" y2="160" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="112" y1="160" x2="160" y2="160" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="112" y1="112" x2="112" y2="160" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<text x="88" y="177" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">close_wall desfaz</text>
+</svg>
+
+</svg>

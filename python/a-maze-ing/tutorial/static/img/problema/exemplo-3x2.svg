@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="395.2" height="192" viewBox="0 0 395.2 192">
+<rect width="395.2" height="192" fill="#ffffff" rx="8"/>
+<rect x="110.6" y="30" width="64" height="64" fill="#d946ef"/>
+<rect x="110.6" y="94" width="64" height="64" fill="#ef4444"/>
+<line x1="110.6" y1="30" x2="174.6" y2="30" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="110.6" y1="94" x2="174.6" y2="94" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="110.6" y1="30" x2="110.6" y2="94" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="174.6" y1="30" x2="238.6" y2="30" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="174.6" y1="94" x2="238.6" y2="94" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="238.6" y1="30" x2="302.6" y2="30" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="302.6" y1="30" x2="302.6" y2="94" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="110.6" y1="94" x2="174.6" y2="94" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="110.6" y1="158" x2="174.6" y2="158" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="110.6" y1="94" x2="110.6" y2="158" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="174.6" y1="94" x2="238.6" y2="94" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="174.6" y1="158" x2="238.6" y2="158" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="302.6" y1="94" x2="302.6" y2="158" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="238.6" y1="158" x2="302.6" y2="158" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<text x="142.6" y="62" font-family="ui-sans-serif, system-ui, sans-serif" font-size="26.88" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">d</text>
+<text x="206.6" y="62" font-family="ui-sans-serif, system-ui, sans-serif" font-size="26.88" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
+<text x="270.6" y="62" font-family="ui-sans-serif, system-ui, sans-serif" font-size="26.88" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">3</text>
+<text x="142.6" y="126" font-family="ui-sans-serif, system-ui, sans-serif" font-size="26.88" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">d</text>
+<text x="206.6" y="126" font-family="ui-sans-serif, system-ui, sans-serif" font-size="26.88" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">5</text>
+<text x="270.6" y="126" font-family="ui-sans-serif, system-ui, sans-serif" font-size="26.88" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">6</text>
+<text x="142.6" y="16" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="206.6" y="16" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="270.6" y="16" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="94.6" y="62" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="94.6" y="126" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="197.6" y="175" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">d53 / d56: entrada em magenta, saída em vermelho</text>
+</svg>

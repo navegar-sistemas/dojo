@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="270" viewBox="0 0 500 270">
+<rect width="500" height="270" fill="#ffffff" rx="8"/>
+<rect x="44" y="20" width="44" height="44" rx="4" fill="#1f2328" stroke="#9ca3af" stroke-width="1"/>
+<text x="66" y="82" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">DEFAULT</text>
+<text x="66" y="100" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">\x1b[49m</text>
+<text x="66" y="118" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">corredor</text>
+<rect x="136" y="20" width="44" height="44" rx="4" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1"/>
+<text x="158" y="82" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">WHITE</text>
+<text x="158" y="100" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">\x1b[47m</text>
+<text x="158" y="118" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">parede</text>
+<rect x="228" y="20" width="44" height="44" rx="4" fill="#facc15" stroke="#9ca3af" stroke-width="1"/>
+<text x="250" y="82" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">YELLOW</text>
+<text x="250" y="100" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">\x1b[43m</text>
+<text x="250" y="118" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">parede</text>
+<rect x="320" y="20" width="44" height="44" rx="4" fill="#22c55e" stroke="#9ca3af" stroke-width="1"/>
+<text x="342" y="82" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">GREEN</text>
+<text x="342" y="100" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">\x1b[42m</text>
+<text x="342" y="118" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">parede</text>
+<rect x="412" y="20" width="44" height="44" rx="4" fill="#3b82f6" stroke="#9ca3af" stroke-width="1"/>
+<text x="434" y="82" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">BLUE</text>
+<text x="434" y="100" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">\x1b[44m</text>
+<text x="434" y="118" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">parede</text>
+<rect x="44" y="150" width="44" height="44" rx="4" fill="#9ca3af" stroke="#9ca3af" stroke-width="1"/>
+<text x="66" y="212" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">GREY</text>
+<text x="66" y="230" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">\x1b[100m</text>
+<text x="66" y="248" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">&quot;42&quot;</text>
+<rect x="136" y="150" width="44" height="44" rx="4" fill="#d946ef" stroke="#9ca3af" stroke-width="1"/>
+<text x="158" y="212" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">MAGENTA</text>
+<text x="158" y="230" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">\x1b[45m</text>
+<text x="158" y="248" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">entrada</text>
+<rect x="228" y="150" width="44" height="44" rx="4" fill="#ef4444" stroke="#9ca3af" stroke-width="1"/>
+<text x="250" y="212" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">RED</text>
+<text x="250" y="230" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">\x1b[41m</text>
+<text x="250" y="248" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">saída</text>
+<rect x="320" y="150" width="44" height="44" rx="4" fill="#22d3ee" stroke="#9ca3af" stroke-width="1"/>
+<text x="342" y="212" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">CYAN</text>
+<text x="342" y="230" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">\x1b[46m</text>
+<text x="342" y="248" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">caminho</text>
+</svg>

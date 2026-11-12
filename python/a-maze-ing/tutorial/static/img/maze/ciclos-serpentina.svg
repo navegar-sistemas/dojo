@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="387.8" height="208" viewBox="0 0 387.8 208">
+<rect width="387.8" height="208" fill="#ffffff" rx="8"/>
+<rect x="94.9" y="30" width="72" height="72" fill="#fb923c"/>
+<rect x="94.9" y="102" width="72" height="72" fill="#fb923c"/>
+<line x1="94.9" y1="30" x2="166.9" y2="30" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="166.9" y1="30" x2="166.9" y2="102" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="94.9" y1="102" x2="166.9" y2="102" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="94.9" y1="30" x2="94.9" y2="102" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="166.9" y1="30" x2="238.9" y2="30" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="238.9" y1="30" x2="238.9" y2="102" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="166.9" y1="102" x2="238.9" y2="102" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="166.9" y1="30" x2="166.9" y2="102" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="238.9" y1="30" x2="310.9" y2="30" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="310.9" y1="30" x2="310.9" y2="102" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="238.9" y1="102" x2="310.9" y2="102" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="238.9" y1="30" x2="238.9" y2="102" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="94.9" y1="102" x2="166.9" y2="102" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="166.9" y1="102" x2="166.9" y2="174" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="94.9" y1="174" x2="166.9" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="94.9" y1="102" x2="94.9" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="166.9" y1="102" x2="238.9" y2="102" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="238.9" y1="102" x2="238.9" y2="174" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="166.9" y1="174" x2="238.9" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="166.9" y1="102" x2="166.9" y2="174" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="238.9" y1="102" x2="310.9" y2="102" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="310.9" y1="102" x2="310.9" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="238.9" y1="174" x2="310.9" y2="174" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="238.9" y1="102" x2="238.9" y2="174" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<text x="130.9" y="16" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="202.9" y="16" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="274.9" y="16" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="78.9" y="66" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="78.9" y="138" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="193.9" y="191" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">6 células, 5 passagens: 0 ciclos, 2 becos reais</text>
+</svg>

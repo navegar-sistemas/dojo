@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="595" height="248" viewBox="0 0 595 248">
+<rect width="595" height="248" fill="#ffffff" rx="8"/>
+<rect x="115.5" y="36" width="52" height="52" fill="#1f2328" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="171.5" y="36" width="52" height="52" fill="#1f2328" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="227.5" y="36" width="52" height="52" fill="#1f2328" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="283.5" y="36" width="52" height="52" fill="#1f2328" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="339.5" y="36" width="52" height="52" fill="#1f2328" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="395.5" y="36" width="52" height="52" fill="#1f2328" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="451.5" y="36" width="52" height="52" fill="#1f2328" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="115.5" y="92" width="52" height="52" fill="#1f2328" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="171.5" y="92" width="52" height="52" fill="#1f2328" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="227.5" y="92" width="52" height="52" fill="#1f2328" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="283.5" y="92" width="52" height="52" fill="#22d3ee" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="339.5" y="92" width="52" height="52" fill="#fde68a" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="395.5" y="92" width="52" height="52" fill="#22d3ee" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="451.5" y="92" width="52" height="52" fill="#1f2328" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="115.5" y="148" width="52" height="52" fill="#1f2328" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="171.5" y="148" width="52" height="52" fill="#1f2328" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="227.5" y="148" width="52" height="52" fill="#1f2328" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="283.5" y="148" width="52" height="52" fill="#1f2328" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="339.5" y="148" width="52" height="52" fill="#1f2328" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="395.5" y="148" width="52" height="52" fill="#1f2328" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="451.5" y="148" width="52" height="52" fill="#1f2328" stroke="#e5e7eb" stroke-width="1"/>
+<text x="309.5" y="118" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14.56" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">1,0</text>
+<text x="421.5" y="118" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14.56" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2,0</text>
+<text x="365.5" y="118" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14.56" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">?</text>
+<text x="141.5" y="20" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="197.5" y="20" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="253.5" y="20" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="309.5" y="20" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">3</text>
+<text x="365.5" y="20" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">4</text>
+<text x="421.5" y="20" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">5</text>
+<text x="477.5" y="20" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">6</text>
+<text x="95.5" y="62" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="95.5" y="118" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="95.5" y="174" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="297.5" y="226" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">células (1, 0) e (2, 0): a passagem fica em (1 + 2 + 1, 0 + 0 + 1) = (4, 1)</text>
+</svg>

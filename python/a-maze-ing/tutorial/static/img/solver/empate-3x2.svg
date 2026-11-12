@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="624" height="162" viewBox="0 0 624 162">
+<rect width="624" height="162" fill="#ffffff" rx="8"/>
+<svg x="0" y="0" width="200" height="162" viewBox="0 0 200 162">
+<rect width="200" height="162" fill="#ffffff" rx="8"/>
+<rect x="16" y="16" width="56" height="56" fill="#d946ef"/>
+<rect x="128" y="72" width="56" height="56" fill="#ef4444"/>
+<polyline points="44,44 100,44 156,44 156,100" fill="none" stroke="#22d3ee" stroke-width="15.68" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="16" y1="16" x2="72" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="16" y1="16" x2="16" y2="72" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="72" y1="16" x2="128" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="128" y1="16" x2="184" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="184" y1="16" x2="184" y2="72" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="16" y1="128" x2="72" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="16" y1="72" x2="16" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="72" y1="128" x2="128" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="184" y1="72" x2="184" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="128" y1="128" x2="184" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<text x="100" y="145" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">EES: o escolhido</text>
+</svg>
+
+<svg x="212" y="0" width="200" height="162" viewBox="0 0 200 162">
+<rect width="200" height="162" fill="#ffffff" rx="8"/>
+<rect x="16" y="16" width="56" height="56" fill="#d946ef"/>
+<rect x="128" y="72" width="56" height="56" fill="#ef4444"/>
+<polyline points="44,44 100,44 100,100 156,100" fill="none" stroke="#22d3ee" stroke-width="15.68" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="16" y1="16" x2="72" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="16" y1="16" x2="16" y2="72" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="72" y1="16" x2="128" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="128" y1="16" x2="184" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="184" y1="16" x2="184" y2="72" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="16" y1="128" x2="72" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="16" y1="72" x2="16" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="72" y1="128" x2="128" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="184" y1="72" x2="184" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="128" y1="128" x2="184" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<text x="100" y="145" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">ESE: mesmo tamanho</text>
+</svg>
+
+<svg x="424" y="0" width="200" height="162" viewBox="0 0 200 162">
+<rect width="200" height="162" fill="#ffffff" rx="8"/>
+<rect x="16" y="16" width="56" height="56" fill="#d946ef"/>
+<rect x="128" y="72" width="56" height="56" fill="#ef4444"/>
+<polyline points="44,44 44,100 100,100 156,100" fill="none" stroke="#22d3ee" stroke-width="15.68" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="16" y1="16" x2="72" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="16" y1="16" x2="16" y2="72" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="72" y1="16" x2="128" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="128" y1="16" x2="184" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="184" y1="16" x2="184" y2="72" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="16" y1="128" x2="72" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="16" y1="72" x2="16" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="72" y1="128" x2="128" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="184" y1="72" x2="184" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="128" y1="128" x2="184" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<text x="100" y="145" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">SEE: mesmo tamanho</text>
+</svg>
+
+</svg>
