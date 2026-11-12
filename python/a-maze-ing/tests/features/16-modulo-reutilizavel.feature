@@ -181,7 +181,7 @@ Funcionalidade: Módulo reutilizável e pacote mazegen
     Dado o repositório no estado "clone limpo"
     E um virtualenv novo "build" em que rodou "pip install build" e "python -m build"
     E um virtualenv novo "uso" em que rodou "pip install dist/<arquivo>"
-    E o caminho "teste" preparado como "pasta com a_maze_ing.py e config.txt"
+    E o caminho "teste" preparado como "pasta com a_maze_ing.py, amazeing/ e config.txt"
     E o config do repositório
     Quando o ambiente de execução é o virtualenv "uso" na pasta "teste"
     E eu executo "python a_maze_ing.py config.txt" com a entrada "4"

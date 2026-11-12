@@ -62,7 +62,7 @@ parte do texto fixo.
 | V04 | given | `um virtualenv novo "{venv}" em que rodou {comandos:L}` | cria o venv e roda os comandos nele; exige código 0 | repo → venvs |
 | V05 | given, when | `o ambiente de execução é o virtualenv "{venv}" na pasta "{pasta}"` | os próximos comandos usam o `PATH` do venv e o `cwd` pasta (`"."` = repo) | venvs → ambiente |
 | V06 | given | `o código-fonte de {alvos:L}` | lista os `.py` dos alvos; `"."` = `project/` sem `.venv`, `build` e `dist` | → fontes |
-| V07 | given | `o config {origem:Origem}` | carrega o config base de `README.md` ou o `config.txt` do repositório | → config |
+| V07 | given | `o config {origem:Origem}` | carrega o config base (`CONFIG_BASE` de `suporte/config.py`) ou o `config.txt` do repositório | → config |
 | V08 | given | `o config {origem:Origem} salvo em "{arquivo}"` | igual a V07, com outro destino; cria a pasta pai se faltar | → config |
 | V09 | given | `o config base com {pares:L}` | parte do config base e aplica cada `CHAVE=valor` (troca a linha da chave ou acrescenta no fim) | → config |
 | V10 | given | `o config com {pares:L}` | aplica os pares sobre o config atual (depois de um `Contexto`) | usa config |
@@ -172,7 +172,7 @@ parte do texto fixo.
 | Cmp | `pelo menos`, `no máximo` |
 | V02 estado | `atual` (`cwd` em `project/`); `instalado` (`make install`, uma vez por sessão); `clone limpo` (cópia do que `git -C project ls-files` lista para uma pasta temporária, seguida de `git init`, `git add` e `git commit` só nessa cópia, porque a raiz do git é `dojo`); `clone do remoto` (`git clone $AMAZEING_REMOTE`; o cenário é pulado se a variável não existir) |
 | V15 variação | `uma linha vazia entre cada par`, `espaços em volta do igual`, `espaços no fim de cada linha`, `finais de linha CRLF`, `sem quebra de linha depois da última linha`, `chave WIDTH minúscula`, `todas as chaves minúsculas`, `chave HEIGHT capitalizada`, `perfect=true minúsculo` |
-| V16 tipo | `inexistente`, `diretório`, `diretório sem permissão de escrita`, `sem permissão de leitura` (config base com `chmod 000`), `não UTF-8`, `vazio`, `bytes binários aleatórios`, `só espaços e tabulações`, `BOM UTF-8 + config base`, `config base com WIDTH de 100000 dígitos`, `só WÍDTH=20 e HEÍGHT=15, com acento`, `pasta com a_maze_ing.py e config.txt`, `diretório pai criado` |
+| V16 tipo | `inexistente`, `diretório`, `diretório sem permissão de escrita`, `sem permissão de leitura` (config base com `chmod 000`), `não UTF-8`, `vazio`, `bytes binários aleatórios`, `só espaços e tabulações`, `BOM UTF-8 + config base`, `config base com WIDTH de 100000 dígitos`, `só WÍDTH=20 e HEÍGHT=15, com acento`, `pasta com a_maze_ing.py, amazeing/ e config.txt`, `diretório pai criado` |
 | V18 situação | `arquivo de configuração inexistente`, `arquivo de configuração sem permissão de leitura`, `chave obrigatória ausente`, `valor inválido`, `parâmetros impossíveis`, `OUTPUT_FILE num diretório inexistente` |
 | V23 modelo | `exemplo do subject`, `exemplo do subject com o rodapé anotado`, `perfeito do config base`, `perfeito do config base com uma parede interna aberta` |
 | V46 evento | `EOF`, `SIGINT`, `1 segundo sem entrada` |
