@@ -18,7 +18,8 @@ debug:
 	$(PY) -m pdb a_maze_ing.py config.txt
 
 clean:
-	rm -rf __pycache__ mazegen/__pycache__ .mypy_cache build dist *.egg-info
+	find . -path ./$(VENV) -prune -o -type d -name __pycache__ -exec rm -rf {} +
+	rm -rf .mypy_cache build dist *.egg-info
 
 lint:
 	$(PY) -m flake8 .
@@ -29,5 +30,6 @@ lint-strict:
 	$(PY) -m mypy . --strict
 
 build:
+	rm -rf dist
 	$(PY) -m build
 	cp dist/mazegen-*.whl dist/mazegen-*.tar.gz .

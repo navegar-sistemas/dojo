@@ -57,12 +57,17 @@ Funcionalidade: Makefile
     Então o caminho "<temporario>" não existe
 
     Exemplos:
-      | temporario          |
-      | __pycache__         |
-      | mazegen/__pycache__ |
-      | .mypy_cache         |
-      | build               |
-      | mazegen.egg-info    |
+      | temporario                                |
+      | __pycache__                               |
+      | mazegen/__pycache__                       |
+      | mazegen/entities/__pycache__              |
+      | amazeing/__pycache__                      |
+      | amazeing/ui/__pycache__                   |
+      | amazeing/domain/value_objects/__pycache__ |
+      | .mypy_cache                               |
+      | build                                     |
+      | dist                                      |
+      | mazegen.egg-info                          |
 
   # pdf: "clean: Remove temporary files or caches (e.g., __pycache__, .mypy_cache) to"
   # pdf: "This package must be called mazegen-* and the file must be located at the root of your"
