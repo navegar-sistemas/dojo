@@ -1,18 +1,65 @@
 """Passos que executam comandos e conferem a saída."""
 
+import re
+
+import pytest
 from pytest_bdd import parsers, then, when
 
-from conftest import TIPOS, Estado
+from conftest import MOTIVOS, TIPOS, Estado, Execucao
+
+
+def conferir_mensagem_de_erro(execucao: Execucao, itens: list[str]) -> str:
+    """Confere a mensagem de erro da D01 e os itens citados, na ordem.
+
+    Args:
+        execucao: Execução que deveria terminar em erro.
+        itens: Textos que a mensagem cita, na ordem.
+
+    Returns:
+        A linha da mensagem.
+    """
+    linhas = execucao.saida_erro.strip().splitlines()
+    if len(linhas) != 1 or not linhas[0].startswith("Error: "):
+        pytest.fail(
+            "a saída de erro deveria ser uma única linha começando com "
+            f"'Error: ', mas foi:\n{execucao.saida_erro!r}"
+        )
+    mensagem = linhas[0]
+    inicio = 0
+    for item in itens:
+        posicao = mensagem.find(item, inicio)
+        if posicao < 0:
+            pytest.fail(
+                f"a mensagem não cita {item!r} depois de "
+                f"{mensagem[:inicio]!r}: {mensagem!r}"
+            )
+        inicio = posicao + len(item)
+    return mensagem
+
+
+def conferir_motivo(mensagem: str, motivo: str) -> None:
+    """Confere a palavra-chave do motivo (I21), sem diferenciar caixa.
+
+    Args:
+        mensagem: Linha da mensagem de erro.
+        motivo: Motivo da lista fechada da V58.
+    """
+    chave = MOTIVOS.get(motivo)
+    if chave is None:
+        pytest.fail(f'motivo "{motivo}" não existe (V58 no README)')
+    if not re.search(re.escape(chave), mensagem, re.IGNORECASE):
+        pytest.fail(f"a mensagem não contém {chave!r}: {mensagem!r}")
 
 
 @when(parsers.parse("eu executo {comandos:L}", extra_types=TIPOS))
 def eu_executo(estado: Estado, comandos: list[str]) -> None:
-    """V29: roda cada comando, com stdin vazio, e guarda os resultados.
+    """V29: grava o config e roda cada comando, com stdin vazio.
 
     Args:
         estado: Estado do cenário.
         comandos: Comandos na ordem em que aparecem no passo.
     """
+    estado.gravar_config()
     for comando in comandos:
         estado.executar(comando)
 
@@ -25,7 +72,7 @@ def eu_executo(estado: Estado, comandos: list[str]) -> None:
 def eu_executo_com_entrada(
     estado: Estado, comandos: list[str], linhas: list[str]
 ) -> None:
-    """V30: roda cada comando com as linhas no stdin.
+    """V30: grava o config e roda cada comando com as linhas no stdin.
 
     Args:
         estado: Estado do cenário.
@@ -33,6 +80,7 @@ def eu_executo_com_entrada(
         linhas: Linhas enviadas ao stdin, cada uma terminada em "\\n".
     """
     entrada = "".join(f"{linha}\n" for linha in linhas)
+    estado.gravar_config()
     for comando in comandos:
         estado.executar(comando, entrada)
 
@@ -163,3 +211,60 @@ def saida_igual(estado: Estado, fluxo: str, texto: str) -> None:
     """
     saida = estado.resultado.fluxo(fluxo).strip()
     assert saida == texto, f"{fluxo} é {saida!r}, esperado {texto!r}"
+
+
+@then("o processo termina dentro do tempo limite")
+def termina_no_tempo(estado: Estado) -> None:
+    """V51: confere que o último comando não estourou o tempo limite.
+
+    Args:
+        estado: Estado do cenário.
+    """
+    resultado = estado.resultado
+    if resultado.estourou:
+        pytest.fail(f"'{resultado.comando}' estourou o tempo limite")
+
+
+@then(
+    parsers.parse(
+        'o resultado da execução é "{resultado:Q}"', extra_types=TIPOS
+    )
+)
+def resultado_da_execucao(estado: Estado, resultado: str) -> None:
+    """V59: confere "sucesso" ou "erro citando A, B[; motivo: M]".
+
+    Sucesso exige código 0, nenhum "Error:" e o OUTPUT_FILE do config
+    gravado com conteúdo; erro exige código 1 e a mensagem da D01.
+
+    Args:
+        estado: Estado do cenário.
+        resultado: Resultado esperado, na forma do README.
+    """
+    execucao = estado.resultado
+    if execucao.estourou:
+        pytest.fail(f"'{execucao.comando}' estourou o tempo limite")
+    if resultado == "sucesso":
+        if execucao.codigo != 0 or "Error:" in execucao.saida_erro:
+            pytest.fail(
+                f"esperado sucesso, mas terminou com código "
+                f"{execucao.codigo}:\n{execucao.saida_erro}"
+            )
+        saida = execucao.arquivo_saida
+        if saida is None:
+            pytest.fail("o comando não passa um config com OUTPUT_FILE")
+        if not saida.is_file() or saida.stat().st_size == 0:
+            pytest.fail(f"o arquivo de saída {saida.name} não foi gravado")
+        return
+    prefixo = "erro citando "
+    if not resultado.startswith(prefixo):
+        pytest.fail(f'resultado "{resultado}" fora do formato do README')
+    citados, _, motivo = resultado[len(prefixo):].partition("; motivo: ")
+    if execucao.codigo != 1:
+        pytest.fail(
+            f"esperado erro com código 1, mas terminou com código "
+            f"{execucao.codigo}:\n{execucao.saida_padrao}"
+            f"{execucao.saida_erro}"
+        )
+    mensagem = conferir_mensagem_de_erro(execucao, citados.split(", "))
+    if motivo:
+        conferir_motivo(mensagem, motivo)

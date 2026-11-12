@@ -198,7 +198,9 @@ os IDs existentes não mudam. Os cenários `@manual` têm texto livre e são pul
 
 - Comandos (inclusive os de V50 e V55) rodam com `cwd` = `project/`, ou a cópia criada por V02
   (`clone limpo`, `clone do remoto`), ou a pasta definida por V05; `PATH` começando por
-  `.venv/bin`; tempo limite de 30 s.
+  `.venv/bin`; tempo limite de 30 s, que mata o grupo de processos do comando e marca o
+  resultado como estourado (V51). Antes de rodar `a_maze_ing.py <config>`, o `OUTPUT_FILE`
+  desse config vai para a reserva da V16 e volta no fim do teste.
 - O git da suíte (clone limpo, V60) roda sem a configuração global de quem executa:
   `core.excludesFile`, hooks e assinatura de commit desligados, para que um ignore global não
   esconda um `.gitignore` incompleto do projeto.
@@ -234,8 +236,8 @@ os IDs existentes não mudam. Os cenários `@manual` têm texto livre e são pul
 | V13 | given | `o config com a linha da chave "{chave}" trocada por "{linha}"` | troca a linha da chave; `""` equivale a removê-la | usa config |
 | V14 | given | `o config com a linha "{linha}" {posicao:Pos}` | insere a linha no início ou no fim | usa config |
 | V15 | given | `o config escrito com a variação "{variacao}"` | transforma o texto na hora de gravar (lista de variações) | usa config |
-| V16 | given | `o caminho "{caminho}" preparado como "{tipo}"` | cria arquivo ou diretório especial (lista de tipos); no fim restaura permissões e apaga; desliga a gravação automática do config nesse destino | → preparados |
-| V18 | given, when | `a situação de erro "{situacao}"` | combina V16, V11 e V09 conforme a situação (lista), agindo sobre o config atual e o seu destino | config, preparados |
+| V16 | given | `o caminho "{caminho}" preparado como "{tipo}"` | cria arquivo ou diretório especial (lista de tipos); um original que existia vai para uma reserva; no fim restaura permissões, apaga o que o teste criou e devolve o original; desliga a gravação automática do config nesse destino | → preparados |
+| V18 | given, when | `a situação de erro "{situacao}"` | combina V16, V11 e V09 conforme a situação (lista), agindo sobre o config atual e o seu destino: inexistente e sem permissão de leitura → V16 no destino; chave ausente → sem `WIDTH`; valor inválido → `WIDTH=abc`; parâmetros impossíveis → `EXIT=0,0` (igual à entrada); OUTPUT_FILE → `diretorio_inexistente/maze.txt` | config, preparados |
 | V19 | given | `os casos de erro do catálogo da suíte` | carrega `CATALOGO_DE_ERROS` do `conftest.py`: um caso por cenário de erro de 03, 04, 05, 07, 08 e 13 | → catalogo |
 | V20 | given | `um labirinto gerado pelo {gerador:Gerador} com o config base` | gera pelo programa (entrada `"4"`) ou pela classe `MazeGenerator` | → labirintos |
 | V21 | given | `um labirinto gerado pelo {gerador:Gerador} com o config base mais {pares:L}` | igual a V20, com os pares aplicados | → labirintos |
@@ -276,7 +278,7 @@ os IDs existentes não mudam. Os cenários `@manual` têm texto livre e são pul
 | V56 | then | `a linha da saída que contém "{a}" também contém "{b}"` | acha a linha com `a` e confere `b` nela | resultado ou sessao |
 | V57 | then | `a mensagem de erro cita {itens:L}` | stderr com uma linha, começando com `Error: `, contendo os itens na ordem | resultado |
 | V58 | then | `a mensagem de erro explica "{motivo}"` | casa a expressão do motivo (I21) | resultado |
-| V59 | then | `o resultado da execução é "{resultado}"` | `sucesso` ou `erro citando A, B[; motivo: M]` | resultado |
+| V59 | then | `o resultado da execução é "{resultado}"` | `sucesso` (código 0, sem `Error:` e o `OUTPUT_FILE` do config gravado com conteúdo) ou `erro citando A, B[; motivo: M]` (código 1 e as regras de V57 e V58) | resultado |
 | V60 | then | `o caminho "{caminho}" {estado:EstadoCaminho}` | `exists`, `git check-ignore`, `git ls-files` ou tamanho > 0; aceita glob | repo |
 | V61 | then | `o arquivo "{arquivo}" {verbo:Contem} {textos:L}` | procura as strings no arquivo lido sem converter quebras de linha (`newline=""`), para `\r` ser detectável | repo |
 | V62 | given, then | `o arquivo "{arquivo}" {tem:TemLinha} que casa com a expressão "{regex}"` | `re.search` com `re.M` | repo |

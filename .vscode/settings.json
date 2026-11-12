@@ -112,6 +112,18 @@
         {
             "name": "linhas:L",
             "regexp": "\"(?:[^\"\\\\]|\\\\.)*\"(?:(?:, | e )\"(?:[^\"\\\\]|\\\\.)*\")*"
+        },
+        {
+            "name": "origem:Origem",
+            "regexp": "do repositório|base"
+        },
+        {
+            "name": "situacao:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "resultado:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
         }
     ]
 }

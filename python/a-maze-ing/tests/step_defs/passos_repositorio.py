@@ -1,14 +1,24 @@
 """Passos que preparam e conferem o repositório de entrega (project/)."""
 
+import random
 import shutil
 import subprocess
+from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
 
 import pytest
-from pytest_bdd import given, parsers, then
+from pytest_bdd import given, parsers, then, when
 
-from conftest import PROJECT_DIR, TIMEOUT, TIPOS, Estado, Execucao
+from conftest import (
+    CONFIG_BASE,
+    PROJECT_DIR,
+    TIMEOUT,
+    TIPOS,
+    Config,
+    Estado,
+    Execucao,
+)
 
 # O clone e as consultas ao git não podem herdar a configuração de quem roda
 # a suíte: o ignore global mascararia um .gitignore incompleto, e hooks ou
@@ -179,22 +189,52 @@ def arquivo_na_raiz(estado: Estado, arquivo: str) -> None:
         'o caminho "{caminho:Q}" preparado como "{tipo:Q}"', extra_types=TIPOS
     )
 )
-def caminho_preparado(
-    estado: Estado, tmp_path: Path, caminho: str, tipo: str
-) -> None:
+def caminho_preparado(estado: Estado, caminho: str, tipo: str) -> None:
     """V16: prepara o caminho; a fixture estado desfaz tudo no fim.
-
-    Um original que exista no caminho vai para a reserva em tmp_path e
-    volta no fim do teste.
 
     Args:
         estado: Estado do cenário.
-        tmp_path: Pasta temporária do cenário, onde fica a reserva.
         caminho: Caminho relativo ao repositório.
-        tipo: "inexistente", "vazio" ou "diretório"; os demais tipos ainda
-            não existem.
+        tipo: Tipo da lista fechada da V16.
     """
-    alvo = estado.cwd / caminho
+    preparar(estado, estado.cwd / caminho, tipo)
+
+
+def _texto(linhas: list[str]) -> bytes:
+    """Linhas de config como bytes UTF-8, uma por linha."""
+    return ("\n".join(linhas) + "\n").encode("utf-8")
+
+
+# Conteúdo de cada tipo de arquivo da V16. O primeiro byte 0xFF nunca
+# aparece em UTF-8, então os bytes aleatórios são sempre inválidos.
+CONTEUDOS: dict[str, Callable[[], bytes]] = {
+    "vazio": lambda: b"",
+    "bytes binários aleatórios": (
+        lambda: b"\xff" + random.Random(0).randbytes(255)
+    ),
+    "só espaços e tabulações": lambda: b"  \t \n\t\t  \n \n",
+    "BOM UTF-8 + config base": lambda: b"\xef\xbb\xbf" + _texto(CONFIG_BASE),
+    "config base com WIDTH de 100000 dígitos": lambda: _texto(
+        ["WIDTH=" + "9" * 100000, *CONFIG_BASE[1:]]
+    ),
+    "só WÍDTH=20 e HEÍGHT=15, com acento": (
+        lambda: _texto(["WÍDTH=20", "HEÍGHT=15"])
+    ),
+    "sem permissão de leitura": lambda: _texto(CONFIG_BASE),
+}
+
+
+def preparar(estado: Estado, alvo: Path, tipo: str) -> None:
+    """Prepara o alvo conforme o tipo da V16.
+
+    O original vai para a reserva e o destino deixa de receber o config
+    automático do cenário.
+
+    Args:
+        estado: Estado do cenário.
+        alvo: Caminho absoluto.
+        tipo: Tipo da lista fechada da V16.
+    """
     if tipo == "diretório":
         criado = alvo
         while not criado.parent.exists():
@@ -203,17 +243,75 @@ def caminho_preparado(
             estado.preparados.append((criado, None))
         alvo.mkdir(parents=True, exist_ok=True)
         return
-    if tipo not in ("inexistente", "vazio"):
+    if tipo != "inexistente" and tipo not in CONTEUDOS:
         pytest.fail(f'tipo "{tipo}" ainda não implementado (V16 no README)')
-    reserva = None
-    if alvo.exists() or alvo.is_symlink():
-        reserva = tmp_path / "reserva" / str(len(estado.preparados))
-        reserva.parent.mkdir(parents=True, exist_ok=True)
-        shutil.move(alvo, reserva)
-    estado.preparados.append((alvo, reserva))
-    if tipo == "vazio":
-        alvo.parent.mkdir(parents=True, exist_ok=True)
-        alvo.write_bytes(b"")
+    estado.proteger(alvo)
+    estado.sem_gravacao.add(alvo)
+    if tipo == "inexistente":
+        return
+    alvo.parent.mkdir(parents=True, exist_ok=True)
+    alvo.write_bytes(CONTEUDOS[tipo]())
+    if tipo == "sem permissão de leitura":
+        alvo.chmod(0)
+
+
+@given(parsers.parse("o config {origem:Origem}", extra_types=TIPOS))
+def config_de(estado: Estado, origem: str) -> None:
+    """V07: carrega o config base do README ou o config.txt do repositório.
+
+    Args:
+        estado: Estado do cenário.
+        origem: "base" ou "do repositório".
+    """
+    if origem == "base":
+        estado.config = Config(list(CONFIG_BASE))
+        return
+    repositorio = estado.cwd / "config.txt"
+    if not repositorio.is_file():
+        pytest.fail(f"config.txt não existe em {estado.cwd}")
+    estado.config = Config(
+        repositorio.read_text(encoding="utf-8").splitlines()
+    )
+
+
+# Valores concretos de cada situação de erro (V18 no README).
+SITUACOES: dict[str, Callable[[Estado, Config], None]] = {
+    "arquivo de configuração inexistente": lambda estado, config: preparar(
+        estado, estado.cwd / config.destino, "inexistente"
+    ),
+    "arquivo de configuração sem permissão de leitura": (
+        lambda estado, config: preparar(
+            estado, estado.cwd / config.destino, "sem permissão de leitura"
+        )
+    ),
+    "chave obrigatória ausente": lambda estado, config: config.sem("WIDTH"),
+    "valor inválido": lambda estado, config: config.definir("WIDTH", "abc"),
+    "parâmetros impossíveis": (
+        lambda estado, config: config.definir("EXIT", "0,0")
+    ),
+    "OUTPUT_FILE num diretório inexistente": (
+        lambda estado, config: config.definir(
+            "OUTPUT_FILE", "diretorio_inexistente/maze.txt"
+        )
+    ),
+}
+
+
+@given(parsers.parse('a situação de erro "{situacao:Q}"', extra_types=TIPOS))
+@when(parsers.parse('a situação de erro "{situacao:Q}"', extra_types=TIPOS))
+def situacao_de_erro(estado: Estado, situacao: str) -> None:
+    """V18: aplica a situação de erro ao config atual e ao seu destino.
+
+    Args:
+        estado: Estado do cenário.
+        situacao: Situação da lista fechada da V18.
+    """
+    if estado.config is None:
+        pytest.fail("a situação de erro precisa de um config antes")
+    aplicar = SITUACOES.get(situacao)
+    if aplicar is None:
+        pytest.fail(f'situação "{situacao}" não existe (V18 no README)')
+    aplicar(estado, estado.config)
 
 
 @then(

@@ -153,7 +153,7 @@ Funcionalidade: Qualidade de código
   # md:  "Inclua docstrings em funções e classes seguindo a PEP 257"
   @obrigatorio @automatizado @decisao-I16 @pdf-p06-L15 @md-L104
   Esquema do Cenário: Cada <definicao> tem docstring
-    Dado o código-fonte de "a_maze_ing.py" e "mazegen/"
+    Dado o código-fonte de "."
     Quando a análise estática percorre o código-fonte
     Então a análise estática confirma "docstring em cada <definicao>"
 
@@ -167,7 +167,7 @@ Funcionalidade: Qualidade de código
   # md:  "Inclua docstrings em funções e classes seguindo a PEP 257 (ex.: estilo Google ou NumPy)"
   @obrigatorio @automatizado @decisao-I16 @pdf-p06-L15 @md-L104
   Cenário: As docstrings seguem a PEP 257
-    Dado o código-fonte de "a_maze_ing.py" e "mazegen/"
+    Dado o código-fonte de "."
     Quando a análise estática percorre o código-fonte
     Então a análise estática confirma "docstrings com aspas triplas duplas"
     E a análise estática confirma "resumo de uma frase terminado em ponto"
@@ -177,7 +177,7 @@ Funcionalidade: Qualidade de código
   # md:  "(ex.: estilo Google ou NumPy) para documentar propósito, parâmetros e retornos."
   @obrigatorio @automatizado @decisao-I16 @pdf-p06-L15-L16 @md-L104
   Cenário: As docstrings documentam propósito, parâmetros e retorno
-    Dado o código-fonte de "a_maze_ing.py" e "mazegen/"
+    Dado o código-fonte de "."
     Quando a análise estática percorre o código-fonte
     Então a análise estática confirma "seção Args: nas funções com parâmetros"
     E a análise estática confirma "seção Returns: nas funções que retornam valor"
