@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="272" viewBox="0 0 450 272">
+<rect width="450" height="272" fill="#ffffff" rx="8"/>
+<rect x="150" y="64" width="150" height="150" fill="#fde68a"/>
+<line x1="150" y1="64" x2="300" y2="64" stroke="#1f2937" stroke-width="8" stroke-linecap="round"/>
+<line x1="300" y1="64" x2="300" y2="214" stroke="#1f2937" stroke-width="8" stroke-linecap="round"/>
+<line x1="150" y1="214" x2="300" y2="214" stroke="#1f2937" stroke-width="8" stroke-linecap="round"/>
+<line x1="150" y1="64" x2="150" y2="214" stroke="#1f2937" stroke-width="8" stroke-linecap="round"/>
+<text x="225" y="139" font-family="ui-sans-serif, system-ui, sans-serif" font-size="18" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">célula</text>
+<text x="225" y="32" font-family="ui-sans-serif, system-ui, sans-serif" font-size="17" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">Norte</text>
+<text x="225" y="51" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">o lado de cima</text>
+<text x="225" y="232" font-family="ui-sans-serif, system-ui, sans-serif" font-size="17" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">Sul</text>
+<text x="225" y="251" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">o lado de baixo</text>
+<text x="370" y="129" font-family="ui-sans-serif, system-ui, sans-serif" font-size="17" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">Leste</text>
+<text x="370" y="149" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">o lado direito</text>
+<text x="80" y="129" font-family="ui-sans-serif, system-ui, sans-serif" font-size="17" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">Oeste</text>
+<text x="80" y="149" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">o lado esquerdo</text>
+</svg>

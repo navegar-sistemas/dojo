@@ -287,6 +287,102 @@ def cell_bits_svg(bits: int, *, caption: str | None = None) -> str:
     return _svg(total_w, total_h, body)
 
 
+def sides_svg() -> str:
+    """Desenha uma célula com o nome de cada um dos quatro lados.
+
+    Returns:
+        O documento SVG.
+    """
+    size, left, top = 150, 150, 64
+    x0, y0, x1, y1 = left, top, left + size, top + size
+    body = [
+        f'<rect x="{x0}" y="{y0}" width="{size}" height="{size}" '
+        f'fill="{COLORS["highlight"]}"/>',
+        _line(x0, y0, x1, y0, "wall", 8),
+        _line(x1, y0, x1, y1, "wall", 8),
+        _line(x0, y1, x1, y1, "wall", 8),
+        _line(x0, y0, x0, y1, "wall", 8),
+        _text((x0 + x1) / 2, (y0 + y1) / 2, "célula", size=18,
+              weight="bold"),
+        _text((x0 + x1) / 2, y0 - 32, "Norte", size=17, weight="bold"),
+        _text((x0 + x1) / 2, y0 - 13, "o lado de cima", size=13,
+              fill="muted"),
+        _text((x0 + x1) / 2, y1 + 18, "Sul", size=17, weight="bold"),
+        _text((x0 + x1) / 2, y1 + 37, "o lado de baixo", size=13,
+              fill="muted"),
+        _text(x1 + 70, (y0 + y1) / 2 - 10, "Leste", size=17,
+              weight="bold"),
+        _text(x1 + 70, (y0 + y1) / 2 + 10, "o lado direito", size=13,
+              fill="muted"),
+        _text(x0 - 70, (y0 + y1) / 2 - 10, "Oeste", size=17,
+              weight="bold"),
+        _text(x0 - 70, (y0 + y1) / 2 + 10, "o lado esquerdo", size=13,
+              fill="muted"),
+    ]
+    return _svg(x1 + left, y1 + 58, body)
+
+
+def bits_svg(bits: int) -> str:
+    """Desenha os 4 bits de uma célula na ordem em que se escreve o binário.
+
+    O bit 3 (Oeste) fica à esquerda e o bit 0 (Norte) à direita, como as
+    casas de um número: a da direita é a de menor valor.
+
+    Args:
+        bits: Paredes fechadas, de 0 a 15.
+
+    Returns:
+        O documento SVG.
+    """
+    box, gap, left, top = 92, 14, 40, 78
+    names = ("Oeste", "Sul", "Leste", "Norte")
+    body: list[str] = []
+    terms: list[str] = []
+    for index, name in enumerate(names):
+        position = 3 - index
+        value = 1 << position
+        on = bool(bits & value)
+        x = left + index * (box + gap)
+        middle = x + box / 2
+        body.append(_text(middle, top - 46, name, size=16, weight="bold"))
+        body.append(_text(middle, top - 22, f"vale {value}", size=14,
+                          fill="muted"))
+        body.append(
+            f'<rect x="{x:g}" y="{top}" width="{box}" height="{box}" rx="10" '
+            f'fill="{COLORS["wall"] if on else COLORS["background"]}" '
+            f'stroke="{COLORS["wall"]}" stroke-width="3"/>'
+        )
+        body.append(_text(middle, top + box / 2, "1" if on else "0",
+                          size=40, weight="bold",
+                          fill="#ffffff" if on else "muted"))
+        body.append(_text(middle, top + box + 22, f"bit {position}",
+                          size=14, fill="muted"))
+        body.append(_text(middle, top + box + 44,
+                          "fechada" if on else "aberta", size=14,
+                          fill="text" if on else "muted",
+                          weight="bold" if on else "normal"))
+        terms.append(str(value) if on else "0")
+    width = left * 2 + 4 * box + 3 * gap
+    arrow_y = top + box + 78
+    body.append(
+        f'<line x1="{width - left:g}" y1="{arrow_y}" x2="{left + 10:g}" '
+        f'y2="{arrow_y}" stroke="{COLORS["muted"]}" stroke-width="2" '
+        f'marker-end="url(#seta)"/>'
+    )
+    body.insert(0, (
+        '<defs><marker id="seta" markerWidth="10" markerHeight="10" '
+        'refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" '
+        f'fill="{COLORS["muted"]}"/></marker></defs>'
+    ))
+    body.append(_text(width / 2, arrow_y + 20,
+                      "o bit 0 é o da direita; o valor dobra a cada casa "
+                      "para a esquerda", size=13, fill="muted"))
+    body.append(_text(width / 2, arrow_y + 54,
+                      f"0b{bits:04b} = {' + '.join(terms)} = {bits} "
+                      f"= \"{bits:x}\"", size=18, weight="bold"))
+    return _svg(width, arrow_y + 80, body)
+
+
 def blocks_svg(
     rows: Sequence[Sequence[str]],
     *,
