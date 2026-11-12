@@ -6,4 +6,3 @@ build/
 dist/
 *.egg-info/
 maze.txt
-.pytest_cache
