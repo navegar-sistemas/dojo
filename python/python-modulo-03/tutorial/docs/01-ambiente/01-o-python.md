@@ -16,10 +16,10 @@ python3 --version
 Python 3.15.2
 ```
 
-O número depois de `Python` é a versão. O enunciado exige `3.10` ou maior (`3.10`, `3.11`, `3.12`
-e assim por diante). Abaixo do 3.9, o código dos exercícios nem roda: ele anota coleções com `list[int]` e
-`tuple[float, float, float]`, uma escrita que o Python só aceita a partir do 3.9
-([Uma lista nova](../04-ex1/02-uma-lista-nova.md)).
+O número depois de `Python` é a versão, e na sua máquina pode ser outro. O enunciado exige `3.10`
+ou maior (`3.10`, `3.11`, `3.12` e assim por diante). Abaixo do 3.9, cinco dos sete exercícios nem
+rodam: eles anotam coleções com `list[int]` e `tuple[float, float, float]`, uma escrita que o
+Python só aceita a partir do 3.9 ([Uma lista nova](../04-ex1/02-uma-lista-nova.md)).
 
 ## Se a versão for menor que 3.10, ou o comando não existir
 
@@ -35,7 +35,8 @@ O Python vem do gerenciador de pacotes do sistema:
 Uma distribuição Linux antiga pode não oferecer nenhum Python 3.10 ou mais novo no gerenciador de
 pacotes. Nesse caso, o [pyenv](https://github.com/pyenv/pyenv) instala uma versão própria, na pasta
 do usuário, sem depender do sistema: depois de instalado e configurado no shell (o programa do
-terminal que lê e executa os comandos, como o `bash` ou o `zsh`), como a página dele explica, `pyenv install 3.12` baixa e compila o Python 3.12, e `pyenv global 3.12` faz o
-comando `python3` passar a ser essa versão. `python3 --version` confirma a troca.
+terminal que lê e executa os comandos, como o `bash` ou o `zsh`), como a página dele explica,
+`pyenv install 3.12` baixa e compila o Python 3.12, e `pyenv global 3.12` faz o comando `python3`
+passar a ser essa versão. `python3 --version` confirma a troca.
 
 Daqui em diante, `python3` quer dizer esse Python 3.10 ou mais novo.

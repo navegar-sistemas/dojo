@@ -18,9 +18,9 @@ Os exercícios usam, sem explicação longa, o básico de Python:
 | f-strings: texto com valores dentro de `{}` | `f"Total score: {total}"` vira `Total score: 9650` |
 | `try` e `except` para capturar um erro | `try: int("abc")` seguido de `except ValueError as error:` |
 
-O tratamento de erros com `try` e `except` é o assunto do projeto anterior da série.
-Neste projeto, ele aparece sempre do mesmo jeito: o código que pode falhar vai no `try`, e o
-`except ValueError as error` captura o erro e guarda a mensagem em `error`. Um `ValueError` é o
+O tratamento de erros com `try` e `except` aparece sempre do mesmo jeito neste projeto: o código
+que pode falhar vai no `try`, e o `except ValueError as error` captura o erro e guarda a mensagem
+em `error`. Um `ValueError` é o
 erro que o Python lança quando uma conversão recebe um texto que não serve, como `int("abc")`.
 
 Três detalhes de texto aparecem bastante:

@@ -56,7 +56,7 @@ AttributeError: module 'alchemy' has no attribute 'create_earth'. Did you mean '
 ```
 
 No lugar de `/home/ana/the-codex` aparece o caminho completo da sua pasta: o traceback mostra
-onde o arquivo está no disco. A saída acima é a do Python 3.15; no 3.10 e no 3.14, a sugestão da
+onde o arquivo está no disco. A saída acima é a do Python 3.15; do 3.10 ao 3.14, a sugestão da
 última linha é escrita como no enunciado, `Did you mean: 'create_air'?`.
 
 ## Lendo o traceback
@@ -70,10 +70,9 @@ onde o arquivo está no disco. A saída acima é a do Python 3.15; no 3.10 e no 
   "você quis dizer `create_air`?". O Python 3.15 escreve a mesma sugestão de outro jeito: "você
   quis dizer `.create_air` em vez de `.create_earth`?".
 
-A linha dos `^` também muda com a versão. O enunciado foi gerado com uma versão mais antiga do
-Python, em que os `^` começam embaixo do `{`; no 3.14 e no 3.15 eles começam uma coluna depois,
-exatamente embaixo de `alchemy.create_earth`; no 3.10, a linha não aparece. As três formas marcam
-o mesmo erro.
+A linha dos `^` também muda. No enunciado, os `^` começam embaixo do `{`; do Python 3.11 ao 3.15,
+eles começam uma coluna depois, exatamente embaixo de `alchemy.create_earth`; no 3.10, a linha não
+aparece. As três formas marcam o mesmo erro.
 
 ## Por que o texto e o traceback saem na mesma linha
 

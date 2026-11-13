@@ -42,9 +42,9 @@ continuam sendo inteiros e são aceitos.
 ## Um limite para as pontuações
 
 `int()` aceita inteiros de até 4300 dígitos (acima disso, lança `ValueError`; esse limite existe
-desde o Python 3.10.7), mas a média é uma
-divisão `/`, e o resultado de `/` é um `float`. Um `float` não guarda números maiores que cerca de
-1.8 × 10³⁰⁸, e acima de 2⁵³ ele já começa a perder as unidades:
+desde o Python 3.10.7), mas a média é uma divisão `/`, e o resultado de `/` é um `float`. Um
+`float` não guarda números maiores que cerca de 1.8 × 10³⁰⁸, e acima de 2⁵³ ele já começa a
+perder as unidades:
 
 ```python title="experimentos/limite.py"
 print(2 ** 53)

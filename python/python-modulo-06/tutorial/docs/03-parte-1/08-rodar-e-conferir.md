@@ -79,16 +79,16 @@ FIM
 
 `9,10c9,10` quer dizer "as linhas 9 e 10 da primeira entrada mudaram em relação às linhas 9 e 10
 da segunda". As linhas com `<` são as do script; as com `>`, as do enunciado. As duas diferenças
-vêm da versão do Python ([Lendo o traceback](./06-o-erro-proposital.md#lendo-o-traceback)):
+são de forma, e não de conteúdo ([Lendo o traceback](./06-o-erro-proposital.md#lendo-o-traceback)):
 
-- a linha dos `^`: o enunciado foi gerado com uma versão mais antiga do Python; nas versões
-  recentes, os `^` começam uma coluna depois;
+- a linha dos `^`: no enunciado, os `^` começam embaixo do `{`; do Python 3.11 ao 3.15, uma
+  coluna depois;
 - a sugestão do fim: o Python 3.15 a escreve como `Did you mean '.create_air' instead of
   '.create_earth'?`; a do enunciado é `Did you mean: 'create_air'?`. O nome sugerido é o mesmo.
 
 Todo o resto, inclusive o arquivo, a linha 12 e o tipo e a mensagem do erro, é igual.
 
-No Python 3.14, a sugestão é escrita como no enunciado, e sobra só a linha dos `^`:
+Do Python 3.11 ao 3.14, a sugestão é escrita como no enunciado, e sobra só a linha dos `^`:
 
 ```text
 9c9
@@ -146,7 +146,7 @@ Testing create_fire: Fire element created
 ## O cache
 
 ```bash
-ls -1 alchemy
+LC_ALL=C ls -1 alchemy
 ```
 
 ```text
@@ -155,8 +155,9 @@ __pycache__
 elements.py
 ```
 
-`ls -1` lista um nome por linha; a ordem dos nomes pode ser outra em alguns sistemas Linux, que
-ignoram o `_` ao ordenar. A pasta `__pycache__` apareceu em `alchemy` (e também na raiz)
-na primeira vez que os módulos foram importados
+`ls -1` lista um nome por linha. `LC_ALL=C` faz o `ls` ordenar os nomes pelo código de cada
+caractere, e a ordem sai igual em qualquer sistema; sem ele, alguns Linux ignoram o `_` ao
+ordenar, e `elements.py` iria para o começo. A pasta `__pycache__` apareceu em `alchemy` (e
+também na raiz) na primeira vez que os módulos foram importados
 ([A pasta `__pycache__`](../02-conceitos/01-o-modulo-e-o-import.md#a-pasta-__pycache__)). Ela não
 é entregue.

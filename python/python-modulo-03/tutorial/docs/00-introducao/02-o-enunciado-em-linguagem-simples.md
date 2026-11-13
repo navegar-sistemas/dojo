@@ -80,9 +80,9 @@ demonstrar operações com elas e acrescentar uma funcionalidade nova a um dos p
 
 ## O que o enunciado cita sem explicar
 
-- **"Sua jornada pelos fundamentos do Python"**: a introdução do enunciado se refere aos projetos
-  anteriores da mesma série, sobre o básico de Python, sobre classes e sobre exceções. O que os
-  exercícios usam deles está nos [pré-requisitos](./03-pre-requisitos.md).
+- **"Sua jornada pelos fundamentos do Python"**: a introdução do enunciado supõe que quem lê já
+  conhece o básico de Python, classes e exceções. O que os exercícios usam disso está nos
+  [pré-requisitos](./03-pre-requisitos.md).
 - **"A estrutura é parecida com a do C: um array de strings"**: na linguagem C, os argumentos da
   linha de comando chegam ao programa como uma sequência de textos. Não é preciso saber C: a versão
   do Python está no [exercício 0](../03-ex0/02-a-linha-de-comando.md).

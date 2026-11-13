@@ -55,10 +55,9 @@ AttributeError: module 'alchemy' has no attribute 'create_earth'. Did you mean: 
 
 O erro é o resultado esperado ([O erro proposital](../03-parte-1/06-o-erro-proposital.md)).
 `/tmp/Python/module-06` é a pasta onde o enunciado rodou o script; na sua máquina, aparece o
-caminho da sua pasta. Duas linhas mudam com a versão do Python. A dos `^`: o enunciado foi gerado
-com uma versão mais antiga, e nas versões recentes ela começa uma coluna depois; no 3.10, ela não
-aparece. A última: no Python 3.15, a sugestão é escrita
-`Did you mean '.create_air' instead of '.create_earth'?`.
+caminho da sua pasta. Duas linhas saem diferentes na sua máquina. A dos `^`: do Python 3.11 ao
+3.15, ela começa uma coluna depois da do enunciado; no 3.10, ela não aparece. A última: no Python
+3.15, a sugestão é escrita `Did you mean '.create_air' instead of '.create_earth'?`.
 
 ```bash
 python3 ft_alembic_5.py

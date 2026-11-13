@@ -62,8 +62,8 @@ Uma quantidade 0 é aceita: o item existe na mochila, sem nenhuma unidade.
 O enunciado também não fala de quantidades enormes, e elas travariam o programa. O `int()` aceita
 textos de até 4300 dígitos, mas o Python se recusa a converter de volta em texto um inteiro com
 mais de 4300 dígitos: duas quantidades de 4300 dígitos, como dois números feitos só de noves,
-somam um total de 4301 dígitos, e o `print` do total lança `ValueError`. A escolha deste projeto é um teto, 2⁵³ = 9007199254740992, o mesmo
-limite das pontuações do [exercício 1](../04-ex1/03-converter-e-descartar.md#um-limite-para-as-pontuações),
+somam um total de 4301 dígitos, e o `print` do total lança `ValueError`. A escolha deste
+projeto é um teto, 2⁵³ = 9007199254740992, o mesmo limite das pontuações do [exercício 1](../04-ex1/03-converter-e-descartar.md#um-limite-para-as-pontuações),
 guardado numa constante:
 
 ```python

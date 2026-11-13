@@ -53,6 +53,6 @@ python3 ft_alembic_4.py 2>&1 | tail -n 1
 AttributeError: module 'alchemy' has no attribute 'create_earth'. Did you mean '.create_air' instead of '.create_earth'?
 ```
 
-A sugestão continua sendo `create_air`, o nome do pacote mais parecido com `create_earth`. No
-Python 3.10 e no 3.14, ela é escrita `Did you mean: 'create_air'?`, como no enunciado. Os `diff`
+A sugestão continua sendo `create_air`, o nome do pacote mais parecido com `create_earth`. Do
+Python 3.10 ao 3.14, ela é escrita `Did you mean: 'create_air'?`, como no enunciado. Os `diff`
 da [Parte I](../03-parte-1/08-rodar-e-conferir.md) continuam dando o mesmo resultado.

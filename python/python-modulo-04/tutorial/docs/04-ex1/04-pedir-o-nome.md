@@ -27,8 +27,8 @@ O `input()` pode lançar três exceções, e qualquer uma delas, sem um `except`
 - **`EOFError`** (*end of file*, "fim do arquivo"): a entrada acabou sem nenhum caractere para ler.
   No terminal, acontece quando a pessoa aperta `Ctrl+D` numa linha vazia; também acontece quando a
   entrada do programa vem de um arquivo vazio em vez do teclado, caso que [Rodar e
-  conferir](./08-rodar-e-conferir.md#as-falhas) mostra com `< /dev/null`. Uma entrada que termina
-  com texto e sem Enter não lança nada: o `input()` devolve o texto;
+  conferir](./08-rodar-e-conferir.md#as-falhas) mostra com `< /dev/null`. Uma entrada vinda de um
+  arquivo que termina com texto e sem Enter não lança nada: o `input()` devolve o texto;
 - **`KeyboardInterrupt`**: a pessoa apertou `Ctrl+C`, o atalho de "interromper";
 - **`UnicodeDecodeError`**: a entrada trouxe bytes que não formam texto, como os de um programa (o
   `/bin/ls`, por exemplo) entregue ao `python3` no lugar do teclado. É o mesmo erro do `read()` com

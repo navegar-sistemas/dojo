@@ -50,7 +50,7 @@ python3 ft_alembic_4.py 2>&1 | tail -n 1
 AttributeError: module 'alchemy' has no attribute 'create_earth'. Did you mean '.create_air' instead of '.create_earth'?
 ```
 
-A interface de `alchemy` cresceu de novo, e `create_earth` continua de fora (no Python 3.10 e no
+A interface de `alchemy` cresceu de novo, e `create_earth` continua de fora (do Python 3.10 ao
 3.14, a sugestão é escrita `Did you mean: 'create_air'?`). Os `diff` das
 Partes [I](../03-parte-1/08-rodar-e-conferir.md) e [II](../04-parte-2/06-rodar-e-conferir.md)
 continuam dando o mesmo resultado.

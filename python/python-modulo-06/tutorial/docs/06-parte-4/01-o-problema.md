@@ -74,8 +74,9 @@ O enunciado não mostra a mensagem de um feitiço rejeitado. Escolha do tutorial
 ## A regra das funções que devolvem texto
 
 O enunciado diz que todas as funções do projeto devolvem textos, mas pede que
-`light_spell_allowed_ingredients()` devolva uma lista. Vale o pedido específico: a função devolve
-uma `list[str]`, e as outras devolvem `str`.
+`light_spell_allowed_ingredients()` devolva uma lista. Vale o pedido específico: essa função e a
+cópia dela nas trevas, `dark_spell_allowed_ingredients()`, devolvem uma `list[str]`, e as outras
+devolvem `str`.
 
 ## As peças desta parte
 
