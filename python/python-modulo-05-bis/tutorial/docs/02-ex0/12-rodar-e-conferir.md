@@ -5,8 +5,11 @@ title: Rodar e conferir
 
 # Rodar e conferir
 
-Os comandos desta página chamam cada Python pelo caminho (`python3` para o global,
-`lab_env/bin/python` para o do laboratório), e por isso funcionam com ou sem o `lab_env` ativado.
+Rode os comandos com o `lab_env` **desativado**, como a [página anterior](./11-instalar-com-poetry.md#desativar-o-lab_env-antes)
+o deixou: o `python3` destes comandos precisa ser o Python global. Com o `lab_env` ativado, o
+`python3` passa a ser o do laboratório, e as comparações que esperam o Python global (a saída
+"open" do `construct.py`, o local de pacotes global) mostram outra coisa. O Python do laboratório
+é sempre chamado pelo caminho, `lab_env/bin/python`, e funciona do mesmo jeito em qualquer caso.
 
 ## Estilo e tipos
 

@@ -25,8 +25,17 @@ VARIABLES = [
     "LOG_LEVEL",
     "ZION_ENDPOINT",
 ]
+SECRETS = ["API_KEY", "DATABASE_URL"]
 MODES = ["development", "production"]
 LOCAL_MARKERS = ["sqlite", "localhost", "127.0.0.1"]
+
+
+def load_env_file() -> None:
+    try:
+        load_dotenv(ENV_FILE)
+    except (OSError, UnicodeDecodeError) as error:
+        print(f"ORACLE ERROR: cannot read {ENV_FILE}: {error}")
+        sys.exit(1)
 
 
 def find_problems() -> list[str]:
@@ -65,31 +74,48 @@ def show_config(config: dict[str, str]) -> None:
     print("Zion Network: Online")
 
 
-def secrets_check(api_key: str) -> str:
-    with open(__file__, encoding="utf-8") as source:
-        code = source.read()
-    if f'"{api_key}"' in code or f"'{api_key}'" in code:
-        return "[WARNING] API_KEY is hardcoded in the source code"
+def secrets_check(config: dict[str, str]) -> str:
+    try:
+        with open(__file__, encoding="utf-8") as source:
+            code = source.read()
+    except (OSError, UnicodeDecodeError):
+        return "[WARNING] Cannot read the source code to look for secrets"
+    found = []
+    for name in SECRETS:
+        value = config[name]
+        if f'"{value}"' in code or f"'{value}'" in code:
+            found.append(name)
+    if found:
+        return f"[WARNING] Hardcoded in the source code: {', '.join(found)}"
     return "[OK] No hardcoded secrets detected"
 
 
-def ignored_names() -> list[str]:
+def ignored_names() -> list[str] | None:
     if not os.path.isfile(IGNORE_FILE):
         return []
-    with open(IGNORE_FILE, encoding="utf-8") as ignore:
-        return ignore.read().splitlines()
+    try:
+        with open(IGNORE_FILE, encoding="utf-8") as ignore:
+            return ignore.read().splitlines()
+    except (OSError, UnicodeDecodeError):
+        return None
 
 
 def env_file_check() -> str:
     if not os.path.isfile(ENV_FILE):
         return "[OK] No .env file, using environment variables only"
-    if ENV_FILE not in ignored_names():
+    names = ignored_names()
+    if names is None:
+        return "[WARNING] Cannot read .gitignore"
+    if ENV_FILE not in names:
         return "[WARNING] .env is not listed in .gitignore"
     return "[OK] .env file properly configured"
 
 
 def overrides_check() -> str:
-    file_values = dotenv_values(ENV_FILE)
+    try:
+        file_values = dotenv_values(ENV_FILE)
+    except (OSError, UnicodeDecodeError):
+        return "[WARNING] Cannot read .env to compare overrides"
     overridden = []
     for name in VARIABLES:
         if name in file_values and file_values[name] != os.environ[name]:
@@ -112,7 +138,7 @@ def production_checks(config: dict[str, str]) -> list[str]:
 
 def security_check(config: dict[str, str]) -> None:
     print("Environment security check:")
-    print(secrets_check(config["API_KEY"]))
+    print(secrets_check(config))
     print(env_file_check())
     print(overrides_check())
     if config["MATRIX_MODE"] == "production":
@@ -124,7 +150,7 @@ def main() -> None:
     print()
     print("ORACLE STATUS: Reading the Matrix...")
     print()
-    load_dotenv(ENV_FILE)
+    load_env_file()
     problems = find_problems()
     if problems:
         print("Configuration errors:")

@@ -94,7 +94,7 @@ def security_check(config: dict[str, str], overrides: list[str]) -> None:
     else:
         print("[WARNING] .env file is not listed in .gitignore")
     if overrides:
-        print(f"[OK] Production overrides active: {', '.join(overrides)}")
+        print(f"[OK] Environment overrides active: {', '.join(overrides)}")
     else:
         print("[OK] Production overrides available")
     production = config["MATRIX_MODE"] == "production"

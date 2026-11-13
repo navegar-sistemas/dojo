@@ -96,12 +96,14 @@ python3 ex0/ft_ancient_text.py /bin/ls
 ```text
 === Cyber Archives Recovery ===
 Accessing file '/bin/ls'
-Error reading file '/bin/ls': 'utf-8' codec can't decode byte 0xb7 in position 18: invalid start byte
+Error reading file '/bin/ls': 'utf-8' codec can't decode byte 0xd8 in position 96: invalid continuation byte
 File '/bin/ls' closed.
 ```
 
-O byte, a posição e o motivo no fim da mensagem mudam de sistema para sistema; no macOS, a linha
-termina em `can't decode byte 0xca in position 0: invalid continuation byte`. O arquivo abriu, a
+O byte, a posição e o motivo no fim da mensagem dependem do sistema e do processador. A saída
+acima é a do Ubuntu 24.04 num processador Intel ou AMD (`x86_64`); no mesmo Ubuntu num processador
+ARM (`aarch64`), a linha termina em `can't decode byte 0xb7 in position 18: invalid start byte`,
+e no macOS, em `can't decode byte 0xca in position 0: invalid continuation byte`. O arquivo abriu, a
 leitura falhou, e o `finally` o fechou ([Ler e fechar](./04-ler-e-fechar.md)).
 
 ## Nenhum caso trava

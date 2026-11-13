@@ -30,9 +30,11 @@ def show_install_help(missing: list[str]) -> None:
 - cada caminho tem uma frase sobre o que a ferramenta faz e os comandos, com dois espaços na
   frente para destacá-los do texto.
 
-As mensagens não são do enunciado: o enunciado só diz que esta saída deve mostrar o que falta e as
-instruções de instalação para o pip e o Poetry. O texto é **escolha do tutorial**, e resume a
-diferença entre as duas ferramentas ([pip e Poetry](./02-pip-e-poetry.md)):
+As mensagens não são do enunciado: o teste "sem dependências" do enunciado só diz que esta saída
+deve mostrar o que falta e as instruções de instalação para o pip e o Poetry. O texto é **escolha
+do tutorial**, e resume a diferença entre as duas ferramentas ([pip e Poetry](./02-pip-e-poetry.md));
+com tudo instalado, a diferença aparece na linha `Environment:` do fim da saída
+([O main](./08-o-main.md#deu-tudo-certo)):
 
 - o pip instala no ambiente **ativo**, a partir do `requirements.txt`; por isso a instrução manda
   ativar um venv antes;

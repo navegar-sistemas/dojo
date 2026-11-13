@@ -90,5 +90,66 @@ recriados em cada pasta de exercício, com os comandos já rodados no tutorial:
 |---|---|---|
 | 0 | `python3 -m venv matrix_env`, `source matrix_env/bin/activate`, `python3 construct.py` | [Rodar e conferir](../03-ex0/07-rodar-e-conferir.md#dentro-do-venv) |
 | 1 (pip) | `python3 -m venv matrix_env`, `source matrix_env/bin/activate`, `pip install -r requirements.txt`, `python3 loading.py` | [Rodar com o pip](../04-ex1/10-rodar-com-pip.md#todas-as-bibliotecas) |
-| 1 (Poetry) | `../.venv/bin/poetry install`, `../.venv/bin/poetry run python loading.py` (o Poetry do `.venv` das ferramentas), sem nenhum ambiente ativado | [Rodar com o Poetry](../04-ex1/11-rodar-com-poetry.md) |
+| 1 (Poetry) | o Poetry, que não vem no repositório, num `.venv` de ferramentas na raiz da cópia; depois `../.venv/bin/poetry install` e `../.venv/bin/poetry run python loading.py`, sem nenhum ambiente ativado | abaixo |
 | 2 | `python3 -m venv matrix_env`, `source matrix_env/bin/activate`, `pip install -r requirements.txt`, `cp .env.example .env`, preencher a `API_KEY`, `python3 oracle.py` | [Rodar e conferir](../05-ex2/10-rodar-e-conferir.md#o-env-preenchido) |
+
+### O Poetry numa cópia nova
+
+O `.venv` das ferramentas, com o Poetry, não vai para o repositório. Numa cópia nova, baixada como
+em [Conferir o que foi enviado](./02-entregar.md#conferir-o-que-foi-enviado), o comando
+`../.venv/bin/poetry` não existe até o ambiente ser criado de novo, na raiz da cópia:
+
+```bash
+git clone <endereço-do-repositório> conferencia
+cd conferencia
+python3 -m venv .venv
+.venv/bin/python -m pip install "poetry>=2"
+```
+
+A instalação termina com a lista do que foi instalado e o aviso de pip mais novo:
+
+```text
+
+[notice] A new release of pip is available: 26.2.2 -> 26.3
+[notice] To update, run: /…/conferencia/.venv/bin/python -m pip install --upgrade pip
+```
+
+Agora o Poetry roda na pasta `ex1` da cópia:
+
+```bash
+cd ex1
+../.venv/bin/poetry install
+```
+
+A saída é a de [Rodar com o Poetry](../04-ex1/11-rodar-com-poetry.md#instalar), com outro código no
+nome do ambiente, porque a pasta é outra; ela começa com:
+
+```text
+Creating virtualenv loading-BI2Xs6Oz-py3.15 in /…/pypoetry/virtualenvs
+```
+
+```bash
+../.venv/bin/poetry run python loading.py
+```
+
+```text
+
+LOADING STATUS: Loading programs...
+
+Checking dependencies:
+[OK] pandas (3.1.1) - Data manipulation ready
+[OK] numpy (2.5.4) - Numerical computation ready
+[OK] matplotlib (3.11.2) - Visualization ready
+
+Analyzing Matrix data...
+Processing 1000 data points...
+Generating visualization...
+
+Analysis complete!
+Results saved to: matrix_analysis.png
+
+Environment: /…/pypoetry/virtualenvs/loading-BI2Xs6Oz-py3.15
+```
+
+Um caminho mais curto é usar o Poetry que já existe na pasta do projeto, pelo caminho completo
+dele (por exemplo, `/…/the-matrix/.venv/bin/poetry install`, com o `/…` da sua máquina).

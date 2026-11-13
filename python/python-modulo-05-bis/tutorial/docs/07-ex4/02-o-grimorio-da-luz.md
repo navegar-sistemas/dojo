@@ -100,9 +100,14 @@ sequenceDiagram
 ```
 
 Carregar o validador não exige o livro: o topo do `light_validator.py` não importa nada. O livro só
-é buscado quando `validate_ingredients` é chamada, e nessa hora ele já terminou de carregar. Quem
-importa primeiro o validador também não tem problema: o validador carrega sem tocar no livro, e na
-primeira validação o import de dentro da função carrega o livro, que importa o validador já pronto.
+é buscado quando `validate_ingredients` é chamada, e nessa hora ele já terminou de carregar.
+
+Neste pacote, o livro é sempre o primeiro a carregar, mesmo quando um programa pede só o
+validador: importar qualquer módulo de dentro do `grimoire` roda antes o `__init__.py` dele
+([O \_\_init\_\_.py do grimoire](./03-o-init-do-grimoire.md)), que importa o livro, e o livro
+importa o validador ([Rodar e conferir](./07-rodar-e-conferir.md#a-ordem-real-dos-imports)). O
+desenho não depende disso: com um `__init__.py` vazio e o validador carregado sozinho, o validador
+carregaria sem tocar no livro, e o livro só entraria na primeira validação.
 
 A decisão de projeto: **o validador depende do livro na hora de validar, e não na hora de
 carregar**. A dependência mútua continua existindo, mas o círculo não se fecha durante o

@@ -37,7 +37,10 @@ title: O enunciado em linguagem simples
   Acrescentar uma pasta nela à mão é proibido em qualquer arquivo do projeto: todo `import` tem
   de funcionar com a organização das pastas.
 - **Nos exercícios 2 a 4, funções simples que devolvem textos.** O assunto ali é o `import`, e
-  não a lógica: cada função devolve uma frase fixa ou montada a partir de outras.
+  não a lógica: cada função devolve uma frase fixa ou montada a partir de outras. Há duas
+  exceções, pedidas pelo próprio enunciado: `light_spell_allowed_ingredients()` e
+  `dark_spell_allowed_ingredients()`, do exercício 4, devolvem a **lista** de ingredientes
+  (`list[str]`), porque o texto de cada uma diz "devolve a lista dos ingredientes".
 
 ## Os cinco exercícios
 

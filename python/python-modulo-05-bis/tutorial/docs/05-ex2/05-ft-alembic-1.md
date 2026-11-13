@@ -59,7 +59,7 @@ Comparada com a do enunciado:
 - a sugestão do fim vem escrita de outro jeito no Python 3.15 ("você quis dizer `.create_air` em
   vez de `.create_earth`?"); no 3.14 e no 3.10, ela é `Did you mean: 'create_air'?`, como no
   enunciado;
-- num terminal, as versões mais novas do Python (3.14 e 3.15) colorem o traceback.
+- num terminal, o Python colore o traceback a partir da versão 3.13.
 
 O texto `Testing the hidden create_earth: ` sai antes do traceback, na mesma linha, porque o
 Python esvazia a saída do programa antes de imprimir uma exceção não capturada. O `print` vai para

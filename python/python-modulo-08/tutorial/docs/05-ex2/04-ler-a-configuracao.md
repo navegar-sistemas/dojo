@@ -33,8 +33,13 @@ except ImportError:
 
 Aqui o `import` é o comum, e não `importlib` como no exercício 1: o programa usa as duas funções
 de verdade, e o mypy confere o uso delas, porque o python-dotenv traz os próprios type hints. O
-preço é que o mypy precisa encontrar a biblioteca, o que a página
-[Rodar e conferir](./10-rodar-e-conferir.md#conferir-estilo-e-tipos) resolve.
+preço é que o mypy precisa encontrar a biblioteca. O enunciado aceita avisos de `import` do flake8
+e do mypy só no exercício 1; aqui, um `import-not-found` do mypy é um aviso como outro qualquer, e
+precisa sumir. O mypy procura as bibliotecas no Python em que ele mesmo está instalado (o `.venv`
+das ferramentas), e ativar o `matrix_env` não muda isso: ele não enxerga o python-dotenv. A opção
+`--python-executable matrix_env/bin/python` manda o mypy procurar as bibliotecas no Python do
+`matrix_env`, onde o python-dotenv está instalado
+([Rodar e conferir](./10-rodar-e-conferir.md#conferir-estilo-e-tipos)).
 
 ## As constantes
 
@@ -48,17 +53,44 @@ VARIABLES = [
     "LOG_LEVEL",
     "ZION_ENDPOINT",
 ]
+SECRETS = ["API_KEY", "DATABASE_URL"]
 MODES = ["development", "production"]
 LOCAL_MARKERS = ["sqlite", "localhost", "127.0.0.1"]
 ```
 
 - `ENV_FILE` e `IGNORE_FILE`: os nomes dos dois arquivos que o programa lê, na pasta atual;
 - `VARIABLES`: as cinco variáveis do enunciado, na ordem dele;
+- `SECRETS`: as variáveis que guardam segredos: a chave e o endereço do banco, que costuma levar
+  usuário e senha dentro dele ([A conferência de segurança](./06-a-conferencia-de-seguranca.md));
 - `MODES`: os dois modos aceitos;
 - `LOCAL_MARKERS`: trechos de endereço que indicam um banco de dados na própria máquina
   ([Mostrar a configuração](./05-mostrar-a-configuracao.md)).
 
 Nenhuma dessas constantes é configuração: são fatos do programa, iguais em toda máquina.
+
+## Carregar o .env
+
+```python
+def load_env_file() -> None:
+    try:
+        load_dotenv(ENV_FILE)
+    except (OSError, UnicodeDecodeError) as error:
+        print(f"ORACLE ERROR: cannot read {ENV_FILE}: {error}")
+        sys.exit(1)
+```
+
+O `load_dotenv` abre e lê o `.env`, e a leitura de um arquivo pode falhar mesmo com ele presente:
+
+- `OSError` é a família dos erros do sistema de arquivos, como `PermissionError` (sem permissão
+  de leitura);
+- `UnicodeDecodeError` acontece quando o arquivo não é um texto UTF-8 válido, como um `.env`
+  salvo com outra codificação ou com um byte corrompido.
+
+Sem o `try`, qualquer um deles derrubaria o programa com um traceback. Com ele, o programa diz qual
+arquivo não pôde ler e por quê, e termina com o código `1`: com um `.env` ilegível, não há como
+saber se a configuração está completa. Um `.env` que não existe não é erro: o `load_dotenv` não
+carrega nada, e a falta das variáveis é acusada logo depois. A função entra depois das constantes;
+a página [Rodar e conferir](./10-rodar-e-conferir.md#arquivos-ilegíveis) provoca os dois erros.
 
 ## Encontrar os problemas
 

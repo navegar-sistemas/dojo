@@ -51,7 +51,9 @@ instalar um Python novo, separado do que veio com o sistema:
   apt-cache policy python3.11
   ```
 
-  Se a linha `Candidate:` mostrar uma versão (e não `(none)`), instale-o junto com o venv dele:
+  Sem nenhuma linha impressa, ou com `Candidate: (none)`, a distribuição não tem esse pacote: troque
+  o `3.11` por outra versão, como `3.12`, e confira de novo. Se a linha `Candidate:` mostrar uma
+  versão, instale-o junto com o venv dele:
 
   ```bash
   sudo apt install python3.11 python3.11-venv

@@ -27,6 +27,8 @@ def main() -> None:
     print()
     print("Analysis complete!")
     print(f"Results saved to: {OUTPUT}")
+    print()
+    print(f"Environment: {sys.prefix}")
 
 
 if __name__ == "__main__":
@@ -40,7 +42,7 @@ flowchart TD
     q -->|sim| help["show_install_help()"] --> exit1["sys.exit(1)"]
     q -->|não| run["run_analysis()"]
     run -->|OSError| fail["Analysis failed: ..."] --> exit1b["sys.exit(1)"]
-    run -->|gráfico gravado| done["Analysis complete!<br/>Results saved to: matrix_analysis.png"]
+    run -->|gráfico gravado| done["Analysis complete!<br/>Results saved to: matrix_analysis.png<br/>Environment: sys.prefix"]
 ```
 
 ## Faltou biblioteca
@@ -62,6 +64,18 @@ com a mensagem do próprio erro, e o programa termina com o código `1`. A pági
 
 ## Deu tudo certo
 
-As três últimas linhas impressas são as do enunciado: uma linha vazia, `Analysis complete!` e o
-nome do arquivo gravado, tirado da mesma constante `OUTPUT` que o `savefig` usou. O programa
-termina sem `sys.exit`, com o código `0`.
+As linhas seguintes são as do enunciado: uma linha vazia, `Analysis complete!` e o nome do
+arquivo gravado, tirado da mesma constante `OUTPUT` que o `savefig` usou.
+
+Depois delas vem a única linha que não está na saída do enunciado, separada por uma linha vazia:
+`Environment:` e o valor de `sys.prefix`, a pasta do ambiente em uso
+([O Python sabe onde está](../02-conceitos/02-o-ambiente-virtual-por-dentro.md#o-python-sabe-onde-está)).
+É ela que mostra, na saída de sucesso, a diferença entre os dois caminhos que o enunciado pede:
+
+- pelo pip, o ambiente é o `matrix_env`, criado e ativado à mão dentro da pasta `ex1`;
+- pelo Poetry, é o ambiente que ele mesmo criou, na pasta de dados dele, com o nome do projeto no
+  nome (`…/pypoetry/virtualenvs/loading-…`).
+
+As duas saídas estão em [Rodar com o pip](./10-rodar-com-pip.md#todas-as-bibliotecas)
+e [Rodar com o Poetry](./11-rodar-com-poetry.md#rodar). O programa termina sem `sys.exit`, com o
+código `0`.

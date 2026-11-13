@@ -14,8 +14,8 @@ lista de `site.getsitepackages()`
 
 A saída do enunciado mostra o `Package installation path` só dentro do venv. A **escolha do
 tutorial** é mostrá-lo nos dois casos, no fim da saída: dentro do venv, a pasta do ambiente;
-fora, a pasta do Python global. Assim, rodar o programa fora e dentro mostra lado a lado os dois
-lugares que a exigência pede para comparar, com uma função só:
+fora, a pasta do Python global. Assim, rodar o programa fora e depois dentro mostra os dois
+lugares que a exigência pede para comparar, um em cada saída, com uma função só:
 
 ```python
 def show_package_path() -> None:

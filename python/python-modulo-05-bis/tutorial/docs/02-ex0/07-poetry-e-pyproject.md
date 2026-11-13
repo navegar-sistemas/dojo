@@ -86,8 +86,12 @@ flowchart LR
 
 O `poetry.lock` é gerado pelo Poetry e não está na lista de arquivos do enunciado, que pede só
 `construct.py`, `loading.py`, `requirements.txt` e `pyproject.toml` na pasta `ex0`; ele fica fora
-da entrega. Num projeto de verdade, o `poetry.lock` vai para o repositório, justamente para que
-todos instalem as mesmas versões.
+da entrega. Isso tem um preço: sem o `poetry.lock` no repositório, o `poetry install` feito na
+avaliação, num clone novo, não acha arquivo de travamento, resolve as versões do zero e grava um
+`poetry.lock` novo, com as versões daquele dia, que podem ser outras. A garantia de "toda
+instalação idêntica", que o próprio `loading.py` imprime, e o "reproduzir o laboratório
+exatamente" do enunciado só valem para quem recebe o `poetry.lock`. Num projeto de verdade, o
+`poetry.lock` vai para o repositório, justamente para que todos instalem as mesmas versões.
 
 ## O ambiente do Poetry
 

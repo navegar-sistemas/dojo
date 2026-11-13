@@ -87,11 +87,15 @@ instaladas pelo pip, ou pelo Poetry, ele roda a análise e cria o gráfico.
 ## O que fica a cargo de quem implementa
 
 O enunciado pede que as diferenças entre o pip e o Poetry apareçam na saída do programa, mas a
-saída de exemplo, a do caso em que tudo está instalado, não mostra nada sobre isso. A **escolha
-do tutorial** segue a saída de exemplo letra por letra no caso de sucesso, e põe as diferenças
-onde o enunciado as pede nos testes: na saída do caso em que faltam bibliotecas, que explica o
-que cada ferramenta faz e quais comandos usar
-([As instruções de instalação](./06-as-instrucoes-de-instalacao.md)).
+saída de exemplo, a do caso em que tudo está instalado, não mostra nada sobre isso: rodada pelo
+pip ou pelo Poetry, ela seria igual. A **escolha do tutorial** mantém todas as linhas da saída de
+exemplo e mostra a diferença em dois lugares:
+
+- no fim da saída de sucesso, uma linha a mais, `Environment:`, com a pasta do ambiente em que o
+  programa rodou: o `matrix_env` criado à mão para o pip, ou o ambiente que o Poetry criou na
+  pasta dele ([O main](./08-o-main.md#deu-tudo-certo));
+- na saída do caso em que faltam bibliotecas, que explica o que cada ferramenta faz e quais
+  comandos usar ([As instruções de instalação](./06-as-instrucoes-de-instalacao.md)).
 
 ## O aviso sobre flake8 e mypy
 

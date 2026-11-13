@@ -44,7 +44,7 @@ depois de `production_checks`:
 ```python
 def security_check(config: dict[str, str]) -> None:
     print("Environment security check:")
-    print(secrets_check(config["API_KEY"]))
+    print(secrets_check(config))
     print(env_file_check())
     print(overrides_check())
     if config["MATRIX_MODE"] == "production":

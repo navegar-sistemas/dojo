@@ -13,7 +13,7 @@ def main() -> None:
     print()
     print("ORACLE STATUS: Reading the Matrix...")
     print()
-    load_dotenv(ENV_FILE)
+    load_env_file()
     problems = find_problems()
     if problems:
         print("Configuration errors:")
@@ -35,8 +35,10 @@ if __name__ == "__main__":
     main()
 ```
 
-- `load_dotenv(ENV_FILE)` vem antes de qualquer leitura: depois dele, as variáveis do `.env` que
-  ainda não existiam estão no ambiente ([O arquivo .env](./02-o-arquivo-env.md));
+- `load_env_file()` vem antes de qualquer leitura: depois dele, as variáveis do `.env` que ainda
+  não existiam estão no ambiente ([O arquivo .env](./02-o-arquivo-env.md)). Se o `.env` existe mas
+  não pode ser lido, o programa para ali, com o código `1`
+  ([Carregar o .env](./04-ler-a-configuracao.md#carregar-o-env));
 - com algum problema, o programa lista todos, diz como resolver e termina com `sys.exit(1)`. A
   configuração não é mostrada pela metade;
 - sem problemas, `read_config` monta o dicionário, e as duas funções de exibição o recebem;
@@ -44,7 +46,8 @@ if __name__ == "__main__":
 
 ```mermaid
 flowchart TD
-    start["main()"] --> load["load_dotenv('.env')"]
+    start["main()"] --> load["load_env_file()"]
+    load -->|".env ilegível"| errload["ORACLE ERROR: cannot read .env"] --> exit0["sys.exit(1)"]
     load --> fp["find_problems()"]
     fp --> q{"algum problema?"}
     q -->|sim| err["Configuration errors:<br/>[MISSING] ... / [INVALID] ..."] --> exit1["sys.exit(1)"]

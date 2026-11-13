@@ -6,8 +6,9 @@ title: Módulo e import
 # Módulo e import
 
 Os exercícios 2 a 4 espalham o código por vários arquivos, e um arquivo usa as funções de outro.
-O `import` é o que liga os arquivos. Esta parte explica, com experimentos pequenos na pasta
-`experimentos`, como ele encontra e carrega o código; os exercícios aplicam cada ideia.
+O `import` é o que liga os arquivos: ele encontra o arquivo de outro módulo, roda o código dele e
+entrega o resultado a quem pediu. Cada ideia vem com um experimento pequeno na pasta
+`experimentos`.
 
 ## O módulo
 

@@ -39,7 +39,7 @@ gerado pelo Poetry, e o `.env`, com a configuração de verdade. A
 [página de entrega](./02-entregar.md) copia só os arquivos pedidos.
 
 ```bash
-find alchemy -name '*.py' | sort
+find alchemy -name '*.py' | LC_ALL=C sort
 ls -1 *.py
 ```
 
@@ -131,7 +131,7 @@ páginas "Rodar e conferir": [0](../02-ex0/12-rodar-e-conferir.md),
 ## Só os imports permitidos
 
 ```bash
-grep -rnE '^ *(import|from) ' --include='*.py' ex0 ex1 alchemy *.py | sort
+grep -rnE '^ *(import|from) ' --include='*.py' ex0 ex1 alchemy *.py | LC_ALL=C sort
 ```
 
 ```text

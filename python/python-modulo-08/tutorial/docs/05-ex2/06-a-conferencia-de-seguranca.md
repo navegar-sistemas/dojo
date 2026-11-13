@@ -22,15 +22,23 @@ desta página entram no arquivo depois de `show_config`, nesta ordem.
 
 Um segredo **hardcoded** ("escrito no código") é um valor secreto escrito direto no código, como
 `API_KEY = "abc123"`. Ele vai para o repositório junto com o código, e qualquer pessoa com acesso
-ao repositório passa a conhecê-lo. A conferência procura o valor da `API_KEY` em uso dentro do
-próprio arquivo do programa:
+ao repositório passa a conhecê-lo. A conferência procura os valores em uso das variáveis de
+`SECRETS`, a `API_KEY` e a `DATABASE_URL`, dentro do próprio arquivo do programa:
 
 ```python
-def secrets_check(api_key: str) -> str:
-    with open(__file__, encoding="utf-8") as source:
-        code = source.read()
-    if f'"{api_key}"' in code or f"'{api_key}'" in code:
-        return "[WARNING] API_KEY is hardcoded in the source code"
+def secrets_check(config: dict[str, str]) -> str:
+    try:
+        with open(__file__, encoding="utf-8") as source:
+            code = source.read()
+    except (OSError, UnicodeDecodeError):
+        return "[WARNING] Cannot read the source code to look for secrets"
+    found = []
+    for name in SECRETS:
+        value = config[name]
+        if f'"{value}"' in code or f"'{value}'" in code:
+            found.append(name)
+    if found:
+        return f"[WARNING] Hardcoded in the source code: {', '.join(found)}"
     return "[OK] No hardcoded secrets detected"
 ```
 
@@ -38,38 +46,52 @@ def secrets_check(api_key: str) -> str:
   próprio `oracle.py`;
 - `with open(...) as source:` abre o arquivo e o fecha sozinho no fim do bloco; `read()` devolve
   o conteúdo inteiro num texto. `encoding="utf-8"` diz como os caracteres estão gravados;
-- um valor escrito no código Python aparece sempre entre aspas, duplas ou simples. A função
-  procura a chave com os dois tipos de aspas em volta: `f'"{api_key}"'` é o texto da chave entre
-  aspas duplas.
+- se o arquivo não puder ser lido (`OSError`, como falta de permissão, ou `UnicodeDecodeError`,
+  um arquivo que não é UTF-8 válido), a conferência não acontece, e a linha diz isso com um
+  `[WARNING]` em vez de derrubar o programa;
+- um valor escrito no código Python aparece sempre entre aspas, duplas ou simples. Para cada
+  variável de `SECRETS`, a função procura o valor com os dois tipos de aspas em volta:
+  `f'"{value}"'` é o texto do valor entre aspas duplas;
+- a linha de aviso diz quais variáveis foram achadas, como
+  `[WARNING] Hardcoded in the source code: API_KEY, DATABASE_URL`.
 
-No programa correto, a chave não está escrita em lugar nenhum: ela vem do ambiente. A conferência
-só daria um aviso falso com uma chave igual a um dos textos que o próprio programa usa, como
-`production` ou `DEBUG`, o que nenhuma chave de verdade é. A página
+No programa correto, nenhum desses valores está escrito em lugar nenhum: eles vêm do ambiente. A conferência
+só daria um aviso falso com um valor igual a um dos textos que o próprio programa usa, como
+`production` ou `DEBUG`, o que nenhuma chave nem endereço de banco de verdade é. A página
 [Rodar e conferir](./10-rodar-e-conferir.md#os-avisos-de-segurança) prova o aviso com uma cópia do
-programa que tem a chave escrita nele.
+programa que tem a chave e o endereço escritos nele.
 
 ## O .env protegido
 
 ```python
-def ignored_names() -> list[str]:
+def ignored_names() -> list[str] | None:
     if not os.path.isfile(IGNORE_FILE):
         return []
-    with open(IGNORE_FILE, encoding="utf-8") as ignore:
-        return ignore.read().splitlines()
+    try:
+        with open(IGNORE_FILE, encoding="utf-8") as ignore:
+            return ignore.read().splitlines()
+    except (OSError, UnicodeDecodeError):
+        return None
 
 
 def env_file_check() -> str:
     if not os.path.isfile(ENV_FILE):
         return "[OK] No .env file, using environment variables only"
-    if ENV_FILE not in ignored_names():
+    names = ignored_names()
+    if names is None:
+        return "[WARNING] Cannot read .gitignore"
+    if ENV_FILE not in names:
         return "[WARNING] .env is not listed in .gitignore"
     return "[OK] .env file properly configured"
 ```
 
 - `os.path.isfile(caminho)` responde se existe um arquivo com aquele caminho;
-- `ignored_names` devolve as linhas do `.gitignore` (`splitlines()` divide um texto em linhas), ou
-  uma lista vazia se não houver `.gitignore`;
-- `env_file_check` tem três respostas. Sem `.env`, toda a configuração veio do ambiente, como num
+- `ignored_names` devolve as linhas do `.gitignore` (`splitlines()` divide um texto em linhas),
+  uma lista vazia se não houver `.gitignore`, ou `None` se ele existe mas não pôde ser lido. O tipo
+  de retorno `list[str] | None` diz exatamente isso: uma lista de textos ou nada;
+- com `None`, `env_file_check` avisa `[WARNING] Cannot read .gitignore`: sem ler o arquivo, não há
+  como saber se o `.env` está protegido;
+- fora isso, `env_file_check` tem três respostas. Sem `.env`, toda a configuração veio do ambiente, como num
   servidor de produção, e não há arquivo para proteger: `[OK]`. Com um `.env` que não está no
   `.gitignore`, o segredo corre o risco de ir para o repositório: `[WARNING]`. Com o `.env`
   listado: `[OK] .env file properly configured`, a linha do enunciado.
@@ -82,7 +104,10 @@ reconhece, e avisaria. É uma conferência simples para um `.gitignore` conhecid
 
 ```python
 def overrides_check() -> str:
-    file_values = dotenv_values(ENV_FILE)
+    try:
+        file_values = dotenv_values(ENV_FILE)
+    except (OSError, UnicodeDecodeError):
+        return "[WARNING] Cannot read .env to compare overrides"
     overridden = []
     for name in VARIABLES:
         if name in file_values and file_values[name] != os.environ[name]:
@@ -96,7 +121,9 @@ Um **override** ("sobreposição") é uma variável definida no ambiente que val
 `.env` ([Quem vale mais](./02-o-arquivo-env.md#quem-vale-mais)). A função descobre quais variáveis
 estão nessa situação:
 
-- `dotenv_values(ENV_FILE)` lê o `.env` sem mexer no ambiente, e devolve o que o arquivo diz;
+- `dotenv_values(ENV_FILE)` lê o `.env` sem mexer no ambiente, e devolve o que o arquivo diz. O
+  `main` já leu o mesmo arquivo com o `load_dotenv`, mas ele pode ter mudado entre uma leitura e
+  outra; se esta falhar, a linha avisa, como as outras conferências;
 - uma variável do arquivo cujo valor no ambiente (`os.environ[name]`) é **diferente** do valor do
   arquivo só pode ter vindo de fora, porque o `load_dotenv` não substitui o que já existe;
 - sem nenhuma sobreposição, a linha é a do enunciado, `[OK] Production overrides available`: o

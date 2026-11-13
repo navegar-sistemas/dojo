@@ -118,7 +118,9 @@ git push
 Sem os dois `git config`, conforme a máquina, o git recusa o registro com
 `Please tell me who you are` ("diga quem você é"), ou registra assim mesmo, com um nome e um
 e-mail montados a partir do seu usuário e do nome da máquina. No macOS, sem nenhuma configuração,
-acontece o segundo: o resumo vem junto de uma mensagem que começa com
+acontece o segundo: logo depois da primeira linha do resumo vem uma linha
+` Committer: <seu nome no sistema> <usuario@maquina.local>`, com o nome da conta do computador e um
+e-mail inventado a partir do usuário e do nome da máquina, e em seguida uma mensagem que começa com
 
 ```text
 Your name and email address were configured automatically based

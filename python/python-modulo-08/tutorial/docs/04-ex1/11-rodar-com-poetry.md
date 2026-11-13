@@ -108,9 +108,13 @@ Generating visualization...
 
 Analysis complete!
 Results saved to: matrix_analysis.png
+
+Environment: /…/pypoetry/virtualenvs/loading-BeTxmVon-py3.15
 ```
 
-A saída é a do enunciado. O `matrix_analysis.png` foi gravado de novo, igual ao anterior: a
+As linhas do enunciado são as mesmas da execução pelo pip; a diferença está na última. Pelo pip, o
+ambiente era o `matrix_env`, dentro da pasta `ex1`; pelo Poetry, é o ambiente que ele criou na
+pasta de cache dele, o mesmo que o `Creating virtualenv` anunciou. O `matrix_analysis.png` foi gravado de novo, igual ao anterior: a
 semente fixa gera os mesmos dados ([A análise](./07-a-analise.md#o-numpy-gera-os-dados)).
 
 ## Instalar de novo
@@ -193,7 +197,12 @@ ela vale. O `requirements.txt` não guarda nada disso.
 
 ## Em outras versões do Python
 
-No Python 3.14, tudo sai igual, com `py3.14` no nome do ambiente. Com o Poetry instalado num `.venv` criado pelo Python 3.10, o ambiente do projeto se chama
-`loading-…-py3.10`, o Poetry instala 14 pacotes (os mesmos do pip no 3.10) e as linhas `[OK]`
-mostram pandas 2.3.3, numpy 2.2.6 e matplotlib 3.10.9. O `poetry.lock` sai igual: ele é
+No Python 3.14, tudo sai igual, com `py3.14` no nome do ambiente. Com o Poetry instalado num
+`.venv` criado pelo Python 3.10, o ambiente do projeto se chama `loading-…-py3.10`, o Poetry
+instala 14 pacotes (os mesmos do pip no 3.10) e as linhas `[OK]` mostram pandas 2.3.3, numpy
+2.2.6 e matplotlib 3.10.9. No meio da saída do `poetry install` aparece um aviso longo, que
+começa com o caminho do Poetry e continua com `RuntimeWarning: Skip installing
+numpy/distutils/__pycache__/conv_template.cpython-310.pyc from numpy. Installing files in a
+__pycache__ directory poses a security risk.`: o pacote do numpy 2.2.6 traz um arquivo de cache
+que não deveria trazer, e o Poetry pula esse arquivo. O aviso não impede nada, e o numpy funciona. O `poetry.lock` sai igual: ele é
 calculado para todas as versões de Python aceitas, qualquer que seja a que está rodando.

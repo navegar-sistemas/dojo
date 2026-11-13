@@ -50,6 +50,12 @@ o que está instalado), mas aí mistura o que o projeto pede com o que foi resol
 biblioteca vira trabalho manual. Para um script pequeno, o `requirements.txt` basta; para um
 projeto que várias pessoas instalam, o arquivo de travamento evita o "na minha máquina funciona".
 
+A vantagem depende de o `poetry.lock` ir junto com o projeto. Nesta entrega ele fica de fora,
+porque o enunciado não o lista: na avaliação, o `poetry install` num clone novo resolve as versões
+do zero, como o `pip`, e pode chegar a versões diferentes das que você instalou
+([O poetry.lock](../02-ex0/07-poetry-e-pyproject.md#o-poetrylock)). Para reproduzir o laboratório
+exatamente, o `poetry.lock` teria de ser entregue.
+
 ## Exercício 1: por que o .env está no .gitignore?
 
 Porque ele guarda os segredos de verdade (a `API_KEY`, senhas dentro da `DATABASE_URL`), e tudo o
@@ -108,7 +114,11 @@ oferece, e a `__all__` declara essa interface para quem lê, para o flake8 e par
   mesmo nome), e o pacote continua funcionando se mudar de nome ou de lugar.
 
 O `recipes.py` usa os dois para mostrar a diferença
-([O subpacote transmutation](../06-ex3/04-o-subpacote-transmutation.md#recipespy)).
+([O subpacote transmutation](../06-ex3/04-o-subpacote-transmutation.md#recipespy)). Pela regra
+acima, o `from alchemy.potions import strength_potion` dele seria relativo (`from ..potions
+import ...`). Ele é absoluto por escolha do tutorial, uma exceção à regra para o arquivo mostrar
+as duas formas de alcançar um vizinho do pacote; o "pelo menos um de cada" do enunciado já estaria
+cumprido pelo `from elements import create_fire`, o absoluto obrigatório para sair do pacote.
 
 ## Exercício 4: os dois grimórios descrevem dois arquivos que precisam um do outro. Por que só um explode?
 
@@ -123,9 +133,9 @@ de `validate_ingredients`, quando ela é chamada, e a essa altura os dois já te
 
 | Alternativa | Como | Neste projeto |
 |---|---|---|
-| import dentro da função (a escolhida) | o validador importa o livro dentro de `validate_ingredients` | funciona em qualquer ordem de carregamento |
+| import dentro da função (a escolhida) | o validador importa o livro dentro de `validate_ingredients` | funciona; o validador carrega sem o livro, e o livro só é buscado na primeira validação |
 | import tardio do outro lado | o livro importa o validador dentro de `light_spell_record`, e o validador importa o livro no topo | funciona do mesmo jeito; é só escolher qual dos dois adia |
-| importar o módulo, e não o nome | `from . import light_spellbook` no topo, e `light_spellbook.light_spell_allowed_ingredients()` dentro da função. O módulo pela metade é aceito no import, e a função só é procurada nele na hora da chamada | funciona se os **dois** arquivos fizerem assim; se só o validador fizer, quebra quando o validador é carregado antes do livro |
+| importar o módulo, e não o nome | `from . import light_spellbook` no topo, e `light_spellbook.light_spell_allowed_ingredients()` dentro da função. O módulo pela metade é aceito no import, e a função só é procurada nele na hora da chamada | só no validador, funciona com o `__init__.py` do tutorial, que carrega o livro antes; com um `__init__.py` vazio e o validador carregado primeiro, quebra com `ImportError ... partially initialized module`. Nos **dois** arquivos, funciona em qualquer ordem |
 | um terceiro módulo | mover a lista de ingredientes para um módulo que os dois importam, e que não importa nenhum deles: o círculo desaparece | o melhor desenho em geral, mas acrescenta um arquivo à árvore do enunciado, e o enunciado quer a lista numa função do livro |
 | passar o valor como parâmetro | o livro passa a lista ao validador: `validate_ingredients(ingredients, allowed)` | o validador deixa de precisar do livro, mas muda a assinatura que o enunciado fixa |
 

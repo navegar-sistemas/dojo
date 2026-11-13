@@ -49,7 +49,7 @@ def security_check(config: dict[str, str], overrides: list[str]) -> None:
     else:
         print("[WARNING] .env file is not listed in .gitignore")
     if overrides:
-        print(f"[OK] Production overrides active: {', '.join(overrides)}")
+        print(f"[OK] Environment overrides active: {', '.join(overrides)}")
     else:
         print("[OK] Production overrides available")
     production = config["MATRIX_MODE"] == "production"
@@ -73,11 +73,18 @@ aparece.
 ### As sobrescritas pelo ambiente
 
 `overrides` é a lista das variáveis que já existiam no ambiente **antes** do `.env` ser carregado
-(o `main` a monta, abaixo). São as que vieram do terminal e venceram o `.env`. A frase do enunciado,
-`Production overrides available` ("sobrescritas de produção disponíveis"), aparece quando nenhuma
-veio: o `.env` vale inteiro, e qualquer valor pode ser trocado pelo ambiente. Quando alguma veio, a
-linha diz quais: `Production overrides active: MATRIX_MODE, API_KEY`. É assim que a saída mostra o
-"preferir as variáveis de ambiente ao `.env`" do roteiro.
+(o `main` a monta, abaixo). São as que vieram do terminal e venceram o `.env`.
+
+- Quando nenhuma veio, a linha é a do enunciado, letra por letra: `Production overrides
+  available` ("sobrescritas de produção disponíveis"). O "production" vem de lá, e a ideia é que,
+  em produção, as variáveis do ambiente do servidor tomam o lugar do `.env`; por enquanto, o `.env`
+  vale inteiro, e qualquer valor pode ser trocado pelo ambiente.
+- Quando alguma veio, a linha diz quais: `Environment overrides active: MATRIX_MODE, API_KEY`
+  ("sobrescritas pelo ambiente ativas"). Essa frase é do tutorial, e diz "environment", e não
+  "production", porque a sobrescrita acontece em qualquer modo: em desenvolvimento,
+  `DATABASE_URL=... python3 ex1/oracle.py` também sobrescreve o `.env`.
+
+É assim que a saída mostra o "preferir as variáveis de ambiente ao `.env`" do roteiro.
 
 ### DEBUG em produção
 

@@ -38,7 +38,10 @@ LOCAL_MARKERS = ["sqlite:", "localhost", "127.0.0.1"]
 - `DEFAULTS` são os **valores padrão**, usados quando a variável falta, como o enunciado pede
   ("mostrar valores padrão"). Só três variáveis têm padrão. A `API_KEY` não tem, de propósito: um
   segredo padrão escrito no código seria exatamente o segredo no código que o exercício quer
-  evitar. O `ZION_ENDPOINT` também não tem: sem endereço, a rede remota fica desligada. Quais
+  evitar. O `ZION_ENDPOINT` também não tem: um endereço remoto padrão faria o programa falar, sem
+  ninguém ter pedido, com um servidor que ninguém configurou; sem endereço, a rede remota fica
+  desligada (`Offline`). O banco padrão, ao contrário, é um arquivo SQLite local, que não sai da
+  máquina. Quais
   variáveis têm padrão, e quais são esses padrões, é escolha do tutorial;
 - `MODES` são os dois modos válidos;
 - `LOCAL_MARKERS` são os trechos que indicam um banco de dados local, usados na

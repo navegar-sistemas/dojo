@@ -101,8 +101,8 @@ git commit -m "Add exercises 0 to 2"
 ```
 
 ```text
-[main (root-commit) 748e07b] Add exercises 0 to 2
- 8 files changed, 309 insertions(+)
+[main (root-commit) e99ed85] Add exercises 0 to 2
+ 8 files changed, 338 insertions(+)
  create mode 100644 ex0/construct.py
  create mode 100644 ex1/loading.py
  create mode 100644 ex1/pyproject.toml
@@ -114,7 +114,7 @@ git commit -m "Add exercises 0 to 2"
 ```
 
 `git commit` registra os arquivos marcados, com a mensagem do `-m`. A primeira linha mostra o
-ramo e o código do registro (`748e07b`, outro a cada registro); `root-commit` quer dizer que é o
+ramo e o código do registro (`e99ed85`, outro a cada registro); `root-commit` quer dizer que é o
 primeiro registro do repositório. Depois vem a lista dos oito arquivos criados.
 
 ```bash
@@ -145,14 +145,20 @@ git commit --amend --reset-author --no-edit
 ```
 
 ```text
-[main 90f9c6b] Add exercises 0 to 2
- 1 file changed, 55 insertions(+)
- create mode 100644 construct.py
+[main e99ed85] Add exercises 0 to 2
+ 8 files changed, 338 insertions(+)
+ create mode 100644 ex0/construct.py
+ create mode 100644 ex1/loading.py
+ create mode 100644 ex1/pyproject.toml
+ create mode 100644 ex1/requirements.txt
+ create mode 100644 ex2/.env.example
+ create mode 100644 ex2/.gitignore
+ create mode 100644 ex2/oracle.py
+ create mode 100644 ex2/requirements.txt
 ```
 
 `--amend` refaz o último registro; `--reset-author` troca o autor dele pelo configurado; `--no-edit`
-mantém a mensagem. A saída acima é de um repositório de teste com um arquivo só; no da entrega, a
-lista é a dos oito arquivos, e o código do registro muda.
+mantém a mensagem. O código do registro depende do autor e da hora, e pode mudar.
 
 ## Conferir o que foi enviado
 

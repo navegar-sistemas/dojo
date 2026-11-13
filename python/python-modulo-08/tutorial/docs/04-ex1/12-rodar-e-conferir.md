@@ -73,6 +73,57 @@ echo $?
 `rmdir` apaga uma pasta vazia, e `> /dev/null` descarta a saída do programa, já conferida antes
 (`/dev/null` é um arquivo especial que joga fora tudo o que recebe).
 
+## Comparar com o enunciado
+
+O `diff` compara a saída do programa com a do enunciado
+([como o diff funciona](../03-ex0/07-rodar-e-conferir.md#comparar-com-o-enunciado)):
+
+```bash
+diff <(../.venv/bin/poetry run python loading.py) - <<'FIM'
+
+LOADING STATUS: Loading programs...
+
+Checking dependencies:
+[OK] pandas (2.1.0) - Data manipulation ready
+[OK] numpy (1.25.0) - Numerical computation ready
+[OK] requests (2.31.0) - Network access ready
+[OK] matplotlib (3.7.2) - Visualization ready
+
+Analyzing Matrix data...
+Processing 1000 data points...
+Generating visualization...
+
+Analysis complete!
+Results saved to: matrix_analysis.png
+FIM
+```
+
+```text
+5,7c5,8
+< [OK] pandas (3.1.1) - Data manipulation ready
+< [OK] numpy (2.5.4) - Numerical computation ready
+< [OK] matplotlib (3.11.2) - Visualization ready
+---
+> [OK] pandas (2.1.0) - Data manipulation ready
+> [OK] numpy (1.25.0) - Numerical computation ready
+> [OK] requests (2.31.0) - Network access ready
+> [OK] matplotlib (3.7.2) - Visualization ready
+15,16d15
+< 
+< Environment: /…/pypoetry/virtualenvs/loading-BeTxmVon-py3.15
+```
+
+Só há duas diferenças:
+
+- `5,7c5,8`: as linhas das bibliotecas. Os números de versão são os instalados em cada máquina, e
+  a linha do `requests` falta porque o programa não busca dados numa API (o enunciado diz que ela
+  só aparece nesse caso);
+- `15,16d15`: a linha vazia e a linha `Environment:` do fim, que não existem no enunciado: são a
+  escolha do tutorial para mostrar a diferença entre o pip e o Poetry
+  ([O main](./08-o-main.md#deu-tudo-certo)).
+
+Todas as outras linhas, inclusive as vazias, são iguais.
+
 ## Resumo das situações
 
 | Situação | Comando | Resultado | Código de saída |

@@ -151,7 +151,12 @@ Generating visualization...
 
 Analysis complete!
 Results saved to: matrix_analysis.png
+
+Environment: /…/the-matrix/ex1/matrix_env
 ```
+
+A linha `Environment:` mostra que o programa rodou no `matrix_env`, o ambiente criado à mão nesta
+página ([O main](./08-o-main.md#deu-tudo-certo)); o `/…` é a pasta onde fica a `the-matrix`.
 
 ```bash
 echo $?
@@ -163,8 +168,9 @@ echo $?
 
 Na primeira vez que o matplotlib roda numa máquina, ele monta uma lista das fontes do sistema;
 se isso demorar mais de cinco segundos, ele avisa
-`Matplotlib is building the font cache; this may take a moment.` antes da saída. É só na primeira
-vez.
+`Matplotlib is building the font cache; this may take a moment.`. O aviso sai no meio da saída,
+entre as linhas `[OK]` e `Analyzing Matrix data...`: é quando a análise carrega o `pyplot`. É só
+na primeira vez.
 
 O gráfico apareceu na pasta:
 

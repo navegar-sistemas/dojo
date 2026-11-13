@@ -66,7 +66,8 @@ pip-26.2.2.dist-info
 O `*` completa o nome da pasta com a versão do Python, seja ela qual for. `pip-26.2.2.dist-info`
 guarda os dados da instalação do `pip`; o número da versão pode ser outro. No Python 3.10, o
 ambiente nasce também com o `setuptools`, uma ferramenta de empacotamento, e a lista tem mais
-linhas (`setuptools`, `pkg_resources`, `_distutils_hack` e os seus `.dist-info`).
+linhas: `_distutils_hack`, `distutils-precedence.pth`, `pip`, `pip-23.0.1.dist-info`,
+`pkg_resources`, `setuptools` e `setuptools-79.0.1.dist-info` (os números podem ser outros).
 
 O Python global também tem a sua `site-packages`, em outro lugar: é ali que um `pip install` sem
 ambiente virtual instalaria (ou tentaria instalar) as bibliotecas, para todos os programas da

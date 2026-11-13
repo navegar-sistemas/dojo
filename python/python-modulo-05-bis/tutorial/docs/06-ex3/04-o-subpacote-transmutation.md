@@ -51,8 +51,12 @@ Os três imports, um de cada tipo:
 | `from ..elements import create_air` | relativo | `alchemy/elements.py`: um ponto seria o pacote `alchemy.transmutation`; dois pontos sobem um nível, para o `alchemy` |
 
 O enunciado pede "pelo menos um" de cada. O tutorial usa os dois tipos para chegar a módulos de
-dentro do pacote (a poção pelo absoluto, o ar pelo relativo), e assim o mesmo arquivo mostra os
-dois caminhos para o mesmo lugar, lado a lado. O fogo só tem o caminho absoluto.
+dentro do mesmo pacote `alchemy` (a poção, em `alchemy.potions`, pelo absoluto; o ar, em
+`alchemy.elements`, pelo relativo): o mesmo arquivo mostra os dois jeitos de alcançar um vizinho
+do pacote, lado a lado. Pelo costume da [página das perguntas](../08-fechamento/03-as-perguntas-do-enunciado.md#exercício-3-quando-usar-um-caminho-absoluto-e-quando-um-relativo),
+os dois seriam relativos; o absoluto para a poção é uma exceção, escolha do tutorial, para o
+arquivo mostrar as duas formas. O fogo só tem o caminho absoluto, e esse import sozinho já
+cumpriria o "pelo menos um absoluto" do enunciado.
 
 A frase segue o modelo do enunciado: o ar, depois a poção de força inteira, depois o fogo, cada um
 entre aspas simples. Três pedaços de texto seguidos dentro dos parênteses formam uma frase só; o

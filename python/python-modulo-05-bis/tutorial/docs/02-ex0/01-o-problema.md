@@ -122,6 +122,6 @@ saída: pede só que ela mostre o que falta e como instalar.
 | instalando com o pip | `pip install -r ex0/requirements.txt`, `python3 ex0/loading.py` |
 | instalando com o Poetry | `poetry install`, `poetry run python ex0/loading.py` |
 
-O tutorial segue esse roteiro. Os dois comandos do Poetry precisam de um ajuste, porque o
+Os dois comandos do Poetry precisam de um ajuste, porque o
 `pyproject.toml` fica em `ex0/` e não na pasta de onde os comandos são rodados
 ([Instalar com o Poetry](./11-instalar-com-poetry.md)).

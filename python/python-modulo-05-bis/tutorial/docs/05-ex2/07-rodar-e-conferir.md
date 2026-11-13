@@ -42,7 +42,8 @@ FIM
   padrão (o canal `1`), e o `sed` recebe as duas, na ordem em que aparecem no terminal;
 - `sed -n '1,6p'` imprime só as linhas 1 a 6. O `-n` cala as outras.
 
-Sem nenhuma linha impressa. A última linha, à parte:
+Sem nenhuma linha impressa. A última linha, à parte (`tail -n 1` guarda só a última linha do que
+recebe):
 
 ```bash
 python3 ft_alembic_1.py 2>&1 | tail -n 1

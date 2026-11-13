@@ -65,8 +65,12 @@ virtuais (`matrix_env`) e conferiria o código das bibliotecas instaladas.
 Success: no issues found in 3 source files
 ```
 
-O flake8 não imprime nada. O mypy confere os três arquivos de uma vez, procurando as bibliotecas
-no ambiente do exercício 2, o único que o mypy precisa enxergar
+O flake8 não imprime nada. O mypy confere os três arquivos de uma vez. O `oracle.py` importa o
+python-dotenv, e o mypy precisa enxergar a biblioteca para conferir o uso dela; sem
+`--python-executable`, ele a procuraria no `.venv` das ferramentas, onde ela não está, e acusaria
+`import-not-found`. A opção aponta para o Python do ambiente do exercício 2, o único que o mypy
+precisa enxergar: o `construct.py` só usa a biblioteca padrão, e o `loading.py` não tem `import`
+de biblioteca externa
 ([Conferir estilo e tipos do exercício 2](../05-ex2/10-rodar-e-conferir.md#conferir-estilo-e-tipos)).
 
 Os experimentos também estão limpos:

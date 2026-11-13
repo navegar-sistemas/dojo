@@ -171,14 +171,14 @@ Remote Network: Online
 Configuration security check:
 [OK] No hardcoded secrets detected
 [OK] .env file properly ignored by git
-[OK] Production overrides active: MATRIX_MODE, API_KEY
+[OK] Environment overrides active: MATRIX_MODE, API_KEY
 [WARNING] DEBUG logging enabled in production
 
 The Oracle sees all configurations.
 ```
 
 - `Mode: production`: o valor do terminal venceu o `development` do `.env`, e a linha
-  `Production overrides active` diz quais variáveis vieram do terminal;
+  `Environment overrides active` diz quais variáveis vieram do terminal;
 - o resto (banco, nível de registro, rede) continua vindo do `.env`;
 - o `DEBUG` do `.env`, aceitável em desenvolvimento, virou aviso em produção.
 
@@ -207,7 +207,7 @@ Remote Network: Online
 Configuration security check:
 [OK] No hardcoded secrets detected
 [OK] .env file properly ignored by git
-[OK] Production overrides active: MATRIX_MODE
+[OK] Environment overrides active: MATRIX_MODE
 [WARNING] DEBUG logging enabled in production
 
 The Oracle sees all configurations.

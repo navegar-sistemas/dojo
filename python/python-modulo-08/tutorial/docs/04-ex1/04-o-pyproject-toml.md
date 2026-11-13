@@ -22,6 +22,7 @@ dependencies = [
 
 [tool.poetry]
 package-mode = false
+requires-poetry = ">=2.0"
 ```
 
 ## O formato TOML
@@ -56,11 +57,17 @@ também tenta instalar o próprio projeto no ambiente, procurando uma pasta com 
 `loading.py` é um programa solto, e não uma biblioteca para outros usarem. `package-mode = false`
 diz ao Poetry que ele só gerencia as dependências, sem instalar o projeto.
 
-## O que não está no arquivo
+## requires-poetry = ">=2.0"
 
 O Poetry precisa da versão 2 ou mais nova para ler as dependências da tabela `[project]`; versões
-antigas só liam uma tabela própria, `[tool.poetry.dependencies]`. Por isso o `.venv` das
-ferramentas tem o `poetry>=2` ([As ferramentas](../01-ambiente/03-as-ferramentas.md)).
+antigas só liam uma tabela própria, `[tool.poetry.dependencies]`, e com este arquivo elas não
+reclamam de nada: o `poetry install` de um Poetry 1.8 termina sem erro e sem instalar biblioteca
+nenhuma, e o programa mostra `[MISSING]` nas três. `requires-poetry` diz qual versão do Poetry o
+projeto exige. O Poetry 2 confere a própria versão contra ela; o Poetry 1.8 não conhece a chave e
+recusa o arquivo logo de saída, com uma mensagem que aponta a chave
+(`Additional properties are not allowed ('requires-poetry' was unexpected)`), em vez de instalar
+nada em silêncio. Por isso também o `.venv` das ferramentas tem o `poetry>=2`
+([As ferramentas](../01-ambiente/03-as-ferramentas.md)).
 
 O comando `poetry check` confere se o arquivo está bem escrito; ele é rodado em
 [Rodar com o Poetry](./11-rodar-com-poetry.md).

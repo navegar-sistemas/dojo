@@ -80,7 +80,7 @@ volta o `validate_ingredients`, que também ainda não existe
 | o livro importa o validador | no topo | no topo |
 | o validador importa o livro | dentro de `validate_ingredients`, na hora de validar | no topo, na hora de carregar |
 | carregar o validador exige o livro? | não | sim |
-| resultado | funciona, em qualquer ordem de import | `ImportError`, em qualquer ordem de import |
+| resultado | funciona; neste pacote o livro carrega sempre primeiro (pelo `__init__.py`), mas o validador também carregaria sozinho | `ImportError`, comece o import pelo livro ou pelo validador |
 
 O flake8 e o mypy aceitam os dois pares sem nenhum aviso: o problema não é de estilo nem de tipo,
 é da ordem em que o código roda.

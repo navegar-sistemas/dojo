@@ -92,6 +92,8 @@ def main() -> None:
     print()
     print("Analysis complete!")
     print(f"Results saved to: {OUTPUT}")
+    print()
+    print(f"Environment: {sys.prefix}")
 
 
 if __name__ == "__main__":
@@ -99,6 +101,6 @@ if __name__ == "__main__":
 ```
 
 O que o arquivo usa, todos autorizados: os módulos `importlib` (`import_module`) e `sys`
-(`exit`), e, por meio do `importlib`, as bibliotecas `numpy`, `pandas` e `matplotlib`. Os outros
+(`exit` e `prefix`), e, por meio do `importlib`, as bibliotecas `numpy`, `pandas` e `matplotlib`. Os outros
 dois arquivos do exercício estão completos nas suas páginas:
 [O requirements.txt](./03-o-requirements-txt.md) e [O pyproject.toml](./04-o-pyproject-toml.md).

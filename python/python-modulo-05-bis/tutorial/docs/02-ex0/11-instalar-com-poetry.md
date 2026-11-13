@@ -97,14 +97,17 @@ Linha por linha:
 4. grava o `ex0/poetry.lock`.
 
 No Python 3.10, o Poetry escolhe a `pandas` 2.3.3 e o `numpy` 2.2.6, e instala seis bibliotecas
-(mais `pytz` e `six`). No meio da lista aparece um aviso:
+(mais `pytz` e `six`). No meio da lista, entre as linhas `Installing`, aparecem estas duas:
 
 ```text
-RuntimeWarning: Skip installing numpy/distutils/__pycache__/conv_template.cpython-310.pyc from numpy. Installing files in a __pycache__ directory poses a security risk. __pycache__ directories should not be included in wheels. This is probably an issue in the build process of 'numpy'.
+/path/to/the-codex/.venv/lib/python3.10/site-packages/poetry/installation/wheel_installer.py:153: RuntimeWarning: Skip installing numpy/distutils/__pycache__/conv_template.cpython-310.pyc from numpy. Installing files in a __pycache__ directory poses a security risk. __pycache__ directories should not be included in wheels. This is probably an issue in the build process of 'numpy'.
+  install(
 ```
 
-("pulando a instalação de um arquivo de `__pycache__` do numpy; instalar arquivos de cache é um
-risco de segurança, e eles não deveriam estar no pacote"). O defeito é do pacote do `numpy` para
+A primeira diz em que arquivo do Poetry o aviso nasceu (o caminho começa pelo `.venv` do projeto,
+onde o Poetry está instalado); a segunda, `install(`, é o trecho de código daquela linha. O aviso
+diz "pulando a instalação de um arquivo de `__pycache__` do numpy; instalar arquivos de cache é um
+risco de segurança, e eles não deveriam estar no pacote". O defeito é do pacote do `numpy` para
 o Python 3.10, que traz por engano um arquivo de cache: o Poetry deixa só esse arquivo de fora, e
 a instalação termina normalmente. O `pip` instala o mesmo pacote sem avisar. No Python 3.14 e
 no 3.15, o Poetry escolhe outro `numpy`, e o aviso não aparece.

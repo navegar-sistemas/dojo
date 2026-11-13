@@ -288,19 +288,21 @@ or set the variables in the environment.
 
 ## Os avisos de segurança
 
-Um segredo escrito no código: uma cópia do programa, `leaky.py` ("vazado"), com a chave do `.env`
-escrita numa linha a mais no fim. `>>` acrescenta a saída do `echo` no fim do arquivo, e
-`grep hardcoded` mostra só as linhas da saída que têm a palavra `hardcoded`:
+Segredos escritos no código: uma cópia do programa, `leaky.py` ("vazado"), com a chave e o
+endereço do banco do `.env` escritos em duas linhas a mais no fim. `>>` acrescenta a saída do
+`echo` no fim do arquivo, e `grep Hardcoded` mostra só as linhas da saída que têm a palavra
+`Hardcoded`:
 
 ```bash
 cp oracle.py leaky.py
 echo 'BACKUP_KEY = "dev-key-zion-0042"' >> leaky.py
-python3 leaky.py | grep hardcoded
+echo 'BACKUP_URL = "sqlite:///matrix.db"' >> leaky.py
+python3 leaky.py | grep Hardcoded
 rm leaky.py
 ```
 
 ```text
-[WARNING] API_KEY is hardcoded in the source code
+[WARNING] Hardcoded in the source code: API_KEY, DATABASE_URL
 ```
 
 Um `.env` sem `.gitignore`: o programa e o `.env` copiados para uma pasta sem `.gitignore`:
@@ -321,6 +323,74 @@ rm -r teste
 As duas conferências reagem quando o problema existe ([A conferência de
 segurança](./06-a-conferencia-de-seguranca.md)).
 
+## Arquivos ilegíveis
+
+Um arquivo pode existir e mesmo assim não poder ser lido. Os três testes abaixo trabalham numa
+pasta `teste` criada e apagada no mesmo bloco; `rm -rf teste` apaga a pasta sem perguntar nada,
+mesmo com um arquivo sem permissão dentro dela (o `-f` é de *force*).
+
+Um `.env` com um byte que não é texto UTF-8. `printf '\xff'` escreve o byte de valor 255 (`ff` em
+hexadecimal), que não pode aparecer num texto UTF-8, e o `>>` o acrescenta no fim do `.env`:
+
+```bash
+mkdir teste
+cp oracle.py .env .gitignore teste/
+cd teste
+printf '\xff' >> .env
+python3 oracle.py
+echo $?
+cd ..
+rm -rf teste
+```
+
+```text
+
+ORACLE STATUS: Reading the Matrix...
+
+ORACLE ERROR: cannot read .env: 'utf-8' codec can't decode byte 0xff in position 198: invalid start byte
+1
+```
+
+A mensagem do erro diz o byte e a posição dele no arquivo. Um `.env` sem permissão de leitura:
+`chmod 000 .env` tira do arquivo todas as permissões, inclusive a de leitura do próprio dono:
+
+```bash
+mkdir teste
+cp oracle.py .env teste/
+cd teste
+chmod 000 .env
+python3 oracle.py
+echo $?
+cd ..
+rm -rf teste
+```
+
+```text
+
+ORACLE STATUS: Reading the Matrix...
+
+ORACLE ERROR: cannot read .env: [Errno 13] Permission denied: '.env'
+1
+```
+
+Nos dois casos, o `load_env_file` capturou o erro, explicou e terminou com o código `1`
+([Carregar o .env](./04-ler-a-configuracao.md#carregar-o-env)). Um `.gitignore` estragado do
+mesmo jeito não para o programa: só a conferência do `.env` muda:
+
+```bash
+mkdir teste
+cp oracle.py .env .gitignore teste/
+cd teste
+printf '\xff' >> .gitignore
+python3 oracle.py | grep gitignore
+cd ..
+rm -rf teste
+```
+
+```text
+[WARNING] Cannot read .gitignore
+```
+
 ## Conferir estilo e tipos
 
 ```bash
@@ -339,9 +409,12 @@ oracle.py:5: note: See https://mypy.readthedocs.io/en/stable/running_mypy.html#m
 Found 1 error in 1 file (checked 1 source file)
 ```
 
-O mypy está instalado no `.venv` das ferramentas e procura o `dotenv` lá, onde ele não está. A
-opção `--python-executable` diz ao mypy para procurar as bibliotecas no Python de outro ambiente,
-o `matrix_env`, onde o python-dotenv foi instalado:
+O `matrix_env` está ativado, mas isso não muda nada para o mypy: ele está instalado no `.venv` das
+ferramentas e procura o `dotenv` no Python de lá, onde ele não está. A exceção do enunciado para
+avisos de `import` vale só para o exercício 1, e aqui o aviso precisa sumir
+([O import do python-dotenv](./04-ler-a-configuracao.md#o-import-do-python-dotenv)). A opção
+`--python-executable` diz ao mypy para procurar as bibliotecas no Python de outro ambiente, o
+`matrix_env`, onde o python-dotenv foi instalado:
 
 ```bash
 ../.venv/bin/mypy --disallow-untyped-defs --python-executable matrix_env/bin/python oracle.py

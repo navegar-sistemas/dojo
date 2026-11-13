@@ -62,9 +62,30 @@ ImportError: cannot import name 'validate_ingredients' from partially initialize
 (`/path/to/the-codex` está no lugar do caminho da pasta do projeto.) Agora é o livro, carregado
 pelo validador, que pede ao validador pela metade o `validate_ingredients`.
 
-## A luz funciona em qualquer ordem
+## A ordem real dos imports
 
-Começando pelo validador da luz, com um ingrediente em maiúsculas e um conjunto inválido:
+Um programa que pede só o validador da luz carrega também o livro, e antes dele:
+
+```bash
+python3 -c 'import sys
+import alchemy.grimoire.light_validator
+print("alchemy.grimoire.light_spellbook" in sys.modules)'
+```
+
+```text
+True
+```
+
+`"nome" in sys.modules` pergunta se o módulo já foi carregado
+([O import circular](../04-conceitos/05-o-import-circular.md#como-um-import-roda-passo-a-passo)).
+Para chegar ao `light_validator`, o Python carrega antes o pacote `alchemy.grimoire`, e o
+`__init__.py` dele importa o `light_spellbook`, que importa o validador. Neste pacote, o livro é
+sempre o primeiro do par a carregar, venha o pedido de onde vier; por isso a luz não tem uma "outra
+ordem" para testar, como as trevas.
+
+## A luz não explode
+
+Pedindo o validador da luz, com um ingrediente em maiúsculas e um conjunto inválido:
 
 ```bash
 python3 -c 'from alchemy.grimoire.light_validator import validate_ingredients
