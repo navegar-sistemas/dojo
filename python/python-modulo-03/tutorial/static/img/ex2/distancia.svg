@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="420" viewBox="0 0 760 420" role="img">
+<title>Distância entre dois pontos 3D</title>
+<defs><marker id="arrow-background" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ffffff"/></marker><marker id="arrow-line" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f2937"/></marker><marker id="arrow-text" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#111827"/></marker><marker id="arrow-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/></marker><marker id="arrow-faint" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e5e7eb"/></marker><marker id="arrow-box" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f3f4f6"/></marker><marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/></marker><marker id="arrow-blue_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#dbeafe"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker><marker id="arrow-green_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#bbf7d0"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker><marker id="arrow-red_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fee2e2"/></marker><marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ea580c"/></marker><marker id="arrow-orange_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fed7aa"/></marker><marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7c3aed"/></marker><marker id="arrow-purple_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ede9fe"/></marker></defs>
+<rect width="760" height="420" fill="#ffffff"/>
+<line x1="150" y1="380" x2="280" y2="295" stroke="#6b7280" stroke-width="1" stroke-dasharray="6 5"/>
+<line x1="280" y1="295" x2="550" y2="295" stroke="#6b7280" stroke-width="1" stroke-dasharray="6 5"/>
+<line x1="280" y1="295" x2="280" y2="55" stroke="#6b7280" stroke-width="1" stroke-dasharray="6 5"/>
+<line x1="420" y1="380" x2="420" y2="140" stroke="#6b7280" stroke-width="1"/>
+<line x1="150" y1="380" x2="150" y2="140" stroke="#6b7280" stroke-width="1"/>
+<line x1="150" y1="140" x2="420" y2="140" stroke="#6b7280" stroke-width="1"/>
+<line x1="420" y1="140" x2="550" y2="55" stroke="#6b7280" stroke-width="1"/>
+<line x1="550" y1="55" x2="280" y2="55" stroke="#6b7280" stroke-width="1"/>
+<line x1="280" y1="55" x2="150" y2="140" stroke="#6b7280" stroke-width="1"/>
+<line x1="150" y1="380" x2="420" y2="380" stroke="#dc2626" stroke-width="3"/>
+<line x1="420" y1="380" x2="550" y2="295" stroke="#16a34a" stroke-width="3"/>
+<line x1="550" y1="295" x2="550" y2="55" stroke="#2563eb" stroke-width="3"/>
+<line x1="150" y1="380" x2="550" y2="295" stroke="#ea580c" stroke-width="2" stroke-dasharray="6 5"/>
+<line x1="150" y1="380" x2="550" y2="55" stroke="#7c3aed" stroke-width="3.5"/>
+<circle cx="150" cy="380" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<circle cx="550" cy="55" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<text x="140" y="406" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="bold" fill="#111827" text-anchor="middle">(1.0, 2.5, 3.0)</text>
+<text x="562" y="43" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="bold" fill="#111827" text-anchor="start">(4.0, 5.0, 6.0)</text>
+<text x="285" y="406" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#dc2626" text-anchor="middle">Δx = 3</text>
+<text x="515" y="351.5" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#16a34a" text-anchor="start">Δy = 2.5</text>
+<text x="562" y="175" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#2563eb" text-anchor="start">Δz = 3</text>
+<text x="390" y="359.5" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#ea580c" text-anchor="middle">√(3² + 2.5²)</text>
+<text x="30" y="40" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="bold" fill="#7c3aed" text-anchor="start">distância = √(3² + 2.5² + 3²) = √24.25 ≈ 4.9244</text>
+</svg>

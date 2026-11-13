@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="326" viewBox="0 0 760 326">
+<defs>
+<marker id="head-newline" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#2563eb"/></marker>
+<marker id="head-ok" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#16a34a"/></marker>
+<marker id="head-mark" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#dc2626"/></marker>
+</defs>
+<rect width="760" height="326" fill="#ffffff" rx="8"/>
+<text x="190" y="28" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" xml:space="preserve">python3 programa.py</text>
+<rect x="20" y="48" width="120" height="40" rx="5" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.5"/>
+<text x="80" y="73" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="normal" fill="#111827" text-anchor="middle" xml:space="preserve">teclado</text>
+<rect x="130" y="150" width="140" height="50" rx="5" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+<text x="200" y="180" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#111827" text-anchor="middle" xml:space="preserve">programa</text>
+<line x1="80" y1="88" x2="150" y2="150" stroke="#2563eb" stroke-width="2" marker-end="url(#head-newline)"/>
+<text x="34" y="128" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#2563eb" text-anchor="start" xml:space="preserve">0 stdin</text>
+<rect x="20" y="262" width="140" height="40" rx="5" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.5"/>
+<text x="90" y="287" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="normal" fill="#111827" text-anchor="middle" xml:space="preserve">terminal</text>
+<line x1="170" y1="200" x2="90" y2="262" stroke="#16a34a" stroke-width="2" marker-end="url(#head-ok)"/>
+<text x="34" y="236" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#16a34a" text-anchor="start" xml:space="preserve">1 stdout</text>
+<rect x="200" y="262" width="160" height="40" rx="5" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.5"/>
+<text x="280" y="287" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="normal" fill="#111827" text-anchor="middle" xml:space="preserve">terminal</text>
+<line x1="230" y1="200" x2="280" y2="262" stroke="#dc2626" stroke-width="2" marker-end="url(#head-mark)"/>
+<text x="296" y="236" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#dc2626" text-anchor="start" xml:space="preserve">2 stderr</text>
+<text x="570" y="28" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" xml:space="preserve">python3 programa.py 2&gt; erros.txt</text>
+<rect x="400" y="48" width="120" height="40" rx="5" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.5"/>
+<text x="460" y="73" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="normal" fill="#111827" text-anchor="middle" xml:space="preserve">teclado</text>
+<rect x="510" y="150" width="140" height="50" rx="5" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+<text x="580" y="180" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#111827" text-anchor="middle" xml:space="preserve">programa</text>
+<line x1="460" y1="88" x2="530" y2="150" stroke="#2563eb" stroke-width="2" marker-end="url(#head-newline)"/>
+<text x="414" y="128" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#2563eb" text-anchor="start" xml:space="preserve">0 stdin</text>
+<rect x="400" y="262" width="140" height="40" rx="5" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.5"/>
+<text x="470" y="287" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="normal" fill="#111827" text-anchor="middle" xml:space="preserve">terminal</text>
+<line x1="550" y1="200" x2="470" y2="262" stroke="#16a34a" stroke-width="2" marker-end="url(#head-ok)"/>
+<text x="414" y="236" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#16a34a" text-anchor="start" xml:space="preserve">1 stdout</text>
+<rect x="580" y="262" width="160" height="40" rx="5" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+<text x="660" y="287" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="normal" fill="#111827" text-anchor="middle" xml:space="preserve">arquivo erros.txt</text>
+<line x1="610" y1="200" x2="660" y2="262" stroke="#dc2626" stroke-width="2" marker-end="url(#head-mark)"/>
+<text x="676" y="236" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#dc2626" text-anchor="start" xml:space="preserve">2 stderr</text>
+<line x1="380" y1="40" x2="380" y2="310" stroke="#9ca3af" stroke-dasharray="4 4"/>
+</svg>

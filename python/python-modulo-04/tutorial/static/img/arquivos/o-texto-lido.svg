@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="336" viewBox="0 0 760 336">
+<rect width="760" height="336" fill="#ffffff" rx="8"/>
+<text x="20" y="30" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#111827" text-anchor="start" xml:space="preserve">o str que read() devolve: 180 caracteres</text>
+<text x="20" y="66" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="start" textLength="483.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">[FRAGMENT 001] Digital preservation protocols established 2087</text>
+<rect x="507.6" y="50" width="30" height="22" rx="5" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+<text x="522.6" y="66" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#2563eb" text-anchor="middle" xml:space="preserve">\n</text>
+<text x="20" y="96" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="start" textLength="421.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">[FRAGMENT 002] Knowledge must survive the entropy wars</text>
+<rect x="445.2" y="80" width="30" height="22" rx="5" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+<text x="460.2" y="96" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#2563eb" text-anchor="middle" xml:space="preserve">\n</text>
+<text x="20" y="126" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="start" textLength="475.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">[FRAGMENT 003] Every byte saved is a victory against oblivion</text>
+<rect x="499.8" y="110" width="30" height="22" rx="5" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+<text x="514.8" y="126" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#2563eb" text-anchor="middle" xml:space="preserve">\n</text>
+<text x="20" y="154" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#2563eb" text-anchor="start" xml:space="preserve">cada linha do arquivo termina com um \n, inclusive a última</text>
+<text x="20" y="190" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#111827" text-anchor="start" xml:space="preserve">o que print(content) mostra no terminal</text>
+<rect x="20" y="202" width="720" height="118" rx="5" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.5"/>
+<text x="32" y="228" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="start" textLength="483.6" lengthAdjust="spacingAndGlyphs" xml:space="preserve">[FRAGMENT 001] Digital preservation protocols established 2087</text>
+<text x="32" y="254" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="start" textLength="421.2" lengthAdjust="spacingAndGlyphs" xml:space="preserve">[FRAGMENT 002] Knowledge must survive the entropy wars</text>
+<text x="32" y="280" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="start" textLength="475.8" lengthAdjust="spacingAndGlyphs" xml:space="preserve">[FRAGMENT 003] Every byte saved is a victory against oblivion</text>
+<text x="32" y="306" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="start" xml:space="preserve">(linha vazia)</text>
+<text x="728" y="306" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#2563eb" text-anchor="end" xml:space="preserve">← o \n do arquivo termina a linha 3; o \n do print gera esta</text>
+</svg>

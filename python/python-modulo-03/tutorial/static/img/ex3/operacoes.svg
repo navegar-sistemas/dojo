@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="296" viewBox="0 0 800 296" role="img">
+<title>União, interseção e diferença</title>
+<defs><marker id="arrow-background" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ffffff"/></marker><marker id="arrow-line" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f2937"/></marker><marker id="arrow-text" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#111827"/></marker><marker id="arrow-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/></marker><marker id="arrow-faint" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e5e7eb"/></marker><marker id="arrow-box" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f3f4f6"/></marker><marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/></marker><marker id="arrow-blue_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#dbeafe"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker><marker id="arrow-green_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#bbf7d0"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker><marker id="arrow-red_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fee2e2"/></marker><marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ea580c"/></marker><marker id="arrow-orange_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fed7aa"/></marker><marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7c3aed"/></marker><marker id="arrow-purple_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ede9fe"/></marker></defs>
+<rect width="800" height="296" fill="#ffffff"/>
+<defs>
+<clipPath id="clip-a-0"><circle cx="105" cy="120" r="70"/></clipPath>
+<clipPath id="clip-a-1"><circle cx="365" cy="120" r="70"/></clipPath>
+<clipPath id="clip-a-2"><circle cx="625" cy="120" r="70"/></clipPath>
+</defs>
+<circle cx="105" cy="120" r="70" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+<circle cx="175" cy="120" r="70" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+<circle cx="105" cy="120" r="70" fill="none" stroke="#1f2937" stroke-width="1.5"/>
+<circle cx="175" cy="120" r="70" fill="none" stroke="#1f2937" stroke-width="1.5"/>
+<text x="35" y="50" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="bold" fill="#111827" text-anchor="middle">a</text>
+<text x="245" y="50" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="bold" fill="#111827" text-anchor="middle">b</text>
+<text x="75" y="125" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" font-weight="normal" fill="#111827" text-anchor="middle">1  2</text>
+<text x="140" y="125" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" font-weight="normal" fill="#111827" text-anchor="middle">3 4</text>
+<text x="207" y="125" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" font-weight="normal" fill="#111827" text-anchor="middle">5</text>
+<text x="140" y="222" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="bold" fill="#111827" text-anchor="middle">a.union(b)</text>
+<text x="140" y="246" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="normal" fill="#2563eb" text-anchor="middle">{1, 2, 3, 4, 5}</text>
+<circle cx="435" cy="120" r="70" fill="#dbeafe" clip-path="url(#clip-a-1)"/>
+<circle cx="365" cy="120" r="70" fill="none" stroke="#1f2937" stroke-width="1.5"/>
+<circle cx="435" cy="120" r="70" fill="none" stroke="#1f2937" stroke-width="1.5"/>
+<text x="295" y="50" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="bold" fill="#111827" text-anchor="middle">a</text>
+<text x="505" y="50" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="bold" fill="#111827" text-anchor="middle">b</text>
+<text x="335" y="125" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" font-weight="normal" fill="#111827" text-anchor="middle">1  2</text>
+<text x="400" y="125" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" font-weight="normal" fill="#111827" text-anchor="middle">3 4</text>
+<text x="467" y="125" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" font-weight="normal" fill="#111827" text-anchor="middle">5</text>
+<text x="400" y="222" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="bold" fill="#111827" text-anchor="middle">a.intersection(b)</text>
+<text x="400" y="246" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="normal" fill="#2563eb" text-anchor="middle">{3, 4}</text>
+<circle cx="625" cy="120" r="70" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+<circle cx="695" cy="120" r="70" fill="#ffffff" stroke="#ffffff" stroke-width="1.5"/>
+<circle cx="625" cy="120" r="70" fill="none" stroke="#1f2937" stroke-width="1.5"/>
+<circle cx="695" cy="120" r="70" fill="none" stroke="#1f2937" stroke-width="1.5"/>
+<text x="555" y="50" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="bold" fill="#111827" text-anchor="middle">a</text>
+<text x="765" y="50" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="bold" fill="#111827" text-anchor="middle">b</text>
+<text x="595" y="125" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" font-weight="normal" fill="#111827" text-anchor="middle">1  2</text>
+<text x="660" y="125" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" font-weight="normal" fill="#111827" text-anchor="middle">3 4</text>
+<text x="727" y="125" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" font-weight="normal" fill="#111827" text-anchor="middle">5</text>
+<text x="660" y="222" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="bold" fill="#111827" text-anchor="middle">a.difference(b)</text>
+<text x="660" y="246" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="normal" fill="#2563eb" text-anchor="middle">{1, 2}</text>
+<text x="320" y="278" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle">a = {1, 2, 3, 4}</text>
+<text x="480" y="278" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle">b = {3, 4, 5}</text>
+</svg>

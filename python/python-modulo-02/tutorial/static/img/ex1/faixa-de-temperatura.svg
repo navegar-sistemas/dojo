@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="246" viewBox="0 0 760 246">
+<rect width="760" height="246" fill="#ffffff" rx="8"/>
+<rect x="292.941" y="90" width="155.294" height="40" fill="#bbf7d0"/>
+<line x1="292.941" y1="90" x2="292.941" y2="130" stroke="#16a34a" stroke-width="2"/>
+<line x1="448.235" y1="90" x2="448.235" y2="130" stroke="#16a34a" stroke-width="2"/>
+<text x="370.588" y="168" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#16a34a" text-anchor="middle">aceita: de 0 a 40, com 0 e 40</text>
+<line x1="60" y1="120" x2="720" y2="120" stroke="#1f2937" stroke-width="2"/>
+<path d="M720 120 l-10 -6 v12 z" fill="#1f2937"/>
+<text x="720" y="170" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="end">temperatura (°C) →</text>
+<line x1="98.8235" y1="114" x2="98.8235" y2="126" stroke="#1f2937" stroke-width="2"/>
+<text x="98.8235" y="146" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle">-50</text>
+<line x1="292.941" y1="114" x2="292.941" y2="126" stroke="#1f2937" stroke-width="2"/>
+<text x="292.941" y="146" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle">0</text>
+<line x1="390" y1="114" x2="390" y2="126" stroke="#1f2937" stroke-width="2"/>
+<text x="390" y="146" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle">25</text>
+<line x1="448.235" y1="114" x2="448.235" y2="126" stroke="#1f2937" stroke-width="2"/>
+<text x="448.235" y="146" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle">40</text>
+<line x1="681.176" y1="114" x2="681.176" y2="126" stroke="#1f2937" stroke-width="2"/>
+<text x="681.176" y="146" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle">100</text>
+<line x1="390" y1="72" x2="390" y2="120" stroke="#16a34a" stroke-width="2" stroke-dasharray="4 3"/>
+<circle cx="390" cy="120" r="7" fill="#16a34a"/>
+<text x="390" y="48" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#16a34a" text-anchor="middle">&quot;25&quot;</text>
+<text x="390" y="66" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#16a34a" text-anchor="middle">aceita</text>
+<line x1="681.176" y1="72" x2="681.176" y2="120" stroke="#dc2626" stroke-width="2" stroke-dasharray="4 3"/>
+<circle cx="681.176" cy="120" r="7" fill="#dc2626"/>
+<text x="681.176" y="48" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#dc2626" text-anchor="middle">&quot;100&quot;</text>
+<text x="681.176" y="66" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#dc2626" text-anchor="middle">quente demais</text>
+<line x1="98.8235" y1="72" x2="98.8235" y2="120" stroke="#2563eb" stroke-width="2" stroke-dasharray="4 3"/>
+<circle cx="98.8235" cy="120" r="7" fill="#2563eb"/>
+<text x="98.8235" y="48" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#2563eb" text-anchor="middle">&quot;-50&quot;</text>
+<text x="98.8235" y="66" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#2563eb" text-anchor="middle">fria demais</text>
+<rect x="60" y="196" width="70" height="30" rx="6" fill="#f3f4f6" stroke="#dc2626" stroke-width="2"/>
+<text x="95" y="216" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#dc2626" text-anchor="middle">&quot;abc&quot;</text>
+<text x="142" y="216" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#dc2626" text-anchor="start">não é número: int() falha antes de conferir a faixa</text>
+</svg>

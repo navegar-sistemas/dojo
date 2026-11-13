@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="566" viewBox="0 0 760 566">
+<defs>
+<marker id="head-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#2563eb"/></marker>
+<marker id="head-ok" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#16a34a"/></marker>
+<marker id="head-warn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#d97706"/></marker>
+</defs>
+<rect width="760" height="566" fill="#ffffff" rx="8"/>
+<text x="20" y="28" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="normal" fill="#6b7280" text-anchor="start" xml:space="preserve">stream.output_pipeline(3, CSVExportPlugin())</text>
+<text x="20" y="70" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#2563eb" text-anchor="start" xml:space="preserve">Numeric Processor</text>
+<rect x="20" y="80" width="96" height="46" rx="5" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+<text x="68" y="97" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" xml:space="preserve">rank 0</text>
+<text x="68" y="117" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" xml:space="preserve">3.14</text>
+<rect x="126" y="80" width="96" height="46" rx="5" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+<text x="174" y="97" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" xml:space="preserve">rank 1</text>
+<text x="174" y="117" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" xml:space="preserve">-1</text>
+<rect x="232" y="80" width="96" height="46" rx="5" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+<text x="280" y="97" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" xml:space="preserve">rank 2</text>
+<text x="280" y="117" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" xml:space="preserve">2.71</text>
+<rect x="338" y="80" width="96" height="46" rx="5" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.5"/>
+<text x="386" y="97" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" xml:space="preserve">rank 3</text>
+<text x="386" y="117" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" xml:space="preserve">42</text>
+<text x="458" y="100" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#2563eb" text-anchor="start" xml:space="preserve">output() × 3: restam 4 → 1</text>
+<text x="458" y="120" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="start" xml:space="preserve">a lista vai para process_output</text>
+<line x1="179" y1="130" x2="179" y2="154" stroke="#2563eb" stroke-width="2" marker-end="url(#head-blue)"/>
+<rect x="20" y="156" width="720" height="50" rx="5" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.5"/>
+<text x="32" y="176" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="start" xml:space="preserve">CSV Output:</text>
+<text x="32" y="196" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="start" xml:space="preserve">3.14,-1,2.71</text>
+<text x="20" y="242" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#16a34a" text-anchor="start" xml:space="preserve">Text Processor</text>
+<rect x="20" y="252" width="96" height="46" rx="5" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+<text x="68" y="269" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" xml:space="preserve">rank 0</text>
+<text x="68" y="289" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" xml:space="preserve">Hello world</text>
+<rect x="126" y="252" width="96" height="46" rx="5" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+<text x="174" y="269" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" xml:space="preserve">rank 1</text>
+<text x="174" y="289" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" xml:space="preserve">Hi</text>
+<rect x="232" y="252" width="96" height="46" rx="5" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+<text x="280" y="269" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" xml:space="preserve">rank 2</text>
+<text x="280" y="289" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" xml:space="preserve">five</text>
+<text x="458" y="272" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#16a34a" text-anchor="start" xml:space="preserve">output() × 3: restam 3 → 0</text>
+<text x="458" y="292" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="start" xml:space="preserve">a lista vai para process_output</text>
+<line x1="179" y1="302" x2="179" y2="326" stroke="#16a34a" stroke-width="2" marker-end="url(#head-ok)"/>
+<rect x="20" y="328" width="720" height="50" rx="5" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.5"/>
+<text x="32" y="348" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="start" xml:space="preserve">CSV Output:</text>
+<text x="32" y="368" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="start" xml:space="preserve">Hello world,Hi,five</text>
+<text x="20" y="414" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#d97706" text-anchor="start" xml:space="preserve">Log Processor</text>
+<rect x="20" y="424" width="96" height="46" rx="5" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+<text x="68" y="441" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" xml:space="preserve">rank 0</text>
+<text x="68" y="461" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" xml:space="preserve">WARNING: …</text>
+<rect x="126" y="424" width="96" height="46" rx="5" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+<text x="174" y="441" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" xml:space="preserve">rank 1</text>
+<text x="174" y="461" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" xml:space="preserve">INFO: …</text>
+<text x="458" y="444" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#d97706" text-anchor="start" xml:space="preserve">output() × 2: restam 2 → 0</text>
+<text x="458" y="464" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="start" xml:space="preserve">a lista vai para process_output</text>
+<line x1="126" y1="474" x2="126" y2="498" stroke="#d97706" stroke-width="2" marker-end="url(#head-warn)"/>
+<rect x="20" y="500" width="720" height="50" rx="5" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.5"/>
+<text x="32" y="520" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="start" xml:space="preserve">CSV Output:</text>
+<text x="32" y="540" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="start" xml:space="preserve">WARNING: Telnet access! Use ssh instead,INFO: User wil is connected</text>
+</svg>

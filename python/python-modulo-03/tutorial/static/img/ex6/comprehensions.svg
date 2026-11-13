@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="320" viewBox="0 0 880 320" role="img">
+<title>Duas list comprehensions</title>
+<defs><marker id="arrow-background" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ffffff"/></marker><marker id="arrow-line" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f2937"/></marker><marker id="arrow-text" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#111827"/></marker><marker id="arrow-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/></marker><marker id="arrow-faint" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e5e7eb"/></marker><marker id="arrow-box" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f3f4f6"/></marker><marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/></marker><marker id="arrow-blue_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#dbeafe"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker><marker id="arrow-green_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#bbf7d0"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker><marker id="arrow-red_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fee2e2"/></marker><marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ea580c"/></marker><marker id="arrow-orange_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fed7aa"/></marker><marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7c3aed"/></marker><marker id="arrow-purple_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ede9fe"/></marker></defs>
+<rect width="880" height="320" fill="#ffffff"/>
+<text x="30" y="30" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#111827" text-anchor="start">PLAYERS</text>
+<text x="30" y="130" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#111827" text-anchor="start">[name.capitalize() for name in PLAYERS]</text>
+<text x="30" y="230" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#111827" text-anchor="start">[name for name in PLAYERS if name == name.capitalize()]</text>
+<rect x="30" y="40" width="84" height="34" rx="6" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.5"/>
+<text x="72" y="62" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle">Alice</text>
+<rect x="30" y="140" width="84" height="34" rx="6" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.5"/>
+<text x="72" y="162" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle">Alice</text>
+<rect x="30" y="240" width="84" height="34" rx="6" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+<text x="72" y="262" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle">Alice</text>
+<rect x="122" y="40" width="84" height="34" rx="6" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.5"/>
+<text x="164" y="62" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle">bob</text>
+<rect x="122" y="140" width="84" height="34" rx="6" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+<text x="164" y="162" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle">Bob</text>
+<rect x="122" y="240" width="84" height="34" rx="6" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="164" y="262" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle">fora</text>
+<rect x="214" y="40" width="84" height="34" rx="6" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.5"/>
+<text x="256" y="62" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle">Charlie</text>
+<rect x="214" y="140" width="84" height="34" rx="6" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.5"/>
+<text x="256" y="162" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle">Charlie</text>
+<rect x="214" y="240" width="84" height="34" rx="6" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+<text x="256" y="262" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle">Charlie</text>
+<rect x="306" y="40" width="84" height="34" rx="6" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.5"/>
+<text x="348" y="62" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle">dylan</text>
+<rect x="306" y="140" width="84" height="34" rx="6" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+<text x="348" y="162" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle">Dylan</text>
+<rect x="306" y="240" width="84" height="34" rx="6" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="348" y="262" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle">fora</text>
+<rect x="398" y="40" width="84" height="34" rx="6" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.5"/>
+<text x="440" y="62" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle">Emma</text>
+<rect x="398" y="140" width="84" height="34" rx="6" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.5"/>
+<text x="440" y="162" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle">Emma</text>
+<rect x="398" y="240" width="84" height="34" rx="6" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+<text x="440" y="262" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle">Emma</text>
+<rect x="490" y="40" width="84" height="34" rx="6" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.5"/>
+<text x="532" y="62" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle">Gregory</text>
+<rect x="490" y="140" width="84" height="34" rx="6" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.5"/>
+<text x="532" y="162" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle">Gregory</text>
+<rect x="490" y="240" width="84" height="34" rx="6" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+<text x="532" y="262" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle">Gregory</text>
+<rect x="582" y="40" width="84" height="34" rx="6" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.5"/>
+<text x="624" y="62" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle">john</text>
+<rect x="582" y="140" width="84" height="34" rx="6" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+<text x="624" y="162" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle">John</text>
+<rect x="582" y="240" width="84" height="34" rx="6" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="624" y="262" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle">fora</text>
+<rect x="674" y="40" width="84" height="34" rx="6" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.5"/>
+<text x="716" y="62" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle">kevin</text>
+<rect x="674" y="140" width="84" height="34" rx="6" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+<text x="716" y="162" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle">Kevin</text>
+<rect x="674" y="240" width="84" height="34" rx="6" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="716" y="262" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle">fora</text>
+<rect x="766" y="40" width="84" height="34" rx="6" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.5"/>
+<text x="808" y="62" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle">Liam</text>
+<rect x="766" y="140" width="84" height="34" rx="6" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.5"/>
+<text x="808" y="162" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle">Liam</text>
+<rect x="766" y="240" width="84" height="34" rx="6" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+<text x="808" y="262" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle">Liam</text>
+<text x="30" y="302" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="start">roxo: capitalize() mudou o nome; verde: o nome já era igual a name.capitalize()</text>
+</svg>

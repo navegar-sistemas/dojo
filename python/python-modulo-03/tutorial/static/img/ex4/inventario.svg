@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="306" viewBox="0 0 760 306" role="img">
+<title>Inventário e porcentagens</title>
+<defs><marker id="arrow-background" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ffffff"/></marker><marker id="arrow-line" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f2937"/></marker><marker id="arrow-text" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#111827"/></marker><marker id="arrow-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/></marker><marker id="arrow-faint" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e5e7eb"/></marker><marker id="arrow-box" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f3f4f6"/></marker><marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/></marker><marker id="arrow-blue_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#dbeafe"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker><marker id="arrow-green_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#bbf7d0"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker><marker id="arrow-red_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fee2e2"/></marker><marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ea580c"/></marker><marker id="arrow-orange_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fed7aa"/></marker><marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7c3aed"/></marker><marker id="arrow-purple_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ede9fe"/></marker></defs>
+<rect width="760" height="306" fill="#ffffff"/>
+<text x="150" y="30" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#111827" text-anchor="middle">chave</text>
+<text x="270" y="30" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#111827" text-anchor="middle">valor</text>
+<text x="560" y="30" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#111827" text-anchor="middle">parte do total (12)</text>
+<rect x="90" y="44" width="120" height="34" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+<text x="150" y="66" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="normal" fill="#111827" text-anchor="middle">&#x27;sword&#x27;</text>
+<line x1="212" y1="61" x2="236" y2="61" stroke="#1f2937" stroke-width="1.5" marker-end="url(#arrow-line)"/>
+<rect x="240" y="44" width="60" height="34" rx="6" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.5"/>
+<text x="270" y="66" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="normal" fill="#111827" text-anchor="middle">1</text>
+<rect x="360" y="48" width="41.5" height="26" rx="3" fill="#fed7aa" stroke="#ea580c" stroke-width="1.5"/>
+<text x="409.5" y="66" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="start">8.3%</text>
+<rect x="90" y="88" width="120" height="34" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+<text x="150" y="110" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="normal" fill="#111827" text-anchor="middle">&#x27;potion&#x27;</text>
+<line x1="212" y1="105" x2="236" y2="105" stroke="#1f2937" stroke-width="1.5" marker-end="url(#arrow-line)"/>
+<rect x="240" y="88" width="60" height="34" rx="6" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.5"/>
+<text x="270" y="110" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="normal" fill="#111827" text-anchor="middle">5</text>
+<rect x="360" y="92" width="208.5" height="26" rx="3" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+<text x="576.5" y="110" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="start">41.7%</text>
+<rect x="90" y="132" width="120" height="34" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+<text x="150" y="154" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="normal" fill="#111827" text-anchor="middle">&#x27;shield&#x27;</text>
+<line x1="212" y1="149" x2="236" y2="149" stroke="#1f2937" stroke-width="1.5" marker-end="url(#arrow-line)"/>
+<rect x="240" y="132" width="60" height="34" rx="6" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.5"/>
+<text x="270" y="154" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="normal" fill="#111827" text-anchor="middle">2</text>
+<rect x="360" y="136" width="83.5" height="26" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+<text x="451.5" y="154" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="start">16.7%</text>
+<rect x="90" y="176" width="120" height="34" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+<text x="150" y="198" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="normal" fill="#111827" text-anchor="middle">&#x27;armor&#x27;</text>
+<line x1="212" y1="193" x2="236" y2="193" stroke="#1f2937" stroke-width="1.5" marker-end="url(#arrow-line)"/>
+<rect x="240" y="176" width="60" height="34" rx="6" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.5"/>
+<text x="270" y="198" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="normal" fill="#111827" text-anchor="middle">3</text>
+<rect x="360" y="180" width="125" height="26" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+<text x="493" y="198" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="start">25.0%</text>
+<rect x="90" y="220" width="120" height="34" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+<text x="150" y="242" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="normal" fill="#111827" text-anchor="middle">&#x27;helmet&#x27;</text>
+<line x1="212" y1="237" x2="236" y2="237" stroke="#1f2937" stroke-width="1.5" marker-end="url(#arrow-line)"/>
+<rect x="240" y="220" width="60" height="34" rx="6" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.5"/>
+<text x="270" y="242" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="normal" fill="#111827" text-anchor="middle">1</text>
+<rect x="360" y="224" width="41.5" height="26" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+<text x="409.5" y="242" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#111827" text-anchor="start">8.3%</text>
+<text x="30" y="286" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#16a34a" text-anchor="start">mais abundante: potion (5)</text>
+<text x="300" y="286" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#ea580c" text-anchor="start">menos abundante: sword (1), o primeiro do empate com helmet</text>
+</svg>

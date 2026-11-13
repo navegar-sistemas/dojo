@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="360" viewBox="0 0 760 360">
+<rect width="760" height="360" fill="#ffffff" rx="8"/>
+<line x1="80" y1="300" x2="620" y2="300" stroke="#1f2937" stroke-width="2"/>
+<line x1="80" y1="300" x2="80" y2="30" stroke="#1f2937" stroke-width="2"/>
+<text x="70" y="22" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="start">altura (cm)</text>
+<text x="340" y="346" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle">dia</text>
+<line x1="80" y1="262.857" x2="600" y2="262.857" stroke="#e5e7eb" stroke-width="1"/>
+<text x="70" y="266.857" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="end">25</text>
+<line x1="80" y1="225.714" x2="600" y2="225.714" stroke="#e5e7eb" stroke-width="1"/>
+<text x="70" y="229.714" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="end">26</text>
+<line x1="80" y1="188.571" x2="600" y2="188.571" stroke="#e5e7eb" stroke-width="1"/>
+<text x="70" y="192.571" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="end">27</text>
+<line x1="80" y1="151.429" x2="600" y2="151.429" stroke="#e5e7eb" stroke-width="1"/>
+<text x="70" y="155.429" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="end">28</text>
+<line x1="80" y1="114.286" x2="600" y2="114.286" stroke="#e5e7eb" stroke-width="1"/>
+<text x="70" y="118.286" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="end">29</text>
+<line x1="80" y1="77.1429" x2="600" y2="77.1429" stroke="#e5e7eb" stroke-width="1"/>
+<text x="70" y="81.1429" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="end">30</text>
+<line x1="80" y1="40" x2="600" y2="40" stroke="#e5e7eb" stroke-width="1"/>
+<text x="70" y="44" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="end">31</text>
+<polyline points="80,262.857 154.286,233.143 228.571,203.429 302.857,173.714 377.143,144 451.429,114.286 525.714,84.5714 600,54.8571" fill="none" stroke="#16a34a" stroke-width="3"/>
+<text x="80" y="322" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#111827" text-anchor="middle">0</text>
+<circle cx="80" cy="262.857" r="5" fill="#16a34a"/>
+<text x="88" y="284.857" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="bold" fill="#16a34a" text-anchor="start">25,0</text>
+<text x="154.286" y="322" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#111827" text-anchor="middle">1</text>
+<circle cx="154.286" cy="233.143" r="5" fill="#16a34a"/>
+<text x="154.286" y="221.143" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="bold" fill="#16a34a" text-anchor="middle">25,8</text>
+<text x="228.571" y="322" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#111827" text-anchor="middle">2</text>
+<circle cx="228.571" cy="203.429" r="5" fill="#16a34a"/>
+<text x="228.571" y="191.429" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="bold" fill="#16a34a" text-anchor="middle">26,6</text>
+<text x="302.857" y="322" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#111827" text-anchor="middle">3</text>
+<circle cx="302.857" cy="173.714" r="5" fill="#16a34a"/>
+<text x="302.857" y="161.714" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="bold" fill="#16a34a" text-anchor="middle">27,4</text>
+<text x="377.143" y="322" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#111827" text-anchor="middle">4</text>
+<circle cx="377.143" cy="144" r="5" fill="#16a34a"/>
+<text x="377.143" y="132" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="bold" fill="#16a34a" text-anchor="middle">28,2</text>
+<text x="451.429" y="322" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#111827" text-anchor="middle">5</text>
+<circle cx="451.429" cy="114.286" r="5" fill="#16a34a"/>
+<text x="451.429" y="102.286" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="bold" fill="#16a34a" text-anchor="middle">29,0</text>
+<text x="525.714" y="322" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#111827" text-anchor="middle">6</text>
+<circle cx="525.714" cy="84.5714" r="5" fill="#16a34a"/>
+<text x="525.714" y="72.5714" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="bold" fill="#16a34a" text-anchor="middle">29,8</text>
+<text x="600" y="322" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#111827" text-anchor="middle">7</text>
+<circle cx="600" cy="54.8571" r="5" fill="#16a34a"/>
+<text x="600" y="42.8571" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="bold" fill="#16a34a" text-anchor="middle">30,6</text>
+<line x1="640" y1="262.857" x2="640" y2="54.8571" stroke="#16a34a" stroke-width="2"/>
+<line x1="632" y1="262.857" x2="648" y2="262.857" stroke="#16a34a" stroke-width="2"/>
+<line x1="632" y1="54.8571" x2="648" y2="54.8571" stroke="#16a34a" stroke-width="2"/>
+<text x="656" y="158.857" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#16a34a" text-anchor="start">+5,6 cm</text>
+<text x="656" y="176.857" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="start">na semana</text>
+</svg>

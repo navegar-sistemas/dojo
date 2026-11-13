@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="634" height="510" viewBox="0 0 634 510" role="img">
+<title>Conquistas por jogador</title>
+<defs><marker id="arrow-background" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ffffff"/></marker><marker id="arrow-line" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f2937"/></marker><marker id="arrow-text" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#111827"/></marker><marker id="arrow-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/></marker><marker id="arrow-faint" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e5e7eb"/></marker><marker id="arrow-box" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f3f4f6"/></marker><marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/></marker><marker id="arrow-blue_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#dbeafe"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker><marker id="arrow-green_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#bbf7d0"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker><marker id="arrow-red_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fee2e2"/></marker><marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ea580c"/></marker><marker id="arrow-orange_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fed7aa"/></marker><marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7c3aed"/></marker><marker id="arrow-purple_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ede9fe"/></marker></defs>
+<rect width="634" height="510" fill="#ffffff"/>
+<text x="268" y="56" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#111827" text-anchor="middle">Alice</text>
+<text x="364" y="56" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#111827" text-anchor="middle">Bob</text>
+<text x="460" y="56" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#111827" text-anchor="middle">Charlie</text>
+<text x="556" y="56" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#111827" text-anchor="middle">Dylan</text>
+<text x="30" y="88" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="start">Crafting Genius</text>
+<circle cx="268" cy="83" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<circle cx="364" cy="83" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<text x="30" y="116" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="start">Strategist</text>
+<circle cx="364" cy="111" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<circle cx="460" cy="111" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<circle cx="556" cy="111" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<text x="30" y="144" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="start">World Savior</text>
+<circle cx="268" cy="139" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<circle cx="364" cy="139" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<text x="30" y="172" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="start">Speed Runner</text>
+<circle cx="460" cy="167" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<circle cx="556" cy="167" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<text x="30" y="200" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="start">Survivor</text>
+<rect x="430" y="184" width="60" height="22" rx="4" fill="#fed7aa" stroke="#ea580c" stroke-width="1.5"/>
+<circle cx="460" cy="195" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<text x="30" y="228" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="start">Master Explorer</text>
+<circle cx="268" cy="223" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<circle cx="364" cy="223" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<circle cx="460" cy="223" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<text x="30" y="256" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="start">Treasure Hunter</text>
+<rect x="430" y="240" width="60" height="22" rx="4" fill="#fed7aa" stroke="#ea580c" stroke-width="1.5"/>
+<circle cx="460" cy="251" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<text x="30" y="284" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="start">Unstoppable</text>
+<circle cx="364" cy="279" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<circle cx="556" cy="279" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<text x="30" y="312" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="start">First Steps</text>
+<rect x="430" y="296" width="60" height="22" rx="4" fill="#fed7aa" stroke="#ea580c" stroke-width="1.5"/>
+<circle cx="460" cy="307" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<text x="30" y="340" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="start">Collector Supreme</text>
+<circle cx="268" cy="335" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<circle cx="364" cy="335" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<circle cx="460" cy="335" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<rect x="24" y="350" width="586" height="26" rx="4" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+<text x="30" y="368" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="start">Untouchable</text>
+<circle cx="268" cy="363" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<circle cx="364" cy="363" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<circle cx="460" cy="363" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<circle cx="556" cy="363" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<text x="30" y="396" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="start">Sharp Mind</text>
+<rect x="430" y="380" width="60" height="22" rx="4" fill="#fed7aa" stroke="#ea580c" stroke-width="1.5"/>
+<circle cx="460" cy="391" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<text x="30" y="424" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="start">Boss Slayer</text>
+<circle cx="268" cy="419" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<circle cx="556" cy="419" r="6" fill="#1f2937" stroke="#1f2937" stroke-width="1.5"/>
+<rect x="24" y="434" width="586" height="26" rx="4" fill="#f3f4f6" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="30" y="452" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="start">Hidden Path Finder</text>
+<rect x="30" y="474" width="18" height="18" rx="3" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5"/>
+<text x="56" y="488" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="start">comum: todos têm</text>
+<rect x="210" y="474" width="18" height="18" rx="3" fill="#fed7aa" stroke="#ea580c" stroke-width="1.5"/>
+<text x="236" y="488" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="start">só um jogador tem</text>
+<rect x="390" y="474" width="18" height="18" rx="3" fill="#f3f4f6" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="416" y="488" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="start">ninguém tem</text>
+<text x="317" y="30" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="bold" fill="#111827" text-anchor="middle">As conquistas do exemplo do enunciado</text>
+</svg>

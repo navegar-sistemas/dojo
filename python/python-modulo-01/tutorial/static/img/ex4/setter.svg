@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="300" viewBox="0 0 760 300">
+<rect width="760" height="300" fill="#ffffff" rx="8"/>
+<text x="30" y="80" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="bold" fill="#111827" text-anchor="start">rose.set_height(25.0)</text>
+<rect x="250" y="54" width="160" height="40" rx="8" fill="#eff6ff" stroke="#16a34a" stroke-width="2"/>
+<text x="330" y="79" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#16a34a" text-anchor="middle">25.0 &lt; 0? não</text>
+<rect x="470" y="54" width="260" height="40" rx="8" fill="#eff6ff" stroke="#16a34a" stroke-width="2"/>
+<text x="600" y="79" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#16a34a" text-anchor="middle">_height: 15.0 → 25.0</text>
+<text x="600" y="116" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#16a34a" text-anchor="middle">devolve True</text>
+<line x1="210" y1="74" x2="248" y2="74" stroke="#1f2937" stroke-width="2"/>
+<path d="M248 74 l-9 -6 v12 z" fill="#1f2937"/>
+<line x1="410" y1="74" x2="468" y2="74" stroke="#16a34a" stroke-width="2"/>
+<path d="M468 74 l-9 -6 v12 z" fill="#16a34a"/>
+<text x="30" y="200" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="bold" fill="#111827" text-anchor="start">rose.set_height(-5.0)</text>
+<rect x="250" y="174" width="160" height="40" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="330" y="199" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#dc2626" text-anchor="middle">-5.0 &lt; 0? sim</text>
+<rect x="470" y="174" width="260" height="40" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+<text x="600" y="199" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="normal" fill="#dc2626" text-anchor="middle">_height continua 25.0</text>
+<text x="600" y="236" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#dc2626" text-anchor="middle">devolve False</text>
+<line x1="210" y1="194" x2="248" y2="194" stroke="#1f2937" stroke-width="2"/>
+<path d="M248 194 l-9 -6 v12 z" fill="#1f2937"/>
+<line x1="410" y1="194" x2="468" y2="194" stroke="#dc2626" stroke-width="2"/>
+<path d="M468 194 l-9 -6 v12 z" fill="#dc2626"/>
+<text x="250" y="270" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#dc2626" text-anchor="start">e o setter imprime &quot;Rose: Error, height can&#x27;t be negative&quot;</text>
+<text x="30" y="30" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="start">antes das duas chamadas, a rosa tem _height = 15.0</text>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="436" viewBox="0 0 760 436">
+<defs>
+<marker id="head-mark" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#dc2626"/></marker>
+<marker id="head-ok" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#16a34a"/></marker>
+</defs>
+<rect width="760" height="436" fill="#ffffff" rx="8"/>
+<text x="300" y="26" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="start" xml:space="preserve">← começo: pop(0)</text>
+<text x="608" y="26" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="end" xml:space="preserve">fim: append →</text>
+<text x="20" y="56" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#111827" text-anchor="start" xml:space="preserve">1. append de &#x27;10&#x27;, &#x27;20&#x27; e &#x27;30&#x27;</text>
+<rect x="300" y="70" width="96" height="46" rx="5" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.5"/>
+<text x="348" y="87" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" xml:space="preserve">rank 0</text>
+<text x="348" y="107" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" xml:space="preserve">&#x27;10&#x27;</text>
+<rect x="406" y="70" width="96" height="46" rx="5" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.5"/>
+<text x="454" y="87" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" xml:space="preserve">rank 1</text>
+<text x="454" y="107" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" xml:space="preserve">&#x27;20&#x27;</text>
+<rect x="512" y="70" width="96" height="46" rx="5" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.5"/>
+<text x="560" y="87" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" xml:space="preserve">rank 2</text>
+<text x="560" y="107" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" xml:space="preserve">&#x27;30&#x27;</text>
+<text x="624" y="100" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#2563eb" text-anchor="start" xml:space="preserve">próximo rank: 3</text>
+<text x="20" y="156" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#111827" text-anchor="start" xml:space="preserve">2. pop(0) devolve (0, &#x27;10&#x27;)</text>
+<rect x="150" y="170" width="96" height="46" rx="5" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+<text x="198" y="187" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" xml:space="preserve">rank 0</text>
+<text x="198" y="207" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" xml:space="preserve">&#x27;10&#x27;</text>
+<line x1="294" y1="193" x2="252" y2="193" stroke="#dc2626" stroke-width="2" marker-end="url(#head-mark)"/>
+<rect x="300" y="170" width="96" height="46" rx="5" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.5"/>
+<text x="348" y="187" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" xml:space="preserve">rank 1</text>
+<text x="348" y="207" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" xml:space="preserve">&#x27;20&#x27;</text>
+<rect x="406" y="170" width="96" height="46" rx="5" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.5"/>
+<text x="454" y="187" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" xml:space="preserve">rank 2</text>
+<text x="454" y="207" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" xml:space="preserve">&#x27;30&#x27;</text>
+<text x="624" y="200" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#2563eb" text-anchor="start" xml:space="preserve">próximo rank: 3</text>
+<text x="20" y="256" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#111827" text-anchor="start" xml:space="preserve">3. append de &#x27;40&#x27;: entra com rank 3</text>
+<rect x="300" y="270" width="96" height="46" rx="5" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.5"/>
+<text x="348" y="287" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" xml:space="preserve">rank 1</text>
+<text x="348" y="307" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" xml:space="preserve">&#x27;20&#x27;</text>
+<rect x="406" y="270" width="96" height="46" rx="5" fill="#f3f4f6" stroke="#9ca3af" stroke-width="1.5"/>
+<text x="454" y="287" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" xml:space="preserve">rank 2</text>
+<text x="454" y="307" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" xml:space="preserve">&#x27;30&#x27;</text>
+<rect x="512" y="270" width="96" height="46" rx="5" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+<text x="560" y="287" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" xml:space="preserve">rank 3</text>
+<text x="560" y="307" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" xml:space="preserve">&#x27;40&#x27;</text>
+<line x1="736" y1="293" x2="612" y2="293" stroke="#16a34a" stroke-width="2" marker-end="url(#head-ok)"/>
+<text x="20" y="356" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#111827" text-anchor="start" xml:space="preserve">4. três pop(0) devolvem (1, &#x27;20&#x27;), (2, &#x27;30&#x27;) e (3, &#x27;40&#x27;); a fila fica vazia</text>
+<rect x="300" y="370" width="308" height="46" rx="5" fill="none" stroke="#9ca3af" stroke-dasharray="5 4"/>
+<text x="454" y="398" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#dc2626" text-anchor="middle" xml:space="preserve">vazia: mais um pop(0) lança IndexError</text>
+</svg>

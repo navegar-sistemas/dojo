@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="404" viewBox="0 0 1080 404" role="img">
+<title>A lista encolhendo em consume_event</title>
+<defs><marker id="arrow-background" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ffffff"/></marker><marker id="arrow-line" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f2937"/></marker><marker id="arrow-text" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#111827"/></marker><marker id="arrow-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/></marker><marker id="arrow-faint" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e5e7eb"/></marker><marker id="arrow-box" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f3f4f6"/></marker><marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/></marker><marker id="arrow-blue_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#dbeafe"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker><marker id="arrow-green_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#bbf7d0"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker><marker id="arrow-red_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fee2e2"/></marker><marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ea580c"/></marker><marker id="arrow-orange_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#fed7aa"/></marker><marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7c3aed"/></marker><marker id="arrow-purple_fill" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ede9fe"/></marker></defs>
+<rect width="1080" height="404" fill="#ffffff"/>
+<text x="400" y="26" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#111827" text-anchor="middle">events: a mesma lista no main e em consume_event</text>
+<text x="136" y="74" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="end">Built list</text>
+<rect x="150" y="44" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="183" y="63" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">charlie</text>
+<text x="183" y="80" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">move</text>
+<rect x="222" y="44" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="255" y="63" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">dylan</text>
+<text x="255" y="80" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">grab</text>
+<rect x="294" y="44" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="327" y="63" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">alice</text>
+<text x="327" y="80" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">use</text>
+<rect x="366" y="44" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="399" y="63" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">alice</text>
+<text x="399" y="80" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">use</text>
+<rect x="438" y="44" width="66" height="46" rx="5" fill="#fed7aa" stroke="#ea580c" stroke-width="2.5"/>
+<text x="471" y="63" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">charlie</text>
+<text x="471" y="80" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">swim</text>
+<rect x="510" y="44" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="543" y="63" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">bob</text>
+<text x="543" y="80" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">run</text>
+<rect x="582" y="44" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="615" y="63" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">charlie</text>
+<text x="615" y="80" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">move</text>
+<rect x="654" y="44" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="687" y="63" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">dylan</text>
+<text x="687" y="80" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">climb</text>
+<rect x="726" y="44" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="759" y="63" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">alice</text>
+<text x="759" y="80" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">use</text>
+<rect x="798" y="44" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="831" y="63" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">bob</text>
+<text x="831" y="80" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">release</text>
+<text x="874" y="74" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" font-weight="normal" fill="#ea580c" text-anchor="start">→ yield (&#x27;charlie&#x27;, &#x27;swim&#x27;)</text>
+<text x="136" y="144" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="end">depois do 1º</text>
+<rect x="150" y="114" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="183" y="133" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">charlie</text>
+<text x="183" y="150" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">move</text>
+<rect x="222" y="114" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="255" y="133" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">dylan</text>
+<text x="255" y="150" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">grab</text>
+<rect x="294" y="114" width="66" height="46" rx="5" fill="#fed7aa" stroke="#ea580c" stroke-width="2.5"/>
+<text x="327" y="133" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">alice</text>
+<text x="327" y="150" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">use</text>
+<rect x="366" y="114" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="399" y="133" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">alice</text>
+<text x="399" y="150" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">use</text>
+<rect x="438" y="114" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="471" y="133" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">bob</text>
+<text x="471" y="150" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">run</text>
+<rect x="510" y="114" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="543" y="133" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">charlie</text>
+<text x="543" y="150" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">move</text>
+<rect x="582" y="114" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="615" y="133" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">dylan</text>
+<text x="615" y="150" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">climb</text>
+<rect x="654" y="114" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="687" y="133" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">alice</text>
+<text x="687" y="150" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">use</text>
+<rect x="726" y="114" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="759" y="133" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">bob</text>
+<text x="759" y="150" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">release</text>
+<text x="802" y="144" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" font-weight="normal" fill="#ea580c" text-anchor="start">→ yield (&#x27;alice&#x27;, &#x27;use&#x27;)</text>
+<text x="136" y="214" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="end">depois do 2º</text>
+<rect x="150" y="184" width="66" height="46" rx="5" fill="#fed7aa" stroke="#ea580c" stroke-width="2.5"/>
+<text x="183" y="203" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">charlie</text>
+<text x="183" y="220" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">move</text>
+<rect x="222" y="184" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="255" y="203" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">dylan</text>
+<text x="255" y="220" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">grab</text>
+<rect x="294" y="184" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="327" y="203" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">alice</text>
+<text x="327" y="220" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">use</text>
+<rect x="366" y="184" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="399" y="203" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">bob</text>
+<text x="399" y="220" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">run</text>
+<rect x="438" y="184" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="471" y="203" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">charlie</text>
+<text x="471" y="220" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">move</text>
+<rect x="510" y="184" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="543" y="203" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">dylan</text>
+<text x="543" y="220" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">climb</text>
+<rect x="582" y="184" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="615" y="203" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">alice</text>
+<text x="615" y="220" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">use</text>
+<rect x="654" y="184" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="687" y="203" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">bob</text>
+<text x="687" y="220" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">release</text>
+<text x="730" y="214" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" font-weight="normal" fill="#ea580c" text-anchor="start">→ yield (&#x27;charlie&#x27;, &#x27;move&#x27;)</text>
+<text x="136" y="284" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="end">depois do 3º</text>
+<rect x="150" y="254" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="183" y="273" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">dylan</text>
+<text x="183" y="290" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">grab</text>
+<rect x="222" y="254" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="255" y="273" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">alice</text>
+<text x="255" y="290" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">use</text>
+<rect x="294" y="254" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="327" y="273" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">bob</text>
+<text x="327" y="290" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">run</text>
+<rect x="366" y="254" width="66" height="46" rx="5" fill="#fed7aa" stroke="#ea580c" stroke-width="2.5"/>
+<text x="399" y="273" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">charlie</text>
+<text x="399" y="290" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">move</text>
+<rect x="438" y="254" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="471" y="273" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">dylan</text>
+<text x="471" y="290" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">climb</text>
+<rect x="510" y="254" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="543" y="273" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">alice</text>
+<text x="543" y="290" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">use</text>
+<rect x="582" y="254" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="615" y="273" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">bob</text>
+<text x="615" y="290" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">release</text>
+<text x="658" y="284" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" font-weight="normal" fill="#ea580c" text-anchor="start">→ yield (&#x27;charlie&#x27;, &#x27;move&#x27;)</text>
+<text x="136" y="354" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="end">depois do 4º</text>
+<rect x="150" y="324" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="183" y="343" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">dylan</text>
+<text x="183" y="360" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">grab</text>
+<rect x="222" y="324" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="255" y="343" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">alice</text>
+<text x="255" y="360" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">use</text>
+<rect x="294" y="324" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="327" y="343" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">bob</text>
+<text x="327" y="360" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">run</text>
+<rect x="366" y="324" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="399" y="343" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">dylan</text>
+<text x="399" y="360" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">climb</text>
+<rect x="438" y="324" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="471" y="343" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">alice</text>
+<text x="471" y="360" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">use</text>
+<rect x="510" y="324" width="66" height="46" rx="5" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.2"/>
+<text x="543" y="343" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#111827" text-anchor="middle">bob</text>
+<text x="543" y="360" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle">release</text>
+</svg>

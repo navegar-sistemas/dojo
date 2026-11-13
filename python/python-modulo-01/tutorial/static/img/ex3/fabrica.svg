@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="350" viewBox="0 0 760 350">
+<rect width="760" height="350" fill="#ffffff" rx="8"/>
+<line x1="40" y1="290" x2="720" y2="290" stroke="#1f2937" stroke-width="2"/>
+<rect x="80" y="260" width="60" height="30" rx="3" fill="#ecfdf5" stroke="#16a34a" stroke-width="2"/>
+<text x="110" y="250" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#16a34a" text-anchor="middle">25,0 cm</text>
+<text x="110" y="312" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#111827" text-anchor="middle">Rose</text>
+<text x="110" y="332" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle">30 dias</text>
+<rect x="215" y="50" width="60" height="240" rx="3" fill="#ecfdf5" stroke="#16a34a" stroke-width="2"/>
+<text x="245" y="40" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#16a34a" text-anchor="middle">200,0 cm</text>
+<text x="245" y="312" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#111827" text-anchor="middle">Oak</text>
+<text x="245" y="332" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle">365 dias</text>
+<rect x="350" y="284" width="60" height="6" rx="3" fill="#ecfdf5" stroke="#16a34a" stroke-width="2"/>
+<text x="380" y="274" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#16a34a" text-anchor="middle">5,0 cm</text>
+<text x="380" y="312" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#111827" text-anchor="middle">Cactus</text>
+<text x="380" y="332" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle">90 dias</text>
+<rect x="485" y="194" width="60" height="96" rx="3" fill="#ecfdf5" stroke="#16a34a" stroke-width="2"/>
+<text x="515" y="184" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#16a34a" text-anchor="middle">80,0 cm</text>
+<text x="515" y="312" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#111827" text-anchor="middle">Sunflower</text>
+<text x="515" y="332" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle">45 dias</text>
+<rect x="620" y="272" width="60" height="18" rx="3" fill="#ecfdf5" stroke="#16a34a" stroke-width="2"/>
+<text x="650" y="262" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#16a34a" text-anchor="middle">15,0 cm</text>
+<text x="650" y="312" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#111827" text-anchor="middle">Fern</text>
+<text x="650" y="332" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle">120 dias</text>
+</svg>
