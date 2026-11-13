@@ -11,9 +11,9 @@ Os exercícios 0, 1 e 2 recebem o nome do arquivo no próprio comando que roda o
 
 ## import sys
 
-`sys` é um **módulo** que vem com o Python: um conjunto de valores e funções ligados ao programa em
-execução. Um módulo entra no programa com `import`, no topo do arquivo, e os nomes dele são usados
-com ponto: `sys.argv`, `sys.stdout`.
+`sys` é um **módulo**: um conjunto de código que vem com o Python, pronto para ser usado. O `sys`
+reúne valores e funções ligados ao programa em execução. Um módulo entra no programa com `import`,
+no topo do arquivo, e os nomes dele são usados com ponto: `sys.argv`, `sys.stdout`.
 
 ## sys.argv
 

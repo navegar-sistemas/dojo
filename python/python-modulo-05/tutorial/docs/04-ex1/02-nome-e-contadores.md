@@ -13,7 +13,9 @@ Numeric Processor: total 4 items processed, remaining 4 on processor
 
 Para escrevê-la, `DataStream` precisa perguntar a cada processador três coisas: o nome, quantos
 itens ele já recebeu no total e quantos ainda estão guardados. Como `DataStream` só conhece a
-classe `DataProcessor`, as três respostas entram nela.
+classe `DataProcessor`, as três respostas entram nela. O enunciado só fixa os três métodos de
+`DataStream`; o atributo `name` e os métodos `total` e `remaining` são escolha do tutorial para
+montar essa linha.
 
 ## O nome
 

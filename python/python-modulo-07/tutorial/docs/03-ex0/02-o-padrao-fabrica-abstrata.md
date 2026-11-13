@@ -31,7 +31,8 @@ criaturas: a `FlameFactory` devolve `Flameling` e `Pyrodon`; a `AquaFactory`, `A
 `Torragon`. Uma fábrica sempre entrega criaturas da mesma família: não há como receber um
 `Flameling` e um `Torragon` da mesma fábrica.
 
-Quem usa as fábricas, como o `battle.py`, só conhece as duas classes abstratas:
+Quem usa as fábricas, como a função `test_factory` do `battle.py`, só conhece as duas classes
+abstratas:
 
 ```python
 def test_factory(factory: CreatureFactory) -> None:
@@ -85,16 +86,16 @@ resto do programa fica do lado das classes abstratas.
 
 ## O que se ganha
 
-- **Uma família nova é só código novo.** Duas criaturas e uma fábrica; o `battle.py` não muda
+- **Uma família nova é só código novo.** Duas criaturas e uma fábrica; as funções de teste do
+  `battle.py` não mudam, e só o `main` ganha uma linha para criar a fábrica nova
   ([As perguntas do enunciado](../06-fechamento/03-as-perguntas-do-enunciado.md#uma-família-nova));
 - **As famílias não se misturam.** Quem pede a base e a evoluída à mesma fábrica recebe duas
   criaturas da mesma família;
 - **As classes concretas podem ficar escondidas.** Quem usa o pacote só precisa das fábricas, e o
   pacote só as expõe ([O `__init__.py` do pacote](./06-o-init-do-pacote.md)).
 
-## A ordem das próximas páginas
+## Os arquivos do pacote
 
 O pacote tem três arquivos, escolha do tutorial: `ex0/creature.py` (a classe `Creature` e as
-quatro criaturas), `ex0/factory.py` (as fábricas) e `ex0/__init__.py` (o que o pacote expõe). As
-páginas seguintes os escrevem nessa ordem e terminam com o `battle.py`, na raiz. A página
-[Os arquivos completos](./08-os-arquivos-completos.md) mostra o resultado, para conferir.
+quatro criaturas), `ex0/factory.py` (as fábricas) e `ex0/__init__.py` (o que o pacote expõe). O
+`battle.py` fica na raiz ([Os arquivos completos](./08-os-arquivos-completos.md)).

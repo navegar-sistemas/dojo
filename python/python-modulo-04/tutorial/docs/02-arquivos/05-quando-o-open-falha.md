@@ -53,8 +53,8 @@ As três tentativas falham, e as três são capturadas pelo mesmo `except OSErro
 | `experimentos/trancado.txt` | sem permissão de leitura | `PermissionError` |
 
 Se o experimento imprimir `experimentos/trancado.txt: opened`, o terminal está rodando como
-**root**, o administrador do sistema, que lê qualquer arquivo independente das permissões. Rode como
-um usuário comum.
+**root**, o administrador do sistema, que lê qualquer arquivo independentemente das permissões.
+Rode como um usuário comum.
 
 ## OSError, a família dos erros do sistema
 

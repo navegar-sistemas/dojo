@@ -19,7 +19,8 @@ terminal.
 ## Quatro programas pequenos
 
 O projeto tem quatro **exercícios**. Cada um é um programa de um arquivo só, numa pasta própria.
-Cada exercício parte do anterior e acrescenta uma ferramenta:
+Os exercícios 1 e 2 partem do código do anterior; o 3 é um programa novo. Cada um acrescenta uma
+ferramenta:
 
 | Exercício | Arquivo | O que ensina |
 |---|---|---|

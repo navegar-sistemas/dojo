@@ -14,7 +14,7 @@ def ask_file_name() -> str:
     sys.stdout.flush()
     try:
         line = sys.stdin.readline()
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt, UnicodeDecodeError):
         line = ""
     if line == "":
         print()
@@ -57,15 +57,16 @@ python3 experimentos/readline.py < /dev/null
 
 - uma linha com Enter vem com o `\n` no fim;
 - se a entrada acaba sem Enter, vem o que havia, sem `\n`;
-- se a entrada já acabou (`Ctrl+D` no terminal, ou um arquivo vazio como o `/dev/null`),
-  `readline()` devolve `""`. Diferente do `input()`, ele **não** lança `EOFError`.
+- se a entrada já acabou (`Ctrl+D` numa linha vazia do terminal, ou um arquivo vazio como o
+  `/dev/null`), `readline()` devolve `""`. Diferente do `input()`, ele **não** lança `EOFError`.
 
 ## Tratar o resultado
 
 - `line.rstrip("\n")` tira o `\n` do fim, se houver. Assim, Enter sem texto (`"\n"`) vira `""`, a
   resposta vazia que o `main` entende como "não gravar";
-- `line == ""` só acontece quando a entrada acabou sem Enter nenhum. Nesse caso, nada foi digitado
-  depois da pergunta, e o `print()` sozinho termina a linha dela, para `Not saving data.` não sair
-  grudado;
-- `Ctrl+C` lança `KeyboardInterrupt` dentro do `readline()`, como no `input()`, e também vira
-  resposta vazia.
+- `Ctrl+C` lança `KeyboardInterrupt` dentro do `readline()`, e bytes que não formam texto lançam
+  `UnicodeDecodeError`, como no `input()` ([Pedir o nome](../04-ex1/04-pedir-o-nome.md)). O
+  `except` troca as duas pela resposta vazia;
+- `line == ""` quer dizer que nenhum caractere chegou depois da pergunta: a entrada acabou, ou o
+  `except` tratou uma falha. Nesse caso, o `print()` sozinho termina a linha da pergunta, para
+  `Not saving data.` não sair grudado.

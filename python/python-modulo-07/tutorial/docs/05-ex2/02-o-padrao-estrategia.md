@@ -81,8 +81,8 @@ devolver uma **lista de textos**, `list[str]`, um por ação, no mesmo espírito
 devolve o texto em vez de imprimir: a estratégia decide **o que** a criatura faz, e o torneio
 decide como mostrar. Imprimir direto dentro do `act` também cumpriria o enunciado.
 
-## A ordem das próximas páginas
+## Os arquivos do pacote
 
 O pacote tem dois arquivos, escolha do tutorial: `ex2/strategy.py`, com a exceção e as quatro
-classes, e `ex2/__init__.py`. As páginas seguintes escrevem a exceção, as estratégias e o
-`__init__.py`, e depois o `tournament.py`, na raiz, com a função `battle` e o cenário.
+classes de estratégia, e `ex2/__init__.py`. O `tournament.py`, com a função `battle` e o
+cenário, fica na raiz.

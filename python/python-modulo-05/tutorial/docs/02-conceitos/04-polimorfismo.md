@@ -92,6 +92,11 @@ classDiagram
     DataProcessor <|-- LogProcessor
 ```
 
+O diagrama segue a notação de
+[A classe abstrata](./02-a-classe-abstrata.md#a-classe-abstrata-do-projeto): cada parâmetro
+aparece com o seu tipo (listas e dicionários sem o tipo dos itens), os métodos abstratos estão em
+itálico e «abstract» marca a classe que não pode ser instanciada.
+
 No exercício 1, a classe `DataStream` faz o papel do laço: guarda uma lista de `DataProcessor`,
 pergunta a cada um `validate(dado)` e entrega o dado com `ingest(dado)` ao primeiro que aceitar,
 sem saber se ele processa números, textos ou logs

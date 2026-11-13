@@ -9,8 +9,8 @@ title: O que vamos construir
 Quase todo programa guarda **vários** valores de uma vez: as pontuações de uma partida, os itens
 de uma mochila, os jogadores conectados. Uma variável comum guarda um valor só. Para guardar
 muitos, o Python tem as **coleções**: objetos que agrupam outros valores. São quatro: lista,
-tupla, set e dicionário. Ao lado delas, os *generators* e as *comprehensions* produzem valores em
-série.
+tupla, set e dicionário. Ao lado delas, os *generators* produzem valores um de cada vez, sob
+demanda, e as *comprehensions* constroem uma coleção nova numa linha.
 
 O projeto se chama **Data Quest** ("missão dos dados"). O tema é uma plataforma que analisa dados
 de jogos: pontuações, posições no mapa, conquistas, inventário. O tema só dá nome às coisas; o
@@ -31,7 +31,8 @@ cada um apresenta uma coleção ou recurso novo:
 | 5 | `ex5/ft_data_stream.py` | **generators**, que produzem um valor por vez, sob demanda |
 | 6 | `ex6/ft_data_alchemist.py` | **comprehensions**, que constroem uma lista ou um dicionário numa linha |
 
-Um exemplo, o exercício 4 rodando com uma lista de itens digitada no terminal:
+Um exemplo é o exercício 4 rodado com dois itens passados na linha de comando, o texto escrito
+depois do nome do programa: `python3 ft_inventory_system.py sword:1 potion:5`. A saída:
 
 ```text
 === Inventory System Analysis ===

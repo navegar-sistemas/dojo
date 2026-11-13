@@ -11,8 +11,8 @@ pede um tratamento diferente, mas o resto do programa não quer saber de cada de
 entregar um dado e receber o resultado. Duas ferramentas da programação orientada a objetos
 resolvem isso:
 
-- a **classe abstrata**, uma classe que só descreve o que as classes filhas precisam saber
-  fazer, sem fazer o trabalho ela mesma;
+- a **classe abstrata**, uma classe que serve só de molde: não gera objetos, lista os métodos que
+  toda classe filha precisa escrever e pode já trazer pronto o que é igual para todas;
 - o **polimorfismo**, que permite chamar o mesmo método em objetos de classes diferentes e
   deixar cada um responder do seu jeito.
 

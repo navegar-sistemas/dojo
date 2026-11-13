@@ -57,9 +57,9 @@ class Bloomelle(Creature, HealCapability):
 
 `class Sproutling(Creature, HealCapability)` herda das duas classes. A ordem de busca
 ([A ordem de busca](../02-conceitos/03-heranca-multipla.md#a-ordem-de-busca)) é `Sproutling`,
-`Creature`, `HealCapability`, `ABC`, `object`. `HealCapability` não tem `__init__` próprio, então
-`super().__init__("Sproutling", "Grass")` chega ao `__init__` de `Creature`, que guarda o nome e
-o tipo, e não falta nada para criar.
+`Creature`, `HealCapability`, `ABC`, `object`. `super().__init__("Sproutling", "Grass")` chega ao
+`__init__` de `Creature`, a próxima classe da ordem, que guarda o nome e o tipo. Como
+`HealCapability` não tem `__init__` próprio, não falta nada para criar.
 
 ## Os três métodos
 

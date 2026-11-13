@@ -30,7 +30,8 @@ done
 cd entrega
 ```
 
-Troque `<endereço-do-repositório>` pelo endereço recebido. O `git clone` baixa o repositório; o
+Troque `<endereço-do-repositório>` pelo endereço recebido e, se a pasta do projeto tem outro
+nome, troque `datadeck` pelo nome da sua pasta. O `git clone` baixa o repositório; o
 primeiro `cp` copia os três programas para a raiz da `entrega`; o `for` cria cada pasta de
 exercício dentro dela (o `-p` do `mkdir` não reclama se a pasta já existir) e copia os arquivos
 `.py` do pacote. O `*.py` deixa a `__pycache__` para trás.
@@ -71,13 +72,19 @@ ainda"); num repositório que já tem registros, essa linha não aparece. A prim
 **ramo** (*branch*), a linha de histórico em que os registros entram; o nome padrão pode ser
 `main` ou `master`.
 
-O `git commit` precisa saber quem é o autor. Se ele pedir (`Please tell me who you are`),
-informe o seu nome e e-mail uma vez, e rode o `git commit` de novo:
+Cada registro leva o nome e o e-mail do autor. Antes do primeiro registro, informe os seus,
+dentro da pasta `entrega` (troque pelos seus dados):
 
 ```bash
-git config --global user.name "Seu Nome"
-git config --global user.email "seu@email"
+git config user.name "Seu Nome"
+git config user.email "voce@exemplo.com"
 ```
+
+Os dois comandos não imprimem nada e valem só para este repositório. Sem eles, o `git` pode
+recusar o registro (`Please tell me who you are`) ou, como no macOS, aceitá-lo com um nome e um
+e-mail deduzidos do usuário e do nome do computador. Nesse caso, a saída do `git commit` traz o
+aviso `Your name and email address were configured automatically based on your username and
+hostname`: sinal de que o registro saiu com a identidade errada.
 
 ```bash
 git commit -m "Add exercises 0 to 2"

@@ -57,6 +57,7 @@ tutorial, que devolve o próprio poder recebido, como texto (`str(power)`): lan�
 os mesmos argumentos do feitiço; por isso ela também recebe `(target, power)`, e devolve um `bool`:
 `True` quando o poder é pelo menos 15. O valor 15 é escolha do tutorial.
 
-Os quatro ficam no nível de cima do arquivo, como funções. Uma função definida com `def` no nível
-de cima não é uma variável global no sentido da proibição do enunciado: ela não guarda um estado
-que muda.
+Os quatro ficam no nível de cima do arquivo, como funções. O enunciado só diz "variáveis globais
+(adote a pureza funcional sempre que possível)"; a leitura do tutorial é que uma função definida
+com `def` no nível de cima não é uma variável global no sentido da proibição, porque não guarda um
+estado que muda.

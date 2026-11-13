@@ -150,5 +150,5 @@ dos itens tem de ser exatamente o pedido).
 
 A variável `mixed` passa porque foi **anotada** como `list[int | float]`. A solução é a mesma
 no projeto: anotar a variável com o tipo que a função pede
-([A demonstração](../03-ex0/07-a-demonstracao.md)). A nota sobre `Sequence` sugere outro tipo de
+([A demonstração](../03-ex0/06-a-demonstracao.md)). A nota sobre `Sequence` sugere outro tipo de
 type hint, que o projeto não precisa.

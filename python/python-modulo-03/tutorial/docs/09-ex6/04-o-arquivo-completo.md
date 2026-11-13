@@ -5,6 +5,9 @@ title: O arquivo completo
 
 # O arquivo completo
 
+As comprehensions das duas páginas anteriores ficam dentro do `main`, na ordem da saída do
+enunciado, com um `print` depois de cada uma.
+
 ```python title="ex6/ft_data_alchemist.py"
 import random
 
@@ -32,6 +35,9 @@ def main() -> None:
 if __name__ == "__main__":
     main()
 ```
+
+Como no [exercício 0](../03-ex0/05-o-arquivo-completo.md), o arquivo termina com uma única quebra
+de linha depois da última linha, `    main()`, que o botão de copiar não leva.
 
 - a lista inicial são os nove nomes do exemplo do enunciado, numa constante;
 - os `\n` antes de `Initial list` e de `Score dict` imprimem as linhas vazias da saída;

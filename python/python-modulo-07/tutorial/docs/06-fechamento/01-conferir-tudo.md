@@ -107,10 +107,14 @@ ex2/strategy.py:1:from abc import ABC, abstractmethod
 - o `|` (*pipe*) entrega essa lista ao segundo `grep`, e o `-v` dele mostra só as linhas que
   **não** combinam com o padrão: some tudo o que importa do próprio projeto (`from ex0`,
   `from ex1`, `from ex2` e os imports relativos, `from .`). O `\|` separa as alternativas do
-  padrão, e `[0-2]` quer dizer "um dígito de 0 a 2".
+  padrão, `[0-2]` quer dizer "um dígito de 0 a 2", e `\.` é um ponto de verdade (sem a barra, o
+  ponto combinaria com qualquer caractere).
 
-Sobram só os imports da biblioteca do Python: `abc`, autorizado. O `typing`, também autorizado,
-não foi preciso.
+Sobram só os imports da biblioteca do Python: `abc`, autorizado (`from abc import ...` importa o
+mesmo módulo que o `import abc` da lista). O `typing`, também autorizado, não foi preciso. Os
+imports do próprio projeto não estão na lista de autorizados; a leitura do tutorial é que fazem
+parte do pedido, porque o enunciado manda o exercício 1 "usar o conteúdo do pacote `ex0` e
+construir sobre ele" e o exercício 2 "criar várias fábricas de Criaturas (de `ex0` e de `ex1`)".
 
 ## Nem eval nem exec
 

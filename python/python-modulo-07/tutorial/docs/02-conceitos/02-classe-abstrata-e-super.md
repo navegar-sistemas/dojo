@@ -18,7 +18,7 @@ obrigatórios se chamam **métodos abstratos**. Os outros métodos, com corpo de
 escrito todos os métodos abstratos, é uma **classe concreta**.
 
 O Python faz isso com o módulo `abc` (de *Abstract Base Classes*, "classes base abstratas"), um
-dos dois `import` que o enunciado permite. Dele vêm duas peças:
+dos dois `import` que o enunciado permite (o outro é o `typing`). Dele vêm duas peças:
 
 - `ABC`: a classe da qual uma classe herda para virar abstrata;
 - `@abstractmethod`: a marca que se põe em cima de um método para torná-lo abstrato.
@@ -116,7 +116,8 @@ qual `move` roda é a classe do objeto, e não o código que chama.
 Graças ao `if __name__ == "__main__":`, o arquivo pode ser importado sem imprimir nada. O comando
 abaixo importa `Vehicle` e tenta criar um objeto dele (o `PYTHONPATH`, de
 [Módulos e pacotes](./01-modulos-e-pacotes.md#onde-o-python-procura), deixa o `import` achar o
-arquivo; o `-B` impede o Python de gravar a pasta `__pycache__` dentro de `experimentos/`):
+arquivo; o `-B` impede o Python de gravar a pasta `__pycache__` dentro de `experimentos/`; o `;`
+separa dois comandos Python na mesma linha):
 
 ```bash
 PYTHONPATH=experimentos python3 -B -c 'from abstrata import Vehicle; Vehicle("Car")'
@@ -168,6 +169,7 @@ classDiagram
     Vehicle <|-- Boat
 ```
 
-A seta de ponta vazada aponta da filha para a mãe; `<<abstract>>` marca a classe que não pode
+Cada caixa é uma classe, com os atributos e os métodos; o `+` marca o que é usado de fora da
+classe. A seta de ponta vazada aponta da filha para a mãe; `<<abstract>>` marca a classe que não pode
 ser instanciada, e o `*` marca o método abstrato. O exercício 0 começa com uma classe no mesmo
 formato, `Creature` ([A classe Creature](../03-ex0/03-a-classe-creature.md)).

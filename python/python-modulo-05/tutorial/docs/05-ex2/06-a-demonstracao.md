@@ -35,6 +35,8 @@ def show_stats(stream: DataStream) -> None:
     stream.print_processors_stats()
 ```
 
+`show_stats` entra depois de `second_batch` e antes do `main`.
+
 ## O main
 
 ```python
@@ -72,6 +74,14 @@ def main() -> None:
   deles depois, porque quem tira os itens agora é o `output_pipeline`;
 - `CSVExportPlugin()` e `JSONExportPlugin()` criam os plugins na hora da chamada. O mypy confere
   que cada um combina com o `ExportPlugin` pedido pela assinatura.
+
+O `main` termina com o `if __name__ == "__main__":` de sempre, apagado no
+[ponto de partida](./01-o-problema.md#o-ponto-de-partida) junto com o `main` do exercício 1:
+
+```python
+if __name__ == "__main__":
+    main()
+```
 
 ## Os números do cenário
 

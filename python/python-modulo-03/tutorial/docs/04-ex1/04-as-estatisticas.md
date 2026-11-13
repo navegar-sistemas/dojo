@@ -29,6 +29,9 @@ python3 experimentos/estatisticas.py
 ValueError: max() iterable argument is empty
 ```
 
+O texto do erro muda com a versão do Python. Essa é a saída do 3.14; no 3.10, a última linha é
+`ValueError: max() arg is an empty sequence`. O erro é o mesmo `ValueError`.
+
 | Estatística | Linha da saída | Código |
 |---|---|---|
 | quantidade | `Total players` | `len(scores)` |

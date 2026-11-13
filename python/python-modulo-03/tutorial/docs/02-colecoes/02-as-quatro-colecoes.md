@@ -35,9 +35,9 @@ python3 experimentos/quatro.py
   aceita repetidos (o `1500` aparece duas vezes) e pode mudar depois de criada;
 - **tupla** (`tuple`), entre parênteses `()`: também guarda a ordem e aceita repetidos, mas
   **não muda** depois de criada;
-- **set** (`set`, "conjunto"), entre chaves `{}`: guarda cada valor **uma vez só** (o segundo
-  `10` sumiu) e **não guarda a ordem** (o `33` saiu primeiro, fora da ordem da escrita e fora da
-  ordem crescente);
+- **set** (`set`, "conjunto"), entre chaves, como `{10, 20}`: guarda cada valor **uma vez só**
+  (o segundo `10` sumiu) e **não guarda a ordem** (o `33` saiu primeiro, fora da ordem da escrita
+  e fora da ordem crescente);
 - **dicionário** (`dict`), entre chaves com pares `chave: valor`: associa cada **chave**
   (`"sword"`) a um **valor** (`1`), como um verbete associado à sua definição.
 
@@ -64,6 +64,7 @@ Duas palavras da tabela aparecem no projeto inteiro:
 O vazio do set é `set()`, e não `{}`, porque as chaves vazias já eram o dicionário vazio antes
 de o set existir no Python. O [exercício 3](../06-ex3/02-sets.md) volta a esse detalhe.
 
-Os elementos de um set e as chaves de um dicionário precisam ser **imutáveis**, por inteiro: uma
-tupla que contém uma lista ou um set não serve. O motivo é o mesmo que torna o set e o dicionário
-rápidos ([A estrutura e o algoritmo](./03-a-estrutura-e-o-algoritmo.md)).
+Os elementos de um set e as chaves de um dicionário precisam ser **hashable**, uma propriedade
+explicada em [A estrutura e o algoritmo](./03-a-estrutura-e-o-algoritmo.md#por-que-o-set-não-aceita-listas).
+Entre os tipos deste projeto, isso quer dizer imutáveis por inteiro: uma tupla que contém uma
+lista ou um set não serve. O motivo é o mesmo que torna o set e o dicionário rápidos.

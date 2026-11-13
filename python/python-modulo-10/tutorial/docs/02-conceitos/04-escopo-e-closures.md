@@ -125,8 +125,9 @@ python3 experimentos/contador.py
   `make_counter` tenha terminado lá atrás;
 - `other`, criado por outra chamada de `make_counter`, começa do 1: cada chamada de
   `make_counter` cria um `count` novo, e cada contador tem o seu;
-- `counter.__code__.co_freevars` lista as **variáveis livres** da função: os nomes que ela usa e
-  que pertencem a um escopo envolvente. Aqui, só `count`;
+- `counter.__code__` é o código da função, já traduzido pelo Python, e `co_freevars` lista as
+  **variáveis livres** dela: os nomes que ela usa e que pertencem a um escopo envolvente. Aqui,
+  só `count`;
 - `counter.__closure__` guarda essas variáveis, cada uma numa **célula**; `cell_contents` é o
   valor guardado agora, 3. Uma função sem variáveis livres tem `__closure__` igual a `None`; o
   `or ()` troca o `None` por uma tupla vazia, e o mypy aceita o laço nos dois casos.

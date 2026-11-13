@@ -93,6 +93,27 @@ Updated inventory: {'magic_item': 8, 'sword': 1}
 
 O item novo soma 1 aos 7 que já estavam no inventário.
 
+## Uma quantidade acima do teto
+
+2⁵³ = 9007199254740992 é aceito; um a mais não é
+([A quantidade](./03-ler-os-parametros.md#a-quantidade)):
+
+```bash
+(cd ex4 && python3 ft_inventory_system.py potion:9007199254740993 sword:1)
+```
+
+```text
+=== Inventory System Analysis ===
+Quantity error for 'potion': quantity above 9007199254740992
+Got inventory: {'sword': 1}
+Item list: ['sword']
+Total quantity of the 1 items: 1
+Item sword represents 100.0%
+Item most abundant: sword with quantity 1
+Item least abundant: sword with quantity 1
+Updated inventory: {'sword': 1, 'magic_item': 1}
+```
+
 ## Um argumento que não é UTF-8
 
 ```bash

@@ -5,9 +5,13 @@ title: O problema
 
 # O problema
 
-No exercício 1, as mensagens de erro saem pelo mesmo caminho que o texto do arquivo. Quem quiser
-guardar só o texto num arquivo, ou só os erros num registro, não consegue separar um do outro. O
-exercício 2 manda cada tipo de mensagem pelo seu canal.
+Todo programa tem duas saídas de texto: a **saída padrão**, por onde sai o resultado, e a **saída
+de erro**, reservada aos avisos de erro. No terminal, as duas aparecem na mesma tela ([Os três
+fluxos](./02-os-tres-fluxos.md)).
+
+No exercício 1, as mensagens de erro saem pela saída padrão, o mesmo caminho do texto do arquivo.
+Quem quiser guardar só o texto num arquivo, ou só os erros num registro, não consegue separar um do
+outro. O exercício 2 manda cada tipo de mensagem pelo seu canal.
 
 ## O que o enunciado pede
 

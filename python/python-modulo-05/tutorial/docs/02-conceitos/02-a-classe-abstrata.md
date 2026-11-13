@@ -125,5 +125,7 @@ classDiagram
     Sensor <|-- Barometer
 ```
 
-No diagrama, a seta de ponta vazada aponta da filha para a mãe; o `*` marca o método abstrato, e
-`<<abstract>>` marca as classes que não podem ser instanciadas.
+No diagrama, cada caixa é uma classe: o nome em cima e, embaixo, os métodos no formato
+`+nome() : tipo do retorno`. O `+` quer dizer que o método é público, feito para ser chamado de
+fora da classe. A seta de ponta vazada aponta da filha para a mãe. O método abstrato aparece em
+itálico, e «abstract», em cima do nome, marca as classes que não podem ser instanciadas.

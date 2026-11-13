@@ -16,6 +16,8 @@ from ex0 import AquaFactory, CreatureFactory, FlameFactory
 
 ## A função que testa uma fábrica
 
+Acrescente abaixo do import, com duas linhas em branco antes do `def`:
+
 ```python
 def test_factory(factory: CreatureFactory) -> None:
     print("Testing factory")
@@ -28,11 +30,16 @@ def test_factory(factory: CreatureFactory) -> None:
 
 É a função **única** que o enunciado pede: recebe uma fábrica qualquer (o type hint é a classe
 abstrata `CreatureFactory`), cria a criatura base e a evoluída, e faz cada uma se descrever e
-atacar. A mesma função serve para o fogo e para a água, porque só usa os métodos que a classe
+atacar. A verificação de que a fábrica consegue criar as duas é a própria execução: as duas
+criaturas são criadas sem erro e cada uma mostra o seu `describe` e o seu `attack`. Uma checagem
+extra com `print` mudaria a saída do exemplo do enunciado, que não tem nenhuma linha a mais. A
+mesma função serve para o fogo e para a água, porque só usa os métodos que a classe
 abstrata garante. O mypy deduz que `base` e `evolved` são `Creature`, pelo tipo de retorno de
 `create_base` e `create_evolved`, e confere que `describe` e `attack` existem nesse tipo.
 
 ## A função da luta
+
+Acrescente abaixo, de novo com duas linhas em branco antes do `def`:
 
 ```python
 def test_battle(first: CreatureFactory, second: CreatureFactory) -> None:
@@ -53,6 +60,8 @@ saída do enunciado. A luta é só a troca de ataques: o enunciado não tem pont
 vencedor.
 
 ## O main
+
+Por fim, no fim do arquivo, com duas linhas em branco antes de cada `def` e antes do `if`:
 
 ```python
 def main() -> None:

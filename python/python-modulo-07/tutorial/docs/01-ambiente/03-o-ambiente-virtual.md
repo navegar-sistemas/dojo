@@ -50,8 +50,8 @@ python3 -m venv .venv
 
 - `.venv/bin/python` é o Python **de dentro** do venv. O `-m pip` roda o `pip` com ele, e o
   `pip` instala as bibliotecas dentro da pasta `.venv`;
-- `--upgrade pip` atualiza o próprio `pip` antes, o que evita o aviso de "nova versão
-  disponível";
+- `--upgrade` instala a versão mais nova de cada pacote da lista; pôr o `pip` na lista atualiza
+  o próprio instalador, o que evita o aviso de "nova versão disponível";
 - `flake8 mypy` são as duas ferramentas.
 
 A última linha da saída lista o que foi instalado, começando por `Successfully installed`. As

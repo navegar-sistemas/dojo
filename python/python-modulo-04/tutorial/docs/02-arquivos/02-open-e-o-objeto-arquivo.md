@@ -68,6 +68,7 @@ file: typing.IO[str] = open("ancient_fragment.txt")
 ```
 
 `typing.IO[str]` quer dizer "um arquivo aberto que lê e escreve `str`". O `TextIOWrapper` é um caso
-particular disso, e o mypy aceita a atribuição. O type hint usa `typing.IO[str]` e não
-`TextIOWrapper` porque o que importa para o resto do código é o que o objeto faz (ler e escrever
+particular disso, e o mypy aceita a atribuição. O type hint usa `typing.IO[str]`, e não
+`TextIOWrapper`, por dois motivos: anotar com `TextIOWrapper` exigiria `import io`, que não está
+entre os autorizados; e o que importa para o resto do código é o que o objeto faz (ler e escrever
 texto), não a classe exata que o Python usou por dentro.

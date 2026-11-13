@@ -15,11 +15,12 @@ reaproveita código e, ao mesmo tempo, deixa cada classe especializar o comporta
 
 ## Como o polimorfismo deixa o DataStream tratar tipos diferentes sem conhecê-los?
 
-`DataStream` guarda uma `list[DataProcessor]` e só chama os métodos que a classe abstrata
-garante: `validate`, `ingest`, `total`, `remaining` e `output`. Em `processor.validate(element)`,
-o Python roda o `validate` da classe do objeto guardado ali, seja ela `NumericProcessor`,
-`TextProcessor` ou `LogProcessor`. O fluxo pergunta "você aceita?" e "guarde", e cada processador
-responde do seu jeito ([Registrar e rotear](../04-ex1/03-registrar-e-rotear.md)).
+`DataStream` guarda uma `list[DataProcessor]` e só usa o que `DataProcessor` define: os métodos
+`validate`, `ingest`, `total` e `remaining` e o atributo `name` (no exercício 2, também o método
+`output`, chamado por `output_pipeline`). Em `processor.validate(element)`, o Python roda o
+`validate` da classe do objeto guardado ali, seja ela `NumericProcessor`, `TextProcessor` ou
+`LogProcessor`. O fluxo pergunta "você aceita?" e "guarde", e cada processador responde do seu
+jeito ([Registrar e rotear](../04-ex1/03-registrar-e-rotear.md)).
 
 ## Quais são os benefícios desse desenho?
 
@@ -48,11 +49,9 @@ processador novo resolve isso sem tocar em `DataStream` nem nos plugins. Crie
 `experimentos/bool_processor.py`:
 
 ```python title="experimentos/bool_processor.py"
-import sys
 from typing import Any
 
-sys.path.insert(0, "ex2")
-from data_pipeline import (  # noqa: E402
+from data_pipeline import (
     CSVExportPlugin,
     DataProcessor,
     DataStream,
@@ -80,12 +79,14 @@ stream.print_processors_stats()
 stream.output_pipeline(5, CSVExportPlugin())
 ```
 
-O `import` em várias linhas, entre parênteses, traz quatro nomes do `data_pipeline`; o
-`sys.path.insert` e o `# noqa: E402` são os mesmos do
-[plugin errado](../05-ex2/08-rodar-e-conferir.md#plugin-errado).
+O `import` em várias linhas, entre parênteses, traz quatro nomes do `data_pipeline`, que está em
+`ex2`. A variável `PYTHONPATH`, escrita antes do comando, diz ao Python em que pasta procurar os
+módulos importados, como a `MYPYPATH` faz para o mypy no
+[plugin errado](../05-ex2/08-rodar-e-conferir.md#plugin-errado). O `-B` impede que o Python grave
+a pasta de cache `__pycache__` dentro de `ex2`:
 
 ```bash
-python3 -B experimentos/bool_processor.py
+PYTHONPATH=ex2 python3 -B experimentos/bool_processor.py
 ```
 
 ```text
@@ -107,7 +108,8 @@ plugin CSV trataram os valores novos sem nenhuma mudança.
 
 Uma mudança de comportamento de um tipo de dado fica dentro da classe dele. Para guardar os logs
 como `[ERROR] Unauthorized access!!` em vez de `ERROR: Unauthorized access!!`, só a linha do
-`_store` do `LogProcessor` muda:
+`_store` do `LogProcessor` muda (em qualquer um dos três arquivos; no exemplo, em
+`ex2/data_pipeline.py`):
 
 ```python
             self._store(f"[{item['log_level']}] {item['log_message']}")
@@ -115,7 +117,8 @@ como `[ERROR] Unauthorized access!!` em vez de `ERROR: Unauthorized access!!`, s
 
 O fluxo, os plugins e os outros processadores continuam iguais. A saída do programa muda nas
 linhas de log, e por isso o `diff` com o enunciado passa a mostrar diferenças: a mudança é só
-para a demonstração na avaliação.
+para a demonstração na avaliação. Depois dela, a linha volta ao original, para a saída continuar
+igual à do enunciado.
 
 ## Como a herança reaproveita código e deixa cada classe se especializar?
 

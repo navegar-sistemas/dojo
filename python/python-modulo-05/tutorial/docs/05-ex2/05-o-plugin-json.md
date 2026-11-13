@@ -7,8 +7,8 @@ title: O plugin JSON
 
 **JSON** (*JavaScript Object Notation*) é um formato de texto para dados estruturados, usado
 por quase todo programa que troca dados pela internet. Um **objeto JSON** é parecido com um
-dicionário do Python: pares `"chave": valor` entre chaves, separados por vírgula. Na saída do enunciado, cada bloco é um
-objeto com uma chave por item, formada pelo rank:
+dicionário do Python: pares `"chave": valor` entre chaves (`{` e `}`), separados por vírgula. Na
+saída do enunciado, cada bloco é um objeto com uma chave por item, formada pelo rank:
 
 ```text
 JSON Output:
@@ -20,9 +20,10 @@ O `item_2` é o log de rank 2: o terceiro log que o processador recebeu.
 ## Os textos no JSON
 
 Todo caractere tem um número, o seu **código**: `A` é 65, a quebra de linha é 10. Os códigos de
-0 a 31 são os **caracteres de controle**, que não aparecem como letra: a quebra de linha, a
-tabulação e outros. No JSON, os códigos são escritos em **hexadecimal** (base 16): os dígitos vão
-de `0` a `9` e continuam com `a` (10) até `f` (15), e 10 se escreve `a`, 16 se escreve `10`.
+0 a 31 são **caracteres de controle**, que não aparecem como letra: a quebra de linha, a
+tabulação e outros. São esses os caracteres de controle que o JSON não aceita dentro de um
+texto. No JSON, os códigos são escritos em **hexadecimal** (base 16): os dígitos vão de `0` a
+`9` e continuam com `a` (10) até `f` (15), e 10 se escreve `a`, 16 se escreve `10`.
 
 No JSON, todo texto vai entre **aspas duplas**, e três tipos de caractere não podem aparecer
 dentro dele como estão:
@@ -33,9 +34,10 @@ dentro dele como estão:
 | barra invertida `\` | `\\` |
 | caracteres de controle (códigos 0 a 31) | `\u` seguido do código em hexadecimal com quatro dígitos: a quebra de linha (código 10) vira `\u000a` |
 
-Imprimir um `str` do Python dentro de chaves não basta: um texto com aspas ou com quebra de linha
-geraria um JSON inválido. O enunciado pede "strings JSON válidas", sem `import json`; a função
-abaixo faz o escape à mão.
+Pôr o texto entre aspas dentro do `{}` não basta: um texto com aspas ou com quebra de linha
+geraria um JSON inválido. Trocar um caractere que não pode aparecer como está pela forma da
+tabela, como `"` por `\"`, se chama **escape**. O enunciado pede "strings JSON válidas", sem
+`import json`; a função abaixo faz o escape à mão.
 
 ```python
 def json_string(value: str) -> str:
@@ -74,10 +76,14 @@ class JSONExportPlugin:
         print("{" + ", ".join(pairs) + "}")
 ```
 
+- `f'item_{rank}'` é uma f-string dentro da outra: monta o texto da chave, como `item_3` para o
+  rank 3. Ela usa aspas simples porque está dentro de uma f-string de aspas duplas; antes do
+  Python 3.12, repetir ali as aspas duplas é erro de sintaxe
+  ([Log Processor](../03-ex0/05-log-processor.md#a-classe));
 - cada par é a chave `"item_<rank>"` e o valor, os dois passados por `json_string`, separados por
   `: `. A chave nunca tem caractere especial, mas passa pela mesma função para sair entre aspas;
 - `", ".join(pairs)` junta os pares com vírgula e espaço, o separador da saída do enunciado;
-- `"{" + ... + "}"` põe as chaves em volta. Elas são somadas fora da f-string porque, numa
-  f-string, `{` e `}` marcam o lugar de um valor.
+- `"{" + ... + "}"` põe os símbolos `{` e `}` em volta. Eles são somados fora da f-string porque,
+  numa f-string, `{` e `}` marcam o lugar de um valor.
 
 Como o CSV, o plugin não herda de nada: tem o `process_output` certo.

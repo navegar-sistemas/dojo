@@ -18,7 +18,7 @@ manda agir. O torneio não sabe o que a estratégia faz; cada estratégia sabe.
 
 Um pacote `ex4` com:
 
-| Classe | Tipo | O que faz |
+| Classe | Abstrata ou concreta | O que faz |
 |---|---|---|
 | `BattleStrategy` | abstrata, filha de `ABC` | métodos abstratos `is_valid`, que devolve um `bool` dizendo se uma criatura serve para a estratégia, e `act`, que o torneio chama para a criatura agir |
 | `NormalStrategy` | concreta, filha de `BattleStrategy` | serve para qualquer criatura; só chama `attack` |

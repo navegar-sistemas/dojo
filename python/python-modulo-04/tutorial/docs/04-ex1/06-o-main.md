@@ -10,7 +10,7 @@ certo.
 
 ```python
 def main() -> None:
-    if len(sys.argv) != 2:
+    if len(sys.argv) != 2 or not sys.argv[1].isprintable():
         print(f"Usage: {sys.argv[0]} <file>")
         return
     print("=== Cyber Archives Recovery & Preservation ===")
@@ -33,7 +33,7 @@ def main() -> None:
 
 ```mermaid
 flowchart TD
-    usage{"um argumento?"} -->|não| u["Usage: ..."]
+    usage{"um argumento,<br/>imprimível?"} -->|não| u["Usage: ..."]
     usage -->|sim| rec["recover_archive"]
     rec --> ok{"leu o texto?"}
     ok -->|"não (None)"| stop["fim"]
@@ -47,6 +47,7 @@ flowchart TD
     saved -->|não| dn["Data not saved."]
 ```
 
+- a conferência dos argumentos é a do exercício 0 ([O uso](../03-ex0/02-o-uso.md#a-conferência));
 - `content is None` testa se a leitura falhou. `is` compara se dois valores são **o mesmo** objeto,
   e é o jeito certo de perguntar por `None`. Depois desse `if`, o mypy sabe que `content` é um
   `str`, e aceita passá-lo para `transform`;

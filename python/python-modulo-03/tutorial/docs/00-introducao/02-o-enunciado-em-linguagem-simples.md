@@ -30,8 +30,8 @@ title: O enunciado em linguagem simples
 Cada exercício tem uma lista de **funções autorizadas**: as funções prontas do Python que o código
 pode chamar. Além delas, duas regras gerais liberam mais coisas:
 
-- os tipos `str` (texto), `int` (inteiro) e `float` (número com parte decimal, escrita com
-  ponto: `2.5`) podem ser usados com
+- a **regra dos tipos**: os tipos `str` (texto), `int` (inteiro) e `float` (número com parte
+  decimal, escrita com ponto: `2.5`) podem ser usados com
   todos os seus métodos e construtores, em qualquer exercício. Um **método** é uma função que
   pertence a um tipo e é chamada com ponto, como `"bob".capitalize()`; um **construtor** é a
   chamada pelo nome do tipo que cria um valor dele, como `int("42")`;
@@ -60,7 +60,7 @@ função do módulo `random`". Cada módulo é explicado no exercício que o usa
 | Exercício | O que o programa precisa fazer |
 |---|---|
 | 0 | mostrar o nome do programa e cada argumento recebido na linha de comando ([Exercício 0](../03-ex0/01-o-problema.md)) |
-| 1 | ler pontuações da linha de comando, descartar as que não são números, guardar as válidas numa lista nova e mostrar quantidade, total, média, maior, menor e a diferença entre maior e menor ([Exercício 1](../04-ex1/01-o-problema.md)) |
+| 1 | ler pontuações da linha de comando, descartar as que não são números inteiros, guardar as válidas numa lista nova e mostrar quantidade, total, média, maior, menor e a diferença entre maior e menor ([Exercício 1](../04-ex1/01-o-problema.md)) |
 | 2 | uma função `get_player_pos()` que pede ao usuário uma posição `x,y,z`, insiste até receber uma válida e a devolve como tupla; o programa lê duas posições e mostra a distância da primeira até o centro `(0, 0, 0)` e a distância entre as duas ([Exercício 2](../05-ex2/01-o-problema.md)) |
 | 3 | uma função `gen_player_achievements()` que sorteia um set de conquistas a partir de uma lista fixa; o programa sorteia para pelo menos quatro jogadores e mostra todas as conquistas distintas, as que todos têm, as que só um tem e as que faltam a cada um ([Exercício 3](../06-ex3/01-o-problema.md)) |
 | 4 | ler itens no formato `nome:quantidade` da linha de comando, descartar os inválidos e os repetidos, guardar o resto num dicionário e mostrar a lista de itens, o total, a porcentagem de cada item, o mais e o menos abundante, e por fim acrescentar um item novo ([Exercício 4](../07-ex4/01-o-problema.md)) |
@@ -88,5 +88,7 @@ elas ou acrescente uma funcionalidade nova a um dos programas
 - **"Estruturas baseadas em hash"**: o prefácio do enunciado conta que trocar listas por elas
   resolveu problemas de velocidade no Twitter. O que elas são está em
   [A estrutura e o algoritmo](../02-colecoes/03-a-estrutura-e-o-algoritmo.md).
-- **Instruções sobre IA**: o enunciado tem um capítulo pedindo que todo código vindo de uma
-  ferramenta de IA seja entendido por completo e revisado com colegas.
+- **Instruções sobre IA**: o enunciado tem um capítulo pedindo que só se use conteúdo gerado por
+  IA que se entenda por completo e pelo qual se possa responder, sempre revisado com colegas. Os
+  exemplos dele mostram que quem não consegue explicar na avaliação o código que a IA escreveu
+  reprova no projeto.

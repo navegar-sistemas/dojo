@@ -72,14 +72,15 @@ de ½ de estar com um jogador, e:
   repetição, a chance real é um pouco menor: cerca de 1.3% para as comuns, e o mesmo para as
   exclusivas de cada jogador.
 
-Numa simulação de 100 000 execuções do programa, algum dos cinco resultados sai `set()` em cerca
-de 6.5% das vezes, uma execução a cada quinze. Com uma lista de 30 conquistas e de 12 a 18 por
-jogador, a mesma simulação dá cerca de 50%: uma execução a cada duas mostra alguma linha
-vazia.
+Contando os cinco resultados juntos, algum deles sai `set()` em cerca de 6.4% das execuções do
+programa, uma a cada dezesseis. Com uma lista de 30 conquistas e de 12 a 18 por jogador, essa
+chance sobe para cerca de 50%: uma execução a cada duas mostra alguma linha vazia.
 
-Por isso o exercício usa uma lista de **60** conquistas e sorteia de **27 a 33** para cada
-jogador. A lista do exemplo do enunciado tem só 14, e lá três dos quatro "só ele tem" saíram
-vazios. A lista maior deixa as linhas da saída mais compridas.
+Por isso a escolha deste projeto é uma lista de **60** conquistas, com um sorteio de **27 a 33**
+para cada jogador. O enunciado não fixa esses números; outros servem, desde que cada jogador
+fique com cerca de metade da lista e a lista seja grande. A lista do exemplo do enunciado tem só
+14, e lá três dos quatro "só ele tem" saíram vazios. A lista maior deixa as linhas da saída mais
+compridas.
 
 ```python
 ACHIEVEMENTS = [

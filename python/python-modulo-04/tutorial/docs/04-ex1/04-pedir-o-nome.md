@@ -12,7 +12,7 @@ e devolve o que foi digitado, sem a quebra de linha do Enter.
 def ask_file_name() -> str:
     try:
         return input("Enter new file name (or empty): ")
-    except (EOFError, KeyboardInterrupt):
+    except (EOFError, KeyboardInterrupt, UnicodeDecodeError):
         print()
         return ""
 ```
@@ -20,15 +20,23 @@ def ask_file_name() -> str:
 Apertar Enter sem digitar nada faz o `input()` devolver `""`, e o `main` entende isso como "não
 gravar".
 
-## Os dois jeitos de o input() falhar
+## Os três jeitos de o input() falhar
 
-O `input()` pode lançar duas exceções, e qualquer uma delas travaria o programa:
+O `input()` pode lançar três exceções, e qualquer uma delas travaria o programa:
 
-- **`EOFError`** (*end of file*, "fim do arquivo"): a entrada acabou antes de chegar um Enter. No
-  terminal, acontece quando a pessoa aperta `Ctrl+D`; também acontece quando o programa recebe a
-  entrada de um arquivo vazio;
-- **`KeyboardInterrupt`**: a pessoa apertou `Ctrl+C`, o atalho de "interromper".
+- **`EOFError`** (*end of file*, "fim do arquivo"): a entrada acabou sem nenhum caractere para ler.
+  No terminal, acontece quando a pessoa aperta `Ctrl+D` numa linha vazia; também acontece quando a
+  entrada do programa vem de um arquivo vazio em vez do teclado, caso que [Rodar e
+  conferir](./08-rodar-e-conferir.md#as-falhas) mostra com `< /dev/null`. Uma entrada que termina
+  com texto e sem Enter não lança nada: o `input()` devolve o texto;
+- **`KeyboardInterrupt`**: a pessoa apertou `Ctrl+C`, o atalho de "interromper";
+- **`UnicodeDecodeError`**: a entrada trouxe bytes que não formam texto, como os de um programa (o
+  `/bin/ls`, por exemplo) entregue ao `python3` no lugar do teclado. É o mesmo erro do `read()` com
+  um arquivo que não é texto ([Quando o open
+  falha](../02-arquivos/05-quando-o-open-falha.md#quando-a-falha-vem-depois-do-open)); na entrada,
+  ele aparece com a configuração de idioma mais comum, a mesma citada em [O
+  uso](../03-ex0/02-o-uso.md#um-nome-que-não-pode-ser-mostrado).
 
-As duas querem dizer que a pessoa não deu um nome. O `except` trata as duas como resposta vazia: o
+As três querem dizer que a pessoa não deu um nome. O `except` trata as três como resposta vazia: o
 `print()` sozinho imprime uma quebra de linha, para que a mensagem seguinte não saia grudada na
 pergunta, e a função devolve `""`.

@@ -83,4 +83,10 @@ def main() -> None:
 - as linhas em branco entre os grupos de comandos do `main` só separam os passos do cenário para
   quem lê; elas não aparecem na saída.
 
-O `main` termina com o `if __name__ == "__main__":` de sempre.
+O `main` termina com o `if __name__ == "__main__":` de sempre, apagado no ponto de partida junto
+com as funções de teste do exercício 0:
+
+```python
+if __name__ == "__main__":
+    main()
+```

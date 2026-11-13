@@ -29,9 +29,11 @@ if __name__ == "__main__":
 - `print("Testing the hidden create_earth: ", end="")` imprime o texto sem terminar a linha
   ([Pré-requisitos](../00-introducao/03-pre-requisitos.md)), e o traceback começa logo depois
   dele, na mesma linha, como na saída do enunciado;
-- o comentário avisa quem lê que o erro da linha seguinte é de propósito;
-- a última linha é igual à que aparece no traceback do enunciado, `print(f"{alchemy.create_earth()}")`,
-  e fica na linha 12 do arquivo, como lá. `print(alchemy.create_earth())` daria o mesmo erro; a
+- o comentário avisa quem lê que o erro da linha seguinte é de propósito, e é ele que empurra a
+  chamada para a linha 12, a do traceback do enunciado; sem o comentário, o traceback diria
+  `line 11`;
+- a última linha é igual à que aparece no traceback do enunciado,
+  `print(f"{alchemy.create_earth()}")`. `print(alchemy.create_earth())` daria o mesmo erro; a
   f-string só repete o enunciado, para que o traceback saia igual.
 
 ## Rodar
@@ -50,11 +52,12 @@ Testing the hidden create_earth: Traceback (most recent call last):
   File "/home/ana/the-codex/ft_alembic_4.py", line 12, in <module>
     print(f"{alchemy.create_earth()}")
              ^^^^^^^^^^^^^^^^^^^^
-AttributeError: module 'alchemy' has no attribute 'create_earth'. Did you mean: 'create_air'?
+AttributeError: module 'alchemy' has no attribute 'create_earth'. Did you mean '.create_air' instead of '.create_earth'?
 ```
 
 No lugar de `/home/ana/the-codex` aparece o caminho completo da sua pasta: o traceback mostra
-onde o arquivo está no disco.
+onde o arquivo está no disco. A saída acima é a do Python 3.15; no 3.10 e no 3.14, a sugestão da
+última linha é escrita como no enunciado, `Did you mean: 'create_air'?`.
 
 ## Lendo o traceback
 
@@ -64,11 +67,13 @@ onde o arquivo está no disco.
   A chamada nem chegou a acontecer; o que falhou foi ler o nome `create_earth` no pacote;
 - a última linha: `AttributeError`, "o módulo `alchemy` não tem o atributo `create_earth`".
   Desde o Python 3.10, a mensagem procura no módulo um nome parecido com o que faltou e sugere:
-  "você quis dizer `create_air`?".
+  "você quis dizer `create_air`?". O Python 3.15 escreve a mesma sugestão de outro jeito: "você
+  quis dizer `.create_air` em vez de `.create_earth`?".
 
-No Python 3.10, a linha dos `^` não aparece. No enunciado, ela começa uma coluna antes, embaixo
-do `{`; no Python 3.14, os `^` ficam exatamente embaixo de `alchemy.create_earth`. As duas formas
-marcam o mesmo erro.
+A linha dos `^` também muda com a versão. O enunciado foi gerado com uma versão mais antiga do
+Python, em que os `^` começam embaixo do `{`; no 3.14 e no 3.15 eles começam uma coluna depois,
+exatamente embaixo de `alchemy.create_earth`; no 3.10, a linha não aparece. As três formas marcam
+o mesmo erro.
 
 ## Por que o texto e o traceback saem na mesma linha
 

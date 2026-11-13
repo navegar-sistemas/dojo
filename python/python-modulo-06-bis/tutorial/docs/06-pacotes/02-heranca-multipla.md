@@ -17,7 +17,7 @@ Quando a classe filha escreve o seu próprio `__init__`, ele **sobrescreve** o d
 ([Sobrescrever um método](../02-conceitos/01-sobrescrever-um-metodo.md)): o `__init__` da mãe só
 roda se a filha o chamar. Com uma mãe só, a chamada é `super().__init__(...)`. `super()` quer
 dizer "a classe mãe", e `super().__init__("Car")` roda o construtor da mãe com o argumento
-`"Car"`:
+`"Car"`. Na classe `Car` do experimento abaixo, filha de `Vehicle`:
 
 ```python
 class Car(Vehicle):

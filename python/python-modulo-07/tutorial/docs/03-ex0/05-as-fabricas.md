@@ -62,6 +62,6 @@ Cada fábrica concreta escreve os dois métodos com as criaturas da sua família
 uma criatura nova a cada chamada: duas chamadas a `create_base` devolvem dois objetos
 diferentes, cada um com os seus atributos.
 
-As fábricas concretas também declaram `-> Creature`, e não `-> Flameling`. Assim, quem usa a
-fábrica continua vendo só o tipo abstrato, e o nome da classe concreta não aparece nem nos type
-hints que o mypy mostra a quem usa o pacote.
+As fábricas concretas também declaram `-> Creature`, e não `-> Flameling`. Assim, para o mypy,
+quem usa a fábrica recebe uma `Creature`, o tipo abstrato, e nunca precisa conhecer a classe
+concreta, que o pacote não expõe.

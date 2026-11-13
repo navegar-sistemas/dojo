@@ -19,10 +19,14 @@ def secure_archive(file_name: str, action: str = "read",
             with open(file_name, "w") as file:
                 file.write(content)
             return (True, "Content successfully written to file")
-    except (OSError, UnicodeDecodeError) as error:
+    except (OSError, ValueError) as error:
         return (False, str(error))
     return (False, f"Unknown action '{action}'")
 ```
+
+O `file` do `with` fica sem type hint: anotá-lo exigiria `typing.IO`, e o exercício 3 não autoriza
+`import typing`. O enunciado exige type hints nas funções, e o mypy deduz sozinho que `file` é um
+arquivo aberto. Nos exercícios anteriores, anotar a variável `file` foi escolha do projeto.
 
 ## Ler
 
@@ -43,11 +47,15 @@ Um único `try` envolve as duas operações. O `except` captura:
 
 - `OSError`: arquivo inexistente, sem permissão, pasta no lugar de arquivo, disco cheio, tanto ao
   abrir quanto ao ler, escrever ou fechar;
-- `UnicodeDecodeError`: um arquivo que não é texto, na leitura.
+- `ValueError`: um nome de arquivo com o caractere nulo, que o `open()` recusa antes de chegar ao
+  sistema ([Gravar o arquivo](../04-ex1/05-gravar-o-arquivo.md#o-modo-w)), e o
+  `UnicodeDecodeError` de um arquivo que não é texto, na leitura. `UnicodeDecodeError` **herda** de
+  `ValueError` (é um caso particular dele), e o mesmo `except` o captura.
 
 `str(error)` transforma a exceção no texto da mensagem, o mesmo que o `{error}` das f-strings
 mostrava: `[Errno 2] No such file or directory: '/not/existing/file'`. `str()` é o construtor do
-tipo `str`, permitido pela regra geral dos tipos.
+tipo `str` e pode ser usado porque o enunciado libera, em todos os exercícios, os tipos `str`,
+`int`, `float`, `list`, `dict`, `set` e `tuple`, com todos os seus métodos e construtores.
 
 ## A ação desconhecida
 

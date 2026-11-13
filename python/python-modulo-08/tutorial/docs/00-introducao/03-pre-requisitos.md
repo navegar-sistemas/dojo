@@ -33,8 +33,8 @@ import sys
 from os import path
 ```
 
-A primeira linha traz o módulo inteiro, usado como `sys.argv`; a segunda traz um nome de dentro do
-módulo, usado direto como `path`.
+A primeira linha traz o módulo inteiro, usado com o nome dele na frente, como em `sys.exit(1)`; a
+segunda traz um nome de dentro do módulo, usado direto como `path`.
 
 ## Exceções, em resumo
 

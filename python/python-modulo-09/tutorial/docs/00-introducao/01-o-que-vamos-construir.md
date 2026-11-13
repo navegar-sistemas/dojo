@@ -33,7 +33,7 @@ cada um acrescenta uma ideia nova do Pydantic:
 | Exercício | Arquivo | O que constrói |
 |---|---|---|
 | 0 | `ex0/space_station.py` | o **modelo** `SpaceStation`, uma classe com oito campos e os limites de cada um |
-| 1 | `ex1/alien_contact.py` | o modelo `AlienContact`, com uma lista fechada de tipos de contato e quatro **regras** que comparam campos entre si (um contato telepático precisa de pelo menos 3 testemunhas) |
+| 1 | `ex1/alien_contact.py` | o modelo `AlienContact`, com uma lista fechada de tipos de contato e quatro **regras** que vão além do limite de cada campo, a maioria comparando campos entre si (um contato telepático precisa de pelo menos 3 testemunhas) |
 | 2 | `ex2/space_crew.py` | os modelos `CrewMember` e `SpaceMission`: uma missão guarda uma lista de tripulantes, e cada tripulante é um modelo validado por inteiro |
 
 Cada programa cria um objeto válido, mostra os dados dele, tenta criar um objeto inválido e

@@ -57,7 +57,7 @@ def spell_dispatcher() -> Callable[[Any], str]:
 
 ```mermaid
 flowchart LR
-    call["cast(valor)"] --> t{"tipo do valor"}
+    chamada["cast(valor)"] --> t{"tipo do valor"}
     t -->|"int"| i["Damage spell: ... damage"]
     t -->|"str"| s["Enchantment: ..."]
     t -->|"list"| l["Multi-cast: N spells"]

@@ -32,13 +32,22 @@ Nenhuma criatura entra no `__init__.py`: `from ex0 import Flameling` falha. A cl
 usa o pacote recebe criaturas das fábricas, e o tipo delas o mypy descobre sozinho pelo retorno
 de `create_base` e `create_evolved`.
 
-O Python não esconde módulos: o módulo `ex0.creature` continua existindo, e um `import` que o
-cite pelo nome completo chega às classes de dentro dele, como em
-[O que aconteceu](../02-conceitos/01-modulos-e-pacotes.md#o-que-aconteceu) com o `shapes`. Expor
-é o que o pacote oferece pelo próprio nome. O código do próprio projeto que precisa da classe
-abstrata `Creature`, para herdar dela (as criaturas do `ex1`) ou para anotar um parâmetro (o
+O enunciado diz que o pacote não pode expor **diretamente** as criaturas concretas, sem dizer o
+que conta como expor. A leitura do tutorial: expor é o que o `__init__.py` e o `__all__` oferecem,
+ou seja, o que `from ex0 import ...` e `from ex0 import *` entregam. O Python não esconde módulos:
+o módulo `ex0.creature` continua existindo, e um `import` que o cite pelo nome completo chega às
+classes de dentro dele, como em
+[O que aconteceu](../02-conceitos/01-modulos-e-pacotes.md#o-que-aconteceu) com o `shapes`. Mais
+ainda: depois de `import ex0`, o submódulo vira atributo do pacote, porque o `__init__.py`
+importou `factory`, que importou `creature`; `ex0.creature.Flameling` funciona
+([Rodar e conferir](./09-rodar-e-conferir.md#o-pacote-só-expõe-fábricas)). O acesso existe, mas
+passa pelo módulo de dentro, e não pelo nome do pacote: as criaturas não são expostas
+diretamente. Uma alternativa, só como observação: chamar o módulo de `_creature.py`, porque o `_`
+no começo do nome marca, por costume, um módulo interno.
+
+O código do próprio projeto que precisa da classe abstrata `Creature`, para herdar dela (as criaturas do `ex1`) ou para anotar um parâmetro (o
 `capacitor.py` e as estratégias do `ex2`), a importa direto do módulo `ex0.creature`; as
-fábricas, todos importam do pacote, com `from ex0 import ...`.
+fábricas, todos os arquivos importam do pacote, com `from ex0 import ...`.
 
 ## O caminho de um import
 

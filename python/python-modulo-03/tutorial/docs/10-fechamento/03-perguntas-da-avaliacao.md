@@ -5,8 +5,11 @@ title: Perguntas da avaliação
 
 # Perguntas da avaliação
 
-O enunciado avisa que a avaliação pode pedir explicações sobre as coleções, demonstrações e
-extensões dos programas, e cita as alternativas do exercício 0 e o set vazio do exercício 3.
+O enunciado avisa que a avaliação pode pedir explicações sobre a escolha de cada coleção,
+demonstrações de operações com elas e extensões dos programas, e que é preciso entender os
+princípios de cada estrutura de dados. No exercício 0, ele manda preparar para a avaliação as
+formas alternativas de não repetir o nome do programa; no exercício 3, pergunta como o Python
+imprime um set vazio, e por quê.
 
 ## Que outras formas há de não imprimir o nome do programa junto com os argumentos? (exercício 0)
 
@@ -17,7 +20,7 @@ abaixo percorre só os argumentos:
 |---|---|---|
 | fatia | `for argument in sys.argv[1:]:` com um contador | a fatia é uma lista nova, sem o índice 0 |
 | índice | `while index < len(sys.argv):` começando em `index = 1` | o laço pula o índice 0, e o índice é o número do argumento |
-| `range` e `enumerate` | `for index in range(1, len(sys.argv)):` ou `enumerate(sys.argv[1:], 1)` | funções prontas que contam as voltas; não autorizadas neste exercício |
+| `range` e `enumerate` | `for index in range(1, len(sys.argv)):` ou `for number, argument in enumerate(sys.argv[1:], 1):` | `range(1, len(sys.argv))` dá os índices de 1 até o último; `enumerate` entrega pares (número, argumento), e o `1` faz a contagem começar em 1. Nenhuma das duas é autorizada neste exercício |
 
 As duas primeiras estão em [Percorrer os argumentos](../03-ex0/04-percorrer-os-argumentos.md).
 
@@ -46,8 +49,8 @@ dois-pontos, como `{n % 3 for n in numbers}`. O resultado é um set, sem repeti�
 
 ## Por que trocar listas por sets acelerou o Twitter?
 
-Perguntar se um valor está numa lista compara com um elemento de cada vez, e o tempo cresce com o
-tamanho da lista. Num set, o hash do valor aponta direto para a gaveta onde ele estaria, e o
+Perguntar se um valor está numa lista compara com um elemento de cada vez, e o tempo cresce na
+mesma proporção do tamanho da lista. Num set, o hash do valor aponta direto para a gaveta onde ele estaria, e o
 tempo não depende do tamanho ([A estrutura e o algoritmo](../02-colecoes/03-a-estrutura-e-o-algoritmo.md)).
 
 ## Acrescentar uma funcionalidade

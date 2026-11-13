@@ -17,9 +17,12 @@ title: O enunciado em linguagem simples
   assinaturas (a linha do `def`). O tutorial confere isso com o **mypy**, um programa que acusa
   funções sem anotação e tipos que não batem
   ([Type hints, flake8 e mypy](../01-ambiente/04-type-hints-flake8-e-mypy.md)).
-- **O tratamento de exceções protege os dados.** Uma entrada inválida não pode deixar o programa
-  num estado errado nem produzir um resultado sem sentido: a função recusa a entrada com uma
-  **exceção** (o objeto de erro do Python) e uma mensagem clara.
+- **O tratamento de exceções protege os dados.** A frase do enunciado é "o tratamento de
+  exceções deve proteger os fluxos de dados contra corrupção" (*Exception handling should protect
+  the data streams from corruption*). O tutorial a concretiza assim (escolha do tutorial): uma
+  entrada inválida não pode deixar o programa num estado errado nem produzir um resultado sem
+  sentido, e a função recusa a entrada com uma **exceção** (o objeto de erro do Python) e uma
+  mensagem clara.
 - **Padrões funcionais à mostra.** O código deve deixar claro o assunto de cada exercício, sem
   complicação além do necessário.
 - **Cada exercício no seu arquivo**, com o nome exato que o enunciado dá.
@@ -56,7 +59,9 @@ Um **módulo** é um arquivo de código que entra no programa com `import`. O en
 Cada exercício mostra um exemplo de saída do programa. O enunciado diz que esse é o formato
 **sugerido**: a estrutura precisa ser mantida, e as mensagens podem ser adaptadas, desde que a
 informação essencial continue lá. O tutorial reproduz cada exemplo exatamente, letra por letra,
-para que a comparação com o enunciado seja automática (escolha do tutorial).
+para que a comparação com o enunciado seja automática (escolha do tutorial). No exercício 1, o
+exemplo é curto e o enunciado pede a demonstração de todas as funções: lá, o exemplo é o começo
+da saída, e o resto demonstra as funções que ele não mostra.
 
 ## Os cinco exercícios
 

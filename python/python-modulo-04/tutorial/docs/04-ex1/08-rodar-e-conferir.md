@@ -90,7 +90,7 @@ sido acrescentado ao antigo, o arquivo teria seis linhas e o `diff` acusaria.
 
 ## As falhas
 
-Um arquivo de leitura que não existe para tudo logo no começo, sem pergunta:
+Com um arquivo de leitura que não existe, o programa termina logo no começo, sem fazer a pergunta:
 
 ```bash
 python3 ex1/ft_archive_creation.py foo
@@ -112,11 +112,11 @@ chmod 444 vault.txt
 `444` é `r--r--r--`: todos só leem, e nem o dono escreve
 ([Permissões](../02-arquivos/05-quando-o-open-falha.md#permissões)). O enunciado usa como exemplo o
 `/etc/passwd`, o arquivo de contas do sistema. No macOS, tentar gravar nele abre uma janela do
-sistema pedindo para "administrar o computador"; o `vault.txt` dá a mesma falha, `[Errno 13]`, no
-Linux e no macOS, sem tocar em arquivo do sistema.
+sistema pedindo para "administrar o computador". O `vault.txt` dá `[Errno 13] Permission denied`,
+a falha que o exemplo do enunciado mostra, no Linux e no macOS, sem tocar em arquivo do sistema.
 
-Gravar no `vault.txt`, gravar no "disco cheio" `/dev/full` (só existe no Linux) e uma entrada que
-acaba sem Enter (`< /dev/null` faz o programa ler de um arquivo vazio):
+Gravar no `vault.txt`, gravar no "disco cheio" `/dev/full` (só existe no Linux) e uma entrada vazia
+(`< /dev/null` faz o programa ler de um arquivo vazio):
 
 ```bash
 printf 'vault.txt\n' | python3 ex1/ft_archive_creation.py ancient_fragment.txt | tail -n 3
@@ -140,6 +140,22 @@ No caso do `/dev/full`, o `open()` deu certo e a falha veio ao gravar, capturada
 deixa criar o arquivo na pasta `/dev`, e a falha vem já no `open()`:
 `Error opening file '/dev/full': [Errno 1] Operation not permitted: '/dev/full'`. No último, o
 `EOFError` virou resposta vazia ([Pedir o nome](./04-pedir-o-nome.md)).
+
+Um nome com o caractere nulo, que o `printf` escreve como `\0`. O `cat -v` no fim mostra os
+caracteres invisíveis, e o nulo aparece como `^@`:
+
+```bash
+printf 'a\0b\n' | python3 ex1/ft_archive_creation.py ancient_fragment.txt | tail -n 3 | cat -v
+```
+
+```text
+Enter new file name (or empty): Saving data to 'a^@b'
+Error opening file 'a^@b': embedded null byte
+Data not saved.
+```
+
+O `open()` recusou o nome com `ValueError`, e o primeiro `except` de `save_archive` o capturou
+([Gravar o arquivo](./05-gravar-o-arquivo.md#o-modo-w)).
 
 ## Conferir estilo e tipos
 

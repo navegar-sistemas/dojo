@@ -12,7 +12,7 @@ e o `main` precisa saber se o texto foi gravado ou não.
 def save_archive(file_name: str, content: str) -> bool:
     try:
         file: typing.IO[str] = open(file_name, "w")
-    except OSError as error:
+    except (OSError, ValueError) as error:
         print(f"Error opening file '{file_name}': {error}")
         return False
     try:
@@ -39,7 +39,13 @@ O segundo argumento do `open()` é o modo de abertura. `"w"` (*write*) abre para
 
 É exatamente o que o enunciado pede: "crie o arquivo ou substitua-o se ele já existir". Para
 escrever, também é preciso permissão: abrir para escrita um arquivo protegido, ou criar um arquivo
-numa pasta protegida, falha com `PermissionError`, que o primeiro `except OSError` captura.
+numa pasta protegida, falha com `PermissionError`, um `OSError` que o primeiro `except` captura.
+
+O nome vem do que a pessoa digitou, e pode trazer o caractere nulo, o de código 0, que nenhum nome
+de arquivo admite. Esse nome nem chega ao sistema: o `open()` o recusa com
+`ValueError: embedded null byte` ("byte nulo no meio do nome"), e `ValueError` não é um `OSError`.
+Por isso o primeiro `except` captura a tupla `(OSError, ValueError)`. [Rodar e
+conferir](./08-rodar-e-conferir.md#as-falhas) mostra esse caso.
 
 ## write
 
@@ -51,13 +57,28 @@ põe quebra de linha no fim. Os `\n` gravados são os que já estão no texto.
 O texto escrito vai primeiro para o buffer ([close e o
 recurso](../02-arquivos/04-close-e-o-recurso.md)). Um texto pequeno como o do fragmento só chega ao
 disco no `close()`, e é nesse momento que uma falha de disco cheio aparece. (Um texto maior que o
-buffer, de alguns milhares de caracteres, começa a ir para o disco já no `write()`, que também pode
-falhar.) Por isso, o `close()` também precisa de proteção:
+buffer começa a ir para o disco já no `write()`, que também pode falhar. O tamanho do buffer muda
+com a versão do Python: cerca de 8 mil caracteres até o 3.13 e cerca de 130 mil a partir do 3.14.)
+Por isso, o `close()` também precisa de proteção:
 
 - o `try` de dentro, com `finally`, garante que o arquivo é fechado mesmo que o `write()` falhe;
 - o `try` de fora captura um `OSError` lançado pelo `write()` **ou** pelo `close()`. Uma exceção
   lançada dentro de um `finally` sobe como qualquer outra, e o `except` de fora a recebe.
 
-Com um único `try` com `finally`, uma falha no `close()` escaparia de todo `except` e travaria o
-programa. No Linux, o arquivo especial `/dev/full` simula um disco cheio: abre normalmente e recusa
-toda escrita. Ele aparece em [Rodar e conferir](./08-rodar-e-conferir.md).
+A mensagem `Error writing file` é escolha do projeto, no molde do `Error opening file`.
+
+Com um único `try`, o `close()` ficaria no `finally` do mesmo `try` que tem o `except`:
+
+```python
+try:
+    file.write(content)
+except OSError as error:
+    print(f"Error writing file '{file_name}': {error}")
+finally:
+    file.close()
+```
+
+O `except` de um `try` só captura o que acontece no bloco do `try`. Uma exceção lançada pelo
+`close()`, dentro do `finally`, escaparia dele e travaria o programa. No Linux, o arquivo especial
+`/dev/full` simula um disco cheio: abre normalmente e recusa toda escrita. Ele aparece em [Rodar e
+conferir](./08-rodar-e-conferir.md).

@@ -48,7 +48,9 @@ python3 experimentos/operacoes.py
 - nenhum dos três muda `a`: cada um devolve um set **novo**, e `a` continua `{1, 2, 3, 4}`.
 
 O Python também escreve essas operações com símbolos: `a | b` (união), `a & b` (interseção) e
-`a - b` (diferença). O enunciado autoriza os métodos pelo nome, e o exercício usa os nomes.
+`a - b` (diferença). A lista de funções autorizadas deste exercício cita os métodos
+`set.union()`, `set.intersection()` e `set.difference()`, e a escolha deste projeto é usar esses
+métodos pelo nome, deixando os símbolos de fora.
 
 ## Juntar muitos sets, um de cada vez
 

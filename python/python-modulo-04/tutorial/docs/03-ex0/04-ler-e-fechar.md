@@ -20,8 +20,8 @@ def display(content: str) -> None:
     print("---")
 ```
 
-O `"---\n"` produz a linha vazia de cima; o `\n` final do conteúdo produz a de baixo ([read e o
-texto](../02-arquivos/03-read-e-o-texto.md)).
+Nas duas linhas vazias, um `\n` vem do texto e o outro do `print`: em cima, o `\n` de `"---\n"`;
+embaixo, o `\n` final do conteúdo ([read e o texto](../02-arquivos/03-read-e-o-texto.md)).
 
 ## O resto de recover_archive
 
@@ -45,6 +45,9 @@ Este trecho continua a função da página anterior, logo depois do `try` do `op
   falha](../02-arquivos/05-quando-o-open-falha.md));
 - o `finally` fecha o arquivo e avisa, com a leitura dando certo ou não ([close e o
   recurso](../02-arquivos/04-close-e-o-recurso.md)).
+
+A mensagem `Error reading file` é escolha do projeto: as saídas do enunciado só mostram falhas ao
+abrir, e o texto segue o molde do `Error opening file`.
 
 Com um arquivo que não é texto, como o programa `/bin/ls`, o arquivo abre, a leitura falha, o erro é
 avisado com `Error reading file`, e o arquivo é fechado mesmo assim. A página [Rodar e

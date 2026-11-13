@@ -42,13 +42,15 @@ class Creature(ABC):
 O enunciado pede "atributos para o nome e o tipo", sem dar os nomes. `name` é direto. Para o tipo,
 o tutorial escolhe `creature_type`, e não `type`: `type` é o nome de uma função embutida do
 Python (`type(42)` responde `<class 'int'>`), e um parâmetro chamado `type` esconderia essa
-função dentro do `__init__`. Os atributos não levam `_` no começo porque o código de fora, como o
-torneio, lê o nome da criatura.
+função dentro do `__init__`. Um atributo cujo nome começa com `_` é, por costume, **interno**: só o
+código da própria classe deveria usá-lo. Os dois atributos não levam `_` porque o código de fora,
+como o torneio, lê o nome da criatura.
 
 ## Devolver em vez de imprimir
 
 `attack` e `describe` **devolvem** o texto, e quem chama decide o que fazer com ele: o
-`battle.py` imprime, e o torneio do exercício 2 junta os textos numa lista antes de imprimir. O
+`battle.py` imprime, e a estratégia do exercício 2 junta os textos numa lista, que o torneio
+imprime. O
 enunciado pede assim: o `attack` "devolve uma mensagem de texto".
 
-O arquivo continua na [próxima página](./04-as-quatro-criaturas.md), com as quatro criaturas.
+As quatro criaturas entram no fim deste mesmo arquivo ([As quatro criaturas](./04-as-quatro-criaturas.md)).

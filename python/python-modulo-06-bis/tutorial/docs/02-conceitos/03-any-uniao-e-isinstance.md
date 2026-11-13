@@ -174,5 +174,5 @@ Success: no issues found in 1 source file
 ```
 
 O projeto usa a mesma solução: anotar a variável com o tipo que a função pede
-([A demonstração](../03-ex0/07-a-demonstracao.md)). A nota sobre `Sequence` sugere outro tipo de
+([A demonstração](../03-ex0/06-a-demonstracao.md)). A nota sobre `Sequence` sugere outro tipo de
 type hint, que o projeto não precisa.

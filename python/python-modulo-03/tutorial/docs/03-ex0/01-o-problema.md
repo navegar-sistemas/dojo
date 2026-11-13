@@ -17,8 +17,10 @@ mostra o que recebeu: o próprio nome, quantos argumentos vieram e cada um deles
 
 ## O que o enunciado pede
 
-Um arquivo `ex0/ft_command_quest.py` que só pode usar `import sys`, `sys.argv`, `len()` e
-`print()`. Ele imprime:
+Um arquivo `ex0/ft_command_quest.py`, que pode usar `import sys`, `sys.argv`, `len()` e `print()`,
+além do que as regras gerais liberam
+([O que pode ser usado](../00-introducao/02-o-enunciado-em-linguagem-simples.md#o-que-pode-ser-usado)).
+Ele imprime:
 
 - um título, `=== Command Quest ===`;
 - o nome do programa;

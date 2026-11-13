@@ -5,9 +5,9 @@ title: Escrever no stderr
 
 # Escrever no stderr
 
-Os três `print` de erro do exercício 1 (abrir, ler e gravar) passam a ir para a saída de erro, todos
-com o mesmo prefixo. Em vez de repetir o prefixo e o `file=sys.stderr` em cada um, uma função cuida
-disso:
+Os quatro `print` de erro do exercício 1 (abrir e ler, em `recover_archive`; abrir e gravar, em
+`save_archive`) passam a ir para a saída de erro, todos com o mesmo prefixo. Em vez de repetir o
+prefixo e o `file=sys.stderr` em cada um, uma função cuida disso:
 
 ```python
 def report_error(message: str) -> None:

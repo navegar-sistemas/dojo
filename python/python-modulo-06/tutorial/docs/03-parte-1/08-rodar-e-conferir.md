@@ -69,19 +69,36 @@ FIM
   a pasta tenha sido aberta por um atalho. Com a troca, o caminho fica igual ao do enunciado.
 
 ```text
+9,10c9,10
+<              ^^^^^^^^^^^^^^^^^^^^
+< AttributeError: module 'alchemy' has no attribute 'create_earth'. Did you mean '.create_air' instead of '.create_earth'?
+---
+>             ^^^^^^^^^^^^^^^^^^^^
+> AttributeError: module 'alchemy' has no attribute 'create_earth'. Did you mean: 'create_air'?
+```
+
+`9,10c9,10` quer dizer "as linhas 9 e 10 da primeira entrada mudaram em relação às linhas 9 e 10
+da segunda". As linhas com `<` são as do script; as com `>`, as do enunciado. As duas diferenças
+vêm da versão do Python ([Lendo o traceback](./06-o-erro-proposital.md#lendo-o-traceback)):
+
+- a linha dos `^`: o enunciado foi gerado com uma versão mais antiga do Python; nas versões
+  recentes, os `^` começam uma coluna depois;
+- a sugestão do fim: o Python 3.15 a escreve como `Did you mean '.create_air' instead of
+  '.create_earth'?`; a do enunciado é `Did you mean: 'create_air'?`. O nome sugerido é o mesmo.
+
+Todo o resto, inclusive o arquivo, a linha 12 e o tipo e a mensagem do erro, é igual.
+
+No Python 3.14, a sugestão é escrita como no enunciado, e sobra só a linha dos `^`:
+
+```text
 9c9
 <              ^^^^^^^^^^^^^^^^^^^^
 ---
 >             ^^^^^^^^^^^^^^^^^^^^
 ```
 
-O `diff` acusa uma única diferença: `9c9` quer dizer "a linha 9 da primeira entrada mudou em
-relação à linha 9 da segunda". A linha com `<` é a do script; a com `>`, a do enunciado. É a
-linha dos `^`, que no Python 3.14 começa uma coluna depois
-([Lendo o traceback](./06-o-erro-proposital.md#lendo-o-traceback)). Todo o resto, inclusive a
-linha 12 e a sugestão `Did you mean: 'create_air'?`, é igual.
-
-No Python 3.10, que não imprime a linha dos `^`, a diferença aparece assim:
+No Python 3.10, que não imprime a linha dos `^` e escreve a sugestão como no enunciado, a
+diferença aparece assim:
 
 ```text
 8a9
@@ -138,7 +155,8 @@ __pycache__
 elements.py
 ```
 
-`ls -1` lista um nome por linha. A pasta `__pycache__` apareceu em `alchemy` (e também na raiz)
+`ls -1` lista um nome por linha; a ordem dos nomes pode ser outra em alguns sistemas Linux, que
+ignoram o `_` ao ordenar. A pasta `__pycache__` apareceu em `alchemy` (e também na raiz)
 na primeira vez que os módulos foram importados
 ([A pasta `__pycache__`](../02-conceitos/01-o-modulo-e-o-import.md#a-pasta-__pycache__)). Ela não
 é entregue.

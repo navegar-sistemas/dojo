@@ -5,6 +5,9 @@ title: O arquivo completo
 
 # O arquivo completo
 
+As funções `get_player_pos` e `distance` estão prontas. Falta o `main`, que as chama na ordem da
+saída do enunciado, e o que fazer quando o usuário desiste no meio de uma pergunta.
+
 ## O main
 
 ```python
@@ -47,8 +50,9 @@ responder de dois jeitos:
 
 Sem tratamento, os dois terminam o programa com um traceback, o relatório de erro do Python, e
 isso é travar. Nenhum dos dois pode ser resolvido dentro de `get_player_pos`: ela promete devolver
-uma posição, e não há posição para devolver. O programa inteiro termina, com uma mensagem, e a
-captura fica no bloco do fim:
+uma posição, e não há posição para devolver. O programa inteiro termina com uma mensagem. O
+enunciado não mostra esse caso, e o texto `Input interrupted - leaving the coordinate system` é
+escolha deste projeto. A captura fica no bloco do fim:
 
 ```python
 if __name__ == "__main__":
@@ -125,6 +129,9 @@ if __name__ == "__main__":
     except (EOFError, KeyboardInterrupt):
         print("\nInput interrupted - leaving the coordinate system")
 ```
+
+Como no [exercício 0](../03-ex0/05-o-arquivo-completo.md), o arquivo termina com uma única quebra
+de linha depois da última linha, a do `print`, que o botão de copiar não leva.
 
 Além das funções autorizadas, o arquivo usa `float()` e os métodos `split` e `strip`, liberados
 pela regra dos tipos, e `append` da lista, liberado desde o exercício 0. Não chama `len()`, que

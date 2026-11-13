@@ -98,5 +98,6 @@ O próprio Poetry recomenda ser instalado num ambiente só dele, separado dos pr
 gerencia: no exercício 1, ele cria e preenche **outro** ambiente virtual, o do programa
 `loading.py`. O `.venv` desta página não é o ambiente de nenhum exercício, então serve. O Poetry é
 sempre chamado pelo caminho, `.venv/bin/poetry` (ou `../.venv/bin/poetry` de dentro de uma pasta de
-exercício), e o `.venv` nunca é **ativado** (o que é ativar um venv:
+exercício), e nenhum ambiente fica **ativado** quando ele roda: com um ambiente ativado, o Poetry
+instalaria as bibliotecas do projeto nele (o que é ativar um venv:
 [O ambiente virtual por dentro](../02-conceitos/02-o-ambiente-virtual-por-dentro.md#ativar-e-desativar)).

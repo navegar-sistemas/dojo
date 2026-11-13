@@ -170,4 +170,5 @@ Success: no issues found in 1 source file
 
 No Pydantic 1, as regras eram escritas com o decorador `@validator`. Ele ainda existe no
 Pydantic 2, mas está **obsoleto** (*deprecated*): marcado para sair numa versão futura, e quem o
-usa recebe um aviso. O enunciado proíbe o `@validator` e pede o `@model_validator`.
+usa recebe um aviso. O enunciado manda evitar o `@validator`, obsoleto, e usar o
+`@model_validator`.

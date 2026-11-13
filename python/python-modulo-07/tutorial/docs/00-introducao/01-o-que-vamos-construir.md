@@ -23,7 +23,7 @@ novo e de novo quando se organiza um programa:
 | **estratégia** (*strategy*) | trocar o jeito de lutar de cada criatura sem que o código do torneio precise conhecer cada habilidade |
 
 As três peças se apoiam em ferramentas que o Python já oferece: **classes abstratas** (classes
-que só servem de molde), **herança múltipla** (uma classe com duas classes mães) e **pacotes**
+que não viram objeto: servem só de molde para outras classes herdarem), **herança múltipla** (uma classe com duas classes mães) e **pacotes**
 (pastas de código que se importam com `import`). A parte
 [Pacotes, classes abstratas e herança múltipla](../02-conceitos/01-modulos-e-pacotes.md) explica
 cada uma com experimentos pequenos.
@@ -59,8 +59,8 @@ Sproutling is a Grass type Creature
 Battle error, aborting tournament: Invalid Creature 'Flameling' for this aggressive strategy
 ```
 
-As mensagens são em inglês porque o enunciado do projeto mostra a saída de cada programa, e essa
-saída é em inglês.
+As mensagens são em inglês porque o documento oficial do projeto mostra a saída de cada
+programa, e essa saída é em inglês.
 
 ## O enunciado
 

@@ -16,8 +16,8 @@ Um arquivo `ex5/ft_data_stream.py`, que pode usar `next()`, `range()`, `len()`, 
 `import typing`, `typing.Generator`, `import random` e qualquer função de `random`.
 
 1. Uma função geradora **sem fim**, `gen_event()`, que sorteia um nome de uma lista de jogadores e
-   uma ação de uma lista de ações. Cada `next()` sobre ela devolve um evento novo, a tupla
-   `(name, action)`.
+   uma ação de uma lista de ações. Cada `next()` sobre o generator que ela cria devolve um evento
+   novo, a tupla `(name, action)`.
 2. Um laço de mil voltas que pega e mostra 1000 eventos de `gen_event()`.
 3. Uma lista com mais dez eventos de `gen_event()`.
 4. Uma segunda função geradora, `consume_event`, que recebe essa lista e, enquanto ela não estiver

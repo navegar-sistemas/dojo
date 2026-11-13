@@ -65,9 +65,15 @@ flowchart LR
     root --> ex2["ex2/"] --> f2["ft_stream_management.py"]
     root --> ex3["ex3/"] --> f3["ft_vault_security.py"]
     root --> frag["ancient_fragment.txt"]
+    root --> nf["new_fragment.txt"]
+    root --> va["vault.txt"]
+    root --> na["new_archive.txt"]
     root --> exp["experimentos/"]
     root --> venv[".venv/"]
+    root --> mc[".mypy_cache/"]
 ```
 
-A pasta `.venv/` é criada na [próxima página](./03-o-ambiente-virtual.md). Só os quatro arquivos
-`.py` das pastas `ex0` a `ex3` são entregues; o `ancient_fragment.txt` serve para testar.
+A pasta `.venv/` é criada na [próxima página](./03-o-ambiente-virtual.md), e a `.mypy_cache/`
+aparece quando o mypy roda. `new_fragment.txt`, `vault.txt` e `new_archive.txt` são criados nas
+conferências dos exercícios 1 e 3. Só os quatro arquivos `.py` das pastas `ex0` a `ex3` são
+entregues; os arquivos `.txt` servem para testar.

@@ -41,7 +41,7 @@ Found 1 error in 1 file (checked 3 source files)
 ```
 
 O flake8 não imprime nada. O mypy confere os três arquivos e acusa só a chamada proposital do
-exercício 0 ([O erro proposital do mypy](../03-ex0/06-o-erro-proposital-do-mypy.md)).
+exercício 0 ([O erro proposital do mypy](../03-ex0/07-o-erro-proposital-do-mypy.md)).
 
 ## As saídas
 

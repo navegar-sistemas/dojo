@@ -24,6 +24,8 @@ from ex1.capability import HealCapability, TransformCapability
 
 ## Os testes de cada capacidade
 
+Acrescente abaixo dos imports, com duas linhas em branco antes de cada `def`:
+
 ```python
 def test_healing(creature: Creature) -> None:
     print(creature.describe())
@@ -52,6 +54,8 @@ As duas funções recebem a criatura, e não a fábrica, porque o enunciado test
 separadamente, com as linhas ` base:` e ` evolved:` entre elas.
 
 ## O main
+
+Por fim, no fim do arquivo, com duas linhas em branco antes de cada `def` e antes do `if`:
 
 ```python
 def main() -> None:

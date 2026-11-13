@@ -57,5 +57,5 @@ Dois tipos de erro aparecem:
 - `4,abc,5` tem três partes, mas `abc` não é número: a mensagem diz qual parte falhou e repete o
   erro do Python.
 
-Já `1.0 , 2.5, 3.0`, com espaços em volta das vírgulas, é aceito. As distâncias saem com quatro
-casas depois do ponto.
+Já `1.0 , 2.5, 3.0`, com espaços em volta das vírgulas, é aceito. As distâncias saem arredondadas
+em quatro casas depois do ponto.

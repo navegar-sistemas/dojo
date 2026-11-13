@@ -5,6 +5,9 @@ title: O gerador sem fim
 
 # O gerador sem fim
 
+O primeiro generator do exercício nunca termina: cada pedido sorteia um evento novo, com um
+jogador e uma ação. O programa pede mil eventos a ele e depois mais dez, guardados numa lista.
+
 ## gen_event
 
 ```python

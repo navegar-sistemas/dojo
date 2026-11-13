@@ -132,10 +132,7 @@ printf '%s\n' '{"item_3": "a,b", "item_4": "say \"hi\"", "item_5": "line\u000abr
 Crie um arquivo de experimento com um plugin cujo `process_output` recebe o tipo errado:
 
 ```python title="experimentos/plugin_errado.py"
-import sys
-
-sys.path.insert(0, "ex2")
-from data_pipeline import DataStream  # noqa: E402
+from data_pipeline import DataStream
 
 
 class BrokenPlugin:
@@ -146,24 +143,21 @@ class BrokenPlugin:
 DataStream().output_pipeline(1, BrokenPlugin())
 ```
 
-`# noqa: E402` é um comentário que o flake8 lê: manda ignorar o aviso `E402` ("`import` depois
-de outro código") nesta linha. Ele é só para este experimento, em que o `sys.path.insert`
-precisa vir antes do `import`; o código entregue não usa `noqa`.
-
-O mypy não roda o programa, então não vê o `sys.path.insert`. A variável `MYPYPATH`, escrita
-antes do comando, diz a ele em que pasta procurar o `data_pipeline`:
+O arquivo importa `DataStream` de `ex2/data_pipeline.py`, que está em outra pasta. O mypy não
+acha o `data_pipeline` sozinho; a variável `MYPYPATH`, escrita antes do comando, diz a ele em que
+pasta procurar os módulos importados:
 
 ```bash
 MYPYPATH=ex2 .venv/bin/mypy --disallow-untyped-defs experimentos/plugin_errado.py
 ```
 
 ```text
-experimentos/plugin_errado.py:12: error: Argument 2 to "output_pipeline" of "DataStream" has incompatible type "BrokenPlugin"; expected "ExportPlugin"  [arg-type]
-experimentos/plugin_errado.py:12: note: Following member(s) of "BrokenPlugin" have conflicts:
-experimentos/plugin_errado.py:12: note:     Expected:
-experimentos/plugin_errado.py:12: note:         def process_output(self, data: list[tuple[int, str]]) -> None
-experimentos/plugin_errado.py:12: note:     Got:
-experimentos/plugin_errado.py:12: note:         def process_output(self, data: list[str]) -> None
+experimentos/plugin_errado.py:9: error: Argument 2 to "output_pipeline" of "DataStream" has incompatible type "BrokenPlugin"; expected "ExportPlugin"  [arg-type]
+experimentos/plugin_errado.py:9: note: Following member(s) of "BrokenPlugin" have conflicts:
+experimentos/plugin_errado.py:9: note:     Expected:
+experimentos/plugin_errado.py:9: note:         def process_output(self, data: list[tuple[int, str]]) -> None
+experimentos/plugin_errado.py:9: note:     Got:
+experimentos/plugin_errado.py:9: note:         def process_output(self, data: list[str]) -> None
 Found 1 error in 1 file (checked 1 source file)
 ```
 

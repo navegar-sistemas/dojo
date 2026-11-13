@@ -10,10 +10,10 @@ pasta do projeto, onde fica o arquivo `ancient_fragment.txt` ([A pasta do
 projeto](../01-ambiente/02-a-pasta-do-projeto.md)), e só funcionam depois que os arquivos existirem:
 a página "Rodar e conferir" de cada exercício os roda.
 
-Duas diferenças em relação aos exemplos do enunciado:
+Três diferenças em relação aos exemplos do enunciado:
 
-- o arquivo protegido é `/etc/sudoers`, que só o administrador lê e existe tanto no macOS quanto no
-  Linux, no lugar do `/etc/master.passwd`, que só existe no macOS ([Quando o open
+- o arquivo protegido é `/etc/sudoers`, que só o administrador lê e existe no macOS e em todo Linux
+  com o `sudo` instalado, no lugar do `/etc/master.passwd`, que só existe no macOS ([Quando o open
   falha](../02-arquivos/05-quando-o-open-falha.md));
 - a mensagem de uso mostra o caminho do programa como ele foi digitado, `ex0/ft_ancient_text.py`,
   porque os comandos são rodados da pasta do projeto ([O uso](../03-ex0/02-o-uso.md));

@@ -7,8 +7,8 @@ title: O pacote
 
 Há dois arquivos `elements.py`. O da raiz é o módulo `elements`, achado na primeira pasta do
 `sys.path` ([Onde o Python procura](../02-conceitos/02-onde-o-python-procura.md)). O de dentro
-da pasta `alchemy` não pode ter o mesmo nome; ele é pedido pelo caminho, com um ponto no lugar da
-barra: `alchemy.elements`.
+da pasta `alchemy` tem o mesmo nome de arquivo, mas é outro módulo, com outro nome: ele é pedido
+pelo caminho, com um ponto no lugar da barra, `alchemy.elements`.
 
 ```bash
 python3 -c "import elements; print(elements.create_fire())"
@@ -84,6 +84,8 @@ Traceback (most recent call last):
                           ^^^^^^^^^^^^^^^^
 AttributeError: module 'alchemy' has no attribute 'elements'
 ```
+
+(No Python 3.10, o traceback não tem a linha de código nem a de marcação.)
 
 `AttributeError` ("erro de atributo") é a exceção de um nome lido com ponto que não existe: "o
 módulo `alchemy` não tem o atributo `elements`". Importar um pacote **não** carrega os módulos de

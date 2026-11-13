@@ -125,7 +125,8 @@ O flake8 não imprime nada, e o mypy confere os quatro arquivos sem achar proble
 **Expor** um nome é oferecê-lo no próprio pacote, para quem faz `import greetings` ou
 `from greetings import ...`. O pacote `greetings` expõe `Greeter`; a função `hello` é usada por
 dentro, pelo `Greeter`, e não faz parte do que o pacote oferece. O enunciado do exercício 3 exige
-exatamente isso: o pacote `ex3` expõe as fábricas e nunca as criaturas concretas.
+exatamente isso: o pacote `ex3` expõe as fábricas e nunca as criaturas concretas (as classes de
+criatura que podem ser instanciadas, o contrário das abstratas).
 
 Troque o `experimentos/pacote.py` por esta versão, que pergunta ao pacote o que ele tem:
 
@@ -201,5 +202,6 @@ flowchart LR
 ```
 
 Os três scripts de teste ficam na raiz e importam os pacotes; o pacote `ex4` usa o `ex3`, porque
-as estratégias agem sobre as criaturas. É isso que o enunciado quer dizer com "os exercícios 3 e
-4 importam um ao outro".
+as estratégias agem sobre as criaturas. O enunciado resume isso dizendo que os exercícios 3 e 4
+"importam um ao outro"; na prática, o `ex4` importa do `ex3`, e o `ex3` não precisa de nada do
+`ex4`.

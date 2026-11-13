@@ -24,7 +24,7 @@ testes, e responde a duas perguntas que uma hierarquia sozinha não resolve:
 Um pacote `ex3` com estas classes. Uma classe **concreta** é uma classe que pode ser instanciada,
 o contrário de uma abstrata:
 
-| Classe | Tipo | O que é |
+| Classe | Abstrata ou concreta | O que é |
 |---|---|---|
 | `Creature` | abstrata, filha de `ABC` | guarda o nome e o tipo da criatura; tem o método abstrato `attack` e o método comum `describe`, que devolve uma frase padrão feita com o nome e o tipo |
 | `Flameling` e `Pyrodon` | concretas, filhas de `Creature` | criaturas comuns; o `attack` de cada uma devolve a sua frase de ataque |
@@ -126,8 +126,10 @@ escolha do tutorial é um módulo por peça:
 | `ex3/factory.py` | `CreatureFactory`, `FlameFactory` e `TransformCreatureFactory` |
 | `ex3/__init__.py` | a porta do pacote: expõe as fábricas |
 
-Todas as classes num módulo só, ao lado do `__init__.py`, também cumpririam o enunciado; separadas,
-cada página do tutorial cuida de um arquivo.
+Todas as classes num módulo só, ao lado do `__init__.py`, também cumpririam o enunciado. Separadas,
+as criaturas concretas ficam em módulos que só a fábrica importa, e cada classe abstrata que
+`capacitor.py` e o `ex4` importam pelo nome do módulo (`ex3.creature`, `ex3.capability`) fica num
+módulo próprio, sem nenhuma criatura concreta junto.
 
 ```mermaid
 classDiagram

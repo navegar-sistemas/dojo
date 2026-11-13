@@ -7,7 +7,8 @@ title: As ferramentas
 
 As demonstrações dos exercícios testam um objeto válido e um inválido. Um modelo de verdade
 recebe centenas de registros. O enunciado traz duas ferramentas que geram dados de teste para os
-três modelos, e esta parte as usa para passar muitos registros pelos modelos prontos.
+três modelos, em quantidade, para passar pelos modelos prontos
+([Validar os dados](./03-validar-os-dados.md)).
 
 As ferramentas vêm num arquivo anexo ao enunciado, o `data_generator.tar`. Um arquivo `.tar`
 junta vários arquivos num só, como um pacote. Elas não fazem parte da entrega.
@@ -27,7 +28,7 @@ data_exporter.py
 
 `tar` é o programa que lida com esses pacotes: `-t` lista o conteúdo, e `-f` diz qual é o
 arquivo. São dois programas em Python. O enunciado fala em importar dados "do diretório de
-ferramentas" (*tools directory*); o tutorial põe os dois numa pasta `tools`:
+ferramentas" (*tools directory*) sem dizer o nome dele; escolha do tutorial: uma pasta `tools`.
 
 ```bash
 mkdir tools
@@ -79,6 +80,10 @@ Importa as três classes do `data_generator.py`, gera um conjunto maior (10 esta
 
 Ele também grava dois arquivos de **casos inválidos**, `invalid_stations.json` e
 `invalid_contacts.json`, com registros que quebram os limites e as regras de propósito.
+
+O enunciado lista, junto das duas ferramentas, uma pasta `generated_data/` com "dados
+pré-gerados, prontos para uso". Ela não vem no `data_generator.tar`: é o `data_exporter.py` que a
+cria.
 
 A pasta `generated_data/` é criada **na pasta de onde o programa é rodado**, e o `import` do
 `data_generator` só funciona se os dois arquivos estiverem na mesma pasta. A

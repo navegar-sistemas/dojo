@@ -5,8 +5,8 @@ title: SpaceMission
 
 # SpaceMission
 
-O modelo da missão entra depois de `CrewMember`. Nesta página, só os campos; as regras vêm na
-[próxima](./04-as-regras-da-missao.md), dentro da mesma classe.
+O modelo da missão entra depois de `CrewMember`. Os campos vêm primeiro; as regras entram depois
+deles, dentro da mesma classe ([As regras da missão](./04-as-regras-da-missao.md)).
 
 ```python
 class SpaceMission(BaseModel):

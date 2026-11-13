@@ -6,7 +6,7 @@ title: As três estratégias
 # As três estratégias
 
 Acrescente ao fim de `ex2/strategy.py`, depois da exceção, a classe abstrata e as três
-estratégias.
+estratégias, com duas linhas em branco antes de cada `class`.
 
 ## A estratégia abstrata
 
@@ -38,7 +38,8 @@ class NormalStrategy(BattleStrategy):
 
 Serve para qualquer criatura: `is_valid` devolve sempre `True`, e `act` só ataca. Toda
 `Creature` tem `attack`, então não há o que conferir. O parâmetro `creature` de `is_valid` não é
-usado, mas fica: a assinatura precisa ser a mesma da classe abstrata.
+usado, mas fica: a assinatura (nome, parâmetros e retorno) precisa ser a mesma da
+classe abstrata.
 
 ## A estratégia agressiva
 
@@ -90,7 +91,8 @@ class DefensiveStrategy(BattleStrategy):
 ```
 
 O mesmo desenho da agressiva, com a capacidade de curar: ataca e depois cura. A mensagem de erro
-segue o modelo da agressiva, com `defensive`.
+é escolha do tutorial, por analogia com a da agressiva (o enunciado só mostra esta), com
+`defensive`.
 
 ## O `__init__.py`
 

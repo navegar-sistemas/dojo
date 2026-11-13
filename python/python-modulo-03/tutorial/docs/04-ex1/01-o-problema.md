@@ -6,10 +6,10 @@ title: O problema
 # O problema
 
 As pontuações de uma partida chegam pela linha de comando, uma por argumento. Quem digita pode
-errar e mandar uma palavra no lugar de um número. O programa separa o que é número do que não é,
-guarda os números numa lista própria e calcula estatísticas sobre ela.
+errar e mandar uma palavra no lugar de um número. O programa separa as pontuações inteiras do
+resto, guarda as inteiras numa lista própria e calcula estatísticas sobre ela.
 
-![Os argumentos 1500, ab, 2300 e 1800 são filtrados: os três números entram na lista scores, nas posições 0 a 2, e ab é avisado com Invalid parameter e descartado. Embaixo, um gráfico de barras das três pontuações com linhas tracejadas na maior, 2300, na média, 1866.67, e na menor, 1500, e a amplitude de 800 entre a maior e a menor; quantidade 3, total 5600](/img/ex1/filtro.svg)
+![Os argumentos 1500, ab, 2300 e 1800 são filtrados: os três números entram na lista scores, nas posições 0 a 2, e ab é avisado com Invalid parameter e descartado. Embaixo, um gráfico de barras das três pontuações com linhas tracejadas na maior, 2300, na média, 1866.666…, e na menor, 1500, e a amplitude de 800 entre a maior e a menor; quantidade 3, total 5600](/img/ex1/filtro.svg)
 
 ## O que o enunciado pede
 

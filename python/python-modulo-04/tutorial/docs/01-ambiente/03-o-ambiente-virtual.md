@@ -28,6 +28,16 @@ python3 -m venv .venv
 
 O comando não imprime nada quando dá certo.
 
+No Debian e no Ubuntu, o `venv` vem num pacote à parte, o `python3-venv`, que costuma faltar mesmo
+com o `python3` instalado. Sem ele, o comando responde
+`The virtual environment was not created successfully` e, logo depois, manda instalar o pacote.
+Instale-o (o `sudo` e o `apt` estão em [O Python](./01-o-python.md)) e crie o venv de novo:
+
+```bash
+sudo apt install python3-venv
+python3 -m venv .venv
+```
+
 ## Instalar o flake8 e o mypy
 
 ```bash

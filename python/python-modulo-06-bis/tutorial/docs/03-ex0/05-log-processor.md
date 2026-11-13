@@ -67,5 +67,6 @@ class LogProcessor(DataProcessor):
 - `dict[str, str]` é o type hint de um dicionário com chaves `str` e valores `str`; a assinatura
   aceita um deles ou uma lista deles;
 - `item['log_level']` lê o valor da chave `log_level`. Dentro de uma f-string com aspas duplas,
-  as chaves do dicionário vão entre aspas simples;
+  as chaves do dicionário vão entre aspas simples: antes do Python 3.12, repetir dentro das `{}`
+  as mesmas aspas que abrem a f-string é erro de sintaxe, e o enunciado aceita o Python 3.10;
 - a linha do `def ingest` tem 74 caracteres, dentro do limite de 79 do flake8.

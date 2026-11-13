@@ -18,14 +18,17 @@ title: O enunciado em linguagem simples
   mypy](../01-ambiente/04-type-hints-flake8-e-mypy.md)).
 - **O programa nunca pode travar.** "Travar" (*crash*) aqui quer dizer parar no meio com a mensagem
   de erro do próprio Python. Toda falha previsível (arquivo inexistente, sem permissão, conteúdo que
-  não é texto) precisa ser tratada com `try` e `except`.
+  não é texto) precisa ser tratada, quase sempre com `try` e `except`.
 - **A instrução `with` só pode aparecer no exercício 3.** Os exercícios 0, 1 e 2 fecham os arquivos
   à mão ([O with](../06-ex3/02-o-with.md)).
 - **Tipos permitidos:** `str`, `int`, `float`, `list`, `dict`, `set` e `tuple`, com todos os seus
   métodos e construtores. Um **método** é uma função que pertence a um valor e é chamada com ponto:
   `"abc".upper()` chama o método `upper` do texto `"abc"` e devolve `"ABC"`. Um **construtor** é o
   próprio tipo chamado como função para criar um valor dele: `str(25)` dá `"25"`, `int("25")` dá
-  `25`.
+  `25`. `True`, `False` e `None` não estão na lista, mas são valores da própria linguagem, escritos
+  direto no código, e não funções: o exercício 3 exige devolver `True` ou `False`. Os programas
+  citam os tipos desses valores, `bool` e `None`, só nos type hints, e nunca chamam o construtor
+  `bool()`.
 - **As mensagens podem variar**, desde que a estrutura da saída e a informação essencial sejam as
   dos exemplos.
 
@@ -64,8 +67,9 @@ final](./04-o-resultado-final.md) reúne todos.
 ## Entrega
 
 Só os quatro arquivos `.py`, com esses nomes e nessas pastas, num repositório Git. Na avaliação,
-quem avalia pode pedir que você explique as operações com arquivos, mostre o tratamento de erros e
-explique como o `with` funciona ([Entregar](../07-fechamento/02-entregar.md)).
+quem avalia pode pedir que você explique as operações com arquivos, demonstre o tratamento de erros
+ou mostre como o `with` funciona, e confere se a estrutura de `secure_archive` segue o que o
+exercício 3 descreve ([Entregar](../07-fechamento/02-entregar.md)).
 
 ## O que o enunciado cita sem explicar
 
@@ -73,8 +77,8 @@ explique como o `with` funciona ([Entregar](../07-fechamento/02-entregar.md)).
   mostra o texto do arquivo, sem mais nada.
 - **`/etc/master.passwd`**: um arquivo do macOS que só o administrador pode ler; o enunciado o usa
   como exemplo de "arquivo inacessível". No Linux ele não existe. O tutorial usa `/etc/sudoers`,
-  protegido do mesmo jeito e presente nos dois sistemas ([Quando o open
-  falha](../02-arquivos/05-quando-o-open-falha.md)).
+  que um usuário comum também não pode ler e que existe no macOS e em todo Linux com o `sudo`
+  instalado ([Quando o open falha](../02-arquivos/05-quando-o-open-falha.md)).
 - **"Compatível com 2087"**: só a justificativa de brincadeira para o `#` no fim das linhas.
 - **"Três canais de dados mais antigos que a Internet"**: a entrada padrão, a saída padrão e a saída
   de erro, que existem desde os primeiros sistemas Unix ([Os três

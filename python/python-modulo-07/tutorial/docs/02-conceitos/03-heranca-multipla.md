@@ -68,7 +68,10 @@ print(amphibian.move())
   métodos abstratos, `move` (de `Vehicle`) e `launch` (de `Floating`);
 - o `move` do anfíbio depende do atributo `afloat`: o estado guardado por `Floating` muda o jeito
   de andar;
-- `launch` muda o estado: depois dele, o anfíbio está na água.
+- `launch` muda o estado: depois dele, o anfíbio está na água;
+- no fim do arquivo, `isinstance(objeto, Classe)` responde `True` se o objeto é daquela classe
+  ou de uma filha dela, e `False` se não é. `print` com dois valores separados por vírgula os
+  imprime na mesma linha, com um espaço entre eles.
 
 ```bash
 python3 experimentos/multipla.py

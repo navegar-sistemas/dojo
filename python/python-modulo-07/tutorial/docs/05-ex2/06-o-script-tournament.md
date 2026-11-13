@@ -6,7 +6,8 @@ title: O script tournament
 # O script tournament
 
 Com a função `battle` pronta, falta o cenário: criar as fábricas e as estratégias e rodar os
-três torneios do enunciado. Acrescente o `main` no fim de `tournament.py`:
+três torneios do enunciado. Acrescente o `main` no fim de `tournament.py`, com duas linhas em
+branco antes do `def`:
 
 ```python
 def main() -> None:
@@ -45,8 +46,9 @@ if __name__ == "__main__":
   torneios;
 - cada torneio é uma chamada a `battle`, com a lista de tuplas `(fábrica, estratégia)`. O mypy
   confere cada tupla contra o type hint `list[tuple[CreatureFactory, BattleStrategy]]`;
-- antes de cada chamada, o título e a lista de oponentes. São textos fixos, copiados do
-  enunciado: os rótulos (`Flameling`, `Healing`...) não saem de nenhum atributo
+- antes de cada chamada, o título e a lista de oponentes. Escolha do tutorial: textos fixos,
+  copiados do enunciado, porque a saída do enunciado não segue regra (`Flameling` é nome de
+  criatura, `Healing` é parte do nome da fábrica)
   ([O que a saída revela](./01-o-problema.md#o-que-a-saída-revela)). A lista do torneio 2 passa
   dos 79 caracteres e foi dividida em dois textos seguidos;
 - `print()` imprime a linha vazia entre os torneios. Dentro do `main`, as linhas em branco entre

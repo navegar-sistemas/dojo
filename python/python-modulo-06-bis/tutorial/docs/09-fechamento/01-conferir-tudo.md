@@ -62,7 +62,7 @@ Found 1 error in 1 file (checked 16 source files)
 
 O flake8 não imprime nada. O mypy confere os dezesseis arquivos entregues (seis na raiz, seis em
 `ex3` e quatro em `ex4`) e acusa só a chamada proposital do exercício 0
-([O erro proposital do mypy](../03-ex0/06-o-erro-proposital-do-mypy.md)).
+([O erro proposital do mypy](../03-ex0/07-o-erro-proposital-do-mypy.md)).
 
 ## As saídas
 

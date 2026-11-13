@@ -14,8 +14,8 @@ código funciona numa máquina e quebra na outra. Três ferramentas põem essas 
 - o **ambiente virtual** (*virtual environment*, ou **venv**): uma pasta com um Python e as
   bibliotecas de um projeto só, separada do Python do sistema;
 - o **gerenciador de pacotes**: o programa que baixa e instala bibliotecas feitas por outras
-  pessoas. Aqui são dois, o **pip**, que vem com o Python, e o **Poetry**, que é instalado à
-  parte;
+  pessoas (cada biblioteca distribuída assim é um **pacote**). Aqui são dois, o **pip**, que vem
+  com o Python, e o **Poetry**, que é instalado à parte;
 - as **variáveis de ambiente** e o arquivo **`.env`**: a configuração fica fora do código, e o
   mesmo programa roda em desenvolvimento ou em produção só trocando os valores.
 

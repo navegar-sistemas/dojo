@@ -6,7 +6,9 @@ title: A assinatura
 # A assinatura
 
 A **assinatura** de uma função é a linha do `def`: o nome, os parâmetros com seus tipos e o tipo do
-retorno. O enunciado descreve a de `secure_archive` em detalhe, e a avaliação a confere.
+retorno. O enunciado fixa o nome da função, o papel de cada parâmetro, quais são opcionais e o tipo
+do retorno, e a avaliação confere esses pontos. Os nomes dos parâmetros, os valores padrão e as
+palavras `"read"` e `"write"` são escolhas do projeto.
 
 ```python
 def secure_archive(file_name: str, action: str = "read",
@@ -42,7 +44,11 @@ Os quatro retornos possíveis:
 |---|---|
 | leitura deu certo | `(True, <conteúdo do arquivo>)` |
 | escrita deu certo | `(True, "Content successfully written to file")` |
-| `open`, `read` ou `write` falhou | `(False, <mensagem da exceção>)` |
+| abrir, ler, escrever ou fechar falhou | `(False, <mensagem da exceção>)` |
 | ação desconhecida | `(False, "Unknown action '<ação>'")` |
+
+O caso da ação desconhecida é escolha do projeto: o enunciado não diz o que fazer com uma ação que
+não seja ler nem escrever, e devolver `False` com a ação recebida mantém a regra de sempre devolver
+uma tupla.
 
 A função não imprime nada: devolve o resultado, e quem chama decide o que fazer com ele.

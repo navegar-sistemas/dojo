@@ -8,7 +8,7 @@ title: Glossário
 | Termo | O que é | Onde |
 |---|---|---|
 | **`__init__`** | o construtor: método que roda sozinho quando o objeto é criado | [Pré-requisitos](./03-pre-requisitos.md) |
-| **`__name__`** | variável que vale `"__main__"` no arquivo rodado com `python3` | [A demonstração do exercício 0](../03-ex0/07-a-demonstracao.md) |
+| **`__name__`** | variável que vale `"__main__"` no arquivo rodado com `python3` | [A demonstração do exercício 0](../03-ex0/06-a-demonstracao.md) |
 | **`__pycache__`** | pasta de cache que o Python cria ao importar um arquivo; não é entregue | [Rodar e conferir do exercício 0](../03-ex0/09-rodar-e-conferir.md) |
 | **ABC** | classe do módulo `abc` da qual uma classe herda para virar abstrata | [A classe abstrata](../02-conceitos/02-a-classe-abstrata.md) |
 | **`@abstractmethod`** | decorador que marca um método como obrigatório nas classes filhas | [A classe abstrata](../02-conceitos/02-a-classe-abstrata.md) |
@@ -19,14 +19,14 @@ title: Glossário
 | **atributo de classe** | atributo escrito no corpo da classe, igual para todos os objetos, como `name` | [Nome e contadores](../04-ex1/02-nome-e-contadores.md) |
 | **`Callable`** | type hint de `typing` para uma função: `Callable[[Any], bool]` recebe um argumento e devolve `bool` | [Numeric Processor](../03-ex0/03-numeric-processor.md) |
 | **classe** | o molde de um tipo de objeto | [Pré-requisitos](./03-pre-requisitos.md) |
-| **classe abstrata** | classe que só serve de molde: não pode ser instanciada e lista os métodos que as filhas escrevem | [A classe abstrata](../02-conceitos/02-a-classe-abstrata.md) |
+| **classe abstrata** | classe que só serve de molde: não pode ser instanciada, lista os métodos que as filhas escrevem e pode trazer prontos os métodos comuns | [A classe abstrata](../02-conceitos/02-a-classe-abstrata.md) |
 | **código de saída** | número que um programa devolve ao terminar: `0` é sucesso; `$?` mostra o do último comando | [Conferir tudo](../06-fechamento/01-conferir-tudo.md) |
 | **CSV** | formato de texto para tabelas: campos separados por vírgula | [O plugin CSV](../05-ex2/04-o-plugin-csv.md) |
 | **decorador** | linha com `@` em cima de um `def` que modifica o método | [A classe abstrata](../02-conceitos/02-a-classe-abstrata.md) |
 | **`diff`** | comando que compara duas listas de linhas e mostra só as diferenças | [Rodar e conferir do exercício 0](../03-ex0/09-rodar-e-conferir.md) |
 | **duck typing** | julgar um objeto pelos métodos que ele tem, e não pela classe de que herda | [Protocol e duck typing](../05-ex2/02-protocol-e-duck-typing.md) |
 | **enunciado (*subject*)** | o documento oficial que diz o que o projeto deve entregar | [O enunciado em linguagem simples](./02-o-enunciado-em-linguagem-simples.md) |
-| **escape** | escrever um caractere especial com um código, como `\"` no JSON | [O plugin JSON](../05-ex2/05-o-plugin-json.md) |
+| **escape** | trocar um caractere que não pode aparecer como está por uma forma escrita com `\`, como `"` por `\"` no JSON | [O plugin JSON](../05-ex2/05-o-plugin-json.md) |
 | **exceção** | objeto que descreve um erro, com um tipo e uma mensagem | [Pré-requisitos](./03-pre-requisitos.md) |
 | **expressão condicional** | `a if condição else b`: vale `a` se a condição é verdadeira, e `b` se não | [Numeric Processor](../03-ex0/03-numeric-processor.md) |
 | **fila (FIFO)** | estrutura em que o primeiro a entrar é o primeiro a sair | [A fila](../02-conceitos/05-a-fila.md) |
@@ -46,11 +46,13 @@ title: Glossário
 | **mypy** | ferramenta que confere os tipos anotados no código, sem rodá-lo | [Type hints, flake8 e mypy](../01-ambiente/04-type-hints-flake8-e-mypy.md) |
 | **`MYPYPATH`** | variável que diz ao mypy em que pasta procurar os módulos importados | [Rodar e conferir do exercício 2](../05-ex2/08-rodar-e-conferir.md) |
 | **`None`** | o valor que quer dizer "nada" | [Registrar e rotear](../04-ex1/03-registrar-e-rotear.md) |
+| **PEP 8** | o estilo padrão do Python, que o flake8 confere | [Type hints, flake8 e mypy](../01-ambiente/04-type-hints-flake8-e-mypy.md) |
 | **pipeline** | o caminho completo do dado: entrada no fluxo, fila do processador, exportação | [output_pipeline](../05-ex2/03-output-pipeline.md) |
 | **plugin** | objeto que se encaixa no programa sem que o programa mude; aqui, um exportador | [O problema do exercício 2](../05-ex2/01-o-problema.md) |
 | **polimorfismo** | chamar o mesmo método em objetos de classes diferentes e cada um responder do seu jeito | [Polimorfismo](../02-conceitos/04-polimorfismo.md) |
 | **processador** | objeto de uma filha de `DataProcessor`: confere, guarda e devolve um tipo de dado | [O problema do exercício 0](../03-ex0/01-o-problema.md) |
 | **`Protocol`** | classe de `typing` que descreve os métodos que um objeto precisa ter, sem exigir herança | [Protocol e duck typing](../05-ex2/02-protocol-e-duck-typing.md) |
+| **`PYTHONPATH`** | variável que diz ao Python em que pasta procurar os módulos importados | [As perguntas do enunciado](../06-fechamento/03-as-perguntas-do-enunciado.md) |
 | **`raise`** | instrução que lança uma exceção | [Pré-requisitos](./03-pre-requisitos.md) |
 | **rank** | número de ordem de chegada de um item no processador, começando em 0 | [A fila](../02-conceitos/05-a-fila.md) |
 | **rotear** | escolher para onde vai cada dado | [Registrar e rotear](../04-ex1/03-registrar-e-rotear.md) |

@@ -17,7 +17,7 @@ Python 3.14.5
 ```
 
 O número depois de `Python` é a versão. Qualquer `3.10` ou maior serve (`3.10`, `3.11`, …,
-`3.14`).
+`3.14`, `3.15`).
 
 ## Se o comando não existir
 

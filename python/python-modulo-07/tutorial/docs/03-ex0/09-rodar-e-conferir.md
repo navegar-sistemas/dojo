@@ -66,7 +66,8 @@ python3 -B -c 'import ex0; print(ex0.__all__); print(hasattr(ex0, "Flameling"))'
 False
 ```
 
-O `-B` impede o Python de gravar a pasta `__pycache__`, que este teste não precisa. Rodado da
+O `-B` impede o Python de gravar a pasta `__pycache__`, que este teste não precisa, e o `;`
+separa os comandos Python escritos na mesma linha. Rodado da
 raiz, o `python3 -c` acha o pacote `ex0` na pasta atual
 ([Onde o Python procura](../02-conceitos/01-modulos-e-pacotes.md#onde-o-python-procura)). O pacote
 oferece as três fábricas e não tem o nome `Flameling`. O mypy recusa o import antes de rodar:
@@ -82,6 +83,17 @@ Found 1 error in 1 file (checked 1 source file)
 
 Rodando, o mesmo import termina com `ImportError: cannot import name 'Flameling' from 'ex0'`,
 seguido do caminho do `__init__.py` na sua máquina.
+
+O módulo de dentro continua alcançável pelo nome completo
+([O que fica de fora](./06-o-init-do-pacote.md#o-que-fica-de-fora)):
+
+```bash
+python3 -B -c 'import ex0; print(hasattr(ex0, "creature"), ex0.creature.Flameling().describe())'
+```
+
+```text
+True Flameling is a Fire type Creature
+```
 
 ## As classes abstratas não são instanciadas
 

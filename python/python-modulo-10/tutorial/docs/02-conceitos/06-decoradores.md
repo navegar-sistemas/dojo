@@ -77,10 +77,10 @@ repetir o nome: o Python cria `add` e, em seguida, faz `add = announce(add)`.
 
 ```mermaid
 flowchart LR
-    call["add(2, b=3)"] --> w["wrapper<br/>imprime Calling add..."]
+    chamada["add(2, b=3)"] --> w["wrapper<br/>imprime Calling add..."]
     w -->|"func(*args, **kwargs)"| orig["add original<br/>devolve 5"]
     orig --> w2["wrapper<br/>imprime add returned 5"]
-    w2 -->|"devolve 5"| call2["quem chamou"]
+    w2 -->|"devolve 5"| chamada2["quem chamou"]
 ```
 
 ## O nome perdido

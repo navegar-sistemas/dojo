@@ -46,9 +46,9 @@ o `power_echo` amplificado por 3, lançado com 12.
 
 ```mermaid
 flowchart LR
-    call["combo('Wizard', 12)"] --> f["fireball"] --> r1["'Fireball hits Wizard'"]
-    call --> h["heal"] --> r2["'Heals Wizard'"]
-    call --> m["mega_echo<br/>(power_echo com poder × 3)"] --> r3["'36'"]
+    chamada["combo('Wizard', 12)"] --> f["fireball"] --> r1["'Fireball hits Wizard'"]
+    chamada --> h["heal"] --> r2["'Heals Wizard'"]
+    chamada --> m["mega_echo<br/>(power_echo com poder × 3)"] --> r3["'36'"]
     r1 --> lst["lista na ordem dos feitiços"]
     r2 --> lst
     r3 --> lst

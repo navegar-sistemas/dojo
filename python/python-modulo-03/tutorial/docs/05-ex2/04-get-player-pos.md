@@ -58,9 +58,9 @@ def get_player_pos() -> tuple[float, float, float]:
 
 ## A pergunta
 
-`PROMPT` guarda o texto da pergunta numa **constante**: uma variável criada fora das funções e
-que, por costume, nunca muda. O nome em maiúsculas marca esse costume; o Python não impede a
-mudança. Assim a linha do `input` fica curta.
+`PROMPT` guarda o texto da pergunta numa constante, como o `MAX_SCORE` do
+[exercício 1](../04-ex1/03-converter-e-descartar.md#um-limite-para-as-pontuações). Assim a linha
+do `input` fica curta.
 
 ## Três partes: o desempacotamento confere
 
@@ -87,6 +87,9 @@ ok: 1 2 3
 ValueError: not enough values to unpack (expected 3, got 1)
 ValueError: too many values to unpack (expected 3, got 4)
 ```
+
+Essa é a saída do Python 3.14. No 3.10, a última mensagem não diz quantos pedaços vieram:
+`ValueError: too many values to unpack (expected 3)`. O erro é o mesmo `ValueError`.
 
 ## A faixa de valores
 
@@ -118,8 +121,8 @@ nan False
   cai fora da faixa.
 
 O limite garante que a conta da distância cabe num `float`. Com duas coordenadas entre −10¹⁵⁰ e
-10¹⁵⁰, a diferença entre elas fica abaixo de 2 × 10¹⁵⁰, o quadrado abaixo de 4 × 10³⁰⁰, e a soma
-dos três quadrados abaixo de 1.2 × 10³⁰¹, longe do maior `float`, cerca de 1.8 × 10³⁰⁸.
+10¹⁵⁰, a diferença entre elas é no máximo 2 × 10¹⁵⁰, o quadrado no máximo 4 × 10³⁰⁰, e a soma dos
+três quadrados no máximo 1.2 × 10³⁰¹, longe do maior `float`, cerca de 1.8 × 10³⁰⁸.
 
 ## Converter as três: o else do for
 

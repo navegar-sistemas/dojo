@@ -27,9 +27,10 @@ de lá), com:
 Os métodos das capacidades devolvem textos que descrevem a ação, como o `attack`. E, de novo, o
 pacote **só expõe as fábricas**.
 
-O `heal` pode receber um parâmetro "alvo" (*target*), quem é curado, se quem programa quiser. O
-tutorial escolhe não usar alvo: as mensagens da saída ("cura a si mesma", "cura a si mesma e aos
-outros") não citam ninguém, e um parâmetro sem uso só complicaria a assinatura.
+O enunciado deixa o `heal` receber, se quem programa quiser, um parâmetro "alvo" (*target*): a
+criatura curada. O tutorial escolhe não usar alvo: as mensagens da saída ("cura a si mesma",
+"cura a si mesma e aos outros") não citam ninguém, e um parâmetro sem uso só complicaria a
+**assinatura** do método (o nome, os parâmetros com os tipos e o tipo de retorno).
 
 ## O teste pedido
 

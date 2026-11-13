@@ -28,7 +28,12 @@ File 'ancient_fragment.txt' closed.
 FIM
 ```
 
-Sem nenhuma linha impressa, a saída é idêntica à esperada. Os outros casos:
+Sem nenhuma linha impressa, a saída é idêntica à esperada. Quando há diferença, o `diff` imprime
+as linhas que mudam: as que começam com `<` vêm da saída do programa (a primeira lista), e as que
+começam com `>`, do texto esperado (a segunda), separadas por uma linha `---`. Antes delas, uma
+linha como `3c3` diz o número da linha em cada lista (o `c` é de *change*, "troca").
+
+Os outros casos:
 
 ```bash
 diff <(python3 ex0/ft_ancient_text.py) - <<'FIM'
@@ -72,6 +77,16 @@ python3 ex0/ft_ancient_text.py ancient_fragment.txt foo
 Usage: ex0/ft_ancient_text.py <file>
 ```
 
+Um nome com um byte que não forma texto ([O uso](./02-o-uso.md#um-nome-que-não-pode-ser-mostrado)):
+
+```bash
+python3 ex0/ft_ancient_text.py $'\xff'
+```
+
+```text
+Usage: ex0/ft_ancient_text.py <file>
+```
+
 Um arquivo que não é texto, o programa `/bin/ls`:
 
 ```bash
@@ -85,8 +100,9 @@ Error reading file '/bin/ls': 'utf-8' codec can't decode byte 0xb7 in position 1
 File '/bin/ls' closed.
 ```
 
-O byte e a posição mudam de sistema para sistema. O arquivo abriu, a leitura falhou, e o `finally` o
-fechou ([Ler e fechar](./04-ler-e-fechar.md)).
+O byte, a posição e o motivo no fim da mensagem mudam de sistema para sistema; no macOS, a linha
+termina em `can't decode byte 0xca in position 0: invalid continuation byte`. O arquivo abriu, a
+leitura falhou, e o `finally` o fechou ([Ler e fechar](./04-ler-e-fechar.md)).
 
 ## Nenhum caso trava
 

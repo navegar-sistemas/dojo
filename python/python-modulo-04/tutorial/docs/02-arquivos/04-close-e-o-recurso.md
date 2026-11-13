@@ -46,9 +46,16 @@ after close: 'archived\n'
 - `!r` dentro das chaves de uma f-string mostra o valor como o `repr()`, entre aspas.
 
 Antes do `close()`, o arquivo no disco ainda está vazio: o texto está no buffer. Depois do
-`close()`, o texto está lá. Quando um programa termina com um arquivo de escrita ainda aberto, o
-Python despeja o buffer ao encerrar; um programa interrompido à força (morto pelo sistema, numa
-queda de energia) perde o que estava no buffer.
+`close()`, o texto está lá.
+
+O segundo `check.read()` encontra o texto, e não `""` como em [Ler duas
+vezes](./03-read-e-o-texto.md#ler-duas-vezes). O primeiro leu um arquivo vazio, e a posição de
+leitura ficou no começo; o `close()` de `file` gravou o texto, o arquivo cresceu, e a leitura
+seguinte partiu do mesmo começo.
+
+Quando um programa termina com um arquivo de escrita ainda aberto, o Python despeja o buffer ao
+encerrar; um programa interrompido à força (morto pelo sistema, numa queda de energia) perde o que
+estava no buffer.
 
 ## Fechar mesmo quando algo dá errado
 

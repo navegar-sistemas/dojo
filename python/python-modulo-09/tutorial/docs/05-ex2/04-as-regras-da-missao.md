@@ -6,8 +6,8 @@ title: As regras da missão
 # As regras da missão
 
 As quatro regras de segurança entram num método dentro de `SpaceMission`, depois do último campo
-(`budget_millions`), no mesmo formato das regras do exercício 1
-([As regras](../04-ex1/03-as-regras.md)):
+(`budget_millions`), separado dele por uma linha em branco, no mesmo formato das regras do
+exercício 1 ([As regras](../04-ex1/03-as-regras.md)):
 
 ```python
     @model_validator(mode="after")
@@ -55,9 +55,11 @@ Quando o método roda, cada `member` já é um `CrewMember` validado: `member.ra
 1. **O ID começa com `M`.** Conferida antes do laço, porque não depende da tripulação.
 2. **Alguém no comando.** Falha quando nenhum tripulante é `commander` nem `captain`. A mensagem é
    a da saída do enunciado, com `Mission` na frente ([O problema](./01-o-problema.md#a-saída-esperada)).
-3. **Experiência nas missões longas.** Só vale quando `duration_days` passa de 365. "50% de
-   tripulação experiente" é lido como **pelo menos metade**: com 3 tripulantes, 2 experientes
-   bastam (66%) e 1 não basta (33%); com 4, bastam 2 (exatamente 50%). A conta
+3. **Experiência nas missões longas.** Só vale quando `duration_days` passa de 365. Escolha do
+   tutorial: "50% de tripulação experiente" é lido como **pelo menos metade**. Com 3 tripulantes,
+   2 experientes bastam (66%) e 1 não basta (33%); com 4, bastam 2 (exatamente 50%); com 5, são
+   precisos 3. O gerador de dados do enunciado usa outra conta, `len(crew) // 2`, e com 5
+   tripulantes se contenta com 2 ([Validar os dados](../06-dados-do-gerador/03-validar-os-dados.md)). A conta
    `experienced * 2 < len(self.crew)` é `experienced / len(self.crew) < 0.5` sem divisão: os dois
    lados ficam inteiros, e não há arredondamento de `float` no caminho. O comentário em inglês
    registra essa troca.
@@ -81,7 +83,7 @@ def validation_message(error: ValidationError) -> str:
     return detail["msg"]
 ```
 
-Cada exercício é um programa independente, rodado a partir da sua própria pasta: um
-`import alien_contact` dentro de `ex2/space_crew.py` não acharia o arquivo da pasta `ex1`. Por
-isso a função é copiada, e não importada do exercício 1
+Cada exercício é um programa independente. O Python procura os módulos importados na pasta do
+arquivo rodado: rodando `ex2/space_crew.py`, a procura é na pasta `ex2`, e não na `ex1`, e um
+`import alien_contact` falharia. Por isso a função é copiada, e não importada do exercício 1
 ([A mensagem do erro](../04-ex1/04-a-mensagem-do-erro.md)).

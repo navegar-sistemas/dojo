@@ -10,13 +10,14 @@ dois métodos que cada filha escreve e implementa o `output`, pedido pelo enunci
 auxiliar, `_store`.
 
 Crie o arquivo `data_processor.py` e escreva nele o código abaixo. As páginas seguintes
-acrescentam o resto, sempre no fim do arquivo, nesta ordem:
+acrescentam o resto, e cada uma diz onde a sua parte entra. No arquivo pronto, depois de
+`DataProcessor`, a ordem é:
 
 1. as funções de conferência `is_number`, `is_text`, `is_log` e `is_list_of`
    ([Numeric Processor](./03-numeric-processor.md), [Text Processor](./04-text-processor.md) e
    [Log Processor](./05-log-processor.md));
 2. as classes `NumericProcessor`, `TextProcessor` e `LogProcessor`;
-3. as funções de teste e o `main` ([A demonstração](./07-a-demonstracao.md)).
+3. as funções de teste e o `main` ([A demonstração](./06-a-demonstracao.md)).
 
 A página [O arquivo completo](./08-o-arquivo-completo.md) mostra o resultado, para conferir.
 

@@ -264,7 +264,10 @@ if __name__ == "__main__":
     main()
 ```
 
+Como no [exercício 0](../03-ex0/08-o-arquivo-completo.md), o arquivo termina com uma única quebra
+de linha depois de `    main()`, que o botão de copiar não leva.
+
 O que o arquivo usa, todos autorizados: `abc` (`ABC` e `abstractmethod`), `typing` (`Any`,
-`Callable` e `Protocol`), as funções embutidas `isinstance`, `len`, `str`, `ord`, `range` e
-`print`, e os métodos de lista (`append`, `pop`), de dicionário (`items`) e de texto (`replace`,
-`join`). Nenhum `import` de CSV ou JSON.
+`Callable` e `Protocol`), as funções embutidas `isinstance`, `len`, `str`, `ord` e `print`, e os
+métodos de lista (`append`, `pop`), de dicionário (`items`) e de texto (`replace`, `join`).
+Nenhum `import` de CSV ou JSON.

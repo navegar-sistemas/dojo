@@ -37,12 +37,15 @@ Traceback (most recent call last):
   File "<string>", line 1, in <module>
     import alchemy; print(alchemy.healing_potion())
                           ^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: module 'alchemy' has no attribute 'healing_potion'
+AttributeError: module 'alchemy' has no attribute 'healing_potion'. Did you mean '.potions.healing_potion' instead of '.healing_potion'?
 ```
 
 `heal` e `healing_potion` são a mesma função, mas o pacote só oferece o apelido. Dentro de
 `alchemy/potions.py`, o nome continua `healing_potion`, e o `ft_distillation_0.py` o importa de
-lá com esse nome. (No Python 3.10, o traceback não tem a linha de código nem a de marcação.)
+lá com esse nome. O Python 3.15 procura o nome também dentro dos módulos do pacote e sugere o
+caminho onde ele existe: "você quis dizer `.potions.healing_potion`?". No Python 3.10 e no 3.14,
+a última linha termina em `'healing_potion'`, sem sugestão; no 3.10, o traceback também não tem a
+linha de código nem a de marcação.
 
 ## O que `import alchemy` carrega agora
 

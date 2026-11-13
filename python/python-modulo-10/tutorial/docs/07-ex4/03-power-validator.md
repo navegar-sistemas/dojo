@@ -27,6 +27,12 @@ def power_validator(min_power: int) -> Callable:
 
 ## Onde está o poder
 
+O enunciado se contradiz aqui: diz que `power_validator` é "aplicado numa função solta"
+(*applied on a standalone function*) e, na mesma página, manda decorar com ele o método
+`cast_spell` da classe `MageGuild`. O decorador do tutorial atende os dois casos, e a página
+[Rodar e conferir](./08-rodar-e-conferir.md#wraps-e-o-validador-numa-função-comum) testa os dois:
+o método e uma função solta, `heal`.
+
 O `wrapper` recebe os argumentos como `*args` e `**kwargs` e precisa achar entre eles o poder. O
 enunciado não diz como; o decorador vale para uma função comum (`fireball(target, power)`) e
 também para o método `cast_spell(self, spell_name, power)`, que tem um argumento a mais na frente,

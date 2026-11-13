@@ -356,10 +356,14 @@ def score_filter() -> str:
         body.append(rect(x, base - height, 80, height, radius=2,
                          fill="blue_fill", stroke="blue"))
         body.append(text(x + 40, base + 20, str(score), size=13, mono=True))
+    # O programa imprime a média sem arredondar (1866.6666666666667); o
+    # rótulo corta esse texto, para não sugerir um arredondamento.
+    printed = str(average)
+    shown = printed if len(printed) <= 8 else f"{printed[:8]}…"
     levels: list[tuple[float, str, str]] = [
         (high, f"maior: {high}", "red"),
         (low, f"menor: {low}", "blue"),
-        (average, f"média: {round(average, 2)}", "green"),
+        (average, f"média: {shown}", "green"),
     ]
     for value, label, color in levels:
         level_y = base - value * scale

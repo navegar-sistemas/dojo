@@ -5,6 +5,8 @@ title: O arquivo completo
 
 # O arquivo completo
 
+Crie `ex3/ft_vault_security.py` com o conteúdo abaixo, que junta a função e a demonstração:
+
 ```python title="ex3/ft_vault_security.py"
 def secure_archive(file_name: str, action: str = "read",
                    content: str = "") -> tuple[bool, str]:
@@ -16,7 +18,7 @@ def secure_archive(file_name: str, action: str = "read",
             with open(file_name, "w") as file:
                 file.write(content)
             return (True, "Content successfully written to file")
-    except (OSError, UnicodeDecodeError) as error:
+    except (OSError, ValueError) as error:
         return (False, str(error))
     return (False, f"Unknown action '{action}'")
 
@@ -38,5 +40,8 @@ if __name__ == "__main__":
     main()
 ```
 
+Depois de colar, confira a quebra de linha depois de `    main()`, como no [exercício
+0](../03-ex0/05-o-arquivo-completo.md).
+
 O que o arquivo usa, todos autorizados: `open()`, `read()`, `write()` e `print()`, além do
-construtor `str()` e da própria função. Nenhum `import`, e o `with` aparece só neste exercício.
+construtor `str()` e das próprias funções. Nenhum `import`, e o `with` aparece só neste exercício.

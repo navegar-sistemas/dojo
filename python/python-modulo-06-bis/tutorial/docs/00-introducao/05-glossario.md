@@ -32,7 +32,7 @@ title: Glossário
 | **estratégia abstrata (*abstract strategy*)** | padrão em que o jeito de agir fica num objeto à parte, trocável, e quem usa só chama um método dele | [O problema do exercício 4](../08-ex4/01-o-problema.md) |
 | **estreitamento de tipo (*type narrowing*)** | depois de um `isinstance`, o mypy passa a tratar a variável com o tipo conferido | [Herança múltipla](../06-pacotes/02-heranca-multipla.md#isinstance-e-o-mypy) |
 | **exceção** | objeto que descreve um erro, com um tipo e uma mensagem | [Pré-requisitos](./03-pre-requisitos.md) |
-| **exceção dedicada** | tipo de exceção do próprio projeto: uma classe filha de `Exception`, como `StrategyError` | [A estratégia abstrata](../08-ex4/02-a-estrategia-abstrata.md#uma-exceção-do-projeto) |
+| **exceção dedicada** | tipo de exceção do próprio projeto: uma classe filha de `Exception`, como `StrategyError` | [A estratégia abstrata](../08-ex4/03-a-estrategia-abstrata.md#uma-exceção-do-projeto) |
 | **expor** | oferecer um nome no próprio pacote, pelo `__init__.py`, para quem o importa | [O pacote](../06-pacotes/01-o-pacote.md#o-que-o-pacote-expõe) |
 | **expressão condicional** | `a if condição else b`: vale `a` se a condição é verdadeira, e `b` se não | [Numeric Processor](../03-ex0/03-numeric-processor.md) |
 | **fábrica abstrata (*abstract factory*)** | padrão em que um objeto, a fábrica, cria os objetos de uma família, e quem pede não sabe qual classe recebe | [A fábrica abstrata](../07-ex3/06-a-fabrica-abstrata.md) |
@@ -59,7 +59,7 @@ title: Glossário
 | **módulo** | arquivo de código que entra no programa com `import`, como `abc` e `typing` | [O enunciado em linguagem simples](./02-o-enunciado-em-linguagem-simples.md) |
 | **MRO** | a ordem em que o Python procura um método nas classes: a própria classe, depois as mães na ordem escrita | [Herança múltipla](../06-pacotes/02-heranca-multipla.md#o-que-aconteceu-a-ordem-de-busca) |
 | **mypy** | ferramenta que confere os tipos anotados no código, sem rodá-lo | [Type hints, flake8 e mypy](../01-ambiente/04-type-hints-flake8-e-mypy.md) |
-| **`__name__`** | variável que vale `"__main__"` no arquivo rodado com `python3` | [A demonstração do exercício 0](../03-ex0/07-a-demonstracao.md) |
+| **`__name__`** | variável que vale `"__main__"` no arquivo rodado com `python3` | [A demonstração do exercício 0](../03-ex0/06-a-demonstracao.md) |
 | **`None`** | o valor que quer dizer "nada" | [Registrar e rotear](../04-ex1/03-registrar-e-rotear.md) |
 | **pacote (*package*)** | pasta de módulos com um `__init__.py`, importada como uma peça só | [O pacote](../06-pacotes/01-o-pacote.md) |
 | **padrão de projeto** | solução de organização de classes com nome, usada em muitos programas | [O que vamos construir](./01-o-que-vamos-construir.md) |

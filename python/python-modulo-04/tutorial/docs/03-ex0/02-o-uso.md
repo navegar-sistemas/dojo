@@ -18,7 +18,7 @@ import typing
 
 
 def main() -> None:
-    if len(sys.argv) != 2:
+    if len(sys.argv) != 2 or not sys.argv[1].isprintable():
         print(f"Usage: {sys.argv[0]} <file>")
         return
     print("=== Cyber Archives Recovery ===")
@@ -38,9 +38,11 @@ enunciado e ficam no topo do arquivo.
 ## A conferência
 
 `len(sys.argv) != 2` é verdadeiro quando o comando não traz exatamente um argumento depois do nome
-do programa: nenhum, ou dois e mais. Nesse caso o programa imprime o uso e o `return` encerra o
-`main` ali. O `sys.exit()`, a forma comum de encerrar um programa, não está entre as funções
-autorizadas; o `return` no `main` tem o mesmo efeito, porque nada roda depois dele.
+do programa: nenhum, ou mais de um. A segunda parte, `not sys.argv[1].isprintable()`, recusa um
+nome que não pode ser mostrado na tela (explicada logo abaixo). Em qualquer dos dois casos, o
+programa imprime o uso e o `return` encerra o `main` ali. O `sys.exit()`, a forma comum de encerrar
+um programa, não está entre as funções autorizadas; o `return` no `main` tem o mesmo efeito, porque
+nada roda depois dele.
 
 `<file>` é a convenção das mensagens de uso para "aqui vai um nome de arquivo". `sys.argv[0]` é o
 caminho do programa como foi digitado: rodando da pasta `data-archivist`, a mensagem sai
@@ -49,6 +51,23 @@ caminho do programa como foi digitado: rodando da pasta `data-archivist`, a mens
 
 Com o argumento certo, o programa imprime o cabeçalho e entrega o nome, `sys.argv[1]`, para
 `recover_archive`.
+
+## Um nome que não pode ser mostrado
+
+`isprintable()` é um método de `str` que devolve `True` quando todos os caracteres do texto podem
+ser impressos, e `False` quando algum não pode, como uma quebra de linha ou uma tabulação.
+
+O terminal entrega cada argumento ao programa como bytes, e o Python os traduz em caracteres pela
+codificação UTF-8 ([open e o objeto arquivo](../02-arquivos/02-open-e-o-objeto-arquivo.md)). Um
+byte que não forma texto em UTF-8 vira um caractere especial, que não pode ser impresso. No bash e
+no zsh, `$'\xff'` escreve um argumento feito de um byte desses, o de valor 255. Na configuração de
+idioma mais comum do Linux e do macOS (`pt_BR.UTF-8`, `en_US.UTF-8`), o primeiro `print` com esse
+nome lançaria `UnicodeEncodeError` e travaria o programa. O `isprintable()` barra o nome antes: o
+programa mostra o uso e termina normalmente ([Rodar e
+conferir](./06-rodar-e-conferir.md#as-outras-falhas)).
+
+O `or` só confere a segunda parte quando a primeira é falsa, isto é, quando há exatamente um
+argumento. Sem argumento, o `sys.argv[1]` nem existe, e não chega a ser lido.
 
 ## O main
 

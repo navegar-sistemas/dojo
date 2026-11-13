@@ -26,8 +26,12 @@ def price(potion: dict) -> int:
     return potion["price"]
 ```
 
-Uma lambda não aceita type hints nos parâmetros. Por isso o mypy não confere o que acontece dentro
-dela, e o `--disallow-untyped-defs` não reclama.
+Uma lambda não aceita type hints nos parâmetros. O mypy deduz o tipo de cada parâmetro pelo lugar
+onde a lambda é usada e confere o corpo com esse tipo: com `words: list[str]`, a linha
+`sorted(words, key=lambda word: word + 1)` dá o erro
+`Unsupported operand types for + ("str" and "int")`, porque `word` é um `str`. O
+`--disallow-untyped-defs` não reclama da falta de anotação, porque ele só vale para funções
+escritas com `def`.
 
 ## O experimento
 
@@ -58,7 +62,7 @@ A anotação `list[dict]` em `potions` é necessária. Sem ela, o mypy deduz o t
 cada dicionário mistura `str` (`"Mana"`) e `int` (`30`), e ele conclui `dict[str, object]`, em que
 `object` quer dizer "um valor qualquer, sem operação garantida". Aí ele recusa comparar preços
 (`<`, `sorted`, `max`), porque não dá para comparar dois `object`. Com `dict` sem colchetes, o
-mypy aceita qualquer chave e qualquer valor, e confia no código.
+mypy aceita qualquer chave e qualquer valor, e confia no código, inclusive dentro das lambdas.
 
 ```bash
 python3 experimentos/lambdas.py
@@ -91,8 +95,8 @@ python3 experimentos/lambdas.py
 
 E mais três detalhes:
 
-- **`map` e `filter` são preguiçosos.** Eles não devolvem uma lista, e sim um **iterador** (o
-  `<class 'map'>`): um objeto que entrega os itens um por um, só quando alguém pede, e uma única
+- **`map` e `filter` são preguiçosos.** Eles não devolvem uma lista, e sim um **iterador**
+  (`type(valor)` dá a classe de um valor, e a de `names` é `<class 'map'>`): um objeto que entrega os itens um por um, só quando alguém pede, e uma única
   vez. O primeiro `list(names)` pediu todos os itens; o segundo não recebeu nenhum (`[]`). Por isso
   o código do projeto embrulha `map` e `filter` em `list(...)` quando precisa devolver uma lista;
 - **`round(valor, 2)`** arredonda para duas casas decimais: `100 / 3` é `33.333...`, e vira

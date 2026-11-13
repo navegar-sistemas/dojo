@@ -25,7 +25,8 @@ para ler o que a pessoa digita.
 ## A saída esperada
 
 O cabeçalho muda para `=== Cyber Archives Recovery & Preservation ===`. Depois do
-`File 'ancient_fragment.txt' closed.`, vêm uma linha vazia, o texto transformado e a pergunta:
+`File 'ancient_fragment.txt' closed.`, vêm uma linha vazia, a linha `Transform data:`, o texto
+transformado entre as linhas `---` e a pergunta:
 
 ```text
 === Cyber Archives Recovery & Preservation ===
@@ -79,7 +80,7 @@ erro.
 ## A estrutura do programa
 
 O arquivo mantém `display` e `recover_archive` do exercício 0, com uma mudança, e ganha três
-funções:
+funções. Como no exercício 0, a divisão é escolha do projeto:
 
 | Função | O que faz |
 |---|---|

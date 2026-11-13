@@ -61,7 +61,7 @@ Found 1 error in 1 file (checked 1 source file)
 ```
 
 O flake8 não imprime nada. O mypy acusa só a chamada proposital da linha 111
-([O erro proposital do mypy](./06-o-erro-proposital-do-mypy.md)); qualquer outra linha na saída
+([O erro proposital do mypy](./07-o-erro-proposital-do-mypy.md)); qualquer outra linha na saída
 dele é um problema a corrigir.
 
 ## A classe abstrata não é instanciada

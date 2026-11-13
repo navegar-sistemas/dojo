@@ -5,6 +5,9 @@ title: As contas
 
 # As contas
 
+Com o inventário montado, faltam as linhas de análise da saída: o total, a porcentagem de cada
+item e o item mais e o menos abundante.
+
 ## O total
 
 `sum(inventory.values())` soma as quantidades: 1 + 5 + 2 + 3 + 1 = 12. A quantidade de itens

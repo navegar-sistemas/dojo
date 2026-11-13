@@ -30,13 +30,14 @@ diretamente", já que acrescentar a pasta `alchemy` ao `sys.path` é proibido).
 
 ## O `__init__.py` de `alchemy`
 
-Para quem importa só `alchemy`, o caminho até a receita passa pelo `alchemy/__init__.py`, que
-fica assim:
+Para quem importa só `alchemy`, o caminho até a receita passa pelo `alchemy/__init__.py`. Ele
+ganha a linha da receita e, pelo [critério do tutorial](./02-absoluto-e-relativo.md#o-critério-do-tutorial),
+os imports dos vizinhos passam a ser relativos:
 
 ```python title="alchemy/__init__.py"
-from alchemy.elements import create_air
-from alchemy.potions import healing_potion as heal, strength_potion
-from alchemy.transmutation import lead_to_gold
+from .elements import create_air
+from .potions import healing_potion as heal, strength_potion
+from .transmutation import lead_to_gold
 
 __all__ = ["create_air", "heal", "strength_potion", "lead_to_gold"]
 ```
@@ -47,8 +48,31 @@ nome da receita fica direto no pacote, como as poções da Parte II. A linha tam
 subpacote virar atributo de `alchemy`, e `alchemy.transmutation.lead_to_gold()` funcionaria do
 mesmo jeito.
 
-Os imports do `alchemy/__init__.py` continuam absolutos, como foram escritos nas Partes I e II;
-os dois jeitos funcionam e podem conviver no mesmo projeto.
+Escrito no `alchemy/__init__.py`, o ponto quer dizer o próprio pacote `alchemy`: `.elements` é o
+mesmo `alchemy.elements` de antes, e nada muda para quem importa o pacote.
+
+## O `potions.py` no critério
+
+O `alchemy/potions.py` também importa um vizinho do pacote, e passa a usar o relativo para ele. O
+`elements.py` da raiz continua absoluto:
+
+```python title="alchemy/potions.py"
+from elements import create_fire, create_water
+from .elements import create_air, create_earth
+
+
+def healing_potion() -> str:
+    return (f"Healing potion brewed with '{create_earth()}' "
+            f"and '{create_air()}'")
+
+
+def strength_potion() -> str:
+    return (f"Strength potion brewed with '{create_fire()}' "
+            f"and '{create_water()}'")
+```
+
+As duas linhas de import trocaram de lugar: o absoluto vem antes, como na receita. O corpo do
+arquivo não muda.
 
 ## Quem é quem
 

@@ -15,12 +15,14 @@ title: O enunciado em linguagem simples
 - **Type hints em todo o código, conferidos pelo mypy.** Um *type hint* é a anotação do tipo de
   cada parâmetro e do retorno, como em `def dobro(n: int) -> int:`. O mypy é o programa que
   confere se esses tipos batem com o uso
-  ([Type hints, flake8 e mypy](../01-ambiente/04-type-hints-flake8-e-mypy.md)). Há uma única
-  reclamação do mypy que o enunciado pede de propósito, no exercício 0
-  ([O erro proposital do mypy](../03-ex0/06-o-erro-proposital-do-mypy.md)).
-- **O tratamento de exceções protege os dados.** Um dado inválido não pode estragar o que já
-  estava guardado: ou ele entra inteiro, ou não entra nada
-  ([Numeric Processor](../03-ex0/03-numeric-processor.md)).
+  ([Type hints, flake8 e mypy](../01-ambiente/04-type-hints-flake8-e-mypy.md)). O mypy acusa
+  um único erro em todo o projeto, no exercício 0: o enunciado pede um teste que o provoca e
+  avisa que ele fica de propósito
+  ([O erro proposital do mypy](../03-ex0/07-o-erro-proposital-do-mypy.md)).
+- **O tratamento de exceções protege os fluxos de dados contra corrupção.** No tutorial, isso
+  quer dizer que um dado inválido não estraga o que já estava guardado: ou ele entra inteiro, ou
+  não entra nada
+  ([Numeric Processor](../03-ex0/03-numeric-processor.md#por-que-validar-a-lista-inteira-antes-de-guardar)).
 - **Só dois `import` da biblioteca do Python: `abc` e `typing`.** São dois **módulos**
   (arquivos de código que vêm com o Python): `abc` traz o que é preciso para criar classes
   abstratas ([A classe abstrata](../02-conceitos/02-a-classe-abstrata.md)), e `typing` traz type
@@ -100,7 +102,7 @@ jeito de processar um dado, e que explique para que serve cada padrão de projet
   as classes que têm a habilidade herdam ([A capacidade](../07-ex3/04-a-capacidade.md)).
 - **Abstract strategy** ("estratégia abstrata"): o padrão em que o jeito de agir fica num objeto
   à parte, trocável, e quem usa só chama um método dele
-  ([A estratégia abstrata](../08-ex4/02-a-estrategia-abstrata.md)).
+  ([A estratégia abstrata](../08-ex4/03-a-estrategia-abstrata.md)).
 - **Neo-Tokyo, 2087, "Stream Engineer", "combat sandbox"**: só o cenário de ficção do projeto.
 - **Instruções sobre IA**: o enunciado tem um capítulo pedindo que todo código vindo de uma
   ferramenta de IA seja entendido por completo e revisado com colegas.

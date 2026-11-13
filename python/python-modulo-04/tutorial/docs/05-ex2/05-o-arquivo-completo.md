@@ -5,6 +5,9 @@ title: O arquivo completo
 
 # O arquivo completo
 
+Crie `ex2/ft_stream_management.py` com o conteúdo abaixo: o código do exercício 1 com as mudanças
+das páginas anteriores.
+
 ```python title="ex2/ft_stream_management.py"
 import sys
 import typing
@@ -52,7 +55,7 @@ def ask_file_name() -> str:
     sys.stdout.flush()
     try:
         line = sys.stdin.readline()
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt, UnicodeDecodeError):
         line = ""
     if line == "":
         print()
@@ -62,7 +65,7 @@ def ask_file_name() -> str:
 def save_archive(file_name: str, content: str) -> bool:
     try:
         file: typing.IO[str] = open(file_name, "w")
-    except OSError as error:
+    except (OSError, ValueError) as error:
         report_error(f"Error opening file '{file_name}': {error}")
         return False
     try:
@@ -77,7 +80,7 @@ def save_archive(file_name: str, content: str) -> bool:
 
 
 def main() -> None:
-    if len(sys.argv) != 2:
+    if len(sys.argv) != 2 or not sys.argv[1].isprintable():
         print(f"Usage: {sys.argv[0]} <file>")
         return
     print("=== Cyber Archives Recovery & Preservation ===")
@@ -102,7 +105,10 @@ if __name__ == "__main__":
     main()
 ```
 
+Depois de colar, confira a quebra de linha depois de `    main()`, como no [exercício
+0](../03-ex0/05-o-arquivo-completo.md).
+
 O que o arquivo usa, todos autorizados: `import sys`, `sys.argv`, `sys.stdin`, `sys.stdout`,
 `sys.stderr`, `len()`, `open()`, `import typing`, `typing.IO`, `read()`, `readline()`, `write()`,
-`flush()`, `close()` e `print()`, além dos métodos `splitlines()` e `rstrip()` de `str` e das
-próprias funções. `input()` não aparece.
+`flush()`, `close()` e `print()`, além dos métodos `splitlines()`, `isprintable()` e `rstrip()` de
+`str` e das próprias funções. `input()` não aparece.

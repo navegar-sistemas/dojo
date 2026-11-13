@@ -10,11 +10,11 @@ número como texto: `3.14` vira `"3.14"`, e `[1, 2]` vira dois itens, `"1"` e `"
 
 ## Duas funções de conferência
 
-Antes da classe, duas funções soltas fazem as perguntas de tipo. `is_list_of` fica fora da
-classe porque as três filhas a usam; `is_number` fica ao lado dela, junto com as conferências
-das outras filhas (`is_text` e `is_log`, nas próximas páginas). No arquivo, as quatro funções
-ficam juntas, depois de `DataProcessor` e antes das classes filhas, na ordem `is_number`,
-`is_text`, `is_log`, `is_list_of`:
+Antes da classe, duas funções soltas, escritas fora de qualquer classe, fazem as perguntas de
+tipo. Funções soltas são escolha do tutorial: `is_list_of` serve às três filhas, e as
+conferências de cada tipo (`is_number` aqui, `is_text` e `is_log` nas próximas páginas) ficam
+junto dela, num lugar só. No arquivo, as quatro funções ficam juntas, depois de `DataProcessor`
+e antes das classes filhas, na ordem `is_number`, `is_text`, `is_log`, `is_list_of`:
 
 ```python
 def is_number(value: Any) -> bool:
@@ -86,8 +86,8 @@ O corpo tem três passos:
 
 ## Por que validar a lista inteira antes de guardar
 
-O enunciado pede que o tratamento de exceções proteja os dados contra **corrupção**: um dado
-ruim não pode deixar o processador num estado pela metade. Com `[1, "x", 3]`, guardar item por
-item e só reclamar ao chegar no `"x"` deixaria o `1` guardado e o `3` perdido. Como `validate`
-confere a lista inteira antes do primeiro `_store`, ou todos os itens entram, ou nenhum entra, e
-a fila e o rank continuam exatamente como estavam.
+O enunciado pede que o tratamento de exceções proteja os fluxos de dados contra **corrupção**. No
+tutorial, isso quer dizer que um dado ruim não pode deixar o processador num estado pela metade.
+Com `[1, "x", 3]`, guardar item por item e só reclamar ao chegar no `"x"` deixaria o `1` guardado
+e o `3` perdido. Como `validate` confere a lista inteira antes do primeiro `_store`, ou todos os
+itens entram, ou nenhum entra, e a fila e o rank continuam exatamente como estavam.

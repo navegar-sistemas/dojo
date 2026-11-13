@@ -5,8 +5,8 @@ title: read e o texto
 
 # read e o texto
 
-Com o arquivo aberto, `read()` entrega o conteúdo. Um detalhe desse texto aparece em toda saída do
-projeto: a linha vazia antes do `---` final.
+Com o arquivo aberto, `read()` entrega o conteúdo. Um detalhe desse texto aparece em toda saída dos
+exercícios 0, 1 e 2 que mostra um arquivo: a linha vazia antes do `---` final.
 
 ## Ler
 
@@ -51,7 +51,7 @@ end
 arquivo já terminou a terceira linha; o do `print` produz uma linha vazia, que aparece antes de
 `end`.
 
-É essa linha vazia que fica antes do `---` final nas saídas do projeto:
+É essa linha vazia que fica antes do `---` final quando os exercícios mostram um texto:
 
 ```text
 ---

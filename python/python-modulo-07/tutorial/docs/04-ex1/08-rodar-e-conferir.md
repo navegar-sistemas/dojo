@@ -98,8 +98,9 @@ Shiftling attacks normally.
 ```
 
 Os dois `Shiftling` vêm da mesma fábrica, mas são objetos diferentes: só o primeiro se
-transformou, e só ele ataca com o golpe reforçado. O código passado com `-c` não é conferido pelo
-mypy; num arquivo, `first.transform()` precisaria do `isinstance` do `capacitor.py`.
+transformou, e só ele ataca com o golpe reforçado. Este comando roda só o Python (`python3 -c`), e o Python
+não confere tipos; para o mypy, `first.transform()` precisaria do `isinstance` do
+`capacitor.py`.
 
 ## Um arquivo do pacote não roda sozinho
 

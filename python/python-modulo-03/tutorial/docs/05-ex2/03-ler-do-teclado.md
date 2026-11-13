@@ -94,7 +94,10 @@ OverflowError
   maior float, cerca de 1.8 × 10³⁰⁸, e `** 2` lança `OverflowError` ("erro de estouro"). Sem
   tratamento, a conta da distância travaria o programa.
 
-O programa recusa os três casos, com uma faixa de valores aceitos
+O enunciado não fala desses valores, e a saída dele só mostra dois tipos de erro, `Invalid syntax`
+e `Error on parameter '...'` com a mensagem do `float()`. A escolha deste projeto é recusar os
+três casos com uma faixa de valores aceitos e uma mensagem própria, no formato da segunda:
+`Error on parameter '1e200': out of range`
 ([get_player_pos](./04-get-player-pos.md#a-faixa-de-valores)).
 
 Os métodos `split` e `strip` são do tipo `str`, e `float()` é o construtor do tipo `float`: os

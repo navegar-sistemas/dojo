@@ -13,7 +13,12 @@ O enunciado roda cada programa de dentro da pasta do exercício, e a saída dos 
 depende disso, porque eles imprimem o nome do programa do jeito que foi digitado
 ([O nome do programa](../03-ex0/02-a-linha-de-comando.md#o-nome-do-programa)). Por isso, os
 comandos abaixo entram na pasta antes de rodar: `(cd ex0 && python3 ft_command_quest.py)` entra
-em `ex0`, roda o programa e, por causa dos parênteses, volta sozinho para a pasta de onde saiu.
+em `ex0` e roda o programa. Os parênteses rodam os dois comandos numa cópia do **shell** (o
+programa do terminal que lê e executa os comandos), então o `cd` não muda a pasta do terminal.
+
+Esses comandos rodam da pasta do projeto, criada em
+[A pasta do projeto](../01-ambiente/02-a-pasta-do-projeto.md), depois que cada exercício estiver
+escrito. A página "Rodar e conferir" de cada exercício volta a eles.
 
 ## Exercício 0
 

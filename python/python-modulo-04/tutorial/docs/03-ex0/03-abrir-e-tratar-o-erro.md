@@ -26,7 +26,9 @@ def recover_archive(file_name: str) -> None:
   falha](../02-arquivos/05-quando-o-open-falha.md));
 - `{error}` imprime a mensagem da exceção, como `[Errno 2] No such file or directory: 'foo'`;
 - o `return` encerra a função ali. Ela não devolve nada (`-> None`), então o `return` sozinho só
-  serve para parar.
+  serve para parar. Por causa dele, o código depois deste `try` só roda quando o `open()` deu
+  certo. E `file`, criada dentro do `try`, continua valendo depois dele: em Python, um `try`, um
+  `if` ou um `for` não prendem ao próprio bloco as variáveis criadas dentro dele.
 
 O resultado, para um arquivo que não existe, é a saída do enunciado:
 

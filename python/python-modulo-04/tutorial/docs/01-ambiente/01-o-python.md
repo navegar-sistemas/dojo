@@ -16,14 +16,14 @@ python3 --version
 Python 3.12.3
 ```
 
-O número depois de `Python` é a versão. Qualquer `3.10` ou maior serve (`3.10`, `3.11`, …, `3.14`).
+O número depois de `Python` é a versão. Qualquer versão a partir da `3.10` serve.
 
 ## Se o comando não existir
 
 No Linux (Debian e Ubuntu), instale o Python do sistema e o pacote `python3-venv`, que permite criar
-o ambiente virtual da página [O ambiente virtual](./03-o-ambiente-virtual.md). `apt` é o instalador
-de programas do Debian e do Ubuntu, e `sudo` roda o comando como administrador (ele pede a sua
-senha):
+o ambiente virtual da página [O ambiente virtual](./03-o-ambiente-virtual.md) e costuma faltar até
+quando o `python3` já vem instalado. `apt` é o instalador de programas do Debian e do Ubuntu, e
+`sudo` roda o comando como administrador (ele pede a sua senha):
 
 ```bash
 sudo apt install python3 python3-venv

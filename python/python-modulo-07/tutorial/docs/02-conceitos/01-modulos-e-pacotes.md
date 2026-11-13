@@ -28,6 +28,7 @@ terminal está. Com `python3 -c '...'`, que roda o código escrito entre as aspa
 pasta atual do terminal. Depois vêm as pastas da biblioteca do Python, onde estão `abc` e
 `typing`.
 
+Uma **variável de ambiente** é um valor com nome que o terminal entrega aos programas que roda.
 A variável de ambiente `PYTHONPATH` acrescenta pastas ao começo dessa lista. Escrita antes do
 comando, ela vale só para ele: `PYTHONPATH=experimentos python3 -c '...'` deixa o código entre
 as aspas importar os arquivos de `experimentos/`.
@@ -103,7 +104,8 @@ False
 
 - `import shapes` achou a pasta `experimentos/shapes/`, porque `experimentos/` é a pasta do
   programa rodado, e rodou o `__init__.py`;
-- `make_square(3)` criou um `Square` de lado 3, de área 9;
+- `make_square(3)` criou um `Square` de lado 3, de área 9. `isinstance(square, Square)` responde
+  se o objeto é da classe `Square` (ou de uma filha dela): `True`;
 - o pacote `shapes` tem o nome `make_square`, que o `__init__.py` importou, mas não tem `Square`:
   `from shapes import Square` falharia. A classe continua alcançável pelo módulo de dentro,
   `shapes.square`: o Python não esconde nada. O que o `__init__.py` controla é o que o pacote
@@ -189,9 +191,9 @@ __pycache__
 square.py
 ```
 
-O `-1` do `ls` lista um nome por linha. Ao importar um módulo, o Python grava na pasta dele uma `__pycache__/` com uma versão
-pré-processada do arquivo, para carregar mais rápido da próxima vez. Ela é refeita sozinha
-quando o arquivo muda e pode ser apagada a qualquer momento.
+O `-1` do `ls` lista um nome por linha. Ao importar um módulo, o Python grava na pasta dele uma
+`__pycache__/` com uma versão pré-processada do arquivo, para carregar mais rápido da próxima
+vez. Ela é refeita sozinha quando o arquivo muda e pode ser apagada a qualquer momento.
 
 ## No projeto
 

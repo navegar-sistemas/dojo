@@ -39,7 +39,11 @@ flowchart LR
     root --> ex6["ex6/"] --> f6["ft_data_alchemist.py"]
     root --> exp["experimentos/"]
     root --> venv[".venv/"]
+    root --> cache[".mypy_cache/"]
+    root --> entrega["entrega/"]
 ```
 
-A pasta `.venv/` é criada em [O ambiente virtual](./03-o-ambiente-virtual.md). Só os sete arquivos
-`.py` das pastas `ex0` a `ex6` são entregues.
+A pasta `.venv/` é criada em [O ambiente virtual](./03-o-ambiente-virtual.md). A `.mypy_cache/`
+aparece quando o mypy roda pela primeira vez, e a `entrega/` é criada em
+[Entregar](../10-fechamento/02-entregar.md). Só os sete arquivos `.py` das pastas `ex0` a `ex6`
+são entregues.

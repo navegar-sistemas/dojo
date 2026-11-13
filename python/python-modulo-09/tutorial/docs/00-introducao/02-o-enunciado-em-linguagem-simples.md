@@ -25,8 +25,9 @@ title: O enunciado em linguagem simples
   `pip`, o instalador de bibliotecas do Python, dentro de um **ambiente virtual**, uma pasta com
   as bibliotecas só deste projeto ([O ambiente virtual](../01-ambiente/03-o-ambiente-virtual.md)).
 - **Pydantic 2.x em todos os exercícios.** A versão 2 do Pydantic mudou muitos nomes da versão 1.
-  O enunciado pede a sintaxe da versão 2 e proíbe o decorador antigo `@validator`; no lugar dele
-  vai o `@model_validator` ([model_validator](../02-conceitos/06-model-validator.md)).
+  O enunciado pede a sintaxe da versão 2: manda evitar o `@validator`, obsoleto, e usar o
+  `@model_validator` ([model_validator](../02-conceitos/06-model-validator.md)). Um **decorador**
+  é a linha com `@` escrita em cima de um `def`, que modifica a função logo abaixo.
 
 ## Os `import` permitidos
 
@@ -38,7 +39,7 @@ entra no programa com `import`.
 
 Os três exercícios precisam de dois módulos da biblioteca padrão: `datetime`, porque todos têm um
 campo de data e hora, e `enum`, porque os exercícios 1 e 2 pedem um *Enum* (uma lista fechada de
-valores, [Enum](../02-conceitos/05-enum.md)). A leitura do tutorial: `None` quer dizer "nenhuma
+valores, [Enum](../02-conceitos/05-enum.md)). Escolha do tutorial: `None` quer dizer "nenhuma
 biblioteca de fora além do Pydantic", e a biblioteca padrão vale pela regra das ferramentas. Os
 arquivos entregues importam só `pydantic`, `datetime` e `enum`.
 
@@ -75,8 +76,10 @@ de variáveis que digam o que guardam ([Entregar](../07-fechamento/02-entregar.m
 - **Validação embutida** e **conversão automática de tipos**: o que o Pydantic confere e
   converte sozinho, só pelos tipos e limites declarados
   ([Conversão de tipos](../02-conceitos/04-conversao-de-tipos.md)).
-- **`@model_validator(mode='after')`**: o decorador das regras que comparam campos entre si,
-  rodadas depois que cada campo passou na sua conferência
+- **Decorador**: a linha com `@` em cima de um `def`, como `@model_validator(...)`, que modifica
+  a função logo abaixo ([Decorador](../02-conceitos/06-model-validator.md#decorador)).
+- **`@model_validator(mode='after')`**: o decorador das regras que vão além do limite de cada
+  campo, rodadas depois que cada campo passou na sua conferência
   ([model_validator](../02-conceitos/06-model-validator.md)).
 - **Enum**: uma lista fechada de valores com nome ([Enum](../02-conceitos/05-enum.md)).
 - **DateTime**: o tipo `datetime`, uma data com hora ([Conversão de tipos](../02-conceitos/04-conversao-de-tipos.md)).
@@ -85,7 +88,7 @@ de variáveis que digam o que guardam ([Entregar](../07-fechamento/02-entregar.m
 - **Modelos aninhados** (*nested models*): um modelo cujo campo guarda outros modelos, como a
   missão que guarda tripulantes ([Modelos aninhados](../02-conceitos/07-modelos-aninhados.md)).
 - **JSON e CSV**: dois formatos de texto para dados, usados pelas ferramentas de dados
-  ([Gerar os dados](../06-dados-do-gerador/02-gerar-os-dados.md)).
+  ([As ferramentas](../06-dados-do-gerador/01-as-ferramentas.md#data_exporterpy)).
 - **Cosmic Data Observatory, "junior Data Engineer"**: só o cenário de ficção do projeto.
 - **Instruções sobre IA**: o enunciado tem um capítulo pedindo que todo código vindo de uma
   ferramenta de IA seja entendido por completo e revisado com colegas.

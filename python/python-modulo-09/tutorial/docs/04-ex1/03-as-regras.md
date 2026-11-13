@@ -5,8 +5,10 @@ title: As regras
 
 # As regras
 
-As quatro regras de negócio entram num método do modelo, dentro da classe `AlienContact`, logo
-depois do último campo (`is_verified`), com o mesmo recuo dos campos:
+As quatro regras de negócio entram num método do modelo, dentro da classe `AlienContact`, depois
+do último campo (`is_verified`), com o mesmo recuo dos campos e separado dele por **uma** linha em
+branco. Sem essa linha, o flake8 acusa `E301 expected 1 blank line, found 0`: o estilo padrão pede
+uma linha em branco antes de cada método dentro de uma classe.
 
 ```python
     # Runs only after every field passed its own checks, so all the

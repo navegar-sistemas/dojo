@@ -31,7 +31,9 @@ git clone <endereço-do-repositório> entrega
 ```
 
 No lugar de `<endereço-do-repositório>` vai o endereço do seu repositório de entrega; `entrega` é
-o nome da pasta criada. Copie para ela as pastas `ex0` a `ex6` da `data-quest` e entre na pasta
+o nome da pasta criada. Como o repositório está vazio, o `git clone` avisa
+`warning: You appear to have cloned an empty repository.` ("parece que você clonou um repositório
+vazio"); o aviso é esperado. Copie para ela as pastas `ex0` a `ex6` da `data-quest` e entre na pasta
 `entrega`:
 
 ```bash
@@ -56,6 +58,22 @@ git status
   fim da linha continua o comando na linha de baixo;
 - `git status` lista o que vai entrar, em "Changes to be committed". Confira que são os sete
   arquivos, com os nomes exatos, e nada mais.
+
+## Registrar e enviar
+
+O commit guarda também o nome e o e-mail de quem o fez. `git config user.name` e
+`git config user.email` mostram os que o Git conhece; se não mostrarem nada, o `git commit`
+recusa com `Author identity unknown` ("identidade do autor desconhecida") ou registra um nome e um
+e-mail adivinhados a partir do usuário e do nome do computador. Nesse caso, grave os seus antes do
+commit, uma vez só:
+
+```bash
+git config --global user.name "Seu Nome"
+git config --global user.email "seu@email"
+```
+
+`--global` grava a configuração para todos os repositórios do seu usuário. Depois, registre e
+envie:
 
 ```bash
 git commit -m "Data Quest: exercises 0 to 6"

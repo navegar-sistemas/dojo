@@ -67,7 +67,7 @@ texto](../02-arquivos/03-read-e-o-texto.md)). A última linha confirma que o arq
 
 ## A estrutura do programa
 
-O arquivo terá três funções:
+O enunciado não fixa funções. A divisão abaixo é escolha do projeto, e o arquivo terá três:
 
 | Função | O que faz |
 |---|---|

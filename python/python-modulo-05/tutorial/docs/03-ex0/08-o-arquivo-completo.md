@@ -162,6 +162,15 @@ if __name__ == "__main__":
     main()
 ```
 
+O arquivo termina com **uma** quebra de linha logo depois da última linha, `    main()`, e nada
+depois dela. O botão de copiar, no canto do bloco, não leva essa quebra final: se, depois de
+colar, o cursor ficar no fim de `    main()`, aperte Enter uma vez antes de salvar. Alguns editores
+já acrescentam a quebra ao salvar; nesse caso, não aperte. Sem a quebra, o flake8 acusa
+`W292 no newline at end of file` ("sem quebra de linha no fim do arquivo"); com mais de uma, acusa
+`W391 blank line at end of file` ("linha em branco no fim do arquivo"). Se o editor puser espaços
+de recuo na linha nova depois do Enter, apague-os: o flake8 também acusa
+`W293 blank line contains whitespace` ("linha em branco com espaços").
+
 O que o arquivo usa, todos autorizados: `abc` (`ABC` e `abstractmethod`), `typing` (`Any` e
 `Callable`), as funções embutidas `isinstance`, `str`, `range` e `print`, e os métodos de lista
 (`append`, `pop`) e de dicionário (`items`).

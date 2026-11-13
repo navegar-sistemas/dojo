@@ -55,7 +55,10 @@ AttributeError: module 'alchemy' has no attribute 'create_earth'. Did you mean: 
 
 O erro é o resultado esperado ([O erro proposital](../03-parte-1/06-o-erro-proposital.md)).
 `/tmp/Python/module-06` é a pasta onde o enunciado rodou o script; na sua máquina, aparece o
-caminho da sua pasta.
+caminho da sua pasta. Duas linhas mudam com a versão do Python. A dos `^`: o enunciado foi gerado
+com uma versão mais antiga, e nas versões recentes ela começa uma coluna depois; no 3.10, ela não
+aparece. A última: no Python 3.15, a sugestão é escrita
+`Did you mean '.create_air' instead of '.create_earth'?`.
 
 ```bash
 python3 ft_alembic_5.py
@@ -135,4 +138,5 @@ Traceback (most recent call last):
 ImportError: cannot import name 'dark_spell_allowed_ingredients' from partially initialized module 'alchemy.grimoire.dark_spellbook' (most likely due to a circular import) (/tmp/Python/module-06/alchemy/grimoire/dark_spellbook.py)
 ```
 
-Este erro também é o resultado esperado ([A explosão](../06-parte-4/03-a-explosao.md)).
+Este erro também é o resultado esperado ([A explosão](../06-parte-4/03-a-explosao.md)), com o
+caminho da sua pasta no lugar de `/tmp/Python/module-06`.

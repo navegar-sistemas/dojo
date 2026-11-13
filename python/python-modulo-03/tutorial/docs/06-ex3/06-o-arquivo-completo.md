@@ -73,6 +73,9 @@ if __name__ == "__main__":
     main()
 ```
 
+Como no [exercício 0](../03-ex0/05-o-arquivo-completo.md), o arquivo termina com uma única quebra
+de linha depois da última linha, `    main()`, que o botão de copiar não leva.
+
 As linhas em branco dentro do `main` separam as quatro etapas; o Python e o flake8 as aceitam.
 
 O arquivo usa `print()`, `random.randint`, `random.sample`, `set()` e os três métodos de set

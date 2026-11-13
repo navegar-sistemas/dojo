@@ -149,5 +149,5 @@ Battle error, aborting tournament: Invalid Creature 'Flameling' for this aggress
 
 - a primeira batalha (oponente 0 contra 1) termina normalmente;
 - na segunda (0 contra 2), o primeiro `Flameling` ataca, e o segundo, com a estratégia agressiva,
-  levanta a `StrategyError`;
+  lança a `StrategyError`;
 - a terceira batalha (1 contra 2) não acontece: o torneio abortou.

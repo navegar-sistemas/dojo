@@ -32,7 +32,8 @@ done
 cd entrega
 ```
 
-Troque `<endereço-do-repositório>` pelo endereço recebido. O `git clone` baixa o repositório; o
+Troque `<endereço-do-repositório>` pelo endereço recebido e, se a pasta do projeto tiver outro
+nome, troque `cosmic-data` pelo nome da sua pasta. O `git clone` baixa o repositório; o
 `for` cria cada pasta de exercício dentro de `entrega` (o `-p` do `mkdir` não reclama se ela já
 existir) e copia para ela os arquivos `.py` com `cp`.
 
@@ -63,13 +64,21 @@ registro ainda"); num repositório que já tem registros, essa linha não aparec
 linha mostra o **ramo** (*branch*), a linha de histórico em que os registros entram; o nome
 padrão pode ser `main` ou `master`.
 
-O `git commit` precisa saber quem é o autor. Se ele pedir (`Please tell me who you are`),
-informe o seu nome e e-mail uma vez, e rode o `git commit` de novo:
+Antes do primeiro registro, diga ao git quem é o autor, com o seu nome e o seu e-mail. Dentro
+da pasta `entrega`, sem `--global`, a configuração vale só para este repositório:
 
 ```bash
-git config --global user.name "Seu Nome"
-git config --global user.email "seu@email"
+git config user.name "Seu Nome"
+git config user.email "voce@exemplo.com"
 ```
+
+Os dois comandos não imprimem nada. Sem eles, o git pode recusar o registro com
+`Please tell me who you are` ("diga quem você é") ou, como no macOS, aceitá-lo com um nome e um
+e-mail deduzidos do usuário e do nome do computador. Nesse segundo caso, a saída do `git commit`
+traz o aviso `Your name and email address were configured automatically based on your username
+and hostname` ("seu nome e e-mail foram configurados automaticamente"): é o sinal de que o registro
+saiu com a identidade errada. Para corrigir o último registro depois de configurar, use
+`git commit --amend --reset-author`.
 
 ```bash
 git commit -m "Add exercises 0 to 2"

@@ -29,11 +29,16 @@ arquivo](../04-ex1/05-gravar-o-arquivo.md)).
 
 Cada etapa tem o seu `try`, para a mensagem dizer o que falhou. Ao abrir, `except OSError` captura a
 família inteira de falhas do sistema: `FileNotFoundError` (Errno 2), `PermissionError` (Errno 13),
-`IsADirectoryError` (Errno 21) e as outras. Ao ler, `UnicodeDecodeError` também é capturado, porque
-um arquivo que não é texto não é uma falha do sistema. Ao gravar, a falha pode aparecer só no
-`close()`, e um `try` por fora do `finally` a captura. Em todas as falhas de arquivo, e quando a
-pergunta do nome recebe `Ctrl+D` ou `Ctrl+C`, o programa avisa e termina com código `0` ([Quando o
-open falha](../02-arquivos/05-quando-o-open-falha.md)).
+`IsADirectoryError` (Errno 21) e as outras ([Quando o open
+falha](../02-arquivos/05-quando-o-open-falha.md)). Ao ler, `UnicodeDecodeError` também é
+capturado, porque um arquivo que não é texto não é uma falha do sistema. Ao gravar, o `open()`
+recusa com `ValueError` um nome com o caractere nulo, e a falha de disco cheio pode aparecer só no
+`close()`, que um `try` por fora do `finally` captura ([Gravar o
+arquivo](../04-ex1/05-gravar-o-arquivo.md)). Na pergunta do nome, `Ctrl+D`, `Ctrl+C` e bytes que
+não formam texto viram resposta vazia ([Pedir o nome](../04-ex1/04-pedir-o-nome.md)). Um
+argumento que não pode ser impresso leva à mensagem de uso ([O uso](../03-ex0/02-o-uso.md)). Em
+todos esses casos, o programa avisa e termina com código `0` ([Rodar e conferir do exercício
+0](../03-ex0/06-rodar-e-conferir.md#nenhum-caso-trava)).
 
 ## Por que mandar os erros para a saída de erro?
 

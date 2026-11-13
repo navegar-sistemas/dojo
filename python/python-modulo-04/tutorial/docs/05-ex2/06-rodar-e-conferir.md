@@ -57,9 +57,9 @@ Nenhum dos dois `diff` imprime nada.
 
 ## A ordem, com tudo junto
 
-Com `2>&1`, as duas saídas vão juntas para o `diff`, passando por um pipe. É o caso em que, sem o
-`flush` de `report_error`, o erro sairia fora de ordem ([Escrever no
-stderr](./03-escrever-no-stderr.md)):
+Dentro do `<(...)`, a saída do programa vai para o `diff` por um pipe, e não para o terminal. Com
+`2>&1`, a saída de erro vai junto, pelo mesmo caminho. É o caso em que, sem o `flush` de
+`report_error`, o erro sairia fora de ordem ([Escrever no stderr](./03-escrever-no-stderr.md)):
 
 ```bash
 diff <(printf 'vault.txt\n' | python3 ex2/ft_stream_management.py ancient_fragment.txt 2>&1) - <<'FIM'

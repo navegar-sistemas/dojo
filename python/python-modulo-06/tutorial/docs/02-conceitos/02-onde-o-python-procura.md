@@ -12,12 +12,14 @@ módulo `sys`, que vem com o Python.
 
 ## A primeira pasta da lista
 
-Os outros itens da lista são as pastas onde o próprio Python guarda os módulos que vêm com ele.
-O primeiro item muda conforme o jeito de rodar:
+O primeiro item da lista muda conforme o jeito de rodar:
 
 - `python3 pasta/arquivo.py`: a pasta **onde está o arquivo rodado**, e não a pasta onde você
   está no terminal;
 - `python3 -c '...'`: a pasta onde você está no terminal.
+
+Os outros itens são pastas do próprio Python, com os módulos que vêm com ele e as bibliotecas
+instaladas.
 
 Crie `experimentos/onde.py`, que imprime o nome da primeira pasta da lista:
 

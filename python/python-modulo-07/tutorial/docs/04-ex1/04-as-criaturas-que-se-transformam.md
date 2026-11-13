@@ -7,7 +7,8 @@ title: As criaturas que se transformam
 
 `Shiftling` e `Morphagon` formam a família que se transforma. O ataque delas depende do estado:
 normal antes do `transform`, reforçado depois, e normal de novo depois do `revert`. Acrescente as
-duas classes no fim de `ex1/creature.py`, depois de `Bloomelle`:
+duas classes no fim de `ex1/creature.py`, depois de `Bloomelle`, com duas linhas em branco antes
+de cada `class`:
 
 ```python
 class Shiftling(Creature, TransformCapability):

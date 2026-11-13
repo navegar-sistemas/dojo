@@ -13,7 +13,8 @@ teste (`ancient_fragment.txt`, `new_fragment.txt`, `new_archive.txt`, `vault.txt
 ## Copiar os arquivos para o repositório
 
 O endereço (a URL) do repositório de entrega vem junto com o projeto. O `git clone` e o `git push`
-podem pedir login ou uma chave SSH, conforme o servidor do repositório. A partir da pasta
+podem pedir login ou uma chave SSH (um par de arquivos que identifica o seu computador para o
+servidor, no lugar da senha), conforme o servidor do repositório. A partir da pasta
 `data-archivist`, suba um nível, baixe o repositório numa pasta `entrega` e copie só os arquivos
 `.py` de cada exercício:
 
@@ -56,8 +57,9 @@ Changes to be committed:
 `git add` marca os arquivos para o próximo registro; `git status` mostra o que está marcado. A lista
 `Changes to be committed` ("mudanças a registrar") tem exatamente os quatro arquivos. O resto pode
 variar: esta é a saída de um repositório de entrega vazio (`No commits yet`, "nenhum registro
-ainda"); num repositório que já tem registros, essa linha não aparece. O nome do ramo na primeira
-linha também pode ser outro, como `main`.
+ainda"); num repositório que já tem registros, essa linha não aparece. O nome do ramo (*branch*, a
+sequência de registros em que o `git` está trabalhando) na primeira linha também pode ser outro,
+como `main`.
 
 O `git commit` precisa saber quem é o autor. Se ele pedir (`Please tell me who you are`), informe o
 seu nome e e-mail uma vez, e rode o `git commit` de novo:
@@ -89,4 +91,6 @@ python3 ex0/ft_ancient_text.py ../data-archivist/ancient_fragment.txt
 ```
 
 Os quatro arquivos aparecem, e o programa lê o fragmento como na pasta do projeto. Depois, a pasta
-`conferencia` pode ser apagada (`cd .. && rm -rf conferencia`).
+`conferencia` pode ser apagada com `cd .. && rm -rf conferencia`: o `&&` roda o segundo comando só
+se o primeiro deu certo, e o `-rf` faz o `rm` apagar a pasta com tudo o que há dentro, sem pedir
+confirmação.

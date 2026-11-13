@@ -6,7 +6,7 @@ title: O problema
 # O problema
 
 Num torneio, criaturas de famílias diferentes lutam entre si, e cada uma age do seu jeito: a que
-cura ataca e depois cura; a que se transforma se transforma, ataca e volta ao normal; as outras
+cura ataca e depois cura; a que muda de forma se transforma, ataca e volta ao normal; as outras
 só atacam. Se o código do torneio decidir isso com um `if` por capacidade, cada capacidade nova
 obriga a mexer nele. O exercício 2 tira essa decisão do torneio: cada criatura entra no torneio
 com uma **estratégia**, um objeto que sabe como ela age.
@@ -108,9 +108,12 @@ Shiftling returns to normal.
 ## O que a saída revela
 
 - cada torneio começa com o título e a lista de oponentes, no formato
-  `(criatura+estratégia)`. Os rótulos da esquerda não seguem uma regra: as fábricas do `ex0`
-  aparecem pelo nome da criatura base (`Flameling`, `Aquabub`), e as do `ex1` pelo nome da
-  família (`Healing`, `Transform`). São textos fixos do cenário;
+  `(criatura+estratégia)`. Os rótulos da esquerda não seguem uma regra: `Flameling` e `Aquabub` são
+  nomes de criatura, e `Healing` e `Transform` são partes do nome da fábrica
+  (`HealingCreatureFactory`, `TransformCreatureFactory`). Escolha do tutorial: imprimir essas
+  linhas como textos fixos, copiados do enunciado. Montar o rótulo e o oponente a partir do mesmo
+  dado (uma tupla com o rótulo, a fábrica e a estratégia, por exemplo) também cumpriria, mas
+  exigiria guardar os rótulos à parte;
 - as criaturas que lutam são sempre as **base** de cada fábrica;
 - com 3 oponentes, há 3 lutas: o 1º contra o 2º, o 1º contra o 3º e o 2º contra o 3º;
 - em cada luta, depois da apresentação, o primeiro oponente age inteiro com a sua estratégia, e

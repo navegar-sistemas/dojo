@@ -5,6 +5,9 @@ title: O arquivo completo
 
 # O arquivo completo
 
+As duas funções geradoras ficam no topo do arquivo, e o `main` faz as três partes do exercício na
+ordem: os mil eventos, a lista de dez e o consumo da lista.
+
 ```python title="ex5/ft_data_stream.py"
 import random
 import typing
@@ -47,6 +50,9 @@ def main() -> None:
 if __name__ == "__main__":
     main()
 ```
+
+Como no [exercício 0](../03-ex0/05-o-arquivo-completo.md), o arquivo termina com uma única quebra
+de linha depois da última linha, `    main()`, que o botão de copiar não leva.
 
 A lista de ações passa de 79 caracteres numa linha só, e continua na linha de baixo, alinhada
 depois do colchete.

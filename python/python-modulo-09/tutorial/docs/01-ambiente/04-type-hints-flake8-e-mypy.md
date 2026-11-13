@@ -105,11 +105,18 @@ arquivo do projeto.
 ## O mypy e o Pydantic
 
 O Pydantic traz um **plugin** para o mypy, um complemento que muda o jeito como o mypy enxerga
-os modelos. O plugin só é ligado por um arquivo de configuração do mypy, e esse arquivo não faria
-parte da entrega: o enunciado pede só os três `.py`. Quem rodar o mypy nos arquivos entregues
-roda sem o plugin.
+os modelos. O plugin só é ligado por um arquivo de configuração do mypy (a linha
+`plugins = pydantic.mypy`), e esse arquivo não faria parte da entrega: o enunciado pede só os
+três `.py`.
 
-Escolha do tutorial: **mypy sem o plugin**, sempre com `--disallow-untyped-defs`. Sem o plugin,
-o mypy já entende os modelos do Pydantic e confere os argumentos passados ao criar um objeto.
+O que muda é a conferência do construtor. Sem o plugin, o mypy exige que cada argumento passado
+ao criar um objeto tenha o tipo do campo, e recusa, por exemplo, uma data escrita como texto num
+campo `datetime`. Com o plugin na configuração padrão, o mypy aceita qualquer tipo no construtor,
+porque o Pydantic converteria o valor; com a opção `init_typed = True` do plugin, a recusa volta.
 A página [Conversão de tipos](../02-conceitos/04-conversao-de-tipos.md#e-pelo-construtor) mostra
-o que isso muda no código.
+esse caso.
+
+Escolha do tutorial: **mypy sem o plugin**, sempre com `--disallow-untyped-defs`, o modo mais
+exigente com o construtor. Os três arquivos entregues passam no mypy dos dois jeitos: sem o
+plugin e com ele, com `--disallow-untyped-defs` e também com `--strict`, a opção que liga todas as
+conferências extras do mypy.

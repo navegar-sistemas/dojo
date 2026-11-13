@@ -5,7 +5,9 @@ title: O arquivo completo
 
 # O arquivo completo
 
-O cabeçalho, a contagem e o laço ficam dentro de uma função `main`, e o fim do arquivo a chama:
+O cabeçalho, a contagem e o laço ficam dentro de uma função `main`, e o fim do arquivo a chama.
+Uma função nova, `printable`, impede que um argumento com bytes inválidos trave o `print`
+([Um argumento que não é texto válido](#um-argumento-que-não-é-texto-válido)):
 
 ```python title="ex0/ft_command_quest.py"
 import sys
@@ -40,6 +42,14 @@ if __name__ == "__main__":
     main()
 ```
 
+O arquivo termina com **uma** quebra de linha logo depois da última linha, `    main()`, e nada
+depois dela: nem outra linha vazia, nem espaços. O botão de copiar, no canto do bloco, não leva
+essa quebra final. Depois de colar, se o cursor ficar no fim de `    main()`, aperte Enter uma vez
+antes de salvar, e apague os espaços de recuo se o editor os puser na linha nova; alguns editores
+já acrescentam a quebra sozinhos ao salvar. Sem a quebra, o flake8 acusa
+`W292 no newline at end of file` ("falta a quebra de linha no fim do arquivo"); com mais de uma,
+`W391 blank line at end of file` ("linha em branco no fim do arquivo").
+
 ## O main
 
 `main` ("principal") é o nome costumeiro da função que faz o trabalho do programa. Definir a
@@ -64,8 +74,9 @@ quer usar as suas funções. Todos os exercícios terminam com esse bloco.
 O shell entrega os argumentos ao programa como **bytes**, e o Python os transforma em texto pela
 codificação do sistema, que nos sistemas atuais é a **UTF-8**: a forma padrão de escrever letras,
 acentos e símbolos em bytes. Um argumento pode trazer bytes que não formam texto UTF-8 válido,
-como o byte `\xff`. O Python ainda o guarda em `sys.argv`, com uma marca no lugar do byte
-estranho.
+como o byte de valor 255, escrito `\xff`: `\x` seguido do valor em base 16, onde `ff` é 255.
+Nenhum texto UTF-8 válido contém esse byte. O Python ainda guarda o argumento em `sys.argv`, com
+uma marca no lugar do byte estranho.
 
 Na hora de imprimir essa marca, o comportamento depende da configuração de idioma do sistema (o
 **locale**) e da versão do Python. Com locales como `en_US.UTF-8` ou `pt_BR.UTF-8` e o Python
@@ -97,4 +108,6 @@ O laço de [Percorrer os argumentos](./04-percorrer-os-argumentos.md) é o mesmo
 `printable(argument)` no lugar de `argument` dentro do `print`.
 
 O arquivo usa só `import sys`, `sys.argv`, `len()` e `print()`, além da fatia, do `for` e do
-método `encode` de `str`, liberado pela regra dos tipos.
+método `encode` de `str`, liberado pela **regra dos tipos**: `str`, `int` e `float` podem ser
+usados com todos os seus métodos e construtores em qualquer exercício
+([O que pode ser usado](../00-introducao/02-o-enunciado-em-linguagem-simples.md#o-que-pode-ser-usado)).

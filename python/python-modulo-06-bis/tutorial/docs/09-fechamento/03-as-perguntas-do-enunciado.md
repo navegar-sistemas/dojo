@@ -19,7 +19,7 @@ dados no fluxo sem conhecer as suas implementações específicas? Quais são os
 abordagem de design?".
 
 `DataStream` guarda uma `list[DataProcessor]` e só chama os métodos que a classe abstrata
-garante: `validate`, `ingest`, `total`, `remaining` e `output`. Em `processor.validate(element)`,
+garante: `validate`, `ingest`, `total` e `remaining` (e, a partir do exercício 2, `output`). Em `processor.validate(element)`,
 o Python roda o `validate` da classe do objeto guardado ali, seja ela `NumericProcessor`,
 `TextProcessor` ou `LogProcessor`. O fluxo pergunta "você aceita?" e "guarde", e cada processador
 responde do seu jeito ([Registrar e rotear](../04-ex1/03-registrar-e-rotear.md)).
@@ -91,9 +91,13 @@ Com `transform` e `revert` como métodos abstratos de `Creature`:
   ([A classe abstrata](../02-conceitos/02-a-classe-abstrata.md)). A classe afirmaria uma
   habilidade que não tem;
 - **ficaria impossível perguntar quem se transforma.** Hoje,
-  `isinstance(criatura, TransformCapability)` separa as duas famílias. Com tudo em `Creature`,
-  toda criatura "tem" `transform`, e a estratégia agressiva não conseguiria recusar um `Flameling`
-  antes da luta: o erro apareceria no meio dela, ou a criatura fingiria se transformar;
+  `isinstance(criatura, TransformCapability)` separa as duas famílias, e é com ele que o
+  `is_valid` da estratégia agressiva recusa o `Flameling` e o `act` lança a `StrategyError` com a
+  mensagem clara do enunciado (`Invalid Creature 'Flameling' for this aggressive strategy`). Com
+  tudo em `Creature`, toda criatura "tem" `transform`, e o `is_valid` não teria o que perguntar:
+  aceitaria o `Flameling`, e no `act` ele faria um `transform` de mentira (atacando como se nada
+  tivesse mudado) ou lançaria o erro genérico que o `transform` falso dele lançasse, em vez da
+  `StrategyError`;
 - **cada habilidade nova mudaria a base de todas as famílias.** Uma capacidade de voar, por
   exemplo, entraria em `Creature` e obrigaria todas as criaturas existentes a escrever `fly`. Com
   capacidades separadas, uma habilidade nova é uma classe nova, e só quem a tem herda dela;

@@ -14,7 +14,7 @@ def main() -> None:
     print("=== Player Score Analytics ===")
     scores = parse_scores(sys.argv[1:])
     if len(scores) == 0:
-        print(f"No scores provided. Usage: python3 {sys.argv[0]}"
+        print(f"No scores provided. Usage: python3 {printable(sys.argv[0])}"
               " <score1> <score2> ...")
     else:
         show_stats(scores)
@@ -28,7 +28,8 @@ def main() -> None:
   `print` deixam a quebra de linha acontecer no meio da chamada;
 - o nome do programa na mensagem vem de `sys.argv[0]`, e não está escrito à mão: assim a mensagem
   mostra o caminho do programa do jeito que a pessoa digitou. De dentro de `ex1`, sai
-  `ft_score_analytics.py`, igual ao enunciado.
+  `ft_score_analytics.py`, igual ao enunciado. Ele passa por `printable`, como os argumentos
+  inválidos (veja abaixo).
 
 O arquivo inteiro:
 
@@ -92,11 +93,15 @@ if __name__ == "__main__":
     main()
 ```
 
+Como no [exercício 0](../03-ex0/05-o-arquivo-completo.md), o arquivo termina com uma única quebra
+de linha depois da última linha, `    main()`, que o botão de copiar não leva.
+
 O arquivo traz a mesma função `printable` do
 [exercício 0](../03-ex0/05-o-arquivo-completo.md#um-argumento-que-não-é-texto-válido). O
 argumento inválido é impresso na mensagem `Invalid parameter` e o nome do programa na mensagem de
 uso, e os dois passam por ela: um argumento com bytes que não são UTF-8 sai como
 `Invalid parameter: '<not valid UTF-8>'`, e o programa segue com as pontuações válidas.
 
-Além das funções autorizadas, o arquivo usa `int()`, liberado pela regra dos tipos, e o método
-`append` da lista, liberado desde que a lista foi apresentada no exercício 0.
+Além das funções autorizadas, o arquivo usa `int()` e o método `encode` (dentro de `printable`),
+liberados pela regra dos tipos, e o método `append` da lista, liberado desde que a lista foi
+apresentada no exercício 0.

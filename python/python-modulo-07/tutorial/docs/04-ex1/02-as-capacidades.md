@@ -6,7 +6,8 @@ title: As capacidades
 # As capacidades
 
 Uma capacidade descreve uma habilidade, sem saber quem a terá. Ela não herda de `Creature` e não
-usa nada de `Creature`: só declara os métodos que quem tiver a habilidade precisa escrever. Uma
+usa nada de `Creature`: declara os métodos que quem tiver a habilidade precisa escrever e,
+quando preciso, o estado da habilidade. Uma
 classe assim, feita para ser herdada **junto** com outra classe principal e acrescentar uma
 habilidade a ela, costuma ser chamada de **mixin** ("ingrediente que se mistura").
 

@@ -71,10 +71,15 @@ mcDonald Mcdonald False
 ```
 
 A última coluna compara o nome com a versão corrigida. É `True` só quando `capitalize()` não muda
-nada, ou seja, quando o nome **já estava** com a inicial maiúscula e o resto minúsculo. Esse é o
-teste que o exercício usa para "o nome já começava com maiúscula", e ele combina com a primeira
-comprehension: um nome entra na segunda lista exatamente quando a primeira o deixaria como
-estava. Os nomes do exercício são todos só com a inicial, então nomes como `ALICE` não aparecem.
+nada, ou seja, quando o nome **já estava** com a inicial maiúscula e o resto minúsculo.
+
+O enunciado pede os nomes que já tinham a inicial maiúscula. A escolha deste projeto é o teste
+`name == name.capitalize()`, que exige também o resto minúsculo, porque ele combina com a
+primeira comprehension: um nome entra na segunda lista exatamente quando a primeira o deixaria
+como estava. A leitura literal seria `name[:1].isupper()`: a fatia com a primeira letra, e o
+método `isupper` de `str`, que diz se as letras do texto são maiúsculas. Ela aceita `ALICE` e
+`McDonald`, que o teste do projeto recusa. Com os nove nomes do exercício, os dois testes dão a
+mesma lista, porque nenhum deles tem maiúscula fora da inicial.
 
 ## As duas comprehensions do exercício
 

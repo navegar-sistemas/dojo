@@ -200,6 +200,9 @@ if __name__ == "__main__":
     main()
 ```
 
+Como no [exercício 0](../03-ex0/08-o-arquivo-completo.md), o arquivo termina com uma única quebra
+de linha depois de `    main()`, que o botão de copiar não leva.
+
 O que o arquivo usa, todos autorizados: `abc` (`ABC` e `abstractmethod`), `typing` (`Any` e
 `Callable`), as funções embutidas `isinstance`, `len`, `str`, `range` e `print`, e os métodos de
 lista (`append`, `pop`) e de dicionário (`items`).

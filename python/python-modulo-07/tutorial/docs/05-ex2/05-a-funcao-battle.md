@@ -27,6 +27,8 @@ Tudo vem dos pacotes: as fábricas do `ex0` e do `ex1`, as estratégias e a exce
 
 ## A função
 
+Acrescente abaixo dos imports, com duas linhas em branco antes do `def`:
+
 ```python
 def battle(opponents: list[tuple[CreatureFactory, BattleStrategy]]) -> None:
     print("*** Tournament ***")
@@ -106,13 +108,14 @@ faltavam não acontecem: o torneio foi abortado. A função termina normalmente,
 
 ```mermaid
 flowchart TD
-    start["próximo par (i, j)"] --> show["apresenta os dois<br/>e imprime ' now fight!'"]
+    start{"há outro par (i, j)?"} -->|sim| show["apresenta os dois<br/>e imprime ' now fight!'"]
     show --> a1["one_strategy.act(one)"]
     a1 -->|lista de textos| a2["two_strategy.act(two)"]
     a1 -->|InvalidStrategyError| err["Battle error, aborting tournament: ..."]
     a2 -->|lista de textos| start
     a2 -->|InvalidStrategyError| err
-    err --> fim["fim do torneio"]
+    start -->|não| fim["fim do torneio"]
+    err --> fim
 ```
 
 O enunciado diz "trata corretamente as tuplas inválidas", sem dizer como. A saída do torneio 1

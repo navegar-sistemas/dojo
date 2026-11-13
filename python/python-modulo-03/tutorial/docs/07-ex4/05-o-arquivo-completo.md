@@ -5,6 +5,9 @@ title: O arquivo completo
 
 # O arquivo completo
 
+As funções `parse_inventory`, `show_percentages` e `show_extremes` estão prontas. O `main` as
+chama na ordem da saída do enunciado e, no fim, acrescenta o item novo.
+
 ## O main
 
 ```python
@@ -33,13 +36,16 @@ def main() -> None:
   normalmente;
 - `update({"magic_item": 1})` acrescenta o item novo no fim, com quantidade 1. Uma chave aparece
   uma vez só, e um `update` com uma chave que já existe troca o valor dela: se a linha de comando
-  trouxer um `magic_item`, o mesmo `update` substitui a quantidade digitada por 1. Por isso, nesse
-  caso, o programa soma 1 à quantidade que já estava lá.
+  trouxer um `magic_item`, o mesmo `update` substitui a quantidade digitada por 1. O enunciado não
+  diz o que fazer quando o item já existe. A escolha deste projeto é somar 1 à quantidade que já
+  estava lá, para não perder a quantidade digitada.
 
 ## O arquivo inteiro
 
 ```python title="ex4/ft_inventory_system.py"
 import sys
+
+MAX_QUANTITY = 2 ** 53
 
 
 def printable(text: str) -> str:
@@ -71,6 +77,10 @@ def parse_inventory(arguments: list[str]) -> dict[str, int]:
             continue
         if quantity < 0:
             print(f"Quantity error for '{name}': negative quantity {quantity}")
+            continue
+        if quantity > MAX_QUANTITY:
+            print(f"Quantity error for '{name}': quantity above "
+                  f"{MAX_QUANTITY}")
             continue
         inventory[name] = quantity
     return inventory
@@ -120,9 +130,14 @@ if __name__ == "__main__":
     main()
 ```
 
+Como no [exercício 0](../03-ex0/05-o-arquivo-completo.md), o arquivo termina com uma única quebra
+de linha depois da última linha, `    main()`, que o botão de copiar não leva.
+
 O arquivo traz a mesma função `printable` do
 [exercício 0](../03-ex0/05-o-arquivo-completo.md#um-argumento-que-não-é-texto-válido), usada na
-conferência do formato ([Ler os parâmetros](./03-ler-os-parametros.md#o-formato)).
+conferência do formato ([Ler os parâmetros](./03-ler-os-parametros.md#o-formato)), e a constante
+`MAX_QUANTITY`, o teto das quantidades ([A quantidade](./03-ler-os-parametros.md#a-quantidade)).
 
-Além das funções autorizadas, o arquivo usa `int()` e o método `split`, liberados pela regra dos
-tipos. Do dicionário, usa só `keys`, `values` e `update`, os colchetes e o `in`.
+Além das funções autorizadas, o arquivo usa `int()` e os métodos `split` e `encode` (dentro de
+`printable`), liberados pela regra dos tipos. Do dicionário, usa só `keys`, `values` e `update`,
+os colchetes e o `in`.

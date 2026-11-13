@@ -11,8 +11,8 @@ pede um tratamento diferente, mas o resto do programa não quer saber de cada de
 entregar um dado e receber o resultado. Duas ferramentas da programação orientada a objetos
 resolvem isso:
 
-- a **classe abstrata**, uma classe que só descreve o que as classes filhas precisam saber
-  fazer, sem fazer o trabalho ela mesma;
+- a **classe abstrata**, uma classe que serve só de molde: não gera objetos, lista os métodos que
+  toda classe filha precisa escrever e pode já trazer pronto o que é igual para todas;
 - o **polimorfismo**, que permite chamar o mesmo método em objetos de classes diferentes e
   deixar cada um responder do seu jeito.
 
@@ -31,8 +31,8 @@ cada exercício copia o código do anterior e acrescenta uma peça:
 | 1 | `ex1/data_stream.py` | uma classe `DataStream` que recebe uma lista com dados misturados e entrega cada um ao processador certo, sem saber de que classe ele é |
 | 2 | `ex2/data_pipeline.py` | a saída do sistema: **plugins** que exportam os dados processados em CSV ou em JSON |
 
-Um trecho da saída do exercício 1. O fluxo recebe uma lista com textos, números e logs, e por
-enquanto só existe o processador de números:
+Um trecho da saída do exercício 1. O `DataStream` recebe uma lista com textos, números e logs, e
+por enquanto só existe o processador de números:
 
 ```text
 Registering Numeric Processor
@@ -46,8 +46,8 @@ Numeric Processor: total 4 items processed, remaining 4 on processor
 ```
 
 Os números (`3.14`, `-1`, `2.71` e `42`) foram aceitos; o resto foi recusado com uma mensagem, e
-o programa seguiu. As mensagens são em inglês porque o enunciado do projeto mostra a saída de
-cada programa, e essa saída é em inglês.
+o programa seguiu. As mensagens são em inglês porque o enunciado, o documento oficial do projeto,
+mostra a saída de cada programa em inglês.
 
 ## O enunciado
 

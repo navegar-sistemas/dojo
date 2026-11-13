@@ -16,8 +16,9 @@ arquivos:
 
 ## O formato dos scripts
 
-Todos os scripts do projeto têm o mesmo formato: os imports no topo e, depois, os `print` dentro
-de um bloco `if __name__ == "__main__":`.
+Os scripts do projeto têm o mesmo formato: os imports no topo e, depois, os `print` dentro de um
+bloco `if __name__ == "__main__":`. O `ft_kaboom_1.py`, da Parte IV, tem um motivo para pôr o
+import dentro do bloco ([A explosão](../06-parte-4/03-a-explosao.md#o-script)).
 
 - `__name__` é uma variável que o Python preenche em todo módulo. No arquivo rodado com
   `python3`, ela vale `"__main__"`; num arquivo importado, vale o nome do módulo. O bloco roda só

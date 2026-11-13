@@ -17,7 +17,7 @@ Python 3.14.5
 ```
 
 O número depois de `Python` é a versão. Qualquer `3.10` ou maior serve (`3.10`, `3.11`, …,
-`3.14`).
+`3.14`, `3.15`).
 
 ## Se o comando não existir
 
@@ -60,8 +60,8 @@ instalar um Python novo, separado do que veio com o sistema:
   nenhuma versão 3.10 ou mais nova, o caminho é atualizar a distribuição.
 
 Quando o Python novo tem outro nome (como `python3.11`), use esse nome no lugar de `python3` ao
-criar o ambiente virtual. Depois disso, o tutorial roda tudo com o Python de dentro do ambiente
-virtual, que é sempre da versão usada para criá-lo.
+criar o ambiente virtual. Depois disso, todo programa do projeto roda com o Python de dentro do
+ambiente virtual, que é sempre da versão usada para criá-lo.
 
 ## O git
 

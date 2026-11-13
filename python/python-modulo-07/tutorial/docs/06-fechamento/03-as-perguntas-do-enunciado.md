@@ -9,7 +9,7 @@ O enunciado avisa que, na avaliação, pode ser pedido que você **explique os p
 usados no projeto, e recomenda entender os conceitos, não só a implementação. Ele também deixa
 dois avisos nos exercícios: no 0, que outras criaturas podem ser usadas, desde que os conceitos
 (famílias e fábricas abstratas) fiquem; no 1, que o exercício precisa usar o conteúdo do pacote
-`ex0` e ser construído sobre ele. As seções abaixo respondem a cada ponto.
+`ex0` e ser construído sobre ele.
 
 ## O padrão fábrica abstrata
 

@@ -80,4 +80,4 @@ outros. Se o comando não existir: no Linux, `sudo apt install git`; no macOS, o
 abre a mesma janela das ferramentas de linha de comando da Apple; aceite e espere terminar.
 
 No resto do tutorial, `python3` quer dizer o Python 3.10 ou mais novo desta página. As saídas
-mostradas foram tiradas do Python 3.14; quando o Python 3.10 mostra algo diferente, a página diz.
+mostradas são as do Python 3.14; quando o 3.10 mostra algo diferente, a página diz.

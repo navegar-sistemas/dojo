@@ -35,7 +35,7 @@ def triple(number):
     return number * 3
 ```
 
-Ele tem dois defeitos: falta espaço entre as funções, e `triple` não tem type hints.
+Ele tem dois defeitos: faltam linhas em branco entre as funções, e `triple` não tem type hints.
 
 ## O flake8
 
@@ -51,6 +51,11 @@ Cada aviso diz o arquivo, a linha, a coluna, um código e a explicação: na lin
 do Python (chamado **PEP 8**) pede **duas linhas em branco entre** as funções e as classes de um
 arquivo (não antes da primeira), e entre `double` e `triple` não havia nenhuma. Sem aviso nenhum, o
 flake8 não imprime nada.
+
+O botão de copiar, no canto de cada bloco de código, não leva a quebra de linha do fim do arquivo.
+Sem ela, o flake8 acusa também `W292 no newline at end of file` ("sem quebra de linha no fim do
+arquivo") na última linha. Depois de colar, se o cursor ficar no fim de `    return number * 3`,
+aperte Enter uma vez antes de salvar.
 
 O flake8 recebe as pastas a conferir. Nunca rode `flake8 .` (o ponto é "a pasta atual"): ele
 entraria também na `.venv` e acusaria milhares de avisos no código das bibliotecas instaladas.

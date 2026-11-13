@@ -9,7 +9,7 @@ O observatório recebe relatos de contato com alienígenas. Conferir cada campo 
 um relato de contato físico que ninguém verificou, ou um contato telepático com uma única
 testemunha, tem todos os campos dentro dos limites e mesmo assim é suspeito. O exercício 1 junta
 os limites de campo do exercício 0 com **regras de negócio**: regras do assunto tratado (aqui, os
-relatos de contato) que comparam campos entre si.
+relatos de contato) que vão além do limite de cada campo, muitas comparando campos entre si.
 
 ## O que o enunciado pede
 

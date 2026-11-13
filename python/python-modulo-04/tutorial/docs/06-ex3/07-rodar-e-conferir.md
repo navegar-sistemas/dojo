@@ -49,6 +49,9 @@ ex3/ft_vault_security.py:5:            with open(file_name) as file:
 ex3/ft_vault_security.py:8:            with open(file_name, "w") as file:
 ```
 
+O terminal troca `ex0/*.py` pelos nomes de todos os arquivos `.py` da pasta `ex0` antes de rodar o
+`grep`: o `*` vale qualquer sequência de caracteres. O mesmo vale para as outras três pastas.
+
 ## Conferir estilo e tipos
 
 ```bash

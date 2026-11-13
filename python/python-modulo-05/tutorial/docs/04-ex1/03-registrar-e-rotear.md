@@ -10,9 +10,9 @@ registrados e, para cada elemento do fluxo, pergunta a eles, em ordem, quem acei
 
 ## Registrar
 
-A classe `DataStream` entra no arquivo depois de `LogProcessor`; os três métodos desta página e
-o da [próxima](./04-as-estatisticas.md) ficam dentro dela, na ordem do
-[arquivo completo](./06-o-arquivo-completo.md).
+A classe `DataStream` entra no arquivo depois de `LogProcessor`. Dentro dela, a ordem é:
+`__init__`, `register_processor`, `process_stream`, `print_processors_stats`
+([próxima página](./04-as-estatisticas.md)) e, por último, `_find_processor`.
 
 ```python
 class DataStream:
@@ -78,9 +78,10 @@ novo com os três:
 
 ![O primeiro lote com dois cenários. Com só o Numeric Processor registrado, a lista de números e o 42 vão para ele, e o texto, a lista de logs e a lista de textos são recusados com DataStream error. Com os três processadores registrados, os números vão para o Numeric, o texto e a lista de textos para o Text, e a lista de logs para o Log](/img/ex1/roteamento.svg)
 
-Os totais das estatísticas (4, 3 e 2) saem desta conta: a lista `[3.14, -1, 2.71]` dá 3 itens e
-o `42` dá 1, total 4 para o processador de números; `'Hello world'` e `['Hi', 'five']` dão 3
-itens de texto; a lista de logs dá 2.
+Cada envio do lote dá 4 itens de números (os 3 da lista `[3.14, -1, 2.71]` e o `42`), 3 de
+texto (`'Hello world'` e os 2 de `['Hi', 'five']`) e 2 de log. O processador de números recebe o
+lote nos dois envios e chega a 8; os de texto e de log só estão registrados no segundo envio e
+ficam com 3 e 2.
 
 ```mermaid
 flowchart TD

@@ -62,12 +62,26 @@ Três limites do import relativo:
 ```mermaid
 flowchart LR
     recipes["alchemy/transmutation/recipes.py<br/>pacote: alchemy.transmutation"]
-    recipes -->|"absoluto: alchemy.elements"| ael["alchemy/elements.py"]
     recipes -->|"absoluto: elements"| el["elements.py da raiz<br/>(fora de qualquer pacote)"]
+    recipes -->|"relativo: ..elements"| ael["alchemy/elements.py"]
     recipes -->|"relativo: ..potions"| potions["alchemy/potions.py"]
 ```
 
 O mesmo arquivo pode usar os dois jeitos, um em cada linha, e a receita da
-[próxima página](./03-recipes.md) faz isso: o enunciado pede pelo menos um de cada. A escolha
-entre os dois está em
+[próxima página](./03-recipes.md) faz isso: o enunciado pede pelo menos um de cada.
+
+## O critério do tutorial
+
+A partir daqui, o projeto segue uma regra só, escolha do tutorial:
+
+- **dentro do pacote `alchemy`**, um arquivo importa outro arquivo do pacote com import
+  **relativo**. O caminho fica preso à estrutura de dentro do pacote, e não ao nome dele;
+- **o que está fora do pacote** (o `elements.py` da raiz) e **tudo o que se importa a partir dos
+  scripts** `ft_*.py` usam import **absoluto**: o relativo não sai do pacote mais externo nem
+  funciona num script rodado direto.
+
+Os dois arquivos do pacote escritos nas Partes I e II, o `alchemy/__init__.py` e o
+`alchemy/potions.py`, importam o vizinho `alchemy.elements` com o nome absoluto, porque o import
+relativo ainda não tinha aparecido. A [página do subpacote](./04-o-subpacote.md) os passa para o
+critério. O motivo da regra está em
 [As perguntas do enunciado](../07-fechamento/03-as-perguntas-do-enunciado.md#quando-usar-import-absoluto-e-quando-usar-relativo).

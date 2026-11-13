@@ -57,10 +57,11 @@ proposital do exercício 0.
 
 ## A ordem do registro
 
-Um elemento vai para o **primeiro** processador registrado que o aceita. A ordem decidiria o
-destino de um elemento aceito por dois processadores; com os três atuais, isso não acontece:
-cada elemento é aceito por um só. O teste abaixo registra os três em ordem inversa e manda o lote
-do enunciado:
+Um elemento vai para o **primeiro** processador registrado que o aceita, e a ordem do registro
+decide o destino de um elemento aceito por mais de um. Com os três processadores atuais, só a
+lista vazia `[]` está nesse caso: os três a aceitam, porque `is_list_of` dá `True` para uma lista
+sem itens, e ela vai para o primeiro registrado sem guardar nada. Nenhum outro elemento é aceito
+por mais de um. O teste abaixo registra os três em ordem inversa e manda o lote do enunciado:
 
 ```bash
 python3 -B -c 'import sys; sys.path.insert(0, "ex1")

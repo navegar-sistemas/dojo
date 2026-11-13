@@ -27,15 +27,20 @@ title: O enunciado em linguagem simples
   terminar assim. A única exceção que o projeto prevê é a da estratégia inválida no exercício 2,
   e o torneio a trata ([A função battle](../05-ex2/05-a-funcao-battle.md)).
 - **Nenhuma biblioteca externa.** Só o que vem com o Python. Em cada exercício, os únicos
-  `import` da biblioteca do Python são `abc` e `typing`, dois **módulos** (arquivos de código que
+  `import` permitidos da biblioteca do Python são `abc` e `typing`, dois **módulos** (arquivos de código que
   vêm com o Python): `abc` traz o que é preciso para criar classes abstratas
   ([Classe abstrata e super](../02-conceitos/02-classe-abstrata-e-super.md)), e `typing` traz type
-  hints especiais. Além deles, cada exercício importa o próprio código do projeto: o `ex1` usa o
-  `ex0`, e o `ex2` usa os dois.
+  hints especiais. O enunciado escreve `import abc`; `from abc import ABC` importa o mesmo módulo
+  autorizado, só trazendo o nome direto. Além deles, cada exercício importa o próprio código do
+  projeto: o `ex1` usa o `ex0`, e o `ex2` usa os dois. A lista de autorizados não cita esses
+  imports; a leitura do tutorial é que eles fazem parte do pedido, porque o enunciado manda "usar o
+  conteúdo do pacote `ex0` e construir este exercício sobre ele" (exercício 1) e "criar várias
+  fábricas de Criaturas (de `ex0` e de `ex1`)" (exercício 2).
 - **Um `__init__.py` em cada pasta de exercício.** É o arquivo que transforma a pasta num
   **pacote**, uma pasta de código que se importa pelo nome
   ([Módulos e pacotes](../02-conceitos/01-modulos-e-pacotes.md)).
-- **Os programas de teste ficam na raiz.** A **raiz** do repositório é a pasta principal, a que
+- **Os programas de teste ficam na raiz.** A entrega é um **repositório Git**: uma pasta cujo
+  histórico de versões é guardado pelo programa `git`. A **raiz** do repositório é a pasta principal, a que
   contém as pastas `ex0/`, `ex1/` e `ex2/`. Os três programas de teste (`battle.py`,
   `capacitor.py` e `tournament.py`) ficam nela, fora dos pacotes.
 
@@ -52,14 +57,17 @@ Para cada exercício, o enunciado mostra a saída completa do programa de teste.
 
 ## Os pacotes só expõem fábricas
 
-Os pacotes `ex0` e `ex1` **não podem expor as criaturas concretas**: quem usa o pacote recebe
-as fábricas, e só por meio delas obtém criaturas. "Expor" é oferecer um nome a quem importa o
-pacote: `from ex0 import FlameFactory` precisa funcionar, e `from ex0 import Flameling` não pode
+O enunciado diz que os pacotes `ex0` e `ex1` **não podem expor diretamente** as criaturas
+concretas (as classes das criaturas de verdade, como `Flameling` e `Aquabub`) e devem expor
+somente fábricas: quem usa o pacote recebe as fábricas, e só por meio delas obtém criaturas. O
+enunciado não define "expor". A leitura do tutorial: expor é pôr o nome no `__init__.py` e na
+lista `__all__` do pacote, ou seja, o que `from ex0 import ...` e `from ex0 import *` entregam.
+`from ex0 import FlameFactory` funciona, e `from ex0 import Flameling` não
 ([O `__init__.py` do pacote](../03-ex0/06-o-init-do-pacote.md)).
 
 ## Entrega
 
-Os três programas de teste e as três pastas de pacote, num repositório Git. Na avaliação, quem
+Os três programas de teste e as três pastas de pacote, no repositório Git. Na avaliação, quem
 avalia pode pedir que você explique os padrões de projeto usados
 ([As perguntas do enunciado](../06-fechamento/03-as-perguntas-do-enunciado.md)).
 
@@ -75,7 +83,7 @@ avalia pode pedir que você explique os padrões de projeto usados
   `Creature` ([As capacidades](../04-ex1/02-as-capacidades.md)).
 - **Strategy** ("estratégia"): o jeito de agir numa luta, guardado num objeto que se pode trocar
   ([O padrão estratégia](../05-ex2/02-o-padrao-estrategia.md)).
-- **Deck Architect, DataDeck, *Gotta catch 'em all*:** só o cenário de ficção do projeto, um jogo
+- **Arquiteto de Baralhos (*Deck Architect*), DataDeck, *Gotta catch 'em all*:** só o cenário de ficção do projeto, um jogo
   de colecionar monstros.
 - **Instruções sobre IA**: o enunciado tem um capítulo pedindo que todo código vindo de uma
   ferramenta de IA seja entendido por completo e revisado com colegas.

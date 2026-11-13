@@ -39,7 +39,7 @@
 <line x1="100" y1="400" x2="590" y2="400" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="6 5"/>
 <text x="600" y="405" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#2563eb" text-anchor="start">menor: 1500</text>
 <line x1="100" y1="370.667" x2="590" y2="370.667" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="6 5"/>
-<text x="600" y="375.667" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#16a34a" text-anchor="start">média: 1866.67</text>
+<text x="600" y="375.667" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#16a34a" text-anchor="start">média: 1866.666…</text>
 <line x1="770" y1="336" x2="770" y2="400" stroke="#ea580c" stroke-width="2" marker-end="url(#arrow-orange)"/>
 <line x1="770" y1="400" x2="770" y2="336" stroke="#ea580c" stroke-width="2" marker-end="url(#arrow-orange)"/>
 <text x="780" y="373" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#ea580c" text-anchor="start">amplitude: 800</text>

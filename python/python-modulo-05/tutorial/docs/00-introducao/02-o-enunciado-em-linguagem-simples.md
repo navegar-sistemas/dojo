@@ -15,17 +15,19 @@ title: O enunciado em linguagem simples
 - **Type hints em todo o código, conferidos pelo mypy.** Um *type hint* é a anotação do tipo de
   cada parâmetro e do retorno, como em `def dobro(n: int) -> int:`. O mypy é o programa que
   confere se esses tipos batem com o uso
-  ([Type hints, flake8 e mypy](../01-ambiente/04-type-hints-flake8-e-mypy.md)). Há uma única
-  reclamação do mypy que o enunciado pede de propósito, no exercício 0
-  ([O erro proposital do mypy](../03-ex0/06-o-erro-proposital-do-mypy.md)).
-- **O tratamento de exceções protege os dados.** Um dado inválido não pode estragar o que já
-  estava guardado: ou ele entra inteiro, ou não entra nada
-  ([Numeric Processor](../03-ex0/03-numeric-processor.md)).
+  ([Type hints, flake8 e mypy](../01-ambiente/04-type-hints-flake8-e-mypy.md)). O mypy acusa
+  um único erro em todo o projeto, no exercício 0: o enunciado pede um teste que o provoca e
+  avisa que ele fica de propósito
+  ([O erro proposital do mypy](../03-ex0/07-o-erro-proposital-do-mypy.md)).
+- **O tratamento de exceções protege os fluxos de dados contra corrupção.** No tutorial, isso
+  quer dizer que um dado inválido não estraga o que já estava guardado: ou ele entra inteiro, ou
+  não entra nada
+  ([Numeric Processor](../03-ex0/03-numeric-processor.md#por-que-validar-a-lista-inteira-antes-de-guardar)).
 - **Só dois `import`: `abc` e `typing`.** São dois **módulos** (arquivos de código que vêm com o
   Python): `abc` traz o que é preciso para criar classes abstratas
-  ([A classe abstrata](../02-conceitos/02-a-classe-abstrata.md)), e `typing` traz type hints
-  especiais, como `Any` e `Protocol`
-  ([Any, união e isinstance](../02-conceitos/03-any-uniao-e-isinstance.md)).
+  ([A classe abstrata](../02-conceitos/02-a-classe-abstrata.md)), e `typing` traz peças para os
+  type hints, como `Any` ([Any, união e isinstance](../02-conceitos/03-any-uniao-e-isinstance.md))
+  e `Protocol` ([Protocol e duck typing](../05-ex2/02-protocol-e-duck-typing.md)).
 - **Tipos e funções embutidos liberados.** Todos os tipos padrão (`int`, `str`, `list`, `dict`,
   `tuple`...) com todos os seus métodos, e todas as funções que o Python oferece sem `import`
   (`print`, `len`, `isinstance`, `range`, `str`...). Um **método** é uma função que pertence a um
@@ -36,9 +38,9 @@ title: O enunciado em linguagem simples
 
 | Exercício | O que o programa precisa fazer |
 |---|---|
-| 0 | criar a classe abstrata `DataProcessor` com os métodos `validate` (o dado serve?), `ingest` (guarda o dado) e `output` (devolve o item mais antigo, com o seu número de ordem), e três classes filhas: `NumericProcessor` (números), `TextProcessor` (textos) e `LogProcessor` (registros de log). Depois, testar cada uma ([Exercício 0](../03-ex0/01-o-problema.md)) |
-| 1 | partir do exercício 0 e criar a classe `DataStream`, que recebe processadores com `register_processor`, distribui uma lista de dados misturados entre eles com `process_stream` e mostra quantos itens cada um recebeu com `print_processors_stats` ([Exercício 1](../04-ex1/01-o-problema.md)) |
-| 2 | partir do exercício 1, criar a regra `ExportPlugin` para os plugins de exportação, o método `output_pipeline` em `DataStream`, e dois plugins: um que escreve os dados em CSV e outro em JSON ([Exercício 2](../05-ex2/01-o-problema.md)) |
+| 0 | criar a classe abstrata `DataProcessor` com os métodos `validate` (o dado serve?), `ingest` (guarda o dado) e `output` (tira o item mais antigo e o devolve com o seu número de ordem), e três classes filhas: `NumericProcessor` (números), `TextProcessor` (textos) e `LogProcessor` (registros de log). Depois, testar cada uma, inclusive com um `ingest` de dado inválido, sem validar antes, que precisa lançar uma exceção ([Exercício 0](../03-ex0/01-o-problema.md)) |
+| 1 | partir do exercício 0 e criar a classe `DataStream`, que recebe processadores com `register_processor`, distribui uma lista de dados misturados entre eles com `process_stream` e mostra com `print_processors_stats` quantos itens cada um recebeu no total e quantos ainda guarda. O teste consome itens com o `output` de cada processador e mostra as estatísticas de novo ([Exercício 1](../04-ex1/01-o-problema.md)) |
+| 2 | partir do exercício 1 e criar a classe `ExportPlugin`, filha de `Protocol`, que descreve o método que todo plugin de exportação precisa ter; o método `output_pipeline` em `DataStream`; e pelo menos dois plugins, um que escreve os dados em CSV e outro em JSON, com o texto de cada formato montado à mão ([Exercício 2](../05-ex2/01-o-problema.md)) |
 
 Para cada exercício, o enunciado mostra a saída completa do programa. A página
 [O resultado final](./04-o-resultado-final.md) reúne as três.
@@ -55,7 +57,7 @@ acrescente um tipo de dado novo ao sistema ou mude o jeito de processar um dado
 - **ABC** (*Abstract Base Class*, "classe base abstrata"): a classe do módulo `abc` da qual uma
   classe herda para virar abstrata ([A classe abstrata](../02-conceitos/02-a-classe-abstrata.md)).
 - **Stream** ("fluxo", "correnteza"): uma sequência de dados que chega para ser processada; aqui,
-  uma lista do Python ([Registrar e rotear](../04-ex1/03-registrar-e-rotear.md)).
+  uma lista do Python ([O problema do exercício 1](../04-ex1/01-o-problema.md)).
 - **Rank** ("posição", "ordem"): o número de ordem de cada item dentro do processador: o primeiro
   item guardado tem rank 0, o segundo 1, e assim por diante ([A fila](../02-conceitos/05-a-fila.md)).
 - **Pipeline** ("encanamento", "linha de montagem"): o caminho completo do dado, da entrada no

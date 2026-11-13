@@ -100,7 +100,10 @@ def spell_reducer(spells: list[int], operation: str) -> int:
 - o dicionário `operations` liga cada nome de operação do enunciado a uma função de dois
   argumentos. O type hint `Callable[[int, int], int]` diz isso: recebe dois `int` e devolve um
   `int`. Escolher a função por um dicionário evita uma fila de `if`/`elif`;
-- **operação desconhecida:** o enunciado pede que o erro seja tratado de forma adequada. A
+- **operação desconhecida:** o enunciado pede que o erro seja tratado de forma adequada. Aqui,
+  "tratar o erro" é recusar a operação com uma mensagem clara (`ValueError`) e deixar o `except`
+  para quem chama, como mostra o teste de
+  [Rodar e conferir](./08-rodar-e-conferir.md#spell_reducer). A
   função lança `ValueError` com uma mensagem que diz qual operação não existe, e quem chama decide
   o que fazer com ela ([Rodar e conferir](./08-rodar-e-conferir.md)). A assinatura promete um
   `int`, e devolver um texto de erro quebraria essa promessa. Lançar `ValueError` é escolha do

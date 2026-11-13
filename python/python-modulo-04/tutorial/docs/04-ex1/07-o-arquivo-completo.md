@@ -5,6 +5,9 @@ title: O arquivo completo
 
 # O arquivo completo
 
+Crie `ex1/ft_archive_creation.py` com o conteúdo abaixo, que junta os pedaços das páginas
+anteriores:
+
 ```python title="ex1/ft_archive_creation.py"
 import sys
 import typing
@@ -45,7 +48,7 @@ def transform(content: str) -> str:
 def ask_file_name() -> str:
     try:
         return input("Enter new file name (or empty): ")
-    except (EOFError, KeyboardInterrupt):
+    except (EOFError, KeyboardInterrupt, UnicodeDecodeError):
         print()
         return ""
 
@@ -53,7 +56,7 @@ def ask_file_name() -> str:
 def save_archive(file_name: str, content: str) -> bool:
     try:
         file: typing.IO[str] = open(file_name, "w")
-    except OSError as error:
+    except (OSError, ValueError) as error:
         print(f"Error opening file '{file_name}': {error}")
         return False
     try:
@@ -68,7 +71,7 @@ def save_archive(file_name: str, content: str) -> bool:
 
 
 def main() -> None:
-    if len(sys.argv) != 2:
+    if len(sys.argv) != 2 or not sys.argv[1].isprintable():
         print(f"Usage: {sys.argv[0]} <file>")
         return
     print("=== Cyber Archives Recovery & Preservation ===")
@@ -93,6 +96,9 @@ if __name__ == "__main__":
     main()
 ```
 
+Depois de colar, confira a quebra de linha depois de `    main()`, como no [exercício
+0](../03-ex0/05-o-arquivo-completo.md).
+
 O que o arquivo usa, todos autorizados: `import sys`, `sys.argv`, `len()`, `open()`,
-`import typing`, `typing.IO`, `read()`, `write()`, `close()`, `print()` e `input()`, além do método
-`splitlines()` de `str` e das próprias funções.
+`import typing`, `typing.IO`, `read()`, `write()`, `close()`, `print()` e `input()`, além dos
+métodos `splitlines()` e `isprintable()` de `str` e das próprias funções.

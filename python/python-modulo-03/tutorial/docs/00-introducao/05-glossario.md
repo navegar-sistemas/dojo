@@ -21,7 +21,7 @@ title: Glossário
 | **imutável** | que nunca muda: tupla, `int`, `float` e `str`. [Veja](../02-colecoes/02-as-quatro-colecoes.md) |
 | **hash** | número inteiro calculado a partir do conteúdo de um valor, que o set e o dicionário usam para achá-lo direto. [Veja](../02-colecoes/03-a-estrutura-e-o-algoritmo.md) |
 | **hashable** | valor que tem hash e por isso pode ser elemento de set ou chave de dicionário: `int`, `float`, `str` e tuplas só com elementos hashable. [Veja](../02-colecoes/03-a-estrutura-e-o-algoritmo.md) |
-| **tempo linear** | tempo que cresce junto com o tamanho da coleção, como o de procurar um valor numa lista. [Veja](../02-colecoes/03-a-estrutura-e-o-algoritmo.md) |
+| **tempo linear** | tempo que cresce na mesma proporção do tamanho da coleção (o dobro de elementos, o dobro do tempo), como o de procurar um valor numa lista. [Veja](../02-colecoes/03-a-estrutura-e-o-algoritmo.md) |
 | **índice** | a posição de um elemento numa lista ou tupla, contando de 0; negativo conta do fim. [Veja](../03-ex0/03-indices-e-fatias.md) |
 | **fatia** (*slice*) | lista nova com um pedaço de outra: `lista[a:b]` vai do índice `a` até antes do `b`. [Veja](../03-ex0/03-indices-e-fatias.md) |
 | **desempacotamento** (*unpacking*) | dar um nome a cada elemento de uma tupla de uma vez: `x, y, z = position`. [Veja](../05-ex2/02-tuplas.md) |
@@ -48,7 +48,8 @@ title: Glossário
 | **argumento** | cada pedaço da linha de comando depois do nome do programa. [Veja](../03-ex0/02-a-linha-de-comando.md) |
 | **`sys.argv`** | a lista com o nome do programa e os argumentos, todos como texto. [Veja](../03-ex0/02-a-linha-de-comando.md) |
 | **main** | a função que faz o trabalho do programa, chamada pelo bloco `if __name__ == "__main__":`. [Veja](../03-ex0/05-o-arquivo-completo.md#o-main) |
-| **constante** | variável criada fora das funções, com nome em maiúsculas, que por costume nunca muda. [Veja](../05-ex2/04-get-player-pos.md#a-pergunta) |
+| **constante** | variável criada fora das funções, com nome em maiúsculas, que por costume nunca muda. [Veja](../04-ex1/03-converter-e-descartar.md#um-limite-para-as-pontuações) |
+| **regra dos tipos** | a regra do enunciado que libera `str`, `int` e `float`, com todos os seus métodos e construtores, em qualquer exercício. [Veja](./02-o-enunciado-em-linguagem-simples.md#o-que-pode-ser-usado) |
 | **apelido de tipo** (*type alias*) | um nome para um tipo comprido: `Event = tuple[str, str]`. [Veja](../08-ex5/03-o-gerador-sem-fim.md) |
 | **`EOFError`** | o erro do `input()` quando a entrada acabou, por Ctrl-D ou porque o texto preparado terminou. [Veja](../05-ex2/06-o-arquivo-completo.md#quando-o-usuário-desiste) |
 | **`KeyboardInterrupt`** | o erro lançado quando o usuário aperta Ctrl-C. [Veja](../05-ex2/06-o-arquivo-completo.md#quando-o-usuário-desiste) |

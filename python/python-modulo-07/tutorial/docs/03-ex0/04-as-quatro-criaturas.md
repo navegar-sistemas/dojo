@@ -6,7 +6,8 @@ title: As quatro criaturas
 # As quatro criaturas
 
 Cada criatura concreta precisa de duas coisas: o seu nome e tipo, e o seu ataque. Acrescente as
-quatro classes no fim de `ex0/creature.py`, depois de `Creature`:
+quatro classes no fim de `ex0/creature.py`, depois de `Creature`, com duas linhas em branco antes
+de cada `class`:
 
 ```python
 class Flameling(Creature):

@@ -32,8 +32,12 @@ python3 experimentos/converter.py
 
 `int()` aceita sinal, ignora espaços nas pontas, aceita o `_` como separador de milhares e
 reconhece dígitos de outras escritas, como o `٣` (3, em algarismo arábico-índico). Recusa letras
-e números com parte decimal. As pontuações do enunciado são todas inteiras, então `4.5` é
-inválido; números negativos continuam sendo inteiros e são aceitos.
+e números com parte decimal.
+
+O enunciado cita, entre os casos de erro, os valores que não são números, e `4.5` é um número.
+Mas todas as pontuações do enunciado são inteiras e saem sem `.0` em `Scores processed`, e a
+escolha deste projeto é aceitar só inteiros: `4.5` é tratado como inválido. Números negativos
+continuam sendo inteiros e são aceitos.
 
 ## Um limite para as pontuações
 
@@ -60,14 +64,19 @@ True False
 OverflowError: integer division result too large for a float
 ```
 
+- `**` é a potência: `2 ** 53` é o 2 multiplicado por ele mesmo 53 vezes, o número escrito 2⁵³,
+  e `10 ** 400` é 1 seguido de 400 zeros;
 - 2⁵³ = 9007199254740992 é o ponto a partir do qual o `float` deixa de guardar todos os
   inteiros: até 2⁵³ todos são exatos, e `2 ** 53 + 1` vira `2 ** 53` ao passar para `float`;
-- um inteiro de 400 dígitos dividido por 2 não cabe num `float`, e o Python lança
+- `10 ** 400`, um inteiro de 401 dígitos, dividido por 2 não cabe num `float`, e o Python lança
   `OverflowError` ("erro de estouro"). Sem tratamento, uma pontuação assim travaria o programa no
   cálculo da média.
 
-O programa aceita pontuações de −2⁵³ a 2⁵³ e trata o resto como argumento inválido. O limite fica
-numa constante:
+O enunciado não fala de pontuações enormes. A escolha deste projeto é aceitar pontuações de −2⁵³
+a 2⁵³ e tratar o resto como argumento inválido, com a mesma mensagem `Invalid parameter`. O limite
+fica numa **constante**: uma variável criada fora das funções, no topo do arquivo, com o nome em
+maiúsculas. Por costume, ela nunca muda; o Python não impede a mudança, e as maiúsculas avisam
+quem lê:
 
 ```python
 MAX_SCORE = 2 ** 53

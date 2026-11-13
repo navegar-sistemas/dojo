@@ -29,8 +29,10 @@ done
 cd entrega
 ```
 
-Troque `<endereço-do-repositório>` pelo endereço recebido. O `git clone` baixa o repositório; o
-`for` cria cada pasta de exercício dentro de `entrega` (o `-p` do `mkdir` não reclama se ela já
+Troque `<endereço-do-repositório>` pelo endereço recebido. O `git clone` baixa o repositório. Se
+ele ainda estiver vazio, o `git clone` avisa
+`warning: You appear to have cloned an empty repository.` ("parece que você clonou um repositório
+vazio"), e o clone funcionou do mesmo jeito. O `for` cria cada pasta de exercício dentro de `entrega` (o `-p` do `mkdir` não reclama se ela já
 existir) e copia para ela os arquivos `.py` com `cp`.
 
 ## Registrar e enviar

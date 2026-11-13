@@ -45,9 +45,13 @@ três itens.
 O próprio programa testa as classes, imprimindo cada passo:
 
 - cria um objeto de cada filha;
-- chama `validate` com dados válidos e inválidos;
+- chama `validate` com dados válidos e inválidos, em cada classe;
 - chama `ingest` com um dado inválido, **sem** validar antes, e mostra a exceção;
 - guarda dados com `ingest` e os tira com `output`.
+
+A saída do exemplo, logo abaixo, só mostra um `validate` com dado válido no Numeric Processor;
+[A demonstração](./06-a-demonstracao.md#os-testes-de-texto-e-de-log) mostra onde o dado válido de
+texto e o de log são conferidos.
 
 ## A saída esperada
 

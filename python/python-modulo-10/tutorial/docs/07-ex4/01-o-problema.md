@@ -32,7 +32,7 @@ class MageGuild:
 | Peça | O que faz |
 |---|---|
 | `spell_timer(func)` | decorador que mede o tempo de execução: imprime `Casting nome_da_função...` antes, roda a função, imprime `Spell completed in X.XXX seconds` depois (três casas decimais) e devolve o resultado da função. Usa `functools.wraps` |
-| `power_validator(min_power)` | **fábrica de decoradores** que confere o poder: se o poder é maior ou igual a `min_power`, roda a função normalmente; se não, devolve `"Insufficient power for this spell"`. Aplicável a uma função comum. Usa `functools.wraps` |
+| `power_validator(min_power)` | **fábrica de decoradores** que confere o poder: se o poder é maior ou igual a `min_power`, roda a função normalmente; se não, devolve `"Insufficient power for this spell"`. O enunciado diz que ele é aplicado a uma função solta, mas também manda decorar com ele o método `cast_spell` ([power_validator](./03-power-validator.md#onde-está-o-poder)). Usa `functools.wraps` |
 | `retry_spell(max_attempts)` | decorador que tenta de novo um feitiço que falhou: se a função lança uma exceção, tenta de novo, até `max_attempts` tentativas, imprimindo `Spell failed, retrying... (attempt n/max_attempts)`. Se todas falham, devolve `"Spell casting failed after max_attempts attempts"`; se uma dá certo, devolve o resultado dela |
 | `MageGuild.validate_mage_name(name)` | método estático: um nome é válido se tem pelo menos 3 caracteres e só letras e espaços |
 | `MageGuild.cast_spell(self, spell_name, power)` | método comum (de instância), decorado com `power_validator` com `min_power=10`: com poder válido, devolve `"Successfully cast spell_name with <power> power"`; senão, `"Insufficient power for this spell"` |
