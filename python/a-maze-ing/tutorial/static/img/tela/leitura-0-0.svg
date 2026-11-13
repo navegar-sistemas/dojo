@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="461.8" height="314" viewBox="0 0 461.8 314">
+<rect width="461.8" height="314" fill="#ffffff" rx="8"/>
+<rect x="151.9" y="60" width="66" height="66" fill="#1f2937" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="221.9" y="60" width="66" height="66" fill="#93c5fd" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="291.9" y="60" width="66" height="66" fill="#1f2937" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="151.9" y="130" width="66" height="66" fill="#93c5fd" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="221.9" y="130" width="66" height="66" fill="#fde68a" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="291.9" y="130" width="66" height="66" fill="#bbf7d0" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="151.9" y="200" width="66" height="66" fill="#1f2937" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="221.9" y="200" width="66" height="66" fill="#93c5fd" stroke="#e5e7eb" stroke-width="1"/>
+<rect x="291.9" y="200" width="66" height="66" fill="#1f2937" stroke="#e5e7eb" stroke-width="1"/>
+<text x="254.9" y="163" font-family="ui-sans-serif, system-ui, sans-serif" font-size="18.2" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">0,0</text>
+<text x="254.9" y="93" font-family="ui-sans-serif, system-ui, sans-serif" font-size="18.2" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">N</text>
+<text x="324.9" y="163" font-family="ui-sans-serif, system-ui, sans-serif" font-size="18.2" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">E</text>
+<text x="254.9" y="233" font-family="ui-sans-serif, system-ui, sans-serif" font-size="18.2" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">S</text>
+<text x="184.9" y="163" font-family="ui-sans-serif, system-ui, sans-serif" font-size="18.2" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">W</text>
+<text x="184.9" y="44" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="254.9" y="44" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="324.9" y="44" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="131.9" y="93" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="131.9" y="163" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="131.9" y="233" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="254.9" y="20" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">px: coluna do desenho →</text>
+<g transform="rotate(90 107.9 163)"><text x="107.9" y="163" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">py: linha do desenho →</text></g>
+<text x="230.9" y="292" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">célula 0,0 = 13: Leste aberto (verde), Sul fechado (azul)</text>
+</svg>

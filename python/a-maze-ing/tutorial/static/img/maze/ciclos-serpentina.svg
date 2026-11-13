@@ -1,37 +1,37 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="387.8" height="232" viewBox="0 0 387.8 232">
-<rect width="387.8" height="232" fill="#ffffff" rx="8"/>
-<rect x="106.9" y="54" width="72" height="72" fill="#fb923c"/>
-<rect x="106.9" y="126" width="72" height="72" fill="#fb923c"/>
-<line x1="106.9" y1="54" x2="178.9" y2="54" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="178.9" y1="54" x2="178.9" y2="126" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
-<line x1="106.9" y1="126" x2="178.9" y2="126" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="106.9" y1="54" x2="106.9" y2="126" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="178.9" y1="54" x2="250.9" y2="54" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="250.9" y1="54" x2="250.9" y2="126" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
-<line x1="178.9" y1="126" x2="250.9" y2="126" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="178.9" y1="54" x2="178.9" y2="126" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
-<line x1="250.9" y1="54" x2="322.9" y2="54" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="322.9" y1="54" x2="322.9" y2="126" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="250.9" y1="126" x2="322.9" y2="126" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
-<line x1="250.9" y1="54" x2="250.9" y2="126" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
-<line x1="106.9" y1="126" x2="178.9" y2="126" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="178.9" y1="126" x2="178.9" y2="198" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
-<line x1="106.9" y1="198" x2="178.9" y2="198" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="106.9" y1="126" x2="106.9" y2="198" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="178.9" y1="126" x2="250.9" y2="126" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="250.9" y1="126" x2="250.9" y2="198" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
-<line x1="178.9" y1="198" x2="250.9" y2="198" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="178.9" y1="126" x2="178.9" y2="198" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
-<line x1="250.9" y1="126" x2="322.9" y2="126" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
-<line x1="322.9" y1="126" x2="322.9" y2="198" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="250.9" y1="198" x2="322.9" y2="198" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="250.9" y1="126" x2="250.9" y2="198" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
-<text x="142.9" y="40" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">0</text>
-<text x="214.9" y="40" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">1</text>
-<text x="286.9" y="40" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">2</text>
-<text x="90.9" y="90" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">0</text>
-<text x="90.9" y="162" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">1</text>
-<text x="214.9" y="16" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">x: horizontal →</text>
-<g transform="rotate(90 66.9 126)"><text x="66.9" y="126" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">y: vertical →</text></g>
-<text x="193.9" y="215" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">6 células, 5 passagens: 0 ciclos, 2 becos reais</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="484" height="232" viewBox="0 0 484 232">
+<rect width="484" height="232" fill="#ffffff" rx="8"/>
+<rect x="155" y="54" width="72" height="72" fill="#fb923c"/>
+<rect x="155" y="126" width="72" height="72" fill="#fb923c"/>
+<line x1="155" y1="54" x2="227" y2="54" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="227" y1="54" x2="227" y2="126" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="155" y1="126" x2="227" y2="126" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="155" y1="54" x2="155" y2="126" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="227" y1="54" x2="299" y2="54" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="299" y1="54" x2="299" y2="126" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="227" y1="126" x2="299" y2="126" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="227" y1="54" x2="227" y2="126" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="299" y1="54" x2="371" y2="54" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="371" y1="54" x2="371" y2="126" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="299" y1="126" x2="371" y2="126" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="299" y1="54" x2="299" y2="126" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="155" y1="126" x2="227" y2="126" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="227" y1="126" x2="227" y2="198" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="155" y1="198" x2="227" y2="198" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="155" y1="126" x2="155" y2="198" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="227" y1="126" x2="299" y2="126" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="299" y1="126" x2="299" y2="198" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="227" y1="198" x2="299" y2="198" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="227" y1="126" x2="227" y2="198" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="299" y1="126" x2="371" y2="126" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="371" y1="126" x2="371" y2="198" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="299" y1="198" x2="371" y2="198" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="299" y1="126" x2="299" y2="198" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<text x="191" y="40" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="263" y="40" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="335" y="40" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="139" y="90" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="139" y="162" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="263" y="16" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">x: horizontal →</text>
+<g transform="rotate(90 115 126)"><text x="115" y="126" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">y: vertical →</text></g>
+<text x="242" y="215" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">6 células, 5 passagens: 0 ciclos · laranja: os 2 becos reais</text>
 </svg>

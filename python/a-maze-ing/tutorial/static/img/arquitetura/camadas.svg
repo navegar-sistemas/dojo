@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="584" viewBox="0 0 760 584">
+<rect width="760" height="584" fill="#ffffff" rx="8"/>
+<rect x="16" y="16" width="728" height="500" rx="16" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.5"/>
+<text x="380" y="33" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13.5" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">a_maze_ing.py: cria e liga as peças; imprime a mensagem de erro final</text>
+<rect x="50" y="50" width="660" height="432" rx="16" fill="#e0e7ff" stroke="#1f2937" stroke-width="1.5"/>
+<text x="380" y="67" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13.5" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">ui: o menu: o único que lê o teclado; imprime o labirinto e o menu</text>
+<rect x="84" y="84" width="592" height="364" rx="16" fill="#bfdbfe" stroke="#1f2937" stroke-width="1.5"/>
+<text x="380" y="101" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13.5" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">services · repositories: o desenho colorido · a leitura e a gravação de arquivos</text>
+<rect x="118" y="118" width="524" height="296" rx="16" fill="#bbf7d0" stroke="#1f2937" stroke-width="1.5"/>
+<text x="380" y="135" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13.5" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">use_cases: a operação gerar e gravar, e a sua porta</text>
+<rect x="152" y="152" width="456" height="228" rx="16" fill="#d9f99d" stroke="#1f2937" stroke-width="1.5"/>
+<text x="380" y="169" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13.5" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">domain: os dados: config lido, labirinto pronto, tela</text>
+<rect x="186" y="186" width="388" height="160" rx="16" fill="#fde68a" stroke="#1f2937" stroke-width="1.5"/>
+<text x="380" y="203" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13.5" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">utils · errors: funções de apoio · tipos de erro</text>
+<rect x="220" y="220" width="320" height="92" rx="16" fill="#fb923c" stroke="#1f2937" stroke-width="1.5"/>
+<text x="380" y="244" font-family="ui-sans-serif, system-ui, sans-serif" font-size="20" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">mazegen</text>
+<text x="380" y="268" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">o gerador: Cell, Maze, Carver, Solver...</text>
+<text x="380" y="290" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">subpastas: entities/, value_objects/, services/</text>
+<text x="380" y="540" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">cada camada importa a si mesma e anéis mais para dentro</text>
+<text x="380" y="562" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">as camadas de um mesmo anel (separadas por ·) não se importam</text>
+</svg>

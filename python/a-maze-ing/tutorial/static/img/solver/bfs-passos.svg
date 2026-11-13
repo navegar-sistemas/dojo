@@ -1,0 +1,356 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="886" height="476" viewBox="0 0 886 476">
+<rect width="886" height="476" fill="#ffffff" rx="8"/>
+<svg x="0" y="0" width="225" height="232" viewBox="0 0 225 232">
+<rect width="225" height="232" fill="#ffffff" rx="8"/>
+<svg x="0" y="0" width="225" height="162" viewBox="0 0 225 162">
+<rect width="225" height="162" fill="#ffffff" rx="8"/>
+<rect x="28.5" y="16" width="56" height="56" fill="#93c5fd"/>
+<line x1="28.5" y1="16" x2="84.5" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="84.5" y1="16" x2="84.5" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="28.5" y1="72" x2="84.5" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="28.5" y1="16" x2="28.5" y2="72" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="84.5" y1="16" x2="140.5" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="140.5" y1="16" x2="140.5" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="84.5" y1="72" x2="140.5" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="84.5" y1="16" x2="84.5" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="140.5" y1="16" x2="196.5" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="196.5" y1="16" x2="196.5" y2="72" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="140.5" y1="72" x2="196.5" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="140.5" y1="16" x2="140.5" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="28.5" y1="72" x2="84.5" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="84.5" y1="72" x2="84.5" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="28.5" y1="128" x2="84.5" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="28.5" y1="72" x2="28.5" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="84.5" y1="72" x2="140.5" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="140.5" y1="72" x2="140.5" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="84.5" y1="128" x2="140.5" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="84.5" y1="72" x2="84.5" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="140.5" y1="72" x2="196.5" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="196.5" y1="72" x2="196.5" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="140.5" y1="128" x2="196.5" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="140.5" y1="72" x2="140.5" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<text x="56.5" y="44" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="112.5" y="145" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">início: a entrada na fila</text>
+</svg>
+
+<svg x="0" y="162" width="225" height="70" viewBox="0 0 225 70">
+<rect width="225" height="70" fill="#ffffff" rx="8"/>
+<text x="16" y="14" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="start" dominant-baseline="central">fila: frente → fim</text>
+<rect x="16" y="28" width="44" height="30" rx="5" fill="#93c5fd" stroke="#1f2937" stroke-width="1.2"/>
+<text x="38" y="43" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">0,0</text>
+</svg>
+
+</svg>
+
+<svg x="237" y="0" width="200" height="232" viewBox="0 0 200 232">
+<rect width="200" height="232" fill="#ffffff" rx="8"/>
+<svg x="0" y="0" width="200" height="162" viewBox="0 0 200 162">
+<rect width="200" height="162" fill="#ffffff" rx="8"/>
+<rect x="16" y="16" width="56" height="56" fill="#fb923c"/>
+<rect x="72" y="16" width="56" height="56" fill="#93c5fd"/>
+<rect x="16" y="72" width="56" height="56" fill="#93c5fd"/>
+<line x1="16" y1="16" x2="72" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="72" y1="16" x2="72" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="72" x2="72" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="16" x2="16" y2="72" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="72" y1="16" x2="128" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="128" y1="16" x2="128" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="72" y1="72" x2="128" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="72" y1="16" x2="72" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="128" y1="16" x2="184" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="184" y1="16" x2="184" y2="72" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="128" y1="72" x2="184" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="128" y1="16" x2="128" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="72" x2="72" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="72" y1="72" x2="72" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="128" x2="72" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="16" y1="72" x2="16" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="72" y1="72" x2="128" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="128" y1="72" x2="128" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="72" y1="128" x2="128" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="72" y1="72" x2="72" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="128" y1="72" x2="184" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="184" y1="72" x2="184" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="128" y1="128" x2="184" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="128" y1="72" x2="128" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<text x="44" y="44" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="100" y="44" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="44" y="100" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="100" y="145" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">tira 0,0 da frente</text>
+</svg>
+
+<svg x="0" y="162" width="200" height="70" viewBox="0 0 200 70">
+<rect width="200" height="70" fill="#ffffff" rx="8"/>
+<text x="16" y="14" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="start" dominant-baseline="central">fila: frente → fim</text>
+<rect x="16" y="28" width="44" height="30" rx="5" fill="#93c5fd" stroke="#1f2937" stroke-width="1.2"/>
+<text x="38" y="43" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">1,0</text>
+<rect x="64" y="28" width="44" height="30" rx="5" fill="#93c5fd" stroke="#1f2937" stroke-width="1.2"/>
+<text x="86" y="43" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">0,1</text>
+</svg>
+
+</svg>
+
+<svg x="449" y="0" width="200" height="232" viewBox="0 0 200 232">
+<rect width="200" height="232" fill="#ffffff" rx="8"/>
+<svg x="0" y="0" width="200" height="162" viewBox="0 0 200 162">
+<rect width="200" height="162" fill="#ffffff" rx="8"/>
+<rect x="16" y="16" width="56" height="56" fill="#bbf7d0"/>
+<rect x="72" y="16" width="56" height="56" fill="#fb923c"/>
+<rect x="16" y="72" width="56" height="56" fill="#93c5fd"/>
+<rect x="128" y="16" width="56" height="56" fill="#93c5fd"/>
+<rect x="72" y="72" width="56" height="56" fill="#93c5fd"/>
+<line x1="16" y1="16" x2="72" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="72" y1="16" x2="72" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="72" x2="72" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="16" x2="16" y2="72" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="72" y1="16" x2="128" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="128" y1="16" x2="128" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="72" y1="72" x2="128" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="72" y1="16" x2="72" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="128" y1="16" x2="184" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="184" y1="16" x2="184" y2="72" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="128" y1="72" x2="184" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="128" y1="16" x2="128" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="72" x2="72" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="72" y1="72" x2="72" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="128" x2="72" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="16" y1="72" x2="16" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="72" y1="72" x2="128" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="128" y1="72" x2="128" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="72" y1="128" x2="128" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="72" y1="72" x2="72" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="128" y1="72" x2="184" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="184" y1="72" x2="184" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="128" y1="128" x2="184" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="128" y1="72" x2="128" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<text x="44" y="44" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="100" y="44" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="44" y="100" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="156" y="44" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="100" y="100" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="100" y="145" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">tira 1,0 da frente</text>
+</svg>
+
+<svg x="0" y="162" width="200" height="70" viewBox="0 0 200 70">
+<rect width="200" height="70" fill="#ffffff" rx="8"/>
+<text x="16" y="14" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="start" dominant-baseline="central">fila: frente → fim</text>
+<rect x="16" y="28" width="44" height="30" rx="5" fill="#93c5fd" stroke="#1f2937" stroke-width="1.2"/>
+<text x="38" y="43" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">0,1</text>
+<rect x="64" y="28" width="44" height="30" rx="5" fill="#93c5fd" stroke="#1f2937" stroke-width="1.2"/>
+<text x="86" y="43" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2,0</text>
+<rect x="112" y="28" width="44" height="30" rx="5" fill="#93c5fd" stroke="#1f2937" stroke-width="1.2"/>
+<text x="134" y="43" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">1,1</text>
+</svg>
+
+</svg>
+
+<svg x="686" y="0" width="200" height="232" viewBox="0 0 200 232">
+<rect width="200" height="232" fill="#ffffff" rx="8"/>
+<svg x="0" y="0" width="200" height="162" viewBox="0 0 200 162">
+<rect width="200" height="162" fill="#ffffff" rx="8"/>
+<rect x="16" y="16" width="56" height="56" fill="#bbf7d0"/>
+<rect x="72" y="16" width="56" height="56" fill="#bbf7d0"/>
+<rect x="16" y="72" width="56" height="56" fill="#fb923c"/>
+<rect x="128" y="16" width="56" height="56" fill="#93c5fd"/>
+<rect x="72" y="72" width="56" height="56" fill="#93c5fd"/>
+<line x1="16" y1="16" x2="72" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="72" y1="16" x2="72" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="72" x2="72" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="16" x2="16" y2="72" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="72" y1="16" x2="128" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="128" y1="16" x2="128" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="72" y1="72" x2="128" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="72" y1="16" x2="72" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="128" y1="16" x2="184" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="184" y1="16" x2="184" y2="72" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="128" y1="72" x2="184" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="128" y1="16" x2="128" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="72" x2="72" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="72" y1="72" x2="72" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="128" x2="72" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="16" y1="72" x2="16" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="72" y1="72" x2="128" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="128" y1="72" x2="128" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="72" y1="128" x2="128" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="72" y1="72" x2="72" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="128" y1="72" x2="184" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="184" y1="72" x2="184" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="128" y1="128" x2="184" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="128" y1="72" x2="128" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<text x="44" y="44" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="100" y="44" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="44" y="100" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="156" y="44" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="100" y="100" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="100" y="145" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">tira 0,1 da frente</text>
+</svg>
+
+<svg x="0" y="162" width="200" height="70" viewBox="0 0 200 70">
+<rect width="200" height="70" fill="#ffffff" rx="8"/>
+<text x="16" y="14" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="start" dominant-baseline="central">fila: frente → fim</text>
+<rect x="16" y="28" width="44" height="30" rx="5" fill="#93c5fd" stroke="#1f2937" stroke-width="1.2"/>
+<text x="38" y="43" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2,0</text>
+<rect x="64" y="28" width="44" height="30" rx="5" fill="#93c5fd" stroke="#1f2937" stroke-width="1.2"/>
+<text x="86" y="43" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">1,1</text>
+</svg>
+
+</svg>
+
+<svg x="0" y="244" width="200" height="232" viewBox="0 0 200 232">
+<rect width="200" height="232" fill="#ffffff" rx="8"/>
+<svg x="0" y="0" width="200" height="162" viewBox="0 0 200 162">
+<rect width="200" height="162" fill="#ffffff" rx="8"/>
+<rect x="16" y="16" width="56" height="56" fill="#bbf7d0"/>
+<rect x="72" y="16" width="56" height="56" fill="#bbf7d0"/>
+<rect x="16" y="72" width="56" height="56" fill="#bbf7d0"/>
+<rect x="128" y="16" width="56" height="56" fill="#fb923c"/>
+<rect x="72" y="72" width="56" height="56" fill="#93c5fd"/>
+<rect x="128" y="72" width="56" height="56" fill="#93c5fd"/>
+<line x1="16" y1="16" x2="72" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="72" y1="16" x2="72" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="72" x2="72" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="16" x2="16" y2="72" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="72" y1="16" x2="128" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="128" y1="16" x2="128" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="72" y1="72" x2="128" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="72" y1="16" x2="72" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="128" y1="16" x2="184" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="184" y1="16" x2="184" y2="72" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="128" y1="72" x2="184" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="128" y1="16" x2="128" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="72" x2="72" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="72" y1="72" x2="72" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="128" x2="72" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="16" y1="72" x2="16" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="72" y1="72" x2="128" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="128" y1="72" x2="128" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="72" y1="128" x2="128" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="72" y1="72" x2="72" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="128" y1="72" x2="184" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="184" y1="72" x2="184" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="128" y1="128" x2="184" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="128" y1="72" x2="128" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<text x="44" y="44" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="100" y="44" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="44" y="100" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="156" y="44" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="100" y="100" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="156" y="100" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">3</text>
+<text x="100" y="145" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">tira 2,0 da frente</text>
+</svg>
+
+<svg x="0" y="162" width="200" height="70" viewBox="0 0 200 70">
+<rect width="200" height="70" fill="#ffffff" rx="8"/>
+<text x="16" y="14" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="start" dominant-baseline="central">fila: frente → fim</text>
+<rect x="16" y="28" width="44" height="30" rx="5" fill="#93c5fd" stroke="#1f2937" stroke-width="1.2"/>
+<text x="38" y="43" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">1,1</text>
+<rect x="64" y="28" width="44" height="30" rx="5" fill="#93c5fd" stroke="#1f2937" stroke-width="1.2"/>
+<text x="86" y="43" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2,1</text>
+</svg>
+
+</svg>
+
+<svg x="237" y="244" width="200" height="232" viewBox="0 0 200 232">
+<rect width="200" height="232" fill="#ffffff" rx="8"/>
+<svg x="0" y="0" width="200" height="162" viewBox="0 0 200 162">
+<rect width="200" height="162" fill="#ffffff" rx="8"/>
+<rect x="16" y="16" width="56" height="56" fill="#bbf7d0"/>
+<rect x="72" y="16" width="56" height="56" fill="#bbf7d0"/>
+<rect x="16" y="72" width="56" height="56" fill="#bbf7d0"/>
+<rect x="128" y="16" width="56" height="56" fill="#bbf7d0"/>
+<rect x="72" y="72" width="56" height="56" fill="#fb923c"/>
+<rect x="128" y="72" width="56" height="56" fill="#93c5fd"/>
+<line x1="16" y1="16" x2="72" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="72" y1="16" x2="72" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="72" x2="72" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="16" x2="16" y2="72" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="72" y1="16" x2="128" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="128" y1="16" x2="128" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="72" y1="72" x2="128" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="72" y1="16" x2="72" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="128" y1="16" x2="184" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="184" y1="16" x2="184" y2="72" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="128" y1="72" x2="184" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="128" y1="16" x2="128" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="72" x2="72" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="72" y1="72" x2="72" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="128" x2="72" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="16" y1="72" x2="16" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="72" y1="72" x2="128" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="128" y1="72" x2="128" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="72" y1="128" x2="128" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="72" y1="72" x2="72" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="128" y1="72" x2="184" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="184" y1="72" x2="184" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="128" y1="128" x2="184" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="128" y1="72" x2="128" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<text x="44" y="44" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="100" y="44" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="44" y="100" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="156" y="44" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="100" y="100" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="156" y="100" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">3</text>
+<text x="100" y="145" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">tira 1,1 da frente</text>
+</svg>
+
+<svg x="0" y="162" width="200" height="70" viewBox="0 0 200 70">
+<rect width="200" height="70" fill="#ffffff" rx="8"/>
+<text x="16" y="14" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="start" dominant-baseline="central">fila: frente → fim</text>
+<rect x="16" y="28" width="44" height="30" rx="5" fill="#93c5fd" stroke="#1f2937" stroke-width="1.2"/>
+<text x="38" y="43" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2,1</text>
+</svg>
+
+</svg>
+
+<svg x="449" y="244" width="225" height="232" viewBox="0 0 225 232">
+<rect width="225" height="232" fill="#ffffff" rx="8"/>
+<svg x="0" y="0" width="225" height="162" viewBox="0 0 225 162">
+<rect width="225" height="162" fill="#ffffff" rx="8"/>
+<rect x="28.5" y="16" width="56" height="56" fill="#bbf7d0"/>
+<rect x="84.5" y="16" width="56" height="56" fill="#bbf7d0"/>
+<rect x="28.5" y="72" width="56" height="56" fill="#bbf7d0"/>
+<rect x="140.5" y="16" width="56" height="56" fill="#bbf7d0"/>
+<rect x="84.5" y="72" width="56" height="56" fill="#bbf7d0"/>
+<rect x="140.5" y="72" width="56" height="56" fill="#fb923c"/>
+<line x1="28.5" y1="16" x2="84.5" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="84.5" y1="16" x2="84.5" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="28.5" y1="72" x2="84.5" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="28.5" y1="16" x2="28.5" y2="72" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="84.5" y1="16" x2="140.5" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="140.5" y1="16" x2="140.5" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="84.5" y1="72" x2="140.5" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="84.5" y1="16" x2="84.5" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="140.5" y1="16" x2="196.5" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="196.5" y1="16" x2="196.5" y2="72" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="140.5" y1="72" x2="196.5" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="140.5" y1="16" x2="140.5" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="28.5" y1="72" x2="84.5" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="84.5" y1="72" x2="84.5" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="28.5" y1="128" x2="84.5" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="28.5" y1="72" x2="28.5" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="84.5" y1="72" x2="140.5" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="140.5" y1="72" x2="140.5" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="84.5" y1="128" x2="140.5" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="84.5" y1="72" x2="84.5" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="140.5" y1="72" x2="196.5" y2="72" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="196.5" y1="72" x2="196.5" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="140.5" y1="128" x2="196.5" y2="128" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="140.5" y1="72" x2="140.5" y2="128" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<text x="56.5" y="44" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="112.5" y="44" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="56.5" y="100" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="168.5" y="44" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="112.5" y="100" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="168.5" y="100" font-family="ui-sans-serif, system-ui, sans-serif" font-size="23.52" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">3</text>
+<text x="112.5" y="145" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">tira 2,1: é a saída, para</text>
+</svg>
+
+<svg x="0" y="162" width="225" height="70" viewBox="0 0 225 70">
+<rect width="225" height="70" fill="#ffffff" rx="8"/>
+<text x="16" y="14" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="start" dominant-baseline="central">fila: frente → fim</text>
+<text x="16" y="43" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="start" dominant-baseline="central">(vazia)</text>
+</svg>
+
+</svg>
+
+</svg>

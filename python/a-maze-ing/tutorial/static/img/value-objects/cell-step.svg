@@ -1,67 +1,68 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="434" height="458" viewBox="0 0 434 458">
-<rect width="434" height="458" fill="#ffffff" rx="8"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="530" height="574" viewBox="0 0 530 574">
+<rect width="530" height="574" fill="#ffffff" rx="8"/>
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1f2937"/></marker></defs>
-<rect x="34" y="34" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="98" y="34" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="162" y="34" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="226" y="34" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="290" y="34" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="354" y="34" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="34" y="98" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="98" y="98" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="162" y="98" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="226" y="98" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="290" y="98" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="354" y="98" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="34" y="162" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="98" y="162" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="162" y="162" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="226" y="162" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="290" y="162" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="354" y="162" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="34" y="226" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="98" y="226" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="162" y="226" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="226" y="226" width="64" height="64" fill="#bbf7d0" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="290" y="226" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="354" y="226" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="34" y="290" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="98" y="290" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="162" y="290" width="64" height="64" fill="#bbf7d0" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="226" y="290" width="64" height="64" fill="#fb923c" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="290" y="290" width="64" height="64" fill="#bbf7d0" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="354" y="290" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="34" y="354" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="98" y="354" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="162" y="354" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="226" y="354" width="64" height="64" fill="#bbf7d0" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="290" y="354" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="354" y="354" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="34" y="34" width="384" height="384" fill="none" stroke="#1f2937" stroke-width="3"/>
-<line x1="258" y1="307.92" x2="258" y2="280.528" stroke="#1f2937" stroke-width="2.5" marker-end="url(#arrow)"/>
-<line x1="272.08" y1="322" x2="299.472" y2="322" stroke="#1f2937" stroke-width="2.5" marker-end="url(#arrow)"/>
-<line x1="258" y1="336.08" x2="258" y2="363.472" stroke="#1f2937" stroke-width="2.5" marker-end="url(#arrow)"/>
-<line x1="243.92" y1="322" x2="216.528" y2="322" stroke="#1f2937" stroke-width="2.5" marker-end="url(#arrow)"/>
-<text x="258" y="322" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.64" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">3,4</text>
-<text x="258" y="249.68" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">3,3</text>
-<text x="258" y="266.32" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12.8" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">N</text>
-<text x="322" y="313.68" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">4,4</text>
-<text x="322" y="330.32" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12.8" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">E</text>
-<text x="258" y="377.68" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">3,5</text>
-<text x="258" y="394.32" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12.8" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">S</text>
-<text x="194" y="313.68" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2,4</text>
-<text x="194" y="330.32" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12.8" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">W</text>
-<text x="66" y="20" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">0</text>
-<text x="130" y="20" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">1</text>
-<text x="194" y="20" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">2</text>
-<text x="258" y="20" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">3</text>
-<text x="322" y="20" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">4</text>
-<text x="386" y="20" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">5</text>
-<text x="18" y="66" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">0</text>
-<text x="18" y="130" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">1</text>
-<text x="18" y="194" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">2</text>
-<text x="18" y="258" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">3</text>
-<text x="18" y="322" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">4</text>
-<text x="18" y="386" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">5</text>
-<text x="217" y="438" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">Cell(3, 4).step(d) para cada Direction</text>
+<rect x="34" y="34" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="114" y="34" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="194" y="34" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="274" y="34" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="354" y="34" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="434" y="34" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="34" y="114" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="114" y="114" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="194" y="114" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="274" y="114" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="354" y="114" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="434" y="114" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="34" y="194" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="114" y="194" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="194" y="194" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="274" y="194" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="354" y="194" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="434" y="194" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="34" y="274" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="114" y="274" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="194" y="274" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="274" y="274" width="80" height="80" fill="#bbf7d0" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="354" y="274" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="434" y="274" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="34" y="354" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="114" y="354" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="194" y="354" width="80" height="80" fill="#bbf7d0" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="274" y="354" width="80" height="80" fill="#fb923c" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="354" y="354" width="80" height="80" fill="#bbf7d0" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="434" y="354" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="34" y="434" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="114" y="434" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="194" y="434" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="274" y="434" width="80" height="80" fill="#bbf7d0" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="354" y="434" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="434" y="434" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="34" y="34" width="480" height="480" fill="none" stroke="#1f2937" stroke-width="3"/>
+<line x1="314" y1="366.8" x2="314" y2="342.8" stroke="#1f2937" stroke-width="2.5" marker-end="url(#arrow)"/>
+<line x1="341.2" y1="394" x2="365.2" y2="394" stroke="#1f2937" stroke-width="2.5" marker-end="url(#arrow)"/>
+<line x1="314" y1="421.2" x2="314" y2="445.2" stroke="#1f2937" stroke-width="2.5" marker-end="url(#arrow)"/>
+<line x1="286.8" y1="394" x2="262.8" y2="394" stroke="#1f2937" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text x="314" y="394" font-family="ui-sans-serif, system-ui, sans-serif" font-size="20.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">3,4</text>
+<text x="314" y="303.6" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">3,3</text>
+<text x="314" y="324.4" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">N</text>
+<text x="394" y="383.6" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">4,4</text>
+<text x="394" y="404.4" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">E</text>
+<text x="314" y="463.6" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">3,5</text>
+<text x="314" y="484.4" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">S</text>
+<text x="234" y="383.6" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2,4</text>
+<text x="234" y="404.4" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">W</text>
+<text x="74" y="20" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="154" y="20" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="234" y="20" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="314" y="20" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">3</text>
+<text x="394" y="20" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">4</text>
+<text x="474" y="20" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">5</text>
+<text x="18" y="74" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="18" y="154" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="18" y="234" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="18" y="314" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">3</text>
+<text x="18" y="394" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">4</text>
+<text x="18" y="474" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">5</text>
+<text x="265" y="536" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">Cell(3, 4).step(d) para cada Direction</text>
+<text x="265" y="556" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">laranja: a célula de partida · verde: o resultado de cada passo</text>
 </svg>

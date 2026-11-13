@@ -5,31 +5,40 @@ title: O que entregar
 
 # O que entregar
 
-Só o que está no repositório Git é avaliado. A raiz do repositório de entrega tem exatamente
-estes arquivos, com estes nomes:
+A entrega é um **repositório Git**: a pasta do projeto com o histórico de versões, enviada para o
+servidor de entrega. O enunciado é claro: só o que está dentro do repositório é avaliado, e vale
+conferir duas vezes o nome de cada arquivo. Esta página lista o que entra e o que fica de fora;
+a [próxima](./09-enviar-e-conferir.md) mostra como enviar e provar, numa cópia nova, que a
+entrega funciona sozinha.
+
+## O que entra
+
+A raiz do repositório tem exatamente estes arquivos, com estes nomes:
 
 | Arquivo | O que é |
 |---|---|
-| `a_maze_ing.py` | o programa; o subject exige esse nome |
+| `a_maze_ing.py` | o programa; o enunciado exige esse nome |
 | `mazegen/` | o gerador reutilizável |
-| `amazeing/` | a aplicação: config, arquivo de saída, desenho e menu |
+| `amazeing/` | a aplicação: configuração, arquivo de saída, desenho e menu |
 | `config.txt` | a configuração padrão, com um comentário antes de cada chave |
-| `Makefile` | `install`, `run`, `debug`, `clean`, `lint`, `lint-strict` e `build` |
-| `pyproject.toml` | metadados e build do pacote `mazegen` |
-| `.flake8` | exclusões do flake8 (`.venv`, `build`, `dist`) |
-| `.gitignore` | os artefatos do Python que não entram no repositório |
-| `README.md` | o README final |
-| `LICENSE.md` | a licença MIT, com o seu login no copyright |
-| `mazegen-1.0.0-py3-none-any.whl` | o wheel, gerado por `make build` |
-| `mazegen-1.0.0.tar.gz` | o sdist, gerado por `make build` |
+| `Makefile` | os atalhos `install`, `run`, `debug`, `clean`, `lint`, `lint-strict` e `build` |
+| `pyproject.toml` | a descrição do pacote `mazegen` e de como construí-lo |
+| `.flake8` | as pastas que o verificador de estilo flake8 ignora (`.venv`, `build`, `dist`) |
+| `.gitignore` | a lista de arquivos gerados que o Git ignora |
+| `README.md` | a apresentação do projeto |
+| `LICENSE.md` | a licença MIT, com o seu login na linha de copyright |
+| `mazegen-1.0.0-py3-none-any.whl` | o pacote pronto para instalar (*wheel*), gerado por `make build` |
+| `mazegen-1.0.0.tar.gz` | o pacote com os fontes (*sdist*), gerado por `make build` |
 
-O wheel e o sdist ficam **versionados**: o subject exige o arquivo do pacote na raiz do
-repositório. Ao mesmo tempo, tudo que é preciso para reconstruí-lo também está lá
-(`pyproject.toml`, `mazegen/`, `README.md`, `LICENSE.md`), porque a avaliação o reconstrói.
+O wheel e o sdist ficam **no repositório**, mesmo sendo gerados: o enunciado exige o arquivo do
+pacote na raiz. Ao mesmo tempo, tudo o que é preciso para reconstruí-lo também está lá
+(`pyproject.toml`, `mazegen/`, `README.md`, `LICENSE.md`), porque a avaliação o reconstrói
+([O roteiro da avaliação](./08-o-roteiro-da-avaliacao.md)).
 
 ## O que não entra
 
-O `.gitignore` deixa de fora o que é gerado ou pessoal:
+O `.gitignore` lista o que é gerado ao rodar ou construir o projeto, e que por isso não vai para
+o repositório ([parte 3](../03-ambiente/05-flake8-e-gitignore.md)):
 
 ```text
 .venv/
@@ -42,18 +51,25 @@ dist/
 maze.txt
 ```
 
-- `.venv/` é recriado por `make install` em cada máquina.
-- `build/`, `dist/` e `*.egg-info/` são restos do build; os arquivos que importam já foram
-  copiados para a raiz.
-- `maze.txt` é o `OUTPUT_FILE` do `config.txt`, regravado a cada execução.
+- `.venv/` é o ambiente virtual, recriado por `make install` em cada máquina.
+- `__pycache__/`, `*.pyc` e `.mypy_cache/` são arquivos que o Python e o mypy criam para ir mais
+  rápido na próxima vez.
+- `build/`, `dist/` e `*.egg-info/` são restos da construção do pacote; os arquivos que importam
+  já foram copiados para a raiz.
+- `maze.txt` é o arquivo de saída do `config.txt`, regravado a cada execução.
 
-Também não entram testes: o subject pede programas de teste para verificar o projeto, mas eles
-não são submetidos nem avaliados. Se você os escreveu, mantenha-os fora do repositório de
-entrega.
+Também não entram programas de teste: o enunciado sugere escrever testes para conferir o projeto,
+mas diz que eles não são entregues nem avaliados.
 
-## Conferir a árvore
+## Conferir a lista de arquivos
+
+O Git só leva para o servidor os arquivos que ele acompanha. `git add -A` marca para o próximo
+registro de versão todos os arquivos da pasta, menos os que o `.gitignore` ignora; depois disso,
+`git ls-files` lista exatamente os que o Git acompanha. A
+[próxima página](./09-enviar-e-conferir.md) explica o `git add` com calma e registra a versão.
 
 ```bash
+git add -A
 git ls-files
 ```
 
@@ -105,25 +121,5 @@ mazegen/value_objects/pattern42.py
 pyproject.toml
 ```
 
-Confira os nomes letra por letra: o subject pede atenção a eles, e um `a-maze-ing.py` ou um
-`Readme.md` não é o arquivo que o avaliador procura.
-
-## Rodar a entrega num clone novo
-
-Antes, no seu repositório, `git status --porcelain` não pode imprimir nada: tudo commitado e
-enviado. O último passo é fazer o que o avaliador vai fazer, numa pasta nova:
-
-```bash
-git clone <url-do-seu-repositório> entrega
-cd entrega
-make install
-make lint
-printf '4\n' | make run
-```
-
-- `make install` cria o `.venv` do zero e instala as ferramentas.
-- `make lint` termina sem nenhuma linha do flake8 e com `Success: no issues found` do mypy.
-- `make run` desenha o labirinto, e a opção `4` sai com código 0.
-
-Se algum desses passos depende de algo que só existe na sua máquina (um arquivo ignorado, uma
-ferramenta instalada fora do `.venv`), o clone limpo é onde isso aparece.
+Confira os nomes letra por letra. Um `a-maze-ing.py` (com hífen) ou um `Readme.md` não é o
+arquivo que o avaliador procura.

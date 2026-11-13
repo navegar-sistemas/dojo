@@ -595,5 +595,5 @@
 <line x1="520" y1="436" x2="548" y2="436" stroke="#1f2937" stroke-width="3" stroke-linecap="round"/>
 <line x1="576" y1="408" x2="576" y2="436" stroke="#1f2937" stroke-width="3" stroke-linecap="round"/>
 <line x1="548" y1="436" x2="576" y2="436" stroke="#1f2937" stroke-width="3" stroke-linecap="round"/>
-<text x="296" y="453" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">o mesmo labirinto com o caminho mais curto</text>
+<text x="296" y="453" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">20 x 15, modo Pac-Man, semente 42, com o caminho mais curto</text>
 </svg>

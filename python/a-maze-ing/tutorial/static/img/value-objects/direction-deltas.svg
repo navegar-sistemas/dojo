@@ -1,29 +1,34 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="392" height="416" viewBox="0 0 392 416">
-<rect width="392" height="416" fill="#ffffff" rx="8"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="438" height="476" viewBox="0 0 438 476">
+<rect width="438" height="476" fill="#ffffff" rx="8"/>
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1f2937"/></marker></defs>
-<rect x="16" y="16" width="120" height="120" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="136" y="16" width="120" height="120" fill="#bbf7d0" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="256" y="16" width="120" height="120" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="16" y="136" width="120" height="120" fill="#bbf7d0" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="136" y="136" width="120" height="120" fill="#fb923c" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="256" y="136" width="120" height="120" fill="#bbf7d0" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="16" y="256" width="120" height="120" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="136" y="256" width="120" height="120" fill="#bbf7d0" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="256" y="256" width="120" height="120" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="16" y="16" width="360" height="360" fill="none" stroke="#1f2937" stroke-width="3"/>
-<line x1="196" y1="169.6" x2="196" y2="118.24" stroke="#1f2937" stroke-width="2.5" marker-end="url(#arrow)"/>
-<line x1="222.4" y1="196" x2="273.76" y2="196" stroke="#1f2937" stroke-width="2.5" marker-end="url(#arrow)"/>
-<line x1="196" y1="222.4" x2="196" y2="273.76" stroke="#1f2937" stroke-width="2.5" marker-end="url(#arrow)"/>
-<line x1="169.6" y1="196" x2="118.24" y2="196" stroke="#1f2937" stroke-width="2.5" marker-end="url(#arrow)"/>
-<text x="196" y="180.4" font-family="ui-sans-serif, system-ui, sans-serif" font-size="24" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">célula</text>
-<text x="196" y="211.6" font-family="ui-sans-serif, system-ui, sans-serif" font-size="24" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">atual</text>
-<text x="196" y="60.4" font-family="ui-sans-serif, system-ui, sans-serif" font-size="24" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">NORTH</text>
-<text x="196" y="91.6" font-family="ui-sans-serif, system-ui, sans-serif" font-size="24" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">dx 0, dy -1</text>
-<text x="316" y="180.4" font-family="ui-sans-serif, system-ui, sans-serif" font-size="24" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">EAST</text>
-<text x="316" y="211.6" font-family="ui-sans-serif, system-ui, sans-serif" font-size="24" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">dx +1, dy 0</text>
-<text x="196" y="300.4" font-family="ui-sans-serif, system-ui, sans-serif" font-size="24" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">SOUTH</text>
-<text x="196" y="331.6" font-family="ui-sans-serif, system-ui, sans-serif" font-size="24" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">dx 0, dy +1</text>
-<text x="76" y="180.4" font-family="ui-sans-serif, system-ui, sans-serif" font-size="24" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">WEST</text>
-<text x="76" y="211.6" font-family="ui-sans-serif, system-ui, sans-serif" font-size="24" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">dx -1, dy 0</text>
-<text x="196" y="396" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">um passo para cada lado: x soma dx, y soma dy</text>
+<rect x="24" y="24" width="130" height="130" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="154" y="24" width="130" height="130" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="284" y="24" width="130" height="130" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="24" y="154" width="130" height="130" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="154" y="154" width="130" height="130" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="284" y="154" width="130" height="130" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="24" y="284" width="130" height="130" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="154" y="284" width="130" height="130" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="284" y="284" width="130" height="130" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="154" y="154" width="130" height="130" fill="#fb923c" stroke="#d1d5db" stroke-width="1.5"/>
+<text x="219" y="208" font-family="ui-sans-serif, system-ui, sans-serif" font-size="17" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">célula</text>
+<text x="219" y="230" font-family="ui-sans-serif, system-ui, sans-serif" font-size="17" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">atual</text>
+<rect x="154" y="24" width="130" height="130" fill="#bbf7d0" stroke="#d1d5db" stroke-width="1.5"/>
+<text x="219" y="71.5" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">NORTH</text>
+<text x="219" y="93.5" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">dx 0, dy -1</text>
+<line x1="253" y1="154" x2="253" y2="120.2" stroke="#1f2937" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="284" y="154" width="130" height="130" fill="#bbf7d0" stroke="#d1d5db" stroke-width="1.5"/>
+<text x="355.5" y="208" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">EAST</text>
+<text x="355.5" y="230" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">dx +1, dy 0</text>
+<line x1="284" y1="249" x2="317.8" y2="249" stroke="#1f2937" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="154" y="284" width="130" height="130" fill="#bbf7d0" stroke="#d1d5db" stroke-width="1.5"/>
+<text x="219" y="344.5" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">SOUTH</text>
+<text x="219" y="366.5" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">dx 0, dy +1</text>
+<line x1="253" y1="284" x2="253" y2="317.8" stroke="#1f2937" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="24" y="154" width="130" height="130" fill="#bbf7d0" stroke="#d1d5db" stroke-width="1.5"/>
+<text x="82.5" y="208" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">WEST</text>
+<text x="82.5" y="230" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">dx -1, dy 0</text>
+<line x1="154" y1="249" x2="120.2" y2="249" stroke="#1f2937" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text x="219" y="436" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">um passo para cada lado: x soma dx, y soma dy</text>
+<text x="219" y="456" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">laranja: a célula atual · verde: as quatro vizinhas</text>
 </svg>

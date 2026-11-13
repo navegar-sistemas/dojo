@@ -1,16 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="439.6" height="140" viewBox="0 0 439.6 140">
-<rect width="439.6" height="140" fill="#ffffff" rx="8"/>
-<rect x="129.8" y="16" width="90" height="90" fill="#fde68a"/>
-<rect x="219.8" y="16" width="90" height="90" fill="#bbf7d0"/>
-<line x1="129.8" y1="16" x2="219.8" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="219.8" y1="16" x2="219.8" y2="106" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="129.8" y1="106" x2="219.8" y2="106" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="129.8" y1="16" x2="129.8" y2="106" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="219.8" y1="16" x2="309.8" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="309.8" y1="16" x2="309.8" y2="106" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="219.8" y1="106" x2="309.8" y2="106" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="219.8" y1="16" x2="219.8" y2="106" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<text x="174.8" y="61" font-family="ui-sans-serif, system-ui, sans-serif" font-size="37.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">3,4</text>
-<text x="264.8" y="61" font-family="ui-sans-serif, system-ui, sans-serif" font-size="37.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">4,4</text>
-<text x="219.8" y="123" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">a parede do meio é o Leste de (3,4) e o Oeste de (4,4)</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="380.4" height="140" viewBox="0 0 380.4 140">
+<rect width="380.4" height="140" fill="#ffffff" rx="8"/>
+<rect x="100.2" y="16" width="90" height="90" fill="#fde68a"/>
+<rect x="190.2" y="16" width="90" height="90" fill="#bbf7d0"/>
+<line x1="100.2" y1="16" x2="190.2" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="190.2" y1="16" x2="190.2" y2="106" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="100.2" y1="106" x2="190.2" y2="106" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="100.2" y1="16" x2="100.2" y2="106" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="190.2" y1="16" x2="280.2" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="280.2" y1="16" x2="280.2" y2="106" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="190.2" y1="106" x2="280.2" y2="106" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="190.2" y1="16" x2="190.2" y2="106" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<text x="145.2" y="61" font-family="ui-sans-serif, system-ui, sans-serif" font-size="37.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">A</text>
+<text x="235.2" y="61" font-family="ui-sans-serif, system-ui, sans-serif" font-size="37.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">B</text>
+<text x="190.2" y="123" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">a parede do meio é o Leste de A e o Oeste de B</text>
 </svg>

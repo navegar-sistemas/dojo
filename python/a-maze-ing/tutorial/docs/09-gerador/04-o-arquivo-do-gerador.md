@@ -1,51 +1,41 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 title: O arquivo do gerador
 ---
 
 # O arquivo do gerador
 
+Depois do laço de tentativas da [página anterior](./03-generate.md), a variável `maze` guarda um
+labirinto aceito, mas ele ainda está nos tipos internos do pacote (`Maze`, `Cell`). Falta calcular
+o caminho mais curto e entregar o resultado em tipos simples, que é o que a fachada promete. Esta
+página fecha o método `generate()` e mostra o arquivo `mazegen/generator.py` inteiro.
+
 ## Resolver e publicar
 
-Depois do laço de tentativas, `generate()` termina com duas linhas:
+`generate()` termina com duas linhas:
 
 ```python
         self.solution = Solver().shortest_path(maze, self._entry, self._exit)
         self.grid = maze.rows()
 ```
 
-Depois do laço, `maze` é a grade aceita. O caminho é calculado uma vez, aqui, e
-`maze.rows()` devolve uma cópia das linhas em listas de inteiros. O `Maze` termina junto com o
-método: só os tipos simples saem do pacote.
+- `Solver().shortest_path(...)` devolve o caminho mais curto da entrada até a saída, em letras
+  `N`, `E`, `S` e `W` ([parte 7](../07-solver/03-o-codigo-do-solver.md)). Ele é calculado uma vez
+  por labirinto, aqui; o arquivo de saída e a tela usam o mesmo texto.
+- `maze.rows()` devolve uma **cópia** da grade de paredes: uma lista por linha, com o número das
+  paredes de cada célula ([parte 5](../05-maze/08-a-copia-da-grade.md)). Sendo cópia, quem mexer
+  em `gen.grid` não estraga nada dentro do pacote.
 
-## Experimente
-
-```python
-from mazegen import MazeGenerator
-
-gen = MazeGenerator(width=20, height=15, seed=42)
-print(gen.grid, repr(gen.solution), len(gen.pattern))
-gen.generate()
-print(len(gen.grid), len(gen.grid[0]), gen.solution)
-first = gen.grid
-gen.generate()
-print(gen.grid == first)
-again = MazeGenerator(width=20, height=15, seed=42)
-again.generate()
-print(again.grid == first)
-```
-
-```text
-[] '' 18
-15 20 SSEEESSSSSENNNESSSSEESSSSEESSEEEENNESSEEEEE
-False
-True
-```
-
-Antes de `generate()`, só `pattern` está preenchido. A segunda chamada dá outro labirinto, e um
-gerador novo com a mesma seed repete o primeiro.
+O `Maze` deixa de existir quando o método termina: só os tipos simples (`str` e listas de `int`)
+saem do pacote.
 
 ## O arquivo completo
+
+Juntando as constantes e a assinatura ([página 2](./10-construtor-e-atributos.md)), as
+conferências do construtor ([página 3](./02-validar-os-parametros.md)) e o laço de tentativas
+([página 4](./03-generate.md)). Os imports trazem cada peça das partes 4 a 8; do módulo do
+`Braider` vêm também as constantes `MAX_DEAD_ENDS` e `MIN_LOOPS`. A docstring da classe (o texto
+entre `"""` abaixo de `class MazeGenerator:`) descreve os três atributos públicos.
 
 ```python title="mazegen/generator.py"
 """Public facade of the package: MazeGenerator."""
@@ -150,3 +140,90 @@ class MazeGenerator:
         self.solution = Solver().shortest_path(maze, self._entry, self._exit)
         self.grid = maze.rows()
 ```
+
+## Experimente
+
+O `mazegen/__init__.py` ainda tem só a docstring de uma linha da
+[parte 3](../03-ambiente/07-pacotes-do-mazegen.md), então os exemplos importam pelo caminho
+completo, `from mazegen.generator import MazeGenerator`. A forma curta,
+`from mazegen import MazeGenerator`, passa a funcionar na [página 6](./05-documentacao-do-modulo.md).
+
+### Os atributos antes e depois de `generate()`
+
+O código cria um gerador, olha os atributos antes e depois de `generate()`, gera um segundo
+labirinto e compara com um gerador novo de mesma semente. Na raiz do projeto:
+
+```bash
+.venv/bin/python - <<'EOF'
+from mazegen.generator import MazeGenerator
+
+gen = MazeGenerator(width=20, height=15, seed=42)
+print(gen.grid, repr(gen.solution), len(gen.pattern))
+gen.generate()
+print(len(gen.grid), len(gen.grid[0]), gen.solution)
+first = gen.grid
+gen.generate()
+print(gen.grid == first)
+again = MazeGenerator(width=20, height=15, seed=42)
+again.generate()
+print(again.grid == first)
+EOF
+```
+
+```text
+[] '' 18
+15 20 SSEEESSSSSENNNESSSSEESSSSEESSEEEENNESSEEEEE
+False
+True
+```
+
+- Antes de `generate()`, só `pattern` está preenchido: 18 células do "42". (`repr` mostra o texto
+  vazio como `''`, para ele aparecer na saída.)
+- Depois, `grid` tem 15 linhas de 20 números, e `solution` tem o caminho.
+- `first = gen.grid` não copia a grade: `first` passa a ser outro nome para a **mesma** lista.
+  A segunda chamada a `generate()` não mexe nessa lista; ela guarda em `gen.grid` uma lista
+  **nova**, a que `maze.rows()` devolve. Então `first` continua com o primeiro labirinto, e
+  `gen.grid` passa a ter o segundo.
+- A segunda chamada dá outro labirinto (`False`): o sorteador continuou de onde parou.
+- Um gerador novo com a mesma semente repete o primeiro labirinto (`True`).
+
+### Os parâmetros recusados
+
+Cada recusa do construtor ([página 3](./02-validar-os-parametros.md)), uma por vez:
+
+```bash
+.venv/bin/python - <<'EOF'
+from mazegen.errors import MazeError
+from mazegen.generator import MazeGenerator
+
+for kwargs in [
+    {"width": 0, "height": 15},
+    {"width": 20, "height": 101},
+    {"width": 20, "height": 15, "entry": (20, 0)},
+    {"width": 20, "height": 15, "exit": (0, 0)},
+    {"width": 2, "height": 2},
+    {"width": 20, "height": 15, "entry": (6, 5)},
+]:
+    try:
+        MazeGenerator(**kwargs)
+    except MazeError as error:
+        print(error)
+EOF
+```
+
+```text
+width must be between 1 and 100, got 0
+height must be between 1 and 100, got 101
+entry (20, 0) is outside the maze
+entry and exit must differ
+perfect=False needs (width - 1) x (height - 1) >= 2 for a Pac-Man board, got 2x2
+entry (6, 5) lies on the "42" pattern
+```
+
+- A lista tem seis dicionários, um por tentativa. `kwargs` é só o nome da variável, comum em
+  Python para isto: vem de *keyword arguments*, "argumentos com nome".
+- `MazeGenerator(**kwargs)`: os dois asteriscos desmontam o dicionário e passam cada chave como um
+  parâmetro com nome. `{"width": 0, "height": 15}` vira `MazeGenerator(width=0, height=15)`.
+- Cada tentativa levanta um `MazeError`, e o `except` imprime só a mensagem.
+- Em 20x15, o canto de cima à esquerda do "42" fica na célula `6,5`: por isso a última entrada é
+  recusada.

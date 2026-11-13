@@ -5,14 +5,20 @@ title: Convertendo um valor
 
 # Convertendo um valor
 
-Antes das regras, cada texto vira o seu tipo: `"20"` vira `20`, `"0,0"` vira `(0, 0)`, `"False"`
-vira `False`. Quem converte é o `ValueParser` (parte 10); o que falta é transformar a falha dele
-numa mensagem para o usuário.
+Antes de conferir qualquer regra, cada texto do arquivo de configuração precisa virar o seu
+tipo: `"20"` vira `20`, `"0,0"` vira `(0, 0)`, `"False"` vira `False`. Os conversores já existem
+(o `ValueParser`, da [parte 10](../10-utilitarios/02-inteiros-sem-surpresa.md)). O que falta é
+transformar a falha deles numa mensagem que o usuário entenda. Esta página cria a função que faz
+isso.
 
 ## O problema
 
-O `ValueParser` levanta `ValueError("abc")` ou `OverflowError(...)`, sem dizer de qual chave
-veio o texto. O usuário precisa ler:
+Quando um texto não serve, o `ValueParser` levanta uma exceção que só carrega o texto:
+
+- `ValueError("abc")` quando o formato está errado;
+- `OverflowError(...)` quando o número tem mais de 18 dígitos.
+
+Ele não sabe de qual chave o texto veio. O usuário, porém, precisa ler a chave e o problema:
 
 ```text
 WIDTH must be an integer, got 'abc'
@@ -21,10 +27,12 @@ PERFECT must be True or False, got 'yes'
 WIDTH has more than 18 digits
 ```
 
-Escrever um `try`/`except` para cada uma das sete chaves repetiria o mesmo bloco sete vezes. Um
-helper, `_parse`, faz isso uma vez.
+Seis chaves passam por um conversor: todas as obrigatórias menos `OUTPUT_FILE`, que já é texto
+e fica como está, mais a `SEED`, quando aparece. Escrever um `try`/`except` para cada uma
+repetiria o mesmo bloco seis vezes. Uma função auxiliar, `_parse`, escreve esse bloco uma vez
+só.
 
-## O helper `_parse`
+## A função `_parse`
 
 ```python
 def _parse(raw: Mapping[str, str], key: str, parser: Callable[[str], _T],
@@ -41,41 +49,28 @@ def _parse(raw: Mapping[str, str], key: str, parser: Callable[[str], _T],
 
 | Parâmetro | Exemplo | Papel |
 |---|---|---|
-| `raw` | o dicionário do repositório | de onde sai o texto |
-| `key` | `"WIDTH"` | a chave, já em maiúsculas, que entra na mensagem |
+| `raw` | o dicionário montado a partir do arquivo | de onde sai o texto |
+| `key` | `"WIDTH"` | a chave, que entra na mensagem |
 | `parser` | `ValueParser.to_int` | a função que converte |
 | `expected` | `"an integer"` | o formato aceito, como aparece na mensagem |
 
-O `parser` é a própria função, sem parênteses: `_parse` a chama com o texto. Assim o mesmo
-helper serve para inteiro, coordenada e booleano.
+`_parse` não usa nada do `MazeConfig` (nem `cls`, nem campo) e por isso é uma função do arquivo,
+fora da classe. O `_` na frente é a convenção do Python para "interna a este arquivo".
 
-### As duas mensagens
+Linha a linha (o `from None` do fim dos dois `raise` é explicado mais abaixo):
 
-- `ValueError` (formato errado): a mensagem cita o valor entre aspas, para o usuário ver
-  exatamente o que o programa leu, inclusive um comentário no fim da linha que ele achou que
-  seria ignorado (`got '20 # largura'`).
-- `OverflowError` (dígitos demais): a mensagem **não** cita o valor, que pode ter 100 000
-  caracteres. Diz só o limite.
+1. `value = raw[key]` pega o texto da chave, por exemplo `"abc"`.
+2. `return parser(value)` tenta converter. Se der certo, a função termina aqui com o valor.
+3. Cada `except` troca o erro do conversor por um `ConfigError`, a exceção de configuração da
+   [parte 10](../10-utilitarios/05-a-hierarquia-app-error.md): o `OverflowError` vira a mensagem do limite de dígitos; o
+   `ValueError`, a mensagem com a chave, o formato esperado e o texto lido.
 
-### `from None`
+### Uma função como parâmetro
 
-`raise ... from None` substitui a exceção original em vez de encadeá-la. Sem ele, se o erro um
-dia aparecesse num traceback, viriam duas exceções (o `ValueError` interno e, "durante o
-tratamento dele", o `ConfigError`). O `ValueError("abc")` não diz nada que o `ConfigError` já não
-diga melhor; o `from None` deixa só o que importa.
-
-## O tipo de volta: `TypeVar`
-
-```python
-_T = TypeVar("_T")
-```
-
-`_parse` devolve `int` quando recebe `to_int`, `tuple[int, int]` quando recebe `to_coordinate` e
-`bool` quando recebe `to_bool`. Uma anotação fixa (`-> int`) estaria errada para dois deles, e
-`-> object` faria o `mypy` perder o tipo de cada campo.
-
-A variável de tipo `_T` liga a entrada à saída: "`parser` é uma função que recebe `str` e devolve
-algum tipo `_T`; `_parse` devolve esse mesmo `_T`". O `mypy` deduz o tipo em cada chamada:
+`parser` recebe a **própria função**, sem parênteses: `ValueParser.to_int`, e não
+`ValueParser.to_int(...)`. Em Python, uma função é um valor como outro qualquer: pode ser
+guardada numa variável e passada adiante. Quem a chama é o `_parse`, na linha `parser(value)`.
+Assim a mesma função auxiliar serve para inteiro, coordenada e booleano:
 
 ```python
 width = _parse(raw, "WIDTH", ValueParser.to_int, "an integer")
@@ -83,34 +78,76 @@ entry = _parse(raw, "ENTRY", ValueParser.to_coordinate,
                "'x,y' with integers")
 ```
 
-`width` sai `int` e `entry` sai `tuple[int, int]`, sem nenhum cast.
+`Callable[[str], _T]` é a anotação de tipo de "uma função que recebe um `str` e devolve um
+`_T`" (o `_T` é explicado mais abaixo).
 
-## Por que uma função do módulo
+### As duas mensagens
 
-`_parse` não usa nada do `MazeConfig`: nem `cls`, nem campo. Fica como função do módulo, com `_`
-na frente para dizer que é interna ao arquivo e não faz parte do que o `MazeConfig` oferece.
+- No formato errado, a mensagem cita o valor entre aspas. O usuário vê exatamente o que o
+  programa leu, inclusive o que ele achou que seria ignorado. Exemplo: o `#` só marca um
+  comentário quando começa a linha ([página 9](./06-linha-a-linha.md)); um `#` depois do valor
+  faz parte do valor. Com `WIDTH=20 # largura`, o texto lido é `20 # largura`, e a mensagem diz
+  `got '20 # largura'`.
+- Nos dígitos demais, a mensagem **não** cita o valor, que pode ter 100 000 caracteres.
 
-## Experimente
+### `raise ... from None`
+
+Quando um `raise` acontece **dentro** de um `except`, o Python guarda a exceção original junto
+com a nova. Se a nova chegar a aparecer num *traceback* (a listagem de erro que o Python imprime
+quando uma exceção não é tratada), as duas aparecem. Na raiz do projeto:
 
 ```bash
 .venv/bin/python -c '
-from amazeing.domain.value_objects.maze_config import MazeConfig
 from amazeing.errors import ConfigError
 
-base = {"WIDTH": "20", "HEIGHT": "15", "ENTRY": "0,0", "EXIT": "19,14",
-        "OUTPUT_FILE": "maze.txt", "PERFECT": "True"}
-for change in [{"WIDTH": "abc"}, {"WIDTH": "9" * 100000},
-               {"ENTRY": "0;0"}, {"SEED": "4.2"}]:
-    try:
-        MazeConfig.create({**base, **change})
-    except ConfigError as error:
-        print(error)
+try:
+    int("abc")
+except ValueError:
+    raise ConfigError("WIDTH must be an integer, got '"'"'abc'"'"'")
 '
 ```
 
 ```text
-WIDTH must be an integer, got 'abc'
-WIDTH has more than 18 digits
-ENTRY must be 'x,y' with integers, got '0;0'
-SEED must be an integer, got '4.2'
+Traceback (most recent call last):
+  File "<string>", line 5, in <module>
+    int("abc")
+    ~~~^^^^^^^
+ValueError: invalid literal for int() with base 10: 'abc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<string>", line 7, in <module>
+    raise ConfigError("WIDTH must be an integer, got 'abc'")
+amazeing.errors.ConfigError: WIDTH must be an integer, got 'abc'
 ```
+
+(O `'"'"'` no comando é o jeito do terminal de pôr uma aspa simples dentro de um texto entre
+aspas simples; o Python recebe só `'`.)
+
+Com `from None` no fim do `raise`, o Python descarta a original: tudo até a linha
+`During handling of the above exception...` some, e sobra só o segundo traceback.
+
+O usuário nunca vê traceback nenhum: o `main` captura o `ConfigError` e imprime só a linha
+`Error: ...` ([parte 14](../14-menu-e-main/05-a-barreira-de-erros.md)). O `from None` vale para
+quem estiver depurando o programa: o `ValueError` interno não diz nada que o `ConfigError` já não
+diga melhor, e só atrapalharia a leitura.
+
+## O tipo de volta: `TypeVar`
+
+```python
+_T = TypeVar("_T")
+```
+
+`_parse` devolve um `int` quando recebe `to_int`, uma tupla quando recebe `to_coordinate` e um
+`bool` quando recebe `to_bool`. Uma anotação fixa, como `-> int`, estaria errada para dois
+deles.
+
+Uma **variável de tipo** (`TypeVar`) resolve: ela representa "algum tipo", e o mesmo `_T` na
+entrada e na saída diz que os dois são **o mesmo** tipo. Lendo a assinatura: "`parser` recebe
+`str` e devolve algum tipo `_T`; `_parse` devolve esse mesmo `_T`". O `mypy`, a ferramenta que
+confere os tipos do código antes de ele rodar, deduz o `_T` em cada chamada: `width` sai `int`, e
+`entry` sai `tuple[int, int]`.
+
+O `_parse` só roda dentro do `MazeConfig.create`, completo na
+[página 6](./08-o-maze-config-completo.md), cujo Experimente mostra estas mensagens de verdade.

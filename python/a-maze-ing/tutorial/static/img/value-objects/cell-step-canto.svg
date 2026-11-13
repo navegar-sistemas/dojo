@@ -1,33 +1,34 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="491.4" height="312" viewBox="0 0 491.4 312">
-<rect width="491.4" height="312" fill="#ffffff" rx="8"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="543.2" height="396" viewBox="0 0 543.2 396">
+<rect width="543.2" height="396" fill="#ffffff" rx="8"/>
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1f2937"/></marker></defs>
-<rect x="149.7" y="80" width="64" height="64" fill="#fb923c" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="213.7" y="80" width="64" height="64" fill="#bbf7d0" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="277.7" y="80" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="341.7" y="80" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="149.7" y="144" width="64" height="64" fill="#bbf7d0" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="213.7" y="144" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="277.7" y="144" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="341.7" y="144" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="149.7" y="208" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="213.7" y="208" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="277.7" y="208" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="341.7" y="208" width="64" height="64" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<rect x="149.7" y="16" width="64" height="64" fill="#ffffff" stroke="#6b7280" stroke-width="2" stroke-dasharray="6 5"/>
-<rect x="85.7" y="80" width="64" height="64" fill="#ffffff" stroke="#6b7280" stroke-width="2" stroke-dasharray="6 5"/>
-<rect x="149.7" y="80" width="256" height="192" fill="none" stroke="#1f2937" stroke-width="3"/>
-<line x1="181.7" y1="97.92" x2="181.7" y2="70.528" stroke="#1f2937" stroke-width="2.5" marker-end="url(#arrow)"/>
-<line x1="195.78" y1="112" x2="223.172" y2="112" stroke="#1f2937" stroke-width="2.5" marker-end="url(#arrow)"/>
-<line x1="181.7" y1="126.08" x2="181.7" y2="153.472" stroke="#1f2937" stroke-width="2.5" marker-end="url(#arrow)"/>
-<line x1="167.62" y1="112" x2="140.228" y2="112" stroke="#1f2937" stroke-width="2.5" marker-end="url(#arrow)"/>
-<text x="181.7" y="112" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16.64" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">0,0</text>
-<text x="181.7" y="39.68" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">0,-1</text>
-<text x="181.7" y="56.32" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12.8" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">N</text>
-<text x="245.7" y="103.68" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">1,0</text>
-<text x="245.7" y="120.32" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12.8" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">E</text>
-<text x="181.7" y="167.68" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">0,1</text>
-<text x="181.7" y="184.32" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12.8" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">S</text>
-<text x="117.7" y="103.68" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">-1,0</text>
-<text x="117.7" y="120.32" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12.8" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">W</text>
-<text x="245.7" y="292" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">step não confere limites: (0,-1) e (-1,0) ficam fora da grade</text>
+<rect x="151.6" y="96" width="80" height="80" fill="#fb923c" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="231.6" y="96" width="80" height="80" fill="#bbf7d0" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="311.6" y="96" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="391.6" y="96" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="151.6" y="176" width="80" height="80" fill="#bbf7d0" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="231.6" y="176" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="311.6" y="176" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="391.6" y="176" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="151.6" y="256" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="231.6" y="256" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="311.6" y="256" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="391.6" y="256" width="80" height="80" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+<rect x="151.6" y="16" width="80" height="80" fill="#ffffff" stroke="#6b7280" stroke-width="2" stroke-dasharray="6 5"/>
+<rect x="71.6" y="96" width="80" height="80" fill="#ffffff" stroke="#6b7280" stroke-width="2" stroke-dasharray="6 5"/>
+<rect x="151.6" y="96" width="320" height="240" fill="none" stroke="#1f2937" stroke-width="3"/>
+<line x1="191.6" y1="108.8" x2="191.6" y2="84.8" stroke="#1f2937" stroke-width="2.5" marker-end="url(#arrow)"/>
+<line x1="218.8" y1="136" x2="242.8" y2="136" stroke="#1f2937" stroke-width="2.5" marker-end="url(#arrow)"/>
+<line x1="191.6" y1="163.2" x2="191.6" y2="187.2" stroke="#1f2937" stroke-width="2.5" marker-end="url(#arrow)"/>
+<line x1="164.4" y1="136" x2="140.4" y2="136" stroke="#1f2937" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text x="191.6" y="136" font-family="ui-sans-serif, system-ui, sans-serif" font-size="20.8" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">0,0</text>
+<text x="191.6" y="45.6" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">0,-1</text>
+<text x="191.6" y="66.4" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">N</text>
+<text x="271.6" y="125.6" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">1,0</text>
+<text x="271.6" y="146.4" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">E</text>
+<text x="191.6" y="205.6" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">0,1</text>
+<text x="191.6" y="226.4" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">S</text>
+<text x="111.6" y="125.6" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">-1,0</text>
+<text x="111.6" y="146.4" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">W</text>
+<text x="271.6" y="358" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">step não confere limites: 0,-1 e -1,0 ficam fora da grade</text>
+<text x="271.6" y="378" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">laranja: partida · verde: dentro da grade · tracejado: fora da grade</text>
 </svg>

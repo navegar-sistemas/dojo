@@ -5,12 +5,36 @@ title: A ordem das validações
 
 # A ordem das validações
 
-`MazeConfig.create` confere as regras numa ordem fixa e **para no primeiro erro**. Cada regra só
-faz sentido se as anteriores passaram:
+Um arquivo de configuração pode ter vários erros ao mesmo tempo: uma chave faltando, uma largura
+`abc`, uma entrada fora da grade. O programa precisa decidir qual erro contar ao usuário. Esta
+página mostra a escolha do projeto: o `MazeConfig.create` confere as regras numa **ordem fixa** e
+**para no primeiro erro**.
+
+## Por que parar no primeiro erro
+
+Cada regra só faz sentido se as anteriores passaram:
+
+- não dá para comparar a largura com 100 se ela não é um número;
+- não dá para conferir se a entrada está dentro da grade enquanto a largura é inválida: com
+  `WIDTH=0`, toda entrada ficaria "fora", e a mensagem apontaria a entrada, quando o problema é
+  a largura;
+- não dá para saber se a entrada cai no "42" se ela nem está dentro da grade.
+
+Juntar todos os erros de uma vez listaria consequências junto com a causa: com `WIDTH=abc`, a
+regra "entrada dentro da grade" também falharia, só porque não há largura. Parar no primeiro
+erro mostra a causa, e o mesmo arquivo dá sempre a mesma mensagem.
+
+A exceção são as chaves ausentes (regra 1), listadas todas juntas, porque uma não depende da
+outra.
+
+O enunciado só exige que todo erro vire uma mensagem clara; a ordem e o "parar no primeiro" são
+escolha do projeto.
+
+## O caminho das regras
 
 ```mermaid
 flowchart TD
-    start(["raw: CHAVE → texto"])
+    start(["dicionário: CHAVE → texto"])
     missing{"1. todas as chaves<br/>obrigatórias presentes?"}
     types{"2. cada valor no<br/>formato do seu tipo?"}
     size{"3. WIDTH e HEIGHT<br/>entre 1 e 100?"}
@@ -38,6 +62,10 @@ flowchart TD
     pattern -- não --> error
 ```
 
+Cada `não` levanta `ConfigError` com uma mensagem e encerra o `create`. As regras 1 a 3 estão
+nesta página; as regras 4 a 7, na [próxima](./04-o-42-e-o-arquivo-completo.md). É a regra 4 que
+recusa uma coordenada como `-1,0`, que o conversor aceita como formato.
+
 ## 1. Chaves ausentes, todas de uma vez
 
 ```python
@@ -47,13 +75,19 @@ if missing:
         "missing mandatory key(s): " + ", ".join(missing))
 ```
 
-Vem primeiro porque nenhuma outra regra roda sem os valores. E lista **todas** as ausentes, na
-ordem de `MANDATORY_KEYS`: quem esqueceu três chaves corrige as três de uma vez, em vez de rodar
-o programa três vezes para descobrir uma por uma.
+- A primeira linha é uma **compreensão de lista** (*list comprehension*): `[key for key in ...
+  if ...]` percorre `MANDATORY_KEYS` (as seis chaves obrigatórias) e monta uma lista só com as
+  que **não** estão (`not in`) no dicionário `raw`.
+- Uma lista vazia conta como falso no `if`; com alguma chave faltando, o erro é levantado.
+- `", ".join(missing)` junta os nomes com vírgula e espaço: `["EXIT", "PERFECT"]` vira
+  `EXIT, PERFECT`.
 
 ```text
 missing mandatory key(s): EXIT, PERFECT
 ```
+
+Vem primeiro porque nenhuma outra regra roda sem os valores. Listar **todas** as ausentes poupa o
+usuário de rodar o programa uma vez para cada chave esquecida.
 
 ## 2. Os tipos, na ordem das chaves
 
@@ -74,13 +108,16 @@ if "SEED" in raw:
     seed = _parse(raw, "SEED", ValueParser.to_int, "an integer")
 ```
 
-Converter tudo antes de comparar qualquer coisa: a regra 3 compara `width` com 100, e isso só é
-possível com um `int`. A ordem `WIDTH`, `HEIGHT`, `ENTRY`, `EXIT`, `OUTPUT_FILE`, `PERFECT`,
-`SEED` é a do arquivo de config, então o primeiro erro acusado é o de cima.
+Cada `_parse` converte um texto ou levanta o erro com a chave na mensagem
+([página anterior](./02-convertendo-um-valor.md)). Tudo é convertido antes de qualquer
+comparação, porque as regras seguintes fazem contas com os números.
 
-- `OUTPUT_FILE` não tem conversão: qualquer texto é um caminho. A única regra é não ser vazio
-  (`OUTPUT_FILE=` sem nada depois).
-- `SEED` só é convertida se estiver presente. Ausente, fica `None`.
+- A ordem é a das seis chaves do enunciado, na ordem da tabela dele (`WIDTH`, `HEIGHT`,
+  `ENTRY`, `EXIT`, `OUTPUT_FILE`, `PERFECT`), e por último a `SEED`, que o projeto acrescentou.
+  O primeiro erro acusado é o da chave mais acima.
+- `OUTPUT_FILE` não é convertido: qualquer texto pode ser o nome de um arquivo. A única regra é
+  não ser vazio (a linha `OUTPUT_FILE=` sem nada depois do `=`).
+- `SEED` só é convertida se estiver no arquivo. Sem ela, fica `None`.
 
 ## 3. O tamanho
 
@@ -91,78 +128,17 @@ for key, value in (("WIDTH", width), ("HEIGHT", height)):
                           f"{MAX_SIZE}, got {value}")
 ```
 
-As regras 4 a 7 usam a largura e a altura como limites. Com `WIDTH=0`, "dentro da grade" não tem
-sentido, então o tamanho vem antes. O laço sobre pares `(chave, valor)` escreve a regra uma vez
-para as duas chaves.
+- O `for` percorre dois pares `(nome, valor)`, e a regra é escrita uma vez para as duas chaves.
+- `MIN_SIZE <= value <= MAX_SIZE` é uma comparação encadeada: o mesmo que
+  `MIN_SIZE <= value and value <= MAX_SIZE`.
+- `MIN_SIZE` (1) e `MAX_SIZE` (100) são importados de `mazegen.generator`, o arquivo do
+  `MazeGenerator` ([parte 9](../09-gerador/10-construtor-e-atributos.md)): o `MazeConfig` e o gerador usam os
+  mesmos limites e nunca discordam.
 
-`MIN_SIZE <= value <= MAX_SIZE` é uma comparação encadeada do Python: equivale a
-`MIN_SIZE <= value and value <= MAX_SIZE`.
+O enunciado manda recusar tamanhos impossíveis, como negativos. O máximo 100 é escolha do
+projeto: grades muito maiores levam segundos para gerar e podem esgotar a memória
+([parte 1](../01-o-problema/03-o-arquivo-de-configuracao.md)). O tamanho vem antes das regras 4
+a 7 porque todas usam a largura e a altura.
 
-## 4. Dentro da grade
-
-```python
-for key, (x, y) in (("ENTRY", entry), ("EXIT", exit)):
-    if not (0 <= x < width and 0 <= y < height):
-        raise ConfigError(
-            f"{key}={x},{y} is outside the maze "
-            f"(x in 0..{width - 1}, y in 0..{height - 1})")
-```
-
-A mensagem mostra a faixa válida, para o usuário não ter de lembrar que as coordenadas começam em
-0: `ENTRY=20,0 is outside the maze (x in 0..19, y in 0..14)`. É aqui que o `-1,0`, aceito como
-formato pelo `ValueParser`, é recusado.
-
-## 5. Entrada diferente da saída
-
-```python
-if entry == exit:
-    raise ConfigError("ENTRY and EXIT must differ")
-```
-
-Vem depois da regra 4: com `ENTRY=30,30` e `EXIT=30,30` numa grade 20x15, o problema mais útil de
-apontar é "fora da grade", e não "iguais".
-
-## 6. O tabuleiro Pac-Man precisa de espaço
-
-```python
-if not perfect and (width - 1) * (height - 1) < 2:
-    raise ConfigError(
-        "PERFECT=False needs (WIDTH - 1) x (HEIGHT - 1) >= 2 for a "
-        f"Pac-Man board, got {width}x{height}")
-```
-
-A conta da parte 1: uma grade com todas as paredes internas abertas tem `(W − 1) × (H − 1)`
-ciclos, e o Pac-Man exige 2. Grades 1xN, Nx1 e 2x2 não chegam lá, e o gerador nunca conseguiria
-cumprir a regra. Melhor recusar logo, com a conta na mensagem.
-
-## Experimente
-
-Cada config abaixo quebra duas regras; só a primeira, na ordem, é acusada:
-
-```bash
-.venv/bin/python -c '
-from amazeing.domain.value_objects.maze_config import MazeConfig
-from amazeing.errors import ConfigError
-
-base = {"WIDTH": "20", "HEIGHT": "15", "ENTRY": "0,0", "EXIT": "19,14",
-        "OUTPUT_FILE": "maze.txt", "PERFECT": "True"}
-for change in [{"WIDTH": "abc", "HEIGHT": "0"},
-               {"WIDTH": "0", "ENTRY": "50,50"},
-               {"ENTRY": "30,30", "EXIT": "30,30"},
-               {"ENTRY": "6,5", "EXIT": "6,5"}]:
-    try:
-        MazeConfig.create({**base, **change})
-    except ConfigError as error:
-        print(error)
-'
-```
-
-```text
-WIDTH must be an integer, got 'abc'
-WIDTH must be between 1 and 100, got 0
-ENTRY=30,30 is outside the maze (x in 0..19, y in 0..14)
-ENTRY and EXIT must differ
-```
-
-A última linha: `6,5` é uma célula do "42", mas a regra 5 vem antes da 7. A regra 7 é a da
-[próxima página](./04-o-42-e-o-arquivo-completo.md).
+O `MazeConfig` só fica completo na [página 6](./08-o-maze-config-completo.md); o Experimente de lá
+mostra estas regras e a ordem entre elas, com um arquivo que quebra duas regras de uma vez.

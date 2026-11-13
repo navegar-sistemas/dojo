@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="771" height="178" viewBox="0 0 771 178">
+<rect width="771" height="178" fill="#ffffff" rx="8"/>
+<svg x="0" y="0" width="224" height="178" viewBox="0 0 224 178">
+<rect width="224" height="178" fill="#ffffff" rx="8"/>
+<polyline points="48,48 112,48 112,112 48,112 48,48" fill="none" stroke="#22d3ee" stroke-width="17.92" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="16" y1="16" x2="80" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="80" y1="16" x2="80" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="80" x2="80" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="16" x2="16" y2="80" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="80" y1="16" x2="144" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="144" y1="16" x2="144" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="80" y1="80" x2="144" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="80" y1="16" x2="80" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="144" y1="16" x2="208" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="208" y1="16" x2="208" y2="80" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="144" y1="80" x2="208" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="144" y1="16" x2="144" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="80" x2="80" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="80" y1="80" x2="80" y2="144" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="144" x2="80" y2="144" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="16" y1="80" x2="16" y2="144" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="80" y1="80" x2="144" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="144" y1="80" x2="144" y2="144" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="80" y1="144" x2="144" y2="144" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="80" y1="80" x2="80" y2="144" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="144" y1="80" x2="208" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="208" y1="80" x2="208" y2="144" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="144" y1="144" x2="208" y2="144" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="144" y1="80" x2="144" y2="144" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<text x="112" y="161" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">ciclo 1</text>
+</svg>
+
+<svg x="236" y="0" width="224" height="178" viewBox="0 0 224 178">
+<rect width="224" height="178" fill="#ffffff" rx="8"/>
+<polyline points="112,48 176,48 176,112 112,112 112,48" fill="none" stroke="#22d3ee" stroke-width="17.92" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="16" y1="16" x2="80" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="80" y1="16" x2="80" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="80" x2="80" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="16" x2="16" y2="80" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="80" y1="16" x2="144" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="144" y1="16" x2="144" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="80" y1="80" x2="144" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="80" y1="16" x2="80" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="144" y1="16" x2="208" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="208" y1="16" x2="208" y2="80" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="144" y1="80" x2="208" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="144" y1="16" x2="144" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="80" x2="80" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="80" y1="80" x2="80" y2="144" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="16" y1="144" x2="80" y2="144" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="16" y1="80" x2="16" y2="144" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="80" y1="80" x2="144" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="144" y1="80" x2="144" y2="144" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="80" y1="144" x2="144" y2="144" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="80" y1="80" x2="80" y2="144" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="144" y1="80" x2="208" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="208" y1="80" x2="208" y2="144" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="144" y1="144" x2="208" y2="144" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="144" y1="80" x2="144" y2="144" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<text x="112" y="161" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">ciclo 2</text>
+</svg>
+
+<svg x="472" y="0" width="299" height="178" viewBox="0 0 299 178">
+<rect width="299" height="178" fill="#ffffff" rx="8"/>
+<polyline points="85.5,48 149.5,48 213.5,48 213.5,112 149.5,112 85.5,112 85.5,48" fill="none" stroke="#22d3ee" stroke-width="17.92" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="53.5" y1="16" x2="117.5" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="117.5" y1="16" x2="117.5" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="53.5" y1="80" x2="117.5" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="53.5" y1="16" x2="53.5" y2="80" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="117.5" y1="16" x2="181.5" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="181.5" y1="16" x2="181.5" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="117.5" y1="80" x2="181.5" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="117.5" y1="16" x2="117.5" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="181.5" y1="16" x2="245.5" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="245.5" y1="16" x2="245.5" y2="80" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="181.5" y1="80" x2="245.5" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="181.5" y1="16" x2="181.5" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="53.5" y1="80" x2="117.5" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="117.5" y1="80" x2="117.5" y2="144" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="53.5" y1="144" x2="117.5" y2="144" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="53.5" y1="80" x2="53.5" y2="144" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="117.5" y1="80" x2="181.5" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="181.5" y1="80" x2="181.5" y2="144" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="117.5" y1="144" x2="181.5" y2="144" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="117.5" y1="80" x2="117.5" y2="144" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="181.5" y1="80" x2="245.5" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="245.5" y1="80" x2="245.5" y2="144" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="181.5" y1="144" x2="245.5" y2="144" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="181.5" y1="80" x2="181.5" y2="144" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<text x="149.5" y="161" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">a volta inteira = ciclo 1 + ciclo 2</text>
+</svg>
+
+</svg>

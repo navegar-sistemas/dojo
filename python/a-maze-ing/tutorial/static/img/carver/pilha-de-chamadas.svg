@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="714" height="452" viewBox="0 0 714 452">
+<rect width="714" height="452" fill="#ffffff" rx="8"/>
+<svg x="0" y="0" width="230" height="220" viewBox="0 0 230 220">
+<rect width="230" height="220" fill="#ffffff" rx="8"/>
+<rect x="60" y="136" width="110" height="34" rx="6" fill="#fb923c" stroke="#1f2937" stroke-width="1.5"/>
+<text x="115" y="153" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">descer(2)</text>
+<text x="200" y="153" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">← topo</text>
+<line x1="50" y1="178" x2="180" y2="178" stroke="#1f2937" stroke-width="3" stroke-linecap="round"/>
+<text x="115" y="200" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">entra 2</text>
+</svg>
+
+<svg x="242" y="0" width="230" height="220" viewBox="0 0 230 220">
+<rect width="230" height="220" fill="#ffffff" rx="8"/>
+<rect x="60" y="136" width="110" height="34" rx="6" fill="#93c5fd" stroke="#1f2937" stroke-width="1.5"/>
+<text x="115" y="153" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">descer(2)</text>
+<rect x="60" y="96" width="110" height="34" rx="6" fill="#fb923c" stroke="#1f2937" stroke-width="1.5"/>
+<text x="115" y="113" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">descer(1)</text>
+<text x="200" y="113" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">← topo</text>
+<line x1="50" y1="178" x2="180" y2="178" stroke="#1f2937" stroke-width="3" stroke-linecap="round"/>
+<text x="115" y="200" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">entra 1</text>
+</svg>
+
+<svg x="484" y="0" width="230" height="220" viewBox="0 0 230 220">
+<rect width="230" height="220" fill="#ffffff" rx="8"/>
+<rect x="60" y="136" width="110" height="34" rx="6" fill="#93c5fd" stroke="#1f2937" stroke-width="1.5"/>
+<text x="115" y="153" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">descer(2)</text>
+<rect x="60" y="96" width="110" height="34" rx="6" fill="#93c5fd" stroke="#1f2937" stroke-width="1.5"/>
+<text x="115" y="113" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">descer(1)</text>
+<rect x="60" y="56" width="110" height="34" rx="6" fill="#fb923c" stroke="#1f2937" stroke-width="1.5"/>
+<text x="115" y="73" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">descer(0)</text>
+<text x="200" y="73" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">← topo</text>
+<line x1="50" y1="178" x2="180" y2="178" stroke="#1f2937" stroke-width="3" stroke-linecap="round"/>
+<text x="115" y="200" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">entra 0</text>
+</svg>
+
+<svg x="0" y="232" width="230" height="220" viewBox="0 0 230 220">
+<rect width="230" height="220" fill="#ffffff" rx="8"/>
+<rect x="60" y="136" width="110" height="34" rx="6" fill="#93c5fd" stroke="#1f2937" stroke-width="1.5"/>
+<text x="115" y="153" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">descer(2)</text>
+<rect x="60" y="96" width="110" height="34" rx="6" fill="#fb923c" stroke="#1f2937" stroke-width="1.5"/>
+<text x="115" y="113" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">descer(1)</text>
+<text x="200" y="113" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">← topo</text>
+<rect x="60" y="56" width="110" height="34" rx="6" fill="none" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="115" y="73" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">descer(0)</text>
+<text x="200" y="73" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">↑ saiu</text>
+<line x1="50" y1="178" x2="180" y2="178" stroke="#1f2937" stroke-width="3" stroke-linecap="round"/>
+<text x="115" y="200" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">sai 0</text>
+</svg>
+
+<svg x="242" y="232" width="230" height="220" viewBox="0 0 230 220">
+<rect width="230" height="220" fill="#ffffff" rx="8"/>
+<rect x="60" y="136" width="110" height="34" rx="6" fill="#fb923c" stroke="#1f2937" stroke-width="1.5"/>
+<text x="115" y="153" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">descer(2)</text>
+<text x="200" y="153" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">← topo</text>
+<rect x="60" y="96" width="110" height="34" rx="6" fill="none" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="115" y="113" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">descer(1)</text>
+<text x="200" y="113" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">↑ saiu</text>
+<line x1="50" y1="178" x2="180" y2="178" stroke="#1f2937" stroke-width="3" stroke-linecap="round"/>
+<text x="115" y="200" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">sai 1</text>
+</svg>
+
+<svg x="484" y="232" width="230" height="220" viewBox="0 0 230 220">
+<rect width="230" height="220" fill="#ffffff" rx="8"/>
+<rect x="60" y="96" width="110" height="34" rx="6" fill="none" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="115" y="113" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">descer(2)</text>
+<text x="200" y="113" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">↑ saiu</text>
+<text x="115" y="159" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">(vazia)</text>
+<line x1="50" y1="178" x2="180" y2="178" stroke="#1f2937" stroke-width="3" stroke-linecap="round"/>
+<text x="115" y="200" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">sai 2</text>
+</svg>
+
+</svg>

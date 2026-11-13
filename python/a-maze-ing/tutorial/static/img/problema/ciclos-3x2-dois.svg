@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="632" height="224" viewBox="0 0 632 224">
+<rect width="632" height="224" fill="#ffffff" rx="8"/>
+<svg x="82" y="34" width="224" height="160" viewBox="0 0 224 160">
+<rect width="224" height="160" fill="#ffffff" rx="8"/>
+<polyline points="48,48 112,48 112,112 48,112 48,48" fill="none" stroke="#22d3ee" stroke-width="17.92" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="16" y1="16" x2="80" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="16" y1="16" x2="16" y2="80" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="80" y1="16" x2="144" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="144" y1="16" x2="208" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="208" y1="16" x2="208" y2="80" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="16" y1="144" x2="80" y2="144" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="16" y1="80" x2="16" y2="144" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="80" y1="144" x2="144" y2="144" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="208" y1="80" x2="208" y2="144" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="144" y1="144" x2="208" y2="144" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+</svg>
+<text x="194" y="20" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">ciclo 1</text>
+<svg x="326" y="34" width="224" height="160" viewBox="0 0 224 160">
+<rect width="224" height="160" fill="#ffffff" rx="8"/>
+<polyline points="112,48 176,48 176,112 112,112 112,48" fill="none" stroke="#22d3ee" stroke-width="17.92" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="16" y1="16" x2="80" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="16" y1="16" x2="16" y2="80" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="80" y1="16" x2="144" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="144" y1="16" x2="208" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="208" y1="16" x2="208" y2="80" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="16" y1="144" x2="80" y2="144" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="16" y1="80" x2="16" y2="144" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="80" y1="144" x2="144" y2="144" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="208" y1="80" x2="208" y2="144" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="144" y1="144" x2="208" y2="144" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+</svg>
+<text x="438" y="20" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">ciclo 2</text>
+<text x="316" y="206" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">a grade 3 x 2 sem nenhuma parede por dentro: dois ciclos independentes, em ciano</text>
+</svg>

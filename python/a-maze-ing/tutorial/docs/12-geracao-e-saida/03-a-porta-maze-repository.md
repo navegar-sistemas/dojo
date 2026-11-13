@@ -5,13 +5,46 @@ title: A porta MazeRepository
 
 # A porta `MazeRepository`
 
-O use case `GenerateMaze` (última página desta parte) precisa **gravar** o labirinto. Quem grava
-de verdade é o `FileMazeRepository`, da camada `repositories`. Mas a regra de dependência (parte
-2) proíbe o use case de importar um repositório: `repositories` é uma camada mais de fora.
+A operação "gerar um labirinto" precisa terminar **gravando** o arquivo de saída. Quem comanda
+essa operação é o `GenerateMaze` (página
+["O caso de uso GenerateMaze"](./06-o-caso-de-uso-generate-maze.md)); quem sabe gravar é o
+`FileMazeRepository` (página ["Gravando o arquivo de saída"](./05-gravando-o-arquivo.md)). Só que a arquitetura
+do projeto proíbe o `GenerateMaze` de importar o `FileMazeRepository`. Esta página mostra como um
+consegue usar o outro sem importá-lo.
 
-A saída é inverter a dependência: o use case declara **o que** precisa, e o repositório cumpre.
+## A regra que impede o import
 
-## O contrato: `typing.Protocol`
+O projeto é dividido em **camadas**, e uma camada só pode importar as que estão mais para dentro
+([parte 2](../02-arquitetura/03-regra-de-dependencia.md)).
+
+- O `GenerateMaze` é um **use case**: uma operação completa da aplicação, como "gerar e gravar
+  um labirinto". Ele fica na camada `use_cases`, mais para dentro.
+- O `FileMazeRepository` fica na camada `repositories`, a que mexe em arquivos, mais para fora.
+  O detalhe de **como** gravar (formato, disco, mensagens de erro) pode mudar sem a operação
+  mudar.
+
+Então o `GenerateMaze` precisa gravar, mas não pode citar a classe que grava.
+
+## A analogia: a tomada
+
+A [parte 2](../02-arquitetura/07-a-porta-e-a-inversao.md) comparou a porta a uma tomada da
+parede. Quem instala a tomada não sabe qual aparelho vai ser ligado nela; define só o
+**formato** do encaixe. Qualquer aparelho com o plugue certo funciona, e trocar de aparelho não
+exige mexer na parede.
+
+No código é igual:
+
+| Tomada | Código |
+|---|---|
+| a parede, que precisa de "algo ligado ali" | `GenerateMaze`, que precisa de "algo que grave" |
+| o formato do encaixe | a **porta** `MazeRepository`: "um método `save(path, maze)`" |
+| o aparelho com o plugue certo | `FileMazeRepository`, que grava em arquivo |
+| quem liga o aparelho na tomada | o `a_maze_ing.py`, o arquivo principal ([parte 14](../14-menu-e-main/04-o-composition-root.md)) |
+
+O formato do encaixe é definido por quem **usa** (o use case), não por quem é ligado. Por isso
+a porta mora junto do use case, em `amazeing/use_cases/ports.py`.
+
+## A porta em Python: `typing.Protocol`
 
 ```python
 class MazeRepository(Protocol):
@@ -22,85 +55,32 @@ class MazeRepository(Protocol):
 ```
 
 Um `Protocol` descreve uma **forma**: "qualquer objeto que tenha um método
-`save(path: str, maze: GeneratedMaze) -> None`". Não tem implementação; o corpo do método é só a
-docstring, que já é um comando válido em Python, e dispensa `pass` ou `...`.
+`save(path: str, maze: GeneratedMaze) -> None`". Ele não grava nada; não tem código, só a
+assinatura. O corpo do método é só a docstring, que já é um comando válido e dispensa `pass`.
+
+`-> None` quer dizer que o método não devolve nada: ele só faz o trabalho (gravar).
+
+### Sem herança
 
 A diferença para uma classe base comum está em como uma classe passa a "ser" um
 `MazeRepository`:
 
-| Classe base (`ABC`) | `Protocol` |
+| Classe base abstrata (`ABC`) | `Protocol` |
 |---|---|
-| a classe concreta precisa **herdar**: `class FileMazeRepository(MazeRepository)` | basta **ter** o método com a assinatura certa, sem herdar nada |
-| o repositório importaria o módulo do use case | o repositório não importa nada do use case |
+| a classe concreta precisa **herdar** dela: `class FileMazeRepository(MazeRepository)` | basta **ter** o método com a assinatura certa, sem herdar nada |
+| o repositório importaria `use_cases/ports.py` | o repositório não importa nada de `use_cases` |
 
-Isso se chama tipagem **estrutural**: o que vale é a estrutura do objeto, não a árvore de herança.
-Em Python é a ideia do "se anda como pato e grasna como pato, é um pato", agora conferida pelo
-`mypy`.
+Uma `ABC` (*abstract base class*) é uma classe feita só para ser herdada. Com ela, o
+`FileMazeRepository` teria de importar `ports.py`, que mora em `use_cases`.
 
-## Quem depende de quem
+Pela direção das setas, isso não seria proibido: `repositories` fica mais para fora que
+`use_cases`, e uma camada de fora pode depender de uma de dentro. Quem proíbe é a tabela de
+imports permitidos da [parte 2](../02-arquitetura/03-regra-de-dependencia.md): `repositories` só
+importa `domain`, `utils` e `errors`. É uma escolha do projeto: o repositório sabe gravar e ler
+arquivos e não precisa saber que existe um use case.
 
-```mermaid
-classDiagram
-    class GenerateMaze {
-        -_repository: MazeRepository
-        +execute() GeneratedMaze
-    }
-    class MazeRepository {
-        <<Protocol>>
-        +save(path, maze) None
-    }
-    class FileMazeRepository {
-        +save(path, maze) None
-        +to_text(maze)$ str
-    }
-    GenerateMaze --> MazeRepository : depende de
-    FileMazeRepository ..|> MazeRepository : cumpre, sem herdar
-```
+Com o `Protocol`, essa regra continua cumprida: vale a **forma** do objeto, não a árvore de
+herança. É a ideia do "se anda como pato e grasna como pato, é um pato".
 
-- `GenerateMaze` importa só `MazeRepository`, da sua própria camada (`use_cases/ports.py`).
-- `FileMazeRepository` não importa `ports.py`: ele só tem um `save` com a mesma assinatura. A
-  camada `repositories` continua sem conhecer `use_cases`.
-- Quem junta os dois é o `a_maze_ing.py` (parte 14), que pode importar tudo:
-  `GenerateMaze(generator, FileMazeRepository(), config)`.
-
-### Quem confere
-
-Nada acontece em tempo de execução: o Python não testa se o objeto cumpre o `Protocol`. Quem
-confere é o `mypy`, na linha do `a_maze_ing.py` que passa um `FileMazeRepository()` onde se
-espera um `MazeRepository`. Se a assinatura do `save` divergir (outro nome de parâmetro, outro
-tipo), o `mypy --strict` acusa ali.
-
-## O que se ganha
-
-- **A regra de dependência é respeitada**: o use case não sabe que existe arquivo.
-- **Trocar o armazenamento** não mexe no use case: um repositório que grave em outro formato só
-  precisa de um `save` com a mesma assinatura.
-- **Experimentar sem disco**: qualquer objeto com `save` serve, como o `Memory` da última página
-  desta parte.
-
-## Por que `ports.py` fica em `use_cases`
-
-A porta é o que o **use case** precisa, escrito do ponto de vista dele. Por isso mora na pasta
-dele, e não na dos repositórios: quem define o contrato é quem usa, não quem implementa.
-
-## O arquivo completo
-
-```python title="amazeing/use_cases/ports.py"
-"""Ports that the use cases depend on."""
-
-from typing import Protocol
-
-from amazeing.domain.value_objects.generated_maze import GeneratedMaze
-
-
-class MazeRepository(Protocol):
-    """Storage of a generated maze."""
-
-    def save(self, path: str, maze: GeneratedMaze) -> None:
-        """Store a maze, replacing what the path held before.
-
-        Args:
-            path: Destination of the maze.
-            maze: Maze to store.
-        """
-```
+Como as peças se ligam, o arquivo completo da porta e um exemplo do `mypy` conferindo a forma
+estão na [próxima página](./08-a-porta-completa.md).

@@ -1,11 +1,13 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 title: Entrada, saída e prioridades
 ---
 
 # Entrada, saída e prioridades
 
-A última passada pinta a entrada de magenta e a saída de vermelho.
+A entrada e a saída também são células do caminho. Se a passada do caminho pintasse as duas de
+ciano, o usuário não saberia onde o caminho começa e onde termina. A terceira e última passada
+pinta a entrada de magenta e a saída de vermelho, **por cima** de tudo o que veio antes.
 
 ```python
         ex, ey = maze.entry
@@ -14,66 +16,73 @@ A última passada pinta a entrada de magenta e a saída de vermelho.
         canvas[2 * sy + 1][2 * sx + 1] = Ansi.RED
 ```
 
-`maze.entry` e `maze.exit` são tuplas `(x, y)`, e o desempacotamento dá nome a cada
-coordenada. `sx, sy` vem de *saída*: `exit` já é o nome do campo, e `ex` ficou com a entrada.
+`maze.entry` e `maze.exit` são tuplas `(x, y)`. A linha `ex, ey = maze.entry` desempacota a
+tupla: guarda o primeiro número em `ex` e o segundo em `ey`. `ex, ey` são o x e o y da entrada
+(*entry*); `sx, sy` os da saída (o `s` de saída, porque `exit` também começaria com `e`).
+Depois, cada uma é pintada na sua posição do desenho, `2x + 1, 2y + 1`.
 
 ## Por que por último
 
-Entrada e saída também são células do caminho. Se fossem pintadas antes, a passada do caminho
-as cobriria de ciano, e o usuário não saberia onde o caminho começa e termina. Pintando por
-último, elas vencem qualquer outra regra.
+O enunciado pede que o desenho mostre "claramente as paredes, a entrada, a saída e o caminho da
+solução". Pintadas por último, a entrada e a saída vencem qualquer outra regra, e aparecem
+sempre, com o caminho escondido ou visível; o ciano só liga e desliga o que fica entre elas.
 
-O subject exige que o desenho mostre "claramente as paredes, a entrada, a saída e o caminho da
-solução". Entrada e saída aparecem sempre, com o caminho oculto ou visível; o ciano só liga e
-desliga o que fica entre elas.
+## As prioridades
 
-## A tabela de prioridades
+Uma posição pode se encaixar em mais de uma regra de cor: a saída é uma célula, é parte do
+caminho e é a saída. Antes de ver quem vence, vale separar dois grupos de posições.
 
-Cada posição recebe a cor da primeira regra que se aplica, de cima para baixo:
+**Posições que nunca são corredor**: os cantos e as posições de parede fechada, inclusive a
+borda. Elas ficam sempre na cor atual das paredes, a da paleta. Nenhuma passada escreve nelas:
+a primeira só escreve em células e em paredes **abertas**, e o caminho só passa por células e
+paredes abertas.
 
-| # | Posição | Cor | SGR |
-|---|---|---|---|
-| 1 | canto | cor atual das paredes | da paleta |
-| 2 | parede fechada, inclusive a borda | cor atual das paredes | da paleta |
-| 3 | célula do "42" | cinza | `100` |
-| 4 | entrada | magenta | `45` |
-| 5 | saída | vermelho | `41` |
-| 6 | célula do caminho, caminho visível | ciano | `46` |
-| 7 | passagem entre células consecutivas do caminho, caminho visível | ciano | `46` |
-| 8 | qualquer outra célula ou passagem | fundo padrão | `49` |
+**Células e passagens** (paredes abertas): estas podem receber mais de uma cor. A tabela vai da
+regra mais forte para a mais fraca; numa posição, vence a primeira que se aplica:
+
+| Prioridade | Posição | Cor | Código | Por quê |
+|---|---|---|---|---|
+| 1 | entrada | magenta | `45` | marca onde o caminho começa |
+| 2 | saída | vermelho | `41` | marca onde o caminho termina |
+| 3 | célula do caminho, ou passagem entre duas células seguidas dele, com o caminho visível | ciano | `46` | o caminho, contínuo |
+| 4 | célula do "42" | cinza | `100` | o "42" tem de ficar visível |
+| 5 | qualquer outra célula ou passagem | fundo do terminal | `49` | o corredor comum |
 
 O código aplica a tabela **de baixo para cima**: escreve primeiro o que tem menos prioridade e
 deixa as escritas seguintes cobrirem. A correspondência:
 
-| Escrita no código | Regras |
+| Escrita no código | O que ela pinta |
 |---|---|
-| tela inicial com `state.wall_colour` | 1 e 2 (cantos e paredes nunca são reescritos) |
-| célula cinza ou `DEFAULT`, parede aberta `DEFAULT` | 3 e 8 |
-| caminho em `CYAN` | 6 e 7 |
-| `MAGENTA` e `RED` | 4 e 5 |
-
-As regras 1 e 2 estão no topo da tabela e são as primeiras escritas no código, e mesmo assim
-nunca são cobertas: nenhuma passada posterior escreve num canto ou numa parede fechada. A
-segunda passada só abre paredes abertas, e o caminho só passa por elas.
+| quadro inicial com `state.wall_colour` | tudo na cor das paredes; cantos e paredes fechadas ficam assim até o fim |
+| primeira passada: célula cinza ou `DEFAULT`, parede aberta `DEFAULT` | prioridades 4 e 5 |
+| segunda passada: caminho em `CYAN` | prioridade 3 |
+| terceira passada: `MAGENTA` e `RED` | prioridades 1 e 2 |
 
 ## Regras que nunca brigam
 
 Algumas regras nunca disputam a mesma posição:
 
-- O "42" e o caminho: as células do "42" têm as quatro paredes fechadas, o solver nunca entra
-  nelas, e o ciano nunca cobre o cinza.
-- O "42" e a entrada ou a saída: o config recusa `ENTRY` e `EXIT` em cima do "42" (parte 11).
-- A entrada e a saída: o config recusa as duas iguais.
+- **O "42" e o caminho.** As células do "42" têm as quatro paredes fechadas, então o caminho
+  nunca entra nelas, e o ciano nunca cobre o cinza.
+- **O "42" e a entrada ou a saída.** A leitura do arquivo de configuração recusa uma `ENTRY` ou
+  uma `EXIT` em cima de uma célula do "42", com uma mensagem de erro
+  ([parte 11](../11-configuracao/04-o-42-e-o-arquivo-completo.md)).
+- **A entrada e a saída.** A mesma leitura recusa as duas na mesma célula
+  ([parte 11](../11-configuracao/04-o-42-e-o-arquivo-completo.md)).
 
-Por isso a ordem entre cinza, magenta e vermelho não importa na prática; a ordem que importa é
-ciano antes de magenta e vermelho.
+Por isso a ordem entre cinza, magenta e vermelho não importa na prática. A ordem que importa é
+a do ciano **antes** do magenta e do vermelho.
 
 ## Com uma paleta diferente
 
-Trocar a cor das paredes muda só as regras 1 e 2. O mesmo labirinto 9x7, com o caminho visível,
-nas quatro cores da paleta:
+Trocar a cor das paredes (opção `3` do menu) muda só os cantos e as paredes fechadas. O mesmo
+labirinto 9x7 (modo Pac-Man, semente 4, entrada `0,0`, saída `8,6`), com o caminho visível, nas
+quatro cores da paleta:
 
 ![O mesmo labirinto 9 por 7 com paredes brancas, amarelas, verdes e azuis](/img/tela/paleta-9x7.svg)
 
-Cinza, magenta, vermelho e ciano não aparecem na paleta, então as marcações continuam visíveis
-em todas as cores de parede.
+Cores do terminal: a cor das paredes muda em cada quadro; preto = fundo do terminal, cinza =
+"42", ciano = caminho, magenta = entrada, vermelho = saída.
+
+Cinza, magenta, vermelho e ciano não estão na paleta das paredes, então a entrada, a saída, o
+caminho e o "42" continuam visíveis em todas as cores de parede.

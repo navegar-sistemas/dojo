@@ -1,58 +1,14 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
 title: O código do Solver
 ---
 
 # O código do Solver
 
-O `Solver` é um service sem estado, em `mazegen/services/solver.py`.
-
-## Os imports
-
-```python
-from collections import deque
-
-from mazegen.entities.maze import Maze
-from mazegen.errors import MazeError
-from mazegen.value_objects.cell import Cell
-from mazegen.value_objects.direction import Direction
-```
-
-`deque` é a fila. `MazeError` aparece para o caso que nunca deveria acontecer, explicado abaixo.
-
-## A assinatura
-
-```python
-    def shortest_path(self, maze: Maze, start: Cell, goal: Cell) -> str:
-```
-
-Recebe o labirinto já escavado, a entrada e a saída. Devolve uma `str` com uma letra por passo:
-um caminho de `n` células tem `n − 1` letras. Entrada e saída nunca são a mesma célula (o
-`MazeGenerator` recusa), então a string nunca sai vazia.
-
-## A busca
-
-```python
-        parents: dict[Cell, tuple[Cell, Direction] | None] = {start: None}
-        queue: deque[Cell] = deque([start])
-        while queue:
-            current = queue.popleft()
-            if current == goal:
-                break
-            for side in maze.passages(current):
-                nxt = current.step(side)
-                if nxt not in parents:
-                    parents[nxt] = (current, side)
-                    queue.append(nxt)
-```
-
-- O tipo de `parents` diz tudo: cada célula aponta para o par `(anterior, lado)`, ou para
-  `None` no caso da entrada.
-- `if current == goal: break`: assim que a saída sai da fila, o resto do labirinto não interessa.
-- `maze.passages(current)` (parte 5) devolve só os lados **abertos**, na ordem N, E, S, W. Uma
-  passagem nunca dá para a borda nem para o "42", porque essas paredes nunca abrem; o `Solver`
-  não precisa checar limites.
-- `nxt not in parents` é o teste de "já descoberta". A primeira descoberta vence.
+Quando a busca da [página anterior](./04-a-busca-do-solver.md) termina, o dicionário
+`parents` tem o pai de cada célula descoberta, mas o `Solver` ainda precisa devolver o
+caminho em letras, e decidir o que fazer se a saída nunca foi descoberta. Esta página escreve
+esses dois trechos e mostra o arquivo `mazegen/services/solver.py` inteiro.
 
 ## A saída inalcançável
 
@@ -61,36 +17,17 @@ um caminho de `n` células tem `n − 1` letras. Entrada e saída nunca são a m
             raise MazeError("internal: exit is not reachable from entry")
 ```
 
-Se a fila esvaziou sem descobrir a saída, não existe caminho. Num labirinto gerado pelo
-`MazeGenerator` isso não acontece:
+Se a fila esvaziou sem descobrir a saída, não existe caminho até ela. `raise` interrompe o método
+e **levanta** (lança) a exceção: ela sobe para quem chamou o método, que pode capturá-la com
+`try`/`except`. Num labirinto gerado pelo `MazeGenerator`, isso não acontece:
 
-- o `Carver` liga todas as células livres;
-- o construtor do `MazeGenerator` garante que a saída é uma célula livre, dentro da grade e fora
-  do "42".
+- o `Carver` liga todas as células livres ([parte 6](../06-carver/01-labirinto-perfeito.md));
+- o `MazeGenerator` garante que a saída fica dentro da grade e fora do "42".
 
-Se acontecer, é bug. O prefixo `internal:` segue a convenção do `MazeError` (parte 4): a
-mensagem aponta para um defeito do código, não para um erro de quem usa. Devolver uma string
-vazia em silêncio esconderia o defeito e gravaria um arquivo de saída errado.
-
-### Experimente
-
-Um `Maze` 2x1 com todas as paredes fechadas, sem passar pelo `Carver`:
-
-```python
-from mazegen.entities.maze import Maze
-from mazegen.services.solver import Solver
-from mazegen.value_objects.cell import Cell
-from mazegen.value_objects.pattern42 import Pattern42
-
-closed = Maze(2, 1, Pattern42.for_size(2, 1))
-Solver().shortest_path(closed, Cell(0, 0), Cell(1, 0))
-```
-
-A última linha da saída:
-
-```text
-mazegen.errors.MazeError: internal: exit is not reachable from entry
-```
+Se acontecer, é bug. O começo `internal:` da mensagem é a convenção do `MazeError` para "defeito
+do código, não erro de quem usa" ([parte 4](../04-value-objects/01-maze-error.md)). A alternativa,
+devolver uma string vazia em silêncio, esconderia o defeito e gravaria um arquivo de saída
+errado.
 
 ## A reconstrução
 
@@ -105,10 +42,13 @@ mazegen.errors.MazeError: internal: exit is not reachable from entry
         return "".join(letters)
 ```
 
-- `link` começa no par da saída e anda de pai em pai; o laço para no `None` da entrada.
-- As letras são acumuladas numa lista e unidas no fim com `"".join`. Somar strings uma a uma
-  dentro do laço criaria uma string nova a cada passo.
-- `reverse()` inverte a lista no lugar: as letras foram lidas da saída para a entrada.
+- `link` começa com o par `(pai, lado)` da saída e vai de pai em pai. O laço para no `None` da
+  entrada.
+- `previous, side = link` desmonta a tupla em duas variáveis: o pai e o lado do passo.
+- `side.letter` é a letra do lado (`"N"`, `"E"`, `"S"` ou `"W"`).
+- `letters.reverse()` inverte a lista no lugar: as letras foram lidas da saída para a entrada.
+- `"".join(letters)` cola as letras numa string só, sem nada entre elas. Somar as strings uma a
+  uma dentro do laço (`texto = texto + letra`) criaria uma string nova a cada passo.
 
 ## O arquivo completo
 
@@ -165,3 +105,51 @@ class Solver:
         letters.reverse()
         return "".join(letters)
 ```
+
+## Experimente
+
+O exemplo da [página 2](./02-pais-e-letras.md): abre à mão todas as paredes internas de uma grade
+3x2 (`open_wall` derruba uma parede, [parte 5](../05-maze/04-abrir-e-fechar.md)) e pede o caminho
+nos dois sentidos. Depois, um `Maze` 2x1 com todas as paredes fechadas, sem passar pelo `Carver`:
+a saída não tem como ser alcançada. Na raiz do projeto:
+
+```bash
+.venv/bin/python - <<'EOF'
+from mazegen.entities.maze import Maze
+from mazegen.errors import MazeError
+from mazegen.services.solver import Solver
+from mazegen.value_objects.cell import Cell
+from mazegen.value_objects.direction import Direction
+from mazegen.value_objects.pattern42 import Pattern42
+
+maze = Maze(3, 2, Pattern42.for_size(3, 2))
+for x in range(3):
+    maze.open_wall(Cell(x, 0), Direction.SOUTH)
+    if x < 2:
+        maze.open_wall(Cell(x, 0), Direction.EAST)
+        maze.open_wall(Cell(x, 1), Direction.EAST)
+print(maze.rows())
+print(Solver().shortest_path(maze, Cell(0, 0), Cell(2, 1)))
+print(Solver().shortest_path(maze, Cell(2, 1), Cell(0, 0)))
+
+closed = Maze(2, 1, Pattern42.for_size(2, 1))
+try:
+    Solver().shortest_path(closed, Cell(0, 0), Cell(1, 0))
+except MazeError as error:
+    print("MazeError:", error)
+EOF
+```
+
+```text
+[[9, 1, 3], [12, 4, 6]]
+EES
+NWW
+MazeError: internal: exit is not reachable from entry
+```
+
+- `maze.rows()` mostra as paredes de cada célula como números (`9` = Norte e Oeste fechados, por
+  exemplo, [parte 1](../01-o-problema/02-paredes-em-bits.md)); só a borda ficou fechada.
+- `EES` e `NWW` são os caminhos do desempate: vizinhas na ordem N, E, S, W, e vale o pai da
+  primeira descoberta.
+- No `Maze` fechado, o `Solver` levanta o `MazeError`. O `try`/`except` o captura só para imprimir
+  a mensagem numa linha.

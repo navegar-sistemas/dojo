@@ -1,39 +1,40 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="270" height="226" viewBox="0 0 270 226">
-<rect width="270" height="226" fill="#ffffff" rx="8"/>
-<rect x="16" y="16" width="34" height="34" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="50" y="16" width="34" height="34" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="84" y="16" width="34" height="34" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="118" y="16" width="34" height="34" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="152" y="16" width="34" height="34" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="186" y="16" width="34" height="34" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="220" y="16" width="34" height="34" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="16" y="50" width="34" height="34" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="50" y="50" width="34" height="34" fill="#d946ef" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="84" y="50" width="34" height="34" fill="#1f2328" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="118" y="50" width="34" height="34" fill="#1f2328" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="152" y="50" width="34" height="34" fill="#1f2328" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="186" y="50" width="34" height="34" fill="#1f2328" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="220" y="50" width="34" height="34" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="16" y="84" width="34" height="34" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="50" y="84" width="34" height="34" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="84" y="84" width="34" height="34" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="118" y="84" width="34" height="34" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="152" y="84" width="34" height="34" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="186" y="84" width="34" height="34" fill="#1f2328" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="220" y="84" width="34" height="34" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="16" y="118" width="34" height="34" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="50" y="118" width="34" height="34" fill="#ef4444" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="84" y="118" width="34" height="34" fill="#1f2328" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="118" y="118" width="34" height="34" fill="#1f2328" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="152" y="118" width="34" height="34" fill="#1f2328" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="186" y="118" width="34" height="34" fill="#1f2328" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="220" y="118" width="34" height="34" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="16" y="152" width="34" height="34" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="50" y="152" width="34" height="34" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="84" y="152" width="34" height="34" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="118" y="152" width="34" height="34" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="152" y="152" width="34" height="34" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="186" y="152" width="34" height="34" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
-<rect x="220" y="152" width="34" height="34" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
-<text x="135" y="206" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">caminho oculto</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="706" height="254" viewBox="0 0 706 254">
+<rect width="706" height="254" fill="#ffffff" rx="8"/>
+<rect x="220" y="16" width="266" height="198" rx="6" fill="#1f2328"/>
+<rect x="234" y="30" width="34" height="34" fill="#f3f4f6"/>
+<rect x="268" y="30" width="34" height="34" fill="#f3f4f6"/>
+<rect x="302" y="30" width="34" height="34" fill="#f3f4f6"/>
+<rect x="336" y="30" width="34" height="34" fill="#f3f4f6"/>
+<rect x="370" y="30" width="34" height="34" fill="#f3f4f6"/>
+<rect x="404" y="30" width="34" height="34" fill="#f3f4f6"/>
+<rect x="438" y="30" width="34" height="34" fill="#f3f4f6"/>
+<rect x="234" y="64" width="34" height="34" fill="#f3f4f6"/>
+<rect x="268" y="64" width="34" height="34" fill="#d946ef"/>
+<rect x="302" y="64" width="34" height="34" fill="#1f2328"/>
+<rect x="336" y="64" width="34" height="34" fill="#1f2328"/>
+<rect x="370" y="64" width="34" height="34" fill="#1f2328"/>
+<rect x="404" y="64" width="34" height="34" fill="#1f2328"/>
+<rect x="438" y="64" width="34" height="34" fill="#f3f4f6"/>
+<rect x="234" y="98" width="34" height="34" fill="#f3f4f6"/>
+<rect x="268" y="98" width="34" height="34" fill="#f3f4f6"/>
+<rect x="302" y="98" width="34" height="34" fill="#f3f4f6"/>
+<rect x="336" y="98" width="34" height="34" fill="#f3f4f6"/>
+<rect x="370" y="98" width="34" height="34" fill="#f3f4f6"/>
+<rect x="404" y="98" width="34" height="34" fill="#1f2328"/>
+<rect x="438" y="98" width="34" height="34" fill="#f3f4f6"/>
+<rect x="234" y="132" width="34" height="34" fill="#f3f4f6"/>
+<rect x="268" y="132" width="34" height="34" fill="#ef4444"/>
+<rect x="302" y="132" width="34" height="34" fill="#1f2328"/>
+<rect x="336" y="132" width="34" height="34" fill="#1f2328"/>
+<rect x="370" y="132" width="34" height="34" fill="#1f2328"/>
+<rect x="404" y="132" width="34" height="34" fill="#1f2328"/>
+<rect x="438" y="132" width="34" height="34" fill="#f3f4f6"/>
+<rect x="234" y="166" width="34" height="34" fill="#f3f4f6"/>
+<rect x="268" y="166" width="34" height="34" fill="#f3f4f6"/>
+<rect x="302" y="166" width="34" height="34" fill="#f3f4f6"/>
+<rect x="336" y="166" width="34" height="34" fill="#f3f4f6"/>
+<rect x="370" y="166" width="34" height="34" fill="#f3f4f6"/>
+<rect x="404" y="166" width="34" height="34" fill="#f3f4f6"/>
+<rect x="438" y="166" width="34" height="34" fill="#f3f4f6"/>
+<text x="353" y="234" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">cores do terminal: branco = parede, escuro = corredor, magenta = entrada, vermelho = saída</text>
 </svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="370" height="270" viewBox="0 0 370 270">
+<rect width="370" height="270" fill="#ffffff" rx="8"/>
+<line x1="110" y1="50" x2="260" y2="50" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 8"/>
+<text x="185" y="28" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">Norte = 1</text>
+<line x1="260" y1="50" x2="260" y2="200" stroke="#1f2937" stroke-width="8" stroke-linecap="round"/>
+<text x="312" y="125" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">Leste = 2</text>
+<line x1="110" y1="200" x2="260" y2="200" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 8"/>
+<text x="185" y="222" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">Sul = 4</text>
+<line x1="110" y1="50" x2="110" y2="200" stroke="#1f2937" stroke-width="8" stroke-linecap="round"/>
+<text x="58" y="125" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">Oeste = 8</text>
+<text x="185" y="113" font-family="ui-sans-serif, system-ui, sans-serif" font-size="34" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">10</text>
+<text x="185" y="147" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">&quot;a&quot;  0b1010</text>
+<text x="185" y="250" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">Leste e Oeste fechados: 2 + 8 = 10</text>
+</svg>

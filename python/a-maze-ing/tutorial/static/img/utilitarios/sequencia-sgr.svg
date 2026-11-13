@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="564" height="188" viewBox="0 0 564 188">
+<rect width="564" height="188" fill="#ffffff" rx="8"/>
+<text x="30" y="26" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="bold" fill="#111827" text-anchor="start" dominant-baseline="central">Python: &quot;\x1b[41m&quot;</text>
+<rect x="30" y="60" width="110" height="64" rx="8" fill="#fde68a" stroke="#1f2937" stroke-width="2"/>
+<text x="85" y="82" font-family="ui-sans-serif, system-ui, sans-serif" font-size="22" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">ESC</text>
+<text x="85" y="108" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">\x1b</text>
+<text x="85" y="146" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">avisa: vem um</text>
+<text x="85" y="164" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">comando</text>
+<rect x="156" y="60" width="70" height="64" rx="8" fill="#fde68a" stroke="#1f2937" stroke-width="2"/>
+<text x="191" y="92" font-family="ui-sans-serif, system-ui, sans-serif" font-size="22" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">[</text>
+<text x="191" y="146" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">abre o</text>
+<text x="191" y="164" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">comando</text>
+<rect x="242" y="60" width="110" height="64" rx="8" fill="#fde68a" stroke="#1f2937" stroke-width="2"/>
+<text x="297" y="92" font-family="ui-sans-serif, system-ui, sans-serif" font-size="22" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">41</text>
+<text x="297" y="146" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">o número:</text>
+<text x="297" y="164" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">fundo vermelho</text>
+<rect x="368" y="60" width="70" height="64" rx="8" fill="#fde68a" stroke="#1f2937" stroke-width="2"/>
+<text x="403" y="92" font-family="ui-sans-serif, system-ui, sans-serif" font-size="22" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">m</text>
+<text x="403" y="146" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">fecha: é um</text>
+<text x="403" y="164" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">comando de cor</text>
+<rect x="474" y="67" width="50" height="50" rx="4" fill="#ef4444" stroke="#9ca3af" stroke-width="1"/>
+<text x="499" y="146" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">o que vier</text>
+<text x="499" y="164" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#111827" text-anchor="middle" dominant-baseline="central">depois</text>
+</svg>

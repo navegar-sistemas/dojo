@@ -5,15 +5,21 @@ title: Reconstruir o pacote
 
 # Reconstruir o pacote
 
-Os dois arquivos do pacote na raiz, `mazegen-1.0.0-py3-none-any.whl` e
-`mazegen-1.0.0.tar.gz`, precisam ser gerados **depois** do README final.
+O enunciado exige que o gerador reutilizável seja entregue como um **pacote Python**: um arquivo
+chamado `mazegen-...`, na raiz do repositório, que se instala com `pip install`. Este projeto
+entrega dois, `mazegen-1.0.0-py3-none-any.whl` (o *wheel*, pronto para instalar) e
+`mazegen-1.0.0.tar.gz` (o *sdist*, os fontes empacotados), criados pelo `make build`
+([parte 9](../09-gerador/08-o-pacote.md)). Eles precisam ser gerados de novo **depois** do
+README final. Esta página mostra por quê, como gerar e como conferir o resultado.
 
-## Por que de novo
+## Por que gerar de novo
 
-O `pyproject.toml` declara `readme = "README.md"`: o build copia o README inteiro para os
-metadados do pacote (o arquivo `METADATA` do wheel e o `PKG-INFO` do sdist). Um wheel gerado
-antes do README final carrega o README antigo. O mesmo vale para qualquer mudança no `mazegen/`
-depois do último build: o wheel na raiz precisa ser exatamente o código entregue.
+O `pyproject.toml` declara `readme = "README.md"`. Ao gerar o pacote, o README inteiro é copiado
+para dentro dele, como a descrição longa (no arquivo `METADATA` do wheel e no `PKG-INFO` do
+sdist). Um wheel gerado antes do README final carrega o README antigo.
+
+O mesmo vale para qualquer mudança no `mazegen/` depois do último build: o wheel na raiz precisa
+ter exatamente o código entregue.
 
 ## `make build`
 
@@ -23,8 +29,15 @@ Na raiz do projeto:
 make build
 ```
 
-A regra apaga `dist/`, roda `python -m build` (que gera o sdist e o wheel num ambiente isolado,
-baixando o `setuptools`) e copia os dois arquivos para a raiz. O fim da saída:
+A regra `build` do `Makefile` ([parte 9](../09-gerador/08-o-pacote.md)) faz três coisas:
+
+1. apaga a pasta `dist/`, onde ficam os pacotes gerados, para não sobrar nenhum antigo;
+2. roda `python -m build`, a ferramenta oficial que gera o sdist e o wheel. Ela trabalha num
+   ambiente separado, criado só para isso, onde baixa e instala o `setuptools`, a biblioteca que
+   de fato monta o pacote seguindo o `pyproject.toml`;
+3. copia os dois arquivos de `dist/` para a raiz do projeto.
+
+O fim da saída:
 
 ```text
 adding 'mazegen-1.0.0.dist-info/licenses/LICENSE.md'
@@ -37,12 +50,12 @@ Successfully built mazegen-1.0.0.tar.gz and mazegen-1.0.0-py3-none-any.whl
 cp dist/mazegen-*.whl dist/mazegen-*.tar.gz .
 ```
 
-O nome da pasta temporária `build/bdist...` muda com o sistema; o resto é igual. A saída não
-pode ter nenhuma linha de `warning`.
+O nome da pasta temporária `build/bdist...` muda com o sistema operacional; o resto é igual. A
+saída não pode ter nenhuma linha de `warning` (aviso).
 
 ## Conferir o wheel
 
-O wheel é um zip. A lista de arquivos mostra que só o `mazegen` entrou:
+Um wheel é um arquivo zip com outra extensão. `unzip -l` lista o que há dentro sem extrair nada:
 
 ```bash
 unzip -l mazegen-1.0.0-py3-none-any.whl
@@ -70,64 +83,27 @@ mazegen-1.0.0.dist-info/top_level.txt
 mazegen-1.0.0.dist-info/RECORD
 ```
 
-(A saída do `unzip` tem também tamanhos e datas; aqui ficaram só os nomes.) Nada de
-`amazeing/`, `a_maze_ing.py` ou `config.txt`: a aplicação não faz parte do módulo reutilizável.
+(A saída do `unzip` tem também tamanhos e datas; aqui ficaram só os nomes.) Só entrou o
+`mazegen`, mais a pasta `mazegen-1.0.0.dist-info` com os dados do pacote. Nada de `amazeing/`,
+`a_maze_ing.py` ou `config.txt`: a aplicação não faz parte do módulo reutilizável.
 
-O README novo está nos metadados:
+Para conferir que o README novo está lá dentro, procure a primeira linha dele no arquivo
+`METADATA`, a ficha do pacote:
 
 ```bash
-unzip -p mazegen-1.0.0-py3-none-any.whl mazegen-1.0.0.dist-info/METADATA | sed -n '12,14p'
+unzip -p mazegen-1.0.0-py3-none-any.whl mazegen-1.0.0.dist-info/METADATA | grep -n 'This project'
 ```
+
+`unzip -p` escreve na tela o conteúdo de um arquivo de dentro do zip, sem extrair nada. O
+`grep -n 'This project'` mostra só as linhas que contêm essa palavra, com o número da linha na
+frente:
 
 ```text
-*This project has been created as part of the 42 curriculum by macoelho.*
-
-# A-Maze-ing
+12:*This project has been created as part of the 42 curriculum by macoelho.*
 ```
 
-## O roteiro da avaliação
+As 11 primeiras linhas do `METADATA` são os dados do pacote (nome, versão, autor, licença...);
+a cópia do README começa na linha 12, com a frase exigida pelo enunciado e o seu login.
 
-O subject avisa que, na avaliação, o pacote será reconstruído a partir dos fontes, num
-virtualenv. O roteiro completo, de um clone limpo, usa um venv para construir e **outro** para
-usar, e roda o programa numa pasta sem o código-fonte do `mazegen`:
-
-```bash
-T=$(mktemp -d)
-python3 -m venv "$T/build"
-"$T/build/bin/python" -m pip install build
-"$T/build/bin/python" -m build
-python3 -m venv "$T/use"
-"$T/use/bin/python" -m pip install dist/mazegen-1.0.0-py3-none-any.whl
-mkdir "$T/run"
-cp -R a_maze_ing.py amazeing config.txt "$T/run/"
-cd "$T/run"
-"$T/use/bin/python" a_maze_ing.py config.txt
-"$T/use/bin/python" -c 'import mazegen; print(mazegen.__file__)'
-```
-
-```mermaid
-flowchart LR
-    A["fontes do clone<br/>pyproject.toml, mazegen/,<br/>README.md, LICENSE.md"] -->|"venv build:<br/>python -m build"| B["dist/mazegen-1.0.0-py3-none-any.whl"]
-    B -->|"venv use:<br/>pip install"| C["site-packages/mazegen"]
-    D["pasta run:<br/>a_maze_ing.py, amazeing/,<br/>config.txt"] -->|"import mazegen"| C
-```
-
-- `python3` precisa ser 3.10 ou posterior. Com um Python mais antigo, o `pip install` recusa o
-  wheel (`requires a different Python`), porque o `pyproject.toml` declara
-  `requires-python = ">=3.10"`.
-- A pasta `$T/run` não tem `mazegen/`. O `import mazegen` do programa só funciona porque o
-  wheel foi instalado no venv `use`, e a última linha imprime um caminho dentro de
-  `site-packages`.
-- `amazeing/` vai junto com o script, porque a aplicação não está no pacote. Sem ela, o
-  programa termina com `ModuleNotFoundError: No module named 'amazeing'`, antes mesmo de o
-  `main` começar.
-- O mesmo roteiro funciona com `dist/mazegen-1.0.0.tar.gz` no lugar do wheel: o `pip` constrói
-  o wheel a partir do sdist e instala.
-
-O labirinto aparece, a opção `4` sai com código 0, e o `maze.txt` gravado em `$T/run` passa no
-`maze_analyzer.py` do subject.
-
-## Limpar
-
-O build deixa `dist/` e `mazegen.egg-info/` na raiz. Os dois estão no `.gitignore` e
-`make clean` os apaga; o que fica versionado são só os dois arquivos copiados para a raiz.
+Na avaliação, o aluno reconstrói o pacote a partir dos fontes, a pedido do avaliador; o roteiro
+está em [O roteiro da avaliação](./08-o-roteiro-da-avaliacao.md), a última página desta parte.

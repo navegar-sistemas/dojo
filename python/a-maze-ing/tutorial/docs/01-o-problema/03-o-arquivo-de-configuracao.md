@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
 title: O arquivo de configuração
 ---
 
@@ -118,7 +118,19 @@ Três detalhes dessa mensagem:
   0 quer dizer sucesso e qualquer outro valor quer dizer erro. Esse número aparece no terminal
   com `echo $?`;
 - nunca aparece **traceback**, a listagem de linhas de código que o Python imprime quando uma
-  exceção não é tratada. O enunciado exige que o programa nunca quebre assim.
+  exceção (um erro em andamento no programa) não é tratada. O enunciado exige que o programa
+  nunca quebre assim.
+
+O enunciado só exige que todo erro vire uma mensagem clara. O prefixo `Error: `, a saída em
+stderr e o código 1 são escolhas do projeto: um formato fixo deixa o erro fácil de reconhecer, e
+o código diferente de 0 avisa um script que algo deu errado.
+
+Duas mensagens fogem dessa regra. O aviso de que o "42" não coube no labirinto também começa com
+`Error: `, mas o programa continua e termina com código 0. A
+[página do "42"](./06-o-padrao-42.md) explica por quê. E a linha de uso, impressa quando o
+programa recebe zero ou mais de um argumento, começa com `Usage:` em vez de `Error: ` (e termina
+com código 1), no formato tradicional dos programas de terminal para dizer como chamá-los
+([parte 14](../14-menu-e-main/04-o-composition-root.md)).
 
 A [parte 11](../11-configuracao/01-o-value-object-maze-config.md) implementa a leitura e as
 mensagens.

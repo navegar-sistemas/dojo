@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="320" height="224" viewBox="0 0 320 224">
-<rect width="320" height="224" fill="#ffffff" rx="8"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="242" viewBox="0 0 320 242">
+<rect width="320" height="242" fill="#ffffff" rx="8"/>
 <rect x="16" y="16" width="48" height="48" fill="#d946ef"/>
 <rect x="256" y="160" width="48" height="48" fill="#ef4444"/>
 <line x1="16" y1="16" x2="64" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
@@ -48,4 +48,5 @@
 <line x1="208" y1="208" x2="256" y2="208" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
 <line x1="304" y1="160" x2="304" y2="208" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
 <line x1="256" y1="208" x2="304" y2="208" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<text x="160" y="225" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">entrada em magenta, saída em vermelho</text>
 </svg>

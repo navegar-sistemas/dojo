@@ -1,20 +1,45 @@
 ---
-sidebar_position: 6
+sidebar_position: 7
 title: "Pattern42: consultar o padrão"
 ---
 
 # `Pattern42`: consultar o padrão
 
-## As duas perguntas
+Com as células do "42" calculadas pelo `for_size` (página
+[Pattern42: o desenho e a posição](./05-pattern42-posicao.md)), o resto do programa precisa
+perguntar ao padrão: "esta célula é do 42?". Esta página dá a essa pergunta a cara de Python
+comum, `cell in pattern`, e mostra o arquivo completo.
 
-Quem usa o padrão faz duas perguntas:
+## Quem pergunta
 
-- "esta célula é do 42?": o `Maze`, para não abrir paredes nela, e o `MazeConfig` (parte 11),
-  para recusar `ENTRY` ou `EXIT` em cima do desenho;
-- "o 42 coube?": o gerador e o menu, para avisar quando a grade é pequena demais.
+- O `Maze`, a grade de paredes ([parte 5](../05-maze/03-vizinhos.md)), pergunta para nunca
+  abrir uma parede de célula do "42".
+- O `MazeGenerator`, a classe principal do gerador ([parte 9](../09-gerador/02-validar-os-parametros.md)),
+  e o `MazeConfig`, as opções lidas do arquivo de configuração
+  ([parte 11](../11-configuracao/04-o-42-e-o-arquivo-completo.md)), perguntam para recusar uma
+  entrada ou uma saída em cima do desenho.
 
-Os métodos especiais `__contains__` e `__bool__` deixam as duas perguntas com a cara de Python
-comum: `cell in pattern` e `if pattern:`.
+Saber se o "42" coube na grade não precisa de método: quando a grade é menor que 9x7, o campo
+`cells` fica vazio, e um conjunto vazio conta como "falso" num `if`. A pergunta se faz ao
+**campo**, não ao padrão:
+
+```python
+if pattern.cells:
+    print("o 42 coube")
+```
+
+`if pattern:` não serve: o próprio objeto `Pattern42` conta sempre como verdadeiro, mesmo vazio,
+porque a classe não diz ao Python como responder a essa pergunta.
+
+## Métodos especiais
+
+O Python tem métodos com nomes entre dois sublinhados de cada lado, como `__init__`, que ele
+mesmo chama em certas situações. São os **métodos especiais**. Um deles transforma a pergunta
+acima em sintaxe comum:
+
+| Quando o código escreve... | O Python chama... |
+|---|---|
+| `x in objeto` | `objeto.__contains__(x)` |
 
 ## `__contains__`: o operador `in`
 
@@ -23,55 +48,41 @@ comum: `cell in pattern` e `if pattern:`.
         return isinstance(cell, Cell) and cell in self.cells
 ```
 
-`x in objeto` chama `objeto.__contains__(x)`. O lado esquerdo do `in` pode ser qualquer coisa,
-por isso o parâmetro é `object`, como no próprio protocolo do Python.
+`cell in pattern` chama esse método, que responde se a célula está no `frozenset` de células.
+
+O tipo do parâmetro é `object`, "qualquer coisa": o lado esquerdo de um `in` pode ser qualquer
+valor, e é assim que o próprio Python declara esse método. Por isso a primeira parte confere o
+tipo. `isinstance(cell, Cell)` responde se `cell` é uma `Cell`.
 
 ### Só uma `Cell` pertence
 
-O `isinstance` vem antes da busca no `frozenset`, e isso decide dois casos:
+O `and` do Python **para na primeira parte falsa**: se `isinstance` dá `False`, a busca no
+`frozenset` nem é feita. Isso decide dois casos:
 
-- **uma tupla nunca pertence**: `(6, 5) in pattern` é `False` mesmo com `Cell(6, 5)` no padrão.
-  Dentro do `mazegen` toda posição é `Cell`; uma tupla ali é engano de quem chamou, e o `False`
-  não esconde nada, porque uma tupla nunca é igual a uma `Cell`.
-- **um objeto sem hash não quebra a consulta**: `[6, 5] in frozenset(...)` levanta `TypeError`,
-  porque uma lista não pode ser procurada num conjunto. Com o `isinstance` na frente, o `and`
-  para antes, e a resposta é só `False`.
+- **Uma tupla nunca pertence.** `(6, 5) in pattern` é `False`, mesmo com `Cell(6, 5)` no padrão.
+  Dentro do `mazegen` toda posição é `Cell`; uma tupla ali é engano de quem chamou. Responder
+  `False` não muda nenhuma resposta: mesmo sem o `isinstance`, a busca no `frozenset` daria
+  `False`, porque `(6, 5) == Cell(6, 5)` é `False` (o `==` da dataclass só compara uma `Cell`
+  com outra `Cell`).
+- **Um objeto sem hash não quebra a consulta.** Procurar uma lista num conjunto levanta erro, porque
+  uma lista não tem hash (o número que o conjunto usa para achar as coisas rápido, explicado na
+  [página da Cell](./04-cell.md)). O texto do erro muda conforme a versão do Python. Do 3.10 ao
+  3.13:
 
-Quem tem uma tupla converte antes: o `MazeConfig` consulta com `Cell(x, y) in pattern`.
+  ```text
+  TypeError: unhashable type: 'list'
+  ```
 
-## `__bool__`: o padrão coube?
+  A partir do 3.14, a mensagem explica um pouco mais:
 
-```python
-    def __bool__(self) -> bool:
-        return bool(self.cells)
-```
+  ```text
+  TypeError: cannot use 'list' as a set element (unhashable type: 'list')
+  ```
 
-`if pattern:` chama `pattern.__bool__()`. O padrão é "verdadeiro" quando tem células, ou seja,
-quando o "42" coube na grade. Um padrão vazio (grade menor que 9x7) é "falso".
+  Com o `isinstance` na frente, `[6, 5] in pattern` responde só `False`.
 
-Sem esse método, todo objeto de uma classe comum é verdadeiro, e `if pattern:` daria `True`
-mesmo para o padrão vazio.
-
-## Experimente
-
-```python
-from mazegen.value_objects.cell import Cell
-from mazegen.value_objects.pattern42 import Pattern42
-
-p = Pattern42.for_size(20, 15)
-print(Cell(6, 5) in p, Cell(9, 7) in p)
-print((6, 5) in p, [6, 5] in p)
-print(bool(p), bool(Pattern42.for_size(8, 7)))
-```
-
-```text
-True False
-False False
-True False
-```
-
-`(6, 5)` é o canto de cima à esquerda do "4" em 20x15. `(9, 7)` é a coluna livre entre os dois
-dígitos.
+Quem tem uma tupla converte antes de perguntar: o `MazeConfig` consulta com
+`Cell(x, y) in pattern`.
 
 ## O arquivo completo
 
@@ -135,12 +146,39 @@ class Pattern42:
             True for a Cell of the pattern.
         """
         return isinstance(cell, Cell) and cell in self.cells
-
-    def __bool__(self) -> bool:
-        """Tell whether the "42" fits in the grid.
-
-        Returns:
-            False when the pattern is empty.
-        """
-        return bool(self.cells)
 ```
+
+## Experimente
+
+Com o arquivo acima gravado em `mazegen/value_objects/pattern42.py`, na raiz do projeto
+([como rodar os exemplos](../00-introducao/03-pre-requisitos.md#como-rodar-os-exemplos)):
+
+```bash
+.venv/bin/python - <<'EOF'
+from mazegen.value_objects.cell import Cell
+from mazegen.value_objects.pattern42 import Pattern42
+
+p = Pattern42.for_size(20, 15)
+xs = [cell.x for cell in p.cells]
+ys = [cell.y for cell in p.cells]
+print(len(p.cells), min(xs), max(xs), min(ys), max(ys))
+print(Pattern42.for_size(8, 7))
+print(Cell(6, 5) in p, Cell(9, 7) in p)
+print((6, 5) in p, [6, 5] in p)
+EOF
+```
+
+```text
+18 6 12 5 9
+Pattern42(cells=frozenset())
+True False
+False False
+```
+
+- `xs` e `ys` são compreensões de lista (*list comprehensions*, a lista montada por um `for`
+  entre colchetes): as colunas e as linhas das 18 células. Em 20x15, o "42" ocupa as colunas 6 a
+  12 e as linhas 5 a 9.
+- Em 8x7, o padrão é vazio: `frozenset()` sem nada dentro.
+- `6,5` é o canto de cima à esquerda do "4" numa grade 20x15; `9,7` é a coluna livre entre os
+  dois dígitos.
+- A tupla e a lista não pertencem, e a lista não causa erro.

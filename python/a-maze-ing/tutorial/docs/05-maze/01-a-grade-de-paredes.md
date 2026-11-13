@@ -5,23 +5,51 @@ title: A grade de paredes
 
 # A grade de paredes
 
-## O que é
+Gerar um labirinto é abrir paredes, uma a uma, numa grade que começa toda fechada. Os
+algoritmos das próximas partes precisam de um lugar para guardar essas paredes enquanto
+trabalham, e esse lugar precisa impedir que eles quebrem as regras do enunciado. Esta parte
+constrói esse lugar: a classe `Maze`, em `mazegen/entities/maze.py`.
 
-O `Maze`, em `mazegen/entities/maze.py`, é o labirinto **em construção**: uma grade com as
-paredes de cada célula. Os algoritmos das próximas partes recebem um `Maze` e trabalham sobre
-ele:
+## Onde o `Maze` entra
+
+O `Maze` é o labirinto **em construção**: a grade com as paredes de cada célula. Cada algoritmo
+recebe o mesmo `Maze` e mexe nele, um depois do outro. O diagrama mostra a ordem em que eles
+**rodam** ao gerar um labirinto:
 
 ```mermaid
 flowchart LR
-    novo["Maze novo<br/>tudo fechado"] --> carver["Carver<br/>cava os corredores"]
-    carver --> braider["Braider<br/>abre ciclos (modo Pac-Man)"]
-    braider --> solver["Solver<br/>encontra o caminho"]
-    solver --> rows["rows()<br/>a grade final"]
+    novo["Maze novo<br/>tudo fechado"] --> carver["1. Carver<br/>cava os corredores"]
+    carver --> braider["2. Braider<br/>abre paredes extras,<br/>só no modo Pac-Man"]
+    braider --> solver["3. Solver<br/>acha o caminho mais curto"]
+    solver --> pronto["grade pronta,<br/>copiada para fora do Maze"]
 ```
 
-É a única **entidade** do gerador: o único objeto cujo estado muda. Por isso ele protege as
-regras da grade (coerência, borda fechada, "42" fechado) por conta própria: nenhum algoritmo
-consegue quebrá-las, nem por engano.
+- O **Carver** cava um labirinto perfeito: um único caminho entre quaisquer duas células.
+- O **Braider** transforma o labirinto perfeito num tabuleiro Pac-Man, abrindo paredes extras
+  para criar rotas alternativas.
+- O **Solver** acha o caminho mais curto da entrada à saída, no labirinto já pronto.
+- No fim, a grade pronta sai do `Maze` como uma cópia, pelo método `rows`
+  ([A cópia da grade](./08-a-copia-da-grade.md)).
+
+A ordem em que o tutorial **constrói** essas classes é outra: o Carver na
+[parte 6](../06-carver/01-labirinto-perfeito.md), o Solver na
+[parte 7](../07-solver/01-busca-em-largura.md) e o Braider na
+[parte 8](../08-braider/01-becos-sem-saida.md). O número da parte não é a ordem de execução.
+
+## Por que o `Maze` é uma entidade
+
+Uma **entidade** é um objeto cujo estado muda, mas que protege as próprias regras: nenhum dos
+seus métodos deixa o objeto num estado proibido (os papéis estão na
+[parte 2](../02-arquitetura/04-papeis-das-classes.md)). O `Maze` é a única entidade do gerador:
+as paredes mudam o tempo todo, mas três regras do enunciado nunca podem quebrar:
+
+- **coerência**: duas células vizinhas concordam sobre a parede que dividem. Se uma diz que tem
+  parede à direita, a vizinha da direita diz que tem parede à esquerda;
+- **borda fechada**: a volta toda da grade é parede;
+- **"42" fechado**: as células que desenham o "42" mantêm as quatro paredes.
+
+O `Maze` garante as três por conta própria. Nenhum algoritmo consegue quebrá-las, nem por
+engano, porque toda mudança de parede passa por métodos do `Maze` que as conferem.
 
 ## Tudo começa fechado
 
@@ -29,68 +57,28 @@ consegue quebrá-las, nem por engano.
 ALL_WALLS = 15
 ```
 
-`15` é `0b1111`: as quatro paredes fechadas. Toda célula nasce assim, e gerar o labirinto é
-**abrir** paredes. Começar fechado tem uma vantagem: a borda e o "42" já nascem certos, e
-continuam certos simplesmente porque ninguém tem permissão de abri-los.
+Relembrando a [parte 1](../01-o-problema/02-paredes-em-bits.md): as paredes de uma célula são um
+número de 0 a 15. Cada lado da célula (Norte em cima, Leste à direita, Sul embaixo, Oeste à
+esquerda) ocupa um **bit**, um dígito 0 ou 1 do número escrito em binário, e vale 1, 2, 4 ou 8:
+o bit fica em 1 quando a parede está fechada. `15` é `1111` em binário (8 + 4 + 2 + 1): as quatro
+paredes fechadas.
 
-## O construtor
-
-```python
-    def __init__(self, width: int, height: int, pattern: Pattern42) -> None:
-        self.width = width
-        self.height = height
-        self.pattern = pattern
-        self._walls: list[list[int]] = [
-            [ALL_WALLS] * width for _ in range(height)
-        ]
-```
-
-- `width`, `height` e `pattern` ficam públicos: os algoritmos leem o tamanho e o padrão.
-- `_walls` é a grade: uma lista por linha, cada uma com `width` inteiros. `_walls[y][x]` são as
-  paredes da célula `(x, y)`, na mesma ordem do arquivo de saída (linha por linha).
-- O `Maze` recebe o `Pattern42` pronto, em vez de calculá-lo. Quem cria o `Maze` (o
-  `MazeGenerator`, parte 9) já calculou o padrão para validar a entrada e a saída, e o mesmo
-  objeto serve aos dois.
-
-![Um Maze 3 por 2 recém-criado, todas as células valendo 15](/img/maze/abrir-antes.svg)
-
-### O `_` de `_walls`
-
-O sublinhado diz "interno". Os algoritmos não escrevem em `_walls` diretamente: leem com
-`walls(cell)` e mudam com `open_wall` e `close_wall`, os únicos métodos que alteram a grade. É
-assim que a classe garante as regras: todo caminho de mudança passa por código que as confere.
-
-### Uma lista nova por linha
-
-A forma curta `[[ALL_WALLS] * width] * height` parece igual, mas está errada: o `* height`
-repete **a mesma lista** `height` vezes. Mudar uma linha muda todas:
-
-```python
-rows = [[15] * 3] * 2
-rows[0][0] = 13
-print(rows)
-rows = [[15] * 3 for _ in range(2)]
-rows[0][0] = 13
-print(rows)
-```
-
-```text
-[[13, 15, 15], [13, 15, 15]]
-[[13, 15, 15], [15, 15, 15]]
-```
-
-A compreensão `for _ in range(height)` cria uma lista nova a cada volta. Dentro de uma linha,
-`[ALL_WALLS] * width` não tem esse problema: os elementos são inteiros, e um inteiro não muda,
-só é trocado por outro.
+Toda célula nasce assim, e gerar o labirinto é **abrir** paredes. Começar fechado tem uma
+vantagem: a borda e o "42" já nascem certos, e continuam certos só porque ninguém tem permissão
+de abri-los.
 
 ## O que vem
 
-| Página | Métodos |
-|---|---|
-| [Consultar a grade](./02-consultar-a-grade.md) | `__contains__`, `cells`, `walls` |
-| [Vizinhos: a borda e o "42"](./03-vizinhos.md) | `neighbour`, `is_open` |
-| [Abrir e fechar paredes](./04-abrir-e-fechar.md) | `open_wall`, `close_wall`, `_other_side` |
-| [Passagens e becos](./05-passagens-e-becos.md) | `passages`, `closed_sides`, `dead_ends` |
-| [Contar ciclos](./06-contar-ciclos.md) | `loop_count` |
-| [Áreas abertas 3x3](./07-areas-abertas-3x3.md) | `has_open_3x3`, `_window_open` |
-| [A cópia da grade](./08-a-copia-da-grade.md) | `rows` e o arquivo completo |
+O `Maze` é grande demais para uma página só. Ele é construído aos poucos, ao longo desta parte,
+num único arquivo, `mazegen/entities/maze.py`:
+
+| Página | Métodos | O problema que resolvem |
+|---|---|---|
+| [O construtor](./09-o-construtor.md) | `__init__` | criar a grade com todas as paredes fechadas |
+| [Consultar a grade](./02-consultar-a-grade.md) | `__contains__`, `cells`, `walls` | a posição existe? quais são as células? quais paredes uma célula tem? |
+| [Vizinhos: a borda e o "42"](./03-vizinhos.md) | `neighbour`, `is_open` | quem está do outro lado de uma parede? dá para passar? |
+| [Abrir e fechar paredes](./04-abrir-e-fechar.md) | `open_wall`, `close_wall`, `_other_side` | mudar uma parede sem quebrar as regras |
+| [Passagens e becos](./05-passagens-e-becos.md) | `passages`, `closed_sides`, `dead_ends` | por onde se anda? onde estão os becos sem saída? |
+| [Contar ciclos](./06-contar-ciclos.md) | `loop_count` | o tabuleiro Pac-Man tem rotas alternativas suficientes? |
+| [Áreas abertas 3x3](./07-areas-abertas-3x3.md) | `has_open_3x3`, `_window_open` | algum bloco 3x3 ficou sem paredes por dentro? |
+| [A cópia da grade](./08-a-copia-da-grade.md) | `rows` | entregar a grade pronta sem deixar ninguém mexer nela |

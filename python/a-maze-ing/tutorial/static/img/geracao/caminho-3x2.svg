@@ -1,21 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="343.4" height="194" viewBox="0 0 343.4 194">
-<rect width="343.4" height="194" fill="#ffffff" rx="8"/>
-<rect x="63.7" y="16" width="72" height="72" fill="#d946ef"/>
-<rect x="207.7" y="88" width="72" height="72" fill="#ef4444"/>
-<polyline points="99.7,52 171.7,52 243.7,52 243.7,124" fill="none" stroke="#22d3ee" stroke-width="20.16" stroke-linecap="round" stroke-linejoin="round"/>
-<line x1="63.7" y1="16" x2="135.7" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="63.7" y1="16" x2="63.7" y2="88" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="135.7" y1="16" x2="207.7" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="207.7" y1="16" x2="279.7" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="279.7" y1="16" x2="279.7" y2="88" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="63.7" y1="160" x2="135.7" y2="160" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="63.7" y1="88" x2="63.7" y2="160" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="135.7" y1="160" x2="207.7" y2="160" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="279.7" y1="88" x2="279.7" y2="160" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<line x1="207.7" y1="160" x2="279.7" y2="160" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
-<text x="99.7" y="52" font-family="ui-sans-serif, system-ui, sans-serif" font-size="30.24" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">0</text>
-<text x="171.7" y="52" font-family="ui-sans-serif, system-ui, sans-serif" font-size="30.24" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">1</text>
-<text x="243.7" y="52" font-family="ui-sans-serif, system-ui, sans-serif" font-size="30.24" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2</text>
-<text x="243.7" y="124" font-family="ui-sans-serif, system-ui, sans-serif" font-size="30.24" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">3</text>
-<text x="171.7" y="177" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">EES vira 4 células: path()[0] a path()[3]</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="469.2" height="194" viewBox="0 0 469.2 194">
+<rect width="469.2" height="194" fill="#ffffff" rx="8"/>
+<rect x="126.6" y="16" width="72" height="72" fill="#d946ef"/>
+<rect x="270.6" y="88" width="72" height="72" fill="#ef4444"/>
+<polyline points="162.6,52 234.6,52 306.6,52 306.6,124" fill="none" stroke="#22d3ee" stroke-width="20.16" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="126.6" y1="16" x2="198.6" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="198.6" y1="16" x2="198.6" y2="88" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="126.6" y1="88" x2="198.6" y2="88" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="126.6" y1="16" x2="126.6" y2="88" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="198.6" y1="16" x2="270.6" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="270.6" y1="16" x2="270.6" y2="88" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="198.6" y1="88" x2="270.6" y2="88" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="198.6" y1="16" x2="198.6" y2="88" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="270.6" y1="16" x2="342.6" y2="16" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="342.6" y1="16" x2="342.6" y2="88" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="270.6" y1="88" x2="342.6" y2="88" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="270.6" y1="16" x2="270.6" y2="88" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="126.6" y1="88" x2="198.6" y2="88" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="198.6" y1="88" x2="198.6" y2="160" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="126.6" y1="160" x2="198.6" y2="160" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="126.6" y1="88" x2="126.6" y2="160" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="198.6" y1="88" x2="270.6" y2="88" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="270.6" y1="88" x2="270.6" y2="160" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="198.6" y1="160" x2="270.6" y2="160" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="198.6" y1="88" x2="198.6" y2="160" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="270.6" y1="88" x2="342.6" y2="88" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<line x1="342.6" y1="88" x2="342.6" y2="160" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="270.6" y1="160" x2="342.6" y2="160" stroke="#1f2937" stroke-width="4" stroke-linecap="round"/>
+<line x1="270.6" y1="88" x2="270.6" y2="160" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+<text x="162.6" y="52" font-family="ui-sans-serif, system-ui, sans-serif" font-size="30.24" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="234.6" y="52" font-family="ui-sans-serif, system-ui, sans-serif" font-size="30.24" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="306.6" y="52" font-family="ui-sans-serif, system-ui, sans-serif" font-size="30.24" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="306.6" y="124" font-family="ui-sans-serif, system-ui, sans-serif" font-size="30.24" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">3</text>
+<text x="234.6" y="177" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">tracejado: parede aberta · número: posição na lista path()</text>
 </svg>

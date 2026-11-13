@@ -5,20 +5,34 @@ title: O README completo
 
 # O README completo
 
-O arquivo inteiro, na raiz do projeto. Antes de copiar, troque o que é pessoal:
+As páginas anteriores explicaram o que o enunciado exige em cada seção do README. Esta mostra o
+arquivo inteiro, pronto, para ficar na raiz do projeto com o nome `README.md`.
 
-| Onde | O que trocar |
+Parte dele descreve **você** e o seu trabalho, e não pode ser copiada como está. Algumas frases
+também falam de coisas que quem seguiu o tutorial não tem: uma suíte de testes (um conjunto de
+programas que testam o projeto), a biblioteca de testes `pytest-bdd`, uma especificação escrita
+antes do código e uma lista de treze tarefas com "comandos de aceitação" (os comandos que
+provavam cada tarefa pronta). Antes de usar, troque ou apague:
+
+| Onde | O que trocar ou apagar |
 |---|---|
 | primeira linha | `macoelho` pelo seu login (ou logins, separados por vírgula) |
-| `Team and project management` | papéis, planejamento, o que funcionou, o que melhoraria e as ferramentas, pelos seus |
-| `Algorithm` | os números medidos, se os seus forem outros |
+| `Algorithm`, os números medidos | os seus, se forem outros ([página 3](./03-algoritmo-e-modulo.md)) |
+| `Algorithm`, a frase `The test suite checks 100 seeds and runs maze_analyzer.py on them.` | apague, ou diga como **você** conferiu a regra do 3x3 (por exemplo, rodando o `maze_analyzer.py` em vários arquivos de saída) |
+| `Team`: `specification, implementation, tests and documentation` | o que você fez de fato |
+| `Planning`: `thirteen ordered tasks` e `as the test suite grew` | o seu planejamento real; quem seguiu o tutorial pode descrever a ordem das partes ([página 4](./04-time-bonus-e-recursos.md)) |
+| `What worked well`: `the acceptance commands written next to each task` | o que funcionou para você |
+| `What could improve` | a sua melhoria |
+| `Tools`: `pytest-bdd for the test suite` | apague, se você não a usou; liste as suas ferramentas |
 | `Resources` | as referências que você leu |
-| `AI usage` | as tarefas em que você usou IA e as partes afetadas |
+| `AI usage`: as linhas que citam `the specification`, `the task list`, `the acceptance commands` e `the test suite` | as tarefas em que você usou IA e as partes afetadas |
 
-O resto (formato do config, menu, regras do `Makefile`, documentação do módulo) descreve o
-programa e só muda se o seu programa for diferente.
+O resto (formato do arquivo de configuração, menu, regras do `Makefile`, documentação do módulo)
+descreve o programa e só muda se o seu programa for diferente.
 
-A cerca do bloco abaixo usa quatro crases porque o README tem blocos de código com três.
+Em Markdown, um bloco de código começa e termina com uma linha de três crases. Como o README tem
+blocos assim por dentro, o bloco abaixo, que mostra o README inteiro, usa **quatro** crases nas
+pontas; com três, ele terminaria no primeiro bloco interno.
 
 ````markdown title="README.md"
 *This project has been created as part of the 42 curriculum by macoelho.*
@@ -34,7 +48,7 @@ output file in hexadecimal and shows it in the terminal.
   cells, no loop.
 - **Pac-Man mode** (`PERFECT=False`, the default): a fully connected board
   with loops, open corners and centre, at least two independent routes and
-  no real dead end.
+  at most two real dead ends (none in every maze measured).
 - **The "42"**: 18 fully closed cells draw a "42" in the middle of every
   maze of at least 9x7 cells; smaller mazes are generated without it and
   the program prints `Error: maze too small for the "42" pattern`.
@@ -110,8 +124,10 @@ Reading rules:
   stay off the "42"; `PERFECT=False` needs
   `(WIDTH - 1) x (HEIGHT - 1) >= 2`.
 
-Every error prints one line `Error: <cause>` on stderr and exits with
-code 1.
+Every configuration or runtime error prints one line `Error: <cause>`
+on stderr and exits with code 1. A wrong number of arguments prints the
+usage line `Usage: python3 a_maze_ing.py <config_file>` instead, also
+with code 1.
 
 The `config.txt` of the repository:
 
@@ -160,8 +176,7 @@ PERFECT=False
 ## Reusable module
 
 The reusable part of the project is the `mazegen` package; it is the only
-code that goes into the wheel. Install it with
-`pip install mazegen-1.0.0-py3-none-any.whl`.
+code that goes into the wheel.
 
 Generate random mazes with a "42" drawn by fully closed cells.
 
@@ -242,9 +257,12 @@ print(gen.solution)
 
 ## Bonus
 
-The Pac-Man board (`PERFECT=False`, the default) has no real dead end: the
-braiding opens one wall in every dead end. Only the 2 dead ends walled in
-by the "42" remain, and the analyzer does not count them. Check it with:
+The Pac-Man board (`PERFECT=False`, the default) came out with no real
+dead end in every maze measured (seeds 1 to 100 in 9x7, 20x15 and 40x30):
+the braiding opens one wall in every dead end. The code only guarantees
+at most two, because a wall that would open a 3x3 area is never opened.
+Only the 2 dead ends walled in by the "42" remain, and the analyzer does
+not count them. Check it with:
 
 ```sh
 python3 maze_analyzer.py maze.txt --max-dead-ends 0
@@ -285,7 +303,17 @@ Every line of the project was reviewed and can be explained by its author.
 
 ## Conferir antes de entregar
 
-Alguns pontos que o avaliador procura e que um erro de digitação apaga:
+Três pontos que o avaliador procura e que um erro de digitação estraga podem ser conferidos no
+terminal, na raiz do projeto:
+
+- `head -n 1 README.md` mostra a primeira linha do arquivo;
+- `grep -c 'python3 a_maze_ing.py config.txt' README.md` conta quantas linhas contêm o comando
+  do enunciado;
+- `grep -E '^## ' README.md` mostra só as linhas que começam com `## `, os títulos das seções.
+  O texto entre aspas é um padrão de busca (uma *expressão regular*), em que alguns símbolos
+  têm sentido especial: o `^` quer dizer "começo da linha", então `^## ` só aceita linhas que
+  começam com `## `, e não as que têm `## ` no meio. O `-E` liga a forma mais completa desses
+  padrões; para este, o resultado seria o mesmo sem ele.
 
 ```bash
 head -n 1 README.md
@@ -306,6 +334,7 @@ grep -E '^## ' README.md
 ## Resources
 ```
 
-A primeira linha com o seu login, o comando do subject escrito por extenso (em `Instructions`
-ele aparece duas vezes) e as oito seções na ordem. `Description`, `Instructions` e `Resources`
-precisam estar escritos exatamente assim.
+A saída certa: a primeira linha em itálico com o seu login; o comando do enunciado escrito por
+extenso (ele aparece em duas linhas da seção `Instructions`); e as oito seções, na ordem.
+`Description`, `Instructions` e `Resources` são os nomes que o enunciado fixa e precisam estar
+escritos exatamente assim.

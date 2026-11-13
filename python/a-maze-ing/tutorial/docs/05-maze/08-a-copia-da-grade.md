@@ -1,9 +1,14 @@
 ---
-sidebar_position: 8
+sidebar_position: 9
 title: A cópia da grade
 ---
 
 # A cópia da grade
+
+Quando os algoritmos terminam, a grade pronta precisa sair do `Maze` para ser gravada no arquivo
+de saída e desenhada na tela. Mas, se o `Maze` entregar a sua própria lista de paredes, quem a
+receber pode mudá-la sem passar pelas regras. Esta página escreve o método que entrega a grade
+com segurança, `rows`, o último método da classe, e mostra o arquivo completo do `Maze`.
 
 ## `rows`
 
@@ -12,61 +17,68 @@ title: A cópia da grade
         return [row[:] for row in self._walls]
 ```
 
-A grade pronta, uma lista por linha, no formato da API pública: `rows()[y][x]` são as paredes da
-célula `(x, y)`. O `MazeGenerator` (parte 9) a guarda no atributo `grid` no fim de `generate()`,
-e dali ela vai para o arquivo de saída e para o desenho.
+Devolve a grade pronta, uma lista por linha, cada linha com o número de paredes (0 a 15) de cada
+célula: `rows()[y][x]` são as paredes da célula `x,y`. É o formato que o `mazegen` mostra para
+fora: o `MazeGenerator` ([parte 9](../09-gerador/03-generate.md)) guarda essa grade no atributo
+`grid` no fim da geração, e dali ela vai para o arquivo de saída e para o desenho.
 
 ## Por que uma cópia
 
-Devolver `self._walls` direto entregaria a lista **interna**. Quem a recebesse poderia escrever
-`grid[0][0] = 0` e abrir as quatro paredes de uma célula sem passar por `open_wall`: a coerência,
-a borda e o "42" deixariam de estar garantidos, e o `Maze` nem saberia.
+Devolver `self._walls` direto entregaria a lista **interna**, a mesma que o `Maze` usa. Quem a
+recebesse poderia escrever `grid[0][0] = 0` e abrir as quatro paredes de uma célula sem passar
+por `open_wall`. A coerência (vizinhas concordando sobre a parede do meio), a borda fechada e o
+"42" fechado deixariam de estar garantidos, e o `Maze` nem ficaria sabendo.
 
-`row[:]` copia cada linha. A cópia de cada linha basta, sem copiar os números: um `int` não
-muda, então compartilhar os mesmos inteiros entre as duas grades não oferece risco. O que
-precisa ser novo são as **listas**, que são mutáveis.
+`row[:]` é uma **fatia** (*slice*) da linha do começo ao fim: uma lista nova com os mesmos
+elementos. A compreensão de lista `[row[:] for row in self._walls]` faz isso para cada linha e
+junta as cópias numa lista nova.
 
-```python
-from mazegen.entities.maze import Maze
-from mazegen.value_objects.cell import Cell
-from mazegen.value_objects.pattern42 import Pattern42
+Copiar as linhas basta, sem copiar os números: um `int` não muda, então as duas grades podem
+compartilhar os mesmos inteiros sem risco. O que precisa ser novo são as **listas**, porque uma
+lista pode ser alterada.
 
-maze = Maze(3, 2, Pattern42.for_size(3, 2))
-copy = maze.rows()
-copy[0][0] = 0
-print(copy[0][0], maze.walls(Cell(0, 0)))
-```
-
-```text
-0 15
-```
-
-A cópia mudou; o `Maze`, não.
+O [Experimente](#experimente), depois do arquivo completo, mostra a cópia mudando sem
+mexer no `Maze`.
 
 ## A classe inteira
 
-| Método | Papel |
-|---|---|
-| `__init__` | cria a grade com tudo fechado |
-| `__contains__` | a posição está dentro da grade? |
-| `cells` | as células fora do "42", linha por linha |
-| `walls` | a máscara de paredes de uma célula |
-| `neighbour` | a vizinha de um lado, ou `None` na borda e no "42" |
-| `is_open` | um lado é passagem? |
-| `open_wall`, `close_wall` | as únicas mudanças, sempre nas duas células |
-| `_other_side` | a guarda das duas mudanças |
-| `passages` | os lados abertos |
-| `closed_sides` | os lados fechados que poderiam abrir |
-| `dead_ends` | os becos reais |
-| `loop_count` | os ciclos independentes |
-| `has_open_3x3`, `_window_open` | há área aberta 3x3? |
-| `rows` | a cópia da grade |
+| Método | O problema que resolve | Página |
+|---|---|---|
+| `__init__` | criar a grade com tudo fechado | [O construtor](./09-o-construtor.md) |
+| `__contains__` | a posição está dentro da grade? | [Consultar a grade](./02-consultar-a-grade.md) |
+| `cells` | percorrer as células do labirinto, linha por linha, sem o "42" | [Consultar a grade](./02-consultar-a-grade.md) |
+| `walls` | quais paredes de uma célula estão fechadas (0 a 15) | [Consultar a grade](./02-consultar-a-grade.md) |
+| `neighbour` | a célula do outro lado de uma parede, ou `None` na borda e no "42" | [Vizinhos](./03-vizinhos.md) |
+| `is_open` | dá para passar por este lado? | [Vizinhos](./03-vizinhos.md) |
+| `open_wall`, `close_wall` | mudar uma parede, sempre nas duas células | [Abrir e fechar paredes](./04-abrir-e-fechar.md) |
+| `_other_side` | recusar mudanças na borda e no "42" antes de escrever | [Abrir e fechar paredes](./04-abrir-e-fechar.md) |
+| `passages` | os lados abertos, na ordem `N, E, S, W` | [Passagens e becos](./05-passagens-e-becos.md) |
+| `closed_sides` | os lados fechados que poderiam abrir | [Passagens e becos](./05-passagens-e-becos.md) |
+| `dead_ends` | os becos sem saída reais | [Passagens e becos](./05-passagens-e-becos.md) |
+| `loop_count` | quantos ciclos independentes o labirinto tem | [Contar ciclos](./06-contar-ciclos.md) |
+| `has_open_3x3`, `_window_open` | algum bloco 3x3 ficou sem paredes por dentro? | [Áreas abertas 3x3](./07-areas-abertas-3x3.md) |
+| `rows` | entregar uma cópia da grade | esta |
 
-Cada método tem uma docstring no estilo Google: um resumo, os parâmetros (`Args:`), o que
-devolve (`Returns:` ou `Yields:`) e o que levanta (`Raises:`). A docstring da classe registra as
-regras que ela protege.
+## As docstrings
+
+O enunciado pede docstrings (o texto entre `"""` que documenta) nas funções e nas classes,
+seguindo a PEP 257, e cita os estilos Google e NumPy como exemplo. O projeto escolheu o Google
+([parte 3](../03-ambiente/07-pacotes-do-mazegen.md)): um resumo de uma linha e, depois, as
+seções que se aplicam:
+
+- `Args:` os parâmetros, um por linha;
+- `Returns:` o que o método devolve;
+- `Yields:` o que uma função geradora (um método com `yield`, como o `cells`) entrega a cada
+  passo;
+- `Raises:` as exceções que ele pode levantar, e quando.
+
+A docstring da classe registra as três regras que ela protege: coerência, borda fechada e "42"
+fechado.
 
 ## O arquivo completo
+
+O arquivo abaixo tem os mesmos imports e métodos montados ao longo desta parte, na mesma ordem,
+agora com as docstrings. Ele substitui o `maze.py` montado até aqui.
 
 ```python title="mazegen/entities/maze.py"
 """Mutable grid of wall masks, the state the generator carves."""
@@ -288,8 +300,8 @@ class Maze:
     def _window_open(self, x0: int, y0: int) -> bool:
         """Tell whether the 3x3 window at a corner is fully open.
 
-        Stopping at the first closed wall keeps 100x100 Pac-Man boards
-        well under the 30 s limit of the test suite.
+        Stopping at the first closed wall rejects most windows after one
+        or two reads, which keeps 100x100 Pac-Man boards fast.
 
         Args:
             x0: Column of the top-left cell of the window.
@@ -315,3 +327,31 @@ class Maze:
         """
         return [row[:] for row in self._walls]
 ```
+
+## Experimente
+
+Com o arquivo acima gravado em `mazegen/entities/maze.py`, na raiz do projeto
+([como rodar os exemplos](../00-introducao/03-pre-requisitos.md#como-rodar-os-exemplos)):
+
+```bash
+.venv/bin/python - <<'EOF'
+from mazegen.entities.maze import Maze
+from mazegen.value_objects.cell import Cell
+from mazegen.value_objects.pattern42 import Pattern42
+
+maze = Maze(3, 2, Pattern42.for_size(3, 2))
+copy = maze.rows()
+print(copy)
+copy[0][0] = 0
+print(copy[0][0], maze.walls(Cell(0, 0)))
+EOF
+```
+
+```text
+[[15, 15, 15], [15, 15, 15]]
+0 15
+```
+
+A primeira linha é a grade 3x2 recém-criada, com 15 (as quatro paredes fechadas) em todas as
+células. Depois de `copy[0][0] = 0`, a cópia tem 0 na célula `0,0`, e o `Maze` continua com 15:
+a cópia mudou; o `Maze`, não.

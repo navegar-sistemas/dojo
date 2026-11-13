@@ -1,5 +1,5 @@
 ---
-sidebar_position: 7
+sidebar_position: 9
 title: O desenho e o menu
 ---
 
@@ -12,9 +12,9 @@ roda. Esta página mostra como o labirinto aparece no terminal e o que o menu of
 ## Terminal ou janela
 
 O enunciado aceita duas formas de mostrar o labirinto: desenhado no **terminal**, com
-caracteres, ou numa **janela gráfica** com a biblioteca MiniLibX. A MiniLibX que vem com o
-enunciado só funciona em Linux, então este projeto desenha no terminal, o que funciona em
-qualquer máquina.
+caracteres, ou numa **janela gráfica** com a biblioteca MiniLibX. Desenhar no terminal é
+escolha do projeto: a MiniLibX que vem com o enunciado só funciona em Linux, e o terminal
+funciona em qualquer máquina.
 
 ## Quadrados coloridos
 
@@ -24,34 +24,39 @@ caractere de terminal é mais alto do que largo, e dois lado a lado formam quase
 
 As cores são ligadas e desligadas por sequências especiais de caracteres, as **sequências
 ANSI**, que o terminal entende e não mostra. Elas são explicadas na
-[parte 10](../10-utilitarios/04-cores-ansi.md).
+[parte 10](../10-utilitarios/08-sequencias-ansi.md).
 
 ## As posições do desenho
 
 O desenho não tem só células: entre duas células existe a parede (ou a passagem) que as separa,
 e ela também precisa de um quadrado. Por isso, uma grade de `WIDTH` colunas vira um desenho de
 `2 × WIDTH + 1` quadrados de largura: uma posição para cada célula, uma para cada parede entre
-células, e mais uma para a borda. O mesmo vale na altura.
+células, e mais uma para a borda. O mesmo vale na altura. O tutorial chama essa tabela de
+posições de **quadro**.
 
-Para uma grade 3x2, são 7 por 5 posições:
+Para uma grade 3x2, o quadro tem 7 colunas por 5 linhas, numeradas a partir de 0:
 
-![As posições do desenho de uma grade 3 por 2](/img/problema/posicoes.svg)
+![O quadro de uma grade 3 por 2: 7 colunas por 5 linhas de posições numeradas](/img/problema/posicoes.svg)
 
 - **amarelo**: as células;
-- **azul**: as paredes, ou passagens, entre duas células e na borda;
+- **azul**: as posições de parede entre duas células e na borda; cada uma vira parede ou
+  passagem, conforme o labirinto;
 - **escuro**: os cantos, onde quatro paredes se encontram.
 
-Contando as posições a partir de 0, a célula `x,y` fica na coluna `2x + 1` e na linha `2y + 1`
-do desenho; a parede Norte dela fica logo acima, e a Oeste logo à esquerda.
+A célula `x,y` fica na coluna `2x + 1` e na linha `2y + 1` do quadro. A parede Norte dela fica
+logo acima, na linha `2y`, e a Oeste logo à esquerda, na coluna `2x`. Na figura, a célula `1,0`
+está na coluna 3, linha 1; a parede Norte dela (N) na coluna 3, linha 0; e a Oeste (O) na
+coluna 2, linha 1.
 
 O labirinto 3x2 do [arquivo de saída](./04-o-arquivo-de-saida.md) (`d53`/`d56`) fica assim no
-terminal, com as paredes brancas e o fundo escuro do terminal nos corredores:
+terminal. A moldura escura é o fundo do terminal; as paredes são brancas, e os corredores ficam
+com o fundo escuro, sem cor:
 
-![Desenho do labirinto 3 por 2 com o caminho oculto](/img/problema/desenho-3x2.svg)
+![Desenho do labirinto 3 por 2 no fundo escuro do terminal, com o caminho oculto](/img/problema/desenho-3x2.svg)
 
-E com o caminho mais curto à mostra:
+E com o caminho mais curto à mostra, em ciano:
 
-![Desenho do labirinto 3 por 2 com o caminho em ciano](/img/problema/desenho-3x2-caminho.svg)
+![Desenho do labirinto 3 por 2 no fundo escuro do terminal, com o caminho em ciano](/img/problema/desenho-3x2-caminho.svg)
 
 ## As cores
 
@@ -70,7 +75,8 @@ caminho sejam distinguíveis e que a cor das paredes possa mudar.
 ## O menu
 
 Depois de cada desenho, o programa mostra um menu e espera o usuário digitar um número e
-apertar Enter:
+apertar Enter. Ler a linha inteira, com Enter, é escolha do projeto: funciona igual em qualquer
+terminal, sem configurar o teclado para ler uma tecla por vez.
 
 ```text
 === A-Maze-ing ===
@@ -81,8 +87,9 @@ apertar Enter:
 Choice? (1-4):
 ```
 
-As três primeiras opções são as interações que o enunciado exige; a quarta é a saída do
-programa.
+As três primeiras opções são as interações que o enunciado exige (gerar outro labirinto,
+mostrar ou esconder o caminho, trocar a cor das paredes); a quarta é a saída do programa. Os
+textos do menu, em inglês como todo o programa, são escolha do projeto.
 
 | Escolha | Efeito | Desenha de novo |
 |---|---|---|
@@ -98,5 +105,6 @@ labirinto: se o caminho estava à mostra, continua à mostra, e a cor continua a
 ## Sair a qualquer momento
 
 Além da opção `4`, o usuário pode encerrar com **Ctrl+C** (interromper) ou **Ctrl+D** (fim da
-entrada). Nos dois casos o programa pula uma linha e termina normalmente, sem mostrar
-traceback.
+entrada). Nos dois casos o programa pula uma linha e termina sem mostrar traceback (a listagem de
+erro do Python). O enunciado só proíbe que o programa quebre; terminar com código de saída 0,
+como na opção `4`, é escolha do projeto, porque sair assim é um pedido do usuário, não um erro.

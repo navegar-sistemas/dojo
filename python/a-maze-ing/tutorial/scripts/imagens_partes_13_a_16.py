@@ -1,4 +1,4 @@
-"""Gera as imagens das partes 13 (desenho) e 16 (bônus).
+"""Gera as imagens das partes 13 (desenho), 14 (menu) e 16 (bônus).
 
 Uso, na pasta tutorial/:
 
@@ -17,19 +17,22 @@ from html import escape
 from pathlib import Path
 from typing import Any
 
-from svg import _svg, _text, color, maze_svg, save
+from svg import _svg, _text, bits_svg, color, maze_svg, save
 
 IMG = Path(__file__).resolve().parent.parent / "static" / "img"
 TELA = IMG / "tela"
 MENU = IMG / "menu"
 BONUS = IMG / "bonus"
 
+# A darker grey than COLORS["grey"]: next to the light walls, the cells of
+# the "42" must stand out, as code 100 does in a real terminal.
+TERMINAL_GREY = "#6b7280"
 SGR_COLOUR = {
     47: "white_wall",
     43: "yellow_wall",
     42: "green_wall",
     44: "blue_wall",
-    100: "grey",
+    100: TERMINAL_GREY,
     45: "magenta",
     41: "red",
     46: "cyan",
@@ -52,13 +55,15 @@ def ansi_rows(lines: Sequence[str]) -> list[list[str]]:
 
 
 def panels_svg(panels: Sequence[tuple[list[list[str]], str]], *,
-               size: int, columns: int) -> str:
+               size: int, columns: int,
+               outlines: Sequence[set[tuple[int, int]]] = ()) -> str:
     """Desenha vários desenhos de terminal lado a lado, cada um com legenda.
 
     Args:
         panels: Pares (rows, legenda).
         size: Lado de cada posição.
         columns: Quantos painéis por linha.
+        outlines: Por painel, as posições (px, py) contornadas em laranja.
 
     Returns:
         O documento SVG.
@@ -80,6 +85,14 @@ def panels_svg(panels: Sequence[tuple[list[list[str]], str]], *,
                     f'width="{size}" height="{size}" fill="{color(name)}" '
                     f'stroke="#d1d5db" stroke-width="0.5"/>'
                 )
+        marked = outlines[index] if index < len(outlines) else set()
+        for px, py in sorted(marked):
+            body.append(
+                f'<rect x="{ox + px * size + 1.5:g}" '
+                f'y="{oy + py * size + 1.5:g}" width="{size - 3:g}" '
+                f'height="{size - 3:g}" fill="none" '
+                f'stroke="{color("current")}" stroke-width="3"/>'
+            )
         body.append(
             f'<rect x="{ox - 1.5:g}" y="{oy - 1.5:g}" width="{pw + 3:g}" '
             f'height="{ph + 3:g}" fill="none" stroke="{color("muted")}" '
@@ -102,13 +115,14 @@ def labeled_blocks_svg(rows: Sequence[Sequence[str]],
         size: Lado de cada quadrado.
         caption: Legenda abaixo do desenho.
         gap: Espaço entre quadrados.
-        axes: Numera as colunas px em cima e as linhas py à esquerda.
+        axes: Numera as colunas px em cima e as linhas py à esquerda, com
+            o nome de cada eixo.
 
     Returns:
         O documento SVG.
     """
-    margin = 40 if axes else 16
-    top = 34 if axes else 16
+    margin = 64 if axes else 16
+    top = 58 if axes else 16
     width = len(rows[0]) * size
     total_w = max(margin + width + 16, len(caption) * 7.4 + 40)
     left = margin + (total_w - (margin + width + 16)) / 2
@@ -134,6 +148,16 @@ def labeled_blocks_svg(rows: Sequence[Sequence[str]],
         for py in range(len(rows)):
             body.append(_text(left - 18, top + py * size + size / 2,
                               str(py), size=12, fill="muted"))
+        body.append(_text(left + width / 2, top - 38,
+                          "px: coluna do desenho →", size=13,
+                          weight="bold"))
+        middle = top + len(rows) * size / 2
+        body.append(
+            f'<g transform="rotate(90 {left - 42:g} {middle:g})">'
+            + _text(left - 42, middle, "py: linha do desenho →", size=13,
+                    weight="bold")
+            + "</g>"
+        )
     total_h = top + len(rows) * size + 46
     body.append(_text(total_w / 2, total_h - 22, caption, size=13,
                       fill="muted"))
@@ -227,7 +251,7 @@ def render_steps(maze: Any, wall: str) -> list[tuple[list[list[str]], str]]:
     for y, row in enumerate(grid):
         for x, walls in enumerate(row):
             canvas[2 * y + 1][2 * x + 1] = (
-                "grey" if (x, y) in maze.pattern else "corridor")
+                TERMINAL_GREY if (x, y) in maze.pattern else "corridor")
             if not walls & 2:
                 canvas[2 * y + 1][2 * x + 2] = "corridor"
             if not walls & 4:
@@ -349,13 +373,35 @@ def main() -> None:
     save(panels_svg(render_steps(small, "white_wall"), size=22, columns=2),
          TELA / "etapas-4x3.svg")
 
-    pair = [["corridor"] * 7 for _ in range(3)]
-    pair[1][3] = pair[1][5] = "cyan"
-    pair[1][4] = "highlight"
+    first = small.grid[0][0]
+    save(bits_svg(first), TELA / f"bits-{first}.svg")
+    around = [["wall", "stack", "wall"],
+              ["stack", "highlight", "stack"],
+              ["wall", "stack", "wall"]]
+    if not first & 2:
+        around[1][2] = "visited"
+    if not first & 4:
+        around[2][1] = "visited"
     save(labeled_blocks_svg(
-        pair, {(3, 1): "1,0", (5, 1): "2,0", (4, 1): "?"}, size=56,
-        caption="células (1, 0) e (2, 0): a passagem fica em "
-                "(1 + 2 + 1, 0 + 0 + 1) = (4, 1)"),
+        around, {(1, 1): "0,0", (1, 0): "N", (2, 1): "E", (1, 2): "S",
+                 (0, 1): "W"}, size=70,
+        caption=f"célula 0,0 = {first}: Leste aberto (verde), "
+                f"Sul fechado (azul)"),
+         TELA / "leitura-0-0.svg")
+
+    path = small.path()
+    save(maze_svg([list(r) for r in small.grid], cell=60, coords=True,
+                  fills={small.entry: "entry", small.exit: "exit"},
+                  path=path,
+                  labels={cell: str(i) for i, cell in enumerate(path)},
+                  caption=f"solution = {small.solution}: "
+                          f"{len(path)} células"),
+         TELA / "caminho-4x3.svg")
+
+    save(labeled_blocks_svg(
+        kinds, {(3, 1): "1,0", (5, 1): "2,0", (4, 1): "?"}, size=46,
+        caption="células 1,0 e 2,0: a passagem fica em "
+                "px = 1 + 2 + 1 = 4, py = 0 + 0 + 1 = 1"),
          TELA / "passagem.svg")
 
     board = build(9, 7, False, 4)
@@ -367,12 +413,18 @@ def main() -> None:
         (ansi_rows(renderer.render(board, hidden)), "caminho oculto"),
         (ansi_rows(renderer.render(board, shown)), "caminho visível"),
     ], size=18, columns=2), TELA / "desenho-9x7.svg")
+    glyph = {(2 * x + 1, 2 * y + 1) for x, y in board.pattern}
+    plain = ansi_rows(renderer.render(board, hidden))
+    save(panels_svg([(plain, "como o terminal mostra"),
+                     (plain, "as 18 células do 42 contornadas")],
+                    size=22, columns=2, outlines=[set(), glyph]),
+         TELA / "quarenta-e-dois-9x7.svg")
 
     menu_lines = ["=== A-Maze-ing ===", "1. Re-generate a new maze",
                   "2. Show / Hide the shortest path",
                   "3. Rotate the wall colours", "4. Quit"]
     save(terminal_svg(
-        ["$ python3 a_maze_ing.py config.txt", ""],
+        ["$ .venv/bin/python a_maze_ing.py nove.txt", ""],
         ansi_rows(renderer.render(board, hidden)),
         [*menu_lines, "Choice? (1-4): 9", "Invalid choice",
          "Choice? (1-4): 2", ""],
@@ -399,19 +451,19 @@ def main() -> None:
         real, enclosed = enclosed_and_real(gen.grid, gen.pattern)
         fills = {cell: "pattern" for cell in gen.pattern}
         fills.update({cell: "current" for cell in real})
-        fills.update({cell: "stack" for cell in enclosed})
+        fills.update({cell: "highlight" for cell in enclosed})
         fills[(0, 0)] = "entry"
         fills[(19, 14)] = "exit"
         save(maze_svg(gen.grid, cell=26, wall=3, fills=fills,
                       caption=f"{caption}: {len(real)} becos reais "
                               f"(laranja), {len(enclosed)} cercados "
-                              f"pelo 42 (azul)"),
+                              f"pelo 42 (amarelo)"),
              BONUS / f"{name}.svg")
 
     stuck = stuck_dead_end(root)
     save(maze_svg(stuck, cell=60, coords=True, fills={(2, 2): "current"},
                   show_open=True,
-                  caption="(2, 2) é beco: só a passagem Norte"),
+                  caption="a célula 2,2 é beco: só a passagem Norte"),
          BONUS / "beco-preso.svg")
     for side, bit, x0, name in (("Oeste", 8, 0, "oeste"),
                                 ("Leste", 2, 2, "leste")):

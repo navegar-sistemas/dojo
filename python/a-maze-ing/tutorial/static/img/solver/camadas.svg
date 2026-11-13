@@ -262,5 +262,5 @@
 <text x="424" y="232" font-family="ui-sans-serif, system-ui, sans-serif" font-size="20.16" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">16</text>
 <text x="376" y="232" font-family="ui-sans-serif, system-ui, sans-serif" font-size="20.16" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">17</text>
 <text x="328" y="232" font-family="ui-sans-serif, system-ui, sans-serif" font-size="20.16" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">18</text>
-<text x="232" y="369" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">distância de cada célula até a entrada (0,0)</text>
+<text x="232" y="369" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">distância de cada célula até a entrada 0,0</text>
 </svg>

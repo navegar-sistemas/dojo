@@ -51,12 +51,12 @@ Gerar um labirinto é decidir, para cada lado de cada célula, se ele é parede 
 A parede que fica à direita (Leste) de uma célula é **a mesma** parede que fica à esquerda
 (Oeste) da vizinha da direita. Não são duas paredes coladas, é uma só.
 
-![Duas células vizinhas compartilhando a parede do meio](/img/problema/parede-compartilhada.svg)
+![Duas células vizinhas, A e B, compartilhando a parede do meio](/img/problema/parede-compartilhada.svg)
 
 Mesmo assim, o programa guarda as paredes **por célula**: cada célula anota o estado dos seus
-quatro lados. A parede do meio aparece duas vezes, uma na célula da esquerda (como Leste) e
-outra na da direita (como Oeste). O enunciado exige que as duas anotações **concordem**: se uma
-diz "fechada", a outra também diz. Essa regra se chama **coerência**, e quebrá-la é o erro mais
+quatro lados. A parede do meio aparece duas vezes: na célula A, à esquerda, como o lado Leste, e
+na célula B, à direita, como o lado Oeste. O enunciado exige que as duas anotações
+**concordem**: é proibido A dizer "parede fechada no Leste" e B dizer "passagem no Oeste". Essa regra se chama **coerência**, e quebrá-la é o erro mais
 fácil de cometer ao abrir passagens. Por isso, toda abertura de passagem mexe nas duas células
 ao mesmo tempo.
 
@@ -85,4 +85,4 @@ Numa grade de 20 colunas por 15 linhas, as células vão de `0,0` (canto de cima
 
 No código, a grade é uma lista de linhas, e cada linha uma lista de células. Para pegar a célula
 `x,y`, primeiro se escolhe a linha e depois a coluna: `grid[y][x]`. É a mesma célula, só que a
-lista pede a linha antes.
+lista pede a linha antes: a célula `5,3` da figura é `grid[3][5]`.

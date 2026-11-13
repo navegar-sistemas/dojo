@@ -1,14 +1,16 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 title: Gravando o arquivo de saída
 ---
 
 # Gravando o arquivo de saída
 
-Com o texto pronto, `save` grava. É o `save` que cumpre a porta `MazeRepository`: mesmo nome,
-mesmos parâmetros, mesmo retorno.
+Com o texto montado ([página anterior](./04-o-texto-do-arquivo.md)), falta escrevê-lo no
+arquivo indicado pela opção `OUTPUT_FILE` da configuração. Escrever pode falhar: a pasta pode
+não existir, ou o usuário pode não ter permissão para gravar ali. Esta página grava o arquivo e
+transforma essas falhas numa mensagem clara.
 
-## O método
+## O método `save`
 
 ```python
 def save(self, path: str, maze: GeneratedMaze) -> None:
@@ -20,25 +22,31 @@ def save(self, path: str, maze: GeneratedMaze) -> None:
                           f"{error.strerror}") from None
 ```
 
+É este `save` que cumpre a porta `MazeRepository`
+([página 3](./03-a-porta-maze-repository.md)): mesmo nome, mesmos parâmetros, mesmo retorno.
+Por isso o `GenerateMaze` consegue usá-lo sem conhecer a classe.
+
+`file.write(self.to_text(maze))` monta o texto e o escreve de uma vez. Os três argumentos do
+`open` são explicados a seguir.
+
 ### `"w"`: substituir o arquivo inteiro
 
-O modo `"w"` cria o arquivo se ele não existe e **apaga** o conteúdo se ele existe. Cada geração
-substitui o arquivo inteiro: depois de três regenerações pelo menu, o arquivo contém só o
-terceiro labirinto, o que está na tela.
+O modo `"w"` (*write*, escrever) cria o arquivo se ele não existe e **apaga** o conteúdo se ele
+já existe. Cada geração substitui o arquivo inteiro: depois de três labirintos novos pedidos
+pelo menu, o arquivo contém só o terceiro, o que está na tela.
 
 ### `encoding="utf-8"`
 
-O conteúdo é todo ASCII (dígitos, vírgulas, letras `NESW`), e em ASCII o UTF-8 é igual byte a
-byte. O `encoding` explícito segue a regra do projeto: nunca depender da codificação padrão da
-máquina.
+O texto só tem dígitos, vírgulas e as letras `NESW`, que têm os mesmos bytes em qualquer
+codificação comum. Mesmo assim, o projeto sempre diz a codificação, para nunca depender da
+configuração do computador ([parte 11](../11-configuracao/05-abrindo-o-arquivo.md)).
 
-### `newline="\n"`
+### `newline="\n"`: o mesmo fim de linha em qualquer sistema
 
-No modo texto, o Python **traduz** o `\n` escrito para o fim de linha do sistema. No Linux e no
-macOS, `\n` continua `\n`; no Windows, vira `\r\n`. O formato pede `\n` e nada de `\r`, em
-qualquer máquina.
+Ao **gravar** em modo texto, o Python troca cada `\n` pelo fim de linha do sistema: no Linux e no
+macOS, `\n` continua `\n`; no Windows, vira `\r\n`. O enunciado pede `\n` no fim de cada linha.
 
-`newline="\n"` desliga a tradução: o que `to_text` montou é exatamente o que vai para o disco.
+`newline="\n"` desliga essa troca: o que o `to_text` montou é exatamente o que vai para o disco.
 
 | `newline` | Linux e macOS | Windows |
 |---|---|---|
@@ -47,57 +55,28 @@ qualquer máquina.
 
 ## O erro de gravação
 
-Gravar pode falhar: a pasta do `OUTPUT_FILE` não existe, não há permissão de escrita, o caminho
-é uma pasta. Todos são `OSError`, e todos viram `OutputError`:
+Toda falha do sistema ao abrir ou escrever um arquivo é um `OSError`, a exceção do Python para
+erros do sistema operacional. O `save` captura e levanta no lugar um `OutputError`, a exceção da
+aplicação para o arquivo de saída ([parte 10](../10-utilitarios/05-a-hierarquia-app-error.md)):
 
-| `OUTPUT_FILE` | Mensagem |
-|---|---|
-| `nao_existe/maze.txt` | `cannot write output file 'nao_existe/maze.txt': No such file or directory` |
-| `trancado/maze.txt` | `cannot write output file 'trancado/maze.txt': Permission denied` |
-| `pasta` | `cannot write output file 'pasta': Is a directory` |
+| `OUTPUT_FILE` | Situação | Mensagem |
+|---|---|---|
+| `nao_existe/maze.txt` | a pasta não existe | `cannot write output file 'nao_existe/maze.txt': No such file or directory` |
+| `trancado/maze.txt` | a pasta não permite gravar | `cannot write output file 'trancado/maze.txt': Permission denied` |
+| `pasta_saida` | o caminho é uma pasta | `cannot write output file 'pasta_saida': Is a directory` |
 
-O mesmo padrão do repositório de config (parte 11): a única camada que abre arquivos converte o
-erro do sistema num erro da aplicação, com `strerror` e `from None`, para o `main` imprimir uma
-linha limpa.
+É o mesmo padrão da leitura da configuração
+([parte 11, "As falhas da leitura"](../11-configuracao/10-as-falhas-da-leitura.md)):
 
-O programa **não cria pastas**. Se `nao_existe/` não existe, é mais provável que o caminho
-esteja errado do que o usuário queira uma pasta nova; criar em silêncio esconderia o erro de
-digitação.
+- `error.strerror` é só a frase do sistema operacional, sem o número interno do erro;
+- `from None` descarta a exceção original, que a nova mensagem já resume;
+- o `main` imprime a mensagem depois de `Error: ` e termina com código 1.
 
-O caminho vai entre aspas simples na mensagem: um `OUTPUT_FILE` com espaços no nome fica legível.
+O caminho vai entre aspas simples na mensagem, para um nome com espaços continuar legível.
 
-## Experimente
-
-```bash
-mkdir -p pasta
-.venv/bin/python -c '
-from amazeing.domain.value_objects.generated_maze import GeneratedMaze
-from amazeing.errors import OutputError
-from amazeing.repositories.maze_repository import FileMazeRepository
-
-maze = GeneratedMaze(((9, 1, 3), (12, 4, 6)), (0, 0), (2, 1), "EES",
-                     frozenset())
-for path in ["small.txt", "nao_existe/maze.txt", "pasta"]:
-    try:
-        FileMazeRepository().save(path, maze)
-        print("ok:", path)
-    except OutputError as error:
-        print(error)
-'
-cat small.txt
-```
-
-```text
-ok: small.txt
-cannot write output file 'nao_existe/maze.txt': No such file or directory
-cannot write output file 'pasta': Is a directory
-913
-c46
-
-0,0
-2,1
-EES
-```
+O programa **não cria pastas**. Se `nao_existe/` não existe, o mais provável é que o caminho
+esteja errado; criar a pasta em silêncio esconderia o erro de digitação. Essa é uma escolha do
+projeto.
 
 ## O arquivo completo
 
@@ -149,3 +128,69 @@ class FileMazeRepository:
 
 A classe não herda de `MazeRepository` nem importa `ports.py`: tem o `save` com a assinatura
 certa, e isso basta.
+
+## Experimente
+
+Os exemplos rodam na raiz do projeto, com o labirinto 3x2 da [página 2](./02-o-caminho-em-celulas.md)
+escrito à mão. O primeiro mostra o texto que o `to_text` monta, sem gravar nada:
+
+```bash
+.venv/bin/python -c '
+from amazeing.domain.value_objects.generated_maze import GeneratedMaze
+from amazeing.repositories.maze_repository import FileMazeRepository
+
+maze = GeneratedMaze(((9, 1, 3), (12, 4, 6)), (0, 0), (2, 1), "EES",
+                     frozenset())
+print(repr(FileMazeRepository.to_text(maze)))
+'
+```
+
+```text
+'913\nc46\n\n0,0\n2,1\nEES\n'
+```
+
+O `repr` mostra cada `\n` escrito por extenso: um depois de cada linha da grade, o par `\n\n` da
+linha vazia, e o `\n` final depois do caminho.
+
+O segundo cria uma pasta comum e uma sem permissão de gravar, grava o mesmo labirinto em quatro
+caminhos, três deles impossíveis, e no fim apaga tudo o que criou:
+
+```bash
+mkdir pasta_saida trancado
+chmod 555 trancado
+.venv/bin/python -c '
+from amazeing.domain.value_objects.generated_maze import GeneratedMaze
+from amazeing.errors import OutputError
+from amazeing.repositories.maze_repository import FileMazeRepository
+
+maze = GeneratedMaze(((9, 1, 3), (12, 4, 6)), (0, 0), (2, 1), "EES",
+                     frozenset())
+for path in ["saida_3x2.txt", "nao_existe/maze.txt", "trancado/maze.txt",
+             "pasta_saida"]:
+    try:
+        FileMazeRepository().save(path, maze)
+        print("ok:", path)
+    except OutputError as error:
+        print(error)
+'
+cat saida_3x2.txt
+chmod 755 trancado
+rm -r saida_3x2.txt pasta_saida trancado
+```
+
+```text
+ok: saida_3x2.txt
+cannot write output file 'nao_existe/maze.txt': No such file or directory
+cannot write output file 'trancado/maze.txt': Permission denied
+cannot write output file 'pasta_saida': Is a directory
+913
+c46
+
+0,0
+2,1
+EES
+```
+
+`chmod 555 trancado` tira a permissão de gravar na pasta (deixa só ler e entrar); o `cat` mostra
+o arquivo gravado; `chmod 755 trancado` devolve a permissão, sem a qual o `rm -r` não apagaria a
+pasta.

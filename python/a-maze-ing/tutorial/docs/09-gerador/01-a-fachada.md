@@ -5,15 +5,39 @@ title: A fachada MazeGenerator
 
 # A fachada MazeGenerator
 
-## Uma classe para o mundo de fora
+O enunciado quer que o gerador de labirintos seja reaproveitado num projeto futuro. Para
+isso, ele exige que a geração seja "uma **classe única** dentro de um **módulo independente** que
+possa ser importado em um projeto futuro". Até aqui o pacote `mazegen` tem sete classes, fora a
+exceção `MazeError`, e quem for reutilizá-lo não deveria precisar conhecer nenhuma delas. Esta
+página apresenta a classe que resolve isso, o `MazeGenerator`, e o papel dela.
 
-O capítulo VI do subject pede que a geração seja "uma **classe única** dentro de um **módulo
-independente** que possa ser importado em um projeto futuro". Até aqui o `mazegen` tem sete
-classes: `Direction`, `Cell`, `Pattern42`, `Maze`, `Carver`, `Solver` e `Braider`. Quem reutiliza
-o pacote não deveria precisar conhecer nenhuma delas.
+## O problema: sete classes para entender
 
-O `MazeGenerator` é uma **fachada**: a única porta de entrada. Ele recebe parâmetros simples
-(inteiros, tuplas, `bool`), coordena as peças internas e devolve o resultado em tipos simples.
+As peças construídas até agora:
+
+| Classe | O que faz | Onde |
+|---|---|---|
+| `Direction` | os quatro lados de uma célula | [parte 4](../04-value-objects/02-direction-bits.md) |
+| `Cell` | a posição `x,y` de uma célula | [parte 4](../04-value-objects/04-cell.md) |
+| `Pattern42` | as células do "42" | [parte 4](../04-value-objects/05-pattern42-posicao.md) |
+| `Maze` | a grade de paredes | [parte 5](../05-maze/01-a-grade-de-paredes.md) |
+| `Carver` | cava o labirinto perfeito | [parte 6](../06-carver/01-labirinto-perfeito.md) |
+| `Solver` | acha o caminho mais curto | [parte 7](../07-solver/01-busca-em-largura.md) |
+| `Braider` | transforma o perfeito em tabuleiro Pac-Man | [parte 8](../08-braider/01-becos-sem-saida.md) |
+
+Para gerar um labirinto com elas, é preciso saber a ordem certa: criar o `Pattern42`, criar o
+`Maze`, chamar o `Carver`, talvez o `Braider`, depois o `Solver`, e ainda converter `Cell` em
+coordenadas comuns. Isso é detalhe interno, e quem reutiliza o pacote não deveria ter de aprender.
+
+## A solução: uma fachada
+
+Uma **fachada** é uma classe que fica na frente de várias outras e oferece um jeito simples de
+usá-las. Funciona como a recepção de um hotel: o hóspede pede tudo à recepção, e a recepção
+aciona a limpeza, a cozinha e a manutenção. O hóspede nunca precisa saber quem faz o quê.
+
+O `MazeGenerator` é a fachada do `mazegen`: a única porta de entrada. Ele recebe parâmetros
+simples (números inteiros, pares de números, `True`/`False`), aciona as peças internas na ordem
+certa e devolve o resultado também em tipos simples.
 
 ```mermaid
 flowchart TD
@@ -33,57 +57,26 @@ flowchart TD
     gen --> solver
 ```
 
-Do lado de fora, uma célula é sempre uma `tuple[int, int]` e as paredes são inteiros de 0 a 15.
-`Cell`, `Direction` e `Maze` ficam do lado de dentro: o gerador converte na chegada (os
-parâmetros `entry` e `exit`) e na saída (`grid`, `solution`, `pattern`).
+Do lado de fora, uma célula é sempre uma tupla `(x, y)` de dois inteiros, e as paredes de uma
+célula são um inteiro de 0 a 15, como no arquivo de saída
+([parte 1](../01-o-problema/02-paredes-em-bits.md)). `Cell`, `Direction` e `Maze` ficam do lado de
+dentro: o gerador converte as tuplas em `Cell` na chegada (os parâmetros `entry` e `exit`) e
+converte de volta na saída (os atributos `grid`, `solution` e `pattern`).
 
-## As constantes
+O enunciado diz "módulo". Em Python, um **módulo** é um arquivo `.py`, e um **pacote** é uma
+pasta de módulos com um `__init__.py` ([parte 3](../03-ambiente/07-pacotes-do-mazegen.md)). O
+`mazegen` é um pacote, e isso cumpre a ideia do enunciado: o que se importa é uma peça só, o
+`mazegen`, com o `MazeGenerator` dentro.
 
-```python
-MIN_SIZE = 1
-MAX_SIZE = 100
-MAX_ATTEMPTS = 20
-```
+"Independente" quer dizer que o `mazegen` não depende de nada do resto do projeto: ele não
+importa nada da aplicação `amazeing` (que lê o arquivo de configuração, grava o arquivo de saída e
+desenha na tela), só a biblioteca padrão do Python ([parte 2](../02-arquitetura/02-dois-pacotes.md)).
+Por isso pode ser copiado para outro projeto sozinho.
 
-- `MIN_SIZE` e `MAX_SIZE`: os limites de `width` e `height`, os mesmos do arquivo de
-  configuração.
-- `MAX_ATTEMPTS`: quantas vezes o modo Pac-Man tenta antes de desistir ([página 3](./03-generate.md)).
+O enunciado fala em "classe única". Este projeto entende assim: uma única classe **pública** de
+geração, o `MazeGenerator`, mais a exceção `MazeError` para os erros; as classes auxiliares
+internas são permitidas. Pôr todo o código numa classe só também cumpriria a regra, mas a deixaria
+enorme e difícil de ler; essa leitura da regra é escolha do projeto.
 
-## A assinatura
-
-```python
-    def __init__(self, width: int, height: int,
-                 entry: tuple[int, int] = (0, 0),
-                 exit: tuple[int, int] | None = None, perfect: bool = False,
-                 seed: int | None = None) -> None:
-```
-
-| Parâmetro | Padrão | Significado |
-|---|---|---|
-| `width`, `height` | obrigatórios | colunas e linhas, de 1 a 100 |
-| `entry` | `(0, 0)` | célula de entrada, `(x, y)` |
-| `exit` | `None` | célula de saída; `None` é o canto de baixo à direita |
-| `perfect` | `False` | `True` para labirinto perfeito, `False` para Pac-Man (o padrão do subject) |
-| `seed` | `None` | seed do sorteio; `None` sorteia um labirinto diferente a cada execução |
-
-O padrão de `exit` não pode ser uma tupla fixa: o canto de baixo à direita depende de `width` e
-`height`. `None` quer dizer "calcule a partir do tamanho".
-
-`exit` também é o nome de uma função embutida do Python. Como parâmetro, ele só esconde essa
-função dentro do construtor, que não a usa; o nome acompanha o vocabulário do subject
-(`ENTRY`, `EXIT`).
-
-## Os atributos públicos
-
-| Atributo | Antes de `generate()` | Depois |
-|---|---|---|
-| `grid` | `[]` | `height` listas de `width` inteiros; `grid[y][x]` são as paredes de `(x, y)` |
-| `solution` | `""` | o caminho mais curto em letras `N`, `E`, `S`, `W` |
-| `pattern` | as células `(x, y)` do "42" | as mesmas |
-
-`pattern` já existe desde o construtor porque só depende do tamanho. A aplicação o usa para pintar
-o "42" de cinza e para avisar quando ele não coube.
-
-`grid` usa os mesmos bits do arquivo de saída. O subject permite outro formato ("não
-necessariamente no mesmo formato do arquivo de saída"), mas com os mesmos bits a aplicação grava
-o arquivo sem conversão nenhuma.
+A [próxima página](./10-construtor-e-atributos.md) mostra o que o `MazeGenerator` recebe ao ser
+criado e onde ele entrega o resultado.

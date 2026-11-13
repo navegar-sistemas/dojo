@@ -1,15 +1,33 @@
 ---
-sidebar_position: 6
+sidebar_position: 7
 title: O caso de uso GenerateMaze
 ---
 
 # O caso de uso `GenerateMaze`
 
-O `GenerateMaze` (`amazeing/use_cases/generate_maze.py`) junta as peças desta parte numa operação
-só: gerar um labirinto, tirar o retrato, gravar o arquivo e devolver o retrato. O menu (parte 14)
-o chama na primeira geração e a cada opção `1`, "Re-generate a new maze".
+Gerar um labirinto acontece mais de uma vez: logo que o programa abre e a cada vez que o usuário
+escolhe a opção `1` do menu, "Re-generate a new maze". Toda vez, os mesmos passos, na mesma
+ordem: gerar, tirar o retrato, gravar o arquivo e só então desenhar. Esta página junta esses
+passos numa única operação, o `GenerateMaze` (`amazeing/use_cases/generate_maze.py`).
 
-## Os colaboradores
+## O que é um use case
+
+Um **use case** (caso de uso) é uma operação completa da aplicação, do ponto de vista de quem a
+usa: "gerar um labirinto novo". Ele não faz o trabalho pesado sozinho; ele **coordena** as peças
+que fazem, como uma receita que diz em que ordem usar cada utensílio
+([parte 2](../02-arquitetura/04-papeis-das-classes.md)). Neste projeto, cada use case tem um
+único método público, `execute`, que roda a operação inteira.
+
+As peças que o `GenerateMaze` coordena:
+
+| Peça | O que faz | Onde foi construída |
+|---|---|---|
+| `MazeGenerator` | gera o labirinto | [parte 9](../09-gerador/03-generate.md) |
+| `GeneratedMaze` | o retrato imutável de uma geração | [página 1](./01-o-retrato-generated-maze.md) |
+| `MazeRepository` | a porta "algo com `save`"; na prática, o `FileMazeRepository` | [página 3](./03-a-porta-maze-repository.md) |
+| `MazeConfig` | a configuração validada: entrada, saída e `OUTPUT_FILE` | [parte 11](../11-configuracao/01-o-value-object-maze-config.md) |
+
+## Receber as peças prontas
 
 ```python
 def __init__(self, generator: MazeGenerator, repository: MazeRepository,
@@ -19,18 +37,33 @@ def __init__(self, generator: MazeGenerator, repository: MazeRepository,
     self._config = config
 ```
 
-| Colaborador | Para quê |
-|---|---|
-| `generator` | gera o labirinto; criado uma vez, com os valores do config |
-| `repository` | grava; qualquer objeto que cumpra a porta `MazeRepository` |
-| `config` | dá a entrada, a saída e o `OUTPUT_FILE` |
+O use case não cria nenhuma peça: recebe todas prontas e as guarda. O `_` no começo dos nomes é
+a convenção do Python para "interno ao objeto, não use de fora".
 
-O use case não cria nenhum deles: recebe prontos. Quem cria é o `a_maze_ing.py` (parte 14). Assim
-o use case não sabe qual repositório concreto está usando, nem de onde veio o config.
+Quem cria as peças é o `a_maze_ing.py` ([parte 14](../14-menu-e-main/04-o-composition-root.md)):
 
-O **mesmo** gerador é usado em todas as chamadas. Ele guarda um único `random.Random`, então, com
-`SEED`, a sequência inteira de labirintos se repete de uma execução para outra: o primeiro, o da
-primeira regeneração, o da segunda...
+```python
+generate = GenerateMaze(generator, FileMazeRepository(), config)
+```
+
+Receber em vez de criar é o que deixa o use case sem saber qual repositório está usando nem de
+onde veio a configuração. Basta passar outro objeto com `save` para ele gravar em outro lugar,
+como mostra o Experimente da [próxima página](./07-gravar-antes-de-desenhar.md#experimente).
+
+O arquivo do use case importa o `MazeGenerator`, uma classe concreta, mas não o
+`FileMazeRepository`. A diferença vem da tabela de imports permitidos da
+[parte 2](../02-arquitetura/03-regra-de-dependencia.md): `use_cases` pode importar o `mazegen`,
+que fica mais para dentro, mas não `repositories`, que fica mais para fora. Para o repositório,
+o use case usa a porta `MazeRepository` da [página 3](./03-a-porta-maze-repository.md).
+
+### Um gerador para todas as gerações
+
+O **mesmo** gerador é usado em todas as chamadas. Ele guarda um único sorteador
+(`random.Random`), criado com a semente da configuração
+([parte 6](../06-carver/04-a-seed.md)). Com `SEED` no arquivo, a **sequência** inteira de
+labirintos se repete de uma execução para outra: o primeiro, o da primeira regeneração, o da
+segunda... Criar um gerador novo a cada vez, com a mesma semente, faria toda regeneração
+devolver o mesmo labirinto.
 
 ## `execute`
 
@@ -42,6 +75,11 @@ def execute(self) -> GeneratedMaze:
     self._repository.save(self._config.output_file, maze)
     return maze
 ```
+
+1. `generate()` cria um labirinto novo dentro do gerador.
+2. `from_generator` tira o retrato, juntando a entrada e a saída da configuração.
+3. `save` grava o retrato no `OUTPUT_FILE`.
+4. O retrato volta para quem chamou (o menu), que o desenha.
 
 ```mermaid
 sequenceDiagram
@@ -63,134 +101,10 @@ sequenceDiagram
     menu->>render: render(maze, state)
 ```
 
-Um método, quatro linhas, uma ordem que não muda.
-
-## Por que gravar antes de desenhar
-
-O desenho só acontece **depois** que `execute` devolve o retrato. Se a gravação falha, o `save`
-levanta `OutputError`, o `execute` não chega ao `return`, e a exceção sobe até o `main`, que
-imprime o erro e termina com código 1:
-
-```text
-Error: cannot write output file 'nao_existe/maze.txt': No such file or directory
-```
-
-O usuário nunca vê na tela um labirinto que não está no arquivo. Na ordem inversa, desenhar e
-depois gravar, uma falha deixaria na tela um labirinto que o arquivo não tem, e o arquivo com o
-labirinto anterior, ou com nada.
-
-Vale também na regeneração: se o disco encher entre uma geração e outra, a opção `1` termina com
-a mesma mensagem e o mesmo código 1 da primeira geração.
-
-## Por que uma geração por `execute`
-
-Tela e arquivo vêm do **mesmo** retrato, criado uma vez por chamada. Não há como o menu desenhar
-um labirinto e o arquivo guardar outro: o objeto que o `save` gravou é o mesmo que o `execute`
-devolve para desenhar.
-
-E a primeira geração e as regenerações passam pelo mesmo caminho. Se a regeneração fosse um
-código à parte no menu, bastaria esquecer o `save` ali para o arquivo ficar com o labirinto
-antigo.
-
-## As exceções
-
-`execute` não captura nada: as duas falhas possíveis já chegam com a mensagem pronta para o
-usuário.
-
-| Exceção | De onde | Quando |
-|---|---|---|
-| `MazeError` | `generate()` | o gerador não conseguiu montar um tabuleiro Pac-Man em 20 tentativas |
-| `OutputError` | `save()` | o `OUTPUT_FILE` não pode ser gravado |
-
-O `main` captura as duas na mesma linha, `except (AppError, MazeError)`.
-
-## Experimente
-
-Qualquer objeto com um `save` serve de repositório. Este guarda numa lista o que receberia:
-
-```bash
-.venv/bin/python -c '
-from amazeing.domain.value_objects.maze_config import MazeConfig
-from amazeing.use_cases.generate_maze import GenerateMaze
-from mazegen import MazeGenerator
-
-
-class Memory:
-    def __init__(self):
-        self.saved = []
-
-    def save(self, path, maze):
-        self.saved.append((path, maze.solution))
-
-
-config = MazeConfig.create({"WIDTH": "6", "HEIGHT": "4", "ENTRY": "0,0",
-                            "EXIT": "5,3", "OUTPUT_FILE": "maze.txt",
-                            "PERFECT": "False", "SEED": "1"})
-generator = MazeGenerator(config.width, config.height, config.entry,
-                          config.exit, config.perfect, config.seed)
-memory = Memory()
-use_case = GenerateMaze(generator, memory, config)
-first = use_case.execute()
-second = use_case.execute()
-print(memory.saved)
-print(first.solution, second.solution)
-'
-```
-
-```text
-[('maze.txt', 'EESEEESS'), ('maze.txt', 'EEEEESSS')]
-EESEEESS EEEEESSS
-```
-
-Duas chamadas, dois labirintos, duas gravações no mesmo caminho, cada uma com o retrato que
-`execute` devolveu. O `Memory` não herda de nada e não importa nada: é a porta `MazeRepository`
-funcionando. Com `FileMazeRepository()` no lugar de `memory`, o `maze.txt` fica com o segundo
-labirinto, o último devolvido.
-
-## O arquivo completo
-
-```python title="amazeing/use_cases/generate_maze.py"
-"""Use case that generates, stores and returns one maze."""
-
-from amazeing.domain.value_objects.generated_maze import GeneratedMaze
-from amazeing.domain.value_objects.maze_config import MazeConfig
-from amazeing.use_cases.ports import MazeRepository
-from mazegen import MazeGenerator
-
-
-class GenerateMaze:
-    """One generation: generate, snapshot, store, return.
-
-    The first maze and every regeneration go through execute, so the file
-    always holds the maze that the screen shows next.
-    """
-
-    def __init__(self, generator: MazeGenerator, repository: MazeRepository,
-                 config: MazeConfig) -> None:
-        """Keep the collaborators of the use case.
-
-        Args:
-            generator: Generator built from the configuration.
-            repository: Storage of the output file.
-            config: Validated configuration.
-        """
-        self._generator = generator
-        self._repository = repository
-        self._config = config
-
-    def execute(self) -> GeneratedMaze:
-        """Generate a new maze and store it before anyone draws it.
-
-        Returns:
-            The stored maze.
-
-        Raises:
-            MazeError: The generator could not build the maze.
-            OutputError: The output file cannot be written.
-        """
-        self._generator.generate()
-        maze = GeneratedMaze.from_generator(
-            self._generator, self._config.entry, self._config.exit)
-        self._repository.save(self._config.output_file, maze)
-        return maze
-```
+O diagrama mostra as chamadas de cima para baixo, na ordem em que acontecem: a seta cheia é
+uma chamada, a tracejada é a resposta. As duas últimas peças ainda não existem: o
+`RenderService`, que desenha, é construído na [parte 13](../13-tela/02-a-grade-de-posicoes.md),
+e o `state` que ele recebe é o estado da tela (caminho visível ou não, cor das paredes), o
+`ViewState` da [parte 13](../13-tela/01-o-estado-da-tela.md). Gravar antes de devolver o
+retrato ao menu é uma decisão com motivo, explicada na
+[próxima página](./07-gravar-antes-de-desenhar.md).

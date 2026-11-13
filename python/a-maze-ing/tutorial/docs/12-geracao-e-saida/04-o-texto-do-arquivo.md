@@ -1,20 +1,39 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 title: O texto do arquivo de saída
 ---
 
 # O texto do arquivo de saída
 
-O `FileMazeRepository` (`amazeing/repositories/maze_repository.py`) grava o retrato no
-`OUTPUT_FILE`. O trabalho se divide em dois métodos: `to_text`, que monta o conteúdo, e `save`,
-que grava (próxima página).
+O enunciado manda gravar cada labirinto num arquivo de texto, num formato exato, que outro
+programa (o `maze_analyzer.py`, que acompanha o enunciado) lê para conferir o labirinto. Antes de
+gravar, é preciso **montar** esse texto a partir do retrato `GeneratedMaze`
+([página 1](./01-o-retrato-generated-maze.md)). Esta página monta o texto; a
+[próxima](./05-gravando-o-arquivo.md) o grava no disco.
 
-## O formato
+## O formato, relembrado
 
-O formato vem do subject (parte 1): uma linha de dígitos hexadecimais por linha da grade, uma
-linha vazia, a entrada, a saída e o caminho. Para um labirinto 11x9 com `seed=3`:
+O arquivo tem cinco partes ([parte 1](../01-o-problema/04-o-arquivo-de-saida.md)):
 
-![Labirinto 11 por 9 com o dígito hexadecimal de cada célula](/img/geracao/arquivo-11x9.svg)
+1. a **grade**: uma linha do arquivo por linha do labirinto, um caractere por célula. O caractere
+   é o número das paredes fechadas da célula (de 0 a 15) escrito em **hexadecimal**: `0` a `9` e
+   depois `a` (10) a `f` (15) ([parte 1](../01-o-problema/02-paredes-em-bits.md));
+2. uma linha vazia;
+3. a entrada, como `x,y`;
+4. a saída, como `x,y`;
+5. o caminho mais curto, uma letra `N`, `E`, `S` ou `W` por passo.
+
+Toda linha termina com uma quebra de linha (`\n`), inclusive a última.
+
+Um exemplo: o labirinto que `MazeGenerator(11, 9, seed=3)` gera. Os parâmetros que não foram
+passados ficam com o valor que o gerador usa quando eles são omitidos: entrada `0,0`, saída no
+canto de baixo à direita (`10,8`) e `perfect=False`, o modo Pac-Man (o enunciado também chama
+esse modo de padrão, mas no arquivo de configuração a chave `PERFECT` é obrigatória).
+
+![Labirinto 11 por 9 com o dígito hexadecimal de cada célula, a entrada em magenta, a saída em vermelho e o 42 em cinza](/img/geracao/arquivo-11x9.svg)
+
+Na figura, cada célula mostra o seu dígito; a entrada está em magenta, a saída em vermelho e as
+células do "42" em cinza.
 
 ```text
 95395391553
@@ -33,7 +52,14 @@ SSSSESWSSSENNESESEEEEEEE
 ```
 
 Cada dígito do arquivo é o número escrito na célula da figura: a linha `y` do arquivo é a linha
-`y` da grade, e o caractere `x` é a coluna `x`. Os `f` do meio são o "42".
+`y` da grade, e o caractere de número `x` dessa linha (contando de 0) é a célula `x,y`. Os `f` do
+meio são as células do "42", com as quatro paredes fechadas.
+
+## A classe `FileMazeRepository`
+
+Quem monta e grava é o `FileMazeRepository` (`amazeing/repositories/maze_repository.py`), o
+*repository* do arquivo de saída: o único que abre esse arquivo. O trabalho se divide em dois
+métodos: `to_text`, que monta o texto, e `save`, que grava.
 
 ## A grade em hexadecimal
 
@@ -42,9 +68,16 @@ lines = ["".join(format(cell, "x") for cell in row)
          for row in maze.grid]
 ```
 
-Para cada linha da grade, cada célula vira um dígito, e os dígitos são colados sem separador.
+De dentro para fora:
 
-`format(cell, "x")` escreve o número em hexadecimal, em **minúsculas** e sem prefixo:
+- `format(cell, "x")` escreve o número `cell` em hexadecimal: `13` vira `"d"`.
+- `"".join(...)` cola os dígitos de uma linha sem nada entre eles: os números
+  `(9, 1, 3)` viram `"913"`.
+- `[... for row in maze.grid]` faz isso para cada linha da grade e junta os resultados numa
+  lista de textos, um por linha.
+
+O `"x"` dá letras **minúsculas** e nenhum prefixo. As outras formas de escrever hexadecimal no
+Python dariam outra coisa:
 
 | Valor | `format(v, "x")` | `hex(v)` | `format(v, "X")` |
 |---|---|---|---|
@@ -53,11 +86,11 @@ Para cada linha da grade, cada célula vira um dígito, e os dígitos são colad
 | 10 | `a` | `0xa` | `A` |
 | 15 | `f` | `0xf` | `F` |
 
-- `hex()` põe o prefixo `0x`, que teria de ser cortado.
-- `"X"` dá maiúsculas. O `maze_analyzer.py` aceita as duas, mas o exemplo do subject usa
-  minúsculas, e o projeto segue o exemplo.
+- `hex()` põe o prefixo `0x` na frente, que teria de ser cortado.
+- `"X"` dá maiúsculas. O `maze_analyzer.py` aceita as duas; minúsculas são escolha do projeto,
+  igual ao exemplo do enunciado.
 
-Como o valor de uma célula vai de 0 a 15, o resultado é sempre **um** dígito: nunca é preciso
+Como o valor de uma célula vai de 0 a 15, o resultado tem sempre **um** dígito: nunca é preciso
 completar com zero à esquerda.
 
 ## O rodapé
@@ -68,13 +101,18 @@ sx, sy = maze.exit
 lines += ["", f"{ex},{ey}", f"{sx},{sy}", maze.solution]
 ```
 
+- `ex, ey = maze.entry` separa a tupla da entrada nos seus dois números, e
+  `sx, sy = maze.exit` faz o mesmo com a saída. `ex, ey` são o x e o y da entrada (*entry*);
+  `sx, sy` os da saída (o `s` de saída, porque `exit` também começaria com `e`).
+- `lines += [...]` acrescenta quatro linhas no fim da lista.
 - `""` é a linha vazia que separa a grade do rodapé.
-- A entrada e a saída saem como `x,y`, sem espaço e sem parênteses: o mesmo formato do config.
-  Escrever `str(maze.entry)` daria `(0, 0)`, que o `maze_analyzer.py` não lê.
+- `f"{ex},{ey}"` escreve `0,0`: sem espaço e sem parênteses, o mesmo formato do arquivo de
+  configuração. Escrever `str(maze.entry)` daria `(0, 0)`, que o `maze_analyzer.py` não lê.
 - O caminho é o `solution`, as mesmas letras que o desenho pinta de ciano.
 
-O exemplo do subject tem anotações como `# entry (x,y)` ao lado do rodapé. Elas fazem parte da
-**figura**, não do arquivo: com elas, o `maze_analyzer.py` não acha a entrada.
+O exemplo de arquivo do enunciado mostra anotações como `# entry (x,y)` ao lado do rodapé. Elas
+explicam a figura e não fazem parte do arquivo: com elas, o `maze_analyzer.py` não consegue ler
+a entrada.
 
 ## Juntar com `\n`
 
@@ -82,34 +120,16 @@ O exemplo do subject tem anotações como `# entry (x,y)` ao lado do rodapé. El
 return "\n".join(lines) + "\n"
 ```
 
-`"\n".join(lines)` põe uma quebra **entre** as linhas, mas não depois da última. O `+ "\n"` final
-faz toda linha terminar em quebra, inclusive a do caminho: é o que um arquivo de texto bem formado
-tem, e o que o formato pede.
+`"\n".join(lines)` põe uma quebra de linha **entre** as linhas, mas não depois da última:
+`"\n".join(["a", "b"])` dá `"a\nb"`. O `+ "\n"` do fim faz a última linha, a do caminho,
+terminar em quebra também, como o enunciado pede.
 
 ## Por que `to_text` é separado e estático
 
-Montar o texto não precisa de arquivo nem de estado: recebe um retrato, devolve uma string. Fica
-num método à parte, `@staticmethod`, por dois motivos:
+Montar o texto não precisa de arquivo nem de dado nenhum do objeto: recebe um retrato e devolve
+um texto. Por isso é um `@staticmethod`, um método que se chama direto pela classe
+(`FileMazeRepository.to_text(maze)`), e fica separado do `save` por dois motivos:
 
-- `save` fica curto: abrir, escrever, tratar o erro;
-- dá para ver o conteúdo exato sem gravar nada, como no exemplo abaixo.
-
-## Experimente
-
-```bash
-.venv/bin/python -c '
-from amazeing.domain.value_objects.generated_maze import GeneratedMaze
-from amazeing.repositories.maze_repository import FileMazeRepository
-
-maze = GeneratedMaze(((9, 1, 3), (12, 4, 6)), (0, 0), (2, 1), "EES",
-                     frozenset())
-print(repr(FileMazeRepository.to_text(maze)))
-'
-```
-
-```text
-'913\nc46\n\n0,0\n2,1\nEES\n'
-```
-
-O `repr` mostra cada `\n`: um depois de cada linha da grade, o par `\n\n` da linha vazia, e o
-`\n` final depois do caminho.
+- o `save` fica curto: abrir, escrever, tratar o erro;
+- dá para ver o conteúdo exato sem gravar nada, como mostra o Experimente da
+  [próxima página](./05-gravando-o-arquivo.md#experimente), depois do arquivo completo.

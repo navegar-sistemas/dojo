@@ -24,6 +24,7 @@ from svg import (
     _caption_overflow,
     _line,
     _svg,
+    _text,
     maze_svg,
     save,
 )
@@ -159,6 +160,83 @@ def blend(start: str, end: str, t: float) -> str:
                          for p, q in zip(a, b))
 
 
+def stack_svg(items: Sequence[str], caption: str,
+              popped: str | None = None, box_w: int = 96) -> str:
+    """Desenha uma pilha vertical: o primeiro item embaixo, o topo em cima.
+
+    Args:
+        items: Itens da pilha, do fundo para o topo.
+        caption: Legenda abaixo do desenho.
+        popped: Item que acabou de sair, desenhado tracejado acima do topo.
+        box_w: Largura de cada caixa.
+
+    Returns:
+        O documento SVG.
+    """
+    box_h, gap, slots = 34, 6, 4
+    width = max(box_w + 120, len(caption) * 7.4 + 40)
+    left = (width - box_w) / 2
+    base = 16 + slots * (box_h + gap)
+    body: list[str] = []
+    for index, item in enumerate(items):
+        y = base - (index + 1) * (box_h + gap)
+        top = index == len(items) - 1
+        fill = COLORS["current"] if top else COLORS["stack"]
+        body.append(f'<rect x="{left:g}" y="{y:g}" width="{box_w}" '
+                    f'height="{box_h}" rx="6" fill="{fill}" '
+                    f'stroke="{COLORS["wall"]}" stroke-width="1.5"/>')
+        body.append(_text(left + box_w / 2, y + box_h / 2, item, size=15,
+                          weight="bold"))
+        if top:
+            body.append(_text(left + box_w + 30, y + box_h / 2, "← topo",
+                              size=13, fill="muted"))
+    if popped is not None:
+        y = base - (max(len(items), 1) + 1) * (box_h + gap)
+        body.append(f'<rect x="{left:g}" y="{y:g}" width="{box_w}" '
+                    f'height="{box_h}" rx="6" fill="none" '
+                    f'stroke="{COLORS["muted"]}" stroke-width="1.5" '
+                    f'stroke-dasharray="5 4"/>')
+        body.append(_text(left + box_w / 2, y + box_h / 2, popped, size=15,
+                          fill="muted"))
+        body.append(_text(left + box_w + 30, y + box_h / 2, "↑ saiu",
+                          size=13, fill="muted"))
+    if not items:
+        body.append(_text(width / 2, base - box_h / 2, "(vazia)", size=14,
+                          fill="muted"))
+    body.append(_line(left - 10, base + 2, left + box_w + 10, base + 2,
+                      "wall", 3))
+    total_h = base + 44
+    body.append(_text(width / 2, total_h - 20, caption, size=13,
+                      fill="muted"))
+    return _svg(width, total_h, body)
+
+
+def queue_svg(items: Sequence[str], width: float) -> str:
+    """Desenha uma fila horizontal: a frente à esquerda, o fim à direita.
+
+    Args:
+        items: Itens da fila, da frente para o fim.
+        width: Largura total do desenho.
+
+    Returns:
+        O documento SVG.
+    """
+    box_w, box_h = 44, 30
+    body = [_text(16, 14, "fila: frente → fim", size=12, fill="muted",
+                  anchor="start")]
+    for index, item in enumerate(items):
+        x = 16 + index * (box_w + 4)
+        body.append(f'<rect x="{x:g}" y="28" width="{box_w}" '
+                    f'height="{box_h}" rx="5" fill="{COLORS["stack"]}" '
+                    f'stroke="{COLORS["wall"]}" stroke-width="1.2"/>')
+        body.append(_text(x + box_w / 2, 28 + box_h / 2, item, size=13,
+                          weight="bold"))
+    if not items:
+        body.append(_text(16, 28 + box_h / 2, "(vazia)", size=13,
+                          fill="muted", anchor="start"))
+    return _svg(width, 28 + box_h + 12, body)
+
+
 def carve_frames(maze: Any, start: Any, rng: random.Random,
                  direction: Any) -> Iterator[tuple[set[Any], list[Any],
                                                    str]]:
@@ -220,17 +298,19 @@ def bfs(maze: Any, start: Any) -> dict[Any, int]:
 def dead_end_fills(maze: Any) -> dict[XY, str]:
     """Cores do "42", dos becos reais e dos becos cercados.
 
+    Segue a convenção da parte 5: beco real em laranja, cercado em amarelo.
+
     Args:
         maze: Maze escavado.
 
     Returns:
-        Cinza no "42", amarelo nos becos reais, laranja nos cercados.
+        Cinza no "42", laranja nos becos reais, amarelo nos cercados.
     """
     fills = {cell.as_tuple(): "pattern" for cell in maze.pattern.cells}
     for cell in maze.cells():
         if len(maze.passages(cell)) == 1:
-            fills[cell.as_tuple()] = ("highlight" if maze.closed_sides(cell)
-                                      else "current")
+            fills[cell.as_tuple()] = ("current" if maze.closed_sides(cell)
+                                      else "highlight")
     return fills
 
 
@@ -282,6 +362,32 @@ def carver_images(out: Path, mz: dict[str, Any]) -> None:
                      f'fill="{COLORS["wall"]}"/>')
     save(overlay(maze_svg(grid, cell=size, caption=caption), marks),
          out / "arvore-6x4.svg")
+
+    closed = maze_cls(6, 4, pattern_cls.for_size(6, 4)).rows()
+    opened = len(opened_walls(closed, grid))
+    save(compose([
+        maze_svg(closed, cell=40, fills={(0, 0): "entry"},
+                 caption="antes: as 24 células fechadas"),
+        maze_svg(grid, cell=40, fills={(0, 0): "entry"},
+                 caption=f"depois: {opened} paredes derrubadas"),
+    ], 2), out / "fechado-e-cavado.svg")
+
+    save(compose([
+        stack_svg(["0,0"], "1. append(0,0)"),
+        stack_svg(["0,0", "1,0"], "2. append(1,0)"),
+        stack_svg(["0,0", "1,0", "1,1"], "3. append(1,1)"),
+        stack_svg(["0,0", "1,0"], "4. pop()", popped="1,1"),
+    ], 4), out / "pilha.svg")
+
+    calls = ["descer(2)", "descer(1)", "descer(0)"]
+    save(compose([
+        stack_svg(calls[:1], "entra 2", box_w=110),
+        stack_svg(calls[:2], "entra 1", box_w=110),
+        stack_svg(calls, "entra 0", box_w=110),
+        stack_svg(calls[:2], "sai 0", popped=calls[2], box_w=110),
+        stack_svg(calls[:1], "sai 1", popped=calls[1], box_w=110),
+        stack_svg([], "sai 2", popped=calls[0], box_w=110),
+    ], 3), out / "pilha-de-chamadas.svg")
 
     seed, width, height = 3, 5, 4
     maze = maze_cls(width, height, pattern_cls.for_size(width, height))
@@ -347,7 +453,7 @@ def solver_images(out: Path, mz: dict[str, Any]) -> None:
     fills.update({cell: "pattern" for cell in gen.pattern})
     labels = {cell.as_tuple(): str(d) for cell, d in distance.items()}
     save(maze_svg(gen.grid, cell=48, fills=fills, labels=labels,
-                  caption="distância de cada célula até a entrada (0,0)"),
+                  caption="distância de cada célula até a entrada 0,0"),
          out / "camadas.svg")
     path_fills = {cell: "pattern" for cell in gen.pattern}
     path_fills[(0, 0)] = "entry"
@@ -380,13 +486,64 @@ def solver_images(out: Path, mz: dict[str, Any]) -> None:
                           f"{letters}"),
          out / "pais.svg")
 
+    corridor = [[13, 5, 3], [13, 5, 6]]
+    found = {(1, 0): "E", (2, 0): "E", (2, 1): "S", (1, 1): "W",
+             (0, 1): "W"}
+    save(maze_svg(corridor, cell=64, labels=found,
+                  fills={(0, 0): "entry", (0, 1): "exit"},
+                  path=walk((0, 0), "EESWW"),
+                  caption="da saída para trás: W, W, S, E, E; "
+                          "invertido: EESWW"),
+         out / "pais-3x2.svg")
+
     open_grid = [[9, 1, 3], [12, 4, 6]]
+    open_maze = mz["Maze"](3, 2, mz["Pattern42"].for_size(3, 2))
+    for y, row in enumerate(open_grid):
+        for x, bits in enumerate(row):
+            for side in open_maze.closed_sides(mz["Cell"](x, y)):
+                if not bits & side:
+                    open_maze.open_wall(mz["Cell"](x, y), side)
+    assert open_maze.rows() == open_grid
+    start = mz["Cell"](0, 0)
+    found_at = {start: 0}
+    queue = deque([start])
+    pictures = []
+
+    def bfs_frame(caption: str, taken: Any) -> str:
+        fills = {cell.as_tuple(): "visited" for cell in found_at}
+        fills.update({cell.as_tuple(): "stack" for cell in queue})
+        if taken is not None:
+            fills[taken.as_tuple()] = "current"
+        labels = {cell.as_tuple(): str(d) for cell, d in found_at.items()}
+        grid_svg = maze_svg(open_grid, cell=56, fills=fills, labels=labels,
+                            show_open=True, caption=caption)
+        match = re.search(r'width="([\d.]+)"', grid_svg)
+        assert match is not None
+        line = queue_svg([f"{c.x},{c.y}" for c in queue],
+                         float(match.group(1)))
+        return compose([grid_svg, line], 1, gap=0)
+
+    pictures.append(bfs_frame("início: a entrada na fila", None))
+    goal = mz["Cell"](2, 1)
+    while queue:
+        cell = queue.popleft()
+        if cell == goal:
+            pictures.append(bfs_frame("tira 2,1: é a saída, para", cell))
+            break
+        for side in open_maze.passages(cell):
+            nxt = cell.step(side)
+            if nxt not in found_at:
+                found_at[nxt] = found_at[cell] + 1
+                queue.append(nxt)
+        pictures.append(bfs_frame(f"tira {cell.x},{cell.y} da frente", cell))
+    save(compose(pictures, 4), out / "bfs-passos.svg")
+
     pictures = []
     for route, note in (("EES", "o escolhido"), ("ESE", "mesmo tamanho"),
                         ("SEE", "mesmo tamanho")):
         pictures.append(maze_svg(open_grid, cell=56, path=walk((0, 0), route),
                                  fills={(0, 0): "entry", (2, 1): "exit"},
-                                 caption=f"{route}: {note}"))
+                                 show_open=True, caption=f"{route}: {note}"))
     save(compose(pictures, 3), out / "empate-3x2.svg")
 
 
@@ -403,8 +560,8 @@ def braider_images(out: Path, mz: dict[str, Any]) -> None:
     maze = maze_cls(9, 7, pattern_cls.for_size(9, 7))
     mz["Carver"]().carve(maze, cell_cls(0, 0), random.Random(1))
     save(maze_svg(maze.rows(), cell=48, fills=dead_end_fills(maze),
-                  caption="amarelo: beco real · laranja: beco cercado "
-                          "pela borda e pelo 42"),
+                  caption="laranja: beco real · amarelo: beco cercado "
+                          "pelo 42 · cinza: o 42"),
          out / "becos-9x7.svg")
 
     maze = maze_cls(20, 15, pattern_cls.for_size(20, 15))
@@ -414,17 +571,19 @@ def braider_images(out: Path, mz: dict[str, Any]) -> None:
     dead = maze.dead_ends()
     fills = dead_end_fills(maze)
     left_svg = maze_svg(before, cell=22, wall=3, fills=fills,
-                        caption=f"perfeito: {len(dead)} becos reais")
+                        caption=f"perfeito: {len(dead)} becos reais "
+                                f"(laranja)")
     mz["Braider"]().braid(maze, rng)
     gen = mz["MazeGenerator"](20, 15, seed=42)
     gen.generate()
     assert maze.rows() == gen.grid
     after = maze.rows()
     opened = opened_walls(before, after)
-    caption = (f"Pac-Man: {len(opened)} paredes abertas, "
+    caption = (f"Pac-Man: {len(opened)} paredes abertas (verde), "
                f"{maze.loop_count()} ciclos")
     right_svg = overlay(
-        maze_svg(after, cell=22, wall=3, fills=fills, caption=caption),
+        maze_svg(after, cell=22, wall=3, fills=dead_end_fills(maze),
+                 caption=caption),
         wall_marks(after, 22, caption, opened, "green_wall", 6))
     save(compose([left_svg, right_svg], 2), out / "antes-depois.svg")
 
@@ -452,8 +611,11 @@ def braider_images(out: Path, mz: dict[str, Any]) -> None:
                 if not rows[cell.y][cell.x] & side:
                     probe.open_wall(cell, side)
         loops = probe.loop_count()
-        fills = {cell.as_tuple(): "highlight" for cell in probe.dead_ends()}
-        caption = (f"{name}: {loops} {'ciclo' if loops == 1 else 'ciclos'}, "
+        links = sum(len(probe.passages(cell)) for cell in probe.cells()) // 2
+        count = len(list(probe.cells()))
+        fills = {cell.as_tuple(): "current" for cell in probe.dead_ends()}
+        caption = (f"{name}: {links} − {count} + 1 = {loops} "
+                   f"{'ciclo' if loops == 1 else 'ciclos'}, "
                    f"{len(fills)} becos")
         pictures.append(overlay(
             maze_svg(rows, cell=56, fills=fills, caption=caption),
@@ -482,6 +644,59 @@ def braider_images(out: Path, mz: dict[str, Any]) -> None:
                  caption="3x2 aberto: permitido"),
     ]
     save(compose(pictures, 3), out / "area-3x3.svg")
+
+    closed3 = maze_cls(3, 3, pattern_cls.for_size(3, 3)).rows()
+    caption = "6 paredes Leste (azul) + 6 paredes Sul (laranja) = 12"
+    inner = overlay(
+        maze_svg(closed3, cell=64, caption=caption),
+        wall_marks(closed3, 64, caption,
+                   [((x, y), "E") for y in range(3) for x in range(2)],
+                   "blue_wall", 7)
+        + wall_marks(closed3, 64, caption,
+                     [((x, y), "S") for y in range(2) for x in range(3)],
+                     "current", 7))
+    save(inner, out / "paredes-internas-3x3.svg")
+
+    closed5 = maze_cls(5, 4, pattern_cls.for_size(5, 4)).rows()
+    pictures = []
+    for y0 in range(2):
+        for x0 in range(3):
+            pictures.append(maze_svg(
+                closed5, cell=28, wall=2.5,
+                fills={(x, y): "highlight" for x in range(x0, x0 + 3)
+                       for y in range(y0, y0 + 3)},
+                caption=f"janela no canto {x0},{y0}"))
+    save(compose(pictures, 3), out / "janelas-5x4.svg")
+
+    corridor = [[13, 5, 3], [13, 5, 6]]
+    caption = "beco real: a parede verde pode abrir"
+    real = overlay(
+        maze_svg(corridor, cell=64, fills={(0, 0): "current"},
+                 show_open=True, caption=caption),
+        wall_marks(corridor, 64, caption, [((0, 0), "S")], "green_wall", 8))
+    walled = [[0, 15, 0], [0, 7, 15], [0, 15, 0]]
+    caption = "beco cercado: as paredes vermelhas nunca abrem"
+    fenced = overlay(
+        maze_svg(walled, cell=64, show_open=True,
+                 fills={(1, 0): "pattern", (2, 1): "pattern",
+                        (1, 2): "pattern", (1, 1): "highlight"},
+                 labels={(1, 0): "42", (2, 1): "42", (1, 2): "42"},
+                 caption=caption),
+        wall_marks(walled, 64, caption,
+                   [((1, 0), "S"), ((1, 1), "E"), ((1, 1), "S")], "red", 8))
+    save(compose([real, fenced], 2), out / "real-x-cercado.svg")
+
+    open_grid = [[9, 1, 3], [12, 4, 6]]
+    loops_drawn = (
+        ("ciclo 1", [(0, 0), (1, 0), (1, 1), (0, 1), (0, 0)]),
+        ("ciclo 2", [(1, 0), (2, 0), (2, 1), (1, 1), (1, 0)]),
+        ("a volta inteira = ciclo 1 + ciclo 2",
+         [(0, 0), (1, 0), (2, 0), (2, 1), (1, 1), (0, 1), (0, 0)]),
+    )
+    save(compose([maze_svg(open_grid, cell=64, show_open=True, path=route,
+                           caption=name)
+                  for name, route in loops_drawn], 3),
+         out / "ciclos-independentes.svg")
 
     block = maze_cls(3, 3, pattern_cls.for_size(3, 3))
     for cell in block.cells():
@@ -523,11 +738,14 @@ def generator_images(out: Path, mz: dict[str, Any]) -> None:
     fills = {cell: "pattern" for cell in gen.pattern}
     fills[(0, 0)] = "entry"
     fills[(19, 14)] = "exit"
+    braided_caption = "2. Braider: Pac-Man (verde: paredes abertas)"
     pictures = [
         maze_svg(carved, cell=16, wall=2.5, fills=fills,
                  caption="1. Carver: perfeito"),
-        maze_svg(gen.grid, cell=16, wall=2.5, fills=fills,
-                 caption="2. Braider: Pac-Man"),
+        overlay(maze_svg(gen.grid, cell=16, wall=2.5, fills=fills,
+                         caption=braided_caption),
+                wall_marks(gen.grid, 16, braided_caption,
+                           opened_walls(carved, gen.grid), "green_wall", 4)),
         maze_svg(gen.grid, cell=16, wall=2.5, fills=fills,
                  path=walk((0, 0), gen.solution),
                  caption="3. Solver: solution"),

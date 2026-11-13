@@ -1,38 +1,55 @@
 ---
-sidebar_position: 6
+sidebar_position: 7
 title: A licença MIT
 ---
 
 # A licença MIT
 
-## O que o subject pede
+O gerador vai ser reaproveitado num projeto seguinte, talvez por outras pessoas. Para
+alguém poder usar legalmente um código que não escreveu, o autor precisa dar essa permissão por
+escrito. Esta página explica o que é uma licença de software, o que o enunciado exige dela e por
+que este projeto usa a licença MIT.
 
-O gerador vai ser reaproveitado num projeto seguinte. Por isso o capítulo VI exige um
-`LICENSE.md` na raiz do repositório, com uma licença que **permita explicitamente a reutilização
-e a distribuição** do código.
+## O que é uma licença
 
-Sem licença nenhuma, vale o direito autoral padrão: o código é só do autor, e ninguém (nem um
-colega, nem um projeto futuro) tem permissão de copiá-lo, modificá-lo ou redistribuí-lo.
+Quem escreve um código tem, automaticamente, o **direito autoral** (*copyright*) sobre ele, como o
+autor de um livro. Sem nenhuma autorização escrita, ninguém além do autor pode copiar, modificar
+ou redistribuir esse código, nem um colega, nem um projeto futuro.
+
+Uma **licença** é o texto em que o autor diz o que os outros **podem** fazer com o código e em
+que condições. Existem licenças prontas, de texto padronizado, que qualquer pessoa pode adotar:
+basta copiar o texto para o projeto e pôr o próprio nome.
+
+## O que o enunciado exige
+
+- um arquivo `LICENSE.md` na raiz do repositório, declarando a licença do código;
+- uma licença que **permita explicitamente a reutilização e a distribuição** do gerador pelos
+  projetos que vierem depois.
+
+O enunciado deixa a escolha da licença para o aluno e diz que escolhê-la faz parte da tarefa: é o
+primeiro contato com licenciamento de software.
 
 ## Por que MIT
 
-A licença MIT cabe em três parágrafos e diz exatamente o que o subject pede:
+A escolha da MIT é do projeto. Ela cabe em três parágrafos e diz exatamente o que o enunciado
+pede:
 
 | Trecho da MIT | O que concede ou exige |
 |---|---|
-| "to use, copy, modify, merge, publish, distribute, sublicense, and/or sell" | uso, cópia, modificação e distribuição, com todas as letras |
+| "to use, copy, modify, merge, publish, distribute, sublicense, and/or sell" | usar, copiar, modificar, juntar a outro código, publicar, distribuir e até vender, com todas as letras |
 | "The above copyright notice and this permission notice shall be included" | a única condição: manter o aviso de copyright e o texto da licença nas cópias |
-| "THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND" | o autor não responde por defeitos |
+| "THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND" | o código vem "como está": o autor não responde por defeitos |
 
 As alternativas mais comuns:
 
 | Licença | Por que não |
 |---|---|
 | GPL | é *copyleft*: todo projeto que incorpora o código e é distribuído tem de sair também sob a GPL. Isso impõe uma condição ao projeto seguinte, em vez de só liberar o uso |
-| Apache 2.0 | também permissiva, com cláusulas extras sobre patentes e avisos de mudança; é mais longa e cobre casos que um gerador de labirintos não tem |
-| nenhuma | ninguém pode reutilizar legalmente |
+| Apache 2.0 | também libera o uso, mas tem cláusulas extras sobre patentes e sobre avisar mudanças; é mais longa e cobre casos que um gerador de labirintos não tem |
+| BSD de 3 cláusulas | quase igual à MIT, com uma cláusula a mais (proíbe usar o nome do autor para promover o projeto derivado); a MIT é mais curta |
+| nenhuma | ninguém pode reutilizar legalmente, e o enunciado não é cumprido |
 
-A MIT é a mais curta que cumpre a exigência, e uma das mais usadas em projetos abertos.
+A MIT é a mais curta que cumpre a exigência, e uma das licenças mais usadas em projetos abertos.
 
 ## A linha de copyright
 
@@ -40,25 +57,27 @@ A MIT é a mais curta que cumpre a exigência, e uma das mais usadas em projetos
 Copyright (c) 2026 macoelho
 ```
 
-O ano e o titular dos direitos: o login da intra 42 de quem escreveu o código. Troque `macoelho`
-pelo seu login; com mais de um autor, separe os logins por vírgula. O resto do texto é o da MIT,
-sem nenhuma alteração.
+O ano e o dono dos direitos: aqui, o login (o nome de usuário) de quem escreveu o código. Troque `macoelho` pelo seu login; com mais de um autor, separe os logins por vírgula. O
+resto do texto é o da MIT, sem nenhuma alteração.
 
 ## Como o pacote leva a licença
 
-O `pyproject.toml` (parte 3) declara a licença em duas chaves:
+O `pyproject.toml`, o arquivo de configuração do pacote Python
+([parte 3](../03-ambiente/04-pyproject.md)), declara a licença em duas chaves:
 
 ```toml
 license = "MIT"
 license-files = ["LICENSE.md"]
 ```
 
-- `license = "MIT"` é um identificador padrão (SPDX), gravado nos metadados do pacote como
-  `License-Expression: MIT`;
-- `license-files` aponta o arquivo, que o build copia para dentro do wheel, em
-  `mazegen-1.0.0.dist-info/licenses/LICENSE.md`.
+- `license = "MIT"` usa o identificador padrão da licença. Os nomes de licença seguem uma lista
+  oficial chamada SPDX, para qualquer ferramenta reconhecê-los; o nome vai para os dados do pacote
+  como `License-Expression: MIT`;
+- `license-files` aponta o arquivo com o texto, que o empacotamento copia para dentro do pacote
+  instalável, em `mazegen-1.0.0.dist-info/licenses/LICENSE.md`
+  ([página 10](./09-instalar-o-pacote.md)).
 
-Assim, quem instala o wheel recebe a licença junto, como a própria MIT exige.
+Assim, quem instala o pacote recebe a licença junto, como a própria MIT exige.
 
 ## O arquivo completo
 

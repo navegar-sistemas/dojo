@@ -5,25 +5,56 @@ title: O value object MazeConfig
 
 # O value object `MazeConfig`
 
-A configuração é lida em duas etapas, por duas classes:
+O programa começa recebendo o caminho de um arquivo de configuração. Dali ele precisa tirar
+valores **confiáveis**: uma largura que é um número entre 1 e 100, uma entrada que está dentro
+da grade, e assim por diante. Se algo estiver errado, ele precisa parar com uma mensagem que
+diga exatamente o quê. Esta parte constrói essa leitura; esta página mostra as duas etapas dela
+e o objeto que guarda o resultado.
+
+## Lembrando o arquivo
+
+O arquivo de configuração ([parte 1](../01-o-problema/03-o-arquivo-de-configuracao.md)) tem uma
+opção por linha, no formato `CHAVE=valor`, e linhas começando com `#` são comentários:
+
+```text
+WIDTH=20
+HEIGHT=15
+ENTRY=0,0
+EXIT=19,14
+OUTPUT_FILE=maze.txt
+PERFECT=False
+```
+
+As seis chaves acima são obrigatórias pelo enunciado. `SEED`, a semente do sorteio (mesmo
+número, mesmo labirinto), é opcional e foi acrescentada pelo projeto.
+
+## Duas etapas, duas classes
 
 ```mermaid
 flowchart LR
     file["config.txt"]
     repo["FileConfigRepository.load<br/>abre o arquivo, separa as linhas<br/>em CHAVE → texto"]
-    raw["dict[str, str]<br/>WIDTH → '20', ENTRY → '0,0', ..."]
+    raw["dicionário de textos<br/>WIDTH → '20', ENTRY → '0,0', ..."]
     create["MazeConfig.create<br/>converte e valida"]
     config["MazeConfig<br/>width=20, entry=(0, 0), ..."]
 
     file --> repo --> raw --> create --> config
 ```
 
-- O **repositório** (`amazeing/repositories/config_repository.py`) cuida do arquivo: abrir, ler,
-  pular comentários, separar chave e valor. Ele é a única camada que mexe em arquivo.
-- O **value object** (`amazeing/domain/value_objects/maze_config.py`) cuida das regras: o que é
-  um valor válido. Ele não sabe que existe arquivo; recebe um dicionário de textos.
+- O `FileConfigRepository` (`amazeing/repositories/config_repository.py`) cuida do **arquivo**:
+  abrir, ler, pular comentários, separar chave e valor. Ele devolve um dicionário de textos, como
+  `{"WIDTH": "20", "ENTRY": "0,0", ...}`. É um *repository*, o papel das classes que mexem em
+  arquivo; nenhuma classe fora da camada `repositories` abre arquivos
+  ([parte 2](../02-arquitetura/04-papeis-das-classes.md)). A outra classe dessa camada, o
+  `FileMazeRepository`, grava o arquivo de saída
+  ([parte 12](../12-geracao-e-saida/05-gravando-o-arquivo.md)).
+- O `MazeConfig` (`amazeing/domain/value_objects/maze_config.py`) cuida das **regras**: o que é
+  um valor válido. Ele não sabe que existe arquivo; recebe o dicionário e devolve os valores já
+  convertidos, ou um erro.
 
-O `MazeConfig` é construído primeiro, porque o repositório depende dele.
+Separar as duas coisas deixa cada uma simples: as regras podem ser usadas e experimentadas com
+um dicionário escrito à mão, sem criar arquivo nenhum. O `MazeConfig` vem primeiro nesta parte
+porque o repositório o usa.
 
 ## Os campos
 
@@ -42,95 +73,69 @@ class MazeConfig:
     seed: int | None
 ```
 
-Um campo por chave do config, já no tipo certo: `entry` é a tupla `(x, y)`, não o texto `"0,0"`.
-`seed` é `None` quando o config não tem `SEED`; o `MazeGenerator` entende `None` como "sorteio
-novo a cada execução".
+Um campo por chave do arquivo, já no tipo certo: `entry` é a tupla `(0, 0)`, não o texto
+`"0,0"`; `perfect` é o booleano `False`, não o texto `"False"`.
 
-`MANDATORY_KEYS` lista as chaves obrigatórias **na ordem** em que aparecem nas mensagens. `SEED`
-fica de fora porque é opcional.
+- `int | None` quer dizer "um inteiro **ou** `None`". `seed` é `None` quando o arquivo não tem
+  `SEED`, e o gerador entende `None` como "sorteio diferente a cada execução".
+- `MANDATORY_KEYS` lista as seis chaves obrigatórias na mesma ordem da tabela de opções do
+  enunciado (seção 2 de [O enunciado em linguagem simples](../00-introducao/02-o-enunciado-em-linguagem-simples.md)):
+  `WIDTH`, `HEIGHT`, `ENTRY`, `EXIT`, `OUTPUT_FILE`, `PERFECT`. É também a ordem em que elas
+  aparecem nas mensagens de erro. `SEED` fica de fora porque é opcional.
+
+`@dataclass` é um decorador da biblioteca padrão que escreve sozinho, a partir dos campos
+anotados, o `__init__` (o construtor), o `__repr__` (o texto que o `print` mostra) e o `__eq__`
+(a comparação com `==`). Ele já apareceu na `Cell` ([parte 4](../04-value-objects/04-cell.md)).
+`frozen=True` ("congelado") proíbe mudar um campo depois que o objeto existe: a linha
+`config.width = 0` levanta (lança) a exceção `FrozenInstanceError`. O
+[Experimente da página 6](./08-o-maze-config-completo.md#experimente) mostra isso funcionando,
+depois que o arquivo estiver completo.
 
 ## Por que um value object
 
-`@dataclass(frozen=True)` torna o objeto imutável: depois de criado, nenhum campo muda. Uma vez
-validada, a configuração continua válida até o fim do programa, porque ninguém consegue trocar
-`width` para `0` no meio do caminho.
+Um **value object** é um objeto que é só um valor, como o número 20 ou o texto `"abc"`: não muda
+depois de criado, e dois com o mesmo conteúdo são iguais. A configuração é um valor nesse
+sentido: ela descreve **uma** execução do programa e não tem motivo para mudar no meio dela.
 
-A validação mora num método de fábrica, `create`, e não no `__init__`:
+Ser imutável é o que torna a validação confiável. Uma vez criado e validado, um `MazeConfig`
+continua válido até o fim do programa, porque nenhum código consegue trocar `width` para `0`
+depois. Quem recebe um `MazeConfig` pode usar os valores sem conferir nada de novo.
+
+## A fábrica `create`
+
+A validação não fica no `__init__`, e sim num método separado, `create`:
 
 ```python
 @classmethod
 def create(cls, raw: Mapping[str, str]) -> "MazeConfig":
 ```
 
-- `create` recebe **textos** (`"20"`) e devolve um objeto com **valores** (`20`). O `__init__`
-  gerado pela dataclass recebe os valores já convertidos; misturar as duas coisas num lugar só
-  confundiria os tipos dos campos.
-- `raw` é um `Mapping[str, str]`: qualquer coisa que se lê como dicionário. O repositório passa
-  um `dict`, mas o `MazeConfig` não exige nada além de `raw[chave]` e `chave in raw`.
-- `create` só devolve um `MazeConfig` se **todas** as regras passarem. Caso contrário, levanta
-  `ConfigError`, e o objeto nunca chega a existir.
+- `@classmethod` faz o método ser chamado pela **classe**, não por um objeto:
+  `MazeConfig.create(...)`. O primeiro parâmetro, `cls`, recebe a própria classe `MazeConfig`.
+  Um método assim, que constrói e devolve um objeto novo, se chama **fábrica**.
+- `-> "MazeConfig"` anota o tipo de retorno. O nome vem entre aspas porque, no meio da
+  definição da classe, o nome `MazeConfig` ainda não existe para o Python.
+- `raw` é um `Mapping[str, str]`: qualquer coisa que se leia como um dicionário de textos para
+  textos. O repositório passa um `dict`; o `create` só usa `raw[chave]` e `chave in raw`.
+  A anotação é `Mapping`, e não `dict`, porque `Mapping` só oferece leitura: o `mypy` acusaria
+  qualquer linha do `create` que tentasse alterar o dicionário recebido.
 
-## Por que validar aqui se o gerador também valida
+Por que não validar no `__init__`? O `__init__` que o `@dataclass` escreve recebe os valores
+**já convertidos** (`width=20`). O `create` recebe **textos** (`"20"`), converte, confere todas
+as regras e só no fim chama `cls(...)`, o `__init__`. Se uma regra falha, ele levanta
+`ConfigError` (a exceção de configuração da
+[parte 10](../10-utilitarios/05-a-hierarquia-app-error.md)) e o objeto nunca chega a existir.
+O resultado: **não existe `MazeConfig` inválido**.
 
-O construtor do `MazeGenerator` (parte 9) já confere tamanho, coordenadas, entrada diferente da
-saída, modo Pac-Man e o "42". Validar de novo parece repetição, mas as mensagens são diferentes:
+## O gerador também valida
 
-```bash
-.venv/bin/python -c '
-from mazegen import MazeError, MazeGenerator
+O `MazeGenerator`, a classe do `mazegen` que gera o labirinto
+([parte 9](../09-gerador/02-validar-os-parametros.md)), já confere várias destas regras quando
+é criado. O `MazeConfig` confere de novo para a mensagem citar a **chave do arquivo**, que é o
+que o usuário escreveu. A [página 5](./07-validar-duas-vezes.md) mostra a diferença com
+um exemplo.
 
-try:
-    MazeGenerator(20, 15, entry=(6, 5))
-except MazeError as error:
-    print(error)
-'
-```
-
-```text
-entry (6, 5) lies on the "42" pattern
-```
-
-```bash
-.venv/bin/python -c '
-from amazeing.domain.value_objects.maze_config import MazeConfig
-from amazeing.errors import ConfigError
-
-try:
-    MazeConfig.create({"WIDTH": "20", "HEIGHT": "15", "ENTRY": "6,5",
-                       "EXIT": "19,14", "OUTPUT_FILE": "maze.txt",
-                       "PERFECT": "True"})
-except ConfigError as error:
-    print(error)
-'
-```
-
-```text
-ENTRY=6,5 lies on the "42" pattern
-```
-
-O gerador é uma biblioteca: fala dos **parâmetros** dele, `entry`, em minúsculas. Quem escreve
-o `config.txt` nunca viu esse parâmetro; viu a linha `ENTRY=6,5`. Validando antes de criar o
-gerador, a mensagem cita a chave como está no arquivo, em maiúsculas, e com o valor escrito do
-mesmo jeito (`6,5`, não `(6, 5)`).
-
-A validação do gerador continua lá: ele é reutilizável, e outro programa pode chamá-lo sem passar
-por config nenhum. Na aplicação, ela nunca dispara, porque o `MazeConfig` barra antes.
-
-## Os imports
-
-```python
-from collections.abc import Callable, Mapping
-from dataclasses import dataclass
-from typing import TypeVar
-
-from amazeing.errors import ConfigError
-from amazeing.utils.value_parser import ValueParser
-from mazegen.generator import MAX_SIZE, MIN_SIZE
-from mazegen.value_objects.cell import Cell
-from mazegen.value_objects.pattern42 import Pattern42
-```
-
-O domínio pode importar `utils`, `errors` e `mazegen`. `MIN_SIZE` e `MAX_SIZE` vêm do gerador:
-os limites 1 e 100 são escritos num lugar só, e o config nunca diverge do gerador. `Cell` e
-`Pattern42` vêm pelo caminho interno do `mazegen`, porque o `__init__` do pacote só exporta
-`MazeGenerator` e `MazeError`.
+As próximas páginas constroem o `create`: converter cada texto
+([página 2](./02-convertendo-um-valor.md)) e conferir as regras numa ordem fixa
+([páginas 3 e 4](./03-a-ordem-das-validacoes.md)). O arquivo completo e os exemplos para rodar
+estão na [página 6](./08-o-maze-config-completo.md).

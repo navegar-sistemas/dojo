@@ -1,38 +1,70 @@
 ---
-sidebar_position: 3
-title: "Makefile: limpar, verificar e empacotar"
+sidebar_position: 4
+title: "Makefile: verificar o código"
 ---
 
-# Makefile: limpar, verificar e empacotar
+# Makefile: verificar o código
 
-## `clean`
+O enunciado exige que o código siga o padrão do flake8 e passe no mypy sem erros, duas
+ferramentas de verificação. Esta página explica o que cada uma confere e escreve as duas regras
+do `Makefile` que as rodam: `lint`, com as opções que o enunciado fixa, e `lint-strict`, a versão
+mais rigorosa. Como na [página anterior](./02-makefile-instalar-e-rodar.md), cada trecho entra no
+fim do `Makefile`.
 
-```makefile
-clean:
-	find . -path ./$(VENV) -prune -o -type d -name __pycache__ -exec rm -rf {} +
-	rm -rf .mypy_cache build dist *.egg-info
+## `lint`: o que o flake8 e o mypy fazem
+
+**Lint** é o nome que se dá a verificar o código sem executá-lo, à procura de erros e de desvios
+do padrão.
+
+O **flake8** confere o **estilo**, segundo a PEP 8, o guia de estilo oficial do Python (linhas
+de até 79 caracteres, espaços em volta de operadores, duas linhas em branco entre funções...).
+Ele também acusa erros simples, como um `import` que não é usado. Um exemplo, só para ver a
+saída (não precisa criar o arquivo), num `estilo.py` com um `import os` que nunca é usado e um
+`=` sem espaços em volta:
+
+```python
+import os
+
+
+def area(largura: int, altura: int) -> int:
+    resultado=largura * altura
+    return resultado
 ```
 
-O Python grava o bytecode de cada módulo numa pasta `__pycache__` **ao lado do módulo**. O
-projeto tem pacotes dentro de pacotes, então há um `__pycache__` em `mazegen/`, outro em
-`mazegen/entities/`, outro em `amazeing/domain/entities/`, e assim por diante. Um
-`rm -rf __pycache__` apagaria só o da raiz.
+`flake8 estilo.py` responde:
 
-O `find` percorre a árvore inteira:
+```text
+estilo.py:1:1: F401 'os' imported but unused
+estilo.py:5:14: E225 missing whitespace around operator
+```
 
-| Pedaço | Significado |
-|---|---|
-| `find .` | a partir da raiz do projeto |
-| `-path ./.venv -prune` | não entra no `.venv`: o ambiente virtual fica intacto |
-| `-o` | "senão", para tudo o que não é o `.venv` |
-| `-type d -name __pycache__` | pastas chamadas `__pycache__` |
-| `-exec rm -rf {} +` | apaga as pastas encontradas, várias por chamada do `rm` |
+Cada linha diz o arquivo, a linha, a coluna, o código do problema e a explicação.
 
-A segunda linha apaga o cache do mypy e o que o empacotamento deixa: `build/`, `dist/` e
-`mazegen.egg-info/`. Ficam o `.venv` e os arquivos de entrega da raiz, inclusive o `.whl` e o
-`.tar.gz`.
+O **mypy** confere as **anotações de tipo**: o `: int` de um parâmetro e o `-> int` do retorno de
+uma função. O Python ignora essas anotações na hora de rodar; o mypy as lê e acusa quando o
+código as contradiz. Outro exemplo, num `exemplo.py` com uma função anotada `-> int` que devolve
+um texto (`str`), e outra função sem anotação nenhuma:
 
-## `lint`
+```python
+def dobro(numero: int) -> int:
+    return str(numero * 2)
+
+
+def metade(numero):
+    return numero // 2
+```
+
+Com as opções da regra `lint` (logo abaixo), o mypy responde:
+
+```text
+exemplo.py:2: error: Incompatible return value type (got "str", expected "int")  [return-value]
+exemplo.py:5: error: Function is missing a type annotation  [no-untyped-def]
+Found 2 errors in 1 file (checked 1 source file)
+```
+
+## `lint`: a regra
+
+O enunciado fixa os dois comandos, com estas opções exatas:
 
 ```makefile
 MYPY_FLAGS = --warn-return-any --warn-unused-ignores --ignore-missing-imports \
@@ -45,19 +77,24 @@ lint:
 	$(PY) -m mypy . $(MYPY_FLAGS)
 ```
 
-São os dois comandos do subject, com as flags exatas. As flags ficam numa variável porque a
-linha não caberia no editor; a `\` no fim da primeira linha continua a variável na linha de
-baixo. Na hora de rodar, o `make` monta tudo numa linha só.
+O `.` quer dizer "a pasta atual e tudo dentro dela". As opções ficam numa variável só porque a
+linha não caberia na tela: a `\` no fim da primeira linha continua a variável na linha de baixo,
+e na hora de rodar o `make` junta tudo numa linha só.
 
-| Flag | Efeito |
+| Opção do mypy | Efeito |
 |---|---|
-| `--warn-return-any` | acusa função com tipo de retorno declarado que devolve um valor `Any` |
-| `--warn-unused-ignores` | acusa um `# type: ignore` que não ignora nada |
-| `--ignore-missing-imports` | não acusa biblioteca de terceiros sem anotações de tipo |
-| `--disallow-untyped-defs` | acusa função ou método sem anotação de tipo |
-| `--check-untyped-defs` | confere também o corpo de funções sem anotação |
+| `--warn-return-any` | acusa uma função com tipo de retorno declarado que devolve um valor de tipo `Any` ("qualquer coisa", sem tipo conhecido) |
+| `--warn-unused-ignores` | acusa um `# type: ignore` (o comentário que manda o mypy pular uma linha) que não está pulando erro nenhum |
+| `--ignore-missing-imports` | não acusa bibliotecas de terceiros que não têm anotações de tipo |
+| `--disallow-untyped-defs` | acusa toda função ou método sem anotação de tipo |
+| `--check-untyped-defs` | confere também o corpo das funções sem anotação |
 
-`flake8 .` confere o estilo (PEP 8) de todo o projeto; o que fica de fora está no `.flake8`.
+As duas últimas parecem repetidas: se toda função precisa ter anotação, não sobra função sem
+anotação para conferir. O projeto usa as duas porque o enunciado fixa a linha do `mypy` com as
+cinco opções, palavra por palavra.
+
+O `flake8 .` confere todos os arquivos `.py` do projeto; as pastas que ele deve pular ficam no
+arquivo `.flake8` ([explicado adiante](./05-flake8-e-gitignore.md)).
 
 ## `lint-strict`
 
@@ -67,27 +104,13 @@ lint-strict:
 	$(PY) -m mypy . --strict
 ```
 
-`--strict` liga quase todas as verificações do mypy, entre elas as do `lint`. O subject a deixa
-opcional e "fortemente recomendada". O projeto passa nas duas regras, sem nenhum
-`# type: ignore` nem `# noqa`.
+`--strict` liga quase todas as verificações do mypy, inclusive quatro das cinco do `lint`; só
+`--ignore-missing-imports` fica de fora, e o projeto não precisa dela, porque não usa biblioteca
+de terceiros. O enunciado deixa a regra `lint-strict` opcional, mas "fortemente recomendada".
 
-## `build`
-
-```makefile
-build:
-	rm -rf dist
-	$(PY) -m build
-	cp dist/mazegen-*.whl dist/mazegen-*.tar.gz .
-```
-
-1. Apaga o `dist/` antigo, para o `cp` copiar só a versão atual.
-2. `python -m build` lê o `pyproject.toml` e gera, em `dist/`, o código-fonte empacotado
-   (`mazegen-1.0.0.tar.gz`) e o wheel (`mazegen-1.0.0-py3-none-any.whl`).
-3. Copia os dois para a raiz, porque o subject exige o arquivo do pacote na raiz do
-   repositório.
-
-O build exige o `README.md` e o `LICENSE.md`, que o `pyproject.toml` cita, e o gerador
-completo. Por isso o `make build` só roda a partir da parte 9, quando o pacote fica pronto.
+O projeto passa nas duas regras sem nenhum `# type: ignore` nem `# noqa` (o comentário que manda
+o flake8 pular uma linha). Isso é uma escolha: calar a ferramenta numa linha esconderia o
+problema em vez de resolvê-lo.
 
 ## Experimente
 
@@ -102,45 +125,9 @@ make -n lint lint-strict
 .venv/bin/python -m mypy . --strict
 ```
 
-## O arquivo completo
+A segunda linha é o comando do enunciado, palavra por palavra, só que com o Python do `.venv`.
 
-As linhas de comando começam com TAB. Ao copiar, confira se o editor não as trocou por
-espaços.
+Faltam duas regras, `clean`, que apaga os arquivos que as ferramentas criam sozinhas, e
+`build`, que monta o pacote do gerador. As duas e o `Makefile` completo estão na
+[próxima página](./09-makefile-empacotar.md).
 
-```makefile title="Makefile"
-VENV = .venv
-PY = $(VENV)/bin/python
-
-MYPY_FLAGS = --warn-return-any --warn-unused-ignores --ignore-missing-imports \
-	--disallow-untyped-defs --check-untyped-defs
-
-.PHONY: install run debug clean lint lint-strict build
-
-install:
-	python3 -m venv $(VENV)
-	$(PY) -m pip install --quiet --no-cache-dir --upgrade pip
-	$(PY) -m pip install --quiet flake8==7.4.1 mypy==2.4.1 build==1.6.1
-
-run:
-	$(PY) a_maze_ing.py config.txt
-
-debug:
-	$(PY) -m pdb a_maze_ing.py config.txt
-
-clean:
-	find . -path ./$(VENV) -prune -o -type d -name __pycache__ -exec rm -rf {} +
-	rm -rf .mypy_cache build dist *.egg-info
-
-lint:
-	$(PY) -m flake8 .
-	$(PY) -m mypy . $(MYPY_FLAGS)
-
-lint-strict:
-	$(PY) -m flake8 .
-	$(PY) -m mypy . --strict
-
-build:
-	rm -rf dist
-	$(PY) -m build
-	cp dist/mazegen-*.whl dist/mazegen-*.tar.gz .
-```

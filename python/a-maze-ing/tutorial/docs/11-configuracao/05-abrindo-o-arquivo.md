@@ -1,20 +1,27 @@
 ---
-sidebar_position: 5
+sidebar_position: 7
 title: Abrindo o arquivo de configuração
 ---
 
 # Abrindo o arquivo de configuração
 
-O `FileConfigRepository` (`amazeing/repositories/config_repository.py`) tem um único método,
-`load(path)`, que recebe o caminho digitado na linha de comando e devolve um `MazeConfig`. Ele
-trabalha em três passos:
+O programa recebe na linha de comando o caminho do arquivo de configuração (o `config.txt` de
+`python3 a_maze_ing.py config.txt`) e precisa ler as linhas dele. O arquivo pode ter sido salvo
+por qualquer editor, no Linux, no macOS ou no Windows, e cada um grava o texto de um jeito um
+pouco diferente. Esta página abre o arquivo e lê as linhas de modo que todos esses jeitos
+funcionem.
 
-1. abrir o arquivo e ler as linhas;
-2. separar cada linha em chave e valor;
-3. entregar o dicionário ao `MazeConfig.create`.
+## O `FileConfigRepository`
 
-O primeiro é o que pode falhar por motivos do sistema: arquivo que não existe, pasta no lugar de
-arquivo, falta de permissão, bytes que não são texto.
+Quem lê o arquivo é o `FileConfigRepository` (`amazeing/repositories/config_repository.py`),
+a única classe que abre o arquivo de configuração
+([página 1](./01-o-value-object-maze-config.md)). O único método dele, `load(path)`, recebe o
+caminho digitado e devolve um `MazeConfig`, em três passos:
+
+1. abrir o arquivo e ler as linhas (esta página), transformando cada falha numa mensagem
+   ([próxima página](./10-as-falhas-da-leitura.md));
+2. separar cada linha em chave e valor ([página 9](./06-linha-a-linha.md));
+3. entregar o dicionário ao `MazeConfig.create`, que converte e valida.
 
 ## Abrir e ler
 
@@ -23,27 +30,36 @@ with open(path, encoding="utf-8-sig") as file:
     lines = file.readlines()
 ```
 
-- `with` fecha o arquivo ao sair do bloco, mesmo se der erro no meio.
-- `encoding` sempre explícito: sem ele, o Python usa a codificação padrão da máquina, que muda de
-  um sistema para outro.
-- `readlines()` devolve a lista das linhas, cada uma ainda com o seu `\n` no fim.
-- O modo texto do Python reconhece `\n`, `\r\n` (Windows) e `\r` como fim de linha, e entrega
-  todas como `\n`. Um config salvo no Windows funciona sem tratamento nenhum.
+- `with open(...) as file` abre o arquivo e o fecha sozinho ao sair do bloco, mesmo que dê erro
+  no meio. O enunciado pede `with` para arquivos.
+- `readlines()` devolve a lista das linhas, cada uma ainda com a quebra de linha `\n` no fim.
 
-### `utf-8-sig` e o BOM
+### O `encoding`
 
-Alguns editores, como o Bloco de Notas do Windows, gravam no início do arquivo um caractere
-invisível, o **BOM** (*byte order mark*, `U+FEFF`). Lido com `utf-8` puro, ele vira parte da
-primeira linha:
+Um arquivo guarda **bytes**, números de 0 a 255. A **codificação** (*encoding*) é a tabela que
+diz que bytes formam cada letra. Letras sem acento têm o mesmo byte em quase todas as tabelas,
+mas as acentuadas, não: o `é` é um byte (`e9`) no Latin-1, uma tabela antiga, e dois bytes
+(`c3 a9`) no **UTF-8**, a tabela mais usada hoje. Lido com a tabela errada, `café` vira `cafÃ©`.
+
+Sem `encoding`, o Python usa a tabela padrão do computador, que muda de um sistema para outro.
+Por isso o projeto sempre diz qual é: UTF-8, numa variante chamada `utf-8-sig`.
+
+### O BOM e o `utf-8-sig`
+
+Alguns editores de texto, como o Bloco de Notas de versões antigas do Windows, gravam no início
+do arquivo um caractere invisível, o **BOM** (*byte order mark*, "marca de ordem dos bytes"):
+três bytes que dizem "este arquivo é UTF-8". Lido com `utf-8` comum, ele vira parte da primeira
+linha:
 
 ```bash
-printf '\xef\xbb\xbf# Width\nWIDTH=20\n' > bom.txt
+printf '\xef\xbb\xbf# Width\nWIDTH=20\n' > exemplo_bom.txt
 .venv/bin/python -c '
-with open("bom.txt", encoding="utf-8") as f:
+with open("exemplo_bom.txt", encoding="utf-8") as f:
     print(f.readlines())
-with open("bom.txt", encoding="utf-8-sig") as f:
+with open("exemplo_bom.txt", encoding="utf-8-sig") as f:
     print(f.readlines())
 '
+rm exemplo_bom.txt
 ```
 
 ```text
@@ -51,69 +67,29 @@ with open("bom.txt", encoding="utf-8-sig") as f:
 ['# Width\n', 'WIDTH=20\n']
 ```
 
-Com `utf-8`, a primeira linha começa com `\ufeff` e não com `#`: deixa de ser comentário e vira
-erro de sintaxe. Se a primeira linha fosse `WIDTH=20`, a chave seria `\ufeffWIDTH`, desconhecida,
-e o programa reclamaria que falta `WIDTH`, com a linha `WIDTH=20` bem à vista. O `strip()` não
-ajuda: para o Python, o BOM não é espaço.
+(O `printf` grava os bytes do BOM, `ef bb bf`, seguidos de duas linhas; o `rm` apaga o arquivo
+no fim. No Python, o BOM aparece como `\ufeff`.)
 
-`utf-8-sig` é o UTF-8 que descarta um BOM no início, se houver. Sem BOM, lê igual ao `utf-8`.
+Com `utf-8`, a primeira linha começa com `\ufeff`, e não com `#`: deixa de ser comentário e vira
+um erro de sintaxe. Se a primeira linha fosse `WIDTH=20`, a chave lida seria `\ufeffWIDTH`, e o
+programa diria que falta `WIDTH`, com a linha `WIDTH=20` bem à vista no arquivo. Tirar espaços
+não adianta: para o Python, o BOM não é espaço.
 
-## Os erros do sistema viram `ConfigError`
+`utf-8-sig` é o UTF-8 que descarta um BOM no começo, se houver. Sem BOM, lê igual ao `utf-8`.
+Aceitar o BOM é escolha do projeto, para um arquivo salvo no Windows funcionar.
 
-```python
-try:
-    # utf-8-sig drops a leading BOM; text mode turns \r\n and \r
-    # into line ends.
-    with open(path, encoding="utf-8-sig") as file:
-        lines = file.readlines()
-except FileNotFoundError:
-    raise ConfigError(
-        f"configuration file not found: {path}") from None
-except UnicodeDecodeError:
-    raise ConfigError(
-        f"configuration file is not valid UTF-8: {path}") from None
-except OSError as error:
-    raise ConfigError(f"cannot read configuration file {path}: "
-                      f"{error.strerror}") from None
-```
+### Fins de linha do Windows
 
-| Exceção | Quando | Mensagem |
-|---|---|---|
-| `FileNotFoundError` | o arquivo não existe | `configuration file not found: nao_existe.txt` |
-| `UnicodeDecodeError` | bytes que não formam UTF-8 (um arquivo em Latin-1, por exemplo) | `configuration file is not valid UTF-8: latin1.txt` |
-| `OSError` | qualquer outra falha do sistema: é uma pasta, falta permissão... | `cannot read configuration file pasta: Is a directory` |
-
-### O `try` em volta do `with` inteiro
-
-O `UnicodeDecodeError` não acontece no `open`, e sim no `readlines()`, quando o Python tenta
-decodificar os bytes. Por isso o `try` cobre a leitura também, não só a abertura.
-
-### A ordem dos `except`
-
-O Python testa os `except` de cima para baixo e usa o primeiro que serve. `FileNotFoundError` é
-uma subclasse de `OSError`: se `OSError` viesse antes, ele capturaria o arquivo inexistente e a
-mensagem específica nunca apareceria. Do mais específico para o mais geral.
-
-`UnicodeDecodeError` não é `OSError` (é um `ValueError`); a posição dele não muda nada, e fica
-antes do `OSError` só para a leitura seguir do caso mais específico para o mais geral.
-
-### `strerror` em vez de `str(error)`
+No Windows, o fim de uma linha é gravado com dois caracteres, `\r\n`; no Linux e no macOS, só
+com `\n`. Ao ler em **modo texto** (o modo padrão do `open`), o Python reconhece `\n`, `\r\n` e
+`\r` e entrega todos como `\n`:
 
 ```text
-str(error)      → [Errno 21] Is a directory: 'pasta'
-error.strerror  → Is a directory
+bytes no disco:   WIDTH=20\r\nHEIGHT=15\r\n
+readlines():      ['WIDTH=20\n', 'HEIGHT=15\n']
 ```
 
-`str(error)` traz o número do erro e repete o caminho, que a mensagem já cita. `strerror` é só a
-frase do sistema operacional.
+Um arquivo salvo no Windows funciona sem tratamento nenhum.
 
-### Por que converter
-
-O `main` captura `AppError` e `MazeError` e imprime `Error: <mensagem>`. Um `OSError` que
-escapasse cairia no `except Exception` de último recurso, como "erro inesperado". Converter aqui,
-na única camada que mexe em arquivo, mantém a promessa: todo problema do usuário sai como uma
-linha clara. O `from None` descarta a exceção original, cujo conteúdo a nova mensagem já
-resume.
-
-O `path` vai na mensagem exatamente como o usuário digitou (`config.txt`, `../outro.cfg`), para
-ele reconhecer o arquivo de que se fala.
+Abrir e ler pode falhar de vários jeitos. A [próxima página](./10-as-falhas-da-leitura.md)
+transforma cada falha numa mensagem.

@@ -18,7 +18,8 @@ python3 a_maze_ing.py config.txt
 ```
 
 Qualquer erro (arquivo que não existe, opção inválida, labirinto impossível) precisa terminar
-com uma **mensagem clara**, nunca com o programa quebrando e mostrando um *traceback* do Python.
+com uma **mensagem clara**, nunca com o programa quebrando e mostrando um *traceback* do Python
+(a listagem de linhas de código que o Python imprime quando um erro não é tratado).
 Construído na [parte 14](../14-menu-e-main/05-a-barreira-de-erros.md).
 
 ## 2. O arquivo de opções
@@ -65,7 +66,11 @@ As regras:
 - **Um "42" visível**, desenhado por células com as quatro paredes fechadas. Se o labirinto
   for pequeno demais para caber o "42", ele é gerado sem o desenho e o programa avisa.
 
-Explicado na [parte 1](../01-o-problema/01-a-grade-e-as-celulas.md).
+Explicado na parte 1: a grade, as paredes e a coerência em
+[A grade e as células](../01-o-problema/01-a-grade-e-as-celulas.md), a semente em
+[O arquivo de configuração](../01-o-problema/03-o-arquivo-de-configuracao.md), os salões em
+[Sem salões e o braiding](../01-o-problema/09-sem-saloes-e-o-braiding.md) e o "42" em
+[O padrão "42"](../01-o-problema/06-o-padrao-42.md).
 
 ## 4. Dois tipos de labirinto
 
@@ -74,13 +79,26 @@ A opção `PERFECT` escolhe o tipo:
 - `PERFECT=True`: **labirinto perfeito**. Existe exatamente **um** caminho entre a entrada e a
   saída; o labirinto não tem nenhum ciclo (nenhum jeito de andar em círculo e voltar ao mesmo
   lugar).
-- `PERFECT=False` (o padrão): **tabuleiro de Pac-Man**, o jogo em que um personagem foge de
-  fantasmas por corredores. Para ser jogável:
+- `PERFECT=False`: **tabuleiro de Pac-Man**, o jogo em que um personagem foge de fantasmas por
+  corredores. Para ser jogável:
   - todo corredor é alcançável;
-  - os quatro cantos e o centro são corredores (é onde os fantasmas e o jogador começam);
+  - os quatro cantos e o centro são corredores, isto é, células livres do labirinto, que dá para
+    alcançar andando. O motivo vem do próprio enunciado: os fantasmas e as *super-pac-gums* (as
+    pastilhas especiais do jogo) ficam nos cantos, e o jogador começa no centro;
   - há pelo menos **duas rotas independentes** (dois ciclos), para quem foge sempre ter outra
     saída;
   - **becos sem saída** (células com uma só abertura) são raros: no máximo um ou dois.
+
+O enunciado chama o modo Pac-Man de **"o padrão"** (*default*, em inglês). No arquivo de opções
+isso não dispensa a chave: `PERFECT` continua obrigatória, e o `config.txt` do projeto traz
+`PERFECT=False`. Na classe que gera o labirinto (`MazeGenerator`, da
+[parte 9](../09-gerador/10-construtor-e-atributos.md)), "padrão" vale ao pé da letra: quem não informa o
+parâmetro `perfect` recebe `perfect=False`.
+
+O "42" fica no meio da grade, mas isso não tira o centro do labirinto: o desenho deixa uma
+coluna livre entre o "4" e o "2", e o centro da grade cai sempre nela. Numa grade de 20 colunas
+por 15 linhas, contando de 0, o meio fica na linha 7, entre as colunas 9 e 10; a célula da
+coluna 9 é livre, entre os dois dígitos.
 
 Explicado na [parte 1](../01-o-problema/05-perfeito-e-pac-man.md).
 
@@ -111,19 +129,24 @@ Este projeto desenha no terminal. Explicado na
 ## 7. O gerador reutilizável
 
 A geração do labirinto fica numa **única classe** (aqui, `MazeGenerator`), dentro de um módulo
-que outro projeto consegue importar. Esse módulo é distribuído como um **pacote Python**: um
-único arquivo, chamado `mazegen-...`, que se instala com `pip install`. O repositório precisa
-ter tudo para reconstruir esse pacote, e a documentação de uso vai junto. Construído na
+que outro projeto consegue importar. Esse módulo, com a documentação de uso, é distribuído como
+um **pacote Python**: um arquivo instalável com `pip install`, cujo nome começa com `mazegen-`
+(por exemplo, `mazegen-1.0.0-py3-none-any.whl`), guardado na raiz do repositório. O enunciado
+aceita dois formatos para esse arquivo, `.whl` ou `.tar.gz`; este projeto entrega os dois. O
+repositório também precisa ter tudo o que é necessário para reconstruir o pacote. Construído na
 [parte 9](../09-gerador/01-a-fachada.md).
 
 ## 8. Qualidade de código
 
 - Python 3.10 ou mais novo.
-- O código segue o padrão de estilo **flake8** e passa no verificador de tipos **mypy**: toda
-  função tem anotações de tipo.
+- O código passa no **flake8**, a ferramenta que confere o estilo (tamanho das linhas, espaços,
+  imports sem uso), e no **mypy**, a ferramenta que confere os tipos. Para isso, toda função tem
+  anotações de tipo, como em `def soma(a: int, b: int) -> int:`.
 - Toda função e classe tem uma **docstring** (o texto entre `"""` que documenta o que ela faz).
 - Erros são tratados com `try`/`except`, e arquivos são abertos com `with`.
-- Um `Makefile` com os atalhos `install`, `run`, `debug`, `clean`, `lint` e `lint-strict`.
+- Um `Makefile` (um arquivo de atalhos de comandos) com os atalhos obrigatórios `install`,
+  `run`, `debug`, `clean` e `lint`, e o opcional `lint-strict`, que o enunciado recomenda
+  fortemente e este projeto inclui.
 
 Construído na [parte 3](../03-ambiente/01-o-ambiente-virtual.md).
 
@@ -135,7 +158,8 @@ Construído na [parte 3](../03-ambiente/01-o-ambiente-virtual.md).
   [parte 15](../15-fechamento/01-o-que-o-readme-precisa-ter.md).
 - `LICENSE.md`: a licença que permite a outros projetos reutilizarem o gerador. Construído na
   [parte 9](../09-gerador/06-a-licenca.md).
-- `.gitignore`: a lista de arquivos gerados que não entram no repositório.
+- `.gitignore`: a lista de arquivos gerados que não entram no repositório. Construído na
+  [parte 3](../03-ambiente/05-flake8-e-gitignore.md).
 
 ## 10. Bônus
 

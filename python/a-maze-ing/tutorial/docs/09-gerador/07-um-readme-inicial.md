@@ -1,13 +1,23 @@
 ---
-sidebar_position: 7
+sidebar_position: 8
 title: Um README inicial
 ---
 
 # Um README inicial
 
-## O build lê o README e a licença
+O próximo passo é empacotar o `mazegen` ([página 9](./08-o-pacote.md)), e o empacotamento lê dois
+arquivos da raiz do repositório: o `README.md` e o `LICENSE.md`. Se um deles faltar, o pacote sai
+incompleto. A licença foi escrita na [página 7](./06-a-licenca.md); esta página escreve um
+`README.md` inicial, só com o que o pacote e a documentação do módulo já precisam. O README
+completo vem na [parte 15](../15-fechamento/01-o-que-o-readme-precisa-ter.md), com o programa
+pronto.
 
-O `pyproject.toml` da parte 3 aponta dois arquivos da raiz:
+## O empacotamento lê o README e a licença
+
+O `README.md` ("leia-me") é o texto de apresentação de um repositório, escrito em **Markdown**
+(texto comum com marcações simples, como `#` para título e `*texto*` para itálico). O
+`pyproject.toml`, o arquivo que descreve o pacote ([parte 3](../03-ambiente/04-pyproject.md)),
+aponta os dois arquivos:
 
 ```toml
 readme = "README.md"
@@ -16,29 +26,34 @@ license = "MIT"
 license-files = ["LICENSE.md"]
 ```
 
-- `readme`: o texto do `README.md` vira a **descrição longa** do pacote, gravada nos metadados
-  (`METADATA` no wheel, `PKG-INFO` no sdist). É o texto que um índice de pacotes mostra na
-  página do projeto.
-- `license-files`: o `LICENSE.md` é copiado para dentro do wheel.
+- `readme`: o texto do `README.md` vira a **descrição longa** do pacote. O empacotamento gera dois
+  arquivos instaláveis com `pip`: o **wheel** (`.whl`), pronto para instalar, e o **sdist**
+  (`.tar.gz`), com os fontes ([página 9](./08-o-pacote.md)). Cada um leva dentro um arquivo de
+  texto com os dados do pacote (nome, versão, licença, descrição): o `METADATA`, no wheel, e o
+  `PKG-INFO`, no sdist. A descrição longa vai nesses arquivos. É o texto que um índice de
+  pacotes, como o site PyPI, de onde o `pip` baixa pacotes, mostra na página do projeto.
+- `license-files`: o `LICENSE.md` é copiado para dentro do pacote.
 
-Se um deles não existe, o build ainda termina, mas com avisos e um pacote incompleto:
+Se um deles não existe, o empacotamento ainda termina, mas imprime avisos e gera um pacote
+incompleto:
 
-| Arquivo ausente | O que o build imprime | O que falta no pacote |
+| Arquivo ausente | O que o empacotamento imprime | O que falta no pacote |
 |---|---|---|
 | `README.md` | `WARNING File '.../README.md' cannot be found` | a descrição longa |
 | `LICENSE.md` | `Pattern 'LICENSE.md' did not match any files.` | a licença |
 
-O projeto exige um build sem nenhum aviso. Por isso os dois arquivos têm de existir **antes** do
-primeiro `make build`, na próxima página.
+Este projeto trata aviso como erro: o empacotamento tem de terminar sem nenhum. Por isso os dois
+arquivos precisam existir **antes** do primeiro `make build`.
 
 ## O que o README já precisa ter
 
-O README completo, com todas as seções que o capítulo VII do subject pede, é escrito na parte 15,
-quando o programa estiver pronto. Por enquanto bastam duas coisas:
+Por enquanto, duas coisas:
 
-1. a **primeira linha** exigida pelo subject, em itálico, com o seu login da intra 42;
-2. a **documentação do módulo**, que o capítulo VI manda repetir no `README.md`. É o mesmo texto
-   da docstring de `mazegen/__init__.py`, com o exemplo num bloco de código Python.
+1. a **primeira linha** que o enunciado exige, em itálico (entre `*`), com a frase fixa que ele dá e,
+   no fim, quem fez o projeto: o seu login (o seu nome de usuário);
+2. a **documentação do módulo**, que o enunciado manda pôr também no `README.md`. É o mesmo texto
+   da docstring de `mazegen/__init__.py` ([página 6](./05-documentacao-do-modulo.md)), com o
+   exemplo num bloco de código Python.
 
 Um README inicial com só isso (troque `macoelho` pelo seu login):
 
@@ -50,8 +65,7 @@ Um README inicial com só isso (troque `macoelho` pelo seu login):
 ## Reusable module
 
 The reusable part of the project is the `mazegen` package; it is the only
-code that goes into the wheel. Install it with
-`pip install mazegen-1.0.0-py3-none-any.whl`.
+code that goes into the wheel.
 
 Generate random mazes with a "42" drawn by fully closed cells.
 
@@ -111,8 +125,12 @@ print(gen.solution)
 ```
 ````
 
-- O README é em inglês, como todo o resto do projeto entregue.
-- No README, o exemplo sai da indentação e vai para um bloco de código marcado como `python`,
-  que o GitHub colore. O texto em volta é o da docstring, sem mudança: quem lê um ou outro encontra a mesma
-  documentação.
-- Ao mudar a API do `MazeGenerator`, os dois lugares mudam juntos.
+- O README é em inglês, como todo o resto do projeto entregue (escolha do projeto).
+- A seção `## Reusable module` ("módulo reutilizável") tem duas partes. O primeiro parágrafo é do
+  README: diz, a quem chega pelo repositório, que o pacote `mazegen` é a parte reutilizável.
+  Daí em diante, o texto é o da docstring, sem mudança, a partir de "Generate random mazes...",
+  inclusive o comando `pip install`: quem lê um ou outro encontra a mesma documentação.
+- A única diferença entre a docstring e o README é o exemplo: na docstring ele é texto recuado
+  com 4 espaços; no README ele vai para um bloco de código marcado como `python`, que o GitHub
+  mostra colorido.
+- Ao mudar os parâmetros ou os atributos do `MazeGenerator`, os dois lugares mudam juntos.

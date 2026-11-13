@@ -1,12 +1,31 @@
 ---
 sidebar_position: 1
-title: O laço do menu
+title: O menu e os seus textos
 ---
 
-# O laço do menu
+# O menu e os seus textos
 
-`Menu` é a interface do programa: desenha o labirinto, mostra as opções, lê a escolha e reage,
-até o usuário sair. Junto com o `main`, é o único lugar do projeto que usa `print` e `input`.
+Depois de desenhar o labirinto, o programa não pode simplesmente terminar. O enunciado exige que,
+**com o programa rodando**, o usuário consiga gerar outro labirinto, mostrar ou esconder o
+caminho mais curto e trocar a cor das paredes. O programa precisa repetir sempre o mesmo ciclo:
+desenhar, perguntar o que o usuário quer, reagir, e voltar a desenhar, até o usuário pedir para
+sair. A classe `Menu` (`amazeing/ui/menu.py`) faz esse ciclo. Esta página mostra os textos que
+ela imprime, por que ela lê o teclado com `input()` e as peças que ela recebe; o laço em si está
+na [próxima página](./07-o-laco-do-run.md).
+
+Na tela, depois de cada desenho, aparece isto ([parte 1](../01-o-problema/07-o-desenho-e-o-menu.md)):
+
+```text
+=== A-Maze-ing ===
+1. Re-generate a new maze
+2. Show / Hide the shortest path
+3. Rotate the wall colours
+4. Quit
+Choice? (1-4):
+```
+
+O `Menu` é a camada de **interface**: junto com o `main` do `a_maze_ing.py`, é o único lugar do
+projeto que usa `print` e `input`, isto é, que conversa com o usuário.
 
 ## Os textos do menu
 
@@ -19,20 +38,50 @@ PATTERN_MISSING = 'Error: maze too small for the "42" pattern'
 CHOICES = ("1", "2", "3", "4")
 ```
 
-Os textos ficam em constantes no topo do módulo, não espalhados pelos métodos: são o contrato
-visível do programa, e mudar um deles é mudar uma linha só. O subject pede, no mínimo,
-regenerar, mostrar e ocultar o caminho e trocar a cor das paredes; a opção `4` sai.
+- `MENU`: as cinco linhas do menu, uma por item da tupla.
+- `PROMPT`: a pergunta que fica esperando a resposta. Termina com um espaço e sem quebra de
+  linha, então o cursor fica na mesma linha, logo depois dos dois-pontos.
+- `PATTERN_MISSING`: o aviso para quando o "42" não coube no labirinto
+  ([página 4](./03-mostrar-o-labirinto.md)). Ele começa com `Error:` como os erros do programa,
+  mas é o único que não encerra a execução: o labirinto sem o "42" continua válido, e o menu
+  segue. Por isso o próprio `Menu` o imprime, em vez de deixá-lo subir até o `main` do
+  `a_maze_ing.py`, que só imprime os erros que terminam o programa
+  ([página 7](./05-a-barreira-de-erros.md)).
+- `CHOICES`: as quatro respostas válidas, como texto.
 
-`PROMPT` termina com um espaço e sem quebra de linha: o cursor fica na mesma linha, logo depois
-dos dois-pontos, esperando a tecla.
+Os textos ficam em constantes no topo do arquivo, e não espalhados pelos métodos: são o que o
+usuário vê do programa, e mudar um deles é mudar uma linha só. Os textos em inglês e as quatro
+opções são escolha do projeto; o enunciado pede no mínimo as três interações (gerar de novo,
+mostrar ou esconder o caminho, trocar a cor das paredes), e a opção `4` é a saída.
 
 ## Por que `input()`
 
-O menu lê uma linha inteira com `input()`, e o usuário confirma com Enter. A alternativa seria
-pôr o terminal em modo *raw* e reagir a cada tecla, sem Enter. O modo raw depende do terminal
-(no Linux e no macOS é um módulo, no Windows é outro), quebra quando a entrada vem de um pipe e
-deixa o terminal desconfigurado se o programa morrer sem restaurá-lo. `input()` funciona igual
-num terminal, num pipe (`printf '2\n4\n' | python3 a_maze_ing.py config.txt`) e no avaliador.
+`input(texto)` mostra o texto, espera o usuário digitar uma linha e apertar Enter, e devolve o
+que foi digitado, sem o Enter. O menu lê a escolha assim: o usuário digita `2` e confirma com
+Enter.
+
+A alternativa seria reagir a cada tecla, sem Enter, pondo o terminal num modo especial (o modo
+*raw*, "cru"). O projeto escolheu `input()` porque o modo raw:
+
+- depende do sistema: no Linux e no macOS é um módulo do Python (`termios`), no Windows é outro;
+- não funciona quando a entrada vem de um **pipe** (abaixo);
+- deixa o terminal desconfigurado, sem mostrar o que se digita, se o programa morrer antes de
+  restaurá-lo.
+
+Um **pipe** é o `|` do terminal: ele entrega a saída de um comando como entrada de outro, como se
+alguém digitasse. Neste comando, o `printf` escreve `2`, Enter, `4`, Enter, e o programa lê essas
+duas respostas como se o usuário as tivesse digitado: mostra o caminho e sai.
+
+```bash
+printf '2\n4\n' | .venv/bin/python a_maze_ing.py config.txt
+```
+
+O comando roda o programa com o Python do ambiente virtual (`.venv/bin/python`); é o mesmo que o
+`python3 a_maze_ing.py config.txt` do enunciado. Ele só funciona no fim desta parte, quando o
+`a_maze_ing.py` estiver completo; a [página 10](./09-o-programa-rodando.md) o roda de verdade.
+
+Com `input()`, o menu funciona igual num terminal e num pipe, e é assim que se pode rodar o
+programa sem ninguém no teclado.
 
 ## Os colaboradores
 
@@ -51,67 +100,17 @@ num terminal, num pipe (`printf '2\n4\n' | python3 a_maze_ing.py config.txt`) e 
         self._state = state
 ```
 
-O `Menu` não cria nada: recebe prontos o use case que gera e grava, o service que desenha e o
-estado da tela. Quem cria e liga as peças é o `main` (página
-[O composition root](./04-o-composition-root.md)). O menu não sabe que existe um arquivo de
+O `Menu` recebe três objetos prontos, e só os guarda:
+
+| Parâmetro | O que é |
+|---|---|
+| `generate` | o `GenerateMaze`, a operação que gera um labirinto, grava o arquivo de saída e devolve o retrato `GeneratedMaze` ([parte 12](../12-geracao-e-saida/06-o-caso-de-uso-generate-maze.md)) |
+| `renderer` | o `RenderService`, que transforma o labirinto em linhas coloridas ([parte 13](../13-tela/02-a-grade-de-posicoes.md)) |
+| `state` | o `ViewState`, com o caminho visível ou não e a cor das paredes ([parte 13](../13-tela/01-o-estado-da-tela.md)) |
+
+O `_` no começo de `self._generate` é uma convenção do Python: avisa que o atributo é de uso
+interno da classe.
+
+O `Menu` não cria nada disso. Quem cria e liga as peças é o `main`
+([página 6](./08-montar-as-pecas.md)). Por isso o menu não sabe que existe um arquivo de
 configuração, nem qual arquivo de saída é gravado: ele só pede "gere outro" ao `GenerateMaze`.
-
-## O laço
-
-```python
-    def run(self) -> int:
-        """Generate the first maze and loop over the menu.
-
-        Exceptions are left to the caller: a failed regeneration, the end
-        of the input and Ctrl+C all reach main.
-
-        Returns:
-            0 when the user picks option 4.
-        """
-        maze = self._generate.execute()
-        while True:
-            self._show(maze)
-            choice = self._read_choice()
-            if choice == "1":
-                maze = self._generate.execute()
-            elif choice == "2":
-                self._state.toggle_path()
-            elif choice == "3":
-                self._state.next_colour()
-            else:
-                return 0
-```
-
-- A primeira geração acontece aqui, pelo mesmo `execute` das regenerações. Primeiro labirinto
-  e regenerações seguem o mesmo caminho: gerar, gravar o arquivo, devolver o retrato.
-- Cada volta do laço desenha e lê **uma escolha válida**. `_read_choice` só devolve `"1"` a
-  `"4"`, então o `else` é sempre a opção `4`.
-- As opções `1`, `2` e `3` só mudam o estado (o labirinto ou o `ViewState`) e voltam ao topo,
-  onde o `_show` desenha de novo com o estado novo. Ninguém chama `_show` em mais de um lugar.
-- A opção `1` troca só o `maze`. O `ViewState` é o mesmo objeto, então o caminho continua
-  visível ou oculto, e a cor continua a escolhida.
-- O `return 0` devolve o código de saída ao `main`, que o passa para `sys.exit`.
-
-```mermaid
-flowchart TD
-    A["maze = generate.execute()"] --> B["_show(maze)"]
-    B --> C["choice = _read_choice()"]
-    C -->|"1"| D["maze = generate.execute()"]
-    C -->|"2"| E["state.toggle_path()"]
-    C -->|"3"| F["state.next_colour()"]
-    C -->|"4"| G["return 0"]
-    D --> B
-    E --> B
-    F --> B
-```
-
-## Exceções sobem
-
-O `Menu` não tem nenhum `try`. Três coisas podem interromper o laço:
-
-- a regeneração falha ao gravar o arquivo (`OutputError`, vindo do repositório);
-- a entrada acaba (`EOFError`, levantado pelo `input` com Ctrl+D ou no fim de um pipe);
-- o usuário aperta Ctrl+C (`KeyboardInterrupt`).
-
-Todas sobem até o `main`, que tem um único lugar para transformar cada uma em mensagem e código
-de saída. Tratar parte delas aqui espalharia a mesma decisão por dois arquivos.

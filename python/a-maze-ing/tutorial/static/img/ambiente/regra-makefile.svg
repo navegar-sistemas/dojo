@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="292" viewBox="0 0 720 292">
+<rect width="720" height="292" fill="#ffffff" rx="8"/>
+<text x="40" y="70" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="19" font-weight="bold" fill="#111827" text-anchor="start" dominant-baseline="central" xml:space="preserve">lint:</text>
+<rect x="83.8" y="55" width="15.45" height="30" rx="5" fill="none" stroke="#ef4444" stroke-width="2"/>
+<rect x="36" y="55" width="45.8" height="30" rx="5" fill="none" stroke="#3b82f6" stroke-width="2"/>
+<text x="36" y="36" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#3b82f6" text-anchor="start" dominant-baseline="central">alvo: o nome da regra</text>
+<text x="241.525" y="70" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#ef4444" text-anchor="middle" dominant-baseline="central">← dois-pontos: fecha o nome</text>
+<rect x="40" y="125" width="39.8" height="30" rx="5" fill="#fde68a" stroke="#facc15" stroke-width="2"/>
+<text x="59.9" y="140" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">TAB</text>
+<text x="85.8" y="140" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="19" font-weight="normal" fill="#111827" text-anchor="start" dominant-baseline="central" xml:space="preserve">$(PY) -m flake8 .</text>
+<rect x="40" y="167" width="39.8" height="30" rx="5" fill="#fde68a" stroke="#facc15" stroke-width="2"/>
+<text x="59.9" y="182" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="bold" fill="#111827" text-anchor="middle" dominant-baseline="central">TAB</text>
+<text x="85.8" y="182" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="19" font-weight="normal" fill="#111827" text-anchor="start" dominant-baseline="central" xml:space="preserve">$(PY) -m mypy . $(MYPY_FLAGS)</text>
+<text x="40" y="220" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#111827" text-anchor="start" dominant-baseline="central">↑ um caractere TAB no começo, nunca espaços</text>
+<line x1="447.3" y1="126" x2="447.3" y2="196" stroke="#bbf7d0" stroke-width="4" stroke-linecap="round"/>
+<text x="461.3" y="151" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#111827" text-anchor="start" dominant-baseline="central">comandos, executados</text>
+<text x="461.3" y="171" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="bold" fill="#111827" text-anchor="start" dominant-baseline="central">em ordem, um por linha</text>
+<text x="360" y="266" font-family="ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">make lint executa os dois comandos; se um falha, o make para ali</text>
+</svg>

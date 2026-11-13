@@ -25,7 +25,8 @@ Cada resposta é **1** (sim, tem parede) ou **0** (não, é passagem). Um dígit
 
 ## Qual bit é qual lado
 
-O enunciado fixa a ordem, e cada lado ganha um número de bit, de 0 a 3:
+O enunciado fixa a ordem: cada lado da célula ganha um número de bit, de 0 a 3, e o bit vale 1
+quando aquele lado tem parede.
 
 | Lado da célula | Número do bit | Quanto vale quando é 1 |
 |---|---|---|
@@ -59,16 +60,27 @@ passagem no Leste e no Sul:
 
 Somando o valor das casas que têm 1: 8 + 1 = **9**. Essa célula é descrita pelo número 9.
 
-O `1001` é simétrico e não revela a ordem de leitura. Um caso assimétrico deixa a ordem clara:
-parede no Leste e no Oeste, passagem no Norte e no Sul, dá `1010` = 8 + 2 = **10**:
+Na última linha da figura, `0b1001` é o jeito de o Python escrever um número em binário: o `0b`
+na frente avisa que os dígitos seguintes são binários. `0b1001` é o número 9, e o `"9"` entre
+aspas é o caractere que vai para o arquivo.
+
+## A célula 9 desenhada
+
+A mesma célula 9, agora com as paredes no lugar. As paredes cheias são as fechadas e as
+tracejadas são as passagens; cada lado mostra quanto vale:
+
+![Célula com Norte e Oeste fechados, valor 9](/img/problema/celula-9.svg)
+
+## Um exemplo que mostra a ordem
+
+O `1001` lido de trás para frente continua `1001`. Por isso ele não mostra se a leitura começa
+pela esquerda ou pela direita: as duas dão o mesmo número. O próximo exemplo não tem essa
+simetria. Parede no Leste e no Oeste, passagem no Norte e no Sul, dá `1010` = 8 + 2 = **10**;
+lido de trás para frente, `0101` seria 5, outra célula:
 
 ![Os bits 1010: Oeste fechado, Sul aberto, Leste fechado, Norte aberto, valor 10](/img/problema/bits-a.svg)
 
-## A mesma célula desenhada
-
-Na figura, as paredes cheias são as fechadas e as tracejadas são as passagens:
-
-![Célula com Norte e Oeste fechados, valor 9](/img/problema/celula-9.svg)
+![Célula com Leste e Oeste fechados, valor 10](/img/problema/celula-a.svg)
 
 ## De 0 a 15 num único caractere: hexadecimal
 
@@ -94,28 +106,12 @@ As colunas dos lados estão na mesma ordem em que o binário se escreve:
 | `0` | 0 | 0 | 0 | 0 | 0 | nenhuma |
 | `3` | 0 | 0 | 1 | 1 | 2 + 1 | Leste e Norte |
 | `5` | 0 | 1 | 0 | 1 | 4 + 1 | Sul e Norte |
+| `6` | 0 | 1 | 1 | 0 | 4 + 2 | Sul e Leste |
 | `9` | 1 | 0 | 0 | 1 | 8 + 1 | Oeste e Norte |
 | `a` | 1 | 0 | 1 | 0 | 8 + 2 | Oeste e Leste |
 | `c` | 1 | 1 | 0 | 0 | 8 + 4 | Oeste e Sul |
 | `d` | 1 | 1 | 0 | 1 | 8 + 4 + 1 | Oeste, Sul e Norte |
 | `f` | 1 | 1 | 1 | 1 | 8 + 4 + 2 + 1 | todas |
 
-## Ler e mudar uma parede em Python
-
-Guardar as paredes como número deixa as operações simples. O operador `&` ("e" bit a bit)
-responde se um bit está ligado; `~` inverte os bits, e `& ~` desliga um bit:
-
-```python
-walls = 15                 # 1111 em binário: as quatro paredes fechadas
-walls & 2                  # 2 → diferente de 0: a parede Leste (vale 2) está fechada
-walls = walls & ~2         # desliga o bit do Leste: 13, que é 1101 em binário, "d"
-walls & 2                  # 0 → a parede Leste agora está aberta
-```
-
-| Operação | Efeito |
-|---|---|
-| `walls & valor` | diferente de 0 se a parede está fechada |
-| `walls & ~valor` | abre a parede (desliga o bit) |
-| `walls \| valor` | fecha a parede (liga o bit) |
-
-`valor` é o número do lado: 1 para Norte, 2 para Leste, 4 para Sul e 8 para Oeste.
+Guardar as paredes como número também deixa simples, no código, perguntar por uma parede e
+abrir ou fechar uma parede. A [próxima página](./08-ler-e-mudar-paredes.md) mostra como.

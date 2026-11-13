@@ -1,37 +1,22 @@
 ---
-sidebar_position: 3
-title: Booleanos e coordenadas
+sidebar_position: 6
+title: Coordenadas e o arquivo completo
 ---
 
-# Booleanos e coordenadas
+# Coordenadas e o arquivo completo
 
-Os outros dois conversores do `ValueParser`: `to_bool`, para `PERFECT`, e `to_coordinate`, para
-`ENTRY` e `EXIT`.
-
-## `to_bool`: `True` ou `False`, em qualquer caixa
-
-```python
-lowered = value.lower()
-if lowered == "true":
-    return True
-if lowered == "false":
-    return False
-raise ValueError(value)
-```
-
-O subject usa `PERFECT=True` no exemplo, e é natural alguém escrever `true` ou `TRUE`. Passar
-tudo para minúsculas antes de comparar aceita qualquer caixa com duas comparações.
-
-O que **não** é aceito: `yes`, `1`, `sim`, `on`. Cada um desses é uma convenção de outro
-programa; aceitar uma e recusar outra seria arbitrário, e aceitar todas transformaria o
-conversor numa lista sem fim. `True` e `False` são as palavras do subject e do próprio Python.
-
-### Por que não `bool(value)`
-
-`bool("False")` é `True`: em Python, toda string não vazia é verdadeira. É o erro clássico de
-converter booleano a partir de texto.
+`ENTRY=0,0` e `EXIT=19,14` dão a célula de entrada e a de saída. Chegam ao programa como texto
+e precisam virar um par de números, a coluna `x` e a linha `y`. Esta página mostra o último
+conversor do `ValueParser`, `to_coordinate`, e o arquivo completo da classe, com os
+conversores das páginas [3](./02-inteiros-sem-surpresa.md),
+[4](./06-fullmatch-e-limite-de-digitos.md) e [5](./07-booleanos.md).
 
 ## `to_coordinate`: `x,y`
+
+Uma coordenada é o endereço de uma célula: `x` é a coluna (posição na horizontal) e `y` é a
+linha (posição na vertical), os dois contando de 0 a partir do canto de cima à esquerda
+([parte 1](../01-o-problema/01-a-grade-e-as-celulas.md)). No arquivo, ela vem como dois inteiros
+separados por vírgula.
 
 ```python
 parts = value.split(",")
@@ -40,64 +25,48 @@ if len(parts) != 2:
 return (ValueParser.to_int(parts[0]), ValueParser.to_int(parts[1]))
 ```
 
-1. `split(",")` corta o texto em cada vírgula. `0,0` dá duas partes; `0` dá uma; `0,0,0` dá três.
-2. Qualquer quantidade diferente de duas é erro de formato.
-3. Cada parte passa por `to_int`, com todas as regras da página anterior: ASCII, sem espaços,
-   até 18 dígitos.
+1. `split(",")` corta o texto em cada vírgula e devolve a lista dos pedaços.
+2. Qualquer quantidade de pedaços diferente de duas é erro de formato.
+3. Cada pedaço passa pelo `to_int`, com todas as regras das páginas 3 e 4: só dígitos de 0 a
+   9, sem espaços, até 18 dígitos.
+4. O resultado é a **tupla** `(x, y)`: um par de valores entre parênteses, que não pode ser
+   alterado depois de criado.
 
-O resultado é a tupla `(x, y)`, coluna e linha, na convenção de todo o projeto.
+O que o `split` devolve em cada caso:
 
-| Texto | Resultado | Motivo |
-|---|---|---|
-| `0,0` | `(0, 0)` | |
-| `19,14` | `(19, 14)` | |
-| `-1,0` | `(-1, 0)` | formato válido; a posição fora da grade é acusada depois, pelo `MazeConfig` |
-| `0, 0` | `ValueError` | a segunda parte é ` 0`, com espaço, e `to_int` recusa |
-| `0;0` | `ValueError` | sem vírgula: uma parte só |
-| `0,0,0` | `ValueError` | três partes |
-| `(0,0)` | `ValueError` | `(0` não é inteiro |
+| Texto | `split(",")` | Resultado | Motivo |
+|---|---|---|---|
+| `0,0` | `['0', '0']` | `(0, 0)` | |
+| `19,14` | `['19', '14']` | `(19, 14)` | |
+| `-1,0` | `['-1', '0']` | `(-1, 0)` | formato válido; a posição fora da grade é recusada depois |
+| `0, 0` | `['0', ' 0']` | `ValueError` | o segundo pedaço tem um espaço, e o `to_int` recusa |
+| `0;0` | `['0;0']` | `ValueError` | sem vírgula: um pedaço só |
+| `0,0,0` | `['0', '0', '0']` | `ValueError` | três pedaços |
+| `(0,0)` | `['(0', '0)']` | `ValueError` | `(0` não é um inteiro |
 
-O `-1,0` mostra a divisão de trabalho: o `ValueParser` só confere o **formato**. Se a coordenada
-cabe na grade depende de `WIDTH` e `HEIGHT`, que ele não conhece.
+O `-1,0` mostra a divisão de trabalho: o `ValueParser` só confere o **formato** do texto. Se a
+célula existe na grade depende da largura e da altura, que ele não conhece. Quem confere é o
+`MazeConfig`, que tem todos os valores
+([parte 11](../11-configuracao/03-a-ordem-das-validacoes.md)).
 
-### Por que `to_coordinate` não captura o `OverflowError`
+### O `OverflowError` passa direto
 
-Se uma das partes tiver dígitos demais, `to_int` levanta `OverflowError`, e ele passa direto por
-`to_coordinate` até o `MazeConfig`. Não há nada a fazer aqui: a mensagem certa
-(`ENTRY has more than 18 digits`) é montada por quem conhece a chave.
+Se um dos pedaços tiver dígitos demais, o `to_int` levanta `OverflowError`, e o `to_coordinate`
+não o captura: a exceção sobe até o `MazeConfig`. Não há o que fazer aqui, porque a mensagem
+certa (`ENTRY has more than 18 digits`) precisa do nome da chave, que só o `MazeConfig` sabe.
 
 ## Por que uma classe e não funções soltas
 
-Três funções no nível do módulo funcionariam igual. A classe agrupa os conversores e a constante
-`MAX_DIGITS` sob um nome só, e quem lê `ValueParser.to_int(...)` sabe de onde a função vem sem
-procurar o `import`. Os métodos são `@staticmethod` porque não precisam de instância nem de
-estado: ninguém escreve `ValueParser()`.
-
-## Experimente
-
-```bash
-.venv/bin/python -c '
-from amazeing.utils.value_parser import ValueParser
-
-for text in ["0,0", "19,14", "-1,0", "0, 0", "0;0", "0,0,0", "(0,0)"]:
-    try:
-        print(repr(text), "->", ValueParser.to_coordinate(text))
-    except ValueError as error:
-        print(repr(text), "->", type(error).__name__)
-'
-```
-
-```text
-'0,0' -> (0, 0)
-'19,14' -> (19, 14)
-'-1,0' -> (-1, 0)
-'0, 0' -> ValueError
-'0;0' -> ValueError
-'0,0,0' -> ValueError
-'(0,0)' -> ValueError
-```
+Três funções no nível do arquivo funcionariam igual. A classe junta os conversores e a constante
+`MAX_DIGITS` sob um nome só: quem lê `ValueParser.to_int(...)` sabe de onde a função vem sem
+procurar o `import`. Os métodos são `@staticmethod` porque não usam nenhum dado de um objeto:
+ninguém precisa escrever `ValueParser()`.
 
 ## O arquivo completo
+
+As docstrings seguem o **estilo Google**: depois da descrição, as seções `Args:` (os
+parâmetros), `Returns:` (o que a função devolve) e `Raises:` (as exceções que ela pode levantar).
+`tuple[int, int]` na assinatura quer dizer "tupla de dois inteiros".
 
 ```python title="amazeing/utils/value_parser.py"
 """Strict parsers for the values of the configuration file."""
@@ -177,4 +146,83 @@ class ValueParser:
         if len(parts) != 2:
             raise ValueError(value)
         return (ValueParser.to_int(parts[0]), ValueParser.to_int(parts[1]))
+```
+
+## Experimente
+
+Com o arquivo completo, os três conversores rodam. Na raiz do projeto, primeiro o `to_int`, com
+os casos das [páginas 3](./02-inteiros-sem-surpresa.md) e
+[4](./06-fullmatch-e-limite-de-digitos.md):
+
+```bash
+.venv/bin/python - <<'EOF'
+from amazeing.utils.value_parser import ValueParser
+
+for text in ["20", "-3", "+007", "1_0", " 5", "２０", "2.5", "9" * 19]:
+    try:
+        print(repr(text), "->", ValueParser.to_int(text))
+    except (ValueError, OverflowError) as error:
+        print(repr(text), "->", type(error).__name__)
+EOF
+```
+
+```text
+'20' -> 20
+'-3' -> -3
+'+007' -> 7
+'1_0' -> ValueError
+' 5' -> ValueError
+'２０' -> ValueError
+'2.5' -> ValueError
+'9999999999999999999' -> OverflowError
+```
+
+- `"9" * 19` repete o texto `"9"` 19 vezes: um número de 19 dígitos, um a mais que o limite.
+- `except (ValueError, OverflowError) as error` captura qualquer uma das duas exceções (a tupla
+  entre parênteses), e `type(error).__name__` é o nome da classe da exceção capturada, como texto.
+
+Depois o `to_bool`:
+
+```bash
+.venv/bin/python - <<'EOF'
+from amazeing.utils.value_parser import ValueParser
+
+for text in ["True", "false", "TRUE", "yes", "1"]:
+    try:
+        print(repr(text), "->", ValueParser.to_bool(text))
+    except ValueError as error:
+        print(repr(text), "->", type(error).__name__)
+EOF
+```
+
+```text
+'True' -> True
+'false' -> False
+'TRUE' -> True
+'yes' -> ValueError
+'1' -> ValueError
+```
+
+E o `to_coordinate`, com os casos da tabela acima:
+
+```bash
+.venv/bin/python - <<'EOF'
+from amazeing.utils.value_parser import ValueParser
+
+for text in ["0,0", "19,14", "-1,0", "0, 0", "0;0", "0,0,0", "(0,0)"]:
+    try:
+        print(repr(text), "->", ValueParser.to_coordinate(text))
+    except ValueError as error:
+        print(repr(text), "->", type(error).__name__)
+EOF
+```
+
+```text
+'0,0' -> (0, 0)
+'19,14' -> (19, 14)
+'-1,0' -> (-1, 0)
+'0, 0' -> ValueError
+'0;0' -> ValueError
+'0,0,0' -> ValueError
+'(0,0)' -> ValueError
 ```
