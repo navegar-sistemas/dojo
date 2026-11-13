@@ -53,4 +53,8 @@ if __name__ == "__main__":
     print("\nCleanup always happens, even with errors!")
 ```
 
+Como no [exercício 0](../03-ex0/05-o-arquivo-completo.md), o arquivo termina com uma única quebra
+de linha depois da última linha, que o botão de copiar não leva. Os avisos do flake8 sobre o fim
+do arquivo estão em [O fim do arquivo](../03-ex0/06-rodar-e-conferir.md#o-fim-do-arquivo).
+
 As funções prontas chamadas são `print()` e `capitalize()`, as duas autorizadas.

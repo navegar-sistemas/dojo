@@ -5,8 +5,7 @@ title: Pré-requisitos
 
 # Pré-requisitos
 
-O tutorial supõe que você já escreveu programas pequenos em Python. Esta página lista o que é
-usado sem explicação longa; se algum item for novo, vale revisá-lo antes de seguir.
+O tutorial usa, sem explicação longa, o básico de Python:
 
 | Assunto | Exemplo |
 |---|---|

@@ -73,11 +73,11 @@ git --version
 ```
 
 ```text
-git version 2.54.0 (Apple Git-157)
+git version 2.43.0
 ```
 
-Qualquer versão serve; o número e o texto entre parênteses (que só aparece no macOS) podem ser
-outros. Se o comando não existir: no Linux, `sudo apt install git`; no macOS, o
+Qualquer versão serve; o número pode ser outro, e no macOS a linha termina com um texto entre
+parênteses, como `(Apple Git-157)`. Se o comando não existir: no Linux, `sudo apt install git`; no macOS, o
 primeiro `git` abre a mesma janela das ferramentas de linha de comando da Apple; aceite e espere
 terminar.
 

@@ -71,5 +71,9 @@ if __name__ == "__main__":
     print("\nAll custom error types work correctly!")
 ```
 
+Como no [exercício 0](../03-ex0/05-o-arquivo-completo.md), o arquivo termina com uma única quebra
+de linha depois da última linha, que o botão de copiar não leva. Os avisos do flake8 sobre o fim
+do arquivo estão em [O fim do arquivo](../03-ex0/06-rodar-e-conferir.md#o-fim-do-arquivo).
+
 A única função pronta chamada é `print()`. `PlantError(...)` e `WaterError(...)` criam objetos das
 classes do próprio arquivo, que podem ser usadas à vontade.

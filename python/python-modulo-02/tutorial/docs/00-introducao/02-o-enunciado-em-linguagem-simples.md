@@ -5,9 +5,6 @@ title: O enunciado em linguagem simples
 
 # O enunciado em linguagem simples
 
-Esta página resume o que o enunciado do projeto pede, sem pular nada. Cada item aponta para a
-página que o constrói.
-
 ## Regras que valem para todos os exercícios
 
 - **Python 3.10 ou mais novo.** Os programas são rodados com `python3`
@@ -83,5 +80,4 @@ erros ([Entregar](../08-fechamento/02-entregar.md)).
   arquivos. Não é preciso saber C; o `open()` do Python é explicado no
   [exercício 2](../05-ex2/02-garden-operations.md).
 - **Instruções sobre IA**: o enunciado tem um capítulo pedindo que todo código vindo de uma
-  ferramenta de IA seja entendido por completo e revisado com colegas. Vale também para este
-  tutorial: cada linha está explicada para que você consiga defendê-la.
+  ferramenta de IA seja entendido por completo e revisado com colegas.

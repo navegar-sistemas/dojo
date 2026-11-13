@@ -30,4 +30,10 @@ if __name__ == "__main__":
     test_temperature()
 ```
 
+O arquivo termina com **uma** quebra de linha logo depois de `    test_temperature()`, e nada
+depois dela: nem outra linha vazia, nem espaços. O botão de copiar, no canto do bloco, não leva
+essa quebra final; alguns editores a acrescentam ao salvar, outros não, e alguns põem espaços de
+recuo na linha nova quando se aperta Enter. O flake8 aponta cada um desses casos na última linha,
+e a página [Rodar e conferir](./06-rodar-e-conferir.md#o-fim-do-arquivo) mostra como corrigir.
+
 O arquivo só chama `int()` e `print()`, as duas funções autorizadas, além das próprias funções.

@@ -42,6 +42,10 @@ if __name__ == "__main__":
     test_temperature()
 ```
 
+Como no [exercício 0](../03-ex0/05-o-arquivo-completo.md), o arquivo termina com uma única quebra
+de linha depois da última linha, que o botão de copiar não leva. Os avisos do flake8 sobre o fim
+do arquivo estão em [O fim do arquivo](../03-ex0/06-rodar-e-conferir.md#o-fim-do-arquivo).
+
 O arquivo continua chamando só `int()` e `print()`. `raise` e `ValueError(...)` não contam como
 funções chamadas: `raise` é palavra da linguagem, liberada pelo enunciado, e `ValueError` é um
 tipo de exceção embutido, que o enunciado manda usar.

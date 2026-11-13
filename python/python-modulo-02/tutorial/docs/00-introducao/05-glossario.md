@@ -5,8 +5,6 @@ title: Glossário
 
 # Glossário
 
-Os termos do tutorial, em ordem alfabética, cada um com a página onde é explicado.
-
 | Termo | O que é | Onde |
 |---|---|---|
 | **`__init__`** | o método que o Python roda ao criar um objeto; recebe os valores iniciais | [A mensagem padrão](../06-ex3/03-a-mensagem-padrao.md) |

@@ -68,3 +68,22 @@ Success: no issues found in 1 source file
 ```
 
 O flake8 não imprime nada, e o mypy não acha problema: o exercício 0 está pronto.
+
+## O fim do arquivo
+
+Se o flake8 acusar algo na última linha do arquivo, o problema está no que vem depois de
+`    test_temperature()`. Um exemplo, com o arquivo salvo sem a quebra final:
+
+```text
+ex0/ft_first_exception.py:18:23: W292 no newline at end of file
+```
+
+| Código | O que diz | Como fica o fim do arquivo | Correção |
+|---|---|---|---|
+| `W292` | `no newline at end of file` ("sem quebra de linha no fim do arquivo") | o arquivo acaba na própria linha do `test_temperature()` | pôr o cursor no fim dessa linha e apertar Enter |
+| `W391` | `blank line at end of file` ("linha em branco no fim do arquivo") | há linhas vazias a mais depois dela | apagar as linhas vazias do fim, deixando só a quebra |
+| `W293` | `blank line contains whitespace` ("linha em branco com espaços") | o Enter criou uma linha nova com espaços de recuo | apagar os espaços dessa linha, deixando-a vazia |
+
+O `W293` costuma vir junto com o `W292`: a linha de espaços também fica sem quebra no fim. Depois
+de corrigir, rode o flake8 de novo até ele não imprimir nada. O mesmo vale para os arquivos dos
+outros exercícios.

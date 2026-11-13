@@ -28,6 +28,23 @@ python3 -m venv .venv
 
 O comando não imprime nada quando dá certo.
 
+### Se o venv falhar
+
+No Debian e no Ubuntu, o `venv` vem num pacote separado, o `python3-venv`. Sem ele, o comando
+termina com uma mensagem que cita o `ensurepip` (a parte do Python que instala o `pip` no venv) e
+o pacote `python3-venv`, e deixa uma pasta `.venv` incompleta. Apague essa pasta, instale o
+pacote (o mesmo `sudo apt install` da página [O Python](./01-o-python.md#se-o-comando-não-existir))
+e crie o venv de novo:
+
+```bash
+rm -rf .venv
+sudo apt install python3-venv
+python3 -m venv .venv
+```
+
+Com um Python de nome numerado, como o `python3.11`, o pacote também leva o número:
+`python3.11-venv`.
+
 ## Instalar o flake8 e o mypy
 
 ```bash
@@ -50,12 +67,13 @@ ferramentas ficam em `.venv/bin/`:
 
 ```text
 7.5.0 (mccabe: 0.7.0, pycodestyle: 2.15.0, pyflakes: 4.1.0) CPython 3.14.5 on
-Darwin
+Linux
 mypy 2.4.1 (compiled: yes)
 ```
 
-Os números podem ser outros na sua máquina, e a última palavra da primeira saída é o nome do
-sistema (`Linux`, `Darwin` no macOS). O que importa é que os dois comandos respondem.
+Os números podem ser outros na sua máquina, e a última palavra da saída do flake8, que ele
+imprime numa linha à parte, é o nome do sistema (`Linux`; `Darwin` no macOS). O que importa é que
+os dois comandos respondem.
 
 Os programas dos exercícios não precisam do venv: eles só usam o que vem com o Python e são
 rodados com `python3`. O venv existe só para as duas ferramentas.

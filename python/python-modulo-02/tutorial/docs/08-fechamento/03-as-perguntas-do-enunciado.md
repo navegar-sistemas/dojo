@@ -27,9 +27,8 @@ exercício 2 usa o primeiro jeito porque precisa escrever o nome de cada tipo e 
 
 ## Capturar Exception ou o tipo exato?
 
-Esta não é uma pergunta do enunciado, e sim uma escolha que ele deixa aberta no exercício 0: usar
-a classe base `Exception` ou descobrir o tipo que `input_temperature` lança. `except Exception` captura quase tudo, inclusive erros que
-ninguém esperava, e os esconde atrás da mesma mensagem. Capturar o tipo exato (`ValueError`)
+O exercício 0 deixa escolher entre a classe base `Exception` e o tipo que `input_temperature`
+lança. `except Exception` captura quase tudo, inclusive erros que ninguém esperava, e os esconde atrás da mesma mensagem. Capturar o tipo exato (`ValueError`)
 trata o problema previsto e deixa os imprevistos aparecerem, onde podem ser vistos e corrigidos.
 
 ## Quando criar os seus próprios tipos de erro?

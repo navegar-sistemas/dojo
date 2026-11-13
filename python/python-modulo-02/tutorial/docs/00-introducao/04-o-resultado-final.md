@@ -5,10 +5,8 @@ title: O resultado final
 
 # O resultado final
 
-Esta é a saída de cada programa pronto, igual, letra por letra, à que o enunciado mostra. Cada
-exercício do tutorial termina conferindo que o programa imprime exatamente isto. Os comandos só
-funcionam depois que os arquivos existirem: a página "Rodar e conferir" de cada exercício os
-roda.
+A saída de cada programa pronto é igual, letra por letra, à que o enunciado mostra. Os comandos
+rodam depois que os arquivos existirem, na página "Rodar e conferir" de cada exercício.
 
 ## Exercício 0
 

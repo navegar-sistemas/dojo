@@ -64,6 +64,5 @@ regra é explicada de novo na página que a cumpre.
 | Exercícios 0 a 4 | constroem os cinco programas, um por parte |
 | Fechamento | confere tudo, mostra como entregar e responde às perguntas que o enunciado deixa para você pensar |
 
-Cada página explica uma ideia. O código aparece em pedaços, cada um explicado, e cada exercício
-termina com o arquivo completo, pronto para copiar. Os termos novos são explicados onde aparecem
-e reunidos no [glossário](./05-glossario.md).
+O código de cada exercício aparece em pedaços e, no fim, o arquivo completo. Os termos novos
+estão reunidos no [glossário](./05-glossario.md).

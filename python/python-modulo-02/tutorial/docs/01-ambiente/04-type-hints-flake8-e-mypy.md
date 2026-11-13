@@ -6,7 +6,7 @@ title: Type hints, flake8 e mypy
 # Type hints, flake8 e mypy
 
 O enunciado pede duas conferências no código: o **estilo**, pelo flake8, e os **tipos**, pelo
-mypy. Esta página mostra o que cada uma acusa, com um arquivo de experimento.
+mypy.
 
 ## Type hints
 
