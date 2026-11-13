@@ -12,4 +12,5 @@ npm run serve      # serve o build/
 
 As páginas ficam em `docs/`, uma pasta por parte. A ordem vem do `_category_.json` de cada pasta
 e do `sidebar_position` de cada página. Os diagramas são escritos em Mermaid, dentro das próprias
-páginas.
+páginas; `src/clientModules/d3-transition.js` carrega no navegador o `d3-transition`, que o
+Mermaid usa ao passar o mouse pelos nós dos diagramas.

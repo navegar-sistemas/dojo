@@ -12,7 +12,7 @@ arquivos existirem: a página "Rodar e conferir" de cada exercício os roda.
 
 Algumas saídas têm caminhos de pastas, que mudam de máquina para máquina. Como o enunciado faz com
 `/path/to/lab_env`, o tutorial escreve `/path/to/` no lugar da parte que muda: `/path/to/the-codex`
-é a pasta do projeto, e `/path/to/python3.14` é o executável do Python global. No terminal aparecem
+é a pasta do projeto, e `/path/to/python3.15` é o executável do Python global. No terminal aparecem
 os caminhos completos. Algumas linhas são longas: o terminal as quebra na largura da janela, mas
 cada uma é uma linha só.
 
@@ -28,7 +28,7 @@ python3 ex0/construct.py
 
 LABORATORY STATUS: You are working in the open
 
-Current Python: /path/to/python3.14
+Current Python: /path/to/python3.15
 Virtual Environment: None detected
 
 WARNING: You are in the global environment!
@@ -61,7 +61,7 @@ Safe to install reagents without affecting
 the global system.
 
 Reagent installation path:
-/path/to/the-codex/lab_env/lib/python3.14/site-packages
+/path/to/the-codex/lab_env/lib/python3.15/site-packages
 ```
 
 Com as bibliotecas instaladas (as versões mudam com o tempo):
@@ -139,7 +139,7 @@ Testing the hidden create_earth: Traceback (most recent call last):
   File "/path/to/the-codex/ft_alembic_1.py", line 10, in <module>
     print(f"{alchemy.create_earth()}")
              ^^^^^^^^^^^^^^^^^^^^
-AttributeError: module 'alchemy' has no attribute 'create_earth'. Did you mean: 'create_air'?
+AttributeError: module 'alchemy' has no attribute 'create_earth'. Did you mean '.create_air' instead of '.create_earth'?
 ```
 
 ## Exercício 3
@@ -194,6 +194,11 @@ Traceback (most recent call last):
     from .dark_spellbook import dark_spell_allowed_ingredients
 ImportError: cannot import name 'dark_spell_allowed_ingredients' from partially initialized module 'alchemy.grimoire.dark_spellbook' (most likely due to a circular import) (/path/to/the-codex/alchemy/grimoire/dark_spellbook.py)
 ```
+
+No Python 3.14 e no 3.10, a sugestão da última linha do `ft_alembic_1.py` é
+`Did you mean: 'create_air'?`, como no enunciado; no 3.10, o traceback também não tem a linha de
+`^`. As saídas mostradas no tutorial são as do Python 3.15; as diferenças das outras versões estão na
+página de cada programa.
 
 Os dois tracebacks são de propósito: o exercício 2 mostra que `create_earth` não está na interface
 do pacote, e o 4, que o par das trevas explode. Os números de linha dos tracebacks são os dos

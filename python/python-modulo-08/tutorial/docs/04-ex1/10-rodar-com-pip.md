@@ -6,8 +6,7 @@ title: Rodar com o pip
 # Rodar com o pip
 
 O caminho do pip: um ambiente virtual criado e ativado à mão, as bibliotecas instaladas pelo
-`requirements.txt`. No caminho, o programa roda em três situações: sem nenhuma biblioteca, com
-uma só e com todas.
+`requirements.txt`.
 
 Os comandos desta página e das duas seguintes são rodados dentro da pasta `ex1`, sem nenhum
 ambiente ativado:
@@ -77,7 +76,7 @@ A saída termina com:
 Installing collected packages: numpy
 Successfully installed numpy-2.5.4
 
-[notice] A new release of pip is available: 26.1.1 -> 26.3
+[notice] A new release of pip is available: 26.2.2 -> 26.3
 [notice] To update, run: pip install --upgrade pip
 ```
 
@@ -127,7 +126,7 @@ aviso do pip:
 ```text
 Successfully installed contourpy-1.4.0 cycler-0.12.1 fonttools-4.68.0 kiwisolver-1.5.1 matplotlib-3.11.2 packaging-26.3 pandas-3.1.1 pillow-13.0.0 pyparsing-3.3.3 python-dateutil-4.0.0 tzdata-2026.6
 
-[notice] A new release of pip is available: 26.1.1 -> 26.3
+[notice] A new release of pip is available: 26.2.2 -> 26.3
 [notice] To update, run: pip install --upgrade pip
 ```
 
@@ -244,9 +243,10 @@ As bibliotecas continuam instaladas, mas no `site-packages` do `matrix_env`, que
 não enxerga. Se o seu Python global tiver alguma delas instalada pelo sistema, a linha dela sai
 com `[OK]`.
 
-## No Python 3.10
+## Em outras versões do Python
 
-No Python 3.10, o pip escolhe as versões mais novas que ainda aceitam o 3.10: pandas 2.3.3,
+No Python 3.14, as bibliotecas e as versões são as mesmas do 3.15, e o aviso `[notice]` cita o
+pip que veio com o 3.14 (`26.1.1 -> 26.3`). No Python 3.10, o pip escolhe as versões mais novas que ainda aceitam o 3.10: pandas 2.3.3,
 numpy 2.2.6 e matplotlib 3.10.9, mais dois pacotes, `pytz` e `six`, que essas versões mais
 antigas pedem como dependência. As linhas `[OK]` mostram essas versões, e o aviso `[notice]` cita
 o pip que veio com o Python 3.10 (`23.0.1 -> 26.3`); o resto da saída é igual.

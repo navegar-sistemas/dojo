@@ -40,7 +40,7 @@ Os type hints do projeto:
 
 Crie `experimentos/estilo.py`:
 
-```python
+```python title="experimentos/estilo.py"
 def double(number: int) -> int:
     return number * 2
 def triple(number):

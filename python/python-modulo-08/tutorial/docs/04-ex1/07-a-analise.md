@@ -54,7 +54,8 @@ roda igual num terminal sem tela gráfica, como o de um servidor acessado pela r
 - `np.random.default_rng(1999)` cria um **gerador de números aleatórios**. O número entre
   parênteses é a **semente** (*seed*): o mesmo gerador com a mesma semente produz sempre a mesma
   sequência. A semente fixa é **escolha do tutorial**: toda execução gera os mesmos dados e o
-  mesmo gráfico, o que permite conferir o resultado. 1999 é o ano do filme;
+  mesmo gráfico, o que permite conferir o resultado (com outra versão do matplotlib, o desenho
+  pode mudar em detalhes de traço, mas os dados são os mesmos). 1999 é o ano do filme;
 - `rng.normal(0.0, 1.0, DATA_POINTS)` sorteia 1000 números de uma **distribuição normal** com
   média 0 e desvio padrão 1: números em torno de 0, quase todos entre -3 e 3. O resultado é um
   **array** do numpy, uma lista de números em que as contas valem para todos os itens de uma vez;
@@ -93,7 +94,7 @@ O enunciado exige que os dados venham do numpy, e não de uma lista escrita no c
 
 O gráfico gravado:
 
-![Gráfico de linhas com 1000 pontos: o sinal, em azul, sobe e desce entre cerca de -20 e 25, e a tendência, em laranja, é a média dos 50 pontos anteriores, uma linha suave que acompanha o sinal a partir do ponto 49](/img/ex1/matrix_analysis.png)
+![Gráfico de linhas com 1000 pontos: o sinal, em azul, sobe e desce entre cerca de -20 e 25, e a tendência, em laranja, é a média dos 50 pontos até cada um, uma linha suave que acompanha o sinal a partir do ponto 49](/img/ex1/matrix_analysis.png)
 
 As mensagens `Analyzing Matrix data...`, `Processing 1000 data points...` e
 `Generating visualization...` são as da saída do enunciado, na mesma ordem; o `1000` vem do

@@ -15,7 +15,9 @@ módulos com nome e número de versão, pronto para ser instalado.
 Os pacotes ficam no **PyPI** (*Python Package Index*, "índice de pacotes do Python",
 [pypi.org](https://pypi.org)), um repositório público na internet. O **pip** é o programa que baixa
 um pacote do PyPI e o instala num Python. Ele vem junto com o Python e é chamado como um módulo:
-`python3 -m pip install nome`.
+`python3 -m pip install nome`. Todo ambiente virtual já nasce com o seu pip. A exceção é o Python
+do sistema no Debian e no Ubuntu, em que o pip vem num pacote à parte, o `python3-pip`; o tutorial
+não precisa dele, porque só usa o pip de dentro dos ambientes virtuais.
 
 O pip instala os pacotes numa pasta chamada **`site-packages`**, que pertence a um Python
 específico: o Python que rodou o pip. É nessa pasta que o `import` procura as bibliotecas de
@@ -41,13 +43,13 @@ Home-page: https://github.com/pycqa/flake8
 Author: Tarek Ziade
 Author-email: tarek@ziade.org
 License: MIT
-Location: /…/the-matrix/.venv/lib/python3.14/site-packages
+Location: /…/the-matrix/.venv/lib/python3.15/site-packages
 Requires: mccabe, pycodestyle, pyflakes
 Required-by: 
 ```
 
 - `Location` é o `site-packages` onde ele está: o do `.venv`. Em `/…/the-matrix`, o `/…` é o
-  caminho da pasta do projeto na sua máquina; o `python3.14` muda com a versão do Python;
+  caminho da pasta do projeto na sua máquina; o `python3.15` muda com a versão do Python;
 - `Requires` lista as dependências do flake8: três outros pacotes, instalados junto com ele;
 - `Required-by` (vazio aqui) lista os pacotes instalados que dependem dele.
 
@@ -64,7 +66,7 @@ funciona com aquele Python. Uma **restrição de versão** limita a escolha:
 
 Uma biblioteca nova pode deixar de funcionar com um Python antigo: o numpy 2.5, por exemplo, não
 funciona no Python 3.10. Com `numpy>=1.25.0`, o pip escolhe a mais nova que serve para o Python
-que está rodando, e o mesmo arquivo de dependências funciona do 3.10 ao 3.14.
+que está rodando, e o mesmo arquivo de dependências funciona do 3.10 ao 3.15.
 
 ## O Python do sistema recusa
 
@@ -87,9 +89,14 @@ O resto da mensagem depende do sistema e sugere usar um ambiente virtual. Muitos
 Ubuntu, macOS com Python de gerenciadores de pacotes) marcam o seu Python como "gerenciado pelo
 sistema": os pacotes dele são instalados pelo instalador do sistema, e um pip mexendo na mesma
 pasta poderia quebrar programas do próprio sistema que dependem de versões específicas. O pip
-recusa antes mesmo do ensaio. Se no seu sistema a saída for `Would install numpy-…` ("instalaria o
-numpy"), o seu Python não tem essa marca; a regra continua valendo: bibliotecas de projeto vão
-num ambiente virtual.
+recusa antes mesmo do ensaio. Há duas outras saídas possíveis:
+
+- uma linha terminada em `No module named pip`: o Python do sistema está sem o pip (o caso do
+  Debian e do Ubuntu sem o pacote `python3-pip`);
+- `Would install numpy-…` ("instalaria o numpy"): o seu Python não tem a marca de "gerenciado
+  pelo sistema".
+
+Em todos os casos, a regra é a mesma: bibliotecas de projeto vão num ambiente virtual.
 
 A opção `--break-system-packages`, citada na mensagem, força a instalação. Não use: é exatamente o
 problema que o ambiente virtual resolve ([próxima página](./02-o-ambiente-virtual-por-dentro.md)).

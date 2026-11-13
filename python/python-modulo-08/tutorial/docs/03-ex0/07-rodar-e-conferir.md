@@ -24,7 +24,7 @@ python3 construct.py
 
 MATRIX STATUS: You're still plugged in
 
-Current Python: /…/bin/python3.14
+Current Python: /…/bin/python3.15
 Virtual Environment: None detected
 
 WARNING: You're in the global environment!
@@ -38,7 +38,7 @@ matrix_env\Scripts\activate  # On Windows
 Then run this program again.
 
 Package installation path:
-/…/lib/python3.14/site-packages
+/…/lib/python3.15/site-packages
 ```
 
 O `/…` marca a pasta onde o Python global está instalado. Num Linux com o Python do sistema, as
@@ -78,13 +78,13 @@ FIM
 
 ```text
 4c4
-< Current Python: /…/bin/python3.14
+< Current Python: /…/bin/python3.15
 ---
 > Current Python: /usr/bin/python3.11
 16,18d15
 < 
 < Package installation path:
-< /…/lib/python3.14/site-packages
+< /…/lib/python3.15/site-packages
 ```
 
 O `diff` descreve como transformar o primeiro texto no segundo. As linhas com `<` são do
@@ -124,7 +124,7 @@ Safe to install packages without affecting
 the global system.
 
 Package installation path:
-/…/the-matrix/ex0/matrix_env/lib/python3.14/site-packages
+/…/the-matrix/ex0/matrix_env/lib/python3.15/site-packages
 ```
 
 Aqui o `/…` é a pasta onde fica a `the-matrix`.
@@ -160,12 +160,12 @@ FIM
 
 ```text
 13c13
-< /path/to/matrix_env/lib/python3.14/site-packages
+< /path/to/matrix_env/lib/python3.15/site-packages
 ---
 > /path/to/matrix_env/lib/python3.11/site-packages
 ```
 
-A única diferença é a versão do Python no caminho dos pacotes: `python3.14` aqui, `python3.11`
+A única diferença é a versão do Python no caminho dos pacotes: `python3.15` aqui, `python3.11`
 na máquina de quem escreveu o enunciado.
 
 ## Dentro do venv, sem ativar
@@ -188,17 +188,17 @@ Safe to install packages without affecting
 the global system.
 
 Package installation path:
-/…/the-matrix/ex0/matrix_env/lib/python3.14/site-packages
+/…/the-matrix/ex0/matrix_env/lib/python3.15/site-packages
 ```
 
 O terminal não tem nada ativado, mas o Python que roda é o do venv, e o programa acerta: a
 detecção olha para o Python em execução, e não para a ativação
 ([Por que não a variável VIRTUAL_ENV](./02-detectar-o-venv.md#por-que-não-a-variável-virtual_env)).
 
-## No Python 3.10
+## Em outras versões do Python
 
-Com o Python 3.10, as saídas são as mesmas, com `python3.10` no lugar de `python3.14` nos
-caminhos.
+Com o Python 3.10 ou o 3.14, as saídas são as mesmas, com `python3.10` ou `python3.14` no lugar
+de `python3.15` nos caminhos.
 
 ## Conferir estilo e tipos
 

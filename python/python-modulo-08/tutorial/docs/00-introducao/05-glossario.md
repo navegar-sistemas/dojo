@@ -45,7 +45,7 @@ title: Glossário
 | **override (sobreposição)** | variável do ambiente que vale mais que o valor do `.env` | [A conferência de segurança](../05-ex2/06-a-conferencia-de-seguranca.md) |
 | **pacote** | biblioteca com nome e versão, pronta para ser instalada | [Pacotes e o pip](../02-conceitos/01-pacotes-e-o-pip.md) |
 | **`PATH`** | variável com a lista de pastas onde o terminal procura os comandos | [Variáveis de ambiente](../02-conceitos/04-variaveis-de-ambiente.md) |
-| **pip** | o instalador de pacotes que vem com o Python | [Pacotes e o pip](../02-conceitos/01-pacotes-e-o-pip.md) |
+| **pip** | o instalador de pacotes que vem com o Python e com todo ambiente virtual | [Pacotes e o pip](../02-conceitos/01-pacotes-e-o-pip.md) |
 | **Poetry** | gerenciador de projetos: resolve e trava as versões e cria o ambiente do projeto | [pip e Poetry](../04-ex1/02-pip-e-poetry.md) |
 | **produção** | o servidor onde o programa roda de verdade, para os usuários | [Desenvolvimento e produção](../05-ex2/07-desenvolvimento-e-producao.md) |
 | **prompt** | o começo da linha onde se digita no terminal; mostra o venv ativado entre parênteses | [O ambiente virtual por dentro](../02-conceitos/02-o-ambiente-virtual-por-dentro.md#ativar-e-desativar) |

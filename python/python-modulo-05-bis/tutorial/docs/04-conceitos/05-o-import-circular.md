@@ -7,7 +7,7 @@ title: O import circular
 
 Dois módulos que precisam um do outro importam um ao outro: é a **dependência circular**, ou
 **import circular**. Às vezes ela funciona, às vezes derruba o programa antes de ele começar. O
-exercício 4 constrói os dois casos; esta página mostra o mecanismo com um par menor.
+exercício 4 constrói os dois casos; um par menor mostra o mecanismo.
 
 ## Como um import roda, passo a passo
 

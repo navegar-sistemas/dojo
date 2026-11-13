@@ -9,7 +9,7 @@ O enunciado deixa uma pergunta no fim de cada exercício, e avisa que, na avalia
 que você sele um laboratório novo do zero, explique qualquer mecanismo de import, mude o que o
 pacote expõe, ou quebre e conserte uma dependência circular. Também pede, no exercício 1, que você
 saiba explicar por que o `.env` está no `.gitignore`, e, no exercício 4, as alternativas à solução
-escolhida. Esta página responde a cada pergunta e mostra cada demonstração.
+escolhida.
 
 ## Exercício 0: o que um ambiente virtual isola, e o que não isola?
 

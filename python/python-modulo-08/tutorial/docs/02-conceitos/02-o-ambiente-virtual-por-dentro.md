@@ -5,10 +5,12 @@ title: O ambiente virtual por dentro
 
 # O ambiente virtual por dentro
 
-Um **ambiente virtual** resolve os dois problemas da [página anterior](./01-pacotes-e-o-pip.md):
-cada projeto ganha o seu próprio `site-packages`, onde o pip pode instalar à vontade, sem tocar no
-Python do sistema (o Python **global**) nem nos outros projetos. O `.venv` criado em
-[As ferramentas](../01-ambiente/03-as-ferramentas.md) é um ambiente virtual; esta página abre ele.
+A [página anterior](./01-pacotes-e-o-pip.md) terminou com dois problemas: uma biblioteca só
+serve ao Python em cujo `site-packages` foi instalada, e o Python do sistema recusa instalações.
+Um **ambiente virtual** resolve os dois: cada projeto ganha um Python e um `site-packages` só
+seus, onde o pip instala à vontade, sem tocar no Python do sistema (o Python **global**) nem nos
+outros projetos. O `.venv` criado em [As ferramentas](../01-ambiente/03-as-ferramentas.md) é um
+ambiente virtual.
 
 ## O que tem na pasta
 
@@ -25,7 +27,7 @@ pyvenv.cfg
 
 - `bin/`: os programas do ambiente: `python` e `python3`, `pip`, as ferramentas instaladas
   (`flake8`, `mypy`, `poetry`) e os scripts `activate`, explicados abaixo;
-- `lib/`: dentro dela, `python3.14/site-packages/`, a pasta das bibliotecas deste ambiente;
+- `lib/`: dentro dela, `python3.15/site-packages/`, a pasta das bibliotecas deste ambiente;
 - `include/`: uma pasta para bibliotecas que compilam código em C; fica vazia aqui;
 - `pyvenv.cfg`: o arquivo que transforma a pasta num ambiente virtual.
 
@@ -38,9 +40,9 @@ cat .venv/pyvenv.cfg
 ```text
 home = /…/bin
 include-system-site-packages = false
-version = 3.14.5
-executable = /…/bin/python3.14
-command = /…/bin/python3.14 -m venv /…/the-matrix/.venv
+version = 3.15.2
+executable = /…/bin/python3.15
+command = /…/bin/python3.15 -m venv /…/the-matrix/.venv
 ```
 
 - `home` é a pasta do Python que criou o ambiente, o Python global;
@@ -82,10 +84,10 @@ python3 experimentos/onde_estou.py
 ```
 
 ```text
-executable:  /…/bin/python3.14
+executable:  /…/bin/python3.15
 prefix:      /…
 base_prefix: /…
-packages:    /…/lib/python3.14/site-packages
+packages:    /…/lib/python3.15/site-packages
 ```
 
 ```bash
@@ -96,7 +98,7 @@ packages:    /…/lib/python3.14/site-packages
 executable:  /…/the-matrix/.venv/bin/python
 prefix:      /…/the-matrix/.venv
 base_prefix: /…
-packages:    /…/the-matrix/.venv/lib/python3.14/site-packages
+packages:    /…/the-matrix/.venv/lib/python3.15/site-packages
 ```
 
 O `/…` marca a parte que muda de máquina para máquina: na primeira saída, a pasta onde o Python
@@ -144,8 +146,9 @@ echo "$VIRTUAL_ENV"
   `source`, e não só o nome do script). O script muda a variável `PATH`, a lista de pastas em que
   o terminal procura os comandos, pondo `.venv/bin` na frente
   ([Variáveis de ambiente](./04-variaveis-de-ambiente.md));
-- o script também cria a variável `VIRTUAL_ENV`, com a pasta do ambiente, e põe o nome do
-  ambiente no começo da linha onde se digita, o *prompt*: `(.venv) $`.
+- o script também cria a variável `VIRTUAL_ENV`, com a pasta do ambiente (`echo "$VIRTUAL_ENV"`
+  mostra o valor: o `$` antes do nome lê uma variável do terminal), e põe o nome do ambiente no
+  começo da linha onde se digita, o *prompt*: `(.venv) $`.
 
 Com o ambiente ativado, `python3` já é o do venv:
 
@@ -157,7 +160,7 @@ python3 experimentos/onde_estou.py
 executable:  /…/the-matrix/.venv/bin/python3
 prefix:      /…/the-matrix/.venv
 base_prefix: /…
-packages:    /…/the-matrix/.venv/lib/python3.14/site-packages
+packages:    /…/the-matrix/.venv/lib/python3.15/site-packages
 ```
 
 O comando `deactivate`, criado pelo `activate`, desfaz tudo:

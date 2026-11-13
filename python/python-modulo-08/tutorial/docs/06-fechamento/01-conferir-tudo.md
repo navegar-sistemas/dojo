@@ -47,14 +47,14 @@ própria pasta e a de cima). Os arquivos de entrega, com os nomes exatos do enun
 | `ex1` | `loading.py`, `requirements.txt`, `pyproject.toml` | `matrix_env`, `.mypy_cache`, `poetry.lock`, `matrix_analysis.png` |
 | `ex2` | `oracle.py`, `requirements.txt`, `.env.example`, `.gitignore` | `matrix_env`, `.mypy_cache`, `.env` |
 
-Os ambientes virtuais ficam de fora porque o enunciado manda: quem avalia cria os seus. O
-`poetry.lock` e o `matrix_analysis.png` são gerados pelo `poetry install` e pelo programa, e não
-estão na lista de arquivos a entregar. O `.env` guarda o segredo.
+Os ambientes virtuais ficam de fora porque o enunciado manda; se for preciso, você cria um novo
+durante a avaliação. O `poetry.lock` e o `matrix_analysis.png` são gerados pelo `poetry install` e
+pelo programa, e não estão na lista de arquivos a entregar. O `.env` guarda o segredo.
 
 ## Estilo e tipos
 
-O flake8 e o mypy recebem os arquivos um a um: com as pastas, eles entrariam nos ambientes
-virtuais e confeririam o código das bibliotecas instaladas.
+As ferramentas recebem os arquivos um a um: com as pastas, o flake8 entraria nos ambientes
+virtuais (`matrix_env`) e conferiria o código das bibliotecas instaladas.
 
 ```bash
 .venv/bin/flake8 ex0/construct.py ex1/loading.py ex2/oracle.py

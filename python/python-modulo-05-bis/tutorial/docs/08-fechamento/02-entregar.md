@@ -33,7 +33,8 @@ cd entrega
 ```
 
 - troque `<endereço-do-repositório>` pelo endereço recebido. O `git clone` baixa o repositório
-  para a pasta `entrega`;
+  para a pasta `entrega`. Se a pasta do projeto tem outro nome, troque `the-codex` pelo nome da
+  sua pasta nos comandos `cp`;
 - o `mkdir -p` cria as pastas `ex0` e `ex1` (o `-p` não reclama se elas já existirem);
 - os arquivos de `ex0` e `ex1` são copiados um a um, pelo nome: assim o `poetry.lock` e o `.env`
   ficam para trás. Um `cp the-codex/ex1/*` não serviria, porque o `*` não pega os nomes que começam
@@ -82,6 +83,17 @@ eles também aparecem, com outras marcas.
 
 ## Registrar e enviar
 
+Cada registro do git leva o nome e o e-mail de quem o fez. Diga ao git quem você é, dentro do
+repositório de entrega, antes do primeiro registro:
+
+```bash
+git config user.name "Seu Nome"
+git config user.email "voce@exemplo.com"
+```
+
+Troque pelo seu nome e pelo seu e-mail. Os dois comandos não imprimem nada; sem `--global`, a
+configuração vale só para este repositório. Depois, registre e envie:
+
 ```bash
 git add .
 git commit -m "Add The Codex exercises 0 to 4"
@@ -90,17 +102,39 @@ git push
 
 - `git add .` marca para o próximo registro tudo o que está na pasta (o ponto), menos o que algum
   `.gitignore` manda ignorar; não imprime nada;
-- `git commit` registra os arquivos marcados com a mensagem do `-m` e mostra um resumo, com o número
-  de arquivos registrados;
+- `git commit` registra os arquivos marcados, com a mensagem do `-m`, e mostra um resumo:
+
+  ```text
+  [main (root-commit) 1e44538] Add The Codex exercises 0 to 4
+   25 files changed, 376 insertions(+)
+  ```
+
+  seguido de uma linha `create mode` por arquivo. `main` é o **ramo** (*branch*), a linha de
+  histórico onde o registro entra (pode ser `master`, conforme o servidor); `root-commit` aparece
+  só no primeiro registro do repositório; o código de sete caracteres identifica o registro e muda
+  a cada vez;
 - `git push` envia o registro para o repositório de entrega.
 
-O `git commit` precisa saber quem é o autor. Se ele pedir (`Please tell me who you are`), informe o
-seu nome e e-mail uma vez, e rode o `git commit` de novo:
+Sem os dois `git config`, conforme a máquina, o git recusa o registro com
+`Please tell me who you are` ("diga quem você é"), ou registra assim mesmo, com um nome e um
+e-mail montados a partir do seu usuário e do nome da máquina. No macOS, sem nenhuma configuração,
+acontece o segundo: o resumo vem junto de uma mensagem que começa com
+
+```text
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+```
+
+("o seu nome e o seu e-mail foram configurados automaticamente a partir do seu usuário e do nome
+da máquina; confira se estão certos"). Essa mensagem é o sinal de que o registro saiu com a
+identidade errada. Rode os dois `git config` e corrija o último registro, antes do `git push`:
 
 ```bash
-git config --global user.name "Seu Nome"
-git config --global user.email "seu@email"
+git commit --amend --reset-author --no-edit
 ```
+
+`--amend` refaz o último registro, `--reset-author` troca o autor pela identidade configurada
+agora, e `--no-edit` mantém a mensagem. O comando mostra o resumo de novo, já sem o aviso.
 
 ## Conferir o que foi enviado
 

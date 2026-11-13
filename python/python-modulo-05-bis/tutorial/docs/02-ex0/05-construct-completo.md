@@ -71,7 +71,7 @@ python3 ex0/construct.py
 
 LABORATORY STATUS: You are working in the open
 
-Current Python: /path/to/python3.14
+Current Python: /path/to/python3.15
 Virtual Environment: None detected
 
 WARNING: You are in the global environment!
@@ -113,10 +113,10 @@ Safe to install reagents without affecting
 the global system.
 
 Reagent installation path:
-/path/to/the-codex/lab_env/lib/python3.14/site-packages
+/path/to/the-codex/lab_env/lib/python3.15/site-packages
 ```
 
-- `/path/to/the-codex` está no lugar do caminho da pasta do projeto, e o `python3.14` muda com a
+- `/path/to/the-codex` está no lugar do caminho da pasta do projeto, e o `python3.15` muda com a
   versão do Python;
 - `Current Python` termina em `bin/python3`, e não em `bin/python` como no enunciado, porque o
   comando digitado foi `python3`: `sys.executable` mostra o nome pelo qual o Python foi chamado.

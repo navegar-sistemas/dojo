@@ -44,7 +44,7 @@ A saída termina com:
 Installing collected packages: python-dotenv
 Successfully installed python-dotenv-1.2.4
 
-[notice] A new release of pip is available: 26.1.1 -> 26.3
+[notice] A new release of pip is available: 26.2.2 -> 26.3
 [notice] To update, run: pip install --upgrade pip
 ```
 
@@ -353,10 +353,11 @@ Success: no issues found in 1 source file
 
 Agora o mypy encontra a biblioteca e confere o uso dela com os type hints que ela traz.
 
-## No Python 3.10
+## Em outras versões do Python
 
-Com o Python 3.10, todas as saídas desta página são as mesmas, menos o aviso `[notice]` do
-`pip install`, que cita o pip que veio com o 3.10 (`23.0.1 -> 26.3`).
+Com o Python 3.10 ou o 3.14, todas as saídas desta página são as mesmas, menos o aviso
+`[notice]` do `pip install`, que cita o pip que veio com cada versão (`23.0.1 -> 26.3` no 3.10,
+`26.1.1 -> 26.3` no 3.14).
 
 Desative o ambiente e volte para a pasta do projeto:
 

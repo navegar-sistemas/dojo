@@ -10,7 +10,8 @@ title: O enunciado em linguagem simples
 - **Python 3.10 ou mais novo** ([O Python](../01-ambiente/01-o-python.md)).
 - **Estilo conferido pelo flake8.** O flake8 é um programa que lê o código e aponta o que foge do
   estilo padrão do Python: linha com mais de 79 caracteres, falta de linha em branco entre
-  funções, `import` que não é usado. O código entregue não pode ter nenhum aviso dele.
+  funções, `import` que não é usado. O código entregue não pode ter nenhum aviso dele (só o
+  exercício 1 aceita avisos sobre `import`, do flake8 e do mypy).
 - **Type hints em todo o código, conferidos pelo mypy.** Um *type hint* é a anotação do tipo de
   cada parâmetro e do retorno, como em `def dobro(n: int) -> int:`. O mypy é o programa que
   confere se esses tipos batem com o uso
@@ -43,7 +44,8 @@ o que varia.
 ## Entrega
 
 Os arquivos da tabela, com esses nomes e nessas pastas, num repositório Git. O ambiente virtual
-**não** é entregue: quem avalia cria um novo, se precisar. O arquivo `.env`, que guarda segredos,
+**não** é entregue, e você precisa saber criar um novo durante a avaliação, se for preciso. O
+arquivo `.env`, que guarda segredos,
 também não. Na avaliação, você precisa saber explicar por que os ambientes virtuais importam, as
 diferenças entre o pip e o Poetry, como as variáveis de ambiente deixam um programa seguro e
 configurável, e por que o `.env` fica no `.gitignore`

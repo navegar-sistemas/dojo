@@ -18,7 +18,8 @@ o básico:
 | `lower()`: o texto em letras minúsculas | `"EARTH".lower()` dá `"earth"` |
 | `endswith()`: o texto termina com outro? | `"water - VALID".endswith("VALID")` dá `True` |
 
-Um arquivo com esses itens, para conferir:
+Para conferir, salve as linhas abaixo como `conferir.py`, em qualquer pasta, e rode
+`python3 conferir.py` nessa pasta:
 
 ```python
 def greet(name: str) -> str:

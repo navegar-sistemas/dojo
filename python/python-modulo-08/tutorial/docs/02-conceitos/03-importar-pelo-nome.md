@@ -20,8 +20,11 @@ python3 -c 'import numpy'
 A última linha do traceback é:
 
 ```text
-ModuleNotFoundError: No module named 'numpy'
+ModuleNotFoundError: No module named 'numpy'. Did you mean: 'runpy'?
 ```
+
+O Python 3.15 acrescenta uma sugestão de nome parecido (`runpy` é um módulo da biblioteca padrão);
+até o 3.14, a linha termina em `No module named 'numpy'`.
 
 `ModuleNotFoundError` ("módulo não encontrado") é um tipo de `ImportError`, o erro de qualquer
 `import` que falha. Um `except ImportError` captura os dois.
@@ -142,7 +145,7 @@ Os dois ficam quietos:
 
 ## O preço
 
-O mypy deixa de conferir o uso da biblioteca: um nome de função escrito errado, como
+O mypy deixa de conferir o uso da biblioteca: um nome escrito errado, como
 `module.__versoin__`, passa pelo mypy e só falha quando o programa roda. Para um programa que
 precisa rodar sem as bibliotecas instaladas e só chama meia dúzia de funções delas, é uma troca
 razoável, e é a escolha do tutorial no exercício 1. Num projeto grande, que sempre tem as

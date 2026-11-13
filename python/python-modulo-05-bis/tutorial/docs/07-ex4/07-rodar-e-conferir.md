@@ -32,9 +32,10 @@ ImportError: cannot import name 'dark_spell_allowed_ingredients' from partially 
 FIM
 ```
 
-Sem nenhuma linha impressa. O `2>&1` e o `sed -n '1,4p;$p'` são os da
-[conferência do exercício 2](../05-ex2/07-rodar-e-conferir.md#ft_alembic_1py-contra-o-enunciado);
-o segundo `sed` troca `$PWD`, a pasta atual, pelo caminho do enunciado. O programa termina com
+Sem nenhuma linha impressa. O `2>&1` é o da
+[conferência do exercício 2](../05-ex2/07-rodar-e-conferir.md#ft_alembic_1py-contra-o-enunciado).
+`sed -n '1,4p;$p'` imprime só as linhas 1 a 4 e a última (`$` é a última linha), e o segundo
+`sed` troca `$PWD`, a pasta atual, pelo caminho do enunciado. O programa termina com
 código de saída `1`, como todo programa que para numa exceção:
 
 ```bash

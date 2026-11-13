@@ -28,11 +28,25 @@ cp the-matrix/ex2/oracle.py the-matrix/ex2/requirements.txt the-matrix/ex2/.env.
 cd entrega
 ```
 
-Troque `<endereço-do-repositório>` pelo endereço recebido. O `git clone` baixa o repositório; o
+Troque `<endereço-do-repositório>` pelo endereço recebido e, se a pasta do projeto tem outro nome,
+troque `the-matrix` pelo nome dela nos comandos `cp`. O `git clone` baixa o repositório; o
 `mkdir -p` cria as pastas dos exercícios (o `-p` não reclama se elas já existirem), e cada `cp`
 copia os arquivos listados para a pasta do fim da linha.
 
-## Registrar e enviar
+## O autor dos registros
+
+Todo registro do Git leva o nome e o e-mail de quem o fez. Antes do primeiro registro, defina os
+dois **dentro do repositório de entrega**, com os seus dados no lugar dos do exemplo:
+
+```bash
+git config user.name "Seu Nome"
+git config user.email "voce@exemplo.com"
+```
+
+Os comandos não imprimem nada. Sem a opção `--global`, a configuração vale só para este
+repositório, e não muda nada nos outros.
+
+## Marcar os arquivos
 
 ```bash
 git add ex0 ex1 ex2
@@ -80,23 +94,65 @@ ex2/.gitignore:1:.env	ex2/.env
 `git check-ignore` responde se um caminho seria ignorado, e o `-v` diz por quê: a regra da linha 1
 do `ex2/.gitignore`, `.env`, cobre o caminho `ex2/.env`. Um `git add ex2` não o adicionaria.
 
-## Enviar
-
-O `git commit` precisa saber quem é o autor. Se ele pedir (`Please tell me who you are`),
-informe o seu nome e e-mail uma vez, e rode o `git commit` de novo:
-
-```bash
-git config --global user.name "Seu Nome"
-git config --global user.email "seu@email"
-```
+## Registrar e enviar
 
 ```bash
 git commit -m "Add exercises 0 to 2"
+```
+
+```text
+[main (root-commit) 748e07b] Add exercises 0 to 2
+ 8 files changed, 309 insertions(+)
+ create mode 100644 ex0/construct.py
+ create mode 100644 ex1/loading.py
+ create mode 100644 ex1/pyproject.toml
+ create mode 100644 ex1/requirements.txt
+ create mode 100644 ex2/.env.example
+ create mode 100644 ex2/.gitignore
+ create mode 100644 ex2/oracle.py
+ create mode 100644 ex2/requirements.txt
+```
+
+`git commit` registra os arquivos marcados, com a mensagem do `-m`. A primeira linha mostra o
+ramo e o código do registro (`748e07b`, outro a cada registro); `root-commit` quer dizer que é o
+primeiro registro do repositório. Depois vem a lista dos oito arquivos criados.
+
+```bash
 git push
 ```
 
-`git commit` registra os arquivos com uma mensagem; `git push` envia o registro para o
-repositório de entrega.
+`git push` envia o registro para o repositório de entrega.
+
+### Se o Git inventou um autor
+
+Sem o `git config` de [O autor dos registros](#o-autor-dos-registros), o `git commit` pode não
+recusar: em vários sistemas (o macOS, por exemplo), ele monta um nome e um e-mail a partir do
+usuário e do nome do computador, registra assim mesmo e só avisa. No meio da saída do commit
+aparece:
+
+```text
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+```
+
+("O seu nome e endereço de e-mail foram configurados automaticamente a partir do seu usuário e do
+nome do computador. Confira se estão corretos.") Essa mensagem quer dizer que o registro saiu com
+um autor errado. Para corrigir, antes do `git push`, rode os dois `git config` e refaça o último
+registro com o autor novo:
+
+```bash
+git commit --amend --reset-author --no-edit
+```
+
+```text
+[main 90f9c6b] Add exercises 0 to 2
+ 1 file changed, 55 insertions(+)
+ create mode 100644 construct.py
+```
+
+`--amend` refaz o último registro; `--reset-author` troca o autor dele pelo configurado; `--no-edit`
+mantém a mensagem. A saída acima é de um repositório de teste com um arquivo só; no da entrega, a
+lista é a dos oito arquivos, e o código do registro muda.
 
 ## Conferir o que foi enviado
 

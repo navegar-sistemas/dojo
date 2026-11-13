@@ -62,12 +62,13 @@ python3 -c 'import sigil'
 Traceback (most recent call last):
   File "<string>", line 1, in <module>
     import sigil
-ModuleNotFoundError: No module named 'sigil'
+ModuleNotFoundError: No module named 'sigil'. Did you mean: 'signal'?
 ```
 
 `ModuleNotFoundError` ("módulo não encontrado") é o erro de um `import` que não achou o módulo em
-nenhuma pasta da lista. No Python 3.10, o traceback não repete a linha `import sigil`; a última
-linha é a mesma.
+nenhuma pasta da lista. O Python 3.15 ainda sugere um módulo de nome parecido que ele conhece, aqui
+o `signal` da biblioteca padrão, que não tem nada a ver com o `sigil`; no 3.14, a última linha
+termina em `'sigil'`, sem sugestão, e no 3.10 o traceback também não repete a linha `import sigil`.
 
 ## O que isso decide no projeto
 

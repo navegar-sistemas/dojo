@@ -30,7 +30,7 @@ All set!
 ```
 
 ```text
-Creating virtualenv loading-68vMiNM2-py3.14 in /…/pypoetry/virtualenvs
+Creating virtualenv loading-BeTxmVon-py3.15 in /…/pypoetry/virtualenvs
 Updating dependencies
 Resolving dependencies...
 
@@ -54,7 +54,7 @@ Writing lock file
 
 Linha por linha:
 
-- `Creating virtualenv loading-68vMiNM2-py3.14 in /…/pypoetry/virtualenvs`: o Poetry criou um
+- `Creating virtualenv loading-BeTxmVon-py3.15 in /…/pypoetry/virtualenvs`: o Poetry criou um
   ambiente virtual para o projeto. O nome junta o `name` do `pyproject.toml` (`loading`), um
   código calculado a partir do caminho da pasta do projeto (outro em cada máquina) e a versão do
   Python. A pasta fica no **cache** do Poetry, uma pasta de dados da própria ferramenta, fora do
@@ -138,7 +138,7 @@ travadas, mesmo que existam outras mais novas.
 ```
 
 ```text
-/…/pypoetry/virtualenvs/loading-68vMiNM2-py3.14
+/…/pypoetry/virtualenvs/loading-BeTxmVon-py3.15
 ```
 
 ```bash
@@ -191,9 +191,9 @@ Python e travou uma versão do numpy para cada uma: a 2.2.6 para o 3.10, a 2.4.6
 2.5.4 do 3.12 em diante. Mais abaixo, em cada tabela, uma linha `markers` diz para qual Python
 ela vale. O `requirements.txt` não guarda nada disso.
 
-## No Python 3.10
+## Em outras versões do Python
 
-Com o Poetry instalado num `.venv` criado pelo Python 3.10, o ambiente do projeto se chama
+No Python 3.14, tudo sai igual, com `py3.14` no nome do ambiente. Com o Poetry instalado num `.venv` criado pelo Python 3.10, o ambiente do projeto se chama
 `loading-…-py3.10`, o Poetry instala 14 pacotes (os mesmos do pip no 3.10) e as linhas `[OK]`
 mostram pandas 2.3.3, numpy 2.2.6 e matplotlib 3.10.9. O `poetry.lock` sai igual: ele é
 calculado para todas as versões de Python aceitas, qualquer que seja a que está rodando.

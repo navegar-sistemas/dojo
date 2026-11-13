@@ -9,9 +9,8 @@ O capítulo de entrega do enunciado diz que, na avaliação entre pares, você v
 coisas: o entendimento dos ambientes virtuais e da importância deles, as diferenças entre o pip e
 o Poetry, como as variáveis de ambiente deixam uma aplicação segura e configurável, e a
 capacidade de explicar tudo isso a outros aprendizes. O exercício 2 acrescenta uma quinta: saber
-explicar por que o `.env` fica no `.gitignore`. E o exercício 0 avisa que quem avalia pode
-precisar criar um ambiente virtual novo. As respostas abaixo apontam para as páginas onde cada
-coisa foi feita.
+explicar por que o `.env` fica no `.gitignore`. E o exercício 0 avisa que você precisa saber
+criar um ambiente virtual novo durante a avaliação, se for preciso.
 
 ## O que é um ambiente virtual, e por que importa?
 
@@ -91,5 +90,5 @@ recriados em cada pasta de exercício, com os comandos já rodados no tutorial:
 |---|---|---|
 | 0 | `python3 -m venv matrix_env`, `source matrix_env/bin/activate`, `python3 construct.py` | [Rodar e conferir](../03-ex0/07-rodar-e-conferir.md#dentro-do-venv) |
 | 1 (pip) | `python3 -m venv matrix_env`, `source matrix_env/bin/activate`, `pip install -r requirements.txt`, `python3 loading.py` | [Rodar com o pip](../04-ex1/10-rodar-com-pip.md#todas-as-bibliotecas) |
-| 1 (Poetry) | `poetry install`, `poetry run python loading.py`, sem nenhum ambiente ativado | [Rodar com o Poetry](../04-ex1/11-rodar-com-poetry.md) |
+| 1 (Poetry) | `../.venv/bin/poetry install`, `../.venv/bin/poetry run python loading.py` (o Poetry do `.venv` das ferramentas), sem nenhum ambiente ativado | [Rodar com o Poetry](../04-ex1/11-rodar-com-poetry.md) |
 | 2 | `python3 -m venv matrix_env`, `source matrix_env/bin/activate`, `pip install -r requirements.txt`, `cp .env.example .env`, preencher a `API_KEY`, `python3 oracle.py` | [Rodar e conferir](../05-ex2/10-rodar-e-conferir.md#o-env-preenchido) |

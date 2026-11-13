@@ -9,7 +9,7 @@ Antes do programa, os três arquivos que o acompanham na entrega.
 
 ## requirements.txt
 
-O programa depende de uma biblioteca só:
+O programa depende de uma biblioteca só. Crie `ex2/requirements.txt`:
 
 ```text title="ex2/requirements.txt"
 python-dotenv
@@ -23,7 +23,7 @@ nenhuma.
 
 ## .env.example
 
-O modelo da configuração, que vai para o repositório:
+O modelo da configuração, que vai para o repositório. Crie `ex2/.env.example`:
 
 ```ini title="ex2/.env.example"
 # Copy to .env and fill in the values. Never commit .env.
@@ -52,7 +52,7 @@ variáveis e os dois valores possíveis de `MATRIX_MODE`.
 
 O `.gitignore` lista, um por linha, os nomes que o Git deve ignorar: arquivos e pastas que não
 entram no repositório mesmo que alguém peça para adicionar a pasta inteira. Ele vale para a pasta
-onde está e as de dentro dela.
+onde está e as de dentro dela. Crie `ex2/.gitignore`:
 
 ```text title="ex2/.gitignore"
 .env

@@ -124,19 +124,19 @@ grep -n -E "^ *(from|import) " *.py alchemy/*.py alchemy/*/*.py | LC_ALL=C sort
 ```
 
 ```text
-alchemy/__init__.py:1:from alchemy.elements import create_air
-alchemy/__init__.py:2:from alchemy.potions import healing_potion as heal, strength_potion
-alchemy/__init__.py:3:from alchemy.transmutation import lead_to_gold
+alchemy/__init__.py:1:from .elements import create_air
+alchemy/__init__.py:2:from .potions import healing_potion as heal, strength_potion
+alchemy/__init__.py:3:from .transmutation import lead_to_gold
 alchemy/grimoire/__init__.py:1:from .light_spellbook import light_spell_record
 alchemy/grimoire/dark_spellbook.py:2:from .dark_validator import validate_ingredients
 alchemy/grimoire/dark_validator.py:2:from .dark_spellbook import dark_spell_allowed_ingredients
 alchemy/grimoire/light_spellbook.py:1:from .light_validator import validate_ingredients
 alchemy/grimoire/light_validator.py:4:    from .light_spellbook import light_spell_allowed_ingredients
-alchemy/potions.py:1:from alchemy.elements import create_air, create_earth
-alchemy/potions.py:2:from elements import create_fire, create_water
+alchemy/potions.py:1:from elements import create_fire, create_water
+alchemy/potions.py:2:from .elements import create_air, create_earth
 alchemy/transmutation/__init__.py:1:from .recipes import lead_to_gold
-alchemy/transmutation/recipes.py:1:from alchemy.elements import create_air
-alchemy/transmutation/recipes.py:2:from elements import create_fire
+alchemy/transmutation/recipes.py:1:from elements import create_fire
+alchemy/transmutation/recipes.py:2:from ..elements import create_air
 alchemy/transmutation/recipes.py:3:from ..potions import strength_potion
 ft_alembic_0.py:1:import elements
 ft_alembic_1.py:1:from elements import create_water
@@ -158,7 +158,10 @@ linha (`-n`). O padrão `^ *(from|import) ` (com `-E`) quer dizer "começo da li
 opcionais, e depois `from` ou `import` seguido de espaço": só as linhas de import, e não os textos
 dos `print` que contêm a palavra *import*. O `sort` põe as linhas na mesma ordem em qualquer
 sistema. Todos os módulos importados são do projeto: `elements`, `alchemy` e os de dentro dele,
-e os relativos, que começam com ponto.
+e os relativos, que começam com ponto. A lista também mostra o
+[critério do tutorial](../05-parte-3/02-absoluto-e-relativo.md#o-critério-do-tutorial): dentro
+de `alchemy/`, todo import de um arquivo do pacote é relativo, e os absolutos são o `elements`
+da raiz e os imports dos scripts.
 
 ```bash
 grep -n -E "sys|eval|exec" *.py alchemy/*.py alchemy/*/*.py

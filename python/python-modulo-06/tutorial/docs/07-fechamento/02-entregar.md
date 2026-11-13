@@ -30,11 +30,35 @@ cp the-codex/alchemy/transmutation/*.py entrega/alchemy/transmutation/
 cd entrega
 ```
 
-Troque `<endereço-do-repositório>` pelo endereço recebido. O `git clone` baixa o repositório; o
+Troque `<endereço-do-repositório>` pelo endereço recebido, e `the-codex` pelo nome da sua pasta,
+se ela tiver outro nome. O `git clone` baixa o repositório; o
 `mkdir -p` cria as pastas de `alchemy` dentro de `entrega` (o `-p` cria também as pastas do meio,
 e não reclama se elas já existirem); cada `cp` copia os arquivos `.py` de uma pasta. Copiar
 `*.py` pasta por pasta, em vez da pasta `alchemy` inteira, deixa as pastas `__pycache__` para
 trás.
+
+## Quem é o autor
+
+Todo registro do git leva o nome e o e-mail de quem o fez. Grave os seus dentro do repositório de
+entrega, antes do primeiro registro (troque pelos seus dados):
+
+```bash
+git config user.name "Seu Nome"
+git config user.email "voce@exemplo.com"
+```
+
+Sem `--global`, a configuração vale só para este repositório. Sem ela, o git pode recusar o
+registro, ou, no macOS, aceitar com um nome e um e-mail deduzidos do usuário e do nome do
+computador. Nesse caso, a saída do `git commit` avisa:
+
+```text
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+```
+
+("O seu nome e e-mail foram configurados automaticamente a partir do seu usuário e do nome do
+computador.") Esse aviso é sinal de identidade errada: rode os dois `git config` acima e corrija o
+último registro com `git commit --amend --reset-author`, que refaz o registro com o autor novo.
 
 ## Registrar e enviar
 
@@ -90,9 +114,17 @@ git push
 ```
 
 `git commit` registra os arquivos com uma mensagem; `git push` envia o registro para o
-repositório de entrega. Se o `git commit` responder `Please tell me who you are` ("diga quem você
-é"), ele mesmo mostra os dois comandos `git config --global` que gravam o seu nome e o seu
-e-mail; rode-os uma vez, com os seus dados, e repita o `git commit`.
+repositório de entrega. A saída do `git commit` começa assim, e segue com mais 23 linhas
+`create mode`, uma por arquivo:
+
+```text
+[main (root-commit) cd56302] Add The Codex
+ 24 files changed, 193 insertions(+)
+ create mode 100644 alchemy/__init__.py
+```
+
+O código depois de `root-commit` (o identificador do registro) muda a cada registro. Nenhuma
+linha fala em nome configurado automaticamente.
 
 ## Conferir o que foi enviado
 

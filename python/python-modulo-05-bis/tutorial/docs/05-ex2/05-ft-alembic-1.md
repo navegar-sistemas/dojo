@@ -46,7 +46,7 @@ Testing the hidden create_earth: Traceback (most recent call last):
   File "/path/to/the-codex/ft_alembic_1.py", line 10, in <module>
     print(f"{alchemy.create_earth()}")
              ^^^^^^^^^^^^^^^^^^^^
-AttributeError: module 'alchemy' has no attribute 'create_earth'. Did you mean: 'create_air'?
+AttributeError: module 'alchemy' has no attribute 'create_earth'. Did you mean '.create_air' instead of '.create_earth'?
 ```
 
 Comparada com a do enunciado:
@@ -56,9 +56,10 @@ Comparada com a do enunciado:
 - a linha de `^` marca o trecho que falhou, `alchemy.create_earth`. No enunciado, ela começa uma
   coluna antes, embaixo da `{`: a posição exata depende da versão do Python, e no 3.10 a linha nem
   aparece;
-- no Python 3.15, a sugestão vem escrita de outro jeito:
-  `Did you mean '.create_air' instead of '.create_earth'?`;
-- num terminal, as versões mais novas do Python (como a 3.14) colorem o traceback.
+- a sugestão do fim vem escrita de outro jeito no Python 3.15 ("você quis dizer `.create_air` em
+  vez de `.create_earth`?"); no 3.14 e no 3.10, ela é `Did you mean: 'create_air'?`, como no
+  enunciado;
+- num terminal, as versões mais novas do Python (3.14 e 3.15) colorem o traceback.
 
 O texto `Testing the hidden create_earth: ` sai antes do traceback, na mesma linha, porque o
 Python esvazia a saída do programa antes de imprimir uma exceção não capturada. O `print` vai para

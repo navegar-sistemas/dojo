@@ -13,8 +13,8 @@ usa, e muitos sistemas Linux recusam, com o erro `externally-managed-environment
 gerenciado pelo sistema"). O jeito comum é criar um **ambiente virtual** (*virtual environment*,
 ou **venv**): uma pasta com um Python próprio e as bibliotecas dele, só para este projeto. O
 exercício 0 inteiro é sobre ambientes virtuais e mostra como eles funcionam por dentro
-([O ambiente virtual por dentro](../02-ex0/02-o-ambiente-virtual-por-dentro.md)); esta página só
-cria um, para as ferramentas.
+([O ambiente virtual por dentro](../02-ex0/02-o-ambiente-virtual-por-dentro.md)); por enquanto,
+basta um ambiente para as ferramentas.
 
 ## Criar o venv das ferramentas
 
@@ -66,7 +66,7 @@ ferramentas ficam em `.venv/bin/`:
 ```
 
 ```text
-7.5.0 (mccabe: 0.7.0, pycodestyle: 2.15.0, pyflakes: 4.1.0) CPython 3.14.5 on
+7.5.0 (mccabe: 0.7.0, pycodestyle: 2.15.0, pyflakes: 4.1.0) CPython 3.15.2 on
 Darwin
 mypy 2.4.1 (compiled: yes)
 ```

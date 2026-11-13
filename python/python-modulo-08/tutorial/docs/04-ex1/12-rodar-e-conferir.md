@@ -5,10 +5,10 @@ title: Rodar e conferir
 
 # Rodar e conferir
 
-As duas páginas anteriores já rodaram o programa em todas as situações que o enunciado pede: sem
-ambiente virtual, com um ambiente vazio, com parte das bibliotecas, com todas pelo pip e com todas
-pelo Poetry. Falta conferir o código e o caso de erro na gravação. Os comandos continuam na pasta
-`ex1`.
+As situações que o enunciado pede (sem ambiente virtual, com um ambiente vazio, com parte das
+bibliotecas, com todas pelo pip e com todas pelo Poetry) estão em
+[Rodar com o pip](./10-rodar-com-pip.md) e [Rodar com o Poetry](./11-rodar-com-poetry.md).
+Faltam o estilo, os tipos e o caso de erro na gravação. Os comandos continuam na pasta `ex1`.
 
 ## Conferir estilo e tipos
 

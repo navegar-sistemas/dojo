@@ -20,10 +20,11 @@ mkdir ex0 ex1 ex2 experimentos
 `mkdir` cria uma pasta (ou várias, com os nomes em sequência). O nome `the-matrix` é só uma
 sugestão; o que o enunciado fixa são as pastas `ex0` a `ex2` e os nomes dos arquivos.
 
-Os comandos das partes de ambiente e de conceitos são rodados a partir desta pasta, a
-`the-matrix`. Os de cada exercício são rodados **dentro da pasta do exercício**, como nos
-exemplos do enunciado: cada parte de exercício começa com um `cd ex0` (ou `ex1`, `ex2`) e
-termina com `cd ..`, que volta para a `the-matrix`.
+Os comandos são rodados a partir desta pasta, a `the-matrix`, e os arquivos dos exercícios são
+criados a partir dela, com o caminho da pasta do exercício (`ex0/construct.py`). A exceção são as
+páginas que rodam os programas de cada exercício: elas rodam os comandos **dentro da pasta do
+exercício**, como nos exemplos do enunciado, começando com um `cd ex0` (ou `ex1`, `ex2`) e
+terminando com `cd ..`, que volta para a `the-matrix`.
 
 Ao fim do projeto, a pasta fica assim (as pastas aparecem com `/` no fim):
 

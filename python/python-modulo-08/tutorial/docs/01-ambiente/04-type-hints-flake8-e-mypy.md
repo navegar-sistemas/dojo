@@ -24,8 +24,9 @@ def double(number: int) -> int:
 
 O Python **não** confere essas anotações quando roda o programa; elas servem para quem lê e para
 o mypy. O enunciado exige type hints em **todo** o código: os parâmetros e o retorno de todas as
-funções. As variáveis podem ficar sem anotação quando o mypy consegue deduzir o tipo pelo valor
-(`count = 0` é um `int`).
+funções. As variáveis podem ficar sem anotação quando o mypy consegue deduzir o tipo: pelo valor
+(`count = 0` é um `int`) ou, para uma lista que começa vazia, pelo primeiro uso no mesmo trecho
+de código (depois de `names = []`, um `names.append("neo")` faz dela uma `list[str]`).
 
 ## Um arquivo com dois problemas
 

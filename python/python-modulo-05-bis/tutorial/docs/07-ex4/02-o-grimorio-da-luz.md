@@ -5,7 +5,7 @@ title: O grimório da luz
 
 # O grimório da luz
 
-O livro de feitiços da luz e o seu validador precisam um do outro. O desenho desta página faz os
+O livro de feitiços da luz e o seu validador precisam um do outro. Um desenho simples faz os
 dois funcionarem: o livro importa o validador no topo, como de costume, e o validador só busca o
 livro quando valida, dentro da função.
 

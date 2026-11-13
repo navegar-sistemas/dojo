@@ -26,7 +26,7 @@ python3 construct.py
 
 MATRIX STATUS: You're still plugged in
 
-Current Python: /…/bin/python3.14
+Current Python: /…/bin/python3.15
 Virtual Environment: None detected
 
 WARNING: You're in the global environment!
@@ -40,7 +40,7 @@ matrix_env\Scripts\activate  # On Windows
 Then run this program again.
 
 Package installation path:
-/…/lib/python3.14/site-packages
+/…/lib/python3.15/site-packages
 ```
 
 Dentro do ambiente virtual `matrix_env`, já ativado:
@@ -62,10 +62,10 @@ Safe to install packages without affecting
 the global system.
 
 Package installation path:
-/…/the-matrix/ex0/matrix_env/lib/python3.14/site-packages
+/…/the-matrix/ex0/matrix_env/lib/python3.15/site-packages
 ```
 
-O `3.14` é a versão do Python; com outra versão, o número muda.
+O `3.15` é a versão do Python; com outra versão, o número muda.
 
 ## Exercício 1
 
@@ -95,7 +95,7 @@ Results saved to: matrix_analysis.png
 Os números entre parênteses são as versões instaladas, e podem ser outros. O programa grava o
 gráfico no arquivo `matrix_analysis.png`:
 
-![Gráfico de linhas com 1000 pontos: o sinal, em azul, sobe e desce entre cerca de -20 e 25, e a tendência, em laranja, é a média dos 50 pontos anteriores, uma linha suave que acompanha o sinal a partir do ponto 49](/img/ex1/matrix_analysis.png)
+![Gráfico de linhas com 1000 pontos: o sinal, em azul, sobe e desce entre cerca de -20 e 25, e a tendência, em laranja, é a média dos 50 pontos até cada um, uma linha suave que acompanha o sinal a partir do ponto 49](/img/ex1/matrix_analysis.png)
 
 ## Exercício 2
 

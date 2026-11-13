@@ -24,27 +24,37 @@ em [Rodar e conferir do exercício 0](../02-ex0/12-rodar-e-conferir.md).
 ## ft_alembic_1.py contra o enunciado
 
 O traceback tem o caminho do arquivo e um número de linha, que mudam de uma pasta e de um arquivo
-para outro. A comparação pega só as linhas que não mudam: as seis primeiras e a última.
+para outro, e a última linha muda com a versão do Python. A comparação pega as seis primeiras
+linhas, que não mudam:
 
 ```bash
-diff <(python3 ft_alembic_1.py 2>&1 | sed -n '1,6p;$p') - <<'FIM'
+diff <(python3 ft_alembic_1.py 2>&1 | sed -n '1,6p') - <<'FIM'
 === Alembic 1 ===
 Accessing the alchemy module using 'import alchemy'
 Testing create_air: Air element created
 Now show that not all functions can be reached
 This will raise an exception!
 Testing the hidden create_earth: Traceback (most recent call last):
-AttributeError: module 'alchemy' has no attribute 'create_earth'. Did you mean: 'create_air'?
 FIM
 ```
 
 - `2>&1` manda a saída de erros (o canal `2`, onde sai o traceback) para o mesmo lugar da saída
   padrão (o canal `1`), e o `sed` recebe as duas, na ordem em que aparecem no terminal;
-- `sed -n '1,6p;$p'` imprime só as linhas 1 a 6 e a última (`$` é a última linha). O `-n` cala
-  as outras.
+- `sed -n '1,6p'` imprime só as linhas 1 a 6. O `-n` cala as outras.
 
-Sem nenhuma linha impressa. No Python 3.15, a última linha tem a sugestão no outro formato
-([ft_alembic_1.py](./05-ft-alembic-1.md)), e o `diff` mostra essa diferença.
+Sem nenhuma linha impressa. A última linha, à parte:
+
+```bash
+python3 ft_alembic_1.py 2>&1 | tail -n 1
+```
+
+```text
+AttributeError: module 'alchemy' has no attribute 'create_earth'. Did you mean '.create_air' instead of '.create_earth'?
+```
+
+O mesmo erro do enunciado, `AttributeError: module 'alchemy' has no attribute 'create_earth'`, com
+a sugestão escrita do jeito do Python 3.15; no 3.14 e no 3.10, a linha é igual à do enunciado,
+terminada em `Did you mean: 'create_air'?`.
 
 O programa termina com erro, de propósito:
 

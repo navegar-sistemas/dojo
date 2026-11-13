@@ -112,4 +112,6 @@ tzdata          2026.6
 ```
 
 Só o que foi instalado aqui, e mais nada: as bibliotecas do Python global não aparecem, e nada
-foi instalado fora do `lab_env`. É o laboratório selado.
+foi instalado fora do `lab_env`. É o laboratório selado. Com Python 3.10, a lista também tem
+`pytz` e `six`, dependências transitivas da `pandas` 2.3.3, e o `setuptools`, que o ambiente do
+3.10 traz de nascença.

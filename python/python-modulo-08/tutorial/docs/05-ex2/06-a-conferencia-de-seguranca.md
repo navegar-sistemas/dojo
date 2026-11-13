@@ -42,7 +42,9 @@ def secrets_check(api_key: str) -> str:
   procura a chave com os dois tipos de aspas em volta: `f'"{api_key}"'` é o texto da chave entre
   aspas duplas.
 
-O programa correto nunca acha a chave: ela vem do ambiente. A página
+No programa correto, a chave não está escrita em lugar nenhum: ela vem do ambiente. A conferência
+só daria um aviso falso com uma chave igual a um dos textos que o próprio programa usa, como
+`production` ou `DEBUG`, o que nenhuma chave de verdade é. A página
 [Rodar e conferir](./10-rodar-e-conferir.md#os-avisos-de-segurança) prova o aviso com uma cópia do
 programa que tem a chave escrita nele.
 

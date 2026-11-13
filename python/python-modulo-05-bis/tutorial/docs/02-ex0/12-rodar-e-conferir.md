@@ -98,8 +98,8 @@ lab_env/bin/python -c 'import site; print(site.getsitepackages()[0])'
 ```
 
 ```text
-/path/to/lib/python3.14/site-packages
-/path/to/the-codex/lab_env/lib/python3.14/site-packages
+/path/to/lib/python3.15/site-packages
+/path/to/the-codex/lab_env/lib/python3.15/site-packages
 ```
 
 A primeira é a pasta do Python global, compartilhada por todos os programas da máquina; o começo
@@ -120,16 +120,16 @@ O ambiente que o Poetry criou também é um ambiente virtual, e `construct.py` o
 
 LABORATORY STATUS: The laboratory is sealed
 
-Current Python: /path/to/virtualenvs/sealed-laboratory-YaXe80qZ-py3.14/bin/python
-Virtual Environment: sealed-laboratory-YaXe80qZ-py3.14
-Environment Path: /path/to/virtualenvs/sealed-laboratory-YaXe80qZ-py3.14
+Current Python: /path/to/virtualenvs/sealed-laboratory-YaXe80qZ-py3.15/bin/python
+Virtual Environment: sealed-laboratory-YaXe80qZ-py3.15
+Environment Path: /path/to/virtualenvs/sealed-laboratory-YaXe80qZ-py3.15
 
 SUCCESS: You are working in an isolated environment!
 Safe to install reagents without affecting
 the global system.
 
 Reagent installation path:
-/path/to/virtualenvs/sealed-laboratory-YaXe80qZ-py3.14/lib/python3.14/site-packages
+/path/to/virtualenvs/sealed-laboratory-YaXe80qZ-py3.15/lib/python3.15/site-packages
 ```
 
 O nome do ambiente é o que o Poetry escolheu; o teste `sys.prefix != sys.base_prefix` vale para

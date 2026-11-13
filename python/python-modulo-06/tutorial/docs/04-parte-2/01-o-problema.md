@@ -21,8 +21,9 @@ Um arquivo novo, `alchemy/potions.py`, com duas poções:
 
 E "o que mais for útil para acessar os quatro elementos": os imports.
 
-No enunciado, a descrição da poção de cura não fecha a última aspa simples
-(`'[created air element]"`); a saída de exemplo fecha, e o tutorial segue a saída.
+No enunciado, as descrições das duas poções não fecham a última aspa simples
+(`'[created air element]"` e `'[created water element]"`); a saída de exemplo fecha, e o tutorial
+segue a saída.
 
 Dois scripts conferem as poções:
 

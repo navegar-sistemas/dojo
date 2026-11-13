@@ -14,7 +14,7 @@ Configuration security check:
 [OK] Production overrides available
 ```
 
-O enunciado mostra as frases, mas não diz o que cada uma confere. As conferências desta página são
+O enunciado mostra as frases, mas não diz o que cada uma confere. As conferências abaixo são
 escolha do tutorial: cada `[OK]` vem de um teste de verdade, que vira `[WARNING]` quando falha. As
 peças entram no `oracle.py` depois de `show_config`.
 

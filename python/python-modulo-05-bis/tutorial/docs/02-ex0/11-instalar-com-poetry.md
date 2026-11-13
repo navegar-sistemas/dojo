@@ -53,6 +53,7 @@ dentro:
 ```
 
 ```text
+
 Poetry could not find a pyproject.toml file in /path/to/the-codex or its parents
 ```
 
@@ -69,15 +70,15 @@ tutorial; com `cd ex0`, os comandos seriam `poetry install` e `poetry run python
 ```
 
 ```text
-Creating virtualenv sealed-laboratory-YaXe80qZ-py3.14 in /path/to/virtualenvs
+Creating virtualenv sealed-laboratory-YaXe80qZ-py3.15 in /path/to/virtualenvs
 Updating dependencies
 Resolving dependencies...
 
 Package operations: 4 installs, 0 updates, 0 removals
 
   - Installing tzdata (2026.6)
-  - Installing numpy (2.5.4)
   - Installing python-dateutil (4.0.0)
+  - Installing numpy (2.5.4)
   - Installing pandas (3.1.1)
 
 Writing lock file
@@ -94,6 +95,19 @@ Linha por linha:
 3. instala as quatro bibliotecas, as mesmas que o `pip` instalou, no ambiente novo. A ordem das
    linhas `Installing` pode variar, porque o Poetry instala várias ao mesmo tempo;
 4. grava o `ex0/poetry.lock`.
+
+No Python 3.10, o Poetry escolhe a `pandas` 2.3.3 e o `numpy` 2.2.6, e instala seis bibliotecas
+(mais `pytz` e `six`). No meio da lista aparece um aviso:
+
+```text
+RuntimeWarning: Skip installing numpy/distutils/__pycache__/conv_template.cpython-310.pyc from numpy. Installing files in a __pycache__ directory poses a security risk. __pycache__ directories should not be included in wheels. This is probably an issue in the build process of 'numpy'.
+```
+
+("pulando a instalação de um arquivo de `__pycache__` do numpy; instalar arquivos de cache é um
+risco de segurança, e eles não deveriam estar no pacote"). O defeito é do pacote do `numpy` para
+o Python 3.10, que traz por engano um arquivo de cache: o Poetry deixa só esse arquivo de fora, e
+a instalação termina normalmente. O `pip` instala o mesmo pacote sem avisar. No Python 3.14 e
+no 3.15, o Poetry escolhe outro `numpy`, e o aviso não aparece.
 
 ```bash
 ls -1 ex0
@@ -138,7 +152,7 @@ no mesmo dia. O caminho do ambiente:
 ```
 
 ```text
-/path/to/virtualenvs/sealed-laboratory-YaXe80qZ-py3.14
+/path/to/virtualenvs/sealed-laboratory-YaXe80qZ-py3.15
 ```
 
 ## A segunda instalação
@@ -187,7 +201,7 @@ que o `poetry.lock` foi gerado.
 flowchart LR
     proj["the-codex/"] --> lab["lab_env/<br/>pip install -r ex0/requirements.txt"]
     proj --> ex0["ex0/pyproject.toml<br/>ex0/poetry.lock"]
-    ex0 -->|"poetry -P ex0 install"| penv["ambiente do Poetry<br/>sealed-laboratory-...-py3.14"]
+    ex0 -->|"poetry -P ex0 install"| penv["ambiente do Poetry<br/>sealed-laboratory-...-py3.15"]
     lab --> l1["pandas, numpy,<br/>python-dateutil, tzdata"]
     penv --> l2["pandas, numpy,<br/>python-dateutil, tzdata"]
 ```

@@ -11,7 +11,8 @@ O projeto usa três ferramentas que não vêm com o Python:
 - o **Poetry**, o gerenciador de projetos do exercício 1
   ([pip e Poetry](../04-ex1/02-pip-e-poetry.md)).
 
-As três são instaladas com o **pip**, o instalador de bibliotecas que vem com o Python. Instalar
+As três são instaladas com o **pip**, o instalador de bibliotecas que vem com o Python e com todo
+ambiente virtual. Instalar
 direto no Python do sistema mistura essas ferramentas com tudo o que o sistema usa, e muitos
 sistemas recusam, com o erro `externally-managed-environment` ("ambiente gerenciado pelo
 sistema"; [Pacotes e o pip](../02-conceitos/01-pacotes-e-o-pip.md#o-python-do-sistema-recusa)).
@@ -60,8 +61,8 @@ que cada programa encontra.
 
 - `.venv/bin/python` é o Python **de dentro** do venv. O `-m pip` roda o `pip` com ele, e o
   `pip` instala as bibliotecas dentro da pasta `.venv`;
-- `--upgrade pip` atualiza o próprio `pip` antes, o que evita o aviso de "nova versão
-  disponível";
+- `--upgrade` instala a versão mais nova de cada pacote da lista, inclusive do próprio `pip`, que
+  já vem no venv: atualizá-lo evita o aviso de "nova versão disponível" nas próximas instalações;
 - `"poetry>=2"` pede o Poetry na versão 2 ou mais nova: o arquivo do exercício 1 usa um formato
   que o Poetry só lê a partir da versão 2. As aspas são necessárias porque, no terminal, `>` sozinho
   manda a saída de um comando para um arquivo.
@@ -83,7 +84,7 @@ A lista e os números das versões podem ser outros na sua máquina. As ferramen
 ```
 
 ```text
-7.5.0 (mccabe: 0.7.0, pycodestyle: 2.15.0, pyflakes: 4.1.0) CPython 3.14.5 on
+7.5.0 (mccabe: 0.7.0, pycodestyle: 2.15.0, pyflakes: 4.1.0) CPython 3.15.2 on
 Darwin
 mypy 2.4.1 (compiled: yes)
 Poetry (version 2.5.1)

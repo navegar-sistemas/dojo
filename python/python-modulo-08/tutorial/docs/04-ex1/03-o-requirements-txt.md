@@ -23,8 +23,8 @@ instala as três bibliotecas e tudo de que elas dependem.
 Os mínimos são as versões da saída de exemplo do enunciado (pandas 2.1.0, numpy 1.25.0,
 matplotlib 3.7.2): versões com que o programa sabidamente funciona. Acima delas, o pip escolhe a
 mais nova que serve para o Python em uso. Essa é a **escolha do tutorial**, e é ela que deixa o
-mesmo arquivo funcionar do Python 3.10 ao 3.14: no 3.14, o pip instala o numpy 2.5; no 3.10, que o
-numpy 2.5 não aceita, instala o numpy 2.2.
+mesmo arquivo funcionar do Python 3.10 ao 3.15: no 3.15 e no 3.14, o pip instala o numpy 2.5; no
+3.10, que o numpy 2.5 não aceita, instala o numpy 2.2.
 
 Fixar versões exatas (`numpy==2.5.4`, como as que o `pip freeze` lista) daria a todo mundo o
 mesmo resultado, mas quebraria em todo Python em que aquela versão não existe. Guardar as versões

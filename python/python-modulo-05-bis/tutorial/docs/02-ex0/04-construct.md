@@ -64,7 +64,7 @@ def show_open_laboratory() -> None:
   a quebra de linha); `\\` é o código da própria barra. Com uma barra só,
   `"lab_env\Scripts\activate"` sai errado de dois jeitos: `\a` é uma sequência de escape de
   verdade (o caractere de "bipe", invisível), e o texto impresso vira `lab_env\Scriptsctivate`;
-  e `\S` não é sequência nenhuma, e o Python 3.14 avisa com `SyntaxWarning: "\S" is an invalid
+  e `\S` não é sequência nenhuma, e o Python 3.14 e o 3.15 avisam com `SyntaxWarning: "\S" is an invalid
   escape sequence`. Os dois espaços antes do `#` copiam o enunciado.
 
 ## Dentro do laboratório

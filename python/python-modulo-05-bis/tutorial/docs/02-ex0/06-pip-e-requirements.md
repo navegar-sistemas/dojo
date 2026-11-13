@@ -26,7 +26,7 @@ pip --version
 ```
 
 ```text
-pip 26.1.1 from /path/to/the-codex/lab_env/lib/python3.14/site-packages/pip (python 3.14)
+pip 26.2.2 from /path/to/the-codex/lab_env/lib/python3.15/site-packages/pip (python 3.15)
 ```
 
 O caminho mostra de onde o `pip` vem, e portanto para onde ele instala: o `lab_env`. Se aparecer
@@ -67,7 +67,9 @@ Cada linha é o nome da biblioteca no PyPI e, opcionalmente, um **especificador 
 Os mínimos `2.1` e `1.25` são as versões da saída de exemplo do enunciado. Usar `>=` em vez de
 `==` é escolha do tutorial: cada versão de uma biblioteca só instala nas versões do Python que
 existiam na época dela, e a `pandas` 2.1.0 não tem pacote pronto para os Pythons mais novos. Com
-`>=`, o `pip` escolhe uma versão que funciona no Python de quem instala, do 3.10 ao mais novo.
+`>=`, o `pip` escolhe uma versão que funciona no Python de quem instala, do 3.10 ao mais novo. No
+Python 3.10, no 3.14 e no 3.15, as bibliotecas do projeto (`pandas`, `numpy` e, no exercício 1,
+`python-dotenv`) instalam a partir de pacotes prontos, sem compilar nada.
 
 O `numpy` aparece na lista mesmo sendo instalado junto com a `pandas`, que depende dele: o
 `loading.py` importa o `numpy` diretamente, e cada biblioteca que o código importa é declarada,

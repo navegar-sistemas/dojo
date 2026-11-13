@@ -13,11 +13,11 @@ python3 --version
 ```
 
 ```text
-Python 3.14.5
+Python 3.15.2
 ```
 
 O número depois de `Python` é a versão. Qualquer `3.10` ou maior serve (`3.10`, `3.11`, …,
-`3.14`).
+`3.14`, `3.15`).
 
 ## Se o comando não existir
 
@@ -80,4 +80,5 @@ outros. Se o comando não existir: no Linux, `sudo apt install git`; no macOS, o
 abre a mesma janela das ferramentas de linha de comando da Apple; aceite e espere terminar.
 
 No resto do tutorial, `python3` quer dizer o Python 3.10 ou mais novo desta página. As saídas
-mostradas são as do Python 3.14; quando o 3.10 mostra algo diferente, a página diz.
+mostradas são as do Python 3.15, o mais novo; quando uma versão mais antiga (do 3.10 ao 3.14)
+mostra algo além de outro número de versão, a página diz.

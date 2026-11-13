@@ -6,8 +6,8 @@ title: O ambiente virtual por dentro
 # O ambiente virtual por dentro
 
 Para descobrir se está num ambiente virtual, `construct.py` precisa saber o que muda no Python
-quando ele roda dentro de um. Esta página cria o ambiente do laboratório, `lab_env`, e olha o que
-há nele.
+quando ele roda dentro de um. A resposta está no próprio ambiente, uma pasta que o roteiro do
+enunciado chama de `lab_env`.
 
 ## Criar o laboratório
 
@@ -32,8 +32,8 @@ O `-1` do `ls` lista um nome por linha. No Linux pode aparecer também `lib64`, 
   Python global, aquele com que o ambiente foi criado: o ambiente não tem um Python copiado, usa
   o mesmo. Também ficam aqui o `pip` do ambiente e os scripts `activate`, da
   [próxima página](./03-ativar-o-ambiente.md);
-- **`lib/python3.14/site-packages/`**: a pasta onde as bibliotecas do ambiente são instaladas. O
-  `python3.14` muda com a versão do Python;
+- **`lib/python3.15/site-packages/`**: a pasta onde as bibliotecas do ambiente são instaladas. O
+  `python3.15` muda com a versão do Python;
 - **`include/`**: uma pasta para compilar bibliotecas escritas em C; fica vazia e não é usada no
   projeto;
 - **`pyvenv.cfg`**: um arquivo de texto pequeno que marca a pasta como ambiente virtual. Ele diz
@@ -60,11 +60,13 @@ ls -1 lab_env/lib/python3*/site-packages
 
 ```text
 pip
-pip-26.1.1.dist-info
+pip-26.2.2.dist-info
 ```
 
-O `*` completa o nome da pasta com a versão do Python, seja ela qual for. `pip-26.1.1.dist-info`
-guarda os dados da instalação do `pip`; o número da versão pode ser outro.
+O `*` completa o nome da pasta com a versão do Python, seja ela qual for. `pip-26.2.2.dist-info`
+guarda os dados da instalação do `pip`; o número da versão pode ser outro. No Python 3.10, o
+ambiente nasce também com o `setuptools`, uma ferramenta de empacotamento, e a lista tem mais
+linhas (`setuptools`, `pkg_resources`, `_distutils_hack` e os seus `.dist-info`).
 
 O Python global também tem a sua `site-packages`, em outro lugar: é ali que um `pip install` sem
 ambiente virtual instalaria (ou tentaria instalar) as bibliotecas, para todos os programas da
@@ -117,7 +119,7 @@ lab_env/bin/python -c 'import site; print(site.getsitepackages())'
 ```
 
 ```text
-['/path/to/the-codex/lab_env/lib/python3.14/site-packages']
+['/path/to/the-codex/lab_env/lib/python3.15/site-packages']
 ```
 
 `site.getsitepackages()` devolve uma lista de pastas. Num ambiente virtual, a primeira é a
@@ -126,7 +128,7 @@ lab_env/bin/python -c 'import site; print(site.getsitepackages())'
 ```mermaid
 flowchart LR
     g["python3 (global)"] -->|"sys.prefix == sys.base_prefix"| gs["site-packages do Python global<br/>(compartilhada pela máquina)"]
-    v["lab_env/bin/python"] -->|"sys.prefix != sys.base_prefix"| vs["lab_env/lib/python3.14/site-packages<br/>(só deste ambiente)"]
+    v["lab_env/bin/python"] -->|"sys.prefix != sys.base_prefix"| vs["lab_env/lib/python3.15/site-packages<br/>(só deste ambiente)"]
     v -.->|"atalho para o mesmo executável"| g
 ```
 

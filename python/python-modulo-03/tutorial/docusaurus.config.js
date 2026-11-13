@@ -28,6 +28,8 @@ const config = {
 
   themes: ['@docusaurus/theme-mermaid'],
 
+  clientModules: ['./src/clientModules/d3-transition.js'],
+
   i18n: {
     defaultLocale: 'pt-BR',
     locales: ['pt-BR'],
