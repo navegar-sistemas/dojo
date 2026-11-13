@@ -12,7 +12,7 @@ const config = {
     v4: true,
   },
 
-  url: 'http://localhost',
+  url: 'https://estudo-maze.navegarsistemas.com.br',
   baseUrl: '/',
 
   onBrokenLinks: 'throw',
