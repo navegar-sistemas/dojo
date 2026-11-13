@@ -30,7 +30,8 @@ class Creature(ABC):
 
 É o formato do `Vehicle` de [Classe abstrata e super](../02-conceitos/02-classe-abstrata-e-super.md):
 
-- `Creature` herda de `ABC`, e por isso pode ter métodos abstratos e não pode ser instanciada;
+- `Creature` herda de `ABC`, o que faz o Python cobrar os métodos abstratos: com o `attack`
+  abstrato, ela não pode ser instanciada;
 - o `__init__` guarda os dois atributos que o enunciado pede, o nome e o tipo, em `self.name` e
   `self.creature_type`;
 - `attack` é abstrato: toda criatura concreta escreve o seu;

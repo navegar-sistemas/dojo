@@ -41,8 +41,9 @@ flowchart LR
     root --> venv[".venv/"]
 ```
 
-A pasta `.venv/` é criada em [O ambiente virtual](./03-o-ambiente-virtual.md). Só os sete arquivos
-`.py` das pastas `ex0` a `ex6` são entregues.
+A pasta `.venv/` é criada em [O ambiente virtual](./03-o-ambiente-virtual.md). Durante o trabalho
+aparecem também pastas de cache do Python e do mypy (`__pycache__` e `.mypy_cache`), que podem
+ser apagadas à vontade. Só os sete arquivos `.py` das pastas `ex0` a `ex6` são entregues.
 
 ## Cada exercício é um arquivo completo
 
@@ -51,6 +52,6 @@ do 2, e assim por diante. Mesmo assim, **cada arquivo é independente**: ele tra
 cópia da classe, do jeito que ela está naquele exercício, e roda sozinho.
 
 Isso é escolha do projeto, com duas bases no enunciado: cada exercício "deve conter as definições
-solicitadas e todo o código exigido", e *imports* ficam para um projeto futuro. Outra opção seria
-importar a classe do exercício anterior; aí um arquivo deixaria de rodar sozinho, e uma mudança
-no exercício 1 mudaria todos os seguintes.
+solicitadas e todo o código exigido", e o enunciado só cita os *imports*, sem pedi-los nos
+exercícios. Outra opção seria importar a classe do exercício anterior; aí um arquivo deixaria de
+rodar sozinho, e uma mudança no exercício 1 mudaria todos os seguintes.

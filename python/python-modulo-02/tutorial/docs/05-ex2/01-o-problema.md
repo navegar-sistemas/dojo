@@ -28,8 +28,8 @@ Um arquivo `ex2/ft_different_errors.py`, que só pode chamar `print()`, `open()`
   que deu errado, mostra que o programa continua depois de cada erro, e mostra como capturar
   **vários tipos de erro com um único `try`**.
 
-O enunciado faz duas observações. Não se pode usar a função `type()` (que devolve o tipo de um
-objeto); e o mypy vai acusar um erro no trecho do `TypeError`, de propósito.
+Duas observações do enunciado mexem no código: não se pode usar a função `type()` (que devolve o
+tipo de um objeto); e o mypy vai acusar um erro no trecho do `TypeError`, de propósito.
 
 ## A saída esperada
 

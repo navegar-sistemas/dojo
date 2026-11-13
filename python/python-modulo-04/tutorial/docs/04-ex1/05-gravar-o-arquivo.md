@@ -58,7 +58,8 @@ O texto escrito vai primeiro para o buffer ([close e o
 recurso](../02-arquivos/04-close-e-o-recurso.md)). Um texto pequeno como o do fragmento só chega ao
 disco no `close()`, e é nesse momento que uma falha de disco cheio aparece. (Um texto maior que o
 buffer começa a ir para o disco já no `write()`, que também pode falhar. O tamanho do buffer muda
-com a versão do Python: cerca de 8 mil caracteres até o 3.13 e cerca de 130 mil a partir do 3.14.)
+com a versão do Python: cerca de 8 mil caracteres até o 3.13 e, a partir do 3.14, entre 130 mil e
+140 mil, conforme o sistema.)
 Por isso, o `close()` também precisa de proteção:
 
 - o `try` de dentro, com `finally`, garante que o arquivo é fechado mesmo que o `write()` falhe;

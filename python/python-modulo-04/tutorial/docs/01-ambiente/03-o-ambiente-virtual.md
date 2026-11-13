@@ -46,7 +46,8 @@ python3 -m venv .venv
 
 - `.venv/bin/python` é o Python **de dentro** do venv. O `-m pip` roda o `pip` com ele, e o `pip`
   instala as bibliotecas dentro da pasta `.venv`;
-- `--upgrade pip` atualiza o próprio `pip` antes, o que evita o aviso de "nova versão disponível";
+- `--upgrade pip` atualiza também o próprio `pip`, na mesma instalação das duas ferramentas, o que
+  evita o aviso de "nova versão disponível" no fim da saída;
 - `flake8 mypy` são as duas ferramentas.
 
 A última linha da saída lista o que foi instalado, começando por `Successfully installed`. As
@@ -64,7 +65,8 @@ mypy 2.4.1 (compiled: yes)
 ```
 
 Os números podem ser outros na sua máquina, e a última palavra da primeira saída é o nome do sistema
-(`Linux`, `Darwin` no macOS). O que importa é que os dois comandos respondem.
+(`Linux`, `Darwin` no macOS). O flake8 quebra essa primeira saída conforme a largura do terminal:
+numa janela larga, ela sai numa linha só. O que importa é que os dois comandos respondem.
 
 Os programas dos exercícios não precisam do venv: eles só usam o que vem com o Python e são rodados
 com `python3`. O venv existe só para as duas ferramentas.

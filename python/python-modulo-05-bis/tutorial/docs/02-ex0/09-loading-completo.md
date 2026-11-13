@@ -77,7 +77,7 @@ O que o arquivo usa: o módulo `importlib`, permitido no exercício 0, e as fun�
 A pasta `ex0` fica com os quatro arquivos do enunciado:
 
 ```bash
-ls -1 ex0
+LC_ALL=C ls -1 ex0
 ```
 
 ```text

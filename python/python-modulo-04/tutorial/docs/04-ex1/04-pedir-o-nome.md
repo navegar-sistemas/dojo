@@ -22,7 +22,8 @@ gravar".
 
 ## Os três jeitos de o input() falhar
 
-O `input()` pode lançar três exceções, e qualquer uma delas, sem um `except`, travaria o programa:
+Três exceções do `input()` precisam ser previstas, e qualquer uma delas, sem um `except`, travaria o
+programa:
 
 - **`EOFError`** (*end of file*, "fim do arquivo"): a entrada acabou sem nenhum caractere para ler.
   No terminal, acontece quando a pessoa aperta `Ctrl+D` numa linha vazia; também acontece quando a

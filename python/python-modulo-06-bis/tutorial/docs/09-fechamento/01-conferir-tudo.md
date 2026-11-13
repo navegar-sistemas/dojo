@@ -10,7 +10,7 @@ Rode tudo a partir da pasta `code-nexus`.
 ## Os arquivos
 
 ```bash
-ls -1 *.py ex3 ex4
+LC_ALL=C ls -1 *.py ex3 ex4
 ```
 
 ```text
@@ -40,14 +40,14 @@ strategy.py
 
 - `*.py` é expandido pelo terminal para todos os arquivos `.py` da pasta atual; `ex3` e `ex4`
   são listadas por dentro. O `-1` põe um nome por linha;
+- `LC_ALL=C`, escrito antes do comando, faz o `ls` ordenar os nomes pelo código de cada caractere,
+  igual em qualquer sistema. Sem ele, a ordem segue o idioma configurado no sistema: no Linux, o
+  `ls` costuma ignorar o `_` ao ordenar, e `__init__.py` e `__pycache__` aparecem no meio da lista;
 - os seis arquivos da raiz e os dois `__init__.py` têm os nomes exatos do enunciado. Um nome
   errado (uma letra trocada, `.py` faltando) já não é o arquivo pedido, e, nos pacotes, quebra os
   imports dos scripts de teste;
 - as pastas `__pycache__` são o cache que o Python cria ao importar os módulos dos pacotes; não
   fazem parte da entrega e podem ser apagadas.
-
-A ordem dos nomes pode mudar de um sistema para outro: no Linux, o `ls` costuma ignorar o `_` ao
-ordenar, e `__init__.py` e `__pycache__` aparecem no meio da lista.
 
 ## Estilo e tipos
 
@@ -147,8 +147,9 @@ O `grep` procura a palavra nos arquivos e mostra cada linha encontrada, com o ar
 da linha (`-n`). Da biblioteca do Python, só `abc` e `typing` aparecem. O resto são imports entre
 os arquivos do próprio projeto: os de `ex3` e `ex4` e os relativos, com ponto, dentro de cada
 pacote. A linha `from ex4 import (` continua nas linhas seguintes do `tournament.py`, com os nomes
-das estratégias e da exceção. A ordem dos arquivos de `ex3` e `ex4` pode mudar no Linux, como a
-do `ls`.
+das estratégias e da exceção. A ordem dos arquivos vem do terminal, que expande `ex3/*.py` e
+`ex4/*.py` seguindo o idioma configurado no sistema; no Linux, os `__init__.py` podem aparecer
+no meio da lista do seu pacote. As linhas encontradas são as mesmas.
 
 ## Nem eval nem exec
 

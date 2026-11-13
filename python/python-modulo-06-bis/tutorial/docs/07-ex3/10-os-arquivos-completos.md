@@ -233,5 +233,5 @@ Cada arquivo termina com uma única quebra de linha depois da última linha, que
 não leva ([O arquivo completo do exercício 0](../03-ex0/08-o-arquivo-completo.md)).
 
 O que os arquivos usam, todos autorizados: `abc` (`ABC` e `abstractmethod`), as funções embutidas
-`isinstance` e `print`, e os `import`s entre os próprios arquivos do projeto (os relativos, com
-ponto, dentro do pacote, e os de `ex3` nos scripts).
+`isinstance`, `print` e `super`, e os `import`s entre os próprios arquivos do projeto (os
+relativos, com ponto, dentro do pacote, e os de `ex3` nos scripts).

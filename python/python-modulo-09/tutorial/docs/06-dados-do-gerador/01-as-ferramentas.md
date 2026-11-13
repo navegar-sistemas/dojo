@@ -48,7 +48,7 @@ data_generator.py
 
 Gera registros parecidos com os dos três exercícios, sorteando os valores dentro de faixas
 realistas. Ele usa só a biblioteca padrão, principalmente o módulo `random`, que sorteia números,
-e o `datetime`. O arquivo tem três classes, uma por tipo de dado:
+e o `datetime`. O arquivo tem uma classe geradora para cada tipo de dado:
 
 | Classe | Gera | Faixas principais |
 |---|---|---|
@@ -60,16 +60,18 @@ As faixas ficam dentro dos limites do enunciado, e as correções (contato físi
 telepatia com 3 testemunhas, um líder em cada missão) seguem as regras de negócio dos
 exercícios.
 
-O sorteio começa sempre do mesmo ponto: a **semente** (*seed*) do `random` é fixa, `42`. Com a
-mesma semente, o `random` sorteia sempre a mesma sequência, e o gerador produz os mesmos dados em
-toda execução e em toda máquina.
+O sorteio começa sempre do mesmo ponto: a **semente** (*seed*) do `random` é fixa. Uma quarta
+classe, `DataConfig`, guarda a configuração, com a semente `42`; cada classe geradora reinicia o
+`random` com ela ou com um número logo acima (`42` nas estações, `43` nos relatos e `44` nas
+missões). Com a mesma semente, o `random` sorteia sempre a mesma sequência, e o gerador produz os
+mesmos dados em toda execução e em toda máquina.
 
 Rodado direto, o `data_generator.py` só imprime um resumo do que gera. Quem grava os dados em
 arquivos é o outro programa.
 
 ## data_exporter.py
 
-Importa as três classes do `data_generator.py`, gera um conjunto maior (10 estações, 15 relatos e
+Importa do `data_generator.py` as três classes geradoras e a `DataConfig`, gera um conjunto maior (10 estações, 15 relatos e
 5 missões) e grava cada conjunto numa pasta `generated_data/`, em três formatos:
 
 - **JSON**, um formato de texto para dados: listas entre `[]`, dicionários entre `{}`, textos

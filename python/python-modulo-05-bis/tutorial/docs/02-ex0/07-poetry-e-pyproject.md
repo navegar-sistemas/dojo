@@ -68,8 +68,8 @@ inclusive as transitivas, uma versão que cumpra todos os especificadores em cad
 de `requires-python`; quando nenhuma versão serve para a faixa inteira, ele escolhe uma para cada
 parte dela ([A segunda instalação](./11-instalar-com-poetry.md#a-segunda-instalação)). Depois
 grava o resultado em `ex0/poetry.lock`: o nome e a versão exata de cada biblioteca, com uma
-**impressão digital** (*hash*) de cada arquivo baixado. As instalações seguintes não resolvem de
-novo: instalam exatamente o que está no `poetry.lock`. É a segunda parte da comparação que o
+**impressão digital** (*hash*) de cada arquivo que o PyPI publica para aquela versão. As
+instalações seguintes não resolvem de novo: instalam exatamente o que está no `poetry.lock`. É a segunda parte da comparação que o
 `loading.py` imprime:
 
 ```text

@@ -19,8 +19,8 @@ Um arquivo `ex0/ft_ancient_text.py` que:
 - trata os casos de falha: arquivo inexistente, arquivo inacessível e outros.
 
 O programa só pode usar `import sys`, `sys.argv`, `len()`, `open()`, `import typing`, `typing.IO`,
-`read()`, `close()` e `print()`. O enunciado também pergunta qual é o tipo do dado devolvido por
-`open()`; a resposta está em [open e o objeto
+`read()`, `close()` e `print()`. O enunciado também pergunta qual é o tipo dos dados devolvidos
+por `open()`; a resposta está em [open e o objeto
 arquivo](../02-arquivos/02-open-e-o-objeto-arquivo.md).
 
 ## A saída esperada

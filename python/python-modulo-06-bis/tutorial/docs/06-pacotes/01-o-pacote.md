@@ -160,7 +160,7 @@ True
 - `greetings.__all__` é a lista do `__init__.py`;
 - `Greeter` está no pacote; `hello` não está. Um `from greetings import hello` falha com
   `ImportError: cannot import name 'hello' from 'greetings'` ("não dá para importar o nome
-  `hello` de `greetings`");
+  `hello` de `greetings`"), seguido, entre parênteses, do caminho do `__init__.py`;
 - `words` está: ao importar um submódulo, o Python o registra como atributo do pacote, e
   `greetings.words.hello` continua alcançável.
 

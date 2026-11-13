@@ -71,8 +71,9 @@ Darwin
 mypy 2.4.1 (compiled: yes)
 ```
 
-Os números podem ser outros na sua máquina, e a última palavra da saída do flake8, que ele
-imprime numa linha à parte, é o nome do sistema (`Darwin` no macOS; `Linux` no Linux). O que importa é que
+Os números podem ser outros na sua máquina. A última palavra da saída do flake8 é o nome do
+sistema (`Darwin` no macOS; `Linux` no Linux), e o ponto em que essa saída quebra de linha
+depende da largura do terminal: numa janela larga, ela cabe numa linha só. O que importa é que
 os dois comandos respondem.
 
 Os programas dos exercícios não precisam do venv: eles só usam o que vem com o Python e são

@@ -20,8 +20,8 @@ Success: no issues found in 7 source files
 
 O flake8 não imprime nada, e o mypy confere os sete arquivos sem achar problema.
 
-O mypy tem uma opção ainda mais rigorosa, `--strict`, que liga todas as conferências opcionais.
-Os sete arquivos também passam nela:
+O mypy tem uma opção ainda mais rigorosa, `--strict`, que liga de uma vez um grupo de conferências
+opcionais, entre elas a `--disallow-untyped-defs`. Os sete arquivos também passam nela:
 
 ```bash
 .venv/bin/mypy --strict ex0 ex1 ex2 ex3 ex4 ex5 ex6

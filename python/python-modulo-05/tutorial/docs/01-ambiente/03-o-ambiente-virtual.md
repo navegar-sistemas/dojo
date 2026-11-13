@@ -69,7 +69,9 @@ mypy 2.4.1 (compiled: yes)
 ```
 
 Os números podem ser outros na sua máquina, e a última palavra da primeira saída é o nome do
-sistema (`Linux`, `Darwin` no macOS). O que importa é que os dois comandos respondem.
+sistema (`Linux`, `Darwin` no macOS). O flake8 quebra essa saída conforme a largura do terminal:
+num terminal de 80 colunas ela ocupa as duas linhas de cima, num mais largo cabe numa só, e num
+mais estreito a quebra cai em outro ponto. O que importa é que os dois comandos respondem.
 
 Os programas dos exercícios não precisam do venv: eles só usam o que vem com o Python e são
 rodados com `python3`. O venv existe só para as duas ferramentas.

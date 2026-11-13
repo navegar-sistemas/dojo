@@ -81,8 +81,8 @@ Success: no issues found in 8 source files
 Rode de novo os `diff` da página "Rodar e conferir" de cada parte:
 [I](../03-parte-1/08-rodar-e-conferir.md), [II](../04-parte-2/06-rodar-e-conferir.md),
 [III](../05-parte-3/07-rodar-e-conferir.md) e [IV](../06-parte-4/07-rodar-e-conferir.md). Todos
-ficam calados, com uma exceção conhecida: o do `ft_alembic_4.py` mostra as linhas que mudam com a
-versão do Python, a dos `^` e, no 3.15, a da sugestão `Did you mean`
+ficam calados, com uma exceção conhecida: o do `ft_alembic_4.py` mostra as linhas que saem
+diferentes do enunciado, a dos `^` e, no 3.15, a da sugestão `Did you mean`
 ([A saída com o traceback](../03-parte-1/08-rodar-e-conferir.md#a-saída-com-o-traceback)).
 
 ## Os códigos de saída

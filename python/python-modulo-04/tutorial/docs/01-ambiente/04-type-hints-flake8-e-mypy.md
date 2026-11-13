@@ -48,9 +48,10 @@ experimentos/estilo.py:3:1: E302 expected 2 blank lines, found 0
 ```
 
 Cada aviso diz o arquivo, a linha, a coluna, um código e a explicação: na linha 3, o estilo padrão
-do Python (chamado **PEP 8**) pede **duas linhas em branco entre** as funções e as classes de um
-arquivo (não antes da primeira), e entre `double` e `triple` não havia nenhuma. Sem aviso nenhum, o
-flake8 não imprime nada.
+do Python (chamado **PEP 8**) pede **duas linhas em branco em volta** de cada função e de cada
+classe de um arquivo, separando-as dos `import`, umas das outras e do código que vem depois (só no
+começo do arquivo elas não são necessárias), e entre `double` e `triple` não havia nenhuma. Sem
+aviso nenhum, o flake8 não imprime nada.
 
 O botão de copiar, no canto de cada bloco de código, não leva a quebra de linha do fim do arquivo.
 Sem ela, o flake8 acusa também `W292 no newline at end of file` ("sem quebra de linha no fim do

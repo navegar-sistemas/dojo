@@ -11,7 +11,7 @@ Rode tudo a partir da pasta `the-codex`. Os comandos chamam o Python do laborat�
 ## Os arquivos
 
 ```bash
-ls -1a ex0 ex1
+LC_ALL=C ls -1a ex0 ex1
 ```
 
 ```text
@@ -40,7 +40,7 @@ gerado pelo Poetry, e o `.env`, com a configuração de verdade. A
 
 ```bash
 find alchemy -name '*.py' | LC_ALL=C sort
-ls -1 *.py
+LC_ALL=C ls -1 *.py
 ```
 
 ```text
@@ -64,7 +64,8 @@ ft_transmutation_0.py
 ```
 
 - `find alchemy -name '*.py'` lista, em todas as pastas dentro de `alchemy`, os arquivos cujo nome
-  termina em `.py`; `sort` põe a lista em ordem alfabética;
+  termina em `.py`; `sort` põe a lista em ordem alfabética, e o `LC_ALL=C` fixa essa ordem pela
+  tabela de caracteres ([O ambiente virtual por dentro](../02-ex0/02-o-ambiente-virtual-por-dentro.md#criar-o-laboratório));
 - `ls -1 *.py` lista os arquivos `.py` da raiz: o `*` casa com qualquer começo de nome.
 
 É a árvore do enunciado ([O enunciado em linguagem simples](../00-introducao/02-o-enunciado-em-linguagem-simples.md#a-árvore-final)).

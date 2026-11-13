@@ -96,7 +96,8 @@ explícito.
 
 ## No arquivo do exercício
 
-Atualizar o programa do exercício 0 leva os mesmos dois passos: acrescentar `#!/usr/bin/env python3` como
-primeira linha de `ex0/ft_garden_intro.py` e rodar `chmod +x ex0/ft_garden_intro.py`. Depois,
+Atualizar o programa do exercício 0 leva os mesmos dois passos: acrescentar
+`#!/usr/bin/env python3` como primeira linha de `ex0/ft_garden_intro.py` e rodar
+`chmod +x ex0/ft_garden_intro.py`. Depois,
 `./ex0/ft_garden_intro.py` roda o programa. O shebang não muda nada para o flake8, para o mypy
 nem para `python3 ex0/ft_garden_intro.py`, que continua funcionando.

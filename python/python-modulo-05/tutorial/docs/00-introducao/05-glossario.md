@@ -38,8 +38,8 @@ title: Glossário
 | **invariante** | regra do mypy para listas: `list[int]` não é aceita onde se pede `list[int \| float]` | [Any, união e isinstance](../02-conceitos/03-any-uniao-e-isinstance.md#lista-invariante) |
 | **`isinstance`** | função que responde se um valor é de um tipo (ou de um tipo filho dele) | [Any, união e isinstance](../02-conceitos/03-any-uniao-e-isinstance.md) |
 | **JSON** | formato de texto para dados estruturados: pares `"chave": valor` entre chaves | [O plugin JSON](../05-ex2/05-o-plugin-json.md) |
-| **lote (*batch*)** | uma lista de elementos enviada de uma vez ao fluxo | [O problema do exercício 1](../04-ex1/01-o-problema.md) |
 | **log** | registro de algo que aconteceu num sistema, com nível e mensagem | [Log Processor](../03-ex0/05-log-processor.md) |
+| **lote (*batch*)** | uma lista de elementos enviada de uma vez ao fluxo | [O problema do exercício 1](../04-ex1/01-o-problema.md) |
 | **método** | função que pertence a um objeto e é chamada com ponto | [Pré-requisitos](./03-pre-requisitos.md) |
 | **método abstrato** | método marcado com `@abstractmethod`, que toda filha precisa escrever | [A classe abstrata](../02-conceitos/02-a-classe-abstrata.md) |
 | **módulo** | arquivo de código que entra no programa com `import`, como `abc` e `typing` | [O enunciado em linguagem simples](./02-o-enunciado-em-linguagem-simples.md) |

@@ -36,8 +36,8 @@ dentro dele como estão:
 
 Pôr o texto entre aspas dentro do `{}` não basta: um texto com aspas ou com quebra de linha
 geraria um JSON inválido. Trocar um caractere que não pode aparecer como está pela forma da
-tabela, como `"` por `\"`, se chama **escape**. O enunciado pede "strings JSON válidas", sem
-`import json`; a função abaixo faz o escape à mão.
+tabela, como `"` por `\"`, se chama **escape**. O enunciado pede "strings CSV e JSON válidas",
+sem `import json`; a função abaixo faz o escape à mão.
 
 ```python
 def json_string(value: str) -> str:

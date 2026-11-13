@@ -166,7 +166,9 @@ FIM
 ```
 
 A única diferença é a versão do Python no caminho dos pacotes: `python3.15` aqui, `python3.11`
-na máquina de quem escreveu o enunciado.
+na máquina de quem escreveu o enunciado. Nas distribuições que usam `lib64`, como o Fedora, o
+caminho tem também `lib64` no lugar de `lib`
+([O que tem na pasta](../02-conceitos/02-o-ambiente-virtual-por-dentro.md#o-que-tem-na-pasta)).
 
 ## Dentro do venv, sem ativar
 

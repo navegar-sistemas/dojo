@@ -31,8 +31,8 @@ campo:
 | `say "hi"` | `"say ""hi"""` |
 
 O mesmo vale para um texto com quebra de linha (`\n` ou `\r`): sem as aspas, ele quebraria o
-registro em dois. O enunciado pede "strings CSV válidas"; nenhum texto do cenário tem esses
-caracteres, mas os dados de um fluxo podem ter.
+registro em dois. O enunciado pede "strings CSV e JSON válidas"; nenhum texto do cenário tem
+esses caracteres, mas os dados de um fluxo podem ter.
 
 ```python
 def csv_field(value: str) -> str:

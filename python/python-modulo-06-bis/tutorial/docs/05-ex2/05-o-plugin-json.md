@@ -5,10 +5,10 @@ title: O plugin JSON
 
 # O plugin JSON
 
-**JSON** (*JavaScript Object Notation*) é um formato de texto para dados estruturados, usado
-por quase todo programa que troca dados pela internet. Um **objeto JSON** é parecido com um
-dicionário do Python: pares `"chave": valor` entre chaves, separados por vírgula. Na saída do enunciado, cada bloco é um
-objeto com uma chave por item, formada pelo rank:
+**JSON** (*JavaScript Object Notation*) é um formato de texto para dados estruturados, muito
+usado por programas que trocam dados pela internet. Um **objeto JSON** é parecido com um
+dicionário do Python: pares `"chave": valor` entre chaves, separados por vírgula. Na saída do
+enunciado, cada bloco é um objeto com uma chave por item, formada pelo rank:
 
 ```text
 JSON Output:
@@ -34,7 +34,8 @@ dentro dele como estão:
 | caracteres de controle (códigos 0 a 31) | `\u` seguido do código em hexadecimal com quatro dígitos: a quebra de linha (código 10) vira `\u000a` |
 
 Imprimir um `str` do Python dentro de chaves não basta: um texto com aspas ou com quebra de linha
-geraria um JSON inválido. O enunciado pede "strings JSON válidas", sem `import json`; a função
+geraria um JSON inválido. O enunciado pede "strings JSON válidas", sem `import json`. Trocar um
+caractere especial pelo código que o representa, como `"` por `\"`, se chama **escape**; a função
 abaixo faz o escape à mão.
 
 ```python

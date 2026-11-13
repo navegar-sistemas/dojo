@@ -67,8 +67,9 @@ ModuleNotFoundError: No module named 'sigil'. Did you mean: 'signal'?
 
 `ModuleNotFoundError` ("módulo não encontrado") é o erro de um `import` que não achou o módulo em
 nenhuma pasta da lista. O Python 3.15 ainda sugere um módulo de nome parecido que ele conhece, aqui
-o `signal` da biblioteca padrão, que não tem nada a ver com o `sigil`; no 3.14, a última linha
-termina em `'sigil'`, sem sugestão, e no 3.10 o traceback também não repete a linha `import sigil`.
+o `signal` da biblioteca padrão, que não tem nada a ver com o `sigil`; do 3.10 ao 3.14, a última
+linha termina em `'sigil'`, sem sugestão, e do 3.10 ao 3.12 o traceback também não repete a linha
+`import sigil`.
 
 ## O que isso decide no projeto
 

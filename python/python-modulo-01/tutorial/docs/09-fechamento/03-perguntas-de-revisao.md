@@ -12,10 +12,10 @@ próprio enunciado, que as deixa ao longo dos exercícios.
 
 Porque um arquivo `.py` pode ser rodado diretamente ou importado por outro arquivo. O Python põe
 `"__main__"` na variável `__name__` só do arquivo rodado diretamente; num arquivo importado, ela
-vale o nome usado no `import`. O `if` faz a demonstração rodar só no primeiro caso, e o arquivo pode
-ser importado para usar as classes dele sem imprimir nada ([O ponto de
-partida](../02-ex0/03-o-ponto-de-partida.md)). É o que permite importar a `Plant` do exercício 4 num
-teste rápido ([Rodar e conferir](../06-ex4/08-rodar-e-conferir.md)) sem rodar a demonstração.
+vale o nome usado no `import`. O `if` faz a demonstração rodar só no primeiro caso, e o arquivo
+pode ser importado para usar as classes dele sem imprimir nada
+([O ponto de partida](../02-ex0/03-o-ponto-de-partida.md)). É o que permite importar a `Plant` do
+exercício 4 num teste rápido ([Rodar e conferir](../06-ex4/08-rodar-e-conferir.md)) sem rodar a demonstração.
 
 ## O que faz a linha shebang?
 

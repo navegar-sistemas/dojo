@@ -19,9 +19,10 @@ A pergunta completa: "Como o polimorfismo permite que o `DataStream` trate difer
 dados no fluxo sem conhecer as suas implementações específicas? Quais são os benefícios dessa
 abordagem de design?".
 
-`DataStream` guarda uma `list[DataProcessor]` e só chama os métodos que a classe abstrata
-garante: `validate`, `ingest`, `total` e `remaining` (e, a partir do exercício 2, `output`). Em `processor.validate(element)`,
-o Python roda o `validate` da classe do objeto guardado ali, seja ela `NumericProcessor`,
+`DataStream` guarda uma `list[DataProcessor]` e só usa o que a classe abstrata garante: os
+métodos `validate`, `ingest`, `total` e `remaining` (e, a partir do exercício 2, `output`) e o
+atributo `name`. Em `processor.validate(element)`, o Python roda o `validate` da classe do
+objeto guardado ali, seja ela `NumericProcessor`,
 `TextProcessor` ou `LogProcessor`. O fluxo pergunta "você aceita?" e "guarde", e cada processador
 responde do seu jeito ([Registrar e rotear](../04-ex1/03-registrar-e-rotear.md)).
 
@@ -361,7 +362,8 @@ linhas de log, e por isso o `diff` com o enunciado passa a mostrar diferenças: 
 efeito, volte a linha à versão original.
 
 Do mesmo jeito, mudar como uma criatura luta é mexer só na estratégia dela: dar a estratégia
-normal ao `Shiftling`, no `main` de `tournament.py`, faz ele só atacar, sem que o torneio mude.
+normal ao `Shiftling`, no `main` de `tournament.py`, faz com que ele só ataque, sem que o torneio
+mude.
 
 ## Por que cada padrão existe
 

@@ -118,5 +118,5 @@ esse caso.
 
 Escolha do tutorial: **mypy sem o plugin**, sempre com `--disallow-untyped-defs`, o modo mais
 exigente com o construtor. Os três arquivos entregues passam no mypy dos dois jeitos: sem o
-plugin e com ele, com `--disallow-untyped-defs` e também com `--strict`, a opção que liga todas as
-conferências extras do mypy.
+plugin e com ele, com `--disallow-untyped-defs` e também com `--strict`, a opção que liga de uma vez um
+grupo de conferências extras do mypy.

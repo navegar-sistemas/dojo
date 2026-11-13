@@ -84,8 +84,7 @@ Os três métodos contados avisam o `_stats` logo no começo:
 ```
 
 As classes filhas não precisam contar `grow`, `age` nem `show`: `Flower.show()` chama
-`super().show()`, que é este
-`show()`, e a contagem acontece aqui, uma vez por chamada.
+`super().show()`, que é este `show()`, e a contagem acontece aqui, uma vez por chamada.
 
 ## Ler as estatísticas de fora
 

@@ -79,8 +79,10 @@ git status --short --untracked-files=all
 ```
 
 Os 25 arquivos da árvore do enunciado, todos novos (`??`), e nada mais: nenhum `.env`, nenhum
-ambiente virtual, nenhum `__pycache__`. Num repositório que já tinha arquivos de antes,
-eles também aparecem, com outras marcas.
+ambiente virtual, nenhum `__pycache__`. O `git status` só lista o que mudou: num repositório que
+já tinha arquivos de antes (como um `README.md` criado pelo serviço), esses arquivos não
+aparecem, a não ser que a cópia tenha trocado o conteúdo de algum deles, que aparece com ` M`
+(modificado).
 
 ## Registrar e enviar
 

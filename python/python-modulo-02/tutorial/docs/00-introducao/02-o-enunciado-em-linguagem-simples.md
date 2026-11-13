@@ -73,8 +73,8 @@ conceitos por trás de cada programa estão reunidos em
 
 ## O que o enunciado cita sem explicar
 
-- **"Módulo 00" e "Módulo 01"**: projetos anteriores da mesma série, sobre o básico de Python e
-  sobre classes. Tudo o que este tutorial usa deles está nos
+- **"Módulo 00" e "Módulo 01"**: o básico de Python e as classes, que o enunciado supõe
+  conhecidos. Tudo o que este tutorial usa deles está nos
   [pré-requisitos](./03-pre-requisitos.md).
 - **"Você já encontrou `open()` em C"**: a linguagem C também tem uma função `open` para abrir
   arquivos. Não é preciso saber C; o `open()` do Python é explicado no

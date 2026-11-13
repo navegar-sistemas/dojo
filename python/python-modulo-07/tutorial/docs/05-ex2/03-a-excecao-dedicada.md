@@ -11,7 +11,7 @@ pede uma **exceção dedicada**: um tipo de exceção próprio, que diga exatame
 
 ## Uma classe de exceção
 
-Os tipos de exceção do Python (`ValueError`, `TypeError`...) são classes, todas filhas de
+Os tipos de exceção comuns do Python (`ValueError`, `TypeError`...) são classes filhas de
 `Exception`. Uma classe filha de `Exception` vira um tipo de exceção novo, que se lança com
 `raise` e se captura com `except` como qualquer outro.
 

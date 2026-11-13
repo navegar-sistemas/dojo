@@ -70,7 +70,7 @@ As versões e a ordem das linhas `Installing` podem ser outras na sua máquina: 
 vários pacotes ao mesmo tempo.
 
 ```bash
-ls
+LC_ALL=C ls -1
 ```
 
 ```text
@@ -114,8 +114,9 @@ Environment: /…/pypoetry/virtualenvs/loading-BeTxmVon-py3.15
 
 As linhas do enunciado são as mesmas da execução pelo pip; a diferença está na última. Pelo pip, o
 ambiente era o `matrix_env`, dentro da pasta `ex1`; pelo Poetry, é o ambiente que ele criou na
-pasta de cache dele, o mesmo que o `Creating virtualenv` anunciou. O `matrix_analysis.png` foi gravado de novo, igual ao anterior: a
-semente fixa gera os mesmos dados ([A análise](./07-a-analise.md#o-numpy-gera-os-dados)).
+pasta de cache dele, o mesmo que o `Creating virtualenv` anunciou. O `matrix_analysis.png` foi
+gravado de novo, igual ao anterior: a semente fixa gera os mesmos dados
+([A análise](./07-a-analise.md#o-numpy-gera-os-dados)).
 
 ## Instalar de novo
 
@@ -156,8 +157,9 @@ pandas          3.1.1  Powerful data structures for data analysis, time ser...
 ```
 
 `poetry show` lista os pacotes do projeto; com `--top-level` ("primeiro nível"), só as
-dependências declaradas no `pyproject.toml`, sem as dependências delas. A descrição longa é
-cortada com `...`.
+dependências declaradas no `pyproject.toml`, sem as dependências delas. A descrição é cortada
+com `...` para caber na largura do terminal: a saída acima é a de um terminal de 80 colunas, e
+numa janela mais larga aparece mais texto.
 
 ## Dentro do poetry.lock
 
@@ -204,5 +206,6 @@ instala 14 pacotes (os mesmos do pip no 3.10) e as linhas `[OK]` mostram pandas 
 começa com o caminho do Poetry e continua com `RuntimeWarning: Skip installing
 numpy/distutils/__pycache__/conv_template.cpython-310.pyc from numpy. Installing files in a
 __pycache__ directory poses a security risk.`: o pacote do numpy 2.2.6 traz um arquivo de cache
-que não deveria trazer, e o Poetry pula esse arquivo. O aviso não impede nada, e o numpy funciona. O `poetry.lock` sai igual: ele é
-calculado para todas as versões de Python aceitas, qualquer que seja a que está rodando.
+que não deveria trazer, e o Poetry pula esse arquivo. O aviso não impede nada, e o numpy
+funciona. O `poetry.lock` sai igual: ele é calculado para todas as versões de Python aceitas,
+qualquer que seja a que está rodando.

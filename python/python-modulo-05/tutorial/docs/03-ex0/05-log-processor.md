@@ -43,7 +43,7 @@ Um valor é um log quando:
 3. todas as chaves e todos os valores são `str`. `value.items()` dá os pares `(chave, valor)` do
    dicionário, e o `for` os separa em `key` e `text`.
 
-O enunciado diz só "um `dict` de pares chave-valor do tipo `str`". Exigir as duas chaves é
+O enunciado diz só "um `dict` de pares chave-valor do tipo string". Exigir as duas chaves é
 escolha do tutorial: sem elas não há como montar o texto `"NÍVEL: mensagem"`, e o `ingest`
 quebraria com `KeyError` no meio do caminho. Chaves a mais são aceitas e ignoradas.
 

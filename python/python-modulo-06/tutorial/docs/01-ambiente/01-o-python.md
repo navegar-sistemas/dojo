@@ -30,6 +30,10 @@ pede a sua senha):
 sudo apt install python3 python3-venv
 ```
 
+No Fedora, o instalador é o `dnf`, e o comando é `sudo dnf install python3`; no Arch, o
+instalador é o `pacman`, e o comando é `sudo pacman -S python`. Nessas duas distribuições, o
+pacote do Python já traz o que cria ambientes virtuais, sem pacote separado.
+
 No macOS, o comando `python3` pode abrir uma janela oferecendo instalar as ferramentas de linha
 de comando da Apple. Pode aceitar: elas trazem o `git`, usado na entrega (fim desta página). Mas
 o Python que vem com elas é o 3.9, antigo demais para o projeto; instale também o Python pelo
@@ -43,14 +47,16 @@ instalar um Python novo, separado do que veio com o sistema:
 
 - **macOS:** o instalador oficial de [python.org](https://www.python.org/downloads/) instala a
   versão mais nova, que passa a responder pelo comando `python3`;
-- **Linux:** muitas distribuições oferecem versões mais novas como pacotes com o número no nome.
-  Confira se a sua tem, por exemplo, o `python3.11`:
+- **Linux (Debian e Ubuntu):** a distribuição pode oferecer versões mais novas do Python como
+  pacotes com o número no nome. Confira se a sua tem, por exemplo, o `python3.11`:
 
   ```bash
   apt-cache policy python3.11
   ```
 
-  Se a linha `Candidate:` mostrar uma versão (e não `(none)`), instale-o junto com o venv dele:
+  Sem nenhuma linha impressa, ou com `Candidate: (none)`, a distribuição não tem esse pacote:
+  troque o `3.11` por outra versão, como `3.12`, e confira de novo. Se a linha `Candidate:`
+  mostrar uma versão, instale-o junto com o venv dele:
 
   ```bash
   sudo apt install python3.11 python3.11-venv
@@ -76,8 +82,10 @@ git --version
 git version 2.54.0 (Apple Git-157)
 ```
 
-Qualquer versão serve; o número e o texto entre parênteses (que só aparece no macOS) podem ser
-outros. Se o comando não existir: no Linux, `sudo apt install git`; no macOS, o primeiro `git`
-abre a mesma janela das ferramentas de linha de comando da Apple; aceite e espere terminar.
+Qualquer versão serve, e o número pode ser outro. O texto entre parênteses só aparece no `git`
+que vem com as ferramentas de linha de comando da Apple, no macOS. Se o comando não existir: no
+Debian e no Ubuntu, `sudo apt install git`; no Fedora, `sudo dnf install git`; no Arch,
+`sudo pacman -S git`; no macOS, o primeiro `git` abre a mesma janela das ferramentas de linha de
+comando da Apple; aceite e espere terminar.
 
 No resto do tutorial, `python3` quer dizer o Python 3.10 ou mais novo desta página.

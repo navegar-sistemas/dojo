@@ -95,8 +95,8 @@ os IDs, as idades e os anos de experiência dos tripulantes.
 
 Os anos de experiência foram escolhidos para a missão passar na regra 3: ela dura 900 dias, e
 Sarah Connor (20 anos) e John Smith (12) são experientes; Alice Johnson (4) não é. São 2 de 3,
-mais da metade. Com Alice incluída, a demonstração mostra que a regra aceita tripulantes sem
-experiência, desde que pelo menos metade tenha.
+mais da metade. Com Alice incluída, a demonstração mostra que a regra aceita tripulantes com
+menos de 5 anos de experiência, desde que pelo menos metade da tripulação seja experiente.
 
 Os tripulantes são criados com o construtor de `CrewMember`, com a patente como membro de `Rank`:
 tipos certos, e o mypy aceita a chamada. `mission_status` fica de fora e recebe `"planned"`.

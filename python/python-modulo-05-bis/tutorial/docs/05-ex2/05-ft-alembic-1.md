@@ -54,10 +54,10 @@ Comparada com a do enunciado:
 - o caminho do arquivo é o da pasta do projeto (`/path/to/the-codex` está no lugar dele), e a
   linha é a 10, a da chamada neste arquivo;
 - a linha de `^` marca o trecho que falhou, `alchemy.create_earth`. No enunciado, ela começa uma
-  coluna antes, embaixo da `{`: a posição exata depende da versão do Python, e no 3.10 a linha nem
-  aparece;
+  coluna antes, embaixo da `{`; do Python 3.11 ao 3.15, ela começa embaixo do `a` de `alchemy`, e
+  no 3.10 a linha nem aparece;
 - a sugestão do fim vem escrita de outro jeito no Python 3.15 ("você quis dizer `.create_air` em
-  vez de `.create_earth`?"); no 3.14 e no 3.10, ela é `Did you mean: 'create_air'?`, como no
+  vez de `.create_earth`?"); do 3.10 ao 3.14, ela é `Did you mean: 'create_air'?`, como no
   enunciado;
 - num terminal, o Python colore o traceback a partir da versão 3.13.
 

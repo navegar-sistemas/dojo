@@ -30,7 +30,7 @@ Os dois scripts:
 | Script | O que faz |
 |---|---|
 | `ft_kaboom_0.py` | acessa o pacote `grimoire` e registra um feitiço da luz, sem erro. Há vários jeitos de evitar a dependência circular; o enunciado pede que se escolha um e que se saiba explicar os outros |
-| `ft_kaboom_1.py` | acessa "em segredo" o `dark_spellbook.py` direto e tenta registrar um feitiço das trevas. Isso precisa falhar com uma exceção, capturada ou não: o laboratório explodiu |
+| `ft_kaboom_1.py` | acessa "secretamente" o `dark_spellbook.py` direto e tenta registrar um feitiço das trevas. Isso precisa falhar com uma exceção, capturada ou não: o laboratório explodiu |
 
 ## A saída esperada
 

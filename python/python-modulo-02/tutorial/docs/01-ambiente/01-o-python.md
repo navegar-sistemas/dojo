@@ -30,11 +30,16 @@ pede a sua senha):
 sudo apt install python3 python3-venv
 ```
 
+No Fedora, o instalador é o `dnf`, e o comando é `sudo dnf install python3`; no Arch, o
+instalador é o `pacman`, e o comando é `sudo pacman -S python`. Nessas duas distribuições, o
+pacote do Python já traz o que cria ambientes virtuais, sem pacote separado.
+
 No macOS, o comando `python3` pode abrir uma janela oferecendo instalar as ferramentas de linha
 de comando da Apple. Pode aceitar: elas trazem o `git`, usado na entrega (seção [O git](#o-git),
 no fim desta página). Mas o Python que vem com elas é o 3.9, antigo demais para o projeto;
 instale também o Python pelo instalador oficial, em
-[python.org](https://www.python.org/downloads/), que passa a responder pelo `python3`. Depois, abra um terminal novo e rode `python3 --version` de novo.
+[python.org](https://www.python.org/downloads/), que passa a responder pelo `python3`. Depois,
+abra um terminal novo e rode `python3 --version` de novo.
 
 ## Se a versão for menor que 3.10
 
@@ -60,7 +65,9 @@ instalar um Python novo, separado do que veio com o sistema:
   ```
 
   Esse Python é chamado pelo nome com o número, `python3.11`. Se a distribuição não oferece
-  nenhuma versão 3.10 ou mais nova, o caminho é atualizar a distribuição.
+  nenhuma versão 3.10 ou mais nova, o caminho é atualizar a distribuição;
+- **outras distribuições Linux:** o Python novo vem do gerenciador de pacotes delas (`dnf` no
+  Fedora, `pacman` no Arch).
 
 Quando o Python novo tem outro nome (como `python3.11`), use esse nome em todo lugar onde o
 tutorial escreve `python3`.
@@ -79,8 +86,9 @@ git version 2.43.0
 ```
 
 Qualquer versão serve; o número pode ser outro, e no macOS a linha termina com um texto entre
-parênteses, como `(Apple Git-157)`. Se o comando não existir: no Linux, `sudo apt install git`;
-no macOS, o primeiro `git` abre a mesma janela das ferramentas de linha de comando da Apple;
-aceite e espere terminar.
+parênteses, como `(Apple Git-157)`. Se o comando não existir: no Debian e no Ubuntu,
+`sudo apt install git`; no Fedora, `sudo dnf install git`; no Arch, `sudo pacman -S git`; no
+macOS, o primeiro `git` abre a mesma janela das ferramentas de linha de comando da Apple; aceite
+e espere terminar.
 
 No resto do tutorial, `python3` quer dizer o Python 3.10 ou mais novo desta página.

@@ -7,7 +7,7 @@ title: Perguntas de revisão
 
 O enunciado recomenda entender os **padrões de projeto** do DataDeck, e não só o código que os
 implementa. As perguntas abaixo revisam cada padrão: o problema, a solução e onde ela aparece no
-projeto. As últimas tratam de dois avisos dos exercícios: no 0, que outras criaturas podem ser
+projeto. Duas delas tratam de avisos dos exercícios: no 0, que outras criaturas podem ser
 usadas, desde que os conceitos (famílias e fábricas abstratas) fiquem; no 1, que o exercício
 precisa usar o conteúdo do pacote `ex0` e ser construído sobre ele.
 

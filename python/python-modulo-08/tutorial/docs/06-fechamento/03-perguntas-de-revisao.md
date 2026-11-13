@@ -20,8 +20,10 @@ Ele importa porque:
 - **isola os projetos**: cada projeto instala as versões de que precisa sem afetar os outros nem
   o Python do sistema, que muitos sistemas nem deixam alterar
   ([O Python do sistema recusa](../02-conceitos/01-pacotes-e-o-pip.md#o-python-do-sistema-recusa));
-- **é descartável e reproduzível**: apagar a pasta apaga tudo o que foi instalado nela, e
-  `python3 -m venv` mais o arquivo de dependências recriam o mesmo ambiente em qualquer máquina;
+- **é descartável e recriável**: apagar a pasta apaga tudo o que foi instalado nela, e
+  `python3 -m venv` mais o arquivo de dependências criam outro, com as mesmas bibliotecas, em
+  qualquer máquina (com as mesmas versões exatas só quando elas estão travadas, como no
+  `poetry.lock`);
 - **não vai para o repositório**: tem milhares de arquivos e caminhos da máquina onde foi criado.
   Vai a receita (o `requirements.txt` ou o `pyproject.toml`), e cada um recria o seu.
 
@@ -105,7 +107,8 @@ python3 -m venv .venv
 .venv/bin/python -m pip install "poetry>=2"
 ```
 
-A instalação termina com a lista do que foi instalado e o aviso de pip mais novo:
+A instalação termina com a lista do que foi instalado e, quando existe um pip mais novo que o do
+venv, o aviso de [Uma biblioteca só](../04-ex1/10-rodar-com-pip.md#uma-biblioteca-só):
 
 ```text
 

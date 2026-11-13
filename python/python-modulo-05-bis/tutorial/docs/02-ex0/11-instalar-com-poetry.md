@@ -109,11 +109,11 @@ onde o Poetry está instalado); a segunda, `install(`, é o trecho de código da
 diz "pulando a instalação de um arquivo de `__pycache__` do numpy; instalar arquivos de cache é um
 risco de segurança, e eles não deveriam estar no pacote". O defeito é do pacote do `numpy` para
 o Python 3.10, que traz por engano um arquivo de cache: o Poetry deixa só esse arquivo de fora, e
-a instalação termina normalmente. O `pip` instala o mesmo pacote sem avisar. No Python 3.14 e
-no 3.15, o Poetry escolhe outro `numpy`, e o aviso não aparece.
+a instalação termina normalmente. O `pip` instala o mesmo pacote sem avisar. Do Python 3.11 ao
+3.15, o Poetry escolhe outro `numpy`, sem esse arquivo, e o aviso não aparece.
 
 ```bash
-ls -1 ex0
+LC_ALL=C ls -1 ex0
 ```
 
 ```text

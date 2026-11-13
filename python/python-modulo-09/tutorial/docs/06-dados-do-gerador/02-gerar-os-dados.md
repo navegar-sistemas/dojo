@@ -53,7 +53,7 @@ O `data_exporter.py` grava a pasta `generated_data/` na pasta de onde é rodado.
 dentro de `tools`, o programa é rodado de dentro de `tools`:
 
 ```bash
-(cd tools && ../.venv/bin/python -B data_exporter.py)
+(PY="$PWD/.venv/bin/python" && cd tools && "$PY" -B data_exporter.py)
 ```
 
 ```text
@@ -72,10 +72,17 @@ dentro de `tools`, o programa é rodado de dentro de `tools`:
 🎯 All data files ready for testing!
 ```
 
-- os parênteses rodam os comandos de dentro deles num terminal à parte (um *subshell*): o `cd
-  tools` só vale ali dentro, e o terminal continua na pasta `cosmic-data` depois do comando;
-- `&&` roda o segundo comando só se o primeiro deu certo;
-- de dentro de `tools`, o Python do venv fica em `../.venv/bin/python` (`..` é a pasta de cima);
+- os parênteses rodam os comandos de dentro deles à parte, num *subshell*: uma cópia do
+  interpretador de comandos, no mesmo terminal, que termina junto com os parênteses. O `cd tools`
+  e a variável `PY` só valem ali dentro, e o terminal continua na pasta `cosmic-data` depois do
+  comando;
+- `&&` roda o comando seguinte só se o anterior deu certo;
+- `PY="$PWD/.venv/bin/python"` guarda na variável `PY` o caminho completo do Python do venv,
+  antes de entrar em `tools`: `$PWD` é a pasta atual, a `cosmic-data`. Depois do `cd`, `"$PY"`
+  chama esse Python. O caminho relativo `../.venv/bin/python` (`..` é a pasta de cima) também
+  rodaria o programa, mas algumas instalações do Python 3.14 em diante imprimem antes dois avisos,
+  `RuntimeWarning: Unexpected value in sys.prefix` e o mesmo com `sys.exec_prefix`, quando o
+  caminho do Python do venv tem `..`;
 - o `-B` impede que o Python grave em `tools` a pasta de cache `__pycache__`, que ele criaria ao
   importar o `data_generator`.
 

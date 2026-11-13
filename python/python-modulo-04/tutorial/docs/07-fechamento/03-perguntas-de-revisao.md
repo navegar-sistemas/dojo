@@ -9,7 +9,7 @@ sidebar_label: Perguntas de revisão
 A primeira pergunta é a que o enunciado faz no exercício 0; as outras cobrem as operações com
 arquivos, o tratamento de erros, os fluxos e o `with`.
 
-## Qual é o tipo do dado devolvido por open()?
+## Qual é o tipo dos dados devolvidos por open()?
 
 Um objeto arquivo, não o texto. Em modo texto, a classe é `TextIOWrapper`, do módulo `io` (o `print`
 a mostra como `_io.TextIOWrapper`); o type hint usado é `typing.IO[str]`, "um arquivo que lê e

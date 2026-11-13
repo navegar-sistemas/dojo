@@ -29,8 +29,8 @@ python3 -m venv .venv
 
 O comando não imprime nada quando dá certo.
 
-No Debian e no Ubuntu, o `python3` vem instalado, mas a parte dele que cria ambientes virtuais
-vem num pacote separado, o `python3-venv`. Sem ele, o comando acima falha com uma mensagem que
+No Debian e no Ubuntu, a parte do `python3` que cria ambientes virtuais vem num pacote
+separado, o `python3-venv`. Sem ele, o comando acima falha com uma mensagem que
 fala em `ensurepip` e manda instalar esse pacote. Nesse caso, instale-o (a mensagem pode pedir o
 nome com a versão, como `python3.12-venv`; use o nome que ela mostrar), apague a pasta criada pela
 metade e crie o venv de novo:
@@ -51,8 +51,8 @@ python3 -m venv .venv
 
 - `.venv/bin/python` é o Python **de dentro** do venv. O `-m pip` roda o `pip` com ele, e o
   `pip` instala as bibliotecas dentro da pasta `.venv`;
-- `--upgrade pip` atualiza o próprio `pip` antes, o que evita o aviso de "nova versão
-  disponível";
+- `--upgrade pip` atualiza também o próprio `pip`, o que evita o aviso de "nova versão
+  disponível" no fim da instalação;
 - `"pydantic>=2,<3"` pede o Pydantic numa versão **maior ou igual a 2 e menor que 3**: qualquer
   2.x, a versão que o enunciado exige. As aspas são obrigatórias: sem elas, o terminal entende o
   `>` e o `<` como redirecionamento de arquivos;
@@ -79,7 +79,9 @@ mypy 2.4.1 (compiled: yes)
 
 - `python -c "..."` roda o código escrito entre as aspas. Aqui ele importa o Pydantic e imprime
   a versão, guardada em `pydantic.VERSION`;
-- a última palavra da saída do flake8 é o nome do sistema (`Linux`, `Darwin` no macOS).
+- a última palavra da saída do flake8 é o nome do sistema (`Linux`, `Darwin` no macOS). O flake8
+  quebra essa linha conforme a largura do terminal: num terminal de 80 colunas, como aqui, o nome
+  do sistema cai na linha de baixo; num terminal mais largo, tudo sai numa linha só.
 
 Os números podem ser outros na sua máquina. O que importa é que a versão do Pydantic comece com
 `2.`. As mensagens de erro do Pydantic mostradas no tutorial são as da versão 2.14.3; outra

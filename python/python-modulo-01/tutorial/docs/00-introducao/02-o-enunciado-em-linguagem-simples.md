@@ -27,11 +27,11 @@ title: O enunciado em linguagem simples
   classes filhas ficam sem validação, que o enunciado dispensa. Os programas não leem nada do
   teclado: os valores usados são os do próprio programa.
 - **Cada arquivo traz as definições pedidas e todo o código que o exercício exige**, escrito para
-  deixar claro o conceito dele. O enunciado fala também em código "limpo e bem documentado".
-  Nos exercícios, a documentação vem
-  de nomes claros e dos type hints, sem comentários nem docstrings (textos de explicação entre
-  aspas triplas no começo de uma função ou classe) que só repitam o nome; isso é escolha do
-  projeto, e a alternativa seria uma docstring de uma linha em cada classe e método.
+  deixar claro o conceito dele. O enunciado fala também em código "limpo e bem documentado". Nos
+  exercícios, a documentação vem de nomes claros e dos type hints, sem comentários nem docstrings
+  (textos de explicação entre aspas triplas no começo de uma função ou classe) que só repitam o
+  nome; isso é escolha do projeto, e a alternativa seria uma docstring de uma linha em cada classe
+  e método.
 - **A partir do exercício 1, todo exercício usa classes.**
 
 O enunciado também libera, em todos os exercícios, as palavras da linguagem (`class`, `def`,
@@ -82,11 +82,11 @@ conceitos, mostrar as relações de herança e acrescentar uma funcionalidade ao
 
 ## O que o enunciado cita sem explicar
 
-- **"Os fundamentos de Python da primeira atividade"**: um projeto anterior da mesma série, sobre
-  o básico de Python. Tudo o que os exercícios usam dele está nos
+- **"Os fundamentos de Python da primeira atividade"**: o básico de Python, que o enunciado supõe
+  conhecido. Tudo o que os exercícios usam dele está nos
   [pré-requisitos](./03-pre-requisitos.md).
-- **"O conceito de imports, que fará parte de um projeto futuro"**: importar é usar, num arquivo,
-  o código de outro arquivo. Um exemplo pequeno aparece no
+- **"O conceito de imports"**: importar é usar, num arquivo, o código de outro arquivo. O
+  enunciado só cita o conceito, sem pedi-lo em nenhum exercício. Um exemplo pequeno aparece no
   [exercício 0](../02-ex0/03-o-ponto-de-partida.md), porque é ele que explica o bloco
   `if __name__ == "__main__":`.
 - **"Convenção protected" e "name mangling"**: dois jeitos de marcar um atributo como interno da

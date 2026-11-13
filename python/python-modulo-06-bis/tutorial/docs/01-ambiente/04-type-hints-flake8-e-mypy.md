@@ -54,9 +54,9 @@ experimentos/estilo.py:3:1: E302 expected 2 blank lines, found 0
 Cada aviso diz o arquivo, a linha, a coluna, um código e a explicação. Na linha 3, o estilo
 padrão do Python (chamado **PEP 8**) pede **duas linhas em branco** separando cada função e cada
 classe do nível do arquivo (escritas sem recuo) do código que vem antes e depois delas, e entre
-`double` e `triple` não havia nenhuma. A regra vale também para os `import` do começo do arquivo:
-por isso o código dos exercícios tem duas linhas em branco depois deles. Sem aviso nenhum, o
-flake8 não imprime nada.
+`double` e `triple` não havia nenhuma. A regra não depende do que vem antes: quando a primeira
+função ou classe vem logo depois dos `import` do começo do arquivo, também fica duas linhas em
+branco abaixo deles. Sem aviso nenhum, o flake8 não imprime nada.
 
 O botão de copiar, no canto de cada bloco de código, não leva a quebra de linha do fim do
 arquivo. Se o editor não a acrescentar ao salvar, o flake8 acusa também a última linha, com

@@ -31,8 +31,9 @@ def main() -> None:
   enunciado;
 - `{first}` imprime a tupla com os parênteses: `(1.0, 2.5, 3.0)`;
 - a tupla é desempacotada para mostrar cada coordenada separada;
-- `to_center` e `between` guardam as distâncias antes de imprimir, para as linhas do `print`
-  caberem em 79 caracteres.
+- `to_center` e `between` guardam as distâncias antes de imprimir. Com a chamada de `distance`
+  dentro do `print`, a linha da segunda distância passaria de 79 caracteres; a primeira segue o
+  mesmo formato, para as duas linhas ficarem parecidas.
 
 ## Quando o usuário desiste
 

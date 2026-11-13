@@ -54,9 +54,9 @@ do Python (chamado **PEP 8**) pede **duas linhas em branco entre** as funções 
 fora de qualquer classe, e entre `double` e `triple` não havia nenhuma. Sem aviso nenhum, o flake8
 não imprime nada.
 
-Todo arquivo `.py` termina com uma quebra de linha logo depois da última linha. O botão de copiar,
-no canto de cada bloco de código, não leva essa quebra final, e alguns editores não a acrescentam
-ao salvar. Sem ela, o flake8 acusa mais um aviso, na última linha:
+O estilo padrão pede que todo arquivo `.py` termine com uma quebra de linha logo depois da última
+linha. O botão de copiar, no canto de cada bloco de código, não leva essa quebra final, e alguns
+editores não a acrescentam ao salvar. Sem ela, o flake8 acusa mais um aviso, na última linha:
 `experimentos/estilo.py:4:22: W292 no newline at end of file` ("sem quebra de linha no fim do
 arquivo"). A correção é pôr o cursor no fim da última linha, apertar Enter uma vez e salvar; o
 [arquivo completo do exercício 0](../02-ex0/04-o-arquivo-completo.md) mostra os outros avisos
@@ -107,7 +107,8 @@ exercício.
 
 Usar `--strict` é escolha do projeto: além da falta de type hints, ele acusa outros descuidos de
 tipo, e o código dos sete exercícios passa em todos. A opção mínima que cumpre a regra dos type
-hints é `--disallow-untyped-defs`, que liga só a conferência de funções sem tipos.
+hints é `--disallow-untyped-defs`, que liga só a conferência de funções e métodos sem type hints
+ou com algum faltando.
 
 O mypy guarda o que já conferiu numa pasta `.mypy_cache`, criada na pasta onde ele roda, para
 conferir mais rápido da próxima vez. Ela pode ser apagada à vontade e não faz parte da entrega.

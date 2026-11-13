@@ -67,7 +67,8 @@ Traceback (most recent call last):
 ImportError: attempted relative import with no known parent package
 ```
 
-("tentativa de import relativo sem pacote pai conhecido"; no Python 3.10, sem a linha do código.)
+("tentativa de import relativo sem pacote pai conhecido"; do Python 3.10 ao 3.12, sem a linha do
+código.)
 Os pontos também não sobem além do pacote mais alto: dentro de `cabinet`, que não está dentro de
 outro pacote, `from ..sigil import WORD` falha com `ImportError: attempted relative import beyond
 top-level package`.

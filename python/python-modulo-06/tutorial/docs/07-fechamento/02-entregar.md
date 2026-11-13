@@ -31,7 +31,10 @@ cd entrega
 ```
 
 Troque `<endereço-do-repositório>` pelo endereço do seu repositório, e `the-codex` pelo nome da
-sua pasta, se ela tiver outro nome. O `git clone` baixa o repositório; o `mkdir -p` cria as
+sua pasta, se ela tiver outro nome. O `git clone` baixa o repositório; num repositório ainda
+vazio, ele avisa `warning: You appear to have cloned an empty repository.` ("parece que você
+clonou um repositório vazio"), o que é o esperado num repositório novo, ainda sem nenhum arquivo.
+O `mkdir -p` cria as
 pastas de `alchemy` dentro de `entrega` (o `-p` cria também as pastas do meio, e não reclama se
 elas já existirem); cada `cp` copia os arquivos `.py` de uma pasta. Copiar `*.py` pasta por
 pasta, em vez da pasta `alchemy` inteira, deixa as pastas `__pycache__` para trás.

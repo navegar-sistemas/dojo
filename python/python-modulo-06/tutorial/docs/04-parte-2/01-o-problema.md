@@ -19,7 +19,7 @@ Um arquivo novo, `alchemy/potions.py`, com duas poções:
 | `healing_potion()` | `Healing potion brewed with '<terra>' and '<ar>'`, com o texto devolvido por `create_earth()` e por `create_air()` no lugar de cada elemento |
 | `strength_potion()` | `Strength potion brewed with '<fogo>' and '<água>'`, com o texto de `create_fire()` e de `create_water()` |
 
-E "o que mais for útil para acessar os quatro elementos": os imports.
+E "Tudo o mais que for útil para acessar os quatro elementos fundamentais": os imports.
 
 No enunciado, as descrições das duas poções não fecham a última aspa simples
 (`'[created air element]"` e `'[created water element]"`); a saída de exemplo fecha, e o tutorial

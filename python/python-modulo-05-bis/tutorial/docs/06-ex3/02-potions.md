@@ -55,8 +55,8 @@ Traceback (most recent call last):
 ImportError: cannot import name 'create_earth' from 'elements' (/path/to/the-codex/elements.py). Did you mean: 'create_fire'?
 ```
 
-(`/path/to/the-codex` está no lugar do caminho da pasta do projeto; no Python 3.10, sem a linha do
-código e sem a sugestão `Did you mean`.)
+(`/path/to/the-codex` está no lugar do caminho da pasta do projeto. Do Python 3.10 ao 3.12, o
+traceback vem sem a linha do código; no 3.10 e no 3.11, também sem a sugestão `Did you mean`.)
 
 ## As frases
 

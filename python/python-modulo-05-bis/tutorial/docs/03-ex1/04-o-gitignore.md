@@ -58,7 +58,8 @@ ZION_ENDPOINT=https://zion.example.com/api
   `.env`;
 - `LOG_LEVEL=DEBUG`: o nível de registro mais detalhado, útil para quem desenvolve;
 - `ZION_ENDPOINT=https://zion.example.com/api`: o endereço da rede remota. O domínio
-  `example.com` é reservado para exemplos e não pertence a ninguém.
+  `example.com` é reservado para exemplos em documentação, e nenhum serviço de verdade usa esse
+  endereço.
 
 Os valores são escolha do tutorial; o enunciado só fixa os nomes das variáveis. O programa não se
 conecta a nada: ele só lê a configuração e mostra o que faria com ela.

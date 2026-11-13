@@ -23,8 +23,9 @@ def memory_vault() -> dict[str, Callable]:
 ```
 
 - `memories` é o dicionário das memórias. A anotação `dict[str, Any]` diz que as chaves são texto
-  e os valores podem ser de qualquer tipo (o enunciado guarda um número, `42`); é necessária
-  porque o dicionário começa vazio e o mypy não saberia o tipo;
+  e os valores podem ser de qualquer tipo (o enunciado guarda um número, `42`). O dicionário
+  começa vazio, e a anotação deixa o tipo escrito na criação, em vez de o mypy deduzi-lo pelo
+  primeiro uso;
 - `store(key, value)` grava o valor na chave. Gravar uma chave muda o **conteúdo** do dicionário,
   sem atribuir um valor novo ao nome `memories`, e por isso não precisa de `nonlocal`
   ([Mudar um objeto não precisa de nonlocal](../02-conceitos/04-escopo-e-closures.md#mudar-um-objeto-não-precisa-de-nonlocal));

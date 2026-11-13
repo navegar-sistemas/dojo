@@ -36,8 +36,8 @@ código que entra no programa com `import`).
 | 1 | `loading.py`, `requirements.txt`, `pyproject.toml` | analisar "dados da Matrix" gerados com numpy, manipulados com pandas e desenhados num gráfico com matplotlib; ter os arquivos de dependências do pip e do Poetry; detectar quais bibliotecas estão instaladas, mostrar as versões delas e, se faltar alguma, explicar como instalar com o pip e com o Poetry ([Exercício 1](../04-ex1/01-o-problema.md)) | `pandas`, `requests`, `matplotlib`, `numpy`, `sys`, `importlib` |
 | 2 | `oracle.py`, `requirements.txt`, `.env.example`, `.gitignore` | ler cinco variáveis de configuração do ambiente e de um arquivo `.env` (com a biblioteca python-dotenv), tratar configuração ausente, mostrar a diferença entre desenvolvimento e produção, e deixar o `.env` fora do Git ([Exercício 2](../05-ex2/01-o-problema.md)) | `os`, `sys`, `python-dotenv`, operações com arquivos |
 
-Para cada exercício, o enunciado mostra uma saída de exemplo. Diferentemente de outros projetos,
-essas saídas mudam de máquina para máquina: elas trazem caminhos de pastas e números de versão. A
+Para cada exercício, o enunciado mostra uma saída de exemplo. Parte dessas saídas muda de máquina
+para máquina, porque elas trazem caminhos de pastas e números de versão. A
 página [O resultado final](./04-o-resultado-final.md) mostra a saída de cada programa pronto e diz
 o que varia.
 

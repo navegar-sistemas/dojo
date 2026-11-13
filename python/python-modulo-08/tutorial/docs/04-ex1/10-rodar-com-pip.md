@@ -24,7 +24,7 @@ python3 -m venv matrix_env
 source matrix_env/bin/activate
 ```
 
-Um venv novo não tem biblioteca nenhuma, só o pip:
+Um venv novo não tem nenhuma das três bibliotecas:
 
 ```bash
 python3 loading.py
@@ -172,10 +172,11 @@ se isso demorar mais de cinco segundos, ele avisa
 entre as linhas `[OK]` e `Analyzing Matrix data...`: é quando a análise carrega o `pyplot`. É só
 na primeira vez.
 
-O gráfico apareceu na pasta:
+O gráfico apareceu na pasta (o `LC_ALL=C` e o `-1` estão explicados em
+[O que tem na pasta](../02-conceitos/02-o-ambiente-virtual-por-dentro.md#o-que-tem-na-pasta)):
 
 ```bash
-ls
+LC_ALL=C ls -1
 ```
 
 ```text
@@ -251,8 +252,13 @@ com `[OK]`.
 
 ## Em outras versões do Python
 
-No Python 3.14, as bibliotecas e as versões são as mesmas do 3.15, e o aviso `[notice]` cita o
-pip que veio com o 3.14 (`26.1.1 -> 26.3`). No Python 3.10, o pip escolhe as versões mais novas que ainda aceitam o 3.10: pandas 2.3.3,
+O aviso `[notice]` depende do pip que veio com o Python instalado, e não só da versão do Python:
+o número da esquerda é esse pip. Um Python que já traz o pip mais novo não mostra o aviso.
+
+No Python 3.14, as bibliotecas e as versões são as mesmas do 3.15. O aviso aparece como
+`26.1.1 -> 26.3` num 3.14.5, por exemplo, e some num 3.14.10, que já traz o pip 26.3.
+
+No Python 3.10, o pip escolhe as versões mais novas que ainda aceitam o 3.10: pandas 2.3.3,
 numpy 2.2.6 e matplotlib 3.10.9, mais dois pacotes, `pytz` e `six`, que essas versões mais
-antigas pedem como dependência. As linhas `[OK]` mostram essas versões, e o aviso `[notice]` cita
-o pip que veio com o Python 3.10 (`23.0.1 -> 26.3`); o resto da saída é igual.
+antigas pedem como dependência. As linhas `[OK]` mostram essas versões, e o aviso `[notice]`
+cita o pip que veio com o Python (`23.0.1 -> 26.3` no 3.10.22); o resto da saída é igual.

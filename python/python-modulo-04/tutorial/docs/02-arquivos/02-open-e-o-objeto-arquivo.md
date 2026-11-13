@@ -32,7 +32,7 @@ valor que representa o arquivo aberto e tem os métodos para usá-lo. O `print` 
 - `_io.TextIOWrapper` é o **tipo** do objeto, também chamado de **classe**: um arquivo aberto em
   **modo texto**, que entrega e recebe `str`. A classe é a `TextIOWrapper` do módulo `io`; o `print`
   mostra `_io`, o nome interno desse mesmo módulo. É a resposta à pergunta que o enunciado faz no
-  exercício 0: "qual é o tipo do dado devolvido por `open()`?";
+  exercício 0: "Qual é o tipo dos dados devolvidos por `open()`?";
 - `name` é o caminho usado para abrir;
 - `mode='r'` é o **modo de abertura**: `r` (*read*) abre só para leitura, e é o modo usado quando
   nenhum é informado;

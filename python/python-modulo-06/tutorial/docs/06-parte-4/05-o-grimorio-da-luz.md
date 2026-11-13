@@ -66,8 +66,8 @@ __all__ = ["light_spell_record"]
 O `__init__.py` **não** importa nada das trevas. Todo import de algo de dentro de `grimoire` roda
 este arquivo antes; se ele importasse o `dark_spellbook`, até o `ft_kaboom_0.py` explodiria, e o
 traceback do `ft_kaboom_1.py` ganharia mais um passo, o do `__init__.py`. O livro das trevas
-fica fora da interface do pacote, e só quem o pede pelo caminho completo chega a ele: é o acesso
-"secreto" do `ft_kaboom_1.py`.
+fica fora da interface do pacote, e só quem o pede pelo caminho completo chega a ele: é o que o
+`ft_kaboom_1.py` faz quando acessa o livro "secretamente", como diz o enunciado.
 
 ## ft_kaboom_0.py
 

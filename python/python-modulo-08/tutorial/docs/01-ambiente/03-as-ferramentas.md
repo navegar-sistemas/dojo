@@ -12,8 +12,7 @@ O projeto usa três ferramentas que não vêm com o Python:
   ([pip e Poetry](../04-ex1/02-pip-e-poetry.md)).
 
 As três são instaladas com o **pip**, o instalador de bibliotecas que vem com o Python e com todo
-ambiente virtual. Instalar
-direto no Python do sistema mistura essas ferramentas com tudo o que o sistema usa, e muitos
+ambiente virtual. Instalar direto no Python do sistema mistura essas ferramentas com tudo o que o sistema usa, e muitos
 sistemas recusam, com o erro `externally-managed-environment` ("ambiente gerenciado pelo
 sistema"; [Pacotes e o pip](../02-conceitos/01-pacotes-e-o-pip.md#o-python-do-sistema-recusa)).
 O jeito certo é um **ambiente virtual**: uma pasta com um Python próprio e as bibliotecas dele,
@@ -67,7 +66,7 @@ que cada programa encontra.
   que o Poetry só lê a partir da versão 2. As aspas são necessárias porque, no terminal, `>` sozinho
   manda a saída de um comando para um arquivo.
 
-A saída é longa: uma linha para cada pacote baixado, porque cada ferramenta traz as bibliotecas de
+A saída é longa: algumas linhas para cada pacote baixado, porque cada ferramenta traz as bibliotecas de
 que ela depende. A última linha lista tudo o que foi instalado:
 
 ```text
@@ -90,8 +89,10 @@ mypy 2.4.1 (compiled: yes)
 Poetry (version 2.5.1)
 ```
 
-A última palavra da primeira saída é o nome do sistema (`Linux`, ou `Darwin` no macOS). O que
-importa é que os três comandos respondem e que o Poetry é da versão 2 ou mais nova.
+A última palavra da primeira saída é o nome do sistema (`Linux`, ou `Darwin` no macOS). Essa
+saída é quebrada para caber na largura do terminal: num terminal de 80 colunas ocupa duas linhas,
+como acima, e numa janela mais larga cabe numa só. O que importa é que os três comandos respondem
+e que o Poetry é da versão 2 ou mais nova.
 
 ## Por que o Poetry fica aqui
 

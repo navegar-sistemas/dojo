@@ -35,11 +35,11 @@ source lab_env/bin/activate
 O comando não imprime nada, mas o começo da linha do terminal (o *prompt*) passa a mostrar
 `(lab_env)`, como no roteiro do enunciado: `(lab_env) $> python3 ex0/construct.py`. O
 `source` roda o script `activate` **dentro** do terminal atual, e não num programa à parte; por
-isso o script consegue mudar o terminal. Ele faz três coisas:
+isso o script consegue mudar o terminal. Além do prompt, as mudanças que importam aqui são três:
 
 1. põe a pasta `lab_env/bin` no começo do `PATH`;
 2. cria a variável `VIRTUAL_ENV`, com o caminho do ambiente;
-3. cria o comando `deactivate`, que desfaz as duas mudanças.
+3. cria o comando `deactivate`, que desfaz tudo isso, inclusive o prompt.
 
 Agora `python3` e `pip` são os do ambiente:
 
@@ -65,8 +65,8 @@ caminho completo da pasta do projeto.
 deactivate
 ```
 
-O comando não imprime nada. O prompt perde o `(lab_env)`, o `PATH` volta a ser o de antes, e `python3` volta a ser o Python
-global. A variável `VIRTUAL_ENV` deixa de existir.
+O comando não imprime nada. O prompt perde o `(lab_env)`, o `PATH` volta a ser o de antes, e
+`python3` volta a ser o Python global. A variável `VIRTUAL_ENV` deixa de existir.
 
 A ativação vale só para aquele terminal: um terminal novo começa desativado, e o `source` precisa
 ser rodado de novo. No Windows, o script de ativação é `lab_env\Scripts\activate`, sem `source`.

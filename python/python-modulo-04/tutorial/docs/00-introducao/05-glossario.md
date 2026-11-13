@@ -62,7 +62,7 @@ title: Glossário
 | **`ls -l`** | lista arquivos com as permissões, o dono e o grupo | [Quando o open falha](../02-arquivos/05-quando-o-open-falha.md) |
 | **mensagem de uso (*usage*)** | a linha que mostra como rodar o programa, como `Usage: ex0/ft_ancient_text.py <file>` | [O uso](../03-ex0/02-o-uso.md) |
 | **método** | função que pertence a um valor e é chamada com ponto, como `file.read()` | [O enunciado em linguagem simples](./02-o-enunciado-em-linguagem-simples.md) |
-| **`mkdir`** | comando que cria pastas; com `-p`, não reclama se a pasta já existe | [A pasta do projeto](../01-ambiente/02-a-pasta-do-projeto.md) |
+| **`mkdir`** | comando que cria pastas; com `-p`, não reclama se a pasta já existe | [A pasta do projeto](../01-ambiente/02-a-pasta-do-projeto.md), [Entregar](../07-fechamento/02-entregar.md) |
 | **modo de abertura** | segundo argumento do `open()`: `"r"` para ler, `"w"` para escrever | [open e o objeto arquivo](../02-arquivos/02-open-e-o-objeto-arquivo.md) |
 | **módulo** | conjunto de código que vem com o Python e entra no programa com `import`, como `sys` | [Os argumentos do terminal](../02-arquivos/06-os-argumentos-do-terminal.md) |
 | **mypy** | ferramenta que confere os tipos anotados no código, sem rodá-lo | [Type hints, flake8 e mypy](../01-ambiente/04-type-hints-flake8-e-mypy.md) |
@@ -83,7 +83,7 @@ title: Glossário
 | **recurso** | algo que o sistema reserva para o programa e precisa ser devolvido, como um arquivo aberto | [close e o recurso](../02-arquivos/04-close-e-o-recurso.md) |
 | **redirecionar** | mandar um fluxo para um arquivo ou outro comando, com `>`, `2>`, `<` ou `\|` | [Os três fluxos](../05-ex2/02-os-tres-fluxos.md) |
 | **`repr()`** | mostra um valor como ele seria escrito no código, com os caracteres invisíveis à mostra | [read e o texto](../02-arquivos/03-read-e-o-texto.md) |
-| **`rm`** | comando que apaga arquivos; com `-rf`, apaga uma pasta com tudo o que há dentro, sem pedir confirmação | [Quando o open falha](../02-arquivos/05-quando-o-open-falha.md) |
+| **`rm`** | comando que apaga arquivos; com `-rf`, apaga uma pasta com tudo o que há dentro, sem pedir confirmação | [Quando o open falha](../02-arquivos/05-quando-o-open-falha.md), [Entregar](../07-fechamento/02-entregar.md) |
 | **root** | o administrador do sistema, que lê qualquer arquivo | [Quando o open falha](../02-arquivos/05-quando-o-open-falha.md) |
 | **`rstrip()`** | método de `str` que tira do fim do texto os caracteres indicados, como o `\n` | [Ler sem input](../05-ex2/04-ler-sem-input.md) |
 | **`splitlines()`** | método de `str` que divide o texto em linhas, sem os `\n` | [Transformar o texto](../04-ex1/03-transformar-o-texto.md) |
@@ -95,7 +95,7 @@ title: Glossário
 | **`TextIOWrapper`** | a classe (o tipo) do objeto arquivo aberto em modo texto | [open e o objeto arquivo](../02-arquivos/02-open-e-o-objeto-arquivo.md) |
 | **traceback** | relatório de erro que o Python imprime quando uma exceção não é capturada | [Pré-requisitos](./03-pre-requisitos.md) |
 | **travar (*crash*)** | parar no meio com a mensagem de erro do próprio Python, o traceback | [O enunciado em linguagem simples](./02-o-enunciado-em-linguagem-simples.md) |
-| **tupla** | sequência entre parênteses, como `(True, "ok")` | [A assinatura](../06-ex3/03-a-assinatura.md) |
+| **tupla** | sequência entre parênteses, como `(True, "ok")` | [Pré-requisitos](./03-pre-requisitos.md), [A assinatura](../06-ex3/03-a-assinatura.md) |
 | **type hint** | anotação do tipo de um parâmetro, variável ou retorno, como `file_name: str` | [Type hints, flake8 e mypy](../01-ambiente/04-type-hints-flake8-e-mypy.md) |
 | **`typing.IO[str]`** | o type hint de um arquivo aberto que lê e escreve `str` | [open e o objeto arquivo](../02-arquivos/02-open-e-o-objeto-arquivo.md) |
 | **`UnicodeDecodeError`** | exceção lançada quando bytes não formam texto: na leitura de um arquivo com `read()` e, até o Python 3.14, na entrada, com `input()` e `readline()`; herda de `ValueError` | [Quando o open falha](../02-arquivos/05-quando-o-open-falha.md), [Pedir o nome](../04-ex1/04-pedir-o-nome.md) |

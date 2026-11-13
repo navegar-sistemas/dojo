@@ -45,8 +45,9 @@ def spell_dispatcher() -> Callable[[Any], str]:
 - **o nome `_`:** as versões registradas não são chamadas pelo nome; o caminho até elas é sempre
   `cast`. `_` é o nome de costume para "um nome que não será usado", e pode se repetir sem aviso
   do flake8 nem do mypy;
-- **`list` sem colchetes:** o `register` usa a anotação para saber o tipo, e só aceita classes. Um
-  type hint como `list[str]` não é uma classe, e o `register` lança `TypeError` ao ver um;
+- **`list` sem colchetes:** o `register` usa a anotação para saber o tipo, e só aceita classes
+  (do Python 3.11 em diante, também uma união de classes, como `int | str`). Um type hint como
+  `list[str]` não é uma classe, e o `register` lança `TypeError` ao ver um;
 - **as mensagens** saem da saída do enunciado: `Damage spell: 42 damage`, `Enchantment: fireball`,
   `Multi-cast: 3 spells` (`len` conta os itens da lista) e `Unknown spell type`.
 

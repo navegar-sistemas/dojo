@@ -177,8 +177,10 @@ python3 experimentos/caderno.py
 ```
 
 `notes.append(note)` só **lê** o nome `notes` (achado no escopo envolvente) e muda a lista para a
-qual ele aponta. A anotação `list[str]` é necessária porque a lista começa vazia e o mypy não
-saberia o tipo dos itens.
+qual ele aponta. A lista começa vazia, e o valor `[]` não diz o tipo dos itens. Sem a anotação, o
+mypy deduz o tipo pelo primeiro uso da lista (aqui, o `append` de um `str`, que dá `list[str]`);
+quando a lista é usada antes de receber um item, ele acusa `Need type annotation for "notes"`. A
+anotação `list[str]` deixa o tipo escrito na própria criação.
 
 ## global e nonlocal
 

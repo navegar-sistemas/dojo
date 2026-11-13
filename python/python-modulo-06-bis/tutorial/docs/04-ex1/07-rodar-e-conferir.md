@@ -58,9 +58,11 @@ proposital do exercício 0.
 ## A ordem do registro
 
 Um elemento vai para o **primeiro** processador registrado que o aceita. A ordem decidiria o
-destino de um elemento aceito por dois processadores; com os três atuais, isso não acontece:
-cada elemento é aceito por um só. O teste abaixo registra os três em ordem inversa e manda o lote
-do enunciado:
+destino de um elemento aceito por dois processadores. Com os três atuais, só a lista vazia, `[]`,
+é aceita por mais de um: ela passa no `is_list_of` dos três
+([Numeric Processor](../03-ex0/03-numeric-processor.md#duas-funções-de-conferência)), vai para o
+primeiro registrado e não guarda nada. Cada elemento do lote do enunciado é aceito por um só
+processador. O teste abaixo registra os três em ordem inversa e manda esse lote:
 
 ```bash
 python3 -B -c 'from data_stream import DataStream, LogProcessor, NumericProcessor, TextProcessor, first_batch

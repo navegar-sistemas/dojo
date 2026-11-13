@@ -8,7 +8,8 @@ title: Funções que devolvem funções
 Um `def` pode ficar **dentro** de outro `def`. A função de dentro é criada cada vez que a de fora
 roda, e a de fora pode devolvê-la como qualquer outro valor. É assim que se escreve uma
 **fábrica de funções**: uma função que monta e devolve uma função nova, configurada pelos
-argumentos recebidos. Os exercícios 1 a 4 inteiros são feitos desse jeito.
+argumentos recebidos. As quatro funções do exercício 1, as quatro do exercício 2, a
+`spell_dispatcher` do exercício 3 e os três decoradores do exercício 4 são feitos desse jeito.
 
 ## O experimento
 

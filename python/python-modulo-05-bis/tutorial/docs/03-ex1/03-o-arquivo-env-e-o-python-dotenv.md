@@ -31,8 +31,8 @@ O `requirements.txt` do exercício 1 tem uma linha só. Crie `ex1/requirements.t
 python-dotenv>=1.0
 ```
 
-O `1.0` como mínimo é escolha do tutorial: é a primeira versão estável da biblioteca, e as
-funções usadas aqui existem nela. A instalação vai para o `lab_env`, que precisa estar
+O `1.0` como mínimo é escolha do tutorial: é a primeira versão da série 1 da biblioteca, e o
+`load_dotenv` dela já funciona como o tutorial mostra. A instalação vai para o `lab_env`, que precisa estar
 **ativado**; o fim do exercício 0 o desativou para o Poetry. Ative-o de novo e instale:
 
 ```bash

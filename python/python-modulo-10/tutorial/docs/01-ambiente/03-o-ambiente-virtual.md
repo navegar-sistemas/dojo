@@ -30,11 +30,11 @@ python3 -m venv .venv
 
 O comando não imprime nada quando dá certo.
 
-No Debian e no Ubuntu, o `python3` vem instalado, mas a parte dele que cria ambientes virtuais
-vem num pacote separado, o `python3-venv`. Sem ele, o comando acima falha com uma mensagem que
-fala em `ensurepip` e manda instalar esse pacote. Nesse caso, instale-o (a mensagem pode pedir o
-nome com a versão, como `python3.12-venv`; use o nome que ela mostrar), apague a pasta criada pela
-metade e crie o venv de novo:
+No Debian e no Ubuntu, a parte do `python3` que cria ambientes virtuais vem num pacote separado,
+o `python3-venv`, que costuma faltar mesmo quando o `python3` já vem instalado. Sem ele, o
+comando acima falha com uma mensagem que fala em `ensurepip` e manda instalar esse pacote. Nesse
+caso, instale-o (a mensagem pode pedir o nome com a versão, como `python3.12-venv`; use o nome que
+ela mostrar), apague a pasta criada pela metade e crie o venv de novo:
 
 ```bash
 sudo apt install python3-venv
@@ -52,8 +52,8 @@ python3 -m venv .venv
 
 - `.venv/bin/python` é o Python **de dentro** do venv. O `-m pip` roda o `pip` com ele, e o
   `pip` instala as bibliotecas dentro da pasta `.venv`;
-- `--upgrade pip` atualiza o próprio `pip` antes, o que evita o aviso de "nova versão
-  disponível";
+- `--upgrade pip` atualiza também o próprio `pip`, na mesma instalação das duas ferramentas, o que
+  evita o aviso de "nova versão disponível";
 - `flake8 mypy` são as duas ferramentas.
 
 A última linha da saída lista o que foi instalado, começando por `Successfully installed`. As
@@ -71,7 +71,9 @@ mypy 2.4.1 (compiled: yes)
 ```
 
 Os números podem ser outros na sua máquina, e a última palavra da primeira saída é o nome do
-sistema (`Linux`, ou `Darwin` no macOS). O que importa é que os dois comandos respondem.
+sistema (`Linux`, ou `Darwin` no macOS). O flake8 quebra essa linha conforme a largura do
+terminal: num terminal de 80 colunas, como aqui, o nome do sistema cai na linha de baixo; num
+terminal mais largo, tudo sai numa linha só. O que importa é que os dois comandos respondem.
 
 Os programas dos exercícios não precisam do venv: eles só usam o que vem com o Python e são
 rodados com `python3`. O venv existe só para as duas ferramentas.

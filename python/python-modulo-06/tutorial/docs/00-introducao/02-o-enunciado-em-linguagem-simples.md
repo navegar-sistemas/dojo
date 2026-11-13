@@ -32,9 +32,9 @@ title: O enunciado em linguagem simples
   lugares. O enunciado proíbe: todo import tem de funcionar só pela posição dos arquivos nas
   pastas ([Onde o Python procura](../02-conceitos/02-onde-o-python-procura.md)).
 - **Funções simples, que devolvem texto.** As funções do projeto só montam e devolvem textos; a
-  lógica é mínima, porque o assunto é o import. A exceção é pedida pelo próprio enunciado: a
-  função que lista os ingredientes permitidos de um feitiço (e a cópia dela nas trevas) devolve
-  uma lista de textos ([O grimório das trevas](../06-parte-4/02-o-grimorio-das-trevas.md)).
+  lógica é mínima, porque o assunto é o import. Por pedido do próprio enunciado, a função que
+  lista os ingredientes permitidos de um feitiço (e a cópia dela nas trevas) foge da regra e
+  devolve uma lista de textos ([O grimório das trevas](../06-parte-4/02-o-grimorio-das-trevas.md)).
 
 ## A árvore final
 

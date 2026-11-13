@@ -15,7 +15,7 @@ Na pasta `the-codex`, com o comando do enunciado:
 
 ```bash
 python3 -m venv lab_env
-ls -1 lab_env
+LC_ALL=C ls -1 lab_env
 ```
 
 ```text
@@ -25,7 +25,9 @@ lib
 pyvenv.cfg
 ```
 
-O `-1` do `ls` lista um nome por linha. No Linux pode aparecer também `lib64`, um atalho para
+O `-1` do `ls` lista um nome por linha. `LC_ALL=C` antes do comando fixa a ordem alfabética pela
+tabela de caracteres, a mesma em qualquer sistema; sem ele, a ordem segue o idioma configurado na
+máquina e pode mudar de uma para outra. No Linux pode aparecer também `lib64`, um atalho para
 `lib`. Cada parte:
 
 - **`bin/`**: os programas do ambiente. `python` e `python3` são **atalhos** (*links*) para o
@@ -55,7 +57,7 @@ bibliotecas instaladas no Python global **não** aparecem dentro do ambiente: el
 A pasta `site-packages` do ambiente acaba de nascer e só tem o próprio `pip`:
 
 ```bash
-ls -1 lab_env/lib/python3*/site-packages
+LC_ALL=C ls -1 lab_env/lib/python3*/site-packages
 ```
 
 ```text
@@ -64,9 +66,9 @@ pip-26.2.2.dist-info
 ```
 
 O `*` completa o nome da pasta com a versão do Python, seja ela qual for. `pip-26.2.2.dist-info`
-guarda os dados da instalação do `pip`; o número da versão pode ser outro. No Python 3.10, o
-ambiente nasce também com o `setuptools`, uma ferramenta de empacotamento, e a lista tem mais
-linhas: `_distutils_hack`, `distutils-precedence.pth`, `pip`, `pip-23.0.1.dist-info`,
+guarda os dados da instalação do `pip`; o número da versão pode ser outro. No Python 3.10 e no
+3.11, o ambiente nasce também com o `setuptools`, uma ferramenta de empacotamento, e a lista tem
+mais linhas: `_distutils_hack`, `distutils-precedence.pth`, `pip`, `pip-23.0.1.dist-info`,
 `pkg_resources`, `setuptools` e `setuptools-79.0.1.dist-info` (os números podem ser outros).
 
 O Python global também tem a sua `site-packages`, em outro lugar: é ali que um `pip install` sem

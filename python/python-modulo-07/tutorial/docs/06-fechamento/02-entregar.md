@@ -91,9 +91,10 @@ git config user.email "voce@exemplo.com"
 
 Os dois comandos não imprimem nada e valem só para este repositório. Sem eles, o `git` pode
 recusar o registro (`Please tell me who you are`) ou, como costuma acontecer no macOS, aceitá-lo com um nome e um
-e-mail deduzidos do usuário e do nome do computador. Nesse caso, a saída do `git commit` traz o
-aviso `Your name and email address were configured automatically based on your username and
-hostname`: sinal de que o registro saiu com a identidade errada.
+e-mail deduzidos do usuário e do nome do computador. Nesse caso, a saída do `git commit` traz um
+aviso que começa com `Your name and email address were configured automatically` ("o seu nome e
+e-mail foram configurados automaticamente"): sinal de que o registro saiu com a identidade
+errada.
 
 ```bash
 git commit -m "Add exercises 0 to 2"

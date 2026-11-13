@@ -35,6 +35,10 @@ primeiro `cp` copia os seis arquivos da raiz; o `mkdir -p` cria as pastas dos pa
 reclama se elas já existirem); os dois últimos `cp` copiam só os `.py` de cada pacote, deixando
 as pastas `__pycache__` para trás.
 
+Com o repositório remoto vazio, o `git clone` imprime
+`warning: You appear to have cloned an empty repository.` ("parece que você clonou um repositório
+vazio"). É o esperado: a pasta `entrega` é criada mesmo assim, pronta para receber os arquivos.
+
 ## Registrar e enviar
 
 ```bash

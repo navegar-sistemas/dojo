@@ -7,8 +7,8 @@ title: Lambda
 
 Funções como `sorted`, `max` e `map` recebem uma função pequena que diz **como** tratar cada
 item: por qual campo ordenar, o que comparar, como transformar. Escrever um `def` com nome só para
-isso, usado uma única vez, ocupa três linhas e espalha o código. A **lambda** resolve: é uma
-função sem nome, escrita no próprio lugar onde é usada.
+isso, usado uma única vez, põe a regra numa função à parte, longe do lugar onde ela é usada. A
+**lambda** resolve: é uma função sem nome, escrita no próprio lugar onde é usada.
 
 ```python
 lambda potion: potion["price"]
@@ -17,7 +17,7 @@ lambda potion: potion["price"]
 - `lambda` abre a função;
 - antes dos dois-pontos, os parâmetros (aqui, um: `potion`);
 - depois dos dois-pontos, **uma expressão só**, cujo valor é devolvido. Não há `return`, nem
-  várias linhas, nem `if` de bloco (só a expressão condicional `a if condição else b`).
+  vários comandos, nem `if` de bloco (só a expressão condicional `a if condição else b`).
 
 Essa lambda faz o mesmo que:
 
@@ -130,7 +130,7 @@ experimentos/nome_lambda.py:1:1: E731 do not assign a lambda expression, use a d
 
 O programa funciona, mas o flake8 recusa: "não atribua uma expressão lambda, use um def". Uma
 lambda guardada num nome é uma função com nome escrita do jeito mais limitado (sem type hints,
-sem várias linhas, e com `__name__` igual a `<lambda>`, o que atrapalha mensagens de erro). A
+sem vários comandos, e com `__name__` igual a `<lambda>`, o que atrapalha mensagens de erro). A
 regra prática: **lambda para uma função curta usada uma vez, no lugar em que é passada; `def` para
 uma função que precisa de nome.** Corrija o arquivo:
 

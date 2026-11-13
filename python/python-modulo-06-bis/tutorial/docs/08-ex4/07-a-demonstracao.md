@@ -71,5 +71,5 @@ onde se pede `list[Opponent]`
 ```mermaid
 flowchart LR
     main["main"] --> run0["run(0, basic, ...)"] --> b0["battle: 1 batalha, sem erro"]
-    main --> run1["run(1, error, ...)"] --> b1["battle: o Flameling recusa a<br/>estratégia agressiva e o torneio aborta"]
+    main --> run1["run(1, error, ...)"] --> b1["battle: a estratégia agressiva recusa<br/>o Flameling e o torneio aborta"]
 ```

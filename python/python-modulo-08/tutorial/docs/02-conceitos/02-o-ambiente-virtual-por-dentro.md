@@ -15,7 +15,7 @@ ambiente virtual.
 ## O que tem na pasta
 
 ```bash
-ls .venv
+LC_ALL=C ls -1 .venv
 ```
 
 ```text
@@ -25,13 +25,21 @@ lib
 pyvenv.cfg
 ```
 
+O `-1` faz o `ls` mostrar um nome por linha; sem ele, no terminal, os nomes saem lado a lado, em
+colunas que dependem da largura da janela. `LC_ALL=C` fixa a ordem: os nomes saem ordenados pelo
+valor de cada caractere, a mesma ordem em qualquer sistema. As outras listagens do tutorial usam
+as duas opções pelo mesmo motivo.
+
 - `bin/`: os programas do ambiente: `python` e `python3`, `pip`, as ferramentas instaladas
   (`flake8`, `mypy`, `poetry`) e os scripts `activate`, explicados abaixo;
 - `lib/`: dentro dela, `python3.15/site-packages/`, a pasta das bibliotecas deste ambiente;
 - `include/`: uma pasta para bibliotecas que compilam código em C; fica vazia aqui;
 - `pyvenv.cfg`: o arquivo que transforma a pasta num ambiente virtual.
 
-Em alguns Linux aparece também `lib64`, um atalho para `lib`.
+No Linux pode aparecer também `lib64`: até o Python 3.14, é um atalho para `lib`; no 3.15, só
+aparece nas distribuições que guardam as bibliotecas compiladas numa pasta com esse nome, como o
+Fedora. Nessas distribuições, os caminhos de pacotes que o Python mostra (como o `packages` mais
+abaixo e o `Package installation path` do exercício 0) têm `lib64` no lugar de `lib`.
 
 ```bash
 cat .venv/pyvenv.cfg
@@ -102,8 +110,9 @@ packages:    /…/the-matrix/.venv/lib/python3.15/site-packages
 ```
 
 O `/…` marca a parte que muda de máquina para máquina: na primeira saída, a pasta onde o Python
-está instalado (num Linux com o Python do sistema, `prefix` é `/usr` e o executável é algo como
-`/usr/bin/python3`); na segunda, a pasta do projeto.
+está instalado (num Linux com o Python do sistema, `prefix` é `/usr`, o executável é algo como
+`/usr/bin/python3` e, no Debian e no Ubuntu, `packages` é algo como
+`/usr/local/lib/python3.12/dist-packages`); na segunda, a pasta do projeto.
 
 A comparação é a regra que o exercício 0 usa:
 

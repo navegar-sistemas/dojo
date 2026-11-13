@@ -6,8 +6,8 @@ title: Seed
 # Seed
 
 Uma `Seed` é uma flor que, depois de florescer, dá sementes. Ela herda de `Flower`, que por sua
-vez herda de `Plant`: uma **cadeia de herança**. Uma `Seed` é uma flor, e
-uma flor é uma planta, então uma `Seed` tem tudo de `Flower` e tudo de `Plant`.
+vez herda de `Plant`: uma **cadeia de herança**. Uma `Seed` é uma flor, e uma flor é uma planta,
+então uma `Seed` tem tudo de `Flower` e tudo de `Plant`.
 
 ```mermaid
 classDiagram

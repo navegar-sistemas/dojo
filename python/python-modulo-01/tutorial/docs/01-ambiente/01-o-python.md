@@ -29,6 +29,9 @@ criar o [ambiente virtual](./03-o-ambiente-virtual.md):
 sudo apt install python3 python3-venv
 ```
 
+O `apt` é o gerenciador de pacotes (o instalador de programas) do Debian e do Ubuntu, e o `sudo`
+na frente roda o comando como administrador do sistema, o que pode pedir a sua senha.
+
 Em outras distribuições Linux, o Python vem do gerenciador de pacotes delas (`dnf` no Fedora,
 `pacman` no Arch).
 

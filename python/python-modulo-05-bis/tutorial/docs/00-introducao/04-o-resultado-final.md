@@ -195,7 +195,7 @@ Traceback (most recent call last):
 ImportError: cannot import name 'dark_spell_allowed_ingredients' from partially initialized module 'alchemy.grimoire.dark_spellbook' (most likely due to a circular import) (/path/to/the-codex/alchemy/grimoire/dark_spellbook.py)
 ```
 
-No Python 3.14 e no 3.10, a sugestão da última linha do `ft_alembic_1.py` é
+Do Python 3.10 ao 3.14, a sugestão da última linha do `ft_alembic_1.py` é
 `Did you mean: 'create_air'?`, como no enunciado; no 3.10, o traceback também não tem a linha de
 `^`. As saídas mostradas no tutorial são as do Python 3.15; as diferenças das outras versões estão na
 página de cada programa.

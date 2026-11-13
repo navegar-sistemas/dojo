@@ -10,7 +10,7 @@ Rode tudo a partir da pasta `the-matrix`, sem nenhum ambiente ativado.
 ## Os arquivos
 
 ```bash
-LC_ALL=C ls -A ex0 ex1 ex2
+LC_ALL=C ls -1A ex0 ex1 ex2
 ```
 
 ```text
@@ -38,10 +38,11 @@ oracle.py
 requirements.txt
 ```
 
-`ls -A` mostra também os nomes que começam com ponto (o `-a` mostraria ainda `.` e `..`, a
-própria pasta e a de cima). `LC_ALL=C` faz o `ls` ordenar os nomes pelo valor de cada caractere,
-com os que começam com ponto primeiro; sem ele, no Linux, a ordem segue o idioma do sistema e pode
-misturar os nomes com ponto aos outros. Os arquivos de entrega, com os nomes exatos do enunciado:
+O `-A` mostra também os nomes que começam com ponto (o `-a` mostraria ainda `.` e `..`, a
+própria pasta e a de cima), e o `-1` põe um nome por linha. `LC_ALL=C` faz o `ls` ordenar os nomes
+pelo valor de cada caractere, com os que começam com ponto primeiro; sem ele, no Linux, a ordem
+segue o idioma do sistema e pode misturar os nomes com ponto aos outros. Os arquivos de entrega,
+com os nomes exatos do enunciado:
 
 | Pasta | Entregar | Fica de fora |
 |---|---|---|

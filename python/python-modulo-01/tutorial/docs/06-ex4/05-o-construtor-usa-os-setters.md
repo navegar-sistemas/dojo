@@ -30,4 +30,5 @@ samambaia com `0.0` cm e 10 dias ([Rodar e conferir](./08-rodar-e-conferir.md) r
 caso).
 
 Os setters não imprimem nada quando aceitam o valor, e por isso a criação de uma planta válida é
-silenciosa, como a saída do enunciado mostra (`Plant created:` aparece sem nenhuma linha antes).
+silenciosa, como a saída do enunciado mostra (`Plant created:` vem logo depois do título, sem
+nenhuma linha entre os dois).

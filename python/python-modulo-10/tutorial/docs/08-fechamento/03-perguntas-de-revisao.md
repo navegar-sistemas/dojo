@@ -127,6 +127,11 @@ não depende de nenhum objeto, como validar um nome
 
 ## Como um decorador transforma uma função?
 
+Esta pergunta não fecha nenhum exercício: vem do último capítulo do enunciado, que lista o que é
+preciso saber explicar sobre o projeto: os conceitos de programação funcional, como as closures
+funcionam e como os decoradores transformam funções. As closures já estão respondidas no
+exercício 2.
+
 O experimento de [Decoradores](../02-conceitos/06-decoradores.md) mostra os dois lados:
 `subtract = announce(subtract)` faz à mão o que a linha `@announce` faz, e o `__name__` da função
 decorada mostra o embrulho (`wrapper`) sem o `@wraps`, e o nome original com ele.

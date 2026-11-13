@@ -31,14 +31,14 @@ title: Glossário
 | **import absoluto** | import com o nome completo do módulo, a partir de uma pasta do `sys.path` | [Absoluto e relativo](../05-parte-3/02-absoluto-e-relativo.md) |
 | **import dentro da função** | import que só roda quando a função é chamada; quebra o ciclo da luz | [Quebrar o ciclo](../06-parte-4/04-quebrar-o-ciclo.md) |
 | **import relativo** | import que começa com pontos e parte do pacote do arquivo que importa | [Absoluto e relativo](../05-parte-3/02-absoluto-e-relativo.md) |
-| **`ImportError`** | exceção de um import que acha o módulo, mas não consegue terminar: nome que não existe, import relativo sem pacote | [A explosão](../06-parte-4/03-a-explosao.md) |
+| **`ImportError`** | exceção de um import que não consegue terminar: um nome que não existe no módulo, um import relativo sem pacote ou além do pacote mais externo | [A explosão](../06-parte-4/03-a-explosao.md) |
 | **injeção de dependência** | quem chama entrega à função o que ela precisa, em vez de a função importar | [Quebrar o ciclo](../06-parte-4/04-quebrar-o-ciclo.md) |
 | **interface** | os nomes que um módulo ou pacote oferece a quem o importa | [A interface do pacote](../03-parte-1/05-a-interface-do-pacote.md) |
 | **módulo** | arquivo `.py` usado por outro através do `import`; o nome é o do arquivo sem `.py` | [O módulo e o import](../02-conceitos/01-o-modulo-e-o-import.md) |
 | **módulo parcialmente inicializado** | módulo que já está em `sys.modules`, mas cujo arquivo ainda não terminou de rodar | [A explosão](../06-parte-4/03-a-explosao.md) |
 | **`ModuleNotFoundError`** | exceção do import que não acha o módulo em nenhuma pasta do `sys.path` | [Onde o Python procura](../02-conceitos/02-onde-o-python-procura.md) |
 | **mypy** | ferramenta que confere os tipos anotados no código, sem rodá-lo | [Type hints, flake8 e mypy](../01-ambiente/04-type-hints-flake8-e-mypy.md) |
-| **mypy `--strict`** | modo do mypy com todas as conferências extras, inclusive a de nomes reexportados | [A interface do pacote](../03-parte-1/05-a-interface-do-pacote.md) |
+| **mypy `--strict`** | modo do mypy que liga um grupo de conferências extras, inclusive a de nomes reexportados | [A interface do pacote](../03-parte-1/05-a-interface-do-pacote.md) |
 | **namespace package** | pasta sem `__init__.py` que o Python aceita como pacote; não é usada neste projeto | [O pacote](../03-parte-1/03-o-pacote.md) |
 | **objeto módulo** | o valor criado pelo Python a partir de um arquivo importado, com o que o arquivo definiu | [O módulo e o import](../02-conceitos/01-o-modulo-e-o-import.md) |
 | **pacote (*package*)** | pasta com `__init__.py` que se importa pelo nome, como `alchemy` | [O pacote](../03-parte-1/03-o-pacote.md) |

@@ -94,9 +94,12 @@ git commit -m "Add exercises 0 to 4"
 código do registro, `ba57fc1`, que muda a cada registro. As outras linhas dizem quantos arquivos e
 linhas entraram.
 
-Sem o `git config`, o git pode não pedir nada: ele aceita o registro com um nome e um e-mail
-montados a partir do usuário e do nome do computador, e mostra no meio da saída uma linha
-`Committer:` com essa identidade e o aviso:
+Sem o `git config`, o git reage de um de dois jeitos, conforme o sistema. Em muitos sistemas
+Linux, ele recusa o registro, com `Author identity unknown` e `*** Please tell me who you are.`
+na saída; nesse caso, rode os dois `git config` acima e repita o `git commit`. Em outros, como o
+macOS, ele não pede nada: aceita o registro com um nome e um e-mail montados a partir do usuário
+e do nome do computador, e mostra no meio da saída uma linha `Committer:` com essa identidade e o
+aviso:
 
 ```text
 Your name and email address were configured automatically based

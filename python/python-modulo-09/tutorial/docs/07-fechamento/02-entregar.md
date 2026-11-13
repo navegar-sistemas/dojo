@@ -91,15 +91,15 @@ repositório no servidor.
 ## Conferir o que foi enviado
 
 O que conta é o que está **no repositório**, não na sua pasta. Baixe uma cópia nova numa pasta à
-parte e rode um programa nela com o Python do venv do projeto:
+parte, `conferencia`, ao lado de `cosmic-data`, e rode um programa dela com o Python do venv do
+projeto:
 
 ```bash
 cd ..
 git clone <endereço-do-repositório> conferencia
-cd conferencia
-ls ex0 ex1 ex2
-../cosmic-data/.venv/bin/python ex2/space_crew.py
+ls conferencia/ex0 conferencia/ex1 conferencia/ex2
+cosmic-data/.venv/bin/python conferencia/ex2/space_crew.py
 ```
 
 Os três arquivos aparecem, e o programa imprime a mesma saída que na pasta do projeto. Depois, a
-pasta `conferencia` pode ser apagada (`cd .. && rm -rf conferencia`).
+pasta `conferencia` pode ser apagada (`rm -rf conferencia`).

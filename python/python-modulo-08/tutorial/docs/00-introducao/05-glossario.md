@@ -52,6 +52,8 @@ title: Glossário
 | **`pyproject.toml`** | arquivo padrão de descrição de um projeto Python, lido pelo Poetry | [O pyproject.toml](../04-ex1/04-o-pyproject-toml.md) |
 | **PyPI** | o repositório público de pacotes Python, de onde o pip baixa | [Pacotes e o pip](../02-conceitos/01-pacotes-e-o-pip.md) |
 | **`pyvenv.cfg`** | arquivo que transforma uma pasta num ambiente virtual | [O ambiente virtual por dentro](../02-conceitos/02-o-ambiente-virtual-por-dentro.md) |
+| **registro (*commit*)** | versão dos arquivos guardada no histórico de um repositório Git, com uma mensagem, um autor e um código | [Entregar](../06-fechamento/02-entregar.md#o-autor-dos-registros) |
+| **repositório** | pasta cujo histórico de versões é guardado pelo Git, com uma cópia num serviço de hospedagem | [O Python](../01-ambiente/01-o-python.md#o-git) |
 | **`requirements.txt`** | lista de dependências no formato do pip, uma por linha | [O requirements.txt](../04-ex1/03-o-requirements-txt.md) |
 | **restrição de versão** | limite para as versões aceitas de um pacote, como `>=1.25.0` | [Pacotes e o pip](../02-conceitos/01-pacotes-e-o-pip.md#versões) |
 | **segredo** | valor que não pode ser público, como uma senha ou uma chave de API | [O problema do exercício 2](../05-ex2/01-o-problema.md) |

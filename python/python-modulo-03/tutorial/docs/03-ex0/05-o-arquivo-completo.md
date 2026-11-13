@@ -102,7 +102,8 @@ def printable(text: str) -> str:
 - a função devolve o próprio texto quando a conversão dá certo, e o aviso `<not valid UTF-8>`
   quando não dá;
 - o programa imprime o nome e cada argumento passando por `printable`, e a saída é a mesma em
-  qualquer locale e versão ([Rodar e conferir](./06-rodar-e-conferir.md#um-argumento-que-não-é-utf-8)).
+  qualquer versão, nos locales UTF-8 e no `C`
+  ([Rodar e conferir](./06-rodar-e-conferir.md#um-argumento-que-não-é-utf-8)).
 
 O laço de [Percorrer os argumentos](./04-percorrer-os-argumentos.md) é o mesmo, com
 `printable(argument)` no lugar de `argument` dentro do `print`.

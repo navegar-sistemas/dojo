@@ -37,7 +37,7 @@ from alchemy.elements import create_air
 Quando `import alchemy` roda este arquivo, o `from ... import` carrega `alchemy.elements` e cria o
 nome `create_air` **dentro do pacote**. A partir daí, `alchemy.create_air` existe. O
 `create_earth` não foi importado, e continua fora da interface: é isso que o enunciado chama de
-importar o pacote "em parte".
+importar "parcialmente" o pacote.
 
 O caminho escrito é o completo, `alchemy.elements`, mesmo dentro do próprio pacote `alchemy`. A
 Parte III mostra uma forma mais curta, o import relativo
@@ -83,8 +83,8 @@ alchemy/__init__.py:1:1: F401 'alchemy.elements.create_air' imported but unused
 flake8 avisa com o código `F401`. No `__init__.py`, o import **é** o uso: ele existe para pôr o
 nome na interface do pacote, e o flake8 não tem como saber disso sozinho.
 
-O mypy, com as opções do projeto, não reclama. Com `--strict`, a opção que liga todas as
-conferências extras do mypy, a reclamação aparece no script que usa o nome:
+O mypy, com as opções do projeto, não reclama. Com `--strict`, a opção que liga de uma vez um
+grupo de conferências extras do mypy, a reclamação aparece no script que usa o nome:
 
 ```bash
 .venv/bin/mypy --strict *.py alchemy
@@ -97,8 +97,8 @@ Found 1 error in 1 file (checked 8 source files)
 
 "O módulo `alchemy` não exporta explicitamente o atributo `create_air`." No modo estrito, um nome
 que um módulo importa não faz parte da interface dele, a menos que o módulo diga que faz. São
-esses os avisos de que o enunciado fala ("você pode se deparar com erros do flake8 / mypy no seu
-`__init__.py`").
+esses os avisos de que o enunciado fala ("Você pode se deparar com erros do flake8 / mypy no seu
+arquivo `__init__.py`").
 
 ## A convenção: `__all__`
 
@@ -130,6 +130,6 @@ Só `__all__` resolve as duas ferramentas, e é a que o tutorial usa.
 
 ```mermaid
 flowchart LR
-    a5["ft_alembic_5.py<br/>from alchemy import create_air"] --> init["alchemy/__init__.py<br/>__all__ = [create_air]"]
+    a5["ft_alembic_5.py<br/>from alchemy import create_air"] --> init["alchemy/__init__.py<br/>__all__ = [#quot;create_air#quot;]"]
     init -->|"from alchemy.elements import create_air"| ael["alchemy/elements.py<br/>create_earth, create_air"]
 ```

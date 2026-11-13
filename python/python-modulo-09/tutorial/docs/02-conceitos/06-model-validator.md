@@ -19,7 +19,8 @@ roda **depois** da conferência de todos os campos: quando ele começa, cada cam
 certo e passou nos seus limites.
 
 O enunciado escreve `mode='after'`, com aspas simples; no Python, aspas simples e duplas dão o
-mesmo texto. O tutorial usa aspas duplas em todo o código.
+mesmo texto. O tutorial escreve os textos com aspas duplas; as simples só aparecem quando o texto
+já tem aspas duplas dentro, como as chaves de dicionário dentro de uma f-string.
 
 ## O experimento
 

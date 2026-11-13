@@ -113,8 +113,8 @@ TypeError: unhashable type: 'list'
 Um valor que tem hash se chama **hashable**. Inteiros, floats e textos são hashable; listas, sets
 e dicionários não são. Uma tupla é hashable quando todos os elementos dela também são:
 `(1.0, 2.5)` é, e uma tupla que guarda um set, como `("Alice", {"Legend", "Survivor"})`, não é.
-É por isso que o enunciado descreve a tupla como "ordenada, imutável e hashable" ("ordenada" no
-sentido de guardar a ordem em que os elementos foram escritos, sem classificá-los): com
+É por isso que o enunciado descreve as tuplas como "ordenadas, imutáveis, hashable" ("ordenadas"
+no sentido de guardar a ordem em que os elementos foram escritos, sem classificá-los): com
 elementos imutáveis, ela pode ser elemento de um set ou chave de um dicionário, e a lista não
 pode.
 

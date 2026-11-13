@@ -147,7 +147,7 @@ Os quatro arquivos do enunciado ficam na pasta `ex1`. O `-a` do `ls` mostra tamb
 começam com ponto:
 
 ```bash
-ls -1a ex1
+LC_ALL=C ls -1a ex1
 ```
 
 ```text

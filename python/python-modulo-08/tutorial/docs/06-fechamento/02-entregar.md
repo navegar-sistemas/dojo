@@ -29,15 +29,17 @@ cp the-matrix/ex2/oracle.py the-matrix/ex2/requirements.txt the-matrix/ex2/.env.
 cd entrega
 ```
 
-Troque `<endereço-do-repositório>` pelo endereço do seu repositório e, se a pasta do projeto tem outro nome,
-troque `the-matrix` pelo nome dela nos comandos `cp`. O `git clone` baixa o repositório; o
+Troque `<endereço-do-repositório>` pelo endereço do seu repositório e, se a pasta do projeto tem
+outro nome, troque `the-matrix` pelo nome dela nos comandos `cp`. O `git clone` baixa o repositório; o
 `mkdir -p` cria as pastas dos exercícios (o `-p` não reclama se elas já existirem), e cada `cp`
 copia os arquivos listados para a pasta do fim da linha.
 
 ## O autor dos registros
 
-Todo registro do Git leva o nome e o e-mail de quem o fez. Antes do primeiro registro, defina os
-dois **dentro da pasta `entrega`**, com os seus dados no lugar dos do exemplo:
+Um **registro** (*commit*) é uma versão dos arquivos guardada no histórico do repositório, com uma
+mensagem que diz o que mudou. Todo registro leva o nome e o e-mail de quem o fez. Antes do
+primeiro registro, defina os dois **dentro da pasta `entrega`**, com os seus dados no lugar dos do
+exemplo:
 
 ```bash
 git config user.name "Seu Nome"
@@ -146,7 +148,7 @@ git commit --amend --reset-author --no-edit
 ```
 
 ```text
-[main e99ed85] Add exercises 0 to 2
+[main 0b9d693] Add exercises 0 to 2
  8 files changed, 338 insertions(+)
  create mode 100644 ex0/construct.py
  create mode 100644 ex1/loading.py
@@ -159,7 +161,8 @@ git commit --amend --reset-author --no-edit
 ```
 
 `--amend` refaz o último registro; `--reset-author` troca o autor dele pelo configurado; `--no-edit`
-mantém a mensagem. O código do registro depende do autor e da hora, e pode mudar.
+mantém a mensagem. O código do registro muda (aqui, de `e99ed85` para `0b9d693`), porque ele é
+calculado a partir do conteúdo, do autor e da hora: com outro autor, é outro registro.
 
 ## Conferir o que foi enviado
 
@@ -170,7 +173,7 @@ parte e confira os arquivos:
 cd ..
 git clone <endereço-do-repositório> conferencia
 cd conferencia
-ls -A ex0 ex1 ex2
+LC_ALL=C ls -1A ex0 ex1 ex2
 ```
 
 ```text

@@ -29,6 +29,9 @@ do Ubuntu, e `sudo` roda o comando como administrador (ele pede a sua senha):
 sudo apt install python3 python3-venv
 ```
 
+Em outras distribuições, o pacote do Python já traz o venv: `sudo dnf install python3` no Fedora,
+`sudo pacman -S python` no Arch.
+
 No macOS, o comando `python3` pode abrir uma janela oferecendo instalar as ferramentas de linha
 de comando da Apple. Pode aceitar: elas trazem o `git`, usado na entrega (fim desta página). Mas
 o Python que vem com elas é o 3.9, antigo demais para o projeto; instale também o Python pelo
@@ -42,14 +45,15 @@ instalar um Python novo, separado do que veio com o sistema:
 
 - **macOS:** o instalador oficial de [python.org](https://www.python.org/downloads/) instala a
   versão mais nova, que passa a responder pelo comando `python3`;
-- **Linux:** muitas distribuições oferecem versões mais novas como pacotes com o número no nome.
-  Confira se a sua tem, por exemplo, o `python3.11`:
+- **Linux (Debian e Ubuntu):** muitas versões dessas distribuições oferecem Pythons mais novos
+  como pacotes com o número no nome. Confira se a sua tem, por exemplo, o `python3.11`:
 
   ```bash
   apt-cache policy python3.11
   ```
 
-  Se a linha `Candidate:` mostrar uma versão (e não `(none)`), instale-o junto com o venv dele:
+  Se a saída tem uma linha `Candidate:` com uma versão (e não `(none)`), instale-o junto com o
+  venv dele; se o comando não imprime nada, a distribuição não tem esse pacote:
 
   ```bash
   sudo apt install python3.11 python3.11-venv
@@ -76,8 +80,9 @@ git version 2.54.0 (Apple Git-157)
 ```
 
 Qualquer versão serve; o número e o texto entre parênteses (que só aparece no macOS) podem ser
-outros. Se o comando não existir: no Linux, `sudo apt install git`; no macOS, o primeiro `git`
-abre a mesma janela das ferramentas de linha de comando da Apple; aceite e espere terminar.
+outros. Se o comando não existir: no Debian e no Ubuntu, `sudo apt install git` (no Fedora,
+`sudo dnf install git`; no Arch, `sudo pacman -S git`); no macOS, o primeiro `git` abre a mesma
+janela das ferramentas de linha de comando da Apple; aceite e espere terminar.
 
 No resto do tutorial, `python3` quer dizer o Python 3.10 ou mais novo desta página. As saídas
 mostradas são as do Python 3.15, o mais novo; quando uma versão mais antiga (do 3.10 ao 3.14)

@@ -54,7 +54,7 @@ AttributeError: module 'alchemy' has no attribute 'create_earth'. Did you mean '
 ```
 
 O mesmo erro do enunciado, `AttributeError: module 'alchemy' has no attribute 'create_earth'`, com
-a sugestão escrita do jeito do Python 3.15; no 3.14 e no 3.10, a linha é igual à do enunciado,
+a sugestão escrita do jeito do Python 3.15; do 3.10 ao 3.14, a linha é igual à do enunciado,
 terminada em `Did you mean: 'create_air'?`.
 
 O programa termina com erro, de propósito:

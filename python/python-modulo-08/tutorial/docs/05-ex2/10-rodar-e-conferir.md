@@ -99,9 +99,9 @@ As outras quatro variáveis vieram do `.env`; a `API_KEY` está vazia no modelo,
 
 ## O .env preenchido
 
-Abra o `.env` num editor de texto (por exemplo, `nano .env` no terminal: `Ctrl+O` grava e
-`Ctrl+X` sai) e preencha a `API_KEY`. Num projeto de verdade, a chave é a que o serviço fornece;
-aqui, qualquer texto serve. O arquivo fica assim:
+Abra o `.env` num editor de texto (por exemplo, `nano .env` no terminal: `Ctrl+O` e `Enter`
+gravam, `Ctrl+X` sai) e preencha a `API_KEY`. Num projeto de verdade, a chave é a que o serviço
+fornece; aqui, qualquer texto serve. O arquivo fica assim:
 
 ```ini title="ex2/.env"
 # Copy to .env and fill in the values. Never commit .env.
@@ -330,7 +330,7 @@ pasta `teste` criada e apagada no mesmo bloco; `rm -rf teste` apaga a pasta sem 
 mesmo com um arquivo sem permissão dentro dela (o `-f` é de *force*).
 
 Um `.env` com um byte que não é texto UTF-8. `printf '\xff'` escreve o byte de valor 255 (`ff` em
-hexadecimal), que não pode aparecer num texto UTF-8, e o `>>` o acrescenta no fim do `.env`:
+hexadecimal, a base 16), que não pode aparecer num texto UTF-8, e o `>>` o acrescenta no fim do `.env`:
 
 ```bash
 mkdir teste
@@ -351,7 +351,10 @@ ORACLE ERROR: cannot read .env: 'utf-8' codec can't decode byte 0xff in position
 1
 ```
 
-A mensagem do erro diz o byte e a posição dele no arquivo. Um `.env` sem permissão de leitura:
+A mensagem do erro diz o byte e a posição dele no arquivo. A posição é o tamanho do `.env` antes
+do byte acrescentado: 198 com o `.env` desta página, outra com uma chave de outro tamanho.
+
+Um `.env` sem permissão de leitura:
 `chmod 000 .env` tira do arquivo todas as permissões, inclusive a de leitura do próprio dono:
 
 ```bash
@@ -429,8 +432,9 @@ Agora o mypy encontra a biblioteca e confere o uso dela com os type hints que el
 ## Em outras versões do Python
 
 Com o Python 3.10 ou o 3.14, todas as saídas desta página são as mesmas, menos o aviso
-`[notice]` do `pip install`, que cita o pip que veio com cada versão (`23.0.1 -> 26.3` no 3.10,
-`26.1.1 -> 26.3` no 3.14).
+`[notice]` do `pip install`, que cita o pip que veio com o Python instalado (`23.0.1 -> 26.3` no
+3.10.22, `26.1.1 -> 26.3` no 3.14.5) e não aparece num Python que já traz o pip mais novo, como o
+3.14.10 ([Em outras versões do Python](../04-ex1/10-rodar-com-pip.md#em-outras-versões-do-python)).
 
 Desative o ambiente e volte para a pasta do projeto:
 
