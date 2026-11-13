@@ -84,4 +84,4 @@ Os dois arquivos do pacote escritos nas Partes I e II, o `alchemy/__init__.py` e
 `alchemy/potions.py`, importam o vizinho `alchemy.elements` com o nome absoluto, porque o import
 relativo ainda não tinha aparecido. A [página do subpacote](./04-o-subpacote.md) os passa para o
 critério. O motivo da regra está em
-[As perguntas do enunciado](../07-fechamento/03-as-perguntas-do-enunciado.md#quando-usar-import-absoluto-e-quando-usar-relativo).
+[Perguntas de revisão](../07-fechamento/03-perguntas-de-revisao.md#quando-usar-import-absoluto-e-quando-usar-relativo).

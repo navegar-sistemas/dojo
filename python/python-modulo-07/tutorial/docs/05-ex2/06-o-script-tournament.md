@@ -63,4 +63,5 @@ if __name__ == "__main__":
 | 2 (multiple) | água com a normal, cura com a defensiva, transformação com a agressiva | três oponentes, três lutas, as três estratégias |
 
 O torneio 1 termina com a mensagem de erro, e o programa continua: o torneio 2 roda inteiro. É o
-"tratar as exceções sem quebrar" das regras gerais do enunciado.
+que pedem as regras gerais do enunciado: "tratar exceções de forma adequada, para evitar que o
+programa quebre".

@@ -8,7 +8,7 @@ title: O gerador de dados
 Testar uma função só com os dados do exemplo do enunciado prova pouco: os mesmos três magos
 sempre dão o mesmo resultado. O enunciado vem com um anexo, `generator.tar.gz`, com um programa
 que sorteia dados novos para cada exercício, o `data_generator.py`. O enunciado sugere usá-lo
-para testar o código e também durante a avaliação.
+para testar o código.
 
 ## Extrair o anexo
 

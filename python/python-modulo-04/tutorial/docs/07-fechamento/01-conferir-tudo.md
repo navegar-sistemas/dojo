@@ -27,8 +27,8 @@ ex3:
 ft_vault_security.py
 ```
 
-Um arquivo por pasta, com o nome exato que o enunciado pede. Um nome errado (uma letra trocada,
-`.py` faltando) faz o exercício não ser encontrado.
+Um arquivo por pasta, com o nome exato que o enunciado pede: um nome com uma letra trocada ou sem o
+`.py` já não é o arquivo do exercício.
 
 ## Estilo e tipos
 

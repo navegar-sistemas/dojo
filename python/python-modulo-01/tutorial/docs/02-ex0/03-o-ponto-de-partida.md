@@ -95,5 +95,5 @@ demonstra quando rodado, e um módulo que só oferece o seu código quando impor
 
 O exercício 0 exige o bloco. Nos exercícios seguintes, o enunciado só o permite, e usá-lo em
 todos é escolha do projeto: a demonstração fica separada das classes, e o
-[exercício 4](../06-ex4/08-rodar-e-conferir.md) importa a classe sem rodar a demonstração. Os
-próximos projetos do curso usam *imports* de verdade.
+[exercício 4](../06-ex4/08-rodar-e-conferir.md) importa a classe sem rodar a demonstração.
+Programas maiores, divididos em vários arquivos, usam *imports* o tempo todo.

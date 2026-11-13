@@ -1,17 +1,18 @@
 ---
 sidebar_position: 3
-title: As perguntas do enunciado
+title: Perguntas de revisão
+sidebar_label: Perguntas de revisão
 ---
 
-# As perguntas do enunciado
+# Perguntas de revisão
 
 O enunciado deixa uma pergunta em duas partes no exercício 1: "Como o polimorfismo permite que o
 `DataStream` trate diferentes tipos de dados no fluxo sem conhecer as suas implementações
 específicas? Quais são os benefícios dessa abordagem de design?". As duas partes são respondidas
-abaixo. O enunciado também avisa que, na avaliação, pode ser pedido que você explique o
-polimorfismo, mostre a sobrescrita de métodos, acrescente um tipo de dado novo ao
-sistema ou mude o jeito de processar um dado. Também pede que você saiba explicar como a herança
-reaproveita código e, ao mesmo tempo, deixa cada classe especializar o comportamento.
+abaixo, junto com outras perguntas que testam o entendimento do projeto: onde está a sobrescrita
+de métodos, como acrescentar um tipo de dado novo, como mudar o jeito de processar um dado e
+como a herança reaproveita código e, ao mesmo tempo, deixa cada classe especializar o
+comportamento.
 
 ## Como o polimorfismo deixa o DataStream tratar tipos diferentes sem conhecê-los?
 
@@ -33,7 +34,7 @@ jeito ([Registrar e rotear](../04-ex1/03-registrar-e-rotear.md)).
 - **Testes separados:** cada processador é testado sozinho, como no exercício 0, e o fluxo é
   testado com qualquer processador.
 
-## Mostrar a sobrescrita
+## Onde está a sobrescrita de métodos?
 
 `NumericProcessor.validate` sobrescreve o `validate` abstrato de `DataProcessor`: mesmo nome,
 mesma assinatura, corpo próprio. `ingest` também é sobrescrito, com uma assinatura mais
@@ -41,7 +42,7 @@ específica em cada filha. `output` **não** é sobrescrito: as três filhas usa
 `name` também é sobrescrito em cada filha
 ([Nome e contadores](../04-ex1/02-nome-e-contadores.md)).
 
-## Acrescentar um tipo de dado novo
+## Como acrescentar um tipo de dado novo?
 
 Nenhum processador aceita `True` e `False`
 ([A armadilha do bool](../02-conceitos/03-any-uniao-e-isinstance.md#a-armadilha-do-bool)). Um
@@ -104,7 +105,7 @@ yes,no
 disso; escreveu só o que é dele: o nome, a conferência e a conversão para texto. O fluxo e o
 plugin CSV trataram os valores novos sem nenhuma mudança.
 
-## Mudar o jeito de processar
+## Como mudar o jeito de processar um dado?
 
 Uma mudança de comportamento de um tipo de dado fica dentro da classe dele. Para guardar os logs
 como `[ERROR] Unauthorized access!!` em vez de `ERROR: Unauthorized access!!`, só a linha do
@@ -116,9 +117,9 @@ como `[ERROR] Unauthorized access!!` em vez de `ERROR: Unauthorized access!!`, s
 ```
 
 O fluxo, os plugins e os outros processadores continuam iguais. A saída do programa muda nas
-linhas de log, e por isso o `diff` com o enunciado passa a mostrar diferenças: a mudança é só
-para a demonstração na avaliação. Depois dela, a linha volta ao original, para a saída continuar
-igual à do enunciado.
+linhas de log, e por isso o `diff` com o enunciado passa a mostrar diferenças: a mudança é só um
+experimento. Depois dele, a linha volta ao original, para a saída continuar igual à do
+enunciado.
 
 ## Como a herança reaproveita código e deixa cada classe se especializar?
 

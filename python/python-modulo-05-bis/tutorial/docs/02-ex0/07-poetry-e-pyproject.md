@@ -43,7 +43,7 @@ A seção padrão de qualquer projeto Python, que o Poetry entende:
 - `name` e `version`: o nome e a versão do projeto. O nome `sealed-laboratory` ("laboratório
   selado") é escolha do tutorial;
 - `requires-python`: as versões do Python em que o projeto roda, as do enunciado. O Poetry usa
-  isso para escolher versões das bibliotecas que funcionem em **todas** elas;
+  isso para garantir que **cada uma** delas tenha uma versão compatível de cada biblioteca;
 - `dependencies`: as mesmas dependências do `requirements.txt`, com os mesmos especificadores. É
   o "declara as mesmas restrições" da saída do `loading.py`.
 
@@ -63,12 +63,14 @@ gerenciar dependências.
 
 ## O poetry.lock
 
-Na primeira instalação, o Poetry **resolve** as dependências: escolhe uma versão de cada
-biblioteca, inclusive das transitivas, que cumpra todos os especificadores e funcione em todas as
-versões do Python de `requires-python`. Depois grava o resultado em `ex0/poetry.lock`: o nome e a
-versão exata de cada biblioteca, com uma **impressão digital** (*hash*) de cada arquivo baixado.
-As instalações seguintes não resolvem de novo: instalam exatamente o que está no `poetry.lock`. É a
-segunda parte da comparação que o `loading.py` imprime:
+Na primeira instalação, o Poetry **resolve** as dependências: escolhe, para cada biblioteca,
+inclusive as transitivas, uma versão que cumpra todos os especificadores em cada versão do Python
+de `requires-python`; quando nenhuma versão serve para a faixa inteira, ele escolhe uma para cada
+parte dela ([A segunda instalação](./11-instalar-com-poetry.md#a-segunda-instalação)). Depois
+grava o resultado em `ex0/poetry.lock`: o nome e a versão exata de cada biblioteca, com uma
+**impressão digital** (*hash*) de cada arquivo baixado. As instalações seguintes não resolvem de
+novo: instalam exatamente o que está no `poetry.lock`. É a segunda parte da comparação que o
+`loading.py` imprime:
 
 ```text
 pyproject.toml declares the same constraints, and Poetry pins the resolved
@@ -86,8 +88,8 @@ flowchart LR
 
 O `poetry.lock` é gerado pelo Poetry e não está na lista de arquivos do enunciado, que pede só
 `construct.py`, `loading.py`, `requirements.txt` e `pyproject.toml` na pasta `ex0`; ele fica fora
-da entrega. Isso tem um preço: sem o `poetry.lock` no repositório, o `poetry install` feito na
-avaliação, num clone novo, não acha arquivo de travamento, resolve as versões do zero e grava um
+da entrega. Isso tem um preço: sem o `poetry.lock` no repositório, o `poetry install` feito num
+clone novo do repositório não acha arquivo de travamento, resolve as versões do zero e grava um
 `poetry.lock` novo, com as versões daquele dia, que podem ser outras. A garantia de "toda
 instalação idêntica", que o próprio `loading.py` imprime, e o "reproduzir o laboratório
 exatamente" do enunciado só valem para quem recebe o `poetry.lock`. Num projeto de verdade, o

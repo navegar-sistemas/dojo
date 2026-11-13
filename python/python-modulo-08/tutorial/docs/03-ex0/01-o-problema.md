@@ -23,8 +23,8 @@ ambiente virtual) que:
 O programa precisa funcionar dentro e fora de um ambiente virtual, com uma saída diferente para
 cada caso. Só pode usar os módulos `sys`, `os` e `site`, e a função `print`.
 
-O enunciado também avisa: o ambiente virtual **não** vai para o repositório, e você precisa
-saber criar um novo durante a avaliação, se for preciso.
+O enunciado também avisa: o ambiente virtual **não** vai para o repositório. Quem baixa o
+projeto cria um novo, com os comandos que o próprio programa ensina.
 
 ## As saídas do enunciado
 

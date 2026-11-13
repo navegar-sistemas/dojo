@@ -5,18 +5,17 @@ title: Entregar
 
 # Entregar
 
-O enunciado pede a entrega num **repositório Git**, e só o que estiver no repositório é avaliado. Só
-os quatro arquivos pedidos precisam ir; a pasta `.venv`, a pasta `experimentos`, os arquivos de
-teste (`ancient_fragment.txt`, `new_fragment.txt`, `new_archive.txt`, `vault.txt`) e a pasta
+A entrega é feita num **repositório Git**, e só o que estiver no repositório conta. Só os quatro
+arquivos pedidos precisam ir; a pasta `.venv`, a pasta `experimentos`, os arquivos de teste
+(`ancient_fragment.txt`, `new_fragment.txt`, `new_archive.txt`, `vault.txt`) e a pasta
 `.mypy_cache`, que o mypy cria, ficam de fora.
 
 ## Copiar os arquivos para o repositório
 
-O endereço (a URL) do repositório de entrega vem junto com o projeto. O `git clone` e o `git push`
-podem pedir login ou uma chave SSH (um par de arquivos que identifica o seu computador para o
-servidor, no lugar da senha), conforme o servidor do repositório. A partir da pasta
-`data-archivist`, suba um nível, baixe o repositório numa pasta `entrega` e copie só os arquivos
-`.py` de cada exercício:
+O repositório tem um endereço (a URL), que o serviço onde ele está hospedado mostra. O `git clone` e
+o `git push` podem pedir login ou uma chave SSH (um par de arquivos que identifica o seu computador
+para esse serviço, no lugar da senha), conforme o serviço. A partir da pasta `data-archivist`, suba
+um nível, baixe o repositório numa pasta `entrega` e copie só os arquivos `.py` de cada exercício:
 
 ```bash
 cd ..
@@ -28,9 +27,9 @@ done
 cd entrega
 ```
 
-Troque `<endereço-do-repositório>` pelo endereço recebido. O `git clone` baixa o repositório; se ele
-ainda estiver vazio, avisa `warning: You appear to have cloned an empty repository.`, o que é normal
-num repositório de entrega novo. O `for` cria cada pasta de exercício dentro de `entrega` (o `-p` do
+Troque `<endereço-do-repositório>` pelo endereço do repositório. O `git clone` baixa o repositório;
+se ele ainda estiver vazio, avisa `warning: You appear to have cloned an empty repository.`, o que é
+normal num repositório novo. O `for` cria cada pasta de exercício dentro de `entrega` (o `-p` do
 `mkdir` não reclama se ela já existir) e copia para ela os arquivos `.py` com `cp`.
 
 ## Registrar e enviar
@@ -56,13 +55,14 @@ Changes to be committed:
 
 `git add` marca os arquivos para o próximo registro; `git status` mostra o que está marcado. A lista
 `Changes to be committed` ("mudanças a registrar") tem exatamente os quatro arquivos. O resto pode
-variar: esta é a saída de um repositório de entrega vazio (`No commits yet`, "nenhum registro
-ainda"); num repositório que já tem registros, essa linha não aparece. O nome do ramo (*branch*, a
-sequência de registros em que o `git` está trabalhando) na primeira linha também pode ser outro,
-como `main`.
+variar: esta é a saída de um repositório vazio (`No commits yet`, "nenhum registro ainda"); num
+repositório que já tem registros, essa linha não aparece. O nome do ramo (*branch*, a sequência de
+registros em que o `git` está trabalhando) na primeira linha também pode ser outro, como `main`.
 
-O `git commit` precisa saber quem é o autor. Se ele pedir (`Please tell me who you are`), informe o
-seu nome e e-mail uma vez, e rode o `git commit` de novo:
+Todo registro leva o nome e o e-mail do autor. Antes do primeiro `git commit` num computador,
+informe os seus (uma vez só; o `--global` vale para todos os repositórios desse computador). Sem
+isso, o `git` recusa o registro com `Please tell me who you are` ou, conforme o sistema, grava um
+autor inventado a partir do seu usuário e do nome do computador:
 
 ```bash
 git config --global user.name "Seu Nome"
@@ -75,7 +75,7 @@ git push
 ```
 
 `git commit` registra os arquivos com uma mensagem; `git push` envia o registro para o repositório
-de entrega.
+remoto, o que foi baixado com o `git clone`.
 
 ## Conferir o que foi enviado
 

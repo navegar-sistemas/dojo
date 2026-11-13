@@ -142,7 +142,7 @@ plugins não compartilham nada além do nome de um método, e qualquer classe, a
 conhecer o projeto, pode virar plugin. O enunciado fecha o exercício 2 perguntando qual é a
 diferença real entre os dois e por que um sistema de plugins prefere o `Protocol`; a resposta
 completa está em
-[As perguntas do enunciado](../09-fechamento/03-as-perguntas-do-enunciado.md#abc-ou-protocol).
+[Perguntas de revisão](../09-fechamento/03-perguntas-de-revisao.md#abc-ou-protocol).
 
 ## O ExportPlugin
 

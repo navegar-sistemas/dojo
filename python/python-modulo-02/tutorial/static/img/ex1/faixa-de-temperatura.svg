@@ -3,7 +3,7 @@
 <rect x="292.941" y="90" width="155.294" height="40" fill="#bbf7d0"/>
 <line x1="292.941" y1="90" x2="292.941" y2="130" stroke="#16a34a" stroke-width="2"/>
 <line x1="448.235" y1="90" x2="448.235" y2="130" stroke="#16a34a" stroke-width="2"/>
-<text x="370.588" y="168" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#16a34a" text-anchor="middle">aceita: de 0 a 40, com 0 e 40</text>
+<text x="370.588" y="168" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="normal" fill="#16a34a" text-anchor="middle">aceita: de 0 a 40, limites incluídos</text>
 <line x1="60" y1="120" x2="720" y2="120" stroke="#1f2937" stroke-width="2"/>
 <path d="M720 120 l-10 -6 v12 z" fill="#1f2937"/>
 <text x="720" y="170" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="end">temperatura (°C) →</text>

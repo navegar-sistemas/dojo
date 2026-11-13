@@ -38,8 +38,9 @@ ImportError: cannot import name 'dark_spell_allowed_ingredients' from partially 
 FIM
 ```
 
-Desta vez o `diff` não imprime nada, no Python 3.10 e no 3.14: o traceback inteiro é igual ao do
-enunciado, com os mesmos arquivos, as mesmas linhas (7, 2 e 2) e a mesma mensagem.
+Desta vez o `diff` não imprime nada, em todas as versões do Python 3.10 ao 3.15: o traceback
+inteiro é igual ao do enunciado, com os mesmos arquivos, as mesmas linhas (7, 2 e 2) e a mesma
+mensagem.
 
 ## Conferir estilo e tipos
 

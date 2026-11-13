@@ -41,7 +41,8 @@ strategy.py
 - `*.py` é expandido pelo terminal para todos os arquivos `.py` da pasta atual; `ex3` e `ex4`
   são listadas por dentro. O `-1` põe um nome por linha;
 - os seis arquivos da raiz e os dois `__init__.py` têm os nomes exatos do enunciado. Um nome
-  errado (uma letra trocada, `.py` faltando) faz o exercício não ser encontrado;
+  errado (uma letra trocada, `.py` faltando) já não é o arquivo pedido, e, nos pacotes, quebra os
+  imports dos scripts de teste;
 - as pastas `__pycache__` são o cache que o Python cria ao importar os módulos dos pacotes; não
   fazem parte da entrega e podem ser apagadas.
 

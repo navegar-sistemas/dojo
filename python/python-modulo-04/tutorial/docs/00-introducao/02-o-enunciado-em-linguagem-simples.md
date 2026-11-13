@@ -66,10 +66,9 @@ final](./04-o-resultado-final.md) reúne todos.
 
 ## Entrega
 
-Só os quatro arquivos `.py`, com esses nomes e nessas pastas, num repositório Git. Na avaliação,
-quem avalia pode pedir que você explique as operações com arquivos, demonstre o tratamento de erros
-ou mostre como o `with` funciona, e confere se a estrutura de `secure_archive` segue o que o
-exercício 3 descreve ([Entregar](../07-fechamento/02-entregar.md)).
+Só os quatro arquivos `.py`, com esses nomes e nessas pastas, num repositório Git
+([Entregar](../07-fechamento/02-entregar.md)). A estrutura de `secure_archive` precisa seguir o que o
+exercício 3 descreve: nome, parâmetros e tipo do retorno.
 
 ## O que o enunciado cita sem explicar
 
@@ -84,4 +83,4 @@ exercício 3 descreve ([Entregar](../07-fechamento/02-entregar.md)).
   de erro, que existem desde os primeiros sistemas Unix ([Os três
   fluxos](../05-ex2/02-os-tres-fluxos.md)).
 - **Instruções sobre IA**: o enunciado tem um capítulo pedindo que todo código vindo de uma
-  ferramenta de IA seja entendido por completo e revisado com colegas.
+  ferramenta de IA seja entendido por completo, conferido e testado antes de ser usado.

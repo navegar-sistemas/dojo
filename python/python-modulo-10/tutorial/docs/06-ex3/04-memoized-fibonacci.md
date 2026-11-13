@@ -98,10 +98,11 @@ def memoized_fibonacci(n: int) -> int:
 
 ## O limite da recursão
 
-Cada chamada recursiva ocupa um lugar numa pilha de chamadas que o Python limita (cerca de mil
-níveis). Com o cache vazio, `memoized_fibonacci(1000)` desceria mil níveis antes do primeiro
-resultado, e o Python lança `RecursionError`; no Python 3.10, o limite chega antes (`n = 500` já
-falha, `n = 400` funciona), porque lá o embrulho do cache também conta como um nível. Com o cache já preenchido até
-perto do valor pedido, a chamada desce pouco e funciona
-([Rodar e conferir](./08-rodar-e-conferir.md)). Os valores do enunciado, até 15, ficam muito longe
-do limite.
+Cada chamada recursiva ocupa um lugar numa pilha de chamadas que o Python limita (mil níveis, por
+padrão). Com o cache vazio, `memoized_fibonacci(1000)` desceria mil níveis antes do primeiro
+resultado, e o Python lança `RecursionError`. O maior `n` que funciona com o cache vazio depende
+da versão: do Python 3.12 em diante, `memoized_fibonacci(999)` funciona; no 3.10 e no 3.11, o
+embrulho do cache também conta como um nível, e o limite cai pela metade (`n = 499` funciona,
+`n = 500` já falha). Com o cache já preenchido até perto do valor pedido, a chamada desce pouco e
+funciona ([Rodar e conferir](./08-rodar-e-conferir.md#o-limite-da-recursão)). Os valores do
+enunciado, até 15, ficam muito longe do limite.

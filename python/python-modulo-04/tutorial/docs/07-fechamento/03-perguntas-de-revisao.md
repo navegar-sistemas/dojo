@@ -1,13 +1,13 @@
 ---
 sidebar_position: 3
-title: As perguntas do enunciado
+title: Perguntas de revisão
+sidebar_label: Perguntas de revisão
 ---
 
-# As perguntas do enunciado
+# Perguntas de revisão
 
-O enunciado deixa uma pergunta no exercício 0 e avisa que, na avaliação, pode ser pedido que você
-explique as operações com arquivos, demonstre o tratamento de erros ou mostre como o `with`
-funciona.
+A primeira pergunta é a que o enunciado faz no exercício 0; as outras cobrem as operações com
+arquivos, o tratamento de erros, os fluxos e o `with`.
 
 ## Qual é o tipo do dado devolvido por open()?
 
@@ -34,8 +34,9 @@ falha](../02-arquivos/05-quando-o-open-falha.md)). Ao ler, `UnicodeDecodeError` 
 capturado, porque um arquivo que não é texto não é uma falha do sistema. Ao gravar, o `open()`
 recusa com `ValueError` um nome com o caractere nulo, e a falha de disco cheio pode aparecer só no
 `close()`, que um `try` por fora do `finally` captura ([Gravar o
-arquivo](../04-ex1/05-gravar-o-arquivo.md)). Na pergunta do nome, `Ctrl+D`, `Ctrl+C` e bytes que
-não formam texto viram resposta vazia ([Pedir o nome](../04-ex1/04-pedir-o-nome.md)). Um
+arquivo](../04-ex1/05-gravar-o-arquivo.md)). Na pergunta do nome, `Ctrl+D`, `Ctrl+C` e, até o
+Python 3.14, bytes que não formam texto viram resposta vazia ([Pedir o
+nome](../04-ex1/04-pedir-o-nome.md)). Um
 argumento que não pode ser impresso leva à mensagem de uso ([O uso](../03-ex0/02-o-uso.md)). Em
 todos esses casos, o programa avisa e termina com código `0` ([Rodar e conferir do exercício
 0](../03-ex0/06-rodar-e-conferir.md#nenhum-caso-trava)).

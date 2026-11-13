@@ -77,7 +77,7 @@ que ele pede.
 | Exercício 1 | variáveis de ambiente, o arquivo `.env`, o `.gitignore` e `oracle.py` |
 | Módulos e pacotes | explica, com experimentos pequenos, como o `import` encontra e carrega o código: módulos, pacotes, `__init__.py`, imports absolutos e relativos, e o import circular |
 | Exercícios 2 a 4 | constroem o pacote `alchemy` e os seis programas de teste |
-| Fechamento | confere tudo, mostra como entregar e responde às perguntas que o enunciado deixa para a avaliação |
+| Fechamento | confere tudo, mostra como entregar num repositório Git e responde às perguntas de revisão de cada exercício |
 
 Cada exercício termina com os arquivos completos e uma página de rodar e conferir. Os termos
 novos estão reunidos no [glossário](./05-glossario.md).

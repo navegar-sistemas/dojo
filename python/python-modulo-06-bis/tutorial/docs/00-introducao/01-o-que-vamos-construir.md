@@ -75,7 +75,7 @@ que ele pede.
 | Exercícios 0 a 2 | constroem os três programas da fundação, um por parte |
 | Pacotes e herança múltipla | explica, com experimentos, o pacote com `__init__.py` e a classe com duas classes mães |
 | Exercícios 3 e 4 | constroem as fábricas, a capacidade e as estratégias, um exercício por parte |
-| Fechamento | confere tudo, mostra como entregar e responde às perguntas que o enunciado deixa para a avaliação |
+| Fechamento | confere tudo, mostra como entregar e responde às perguntas de revisão |
 
 Cada exercício termina com os arquivos completos. Os termos novos estão reunidos no
 [glossário](./05-glossario.md).

@@ -102,4 +102,4 @@ serem importados; quem roda são os programas de fora do pacote, como `use_potio
 
 O relativo deixa claro que o módulo é vizinho, e sobrevive a uma troca de nome do pacote. O
 absoluto é o único que alcança módulos de fora do pacote, e diz o caminho inteiro a quem lê. A
-[página das perguntas](../08-fechamento/03-as-perguntas-do-enunciado.md) volta a essa escolha.
+[página das perguntas](../08-fechamento/03-perguntas-de-revisao.md) volta a essa escolha.

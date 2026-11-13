@@ -64,7 +64,7 @@ que ele pede.
 | Ambiente | prepara o Python, a pasta do projeto, as duas ferramentas que conferem o código (flake8 e mypy) e o gerador de dados de teste que vem com o enunciado |
 | Funções como valores | explica, com experimentos pequenos, funções guardadas em variáveis, lambdas, funções que devolvem funções, escopo e closures, `*args` e `**kwargs`, e decoradores |
 | Exercícios 0 a 4 | constroem os cinco programas, um por parte |
-| Fechamento | confere tudo, mostra como entregar e responde às perguntas que o enunciado deixa para a avaliação |
+| Fechamento | confere tudo, mostra como entregar e responde às perguntas de revisão sobre os conceitos |
 
 Cada exercício termina com o arquivo completo e uma página que roda e confere o programa. Os
 termos novos estão reunidos no [glossário](./05-glossario.md).

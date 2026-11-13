@@ -7,8 +7,8 @@ title: A assinatura
 
 A **assinatura** de uma função é a linha do `def`: o nome, os parâmetros com seus tipos e o tipo do
 retorno. O enunciado fixa o nome da função, o papel de cada parâmetro, quais são opcionais e o tipo
-do retorno, e a avaliação confere esses pontos. Os nomes dos parâmetros, os valores padrão e as
-palavras `"read"` e `"write"` são escolhas do projeto.
+do retorno. Os nomes dos parâmetros, os valores padrão e as palavras `"read"` e `"write"` são
+escolhas do projeto.
 
 ```python
 def secure_archive(file_name: str, action: str = "read",

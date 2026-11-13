@@ -1,13 +1,13 @@
 ---
 sidebar_position: 3
-title: As perguntas do enunciado
+title: Perguntas de revisão
 ---
 
-# As perguntas do enunciado
+# Perguntas de revisão
 
-O enunciado deixa quatro perguntas para pensar, em dois quadros *Think About* ("pense nisto"),
-com duas perguntas cada: um no exercício 0 e outro no exercício 2. Deixa também duas dicas: uma
-na introdução e outra no exercício 1. O enunciado não diz como a avaliação usa essas perguntas.
+As quatro primeiras perguntas vêm dos dois quadros *Think About* ("pense nisto") do enunciado,
+com duas perguntas cada: um no exercício 0 e outro no exercício 2. As duas seções seguintes
+retomam as duas dicas do enunciado, uma da introdução e outra do exercício 1.
 
 ## Como funciona a conversão automática de tipos do Pydantic?
 

@@ -5,7 +5,7 @@ title: Entregar
 
 # Entregar
 
-O enunciado pede a entrega num **repositório Git**, e só o que estiver no repositório é avaliado.
+O enunciado pede a entrega num **repositório Git**, e só o que estiver no repositório conta.
 Ele também avisa: entregue só os arquivos pedidos. Vão os três `.py`; ficam de fora a pasta
 `.venv`, a `experimentos`, a `tools` (com os dados gerados), o `data_generator.tar`, as pastas
 `__pycache__`, que o Python cria ao importar um arquivo, e a `.mypy_cache`, que o mypy cria.
@@ -15,10 +15,10 @@ programas ([O ambiente virtual](../01-ambiente/03-o-ambiente-virtual.md)).
 
 ## Copiar os arquivos para o repositório
 
-O endereço (a URL) do repositório de entrega vem junto com o projeto. O `git clone` e o
-`git push` podem pedir login ou uma **chave SSH**, conforme o servidor do repositório. Uma chave
-SSH é um par de arquivos que identifica o seu computador para o servidor, no lugar de uma senha;
-quem fornece o repositório explica como criar a chave e cadastrá-la no servidor. A partir da
+O repositório fica num servidor Git, e o endereço (a URL) dele é o que o serviço que o hospeda
+mostra. O `git clone` e o `git push` podem pedir login ou uma **chave SSH**, conforme o servidor.
+Uma chave SSH é um par de arquivos que identifica o seu computador para o servidor, no lugar de
+uma senha; o serviço que hospeda o repositório explica como criar a chave e cadastrá-la. A partir da
 pasta `cosmic-data`, suba um nível, baixe o repositório numa pasta `entrega` e copie só os
 arquivos `.py` de cada exercício:
 
@@ -32,7 +32,7 @@ done
 cd entrega
 ```
 
-Troque `<endereço-do-repositório>` pelo endereço recebido e, se a pasta do projeto tiver outro
+Troque `<endereço-do-repositório>` pelo endereço do seu repositório e, se a pasta do projeto tiver outro
 nome, troque `cosmic-data` pelo nome da sua pasta. O `git clone` baixa o repositório; o
 `for` cria cada pasta de exercício dentro de `entrega` (o `-p` do `mkdir` não reclama se ela já
 existir) e copia para ela os arquivos `.py` com `cp`.
@@ -59,7 +59,7 @@ Changes to be committed:
 
 `git add` marca os arquivos para o próximo registro; `git status` mostra o que está marcado. A
 lista `Changes to be committed` ("mudanças a registrar") tem exatamente os três arquivos. O
-resto pode variar: esta é a saída de um repositório de entrega vazio (`No commits yet`, "nenhum
+resto pode variar: esta é a saída de um repositório vazio (`No commits yet`, "nenhum
 registro ainda"); num repositório que já tem registros, essa linha não aparece. A primeira
 linha mostra o **ramo** (*branch*), a linha de histórico em que os registros entram; o nome
 padrão pode ser `main` ou `master`.
@@ -86,7 +86,7 @@ git push
 ```
 
 `git commit` registra os arquivos com uma mensagem; `git push` envia o registro para o
-repositório de entrega.
+repositório no servidor.
 
 ## Conferir o que foi enviado
 

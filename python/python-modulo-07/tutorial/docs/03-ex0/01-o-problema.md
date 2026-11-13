@@ -33,8 +33,8 @@ Um programa `battle.py`, na raiz do projeto, fora do pacote, que:
 1. cria a fábrica do fogo e a da água (o enunciado as chama de "fábricas de Flameling e de
    Aquabub", pelo nome da criatura base; são a `FlameFactory` e a `AquaFactory`);
 2. usa **uma única função**, que recebe uma fábrica qualquer, para testar as duas: segundo o
-   enunciado, a função "verifica que ela consegue criar a criatura base e a evoluída", e depois faz
-   cada uma se descrever e atacar;
+   enunciado, a função recebe "um objeto fábrica e verifica que ele consegue criar a Criatura
+   base e a evoluída", e depois faz cada uma se descrever e atacar;
 3. usa outra função, que recebe as duas fábricas, para fazer as duas criaturas base lutarem.
 
 Uma única função para as duas fábricas quer dizer que a função não sabe qual fábrica recebeu: é o

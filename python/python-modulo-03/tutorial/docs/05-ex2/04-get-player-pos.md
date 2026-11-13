@@ -88,7 +88,8 @@ ValueError: not enough values to unpack (expected 3, got 1)
 ValueError: too many values to unpack (expected 3, got 4)
 ```
 
-Essa é a saída do Python 3.14. No 3.10, a última mensagem não diz quantos pedaços vieram:
+Essa é a saída do Python 3.14 em diante. Até o 3.13, a última mensagem não diz quantos pedaços
+vieram:
 `ValueError: too many values to unpack (expected 3)`. O erro é o mesmo `ValueError`.
 
 ## A faixa de valores

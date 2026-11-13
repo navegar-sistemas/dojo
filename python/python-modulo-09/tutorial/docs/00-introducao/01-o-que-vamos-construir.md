@@ -74,7 +74,7 @@ que ele pede.
 | Pydantic | explica, com experimentos pequenos, cada peça do Pydantic que os exercícios usam |
 | Exercícios 0 a 2 | constroem os três programas, um por parte |
 | Os dados do gerador | roda as ferramentas de dados que vêm com o enunciado e passa os dados gerados pelos três modelos |
-| Fechamento | confere tudo, mostra como entregar e responde às perguntas que o enunciado deixa no ar |
+| Fechamento | confere tudo, mostra como entregar e reúne perguntas de revisão sobre os conceitos do projeto |
 
 Cada exercício termina com o arquivo completo. Os termos novos estão reunidos no
 [glossário](./05-glossario.md).

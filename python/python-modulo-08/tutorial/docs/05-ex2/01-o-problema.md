@@ -41,9 +41,10 @@ As variáveis são cinco:
 | `LOG_LEVEL` | o nível de detalhe dos *logs* (as mensagens que um programa registra sobre o que faz), como `DEBUG` (tudo) ou `WARNING` (só alertas) |
 | `ZION_ENDPOINT` | o endereço (URL) da "rede da resistência", um serviço externo |
 
-O enunciado ainda avisa, em destaque: nunca registrar segredos reais no controle de versão. O
-`.env` precisa estar no `.gitignore`, e você precisa saber explicar por quê
-([As perguntas do enunciado](../06-fechamento/03-as-perguntas-do-enunciado.md)).
+O enunciado ainda avisa, em destaque: nunca registrar no Git segredos reais (valores que não
+podem ser públicos, como senhas e chaves de acesso). O `.env` precisa estar no `.gitignore`, e é
+preciso saber explicar por quê
+([Por que o .env fica no .gitignore?](../06-fechamento/03-perguntas-de-revisao.md#por-que-o-env-fica-no-gitignore)).
 
 Os módulos autorizados são `os`, `sys`, `python-dotenv` e as operações com arquivos (`open` e
 companhia).

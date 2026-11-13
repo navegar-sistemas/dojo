@@ -235,4 +235,4 @@ python3 experimentos/global_nonlocal.py
 O contador global não tem como ser independente: existe um único `calls`, e qualquer linha do
 programa pode estragá-lo. Os contadores com `nonlocal` têm cada um o seu estado, privado. É por
 isso que o enunciado proíbe variáveis globais e libera `nonlocal` no exercício 2
-([As perguntas do enunciado](../08-fechamento/03-as-perguntas-do-enunciado.md)).
+([Perguntas de revisão](../08-fechamento/03-perguntas-de-revisao.md#por-que-global-é-proibido-e-nonlocal-é-permitido-quais-as-diferenças)).

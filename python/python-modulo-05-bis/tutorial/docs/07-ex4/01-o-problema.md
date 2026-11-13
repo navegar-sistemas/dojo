@@ -25,8 +25,8 @@ permitidos continuam sendo só os dos módulos do projeto.
 | `light_validator.py` | `validate_ingredients(ingredients: str)`, que devolve um texto com os ingredientes e a palavra `VALID` ou `INVALID`. Os ingredientes são válidos se incluem pelo menos um dos permitidos pelo livro, sem diferenciar maiúsculas de minúsculas |
 
 O livro precisa do validador para decidir, e o validador precisa do livro para saber o que é
-permitido. O enunciado lembra que há vários jeitos de impedir a explosão: escolher um e saber
-explicar os outros na avaliação.
+permitido. Há vários jeitos de impedir a explosão: o tutorial usa um, e os outros estão nas
+[Perguntas de revisão](../08-fechamento/03-perguntas-de-revisao.md#as-alternativas).
 
 ### O grimório das trevas, que não sobrevive
 

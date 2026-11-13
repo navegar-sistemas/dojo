@@ -23,7 +23,7 @@ python3 experimentos/abrir.py
 ```
 
 ```text
-<_io.TextIOWrapper name='ancient_fragment.txt' mode='r' encoding='UTF-8'>
+<_io.TextIOWrapper name='ancient_fragment.txt' mode='r' encoding='utf-8'>
 ```
 
 `open("ancient_fragment.txt")` **não** devolve o texto do arquivo. Devolve um **objeto arquivo**: um
@@ -36,8 +36,11 @@ valor que representa o arquivo aberto e tem os métodos para usá-lo. O `print` 
 - `name` é o caminho usado para abrir;
 - `mode='r'` é o **modo de abertura**: `r` (*read*) abre só para leitura, e é o modo usado quando
   nenhum é informado;
-- `encoding` é a **codificação**: a regra que traduz os bytes do disco em caracteres. `UTF-8` é a
-  usada em quase todo sistema hoje; a sua máquina pode mostrar `utf-8` em minúsculas.
+- `encoding` é a **codificação**: a regra que traduz os bytes do disco em caracteres. UTF-8 é a
+  usada em quase todo sistema hoje. A partir do Python 3.15, o `open()` usa UTF-8 por padrão, e o
+  `print` mostra `utf-8`. Até o 3.14, a codificação vem da **configuração de idioma** do sistema;
+  na mais comum do Linux e do macOS (`pt_BR.UTF-8`, `en_US.UTF-8`), também é UTF-8, mas o `print`
+  a mostra em maiúsculas: `encoding='UTF-8'`.
 
 A última linha, `file.close()`, fecha o arquivo; a página [close e o
 recurso](./04-close-e-o-recurso.md) explica por que isso importa.

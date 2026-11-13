@@ -85,9 +85,8 @@ flowchart LR
 
 `repeat` sem parênteses (`@repeat`) não funcionaria: o Python faria `chant = repeat(chant)`,
 `times` receberia a função, e `chant("om")` devolveria uma função (um `wrapper`) em vez da lista
-de resultados. Um
-decorador com parâmetros é sempre usado com parênteses, mesmo que os valores sejam passados por
-nome: `@repeat(times=3)`.
+de resultados. Um decorador com parâmetros é sempre usado com parênteses, mesmo que os valores
+sejam passados por nome: `@repeat(times=3)`.
 
 No exercício 4, `power_validator(min_power)` e `retry_spell(max_attempts)` seguem este formato de
 três camadas, e `spell_timer(func)` segue o formato de duas camadas da

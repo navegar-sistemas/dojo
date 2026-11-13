@@ -30,7 +30,7 @@ ex6/ft_garden_analytics.py
 - `-1` faz o `ls` listar um por linha.
 
 Um arquivo por pasta, com o nome exato que o enunciado pede. Um nome errado (uma letra trocada,
-`.py` faltando) faz o exercício não ser encontrado na avaliação.
+`.py` faltando) não cumpre o enunciado, mesmo que o programa funcione.
 
 ## Estilo
 

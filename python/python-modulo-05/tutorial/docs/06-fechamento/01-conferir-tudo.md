@@ -24,9 +24,9 @@ ex2:
 data_pipeline.py
 ```
 
-Um arquivo por pasta, com o nome exato que o enunciado pede. Um nome errado (uma letra trocada,
-`.py` faltando) faz o exercício não ser encontrado. Se aparecer uma pasta `__pycache__`, ela é
-o cache que o Python cria ao importar um arquivo; não faz parte da entrega e pode ser apagada.
+Um arquivo por pasta, com o nome exato que o enunciado pede. Se aparecer uma pasta `__pycache__`,
+ela é o cache que o Python cria ao importar um arquivo; não faz parte da entrega e pode ser
+apagada.
 
 ## Estilo e tipos
 

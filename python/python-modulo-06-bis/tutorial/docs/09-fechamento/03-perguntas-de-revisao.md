@@ -1,16 +1,17 @@
 ---
 sidebar_position: 3
-title: As perguntas do enunciado
+title: Perguntas de revisão
+sidebar_label: Perguntas de revisão
 ---
 
-# As perguntas do enunciado
+# Perguntas de revisão
 
-O enunciado deixa uma pergunta no fim dos exercícios 1, 2, 3 e 4, respondidas abaixo. Também avisa
-que, na avaliação, pode ser pedido que você explique o polimorfismo, mostre a sobrescrita de
-métodos, acrescente ao sistema um tipo de dado novo, uma família de criaturas nova ou uma
-estratégia nova, ou mude o jeito de processar um dado; e pede que você saiba explicar como a
-herança reaproveita código e, ao mesmo tempo, deixa cada classe especializar o comportamento, e
-por que cada padrão de projeto existe.
+Os exercícios 1, 2, 3 e 4 do enunciado terminam com uma pergunta, respondida abaixo. Depois delas
+vêm as tarefas que mostram se o projeto foi entendido: explicar o polimorfismo, mostrar a
+sobrescrita de métodos, acrescentar ao sistema um tipo de dado novo, uma família de criaturas nova
+ou uma estratégia nova, mudar o jeito de processar um dado, explicar como a herança reaproveita
+código e, ao mesmo tempo, deixa cada classe especializar o comportamento, e explicar por que cada
+padrão de projeto existe.
 
 ## Exercício 1: como o polimorfismo deixa o DataStream tratar tipos diferentes sem conhecê-los?
 
@@ -124,8 +125,8 @@ use. A função `battle`, as estratégias antigas e as famílias antigas ficam c
 
 ## Uma família, uma capacidade e uma estratégia novas
 
-O experimento abaixo faz exatamente isso, fora dos pacotes, e cobre três pedidos da avaliação de
-uma vez: uma **capacidade** nova (curar), uma **família** nova (as criaturas de planta, com a sua
+O experimento abaixo faz exatamente isso, fora dos pacotes, e acrescenta três peças de uma vez:
+uma **capacidade** nova (curar), uma **família** nova (as criaturas de planta, com a sua
 fábrica) e uma **estratégia** nova (a de suporte, que cura e depois ataca). Crie
 `experimentos/nova_familia.py`:
 
@@ -356,8 +357,8 @@ como `[ERROR] Unauthorized access!!` em vez de `ERROR: Unauthorized access!!`, s
 ```
 
 O fluxo, os plugins e os outros processadores continuam iguais. A saída do programa muda nas
-linhas de log, e por isso o `diff` com o enunciado passa a mostrar diferenças: a mudança é só
-para a demonstração na avaliação.
+linhas de log, e por isso o `diff` com o enunciado passa a mostrar diferenças: depois de ver o
+efeito, volte a linha à versão original.
 
 Do mesmo jeito, mudar como uma criatura luta é mexer só na estratégia dela: dar a estratégia
 normal ao `Shiftling`, no `main` de `tournament.py`, faz ele só atacar, sem que o torneio mude.

@@ -62,7 +62,7 @@ regra é explicada de novo na página que a cumpre.
 | Ambiente | prepara o Python, a pasta do projeto e as duas ferramentas que conferem o código (flake8 e mypy) |
 | O que é uma exceção | explica, com exemplos pequenos, o que acontece quando um erro aparece e como capturá-lo |
 | Exercícios 0 a 4 | constroem os cinco programas, um por parte |
-| Fechamento | confere tudo, mostra como entregar e responde às perguntas que o enunciado deixa para você pensar |
+| Fechamento | confere tudo, mostra como entregar e reúne perguntas de revisão sobre os conceitos do projeto, com as respostas |
 
 O código de cada exercício aparece em pedaços e, no fim, o arquivo completo. Os termos novos
 estão reunidos no [glossário](./05-glossario.md).

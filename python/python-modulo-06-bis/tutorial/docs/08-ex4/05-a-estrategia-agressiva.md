@@ -88,7 +88,7 @@ ex4/aggressive.py:19: error: "Creature" has no attribute "revert"  [attr-defined
 Found 2 errors in 1 file (checked 4 source files)
 ```
 
-O mypy estreita o tipo de uma variável só quando vê o `isinstance` escrito na própria função
+O mypy não olha dentro de `is_valid` para saber o que ela confere
 ([isinstance e o mypy](../06-pacotes/02-heranca-multipla.md#isinstance-e-o-mypy)). Para ele,
 `self.is_valid(creature)` é uma chamada qualquer que devolve um `bool`, e `creature` continua um
 `Creature`, sem `transform` nem `revert`. Com o `isinstance` no próprio `act`, depois do `raise`

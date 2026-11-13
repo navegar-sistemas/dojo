@@ -6,19 +6,19 @@ title: Entregar
 # Entregar
 
 A entrega é feita num **repositório git** (uma pasta cujo histórico de versões o git guarda e
-envia para um servidor), e só o que estiver no repositório é avaliado. Só os sete arquivos
-pedidos precisam ir. Ficam de fora a pasta `.venv`, a pasta `experimentos` e as pastas
+envia para um servidor), e só o que estiver no repositório conta como entregue. Só os sete
+arquivos pedidos precisam ir. Ficam de fora a pasta `.venv`, a pasta `experimentos` e as pastas
 `__pycache__` e `.mypy_cache` que o Python e o mypy criam.
 
 ## Antes de começar
 
 Você precisa de duas coisas:
 
-- o **endereço** (a URL) do repositório de entrega, informado por quem organiza a entrega do
-  projeto;
+- o **endereço** (a URL) do repositório git onde o projeto vai ficar, num serviço que hospeda
+  repositórios git;
 - **acesso** a esse repositório: o `git clone` e o `git push` podem pedir que você se identifique
-  no servidor (com usuário e senha, um token ou uma chave SSH já cadastrada). Use a forma de
-  acesso indicada por quem organiza a entrega.
+  no servidor (com usuário e senha, um token ou uma chave SSH já cadastrada), na forma que o
+  serviço aceita.
 
 ## Baixar o repositório
 
@@ -32,7 +32,7 @@ cd ..
 git clone <endereço-do-repositório> entrega
 ```
 
-Se o repositório de entrega ainda estiver vazio, o `git clone` avisa
+Se o repositório ainda estiver vazio, o `git clone` avisa
 `warning: You appear to have cloned an empty repository.` ("parece que você clonou um
 repositório vazio"). É o esperado, não um erro. Se aparecer `fatal:`, o clone falhou: confira o
 endereço e o acesso e rode o `git clone` de novo, antes de seguir.
@@ -96,7 +96,7 @@ git push
 ```
 
 `git commit` registra os arquivos com uma mensagem; `git push` envia o registro para o
-repositório de entrega. O `git push` só tem o que enviar depois de um `git commit` que deu
+repositório remoto. O `git push` só tem o que enviar depois de um `git commit` que deu
 certo: se o commit falhar, o push falha (num repositório vazio, com `failed to push`) ou responde
 `Everything up-to-date` sem enviar nada (num repositório que já tem registros). Nos dois casos, o
 conserto é refazer o commit e depois o push.
@@ -120,14 +120,13 @@ também podem ser repetidos aqui. Depois, a pasta `conferencia` pode ser apagada
 anterior deu certo; o `rm -rf` apaga a pasta e tudo o que há dentro dela, sem pedir confirmação
 e sem passar pela lixeira.
 
-## Na avaliação
+## Além do código
 
-Quem avalia vai pedir que você **acrescente o shebang** ao exercício 0, ao vivo
-([O shebang](../02-ex0/06-o-shebang.md)). E pode pedir:
+O enunciado pede que você saiba **acrescentar o shebang** ao exercício 0
+([O shebang](../02-ex0/06-o-shebang.md)), e também que saiba:
 
-- que você **explique** os conceitos
-  ([As perguntas do enunciado](./03-as-perguntas-do-enunciado.md));
-- que você **mostre as relações de herança**: o diagrama de [Seed](../08-ex6/06-seed.md) mostra a
+- **explicar** os conceitos ([Perguntas de revisão](./03-perguntas-de-revisao.md));
+- **mostrar as relações de herança**: o diagrama de [Seed](../08-ex6/06-seed.md) mostra a
   família inteira;
-- que você **estenda o código** com uma funcionalidade nova: um tipo novo de planta segue os três
-  passos de [super()](../07-ex5/03-super.md).
+- **estender o código** com uma funcionalidade nova: um tipo novo de planta segue os três passos
+  de [super()](../07-ex5/03-super.md).

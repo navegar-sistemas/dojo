@@ -6,9 +6,9 @@ title: O problema
 # O problema
 
 Os tipos embutidos descrevem problemas **genéricos**, que qualquer programa pode ter: valor
-inválido, divisão por zero, arquivo ausente. Uma planta murchando ou um tanque de água vazio não é nenhum deles. Para esses
-problemas, o programa pode criar **os seus próprios tipos de erro**, com nomes que dizem
-exatamente o que aconteceu.
+inválido, divisão por zero, arquivo ausente. Uma planta murchando ou um tanque de água vazio não
+é nenhum deles. Para esses problemas, o programa pode criar **os seus próprios tipos de erro**,
+com nomes que dizem exatamente o que aconteceu.
 
 ## O que o enunciado pede
 

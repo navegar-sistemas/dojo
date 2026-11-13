@@ -63,7 +63,7 @@ ferramentas ficam em `.venv/bin/`:
 ```
 
 ```text
-7.5.0 (mccabe: 0.7.0, pycodestyle: 2.15.0, pyflakes: 4.1.0) CPython 3.14.5 on
+7.5.0 (mccabe: 0.7.0, pycodestyle: 2.15.0, pyflakes: 4.1.0) CPython 3.15.2 on
 Darwin
 mypy 2.4.1 (compiled: yes)
 ```

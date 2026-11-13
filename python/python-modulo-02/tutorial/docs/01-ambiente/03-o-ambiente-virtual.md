@@ -53,7 +53,7 @@ Com um Python de nome numerado, como o `python3.11`, o pacote também leva o nú
 
 - `.venv/bin/python` é o Python **de dentro** do venv. O `-m pip` roda o `pip` com ele, e o
   `pip` instala as bibliotecas dentro da pasta `.venv`;
-- `--upgrade pip` atualiza o próprio `pip` antes, o que evita o aviso de "nova versão
+- `--upgrade pip` atualiza também o próprio `pip`, o que evita o aviso de "nova versão
   disponível";
 - `flake8 mypy` são as duas ferramentas.
 
@@ -66,13 +66,13 @@ ferramentas ficam em `.venv/bin/`:
 ```
 
 ```text
-7.5.0 (mccabe: 0.7.0, pycodestyle: 2.15.0, pyflakes: 4.1.0) CPython 3.14.5 on
-Linux
+7.5.0 (mccabe: 0.7.0, pycodestyle: 2.15.0, pyflakes: 4.1.0) CPython 3.15.2 on
+Darwin
 mypy 2.4.1 (compiled: yes)
 ```
 
 Os números podem ser outros na sua máquina, e a última palavra da saída do flake8, que ele
-imprime numa linha à parte, é o nome do sistema (`Linux`; `Darwin` no macOS). O que importa é que
+imprime numa linha à parte, é o nome do sistema (`Darwin` no macOS; `Linux` no Linux). O que importa é que
 os dois comandos respondem.
 
 Os programas dos exercícios não precisam do venv: eles só usam o que vem com o Python e são

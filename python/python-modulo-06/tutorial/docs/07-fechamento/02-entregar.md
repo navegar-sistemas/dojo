@@ -7,17 +7,17 @@ title: Entregar
 
 O enunciado pede a entrega num **repositório Git**, com a árvore de arquivos na **raiz** do
 repositório: a pasta `alchemy/`, o `elements.py` e os 13 scripts direto na pasta principal, sem
-uma pasta `the-codex` em volta. Só o que estiver no repositório é avaliado. A pasta `.venv`, a
-pasta `experimentos`, as pastas `__pycache__` e a pasta `.mypy_cache` ficam de fora.
+uma pasta `the-codex` em volta. Só conta o que estiver no repositório. A pasta `.venv`, a pasta
+`experimentos`, as pastas `__pycache__` e a pasta `.mypy_cache` ficam de fora.
 
 ## Copiar os arquivos para o repositório
 
-O endereço (a URL) do repositório de entrega vem junto com o projeto. O `git clone` e o
-`git push` podem pedir login ou uma **chave SSH**, conforme o servidor do repositório. Uma chave
-SSH é um par de arquivos que identifica o seu computador para o servidor, no lugar de uma senha;
-quem fornece o repositório explica como criar a chave e cadastrá-la no servidor. A partir da
-pasta `the-codex`, suba um nível, baixe o repositório numa pasta `entrega` e copie só os arquivos
-`.py`, pasta por pasta:
+O repositório fica num serviço que hospeda repositórios Git, e cada repositório tem um endereço
+(a URL). O `git clone` e o `git push` podem pedir login ou uma **chave SSH**, conforme o serviço.
+Uma chave SSH é um par de arquivos que identifica o seu computador para o serviço, no lugar de uma
+senha; a documentação do serviço explica como criar a chave e cadastrá-la. A partir da pasta
+`the-codex`, suba um nível, baixe o repositório numa pasta `entrega` e copie só os arquivos `.py`,
+pasta por pasta:
 
 ```bash
 cd ..
@@ -30,17 +30,16 @@ cp the-codex/alchemy/transmutation/*.py entrega/alchemy/transmutation/
 cd entrega
 ```
 
-Troque `<endereço-do-repositório>` pelo endereço recebido, e `the-codex` pelo nome da sua pasta,
-se ela tiver outro nome. O `git clone` baixa o repositório; o
-`mkdir -p` cria as pastas de `alchemy` dentro de `entrega` (o `-p` cria também as pastas do meio,
-e não reclama se elas já existirem); cada `cp` copia os arquivos `.py` de uma pasta. Copiar
-`*.py` pasta por pasta, em vez da pasta `alchemy` inteira, deixa as pastas `__pycache__` para
-trás.
+Troque `<endereço-do-repositório>` pelo endereço do seu repositório, e `the-codex` pelo nome da
+sua pasta, se ela tiver outro nome. O `git clone` baixa o repositório; o `mkdir -p` cria as
+pastas de `alchemy` dentro de `entrega` (o `-p` cria também as pastas do meio, e não reclama se
+elas já existirem); cada `cp` copia os arquivos `.py` de uma pasta. Copiar `*.py` pasta por
+pasta, em vez da pasta `alchemy` inteira, deixa as pastas `__pycache__` para trás.
 
 ## Quem é o autor
 
-Todo registro do git leva o nome e o e-mail de quem o fez. Grave os seus dentro do repositório de
-entrega, antes do primeiro registro (troque pelos seus dados):
+Todo registro do git leva o nome e o e-mail de quem o fez. Grave os seus dentro da pasta
+`entrega`, antes do primeiro registro (troque pelos seus dados):
 
 ```bash
 git config user.name "Seu Nome"
@@ -103,7 +102,7 @@ Changes to be committed:
 
 `git add` marca os arquivos para o próximo registro; `git status` mostra o que está marcado. A
 lista `Changes to be committed` ("mudanças a registrar") tem exatamente os 24 arquivos, e nenhum
-`__pycache__`. O resto pode variar: esta é a saída de um repositório de entrega vazio
+`__pycache__`. O resto pode variar: esta é a saída de um repositório vazio
 (`No commits yet`, "nenhum registro ainda"); num repositório que já tem registros, essa linha não
 aparece. A primeira linha mostra o **ramo** (*branch*), a linha de histórico em que os registros
 entram; o nome padrão pode ser `main` ou `master`.
@@ -113,8 +112,8 @@ git commit -m "Add The Codex"
 git push
 ```
 
-`git commit` registra os arquivos com uma mensagem; `git push` envia o registro para o
-repositório de entrega. A saída do `git commit` começa assim, e segue com mais 23 linhas
+`git commit` registra os arquivos com uma mensagem; `git push` envia o registro para a cópia do
+repositório no serviço. A saída do `git commit` começa assim, e segue com mais 23 linhas
 `create mode`, uma por arquivo:
 
 ```text

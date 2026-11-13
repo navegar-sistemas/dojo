@@ -85,7 +85,7 @@ Traceback (most recent call last):
 AttributeError: module 'alchemy' has no attribute 'elements'
 ```
 
-(No Python 3.10, o traceback não tem a linha de código nem a de marcação.)
+(Até o Python 3.12, o traceback não tem a linha de código nem a de marcação.)
 
 `AttributeError` ("erro de atributo") é a exceção de um nome lido com ponto que não existe: "o
 módulo `alchemy` não tem o atributo `elements`". Importar um pacote **não** carrega os módulos de

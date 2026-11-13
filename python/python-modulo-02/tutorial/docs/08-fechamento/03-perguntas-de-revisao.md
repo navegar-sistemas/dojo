@@ -1,13 +1,13 @@
 ---
 sidebar_position: 3
-title: As perguntas do enunciado
+title: Perguntas de revisão
 ---
 
-# As perguntas do enunciado
+# Perguntas de revisão
 
-O enunciado deixa perguntas ao longo dos exercícios e avisa que, na avaliação, pode ser pedido
-que você explique os conceitos e mostre como os programas lidam com cada problema. Estas são as
-perguntas, com as respostas que o projeto construiu.
+O enunciado deixa perguntas ao longo dos exercícios. Elas resumem os conceitos do projeto, e
+saber respondê-las é saber explicar como cada programa lida com os erros. Estas são as perguntas,
+com as respostas que o projeto construiu.
 
 ## Por que o Python tem diferentes tipos de erro?
 
@@ -28,8 +28,9 @@ exercício 2 usa o primeiro jeito porque precisa escrever o nome de cada tipo e 
 ## Capturar Exception ou o tipo exato?
 
 O exercício 0 deixa escolher entre a classe base `Exception` e o tipo que `input_temperature`
-lança. `except Exception` captura quase tudo, inclusive erros que ninguém esperava, e os esconde atrás da mesma mensagem. Capturar o tipo exato (`ValueError`)
-trata o problema previsto e deixa os imprevistos aparecerem, onde podem ser vistos e corrigidos.
+lança. `except Exception` captura quase tudo, inclusive erros que ninguém esperava, e os
+esconde atrás da mesma mensagem. Capturar o tipo exato (`ValueError`) trata o problema previsto
+e deixa os imprevistos aparecerem, onde podem ser vistos e corrigidos.
 
 ## Quando criar os seus próprios tipos de erro?
 
@@ -53,5 +54,6 @@ aberta, e o programa (ou o jardim) paga o preço depois.
 ## Como o bloco finally ajuda a garantir que a limpeza sempre ocorra?
 
 O `finally` roda em todos os caminhos de saída do `try`: sucesso, erro capturado, erro não
-capturado e `return`. Código de limpeza escrito ali não tem como ser pulado
+capturado e `return`. Código de limpeza escrito ali roda em qualquer um desses caminhos, enquanto
+o mesmo código escrito depois do bloco seria pulado pelo `return` e pelo erro não capturado
 ([finally](../07-ex4/02-finally.md)).

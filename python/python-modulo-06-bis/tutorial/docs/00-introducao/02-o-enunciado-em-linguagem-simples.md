@@ -70,11 +70,11 @@ Para cada exercício, o enunciado mostra a saída completa do programa. A págin
 
 ## Entrega
 
-Só os arquivos pedidos, com esses nomes e nesses lugares, num repositório Git. Na avaliação, quem
-avalia pode pedir que você explique o polimorfismo, mostre a sobrescrita de métodos, acrescente
-ao sistema um tipo de dado novo, uma família de criaturas nova ou uma estratégia nova, ou mude o
-jeito de processar um dado, e que explique para que serve cada padrão de projeto
-([As perguntas do enunciado](../09-fechamento/03-as-perguntas-do-enunciado.md)).
+Só os arquivos pedidos, com esses nomes e nesses lugares, num repositório Git. O enunciado fecha
+com o que vale saber fazer com o projeto pronto: explicar o polimorfismo, mostrar a sobrescrita de
+métodos, acrescentar ao sistema um tipo de dado novo, uma família de criaturas nova ou uma
+estratégia nova, mudar o jeito de processar um dado e explicar para que serve cada padrão de
+projeto ([Perguntas de revisão](../09-fechamento/03-perguntas-de-revisao.md)).
 
 ## O que o enunciado cita sem explicar
 
@@ -105,4 +105,4 @@ jeito de processar um dado, e que explique para que serve cada padrão de projet
   ([A estratégia abstrata](../08-ex4/03-a-estrategia-abstrata.md)).
 - **Neo-Tokyo, 2087, "Stream Engineer", "combat sandbox"**: só o cenário de ficção do projeto.
 - **Instruções sobre IA**: o enunciado tem um capítulo pedindo que todo código vindo de uma
-  ferramenta de IA seja entendido por completo e revisado com colegas.
+  ferramenta de IA seja entendido por completo, conferido e testado antes de entrar no projeto.

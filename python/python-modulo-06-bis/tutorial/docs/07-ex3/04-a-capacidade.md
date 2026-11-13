@@ -36,7 +36,7 @@ herde de `Creature`. Ela descreve só a habilidade, e por isso não tem nome, ti
 criatura que se transforma herda das duas classes
 ([A família que se transforma](./05-a-familia-que-se-transforma.md)). O que se perderia com a
 habilidade dentro de `Creature` é uma das perguntas do enunciado, respondida em
-[As perguntas do enunciado](../09-fechamento/03-as-perguntas-do-enunciado.md#capacidade-na-base).
+[Perguntas de revisão](../09-fechamento/03-perguntas-de-revisao.md#capacidade-na-base).
 
 ## O estado de transformação
 

@@ -56,7 +56,7 @@ essa saída é em inglês.
 
 ## O enunciado
 
-O projeto vem com um documento oficial que diz o que precisa ser entregue: o **enunciado** (em
+O projeto vem com um documento que diz o que precisa ser entregue: o **enunciado** (em
 inglês, *subject*). A [próxima página](./02-o-enunciado-em-linguagem-simples.md) resume tudo o
 que ele pede.
 
@@ -67,7 +67,7 @@ que ele pede.
 | Ambiente | prepara o Python, a pasta do projeto e as duas ferramentas que conferem o código (flake8 e mypy) |
 | Módulos e imports | mostra, com experimentos pequenos, o que o `import` faz e onde o Python procura os arquivos importados |
 | Partes I a IV | constroem a árvore do projeto, uma parte do enunciado por vez |
-| Fechamento | confere tudo, mostra como entregar e responde às perguntas que o enunciado deixa para a avaliação |
+| Fechamento | confere tudo, mostra como entregar e reúne perguntas de revisão sobre os quatro assuntos |
 
 Cada parte termina com os arquivos completos dela e uma página que roda e confere tudo. Os termos
 novos estão reunidos no [glossário](./05-glossario.md).

@@ -67,9 +67,9 @@ Para cada exercício, o enunciado mostra a saída exata do programa. A página
 
 Só os cinco arquivos `.py` (`ex0/ft_first_exception.py`, `ex1/ft_raise_exception.py`,
 `ex2/ft_different_errors.py`, `ex3/ft_custom_errors.py` e `ex4/ft_finally_block.py`), com esses
-nomes e nessas pastas, num repositório Git. Na avaliação,
-quem avalia pode pedir que você explique os conceitos e mostre como os programas lidam com os
-erros ([Entregar](../08-fechamento/02-entregar.md)).
+nomes e nessas pastas, num repositório Git ([Entregar](../08-fechamento/02-entregar.md)). Os
+conceitos por trás de cada programa estão reunidos em
+[Perguntas de revisão](../08-fechamento/03-perguntas-de-revisao.md).
 
 ## O que o enunciado cita sem explicar
 
@@ -80,4 +80,4 @@ erros ([Entregar](../08-fechamento/02-entregar.md)).
   arquivos. Não é preciso saber C; o `open()` do Python é explicado no
   [exercício 2](../05-ex2/02-garden-operations.md).
 - **Instruções sobre IA**: o enunciado tem um capítulo pedindo que todo código vindo de uma
-  ferramenta de IA seja entendido por completo e revisado com colegas.
+  ferramenta de IA seja entendido por completo, conferido e testado antes de ser usado.

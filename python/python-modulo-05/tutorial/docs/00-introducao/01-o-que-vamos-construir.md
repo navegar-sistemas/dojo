@@ -62,7 +62,7 @@ que ele pede.
 | Ambiente | prepara o Python, a pasta do projeto e as duas ferramentas que conferem o código (flake8 e mypy) |
 | Classes abstratas e polimorfismo | explica, com experimentos pequenos, sobrescrita de métodos, classes abstratas, os type hints `Any` e `int \| float`, polimorfismo e a fila que guarda os dados |
 | Exercícios 0 a 2 | constroem os três programas, um por parte |
-| Fechamento | confere tudo, mostra como entregar e responde às perguntas que o enunciado deixa para a avaliação |
+| Fechamento | confere tudo, mostra como entregar e responde a perguntas de revisão sobre o projeto |
 
 Cada exercício termina com o arquivo completo. Os termos novos estão reunidos no
 [glossário](./05-glossario.md).

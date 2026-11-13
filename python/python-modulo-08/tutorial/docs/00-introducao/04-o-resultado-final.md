@@ -99,7 +99,7 @@ na saída do enunciado: é a pasta do ambiente onde o programa rodou, aqui o ven
 Poetry, ela mostra o ambiente que o Poetry criou. O programa grava o
 gráfico no arquivo `matrix_analysis.png`:
 
-![Gráfico de linhas com 1000 pontos: o sinal, em azul, sobe e desce entre cerca de -20 e 25, e a tendência, em laranja, é a média dos 50 pontos até cada um, uma linha suave que acompanha o sinal a partir do ponto 49](/img/ex1/matrix_analysis.png)
+![Gráfico de linhas com 1000 pontos: o sinal, em azul, sobe e desce entre cerca de -21 e 26, e a tendência, em laranja, é a média dos 50 pontos até cada um, uma linha suave que acompanha o sinal a partir do ponto 49](/img/ex1/matrix_analysis.png)
 
 ## Exercício 2
 

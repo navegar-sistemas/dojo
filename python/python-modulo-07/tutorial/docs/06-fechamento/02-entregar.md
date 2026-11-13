@@ -5,23 +5,33 @@ title: Entregar
 
 # Entregar
 
-O enunciado pede a entrega num **repositório Git**, e só o que estiver no repositório é avaliado.
-Vão os três programas de teste, na raiz do repositório, e as três pastas de pacote, com os seus
-arquivos `.py`. A pasta `.venv`, a pasta `experimentos`, as pastas `__pycache__` e a pasta
-`.mypy_cache` ficam de fora.
+O enunciado pede a entrega num **repositório Git**, e o que conta é o que está no repositório,
+não na sua pasta de trabalho. Vão os três programas de teste, na raiz do repositório, e as três
+pastas de pacote, com os seus arquivos `.py`. A pasta `.venv`, a pasta `experimentos`, as pastas
+`__pycache__` e a pasta `.mypy_cache` ficam de fora.
 
 ## Copiar os arquivos para o repositório
 
-O endereço (a URL) do repositório de entrega vem junto com o projeto. O `git clone` e o
-`git push` podem pedir login ou uma **chave SSH**, conforme o servidor do repositório. Uma chave
-SSH é um par de arquivos que identifica o seu computador para o servidor, no lugar de uma senha;
-quem fornece o repositório explica como criar a chave e cadastrá-la no servidor. A partir da
-pasta `datadeck`, suba um nível, baixe o repositório numa pasta `entrega` e copie só os arquivos
-`.py`:
+Você precisa do endereço (a URL) do repositório remoto, a cópia do repositório guardada no
+serviço que o hospeda (GitHub, GitLab ou outro). O `git clone` e o `git push` podem pedir login
+ou uma **chave SSH**: um par de arquivos que identifica o seu computador para o serviço, no lugar
+de uma senha. A documentação do serviço explica como criar a chave e cadastrá-la. A partir da
+pasta `datadeck`, suba um nível e baixe o repositório numa pasta `entrega`:
 
 ```bash
 cd ..
 git clone <endereço-do-repositório> entrega
+```
+
+Troque `<endereço-do-repositório>` pelo endereço do seu repositório **antes** de rodar: os sinais
+`<` e `>` têm outro significado no terminal. Se o repositório ainda estiver vazio, o `git clone`
+avisa `warning: You appear to have cloned an empty repository.` ("parece que você clonou um
+repositório vazio"): é o esperado. Uma linha começando com `fatal:` quer dizer que o clone
+falhou; confira o endereço e o acesso e rode o `git clone` de novo antes de seguir.
+
+Depois, copie só os arquivos `.py` e entre na pasta `entrega`:
+
+```bash
 cp datadeck/battle.py datadeck/capacitor.py datadeck/tournament.py entrega/
 for ex in ex0 ex1 ex2; do
     mkdir -p "entrega/$ex"
@@ -30,11 +40,10 @@ done
 cd entrega
 ```
 
-Troque `<endereço-do-repositório>` pelo endereço recebido e, se a pasta do projeto tem outro
-nome, troque `datadeck` pelo nome da sua pasta. O `git clone` baixa o repositório; o
-primeiro `cp` copia os três programas para a raiz da `entrega`; o `for` cria cada pasta de
-exercício dentro dela (o `-p` do `mkdir` não reclama se a pasta já existir) e copia os arquivos
-`.py` do pacote. O `*.py` deixa a `__pycache__` para trás.
+Se a pasta do projeto tem outro nome, troque `datadeck` pelo nome da sua pasta. O primeiro `cp`
+copia os três programas para a raiz da `entrega`; o `for` cria cada pasta de exercício dentro
+dela (o `-p` do `mkdir` não reclama se a pasta já existir) e copia os arquivos `.py` do pacote.
+O `*.py` deixa a `__pycache__` para trás.
 
 ## Registrar e enviar
 
@@ -67,7 +76,7 @@ Changes to be committed:
 
 `git add` marca os arquivos para o próximo registro; `git status` mostra o que está marcado. A
 lista `Changes to be committed` ("mudanças a registrar") tem os doze arquivos. O resto pode
-variar: esta é a saída de um repositório de entrega vazio (`No commits yet`, "nenhum registro
+variar: esta é a saída de um repositório vazio (`No commits yet`, "nenhum registro
 ainda"); num repositório que já tem registros, essa linha não aparece. A primeira linha mostra o
 **ramo** (*branch*), a linha de histórico em que os registros entram; o nome padrão pode ser
 `main` ou `master`.
@@ -81,7 +90,7 @@ git config user.email "voce@exemplo.com"
 ```
 
 Os dois comandos não imprimem nada e valem só para este repositório. Sem eles, o `git` pode
-recusar o registro (`Please tell me who you are`) ou, como no macOS, aceitá-lo com um nome e um
+recusar o registro (`Please tell me who you are`) ou, como costuma acontecer no macOS, aceitá-lo com um nome e um
 e-mail deduzidos do usuário e do nome do computador. Nesse caso, a saída do `git commit` traz o
 aviso `Your name and email address were configured automatically based on your username and
 hostname`: sinal de que o registro saiu com a identidade errada.
@@ -92,7 +101,7 @@ git push
 ```
 
 `git commit` registra os arquivos com uma mensagem; `git push` envia o registro para o
-repositório de entrega.
+repositório remoto.
 
 ## Conferir o que foi enviado
 
@@ -103,10 +112,10 @@ parte e rode um programa nela:
 cd ..
 git clone <endereço-do-repositório> conferencia
 cd conferencia
-ls -1 *.py ex0 ex1 ex2
+LC_ALL=C ls -1 *.py ex0 ex1 ex2
 python3 tournament.py
 ```
 
-Os doze arquivos aparecem, e o programa imprime a mesma saída que na pasta do projeto: os pacotes
+Os doze arquivos aparecem, sem nenhuma `__pycache__`, e o programa imprime a mesma saída que na pasta do projeto: os pacotes
 foram junto, e os imports funcionam a partir da raiz. Depois, a pasta `conferencia` pode ser
 apagada (`cd .. && rm -rf conferencia`).

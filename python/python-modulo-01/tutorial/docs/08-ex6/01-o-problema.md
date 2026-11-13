@@ -29,7 +29,7 @@ Um arquivo `ex6/ft_garden_analytics.py`, que só pode chamar `super()`, `print()
 
 O enunciado aceita, para os métodos estático e de classe, a sintaxe de **decorador**, explicada
 em [O método estático](./02-o-metodo-estatico.md). Ele avisa também que este exercício reúne todos
-os conceitos do projeto, e que a avaliação vai pedir que você explique como as peças se encaixam.
+os conceitos do projeto: o ponto principal é entender como as peças interagem e se organizam.
 
 ## A saída esperada
 

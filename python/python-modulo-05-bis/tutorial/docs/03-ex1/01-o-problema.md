@@ -30,8 +30,8 @@ Quatro arquivos na pasta `ex1/`. Os `import` permitidos são `os`, `sys` e a bib
   - trata a configuração que falta sem travar;
 - **`requirements.txt`**, com a dependência `python-dotenv`;
 - **`.env.example`**, um modelo do `.env`, que vai para o repositório no lugar dele;
-- **`.gitignore`**, que lista o `.env`, para o git nunca registrá-lo. Na avaliação, é preciso saber
-  explicar por quê.
+- **`.gitignore`**, que lista o `.env`, para o git nunca registrá-lo; o motivo está em
+  [O .gitignore e o .env.example](./04-o-gitignore.md).
 
 As cinco variáveis de configuração:
 

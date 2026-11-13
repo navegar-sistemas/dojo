@@ -54,13 +54,15 @@ ferramentas ficam em `.venv/bin/`:
 ```
 
 ```text
-7.5.0 (mccabe: 0.7.0, pycodestyle: 2.15.0, pyflakes: 4.1.0) CPython 3.14.5 on
+7.5.0 (mccabe: 0.7.0, pycodestyle: 2.15.0, pyflakes: 4.1.0) CPython 3.15.2 on
 Linux
 mypy 2.4.1 (compiled: yes)
 ```
 
 Os números podem ser outros na sua máquina, e a última palavra da primeira saída é o nome do
-sistema (`Linux`, ou `Darwin` no macOS).
+sistema (`Linux`, ou `Darwin` no macOS). O flake8 quebra essa saída na largura do terminal: num
+terminal de 80 colunas, o nome do sistema cai na linha de baixo, como acima; num mais largo, tudo
+sai numa linha só.
 
 Os programas dos exercícios não precisam do venv: eles só usam o que vem com o Python e são
 rodados com `python3`. O venv existe só para as duas ferramentas.

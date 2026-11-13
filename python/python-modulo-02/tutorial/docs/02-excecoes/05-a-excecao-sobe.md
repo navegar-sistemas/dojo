@@ -42,10 +42,13 @@ ValueError: invalid literal for int() with base 10: 'abc'
 
 O traceback agora tem três pares de linhas, um por função que estava em andamento, do mais
 antigo para o mais recente: o corpo do arquivo chamou `check_sensor` (linha 10), que chamou
-`read_sensor` (linha 6), onde o `int()` falhou (linha 2). As marcas `~` e `^` sob algumas
-linhas são um destaque que só as versões mais novas do Python imprimem, e não em toda linha; na
-sua máquina elas podem aparecer em outro lugar ou nem aparecer. O que importa para ler o
-traceback são os pares de arquivo, linha e função.
+`read_sensor` (linha 6), onde o `int()` falhou (linha 2).
+
+As marcas `~` e `^` sublinham o trecho da linha que estava rodando quando a exceção passou por
+ali: na linha 10, a chamada `check_sensor("abc")`, com os `^` sob os argumentos. Elas existem a
+partir do Python 3.11 e não aparecem em toda linha. Esta é a saída do 3.15 (e do 3.13 e do 3.14);
+no 3.11 e no 3.12, as marcas ficam sob as linhas 6 e 2, e não sob a 10; no 3.10, não há marca
+nenhuma. O que importa para ler o traceback são os pares de arquivo, linha e função.
 
 ## Capturar mais acima
 

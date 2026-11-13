@@ -13,27 +13,28 @@ python3 --version
 ```
 
 ```text
-Python 3.14.5
+Python 3.15.2
 ```
 
 O número depois de `Python` é a versão. Qualquer `3.10` ou maior serve (`3.10`, `3.11`, …,
-`3.14`). O código do tutorial roda igual em todas elas.
+`3.15`). Os cinco programas imprimem exatamente a mesma saída em todas elas.
 
 ## Se o comando não existir
 
 No Linux (Debian e Ubuntu), instale o Python do sistema e o pacote `python3-venv`, que permite
-criar o ambiente virtual da página [O ambiente virtual](./03-o-ambiente-virtual.md):
+criar o ambiente virtual da página [O ambiente virtual](./03-o-ambiente-virtual.md). `apt` é o
+instalador de programas do Debian e do Ubuntu, e `sudo` roda o comando como administrador (ele
+pede a sua senha):
 
 ```bash
 sudo apt install python3 python3-venv
 ```
 
 No macOS, o comando `python3` pode abrir uma janela oferecendo instalar as ferramentas de linha
-de comando da Apple. Pode aceitar: elas trazem o `git`, usado na entrega (a seção "O git", no fim desta página,
-confere que ele está instalado). Mas
-o Python que vem com elas é o 3.9, antigo demais para o projeto; instale também o Python pelo
-instalador oficial, em [python.org](https://www.python.org/downloads/), que passa a responder
-pelo `python3`. Depois, abra um terminal novo e rode `python3 --version` de novo.
+de comando da Apple. Pode aceitar: elas trazem o `git`, usado na entrega (seção [O git](#o-git),
+no fim desta página). Mas o Python que vem com elas é o 3.9, antigo demais para o projeto;
+instale também o Python pelo instalador oficial, em
+[python.org](https://www.python.org/downloads/), que passa a responder pelo `python3`. Depois, abra um terminal novo e rode `python3 --version` de novo.
 
 ## Se a versão for menor que 3.10
 
@@ -42,16 +43,17 @@ instalar um Python novo, separado do que veio com o sistema:
 
 - **macOS:** o instalador oficial de [python.org](https://www.python.org/downloads/) instala a
   versão mais nova, que passa a responder pelo comando `python3`;
-- **Linux:** muitas distribuições oferecem versões mais novas como pacotes com o número no nome.
-  Confira se a sua tem, por exemplo, o `python3.11`:
+- **Linux (Debian e Ubuntu):** a distribuição pode oferecer versões mais novas do Python como
+  pacotes com o número no nome. Confira se a sua tem, por exemplo, o `python3.11`:
 
   ```bash
   apt-cache policy python3.11
   ```
 
   Se a resposta tiver uma linha `Candidate:` com um número de versão, o pacote existe na sua
-  distribuição; se disser `Unable to locate package` ou `Candidate: (none)`, não existe.
-  Existindo, instale-o junto com o venv dele:
+  distribuição; sem nenhuma linha impressa, ou com `Candidate: (none)`, não existe: troque o
+  `3.11` por outra versão, como `3.12`, e confira de novo. Existindo, instale-o junto com o venv
+  dele:
 
   ```bash
   sudo apt install python3.11 python3.11-venv
@@ -77,8 +79,8 @@ git version 2.43.0
 ```
 
 Qualquer versão serve; o número pode ser outro, e no macOS a linha termina com um texto entre
-parênteses, como `(Apple Git-157)`. Se o comando não existir: no Linux, `sudo apt install git`; no macOS, o
-primeiro `git` abre a mesma janela das ferramentas de linha de comando da Apple; aceite e espere
-terminar.
+parênteses, como `(Apple Git-157)`. Se o comando não existir: no Linux, `sudo apt install git`;
+no macOS, o primeiro `git` abre a mesma janela das ferramentas de linha de comando da Apple;
+aceite e espere terminar.
 
 No resto do tutorial, `python3` quer dizer o Python 3.10 ou mais novo desta página.

@@ -88,6 +88,6 @@ def wrapper(*args: Any, **kwargs: Any) -> Any:
 ```
 
 `wrapper("Dragon", power=10)` recolhe `args = ("Dragon",)` e `kwargs = {"power": 10}`, e
-`func(*args, **kwargs)` espalha os dois de volta: `func` recebe `func("Dragon", power=10)`, igual
-à chamada original. É a peça central de todo decorador
+`func(*args, **kwargs)` espalha os dois de volta: `func` é chamada como `func("Dragon", power=10)`,
+igual à chamada original. É a peça central de todo decorador
 ([Decoradores](./06-decoradores.md)).

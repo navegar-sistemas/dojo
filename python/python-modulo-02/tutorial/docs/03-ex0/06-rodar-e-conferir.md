@@ -49,9 +49,9 @@ FIM
   mostra. As aspas em `'FIM'` fazem o terminal copiar o texto como está, sem interpretar nenhum
   símbolo.
 
-Ao digitar (ou colar) o comando, o terminal mostra um aviso no começo de cada linha (`>` no
-bash, `heredoc>` no zsh) até receber a linha `FIM`: ele está esperando o resto do texto, não
-travou.
+Ao digitar (ou colar) o comando, o terminal mostra um aviso no começo de cada linha até receber a
+linha `FIM`: `>` no bash, o interpretador de comandos padrão da maioria dos Linux, e `heredoc>` no
+zsh, o padrão do macOS. Ele está esperando o resto do texto, não travou.
 
 Se os dois textos forem iguais, o `diff` **não imprime nada**. Se imprimir alguma linha, ela
 mostra onde a saída do programa (marcada com `<`) difere do esperado (marcada com `>`).

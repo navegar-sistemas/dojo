@@ -29,9 +29,10 @@ Traceback (most recent call last):
 ValueError: invalid literal for int() with base 10: 'abc'
 ```
 
-(No lugar de `/…`, aparece o caminho da pasta na sua máquina. Dependendo da versão do Python,
-pode aparecer também uma linha de marcas `^` sob o código; a página
-[A exceção sobe](./05-a-excecao-sobe.md) explica essas marcas.)
+(No lugar de `/…`, aparece o caminho da pasta na sua máquina. No Python 3.11 e no 3.12, aparece
+também uma linha de marcas `^` sob o `int("abc")`; a página
+[A exceção sobe](./05-a-excecao-sobe.md) explica essas marcas. A partir do Python 3.13, o
+terminal mostra o relatório em cores; o texto é o mesmo.)
 
 A primeira linha foi impressa. Na segunda, o `int("abc")` não conseguiu fazer o seu trabalho, e o
 Python **parou o programa ali**: a terceira linha, `After the error`, nunca foi impressa. Em vez

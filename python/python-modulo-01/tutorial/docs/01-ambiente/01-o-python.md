@@ -17,7 +17,7 @@ Python 3.12.3
 ```
 
 O número depois de `Python` é a versão; na sua máquina ele pode ser outro. Qualquer `3.10` ou
-maior serve (`3.10`, `3.11`, `3.12`, `3.13`, `3.14`). O código dos exercícios não usa nada que
+maior serve (`3.10`, `3.11`, `3.12`, `3.13`, `3.14`, `3.15`). O código dos exercícios não usa nada que
 só exista nas versões mais novas.
 
 ## Se o comando não existir

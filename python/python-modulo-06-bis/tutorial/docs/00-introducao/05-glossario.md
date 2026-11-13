@@ -69,7 +69,7 @@ title: Glossário
 | **processador** | objeto de uma filha de `DataProcessor`: confere, guarda e devolve um tipo de dado | [O problema do exercício 0](../03-ex0/01-o-problema.md) |
 | **`Protocol`** | classe de `typing` que descreve os métodos que um objeto precisa ter, sem exigir herança | [Protocol e duck typing](../05-ex2/02-protocol-e-duck-typing.md) |
 | **`__pycache__`** | pasta de cache que o Python cria ao importar um arquivo; não é entregue | [Rodar e conferir do exercício 0](../03-ex0/09-rodar-e-conferir.md) |
-| **`PYTHONPATH`** | variável que acrescenta pastas aos lugares onde o Python procura módulos | [As perguntas do enunciado](../09-fechamento/03-as-perguntas-do-enunciado.md#uma-família-uma-capacidade-e-uma-estratégia-novas) |
+| **`PYTHONPATH`** | variável que acrescenta pastas aos lugares onde o Python procura módulos | [Perguntas de revisão](../09-fechamento/03-perguntas-de-revisao.md#uma-família-uma-capacidade-e-uma-estratégia-novas) |
 | **`raise`** | instrução que lança uma exceção | [Pré-requisitos](./03-pre-requisitos.md) |
 | **raiz do repositório** | a pasta principal da entrega; aqui, a pasta `code-nexus` | [A pasta do projeto](../01-ambiente/02-a-pasta-do-projeto.md) |
 | **rank** | número de ordem de chegada de um item no processador, começando em 0 | [A fila](../02-conceitos/05-a-fila.md) |
@@ -78,8 +78,8 @@ title: Glossário
 | **sobrescrever (*override*)** | a filha definir um método com o mesmo nome de um método da mãe, que passa a valer para os objetos dela | [Sobrescrever um método](../02-conceitos/01-sobrescrever-um-metodo.md) |
 | **submódulo** | arquivo `.py` dentro de um pacote, como `ex3.creature` | [O pacote](../06-pacotes/01-o-pacote.md) |
 | **`super()`** | a classe mãe, dentro de um método da filha; `super().__init__(...)` roda o construtor da mãe | [Herança múltipla](../06-pacotes/02-heranca-multipla.md#super-o-construtor-da-mãe) |
-| **tipagem estrutural** | uma classe entra na regra por ter os métodos certos, como no `Protocol` | [As perguntas do enunciado](../09-fechamento/03-as-perguntas-do-enunciado.md#abc-ou-protocol) |
-| **tipagem nominal** | uma classe entra na regra por herdar dela, como na ABC | [As perguntas do enunciado](../09-fechamento/03-as-perguntas-do-enunciado.md#abc-ou-protocol) |
+| **tipagem estrutural** | uma classe entra na regra por ter os métodos certos, como no `Protocol` | [Perguntas de revisão](../09-fechamento/03-perguntas-de-revisao.md#abc-ou-protocol) |
+| **tipagem nominal** | uma classe entra na regra por herdar dela, como na ABC | [Perguntas de revisão](../09-fechamento/03-perguntas-de-revisao.md#abc-ou-protocol) |
 | **traceback** | relatório de erro que o Python imprime quando uma exceção não é capturada | [Pré-requisitos](./03-pre-requisitos.md) |
 | **type hint** | anotação do tipo de um parâmetro, variável ou retorno, como `data: Any` | [Type hints, flake8 e mypy](../01-ambiente/04-type-hints-flake8-e-mypy.md) |
 | **`TypeError`** | exceção para valor do tipo errado; também lançada ao instanciar uma classe abstrata | [A classe abstrata](../02-conceitos/02-a-classe-abstrata.md) |

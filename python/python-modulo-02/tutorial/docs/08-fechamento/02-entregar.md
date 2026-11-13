@@ -5,28 +5,25 @@ title: Entregar
 
 # Entregar
 
-O enunciado pede a entrega num **repositório Git**, e só o que estiver no repositório é avaliado.
-Um **repositório** é uma pasta acompanhada pelo git, com o histórico dos arquivos; ele fica num
-servidor, e cada pessoa trabalha numa cópia baixada dele.
-Só os cinco arquivos pedidos precisam ir. Ficam de fora a pasta `.venv`, a pasta
-`experimentos` e a pasta `.mypy_cache`, onde o mypy guarda resultados (escondida pelo ponto no
-nome, como a `.venv`).
+O enunciado pede a entrega num **repositório Git**, e só o que estiver no repositório conta. Um
+**repositório** é uma pasta acompanhada pelo git, com o histórico dos arquivos; ele fica num
+servidor, e cada pessoa trabalha numa cópia baixada dele. Só os cinco arquivos pedidos precisam
+ir. Ficam de fora a pasta `.venv`, a pasta `experimentos` e a pasta `.mypy_cache`, onde o mypy
+guarda resultados (escondida pelo ponto no nome, como a `.venv`).
 
 ## Antes de começar
 
 Você precisa de duas coisas:
 
-- o **endereço** (a URL) do repositório de entrega, informado por quem organiza a entrega do
-  projeto;
+- o **endereço** (a URL) do repositório onde o projeto vai ficar;
 - **acesso** a esse repositório: o `git clone` e o `git push` podem pedir que você se identifique
-  no servidor (com usuário e senha, um token ou uma chave SSH já cadastrada). Use a forma de
-  acesso indicada por quem organiza a entrega.
+  no servidor (com usuário e senha, um token ou uma chave SSH já cadastrada).
 
 ## Baixar o repositório
 
-Nos comandos desta página, troque `<endereço-do-repositório>` pelo endereço recebido, **antes**
-de rodar: os sinais `<` e `>` têm outro significado no terminal, e o comando copiado como está
-falha. A partir da pasta `garden-guardian`, suba um nível e baixe o repositório numa pasta
+Nos comandos desta página, troque `<endereço-do-repositório>` pelo endereço do repositório,
+**antes** de rodar: os sinais `<` e `>` têm outro significado no terminal, e o comando copiado
+como está falha. A partir da pasta `garden-guardian`, suba um nível e baixe o repositório numa pasta
 `entrega`:
 
 ```bash
@@ -34,7 +31,7 @@ cd ..
 git clone <endereço-do-repositório> entrega
 ```
 
-Se o repositório de entrega ainda estiver vazio, o `git clone` avisa
+Se o repositório ainda estiver vazio, o `git clone` avisa
 `warning: You appear to have cloned an empty repository.` ("parece que você clonou um
 repositório vazio"). É o esperado, não um erro. Se aparecer `fatal:`, o clone falhou: confira o
 endereço e o acesso e rode o `git clone` de novo, antes de seguir.
@@ -110,7 +107,7 @@ Changes to be committed:
 
 `git add` marca os arquivos para o próximo registro; `git status` mostra o que está marcado.
 A lista `Changes to be committed` ("mudanças a registrar") tem exatamente os cinco arquivos. O
-resto pode variar: esta é a saída de um repositório de entrega vazio (`No commits yet`, "nenhum
+resto pode variar: esta é a saída de um repositório vazio (`No commits yet`, "nenhum
 registro ainda"); num repositório que já tem registros, essa linha não aparece. A primeira
 linha diz o **ramo** (*branch*), a linha de histórico em que os registros entram; o padrão se
 chama `main` ou `master`, conforme o repositório.
@@ -121,7 +118,7 @@ git push
 ```
 
 `git commit` registra os arquivos com uma mensagem; `git push` envia o registro para o
-repositório de entrega. O `git push` só tem o que enviar depois de um `git commit` que deu
+repositório no servidor. O `git push` só tem o que enviar depois de um `git commit` que deu
 certo. Se o commit falhar, o push não envia os arquivos: num repositório vazio ele responde
 `failed to push`; num repositório que já tem registros, responde `Everything up-to-date`
 ("tudo atualizado") sem ter enviado nada. Por isso a seção seguinte confere o que chegou de

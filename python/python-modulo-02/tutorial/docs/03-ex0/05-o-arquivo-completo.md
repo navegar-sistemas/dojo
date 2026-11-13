@@ -5,9 +5,8 @@ title: O arquivo completo
 
 # O arquivo completo
 
-As páginas anteriores mostraram o arquivo em pedaços, para ler. Agora crie
-`ex0/ft_first_exception.py` com o conteúdo completo: as três partes juntas, com duas linhas em
-branco entre as funções e antes do main, como o flake8 exige:
+Crie `ex0/ft_first_exception.py` com o conteúdo completo: as três partes das páginas anteriores
+juntas, com duas linhas em branco entre as funções e antes do main, como o flake8 exige:
 
 ```python title="ex0/ft_first_exception.py"
 def input_temperature(temp_str: str) -> int:

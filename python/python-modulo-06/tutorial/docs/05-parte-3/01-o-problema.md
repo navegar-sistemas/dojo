@@ -61,9 +61,9 @@ quebrada em duas por falta de espaço na página; é uma linha só.
 
 ## A pergunta
 
-O enunciado deixa uma pergunta para a avaliação: "Quando um alquimista deve usar caminhos
-absolutos e quando deve usar caminhos relativos?". A resposta está em
-[As perguntas do enunciado](../07-fechamento/03-as-perguntas-do-enunciado.md#quando-usar-import-absoluto-e-quando-usar-relativo).
+O enunciado deixa uma pergunta em aberto: "Quando um alquimista deve usar caminhos absolutos e
+quando deve usar caminhos relativos?". A resposta está em
+[Perguntas de revisão](../07-fechamento/03-perguntas-de-revisao.md#quando-usar-import-absoluto-e-quando-usar-relativo).
 
 ## As peças desta parte
 

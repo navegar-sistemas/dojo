@@ -29,7 +29,8 @@ pasta atual do terminal. Depois vêm as pastas da biblioteca do Python, onde est
 `typing`.
 
 Uma **variável de ambiente** é um valor com nome que o terminal entrega aos programas que roda.
-A variável de ambiente `PYTHONPATH` acrescenta pastas ao começo dessa lista. Escrita antes do
+A variável de ambiente `PYTHONPATH` acrescenta pastas a essa lista, logo depois da primeira e
+antes das pastas da biblioteca do Python. Escrita antes do
 comando, ela vale só para ele: `PYTHONPATH=experimentos python3 -c '...'` deixa o código entre
 as aspas importar os arquivos de `experimentos/`.
 
@@ -182,7 +183,7 @@ meio de um `import`, a partir de um programa de fora.
 ## O `__pycache__`
 
 ```bash
-ls -1 experimentos/shapes
+LC_ALL=C ls -1 experimentos/shapes
 ```
 
 ```text
@@ -191,7 +192,10 @@ __pycache__
 square.py
 ```
 
-O `-1` do `ls` lista um nome por linha. Ao importar um módulo, o Python grava na pasta dele uma
+O `-1` do `ls` lista um nome por linha. O `LC_ALL=C` antes do comando faz o `ls` ordenar os
+nomes pelo código de cada caractere, a mesma ordem em qualquer sistema; sem ele, a ordem segue o
+idioma configurado no terminal, e no Linux os nomes que começam com `_` podem aparecer depois
+dos outros. Ao importar um módulo, o Python grava na pasta dele uma
 `__pycache__/` com uma versão pré-processada do arquivo, para carregar mais rápido da próxima
 vez. Ela é refeita sozinha quando o arquivo muda e pode ser apagada a qualquer momento.
 

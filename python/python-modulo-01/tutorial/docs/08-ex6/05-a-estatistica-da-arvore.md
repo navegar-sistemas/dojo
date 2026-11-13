@@ -76,7 +76,7 @@ herdado.
 Do Python 3.10 ao 3.13, as aspas são necessárias pelo mesmo motivo do
 [método de classe](./03-o-metodo-de-classe.md#por-que-plant-entre-aspas): uma anotação escrita
 direto no corpo da classe é lida no momento em que o Python passa por ela, e nessa hora a classe
-`Tree` ainda está sendo montada; o nome `Tree` ainda não existe. No 3.14, a anotação só é lida
-quando alguém a pede, e o código funciona com ou sem as aspas. O `Tree.Stats()` do `__init__`
+`Tree` ainda está sendo montada; o nome `Tree` ainda não existe. A partir do 3.14, a anotação só
+é lida quando alguém a pede, e o código funciona com ou sem as aspas. O `Tree.Stats()` do `__init__`
 dispensa as aspas em todas as versões: o corpo de um método só roda quando o método é chamado, e
 então a classe `Tree` já existe.

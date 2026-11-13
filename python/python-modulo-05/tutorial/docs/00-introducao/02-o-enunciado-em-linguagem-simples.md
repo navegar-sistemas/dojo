@@ -47,10 +47,10 @@ Para cada exercício, o enunciado mostra a saída completa do programa. A págin
 
 ## Entrega
 
-Só os três arquivos `.py`, com esses nomes e nessas pastas, num repositório Git. Na avaliação,
-quem avalia pode pedir que você explique o polimorfismo, mostre a sobrescrita de métodos,
-acrescente um tipo de dado novo ao sistema ou mude o jeito de processar um dado
-([As perguntas do enunciado](../06-fechamento/03-as-perguntas-do-enunciado.md)).
+Só os três arquivos `.py`, com esses nomes e nessas pastas, num repositório Git
+([Entregar](../06-fechamento/02-entregar.md)). Além de escrever o código, vale saber explicar o
+polimorfismo, mostrar a sobrescrita de métodos, acrescentar um tipo de dado novo ao sistema e
+mudar o jeito de processar um dado ([Perguntas de revisão](../06-fechamento/03-perguntas-de-revisao.md)).
 
 ## O que o enunciado cita sem explicar
 
@@ -70,4 +70,4 @@ acrescente um tipo de dado novo ao sistema ou mude o jeito de processar um dado
   [O plugin CSV](../05-ex2/04-o-plugin-csv.md) e [O plugin JSON](../05-ex2/05-o-plugin-json.md).
 - **Neo-Tokyo, 2087, "Stream Engineer"**: só o cenário de ficção do projeto.
 - **Instruções sobre IA**: o enunciado tem um capítulo pedindo que todo código vindo de uma
-  ferramenta de IA seja entendido por completo e revisado com colegas.
+  ferramenta de IA seja entendido por completo, conferido e testado antes de ser usado.

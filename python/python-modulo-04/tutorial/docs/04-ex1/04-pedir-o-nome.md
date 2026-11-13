@@ -22,7 +22,7 @@ gravar".
 
 ## Os três jeitos de o input() falhar
 
-O `input()` pode lançar três exceções, e qualquer uma delas travaria o programa:
+O `input()` pode lançar três exceções, e qualquer uma delas, sem um `except`, travaria o programa:
 
 - **`EOFError`** (*end of file*, "fim do arquivo"): a entrada acabou sem nenhum caractere para ler.
   No terminal, acontece quando a pessoa aperta `Ctrl+D` numa linha vazia; também acontece quando a
@@ -33,9 +33,14 @@ O `input()` pode lançar três exceções, e qualquer uma delas travaria o progr
 - **`UnicodeDecodeError`**: a entrada trouxe bytes que não formam texto, como os de um programa (o
   `/bin/ls`, por exemplo) entregue ao `python3` no lugar do teclado. É o mesmo erro do `read()` com
   um arquivo que não é texto ([Quando o open
-  falha](../02-arquivos/05-quando-o-open-falha.md#quando-a-falha-vem-depois-do-open)); na entrada,
-  ele aparece com a configuração de idioma mais comum, a mesma citada em [O
-  uso](../03-ex0/02-o-uso.md#um-nome-que-não-pode-ser-mostrado).
+  falha](../02-arquivos/05-quando-o-open-falha.md#quando-a-falha-vem-depois-do-open)). Na entrada,
+  ele só aparece até o Python 3.14, com a configuração de idioma mais comum ([open e o objeto
+  arquivo](../02-arquivos/02-open-e-o-objeto-arquivo.md#abrir)). A partir do 3.15, o `input()`
+  guarda cada byte inválido como um caractere especial, o mesmo que os argumentos ganham em [O
+  uso](../03-ex0/02-o-uso.md#um-nome-que-não-pode-ser-mostrado), e devolve o texto sem lançar nada.
+  Esse nome segue para a gravação, e uma recusa do `open()` (os bytes do `/bin/ls` trazem o
+  caractere nulo, por exemplo) é tratada em [Gravar o arquivo](./05-gravar-o-arquivo.md#o-modo-w).
+  O `except` continua necessário para as versões de 3.10 a 3.14.
 
 As três querem dizer que a pessoa não deu um nome. O `except` trata as três como resposta vazia: o
 `print()` sozinho imprime uma quebra de linha, para que a mensagem seguinte não saia grudada na

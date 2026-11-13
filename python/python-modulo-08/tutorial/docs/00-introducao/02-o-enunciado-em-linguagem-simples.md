@@ -44,12 +44,11 @@ o que varia.
 ## Entrega
 
 Os arquivos da tabela, com esses nomes e nessas pastas, num repositório Git. O ambiente virtual
-**não** é entregue, e você precisa saber criar um novo durante a avaliação, se for preciso. O
-arquivo `.env`, que guarda segredos,
-também não. Na avaliação, você precisa saber explicar por que os ambientes virtuais importam, as
-diferenças entre o pip e o Poetry, como as variáveis de ambiente deixam um programa seguro e
-configurável, e por que o `.env` fica no `.gitignore`
-([As perguntas do enunciado](../06-fechamento/03-as-perguntas-do-enunciado.md)).
+**não** é entregue: quem baixa o projeto cria um novo com `python3 -m venv`. O arquivo `.env`, que
+guarda segredos, também não. O objetivo não é só fazer o código funcionar, mas entender o porquê
+das ferramentas: por que os ambientes virtuais importam, as diferenças entre o pip e o Poetry,
+como as variáveis de ambiente deixam um programa seguro e configurável, e por que o `.env` fica no
+`.gitignore` ([Perguntas de revisão](../06-fechamento/03-perguntas-de-revisao.md)).
 
 ## O que o enunciado cita sem explicar
 
@@ -77,4 +76,4 @@ configurável, e por que o `.env` fica no `.gitignore`
   resultado; o enunciado usa a palavra para dizer que os três programas são as primeiras peças de
   um sistema assim.
 - **Instruções sobre IA**: o enunciado tem um capítulo pedindo que todo código vindo de uma
-  ferramenta de IA seja entendido por completo e revisado com colegas.
+  ferramenta de IA seja entendido por completo, conferido e testado antes de ser usado.

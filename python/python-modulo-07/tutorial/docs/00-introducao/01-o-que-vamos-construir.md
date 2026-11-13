@@ -23,8 +23,9 @@ novo e de novo quando se organiza um programa:
 | **estratégia** (*strategy*) | trocar o jeito de lutar de cada criatura sem que o código do torneio precise conhecer cada habilidade |
 
 As três peças se apoiam em ferramentas que o Python já oferece: **classes abstratas** (classes
-que não viram objeto: servem só de molde para outras classes herdarem), **herança múltipla** (uma classe com duas classes mães) e **pacotes**
-(pastas de código que se importam com `import`). A parte
+que não viram objeto: servem só de molde para outras classes herdarem), **herança múltipla**
+(uma classe com duas classes mães) e **pacotes** (pastas de código que se importam com
+`import`). A parte
 [Pacotes, classes abstratas e herança múltipla](../02-conceitos/01-modulos-e-pacotes.md) explica
 cada uma com experimentos pequenos.
 
@@ -75,7 +76,7 @@ que ele pede.
 | Ambiente | prepara o Python, a pasta do projeto e as duas ferramentas que conferem o código (flake8 e mypy) |
 | Pacotes, classes abstratas e herança múltipla | explica, com experimentos pequenos, módulos e pacotes, classes abstratas com `super()`, herança múltipla e como o `isinstance` informa o tipo ao mypy |
 | Exercícios 0 a 2 | constroem os três pacotes e os três programas de teste, um exercício por parte |
-| Fechamento | confere tudo, mostra como entregar e responde ao que o enunciado deixa para a avaliação |
+| Fechamento | confere tudo, mostra como entregar e revisa os três padrões de projeto em perguntas e respostas |
 
 Cada exercício termina com os arquivos completos. Os termos novos estão reunidos no
 [glossário](./05-glossario.md).

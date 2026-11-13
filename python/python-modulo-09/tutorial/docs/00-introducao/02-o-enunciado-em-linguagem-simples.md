@@ -90,5 +90,6 @@ de variáveis que digam o que guardam ([Entregar](../07-fechamento/02-entregar.m
 - **JSON e CSV**: dois formatos de texto para dados, usados pelas ferramentas de dados
   ([As ferramentas](../06-dados-do-gerador/01-as-ferramentas.md#data_exporterpy)).
 - **Cosmic Data Observatory, "junior Data Engineer"**: só o cenário de ficção do projeto.
-- **Instruções sobre IA**: o enunciado tem um capítulo pedindo que todo código vindo de uma
-  ferramenta de IA seja entendido por completo e revisado com colegas.
+- **Instruções sobre IA**: o enunciado tem um capítulo pedindo que só se use código vindo de uma
+  ferramenta de IA depois de entendê-lo por completo, e que tudo o que ela gera seja conferido,
+  revisado e testado.

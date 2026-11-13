@@ -33,7 +33,7 @@ title: Glossário
 | **flake8** | ferramenta que confere o estilo do código | [Type hints, flake8 e mypy](../01-ambiente/04-type-hints-flake8-e-mypy.md) |
 | **fluxo (*stream*)** | sequência de dados que chega para ser processada; aqui, uma lista | [O problema do exercício 1](../04-ex1/01-o-problema.md) |
 | **herança** | uma classe filha recebe os métodos e atributos da classe mãe | [Pré-requisitos](./03-pre-requisitos.md) |
-| **`IndexError`** | exceção de `pop(0)` numa lista vazia | [A fila](../02-conceitos/05-a-fila.md) |
+| **`IndexError`** | exceção para posição inexistente numa lista; `pop(0)` a lança quando a lista está vazia | [A fila](../02-conceitos/05-a-fila.md) |
 | **instância (objeto)** | valor criado a partir de uma classe, como `NumericProcessor()` | [Pré-requisitos](./03-pre-requisitos.md) |
 | **invariante** | regra do mypy para listas: `list[int]` não é aceita onde se pede `list[int \| float]` | [Any, união e isinstance](../02-conceitos/03-any-uniao-e-isinstance.md#lista-invariante) |
 | **`isinstance`** | função que responde se um valor é de um tipo (ou de um tipo filho dele) | [Any, união e isinstance](../02-conceitos/03-any-uniao-e-isinstance.md) |
@@ -52,7 +52,7 @@ title: Glossário
 | **polimorfismo** | chamar o mesmo método em objetos de classes diferentes e cada um responder do seu jeito | [Polimorfismo](../02-conceitos/04-polimorfismo.md) |
 | **processador** | objeto de uma filha de `DataProcessor`: confere, guarda e devolve um tipo de dado | [O problema do exercício 0](../03-ex0/01-o-problema.md) |
 | **`Protocol`** | classe de `typing` que descreve os métodos que um objeto precisa ter, sem exigir herança | [Protocol e duck typing](../05-ex2/02-protocol-e-duck-typing.md) |
-| **`PYTHONPATH`** | variável que diz ao Python em que pasta procurar os módulos importados | [As perguntas do enunciado](../06-fechamento/03-as-perguntas-do-enunciado.md) |
+| **`PYTHONPATH`** | variável que diz ao Python em que pasta procurar os módulos importados | [Perguntas de revisão](../06-fechamento/03-perguntas-de-revisao.md) |
 | **`raise`** | instrução que lança uma exceção | [Pré-requisitos](./03-pre-requisitos.md) |
 | **rank** | número de ordem de chegada de um item no processador, começando em 0 | [A fila](../02-conceitos/05-a-fila.md) |
 | **rotear** | escolher para onde vai cada dado | [Registrar e rotear](../04-ex1/03-registrar-e-rotear.md) |

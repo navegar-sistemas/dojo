@@ -70,7 +70,7 @@ que ele pede.
 | Ambiente | prepara o Python, a pasta do projeto e as ferramentas (flake8, mypy e Poetry) |
 | Pacotes, venvs e variáveis | explica, com experimentos pequenos, o pip, o ambiente virtual por dentro, a importação de uma biblioteca que talvez não exista e as variáveis de ambiente |
 | Exercícios 0 a 2 | constroem os três programas, um por parte, e os rodam em ambientes diferentes |
-| Fechamento | confere tudo, mostra como entregar e responde ao que o enunciado pede que você saiba explicar na avaliação |
+| Fechamento | confere tudo, mostra como entregar num repositório Git e reúne perguntas de revisão sobre os conceitos do projeto |
 
 Cada exercício termina com o arquivo completo e uma página que roda o programa em cada situação.
 Os termos novos estão reunidos no [glossário](./05-glossario.md).

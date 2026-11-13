@@ -73,8 +73,8 @@ The Oracle sees all configurations.
 
 Os valores padrão e um aviso para cada coisa que falta, como o roteiro pede, e o programa termina
 normalmente (código de saída `0`, que `echo $?` mostraria). Se alguma das cinco variáveis já
-estiver definida no seu terminal (por um `export` antigo), ela aparece em `Production overrides
-active`; um terminal novo começa sem elas.
+estiver definida no seu terminal (por um `export` antigo), a linha `Production overrides
+available` vira `Environment overrides active`, com o nome dela; um terminal novo começa sem elas.
 
 ## Com o .env
 

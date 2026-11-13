@@ -5,19 +5,20 @@ title: Entregar
 
 # Entregar
 
-O enunciado pede a entrega num **repositório Git**, e só o que estiver no repositório é avaliado.
-Só os três arquivos pedidos precisam ir; a pasta `.venv`, a pasta `experimentos`, as pastas
-`__pycache__`, que o Python cria ao importar um arquivo, e a pasta `.mypy_cache`, que o mypy
-cria, ficam de fora.
+O enunciado pede a entrega num **repositório Git**: o que vale é o que está no repositório, e não
+a cópia na sua pasta. Só os três arquivos pedidos precisam ir; a pasta `.venv`, a pasta
+`experimentos`, as pastas `__pycache__`, que o Python cria ao importar um arquivo, e a pasta
+`.mypy_cache`, que o mypy cria, ficam de fora.
 
 ## Copiar os arquivos para o repositório
 
-O endereço (a URL) do repositório de entrega vem junto com o projeto. O `git clone` e o
-`git push` podem pedir login ou uma **chave SSH**, conforme o servidor do repositório. Uma chave
-SSH é um par de arquivos que identifica o seu computador para o servidor, no lugar de uma senha;
-quem fornece o repositório explica como criar a chave e cadastrá-la no servidor. A partir da
-pasta `code-nexus`, suba um nível, baixe o repositório numa pasta `entrega` e copie só os
-arquivos `.py` de cada exercício:
+O repositório fica num serviço de hospedagem de Git (como GitHub, GitLab ou Codeberg), que dá a
+ele um endereço (a URL). Crie um repositório vazio no serviço que você usa e copie o endereço
+dele. O `git clone` e o `git push` podem pedir login ou uma **chave SSH**, conforme o serviço.
+Uma chave SSH é um par de arquivos que identifica o seu computador para o serviço, no lugar de
+uma senha; a documentação do serviço explica como criar a chave e cadastrá-la. A partir da pasta
+`code-nexus`, suba um nível, baixe o repositório numa pasta `entrega` e copie só os arquivos
+`.py` de cada exercício:
 
 ```bash
 cd ..
@@ -29,11 +30,12 @@ done
 cd entrega
 ```
 
-Troque `<endereço-do-repositório>` pelo endereço recebido. O `git clone` baixa o repositório. Se
-ele ainda estiver vazio, o `git clone` avisa
+Troque `<endereço-do-repositório>` pelo endereço do repositório. O `git clone` baixa o
+repositório. Se ele ainda estiver vazio, o `git clone` avisa
 `warning: You appear to have cloned an empty repository.` ("parece que você clonou um repositório
-vazio"), e o clone funcionou do mesmo jeito. O `for` cria cada pasta de exercício dentro de `entrega` (o `-p` do `mkdir` não reclama se ela já
-existir) e copia para ela os arquivos `.py` com `cp`.
+vazio"), e o clone funcionou do mesmo jeito. O `for` cria cada pasta de exercício dentro de
+`entrega` (o `-p` do `mkdir` não reclama se ela já existir) e copia para ela os arquivos `.py`
+com `cp`.
 
 ## Registrar e enviar
 
@@ -57,7 +59,7 @@ Changes to be committed:
 
 `git add` marca os arquivos para o próximo registro; `git status` mostra o que está marcado. A
 lista `Changes to be committed` ("mudanças a registrar") tem exatamente os três arquivos. O
-resto pode variar: esta é a saída de um repositório de entrega vazio (`No commits yet`, "nenhum
+resto pode variar: esta é a saída de um repositório vazio (`No commits yet`, "nenhum
 registro ainda"); num repositório que já tem registros, essa linha não aparece. A primeira
 linha mostra o **ramo** (*branch*), a linha de histórico em que os registros entram; o nome
 padrão pode ser `main` ou `master`.
@@ -76,7 +78,7 @@ git push
 ```
 
 `git commit` registra os arquivos com uma mensagem; `git push` envia o registro para o
-repositório de entrega.
+repositório no serviço de hospedagem.
 
 ## Conferir o que foi enviado
 

@@ -13,11 +13,11 @@ python3 --version
 ```
 
 ```text
-Python 3.14.5
+Python 3.15.2
 ```
 
 O número depois de `Python` é a versão. Qualquer `3.10` ou maior serve (`3.10`, `3.11`, …,
-`3.14`).
+`3.14`, `3.15`). Os números da versão podem ser outros na sua máquina.
 
 ## Se o comando não existir
 

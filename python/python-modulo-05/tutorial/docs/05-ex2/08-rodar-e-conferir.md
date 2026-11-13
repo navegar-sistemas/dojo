@@ -105,9 +105,9 @@ JSON Output:
   porque o processador já tinha recebido os três itens da primeira cópia.
 
 Um leitor de JSON de verdade confirma que o texto é válido. O Python tem um, o módulo `json`; o
-enunciado não o permite no código entregue, mas ele serve para conferir no terminal. O `python3
--m json.tool` lê um JSON da entrada e o imprime formatado, ou mostra um erro se o JSON for
-inválido:
+enunciado não o permite no código entregue, mas ele serve para conferir no terminal. O
+`python3 -m json.tool` lê um JSON da entrada e o imprime formatado, ou mostra um erro se o JSON
+for inválido:
 
 ```bash
 printf '%s\n' '{"item_3": "a,b", "item_4": "say \"hi\"", "item_5": "line\u000abreak"}' | python3 -m json.tool

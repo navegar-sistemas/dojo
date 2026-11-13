@@ -16,6 +16,7 @@ title: Glossário
 | **ABC** | classe do módulo `abc` da qual uma classe herda para virar abstrata | [Classe abstrata e super](../02-conceitos/02-classe-abstrata-e-super.md) |
 | **`@abstractmethod`** | decorador que marca um método como obrigatório nas classes filhas | [Classe abstrata e super](../02-conceitos/02-classe-abstrata-e-super.md) |
 | **ambiente virtual (venv)** | pasta com um Python e bibliotecas só deste projeto; aqui guarda o flake8 e o mypy | [O ambiente virtual](../01-ambiente/03-o-ambiente-virtual.md) |
+| **assinatura** | o nome de um método, os parâmetros com os tipos e o tipo de retorno | [O problema do exercício 1](../04-ex1/01-o-problema.md#o-que-o-enunciado-pede) |
 | **atributo** | variável guardada dentro de um objeto, como `self.name` | [Pré-requisitos](./03-pre-requisitos.md) |
 | **`AttributeError`** | exceção de quando um objeto não tem o atributo ou método pedido | [Herança múltipla](../02-conceitos/03-heranca-multipla.md) |
 | **capacidade (*capability*)** | classe abstrata com uma habilidade extra, separada de `Creature`, herdada junto com ela | [As capacidades](../04-ex1/02-as-capacidades.md) |
@@ -62,3 +63,4 @@ title: Glossário
 | **traceback** | relatório de erro que o Python imprime quando uma exceção não é capturada | [Pré-requisitos](./03-pre-requisitos.md#exceções-em-resumo) |
 | **type hint** | anotação do tipo de um parâmetro, variável ou retorno, como `name: str` | [Type hints, flake8 e mypy](../01-ambiente/04-type-hints-flake8-e-mypy.md) |
 | **`TypeError`** | exceção para valor do tipo errado; também lançada ao instanciar uma classe abstrata | [Classe abstrata e super](../02-conceitos/02-classe-abstrata-e-super.md#a-classe-abstrata-não-é-instanciada) |
+| **variável de ambiente** | valor com nome que o terminal entrega aos programas que roda, como `PYTHONPATH` | [Módulos e pacotes](../02-conceitos/01-modulos-e-pacotes.md#onde-o-python-procura) |

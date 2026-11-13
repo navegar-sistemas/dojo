@@ -60,11 +60,17 @@ ser impressos, e `False` quando algum não pode, como uma quebra de linha ou uma
 O terminal entrega cada argumento ao programa como bytes, e o Python os traduz em caracteres pela
 codificação UTF-8 ([open e o objeto arquivo](../02-arquivos/02-open-e-o-objeto-arquivo.md)). Um
 byte que não forma texto em UTF-8 vira um caractere especial, que não pode ser impresso. No bash e
-no zsh, `$'\xff'` escreve um argumento feito de um byte desses, o de valor 255. Na configuração de
-idioma mais comum do Linux e do macOS (`pt_BR.UTF-8`, `en_US.UTF-8`), o primeiro `print` com esse
-nome lançaria `UnicodeEncodeError` e travaria o programa. O `isprintable()` barra o nome antes: o
-programa mostra o uso e termina normalmente ([Rodar e
-conferir](./06-rodar-e-conferir.md#as-outras-falhas)).
+no zsh, `$'\xff'` escreve um argumento feito de um byte desses, o de valor 255. O que o primeiro
+`print` faria com esse nome depende da versão do Python:
+
+- até o 3.14, com a configuração de idioma mais comum do Linux e do macOS (`pt_BR.UTF-8`,
+  `en_US.UTF-8`), o `print` lançaria `UnicodeEncodeError` ("erro ao codificar") e travaria o
+  programa;
+- a partir do 3.15, o `print` devolve ao terminal o byte cru, e o terminal mostra um símbolo de
+  caractere inválido no lugar do nome.
+
+O `isprintable()` barra o nome antes, em qualquer versão: o programa mostra o uso e termina
+normalmente ([Rodar e conferir](./06-rodar-e-conferir.md#as-outras-falhas)).
 
 O `or` só confere a segunda parte quando a primeira é falsa, isto é, quando há exatamente um
 argumento. Sem argumento, o `sys.argv[1]` nem existe, e não chega a ser lido.

@@ -27,9 +27,9 @@ def power_validator(min_power: int) -> Callable:
 
 ## Onde está o poder
 
-O enunciado se contradiz aqui: diz que `power_validator` é "aplicado numa função solta"
-(*applied on a standalone function*) e, na mesma página, manda decorar com ele o método
-`cast_spell` da classe `MageGuild`. O decorador do tutorial atende os dois casos, e a página
+O enunciado se contradiz aqui: diz que `power_validator` é "aplicado a uma função independente"
+(*applied on a standalone function*) e, mais adiante no mesmo exercício, manda decorar com ele o
+método `cast_spell` da classe `MageGuild`. O decorador do tutorial atende os dois casos, e a página
 [Rodar e conferir](./08-rodar-e-conferir.md#wraps-e-o-validador-numa-função-comum) testa os dois:
 o método e uma função solta, `heal`.
 
@@ -46,8 +46,8 @@ o `self`. Nos dois, o poder é o **último** parâmetro. A regra escolhida pelo 
 `a if condição else b` escolhe entre os dois casos numa linha.
 
 Essa regra vale para funções em que o poder é o último parâmetro, como no contrato dos feitiços.
-Outra opção seria descobrir a posição pelo nome do parâmetro com o módulo `inspect`, fora da lista
-de autorizados do exercício.
+Outra opção seria descobrir a posição pelo nome do parâmetro com o módulo `inspect`, da biblioteca
+padrão; o exercício não o cita, e a regra do último argumento basta para os feitiços do projeto.
 
 ## A conferência
 

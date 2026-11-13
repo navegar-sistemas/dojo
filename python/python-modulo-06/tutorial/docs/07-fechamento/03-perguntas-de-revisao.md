@@ -1,16 +1,17 @@
 ---
 sidebar_position: 3
-title: As perguntas do enunciado
+title: Perguntas de revisão
+sidebar_label: Perguntas de revisão
 ---
 
-# As perguntas do enunciado
+# Perguntas de revisão
 
-O enunciado deixa uma pergunta na Parte III ("Quando um alquimista deve usar caminhos absolutos e
-quando deve usar caminhos relativos?") e pede, na Parte IV, que se saiba explicar os diferentes
-jeitos de evitar dependências circulares. Também avisa que, na avaliação, pode ser pedido que
-você explique os mecanismos de import, mostre diferentes estilos de import ou modifique o
-laboratório, e que o importante é entender os quatro mistérios (inicialização de pacotes, caminhos
-de import, absoluto e relativo, dependências circulares), e não só a implementação.
+O projeto gira em torno de quatro assuntos, que o enunciado chama de "quatro mistérios sagrados":
+inicialização de pacotes, caminhos de import, import absoluto e relativo, e dependências
+circulares. As perguntas abaixo revisam os quatro, cada uma com a resposta e o link para a página
+que explica o assunto. As duas primeiras vêm do próprio enunciado: a da Parte III ("Quando um
+alquimista deve usar caminhos absolutos e quando deve usar caminhos relativos?") e a da Parte IV,
+sobre os diferentes jeitos de evitar dependências circulares.
 
 ## Quando usar import absoluto e quando usar relativo?
 
@@ -64,7 +65,7 @@ Os jeitos de evitar mudam o momento do pedido, o que é pedido ou onde fica o qu
 Cada um, com exemplo e o motivo de ter sido usado ou não aqui, está em
 [Quebrar o ciclo](../06-parte-4/04-quebrar-o-ciclo.md).
 
-## Explicar os mecanismos de import
+## O que acontece, passo a passo, num import?
 
 O que acontece em `import alchemy.potions`, do começo ao fim:
 
@@ -83,7 +84,7 @@ Um módulo já carregado não roda de novo: o Python o acha em `sys.modules`. E 
 `sys.modules` antes de rodar, e por isso pode ser encontrado pela metade: a origem do import
 circular.
 
-## Mostrar os estilos de import
+## Quais são os estilos de import?
 
 Todos os estilos aparecem nos scripts e arquivos do projeto:
 
@@ -102,10 +103,10 @@ Todos os estilos aparecem nos scripts e arquivos do projeto:
 | dentro de uma função | `from .light_spellbook import light_spell_allowed_ingredients` | `alchemy/grimoire/light_validator.py` |
 | dentro de um bloco `if` | `from alchemy.grimoire.dark_spellbook import dark_spell_record` | `ft_kaboom_1.py` |
 
-## Modificar o laboratório
+## O que muda quando o laboratório muda?
 
-Duas mudanças que mostram que você entende o que cada peça faz. As duas desfazem um erro pedido
-pelo enunciado: servem para a demonstração na avaliação, e depois os arquivos voltam ao que eram.
+Duas mudanças que põem à prova o que cada peça faz. As duas desfazem um erro que o enunciado
+pede: são exercícios, e depois os arquivos voltam ao que eram.
 
 ### Mostrar o create_earth no pacote
 

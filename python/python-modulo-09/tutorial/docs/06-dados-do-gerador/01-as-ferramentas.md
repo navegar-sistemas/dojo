@@ -47,8 +47,8 @@ data_generator.py
 ## data_generator.py
 
 Gera registros parecidos com os dos três exercícios, sorteando os valores dentro de faixas
-realistas. Ele usa só a biblioteca padrão: o módulo `random`, que sorteia números, e o
-`datetime`. O arquivo tem três classes, uma por tipo de dado:
+realistas. Ele usa só a biblioteca padrão, principalmente o módulo `random`, que sorteia números,
+e o `datetime`. O arquivo tem três classes, uma por tipo de dado:
 
 | Classe | Gera | Faixas principais |
 |---|---|---|

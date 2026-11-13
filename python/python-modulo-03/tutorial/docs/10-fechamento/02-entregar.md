@@ -5,8 +5,8 @@ title: Entregar
 
 # Entregar
 
-A entrega é feita no repositório Git do projeto, e só o que está nele é avaliado. Entram só os
-sete arquivos pedidos, cada um na sua pasta:
+A entrega é feita num repositório Git, e o que não estiver nele não faz parte do trabalho
+entregue. Entram só os sete arquivos pedidos, cada um na sua pasta:
 
 | Pasta | Arquivo |
 |---|---|
@@ -23,14 +23,15 @@ As pastas `experimentos/`, `.venv/` e `.mypy_cache/` (criada pelo mypy) ficam de
 ## Baixar o repositório
 
 Um **repositório Git** é uma pasta cujo histórico de mudanças o Git guarda, e que pode ser
-copiada entre máquinas. O repositório de entrega é criado vazio no servidor da escola, com um
-endereço próprio. `git clone` baixa uma cópia dele para uma pasta nova. Na pasta `data-quest`:
+copiada entre máquinas. Os passos abaixo partem de um repositório vazio que já existe num serviço
+de hospedagem de Git, como o GitHub ou o GitLab, com um endereço próprio. `git clone` baixa uma
+cópia dele para uma pasta nova. Na pasta `data-quest`:
 
 ```bash
 git clone <endereço-do-repositório> entrega
 ```
 
-No lugar de `<endereço-do-repositório>` vai o endereço do seu repositório de entrega; `entrega` é
+No lugar de `<endereço-do-repositório>` vai o endereço do seu repositório; `entrega` é
 o nome da pasta criada. Como o repositório está vazio, o `git clone` avisa
 `warning: You appear to have cloned an empty repository.` ("parece que você clonou um repositório
 vazio"); o aviso é esperado. Copie para ela as pastas `ex0` a `ex6` da `data-quest` e entre na pasta
@@ -80,11 +81,11 @@ git commit -m "Data Quest: exercises 0 to 6"
 git push
 ```
 
-`git commit` registra os arquivos com uma mensagem, e `git push` os envia para o repositório de
-entrega.
+`git commit` registra os arquivos com uma mensagem, e `git push` os envia para o repositório no
+servidor.
 
-## Na avaliação
+## Revisar
 
-Quem avalia pode pedir que você explique por que escolheu cada coleção, demonstre operações com
-elas ou acrescente uma funcionalidade a um dos programas
-([Perguntas da avaliação](./03-perguntas-da-avaliacao.md)).
+As [Perguntas de revisão](./03-perguntas-de-revisao.md) reúnem o que vale saber explicar sobre o
+projeto: por que cada coleção foi escolhida, como as operações com elas funcionam e onde mexer
+para acrescentar uma funcionalidade a um dos programas.

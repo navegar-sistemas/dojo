@@ -64,9 +64,9 @@ python3 experimentos/readline.py < /dev/null
 
 - `line.rstrip("\n")` tira o `\n` do fim, se houver. Assim, Enter sem texto (`"\n"`) vira `""`, a
   resposta vazia que o `main` entende como "não gravar";
-- `Ctrl+C` lança `KeyboardInterrupt` dentro do `readline()`, e bytes que não formam texto lançam
-  `UnicodeDecodeError`, como no `input()` ([Pedir o nome](../04-ex1/04-pedir-o-nome.md)). O
-  `except` troca as duas pela resposta vazia;
+- `Ctrl+C` lança `KeyboardInterrupt` dentro do `readline()`, e, até o Python 3.14, bytes que não
+  formam texto lançam `UnicodeDecodeError`, como no `input()` ([Pedir o
+  nome](../04-ex1/04-pedir-o-nome.md)). O `except` troca as duas pela resposta vazia;
 - `line == ""` quer dizer que nenhum caractere chegou depois da pergunta: a entrada acabou, ou o
   `except` tratou uma falha. Nesse caso, o `print()` sozinho termina a linha da pergunta, para
   `Not saving data.` não sair grudado.

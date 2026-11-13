@@ -65,8 +65,8 @@ tutorial escreve `python3`.
 ## O git
 
 A entrega é feita num **repositório**: uma pasta cujo histórico de versões é guardado pelo
-**git**, o programa que registra e envia versões de arquivos, com uma cópia num servidor
-([Entregar](../07-fechamento/02-entregar.md)). Confira se ele existe:
+**git**, o programa que registra e envia versões de arquivos, com uma cópia num serviço na
+internet ([Entregar](../07-fechamento/02-entregar.md)). Confira se ele existe:
 
 ```bash
 git --version

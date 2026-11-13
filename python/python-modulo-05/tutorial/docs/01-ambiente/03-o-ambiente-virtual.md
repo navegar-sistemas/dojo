@@ -28,8 +28,8 @@ python3 -m venv .venv
 
 O comando não imprime nada quando dá certo.
 
-No Debian e no Ubuntu, o `python3` vem instalado, mas a parte dele que cria ambientes virtuais
-vem num pacote separado, o `python3-venv`. Sem ele, o comando acima falha com uma mensagem que
+No Debian e no Ubuntu, a parte do `python3` que cria ambientes virtuais vem num pacote separado,
+o `python3-venv`. Sem ele, o comando acima falha com uma mensagem que
 fala em `ensurepip` e manda instalar esse pacote. Nesse caso, instale-o (a mensagem pode pedir o
 nome com a versão, como `python3.12-venv`; use o nome que ela mostrar), apague a pasta criada pela
 metade e crie o venv de novo:
@@ -63,7 +63,7 @@ ferramentas ficam em `.venv/bin/`:
 ```
 
 ```text
-7.5.0 (mccabe: 0.7.0, pycodestyle: 2.15.0, pyflakes: 4.1.0) CPython 3.14.5 on
+7.5.0 (mccabe: 0.7.0, pycodestyle: 2.15.0, pyflakes: 4.1.0) CPython 3.15.2 on
 Darwin
 mypy 2.4.1 (compiled: yes)
 ```

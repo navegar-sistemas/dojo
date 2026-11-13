@@ -83,9 +83,9 @@ todas.
 ## Entrega
 
 A árvore inteira, na raiz de um repositório Git ([Entregar](../07-fechamento/02-entregar.md)).
-Na avaliação, pode ser pedido que você explique os mecanismos de import, mostre os diferentes
-estilos de import ou modifique o laboratório
-([As perguntas do enunciado](../07-fechamento/03-as-perguntas-do-enunciado.md)).
+O objetivo é entender os mecanismos de import, os diferentes estilos de import e o efeito de cada
+mudança no laboratório, e não só fazer os scripts funcionarem
+([Perguntas de revisão](../07-fechamento/03-perguntas-de-revisao.md)).
 
 ## O que o enunciado cita sem explicar
 
@@ -107,4 +107,4 @@ estilos de import ou modifique o laboratório
 - **Alembic, distillation, transmutation, grimoire, spellbook**: só o cenário. *Grimoire* é o
   grimório, e *spellbook*, o livro de feitiços.
 - **Instruções sobre IA**: o enunciado tem um capítulo pedindo que todo código vindo de uma
-  ferramenta de IA seja entendido por completo e revisado com colegas.
+  ferramenta de IA seja entendido por completo, conferido e testado antes de ser usado.

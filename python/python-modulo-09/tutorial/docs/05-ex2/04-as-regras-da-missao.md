@@ -57,7 +57,7 @@ Quando o método roda, cada `member` já é um `CrewMember` validado: `member.ra
    a da saída do enunciado, com `Mission` na frente ([O problema](./01-o-problema.md#a-saída-esperada)).
 3. **Experiência nas missões longas.** Só vale quando `duration_days` passa de 365. Escolha do
    tutorial: "50% de tripulação experiente" é lido como **pelo menos metade**. Com 3 tripulantes,
-   2 experientes bastam (66%) e 1 não basta (33%); com 4, bastam 2 (exatamente 50%); com 5, são
+   2 experientes bastam (67%) e 1 não basta (33%); com 4, bastam 2 (exatamente 50%); com 5, são
    precisos 3. O gerador de dados do enunciado usa outra conta, `len(crew) // 2`, e com 5
    tripulantes se contenta com 2 ([Validar os dados](../06-dados-do-gerador/03-validar-os-dados.md)). A conta
    `experienced * 2 < len(self.crew)` é `experienced / len(self.crew) < 0.5` sem divisão: os dois

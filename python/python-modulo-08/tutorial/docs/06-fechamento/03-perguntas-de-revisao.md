@@ -1,16 +1,15 @@
 ---
 sidebar_position: 3
-title: As perguntas do enunciado
+title: Perguntas de revisão
 ---
 
-# As perguntas do enunciado
+# Perguntas de revisão
 
-O capítulo de entrega do enunciado diz que, na avaliação entre pares, você vai demonstrar quatro
-coisas: o entendimento dos ambientes virtuais e da importância deles, as diferenças entre o pip e
-o Poetry, como as variáveis de ambiente deixam uma aplicação segura e configurável, e a
-capacidade de explicar tudo isso a outros aprendizes. O exercício 2 acrescenta uma quinta: saber
-explicar por que o `.env` fica no `.gitignore`. E o exercício 0 avisa que você precisa saber
-criar um ambiente virtual novo durante a avaliação, se for preciso.
+O objetivo do projeto não é só fazer os programas funcionarem, mas entender o porquê de cada
+ferramenta. As perguntas abaixo cobrem os conceitos centrais: o que é um ambiente virtual e por
+que ele importa, as diferenças entre o pip e o Poetry, como as variáveis de ambiente deixam uma
+aplicação segura e configurável, por que o `.env` fica no `.gitignore` e como explicar tudo isso
+a outra pessoa. A última seção recria os ambientes a partir do repositório, que não os guarda.
 
 ## O que é um ambiente virtual, e por que importa?
 
@@ -26,7 +25,7 @@ Ele importa porque:
 - **não vai para o repositório**: tem milhares de arquivos e caminhos da máquina onde foi criado.
   Vai a receita (o `requirements.txt` ou o `pyproject.toml`), e cada um recria o seu.
 
-Para mostrar ao vivo: o `construct.py` fora e dentro do `matrix_env`, e dentro sem ativar
+Para ver na prática: o `construct.py` fora e dentro do `matrix_env`, e dentro sem ativar
 ([Rodar e conferir do exercício 0](../03-ex0/07-rodar-e-conferir.md)). O ponto central é que
 `sys.prefix` muda e `sys.base_prefix` não.
 
@@ -42,7 +41,7 @@ O pip é um instalador; o Poetry, um gerenciador de projetos
 | ambiente virtual | você cria e ativa | o Poetry cria e usa |
 | comandos | `pip install -r requirements.txt` e `python3 loading.py` | `poetry install` e `poetry run python loading.py` |
 
-Para mostrar ao vivo: o `loading.py` num venv vazio, depois com o `pip install -r` e depois com o
+Para ver na prática: o `loading.py` num venv vazio, depois com o `pip install -r` e depois com o
 `poetry run` ([Rodar com o pip](../04-ex1/10-rodar-com-pip.md),
 [Rodar com o Poetry](../04-ex1/11-rodar-com-poetry.md)); o `grep` das três versões do numpy no
 `poetry.lock` mostra o que o pip não guarda. A saída do caso sem bibliotecas resume a diferença
@@ -60,7 +59,7 @@ nas próprias instruções ([As instruções de instalação](../04-ex1/06-as-in
   pelo nome, e o programa não roda com um valor que ninguém escolheu
   ([Sem valores padrão](../05-ex2/04-ler-a-configuracao.md#sem-valores-padrão)).
 
-Para mostrar ao vivo: o `oracle.py` sem configuração, com o `.env`, com
+Para ver na prática: o `oracle.py` sem configuração, com o `.env`, com
 `MATRIX_MODE=production API_KEY=secret123` e com a produção completa
 ([Rodar e conferir do exercício 2](../05-ex2/10-rodar-e-conferir.md)).
 
@@ -73,7 +72,7 @@ precisa ser trocado. Com o `.env` no `.gitignore`, o Git o ignora mesmo num `git
 inteira ([O .env nunca entra](./02-entregar.md#o-env-nunca-entra)). O que vai para o repositório
 é o `.env.example`, com os nomes das variáveis e sem os segredos.
 
-## Explicar a outros aprendizes
+## Como explicar tudo isso a outra pessoa?
 
 Os programas foram feitos para isso: cada um demonstra a sua ferramenta na própria saída. Uma
 ordem que funciona: rodar o `construct.py` fora e dentro do venv; rodar o `loading.py` num venv
@@ -81,7 +80,7 @@ vazio e depois instalar; rodar o `oracle.py` sem `.env`, com `.env` e em produç
 a pergunta é a mesma: **de onde** o programa tirou o que mostrou (qual Python, qual
 `site-packages`, qual variável).
 
-## Recriar tudo a partir da entrega
+## Recriar tudo a partir do repositório
 
 O repositório tem só os oito arquivos; para rodar os programas a partir dele, os ambientes são
 recriados em cada pasta de exercício, com os comandos já rodados no tutorial:

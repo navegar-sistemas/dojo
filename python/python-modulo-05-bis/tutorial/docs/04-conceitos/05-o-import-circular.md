@@ -131,4 +131,4 @@ consulta ao `sys.modules`.
 
 Esse é um dos jeitos de quebrar o círculo, e é o que o tutorial usa no exercício 4. Os outros
 (importar o módulo em vez do nome, mover o que os dois usam para um terceiro módulo, passar o valor
-como parâmetro) estão em [As perguntas do enunciado](../08-fechamento/03-as-perguntas-do-enunciado.md).
+como parâmetro) estão em [Perguntas de revisão](../08-fechamento/03-perguntas-de-revisao.md).

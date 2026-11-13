@@ -10,10 +10,9 @@ Até aqui, o programa roda com `python3 ex0/ft_garden_intro.py`: quem digita esc
 **shebang**, junto com a permissão de execução, dá isso a um arquivo `.py`: o programa passa a
 rodar com `./ex0/ft_garden_intro.py`, sem digitar `python3`.
 
-Na avaliação, quem avalia pede que você acrescente o shebang ao programa, ao vivo. Entregar o
-arquivo sem shebang é escolha do projeto, apoiada no enunciado: ele diz que a avaliação vai pedir
-que você *atualize* o script para usar o shebang. O treino é feito numa cópia, em
-`experimentos/`.
+O enunciado pede que você pesquise o que essa linha faz e saiba *atualizar* o script para usá-la.
+Entregar o arquivo sem shebang é escolha do projeto, apoiada nessa formulação: atualizar supõe um
+script que ainda não tem a linha. O treino é feito numa cópia, em `experimentos/`.
 
 ## A linha
 
@@ -33,8 +32,8 @@ como a junção de *hash* ou *sharp*, nomes do `#` em inglês, com *bang*, nome 
 
 Numa máquina em que o Python 3.10 ou mais novo tem outro nome, como `python3.11`
 ([O Python](../01-ambiente/01-o-python.md)), a linha continua `#!/usr/bin/env python3`, e o `env`
-acha o `python3` antigo do sistema. O programa do exercício 0 roda nele do mesmo jeito: as
-f-strings e os type hints de variável existem desde o Python 3.6.
+acha o `python3` antigo do sistema. O programa do exercício 0 roda nele do mesmo jeito, desde que
+ele seja o 3.6 ou mais novo: as f-strings e os type hints de variável existem desde essa versão.
 
 ## Treinar numa cópia
 
@@ -95,9 +94,9 @@ de dentro da pasta `experimentos`, o comando seria `./semente.py`. Com uma barra
 `experimentos/semente.py`, o caminho já é seguido a partir da pasta atual, e o `./` só deixa isso
 explícito.
 
-## Na avaliação
+## No arquivo do exercício
 
-São os mesmos dois passos, no arquivo de verdade: acrescentar `#!/usr/bin/env python3` como
+Atualizar o programa do exercício 0 leva os mesmos dois passos: acrescentar `#!/usr/bin/env python3` como
 primeira linha de `ex0/ft_garden_intro.py` e rodar `chmod +x ex0/ft_garden_intro.py`. Depois,
 `./ex0/ft_garden_intro.py` roda o programa. O shebang não muda nada para o flake8, para o mypy
 nem para `python3 ex0/ft_garden_intro.py`, que continua funcionando.

@@ -24,7 +24,7 @@ title: Glossário
 | **`diff`** | comando que compara dois textos linha a linha e mostra só as diferenças | [Rodar e conferir da Parte I](../03-parte-1/08-rodar-e-conferir.md) |
 | **`E402`** | aviso do flake8 para um import no meio do corpo do arquivo, fora do topo | [A explosão](../06-parte-4/03-a-explosao.md) |
 | **`E501`** | aviso do flake8 para uma linha com mais de 79 caracteres | [import e from](../03-parte-1/04-import-e-from.md) |
-| **enunciado (*subject*)** | o documento oficial que diz o que o projeto deve entregar | [O enunciado em linguagem simples](./02-o-enunciado-em-linguagem-simples.md) |
+| **enunciado (*subject*)** | o documento que diz o que o projeto deve entregar | [O enunciado em linguagem simples](./02-o-enunciado-em-linguagem-simples.md) |
 | **exceção** | objeto que descreve um erro, com um tipo e uma mensagem | [Pré-requisitos](./03-pre-requisitos.md) |
 | **`F401`** | aviso do flake8 para um import que o arquivo não usa | [A interface do pacote](../03-parte-1/05-a-interface-do-pacote.md) |
 | **flake8** | ferramenta que confere o estilo do código | [Type hints, flake8 e mypy](../01-ambiente/04-type-hints-flake8-e-mypy.md) |

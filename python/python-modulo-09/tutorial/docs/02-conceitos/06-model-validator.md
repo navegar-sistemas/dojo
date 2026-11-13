@@ -64,9 +64,12 @@ O método `check_seats`:
 - recebe `self`, o objeto já com todos os campos preenchidos e conferidos;
 - quando a regra falha, lança `ValueError` com a mensagem da regra;
 - quando a regra passa, devolve o próprio objeto: `return self`;
-- o tipo de retorno é `"Launch"`, o nome da classe **entre aspas**: dentro do corpo da classe, o
-  nome `Launch` ainda não existe para o Python, e as aspas adiam a leitura do tipo. No Python 3.11
-  existe o tipo `Self` para isso, mas o projeto precisa rodar no 3.10.
+- o tipo de retorno é `"Launch"`, o nome da classe **entre aspas**. No Python 3.10, a anotação
+  é lida quando o `def` roda, ainda dentro do corpo da classe, e nesse momento o nome `Launch`
+  ainda não existe: sem as aspas, o programa para com `NameError`. As aspas adiam a leitura do
+  tipo. A partir do Python 3.14, as anotações só são lidas quando alguém as pede, e as aspas
+  deixam de ser necessárias; no 3.11 surgiu também o tipo `Self` para esse caso. O projeto
+  precisa rodar no 3.10, e por isso usa as aspas.
 
 ```bash
 .venv/bin/python experimentos/validador.py

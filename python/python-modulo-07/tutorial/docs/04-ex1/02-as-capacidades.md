@@ -44,8 +44,8 @@ estado: curar não muda nada na criatura.
 ## TransformCapability
 
 Uma classe abstrata com dois métodos abstratos, `transform` e `revert`, e um atributo criado no
-`__init__`: `self.transformed`, que começa `False` ("não transformada"). O enunciado pede "um
-atributo que torna o estado persistente": o valor fica guardado no objeto entre uma chamada e
+`__init__`: `self.transformed`, que começa `False` ("não transformada"). O enunciado diz que "um
+atributo é usado para tornar o estado persistente": o valor fica guardado no objeto entre uma chamada e
 outra, e é por ele que o `attack` sabe se a criatura está transformada. O nome `transformed` é
 escolha do tutorial.
 

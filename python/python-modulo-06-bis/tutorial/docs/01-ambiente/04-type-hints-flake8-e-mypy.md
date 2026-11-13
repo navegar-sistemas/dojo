@@ -105,4 +105,5 @@ Success: no issues found in 1 source file
 ```
 
 O flake8 não imprime nada, e o mypy diz que não achou problema. É isso que se espera de cada
-exercício.
+exercício, com uma exceção: o erro do mypy que o enunciado pede no exercício 0
+([O erro proposital do mypy](../03-ex0/07-o-erro-proposital-do-mypy.md)).

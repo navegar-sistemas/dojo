@@ -72,10 +72,11 @@ Para cada exercício, o enunciado mostra a saída do programa; as sete estão em
 
 ## Entrega
 
-Só os sete arquivos `.py`, com esses nomes e nessas pastas, num repositório Git. Na avaliação,
-quem avalia pode pedir que você explique por que escolheu cada coleção, demonstre operações com
-elas ou acrescente uma funcionalidade nova a um dos programas
-([Entregar](../10-fechamento/02-entregar.md)).
+Só os sete arquivos `.py`, com esses nomes e nessas pastas, num repositório Git
+([Entregar](../10-fechamento/02-entregar.md)). O enunciado também pede que se entendam os
+princípios de cada estrutura de dados: saber explicar por que cada coleção foi escolhida,
+demonstrar operações com elas e acrescentar uma funcionalidade nova a um dos programas
+([Perguntas de revisão](../10-fechamento/03-perguntas-de-revisao.md)).
 
 ## O que o enunciado cita sem explicar
 
@@ -89,6 +90,6 @@ elas ou acrescente uma funcionalidade nova a um dos programas
   resolveu problemas de velocidade no Twitter. O que elas são está em
   [A estrutura e o algoritmo](../02-colecoes/03-a-estrutura-e-o-algoritmo.md).
 - **Instruções sobre IA**: o enunciado tem um capítulo pedindo que só se use conteúdo gerado por
-  IA que se entenda por completo e pelo qual se possa responder, sempre revisado com colegas. Os
-  exemplos dele mostram que quem não consegue explicar na avaliação o código que a IA escreveu
-  reprova no projeto.
+  IA que se entenda por completo e pelo qual se possa responder, e que todo resultado de IA seja
+  conferido, questionado e testado. Código que você não consegue explicar não é código que você
+  domina.

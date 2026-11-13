@@ -51,9 +51,10 @@ while index < len(sys.argv):
 
 O laço começa no índice 1, pulando o nome do programa, e para quando `index` chega a
 `len(sys.argv)`, o primeiro índice que não existe. As duas formas imprimem o mesmo, e o arquivo
-completo usa a primeira, com a fatia. O enunciado avisa que há várias formas de não imprimir o
-nome do programa de novo no meio dos argumentos (ele está em `sys.argv[0]`) e que a avaliação
-pode pedir as alternativas: estas duas são exemplos.
+completo usa a primeira, com a fatia. O enunciado lembra que há várias formas de não imprimir o
+nome do programa de novo no meio dos argumentos (ele está em `sys.argv[0]`) e pede que se
+conheçam as alternativas: estas duas são exemplos, e outras estão nas
+[Perguntas de revisão](../10-fechamento/03-perguntas-de-revisao.md#como-não-repetir-o-nome-do-programa-exercício-0).
 
 As funções `range()` e `enumerate()`, que o Python oferece para contar voltas, não estão na lista
 de autorizadas deste exercício.

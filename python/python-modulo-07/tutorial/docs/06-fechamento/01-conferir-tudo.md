@@ -10,7 +10,7 @@ Rode tudo a partir da pasta `datadeck`.
 ## Os arquivos
 
 ```bash
-ls -1 *.py ex0 ex1 ex2
+LC_ALL=C ls -1 *.py ex0 ex1 ex2
 ```
 
 ```text
@@ -38,8 +38,9 @@ strategy.py
 ```
 
 `*.py` quer dizer "todos os arquivos terminados em `.py` da pasta atual": os três programas de
-teste, com os nomes exatos que o enunciado pede. Cada pasta de exercício tem o seu `__init__.py`,
-obrigatório pelo enunciado. As pastas `__pycache__` são o cache que o Python criou ao importar os
+teste, com os nomes exatos que o enunciado pede. O `LC_ALL=C` fixa a ordem dos nomes
+([O `__pycache__`](../02-conceitos/01-modulos-e-pacotes.md#o-__pycache__)). Cada pasta de
+exercício tem o seu `__init__.py`, obrigatório pelo enunciado. As pastas `__pycache__` são o cache que o Python criou ao importar os
 pacotes; não fazem parte da entrega.
 
 ## Estilo e tipos
@@ -114,7 +115,7 @@ Sobram só os imports da biblioteca do Python: `abc`, autorizado (`from abc impo
 mesmo módulo que o `import abc` da lista). O `typing`, também autorizado, não foi preciso. Os
 imports do próprio projeto não estão na lista de autorizados; a leitura do tutorial é que fazem
 parte do pedido, porque o enunciado manda o exercício 1 "usar o conteúdo do pacote `ex0` e
-construir sobre ele" e o exercício 2 "criar várias fábricas de Criaturas (de `ex0` e de `ex1`)".
+construir este exercício sobre ele" e o exercício 2 "criar várias fábricas de Criaturas (de `ex0` e de `ex1`)".
 
 ## Nem eval nem exec
 

@@ -1,17 +1,17 @@
 ---
 sidebar_position: 3
-title: As perguntas do enunciado
+title: Perguntas de revisão
 ---
 
-# As perguntas do enunciado
+# Perguntas de revisão
 
-O enunciado avisa que, na avaliação, pode ser pedido que você **explique os padrões de projeto**
-usados no projeto, e recomenda entender os conceitos, não só a implementação. Ele também deixa
-dois avisos nos exercícios: no 0, que outras criaturas podem ser usadas, desde que os conceitos
-(famílias e fábricas abstratas) fiquem; no 1, que o exercício precisa usar o conteúdo do pacote
-`ex0` e ser construído sobre ele.
+O enunciado recomenda entender os **padrões de projeto** do DataDeck, e não só o código que os
+implementa. As perguntas abaixo revisam cada padrão: o problema, a solução e onde ela aparece no
+projeto. As últimas tratam de dois avisos dos exercícios: no 0, que outras criaturas podem ser
+usadas, desde que os conceitos (famílias e fábricas abstratas) fiquem; no 1, que o exercício
+precisa usar o conteúdo do pacote `ex0` e ser construído sobre ele.
 
-## O padrão fábrica abstrata
+## O que o padrão fábrica abstrata resolve?
 
 **O problema:** o código que usa as criaturas não deveria depender das classes concretas delas,
 e as criaturas de uma família deveriam vir sempre juntas.
@@ -26,7 +26,7 @@ recebe uma `CreatureFactory` e trabalha com `Creature`, as duas abstratas.
 expõem as fábricas, e as classes concretas ficam por trás delas
 ([O padrão fábrica abstrata](../03-ex0/02-o-padrao-fabrica-abstrata.md)).
 
-## As capacidades
+## O que as capacidades resolvem?
 
 **O problema:** algumas criaturas sabem fazer coisas a mais, e essas habilidades podem um dia
 servir para outras coisas que não são criaturas.
@@ -40,7 +40,7 @@ estado, como o `transformed`, que muda o `attack` da criatura.
 **No projeto:** `isinstance(creature, HealCapability)` pergunta se uma criatura sabe curar, sem
 conhecer a classe dela ([As capacidades](../04-ex1/02-as-capacidades.md)).
 
-## O padrão estratégia
+## O que o padrão estratégia resolve?
 
 **O problema:** cada criatura luta de um jeito, e o código do torneio não deveria conhecer cada
 capacidade nem a ordem das ações de cada uma.
@@ -53,14 +53,14 @@ exceção dedicada, e o torneio a trata.
 **No projeto:** a mesma criatura pode lutar com estratégias diferentes, e uma estratégia nova não
 muda o torneio ([O padrão estratégia](../05-ex2/02-o-padrao-estrategia.md)).
 
-## O que os três têm em comum
+## O que os três padrões têm em comum?
 
 Os três padrões separam **o que** se faz (a classe abstrata) de **como** se faz (as classes
 concretas), e o resto do programa só conversa com a parte abstrata. É o polimorfismo
 ([Polimorfismo](../02-conceitos/02-classe-abstrata-e-super.md#polimorfismo)) aplicado em três
 lugares: na criação das criaturas, nas habilidades delas e no jeito de lutar.
 
-## Uma família nova
+## Como acrescentar uma família nova?
 
 O aviso do exercício 0 permite outras criaturas, mantendo famílias e fábricas abstratas. O
 experimento abaixo cria uma família nova, a da pedra, e uma estratégia nova, a cautelosa, sem
@@ -180,7 +180,7 @@ na pasta atual:
 Success: no issues found in 8 source files
 ```
 
-## Como o exercício 1 constrói sobre o 0
+## Como o exercício 1 constrói sobre o 0?
 
 O `ex1` não copia nada do `ex0`: importa a mesma classe `Creature` (as criaturas novas são filhas
 dela) e a mesma `CreatureFactory` (as fábricas novas são filhas dela). Por isso o torneio do
@@ -188,7 +188,7 @@ exercício 2 mistura, na mesma lista, fábricas do `ex0` e do `ex1`: todas são 
 e todas as criaturas são `Creature`
 ([As criaturas que curam](../04-ex1/03-as-criaturas-que-curam.md#os-dois-imports)).
 
-## Mudar o jeito de lutar
+## Como mudar o jeito de lutar?
 
 Para que o `Sproutling` lute sem curar, nenhuma classe muda: basta inscrevê-lo com outra
 estratégia, `(healing, normal)` no lugar de `(healing, defensive)`. Para que a estratégia
@@ -198,6 +198,6 @@ defensiva cure **antes** de atacar, só a lista devolvida pelo `act` dela muda:
         return [creature.heal(), creature.attack()]
 ```
 
-O torneio e as criaturas continuam iguais. A saída do programa muda nas linhas de cura, e por
-isso o `diff` com o enunciado passa a mostrar diferenças: a mudança é só para a demonstração na
-avaliação.
+O torneio e as criaturas continuam iguais. A saída do programa muda nas linhas de cura, e o
+`diff` com o enunciado passa a mostrar diferenças: depois de experimentar, desfaça a mudança,
+para que a saída volte a ser a do enunciado.

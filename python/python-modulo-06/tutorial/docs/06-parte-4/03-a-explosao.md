@@ -50,8 +50,8 @@ Traceback (most recent call last):
 ImportError: cannot import name 'dark_spell_allowed_ingredients' from partially initialized module 'alchemy.grimoire.dark_spellbook' (most likely due to a circular import) (/home/ana/the-codex/alchemy/grimoire/dark_spellbook.py)
 ```
 
-No lugar de `/home/ana/the-codex` aparece o caminho da sua pasta. A saída é a mesma no Python
-3.10 e no 3.14.
+No lugar de `/home/ana/the-codex` aparece o caminho da sua pasta. A saída é a mesma em todas as
+versões, do Python 3.10 ao 3.15.
 
 ## Lendo o traceback
 
@@ -112,8 +112,8 @@ Traceback (most recent call last):
 ImportError: cannot import name 'validate_ingredients' from partially initialized module 'alchemy.grimoire.dark_validator' (most likely due to a circular import) (/home/ana/the-codex/alchemy/grimoire/dark_validator.py)
 ```
 
-Agora o validador começou primeiro, e é ele que está pela metade quando o livro o pede. (No
-Python 3.10, a linha de código vinda do `-c` não aparece.) Qualquer que seja a porta de entrada,
+Agora o validador começou primeiro, e é ele que está pela metade quando o livro o pede. (Até o
+Python 3.12, a linha de código vinda do `-c` não aparece.) Qualquer que seja a porta de entrada,
 o par das trevas explode.
 
 ## O flake8 e o mypy não percebem

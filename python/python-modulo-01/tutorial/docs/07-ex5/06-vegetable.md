@@ -50,9 +50,8 @@ valor, como o enunciado diz, e a soma bate com a saída.
 O `round()` sem casas arredonda um valor terminado em ,5 para o **par** mais próximo: depois de
 uma única chamada, `round(0.5)` imprime `0`, e depois de três, `round(1.5)` imprime `2`. Nas
 chamadas em pares da simulação (um `grow` e um `age` por dia), o valor é sempre inteiro e o
-arredondamento não muda nada. Na avaliação, se pedirem um único `grow()` seguido de `show()`, a
-linha continua `Nutritional value: 0`: o valor guardado subiu para `0.5`, e só a exibição
-arredondou.
+arredondamento não muda nada. Um único `grow()` seguido de `show()` imprime
+`Nutritional value: 0`: o valor guardado subiu para `0.5`, e só a exibição arredondou.
 
 Os atributos `_harvest_season` e `_nutritional_value` são os `harvest_season` e
 `nutritional_value` pedidos, com a marca protected

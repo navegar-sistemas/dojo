@@ -76,9 +76,10 @@ Como se lê:
 - a última linha é o tipo da exceção e a mensagem: "literal inválido para `int()` na base 10:
   `'fire'`".
 
-O Python 3.10 imprime menos: sem as linhas de marcação, e, para código vindo do `-c`, sem a linha
-de código. O tipo e a mensagem são os mesmos. Este projeto tem dois tracebacks esperados, e cada
-um tem uma página que o lê linha a linha.
+Versões mais antigas imprimem menos. Até o Python 3.12, o traceback de código vindo do `-c` não
+tem a linha de código nem a de marcação; o 3.10 também não tem a linha de marcação para código
+vindo de um arquivo. O tipo e a mensagem são os mesmos. Este projeto tem dois tracebacks
+esperados, e cada um tem uma página que o lê linha a linha.
 
 O comando terminou com **código de saída** `1`. Todo programa devolve um número ao terminar: `0`
 quer dizer que deu tudo certo, e outro número, que deu erro. Uma exceção que ninguém captura,

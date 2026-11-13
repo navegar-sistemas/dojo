@@ -10,7 +10,7 @@ Rode tudo a partir da pasta `the-matrix`, sem nenhum ambiente ativado.
 ## Os arquivos
 
 ```bash
-ls -A ex0 ex1 ex2
+LC_ALL=C ls -A ex0 ex1 ex2
 ```
 
 ```text
@@ -39,7 +39,9 @@ requirements.txt
 ```
 
 `ls -A` mostra também os nomes que começam com ponto (o `-a` mostraria ainda `.` e `..`, a
-própria pasta e a de cima). Os arquivos de entrega, com os nomes exatos do enunciado:
+própria pasta e a de cima). `LC_ALL=C` faz o `ls` ordenar os nomes pelo valor de cada caractere,
+com os que começam com ponto primeiro; sem ele, no Linux, a ordem segue o idioma do sistema e pode
+misturar os nomes com ponto aos outros. Os arquivos de entrega, com os nomes exatos do enunciado:
 
 | Pasta | Entregar | Fica de fora |
 |---|---|---|
@@ -47,8 +49,10 @@ própria pasta e a de cima). Os arquivos de entrega, com os nomes exatos do enun
 | `ex1` | `loading.py`, `requirements.txt`, `pyproject.toml` | `matrix_env`, `.mypy_cache`, `poetry.lock`, `matrix_analysis.png` |
 | `ex2` | `oracle.py`, `requirements.txt`, `.env.example`, `.gitignore` | `matrix_env`, `.mypy_cache`, `.env` |
 
-Os ambientes virtuais ficam de fora porque o enunciado manda; se for preciso, você cria um novo
-durante a avaliação. O `poetry.lock` e o `matrix_analysis.png` são gerados pelo `poetry install` e
+Os ambientes virtuais ficam de fora porque o enunciado manda: cada um é recriado com
+`python3 -m venv` e o arquivo de dependências
+([Recriar tudo a partir do repositório](./03-perguntas-de-revisao.md#recriar-tudo-a-partir-do-repositório)).
+O `poetry.lock` e o `matrix_analysis.png` são gerados pelo `poetry install` e
 pelo programa, e não estão na lista de arquivos a entregar. O `.env` guarda o segredo.
 
 ## Estilo e tipos

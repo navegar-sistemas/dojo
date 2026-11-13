@@ -32,10 +32,11 @@ criaturas: a `FlameFactory` devolve `Flameling` e `Pyrodon`; a `AquaFactory`, `A
 `Flameling` e um `Torragon` da mesma fábrica.
 
 Quem usa as fábricas, como a função `test_factory` do `battle.py`, só conhece as duas classes
-abstratas:
+abstratas. O começo dela:
 
 ```python
 def test_factory(factory: CreatureFactory) -> None:
+    print("Testing factory")
     base = factory.create_base()
     evolved = factory.create_evolved()
 ```
@@ -88,7 +89,7 @@ resto do programa fica do lado das classes abstratas.
 
 - **Uma família nova é só código novo.** Duas criaturas e uma fábrica; as funções de teste do
   `battle.py` não mudam, e só o `main` ganha uma linha para criar a fábrica nova
-  ([As perguntas do enunciado](../06-fechamento/03-as-perguntas-do-enunciado.md#uma-família-nova));
+  ([Como acrescentar uma família nova?](../06-fechamento/03-perguntas-de-revisao.md#como-acrescentar-uma-família-nova));
 - **As famílias não se misturam.** Quem pede a base e a evoluída à mesma fábrica recebe duas
   criaturas da mesma família;
 - **As classes concretas podem ficar escondidas.** Quem usa o pacote só precisa das fábricas, e o

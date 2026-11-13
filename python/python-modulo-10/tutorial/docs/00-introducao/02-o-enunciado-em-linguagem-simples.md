@@ -79,16 +79,15 @@ A página [O resultado final](./04-o-resultado-final.md) reúne a saída dos cin
 
 O enunciado vem com um anexo, `generator.tar.gz`, que contém o programa `data_generator.py`: ele
 sorteia dados de teste para cada exercício (magos, artefatos, feitiços, poderes). O enunciado
-sugere usá-lo para testar o código e durante a avaliação
+sugere usá-lo para testar o código
 ([O gerador de dados](../01-ambiente/05-o-gerador-de-dados.md)).
 
 ## Entrega
 
 Só os cinco arquivos `.py`, com esses nomes e nessas pastas, num repositório Git
-([Entregar](../08-fechamento/02-entregar.md)). Na avaliação, quem avalia pode pedir que você
-explique os conceitos de programação funcional, mostre como uma closure funciona ou mostre como
-um decorador transforma uma função
-([As perguntas do enunciado](../08-fechamento/03-as-perguntas-do-enunciado.md)).
+([Entregar](../08-fechamento/02-entregar.md)). Cada exercício do enunciado termina com perguntas
+sobre os conceitos que ele usa; as respostas estão em
+[Perguntas de revisão](../08-fechamento/03-perguntas-de-revisao.md).
 
 ## O que o enunciado cita sem explicar
 
@@ -107,5 +106,5 @@ um decorador transforma uma função
 - **Fibonacci**: a sequência 0, 1, 1, 2, 3, 5, 8..., em que cada número é a soma dos dois
   anteriores.
 - **Ano 2142, magos, Sage Lambda, Grandmaster Decorator...**: só o cenário de ficção do projeto.
-- **Instruções sobre IA**: o enunciado tem um capítulo pedindo que todo código vindo de uma
-  ferramenta de IA seja entendido por completo e revisado com colegas.
+- **Instruções sobre IA**: o enunciado tem um capítulo pedindo que só se use código vindo de uma
+  ferramenta de IA depois de entendê-lo por completo, conferi-lo e testá-lo.

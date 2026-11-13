@@ -103,7 +103,6 @@ da linha (`-n`). Só aparecem `pydantic` e os módulos `datetime` e `enum` da bi
 O enunciado aceita qualquer Python a partir do 3.10. Os três programas e os experimentos dão a
 mesma saída no Python 3.10, no 3.14 e no 3.15, com o mesmo Pydantic 2.14.3, que o `pip` instala
 nas três: as mensagens de erro vêm do Pydantic, e não do Python. Só mudam os números de versão
-que o `python3 --version` e o `flake8 --version` imprimem. Para conferir numa máquina com outra
-versão, crie um segundo venv com o
-Python 3.10 (por exemplo, `python3.10 -m venv .venv310`), instale nele as mesmas bibliotecas e
-rode os `diff` com `.venv310/bin/python`.
+que o `python3 --version` e o `flake8 --version` imprimem. Para conferir com outra versão, crie
+um segundo venv com ela (por exemplo, `python3.10 -m venv .venv310`), instale nele as mesmas
+bibliotecas e rode os `diff` com `.venv310/bin/python`.

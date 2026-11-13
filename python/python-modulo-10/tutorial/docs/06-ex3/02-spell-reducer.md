@@ -101,13 +101,10 @@ def spell_reducer(spells: list[int], operation: str) -> int:
   argumentos. O type hint `Callable[[int, int], int]` diz isso: recebe dois `int` e devolve um
   `int`. Escolher a função por um dicionário evita uma fila de `if`/`elif`;
 - **operação desconhecida:** o enunciado pede que o erro seja tratado de forma adequada. Aqui,
-  "tratar o erro" é recusar a operação com uma mensagem clara (`ValueError`) e deixar o `except`
-  para quem chama, como mostra o teste de
-  [Rodar e conferir](./08-rodar-e-conferir.md#spell_reducer). A
-  função lança `ValueError` com uma mensagem que diz qual operação não existe, e quem chama decide
-  o que fazer com ela ([Rodar e conferir](./08-rodar-e-conferir.md)). A assinatura promete um
-  `int`, e devolver um texto de erro quebraria essa promessa. Lançar `ValueError` é escolha do
-  tutorial;
+  "tratar o erro" é recusar a operação: a função lança `ValueError` com uma mensagem que diz qual
+  operação não existe, e quem chama decide o que fazer com ela num `except`, como mostra o teste
+  de [Rodar e conferir](./08-rodar-e-conferir.md#spell_reducer). A assinatura promete um `int`, e
+  devolver um texto de erro quebraria essa promessa. Lançar `ValueError` é escolha do tutorial;
 - a operação é conferida antes da lista: uma operação inexistente é um erro mesmo com a lista
   vazia (escolha do tutorial);
 - **lista vazia:** devolve 0, como o enunciado pede, antes de chegar ao `reduce`, que lançaria

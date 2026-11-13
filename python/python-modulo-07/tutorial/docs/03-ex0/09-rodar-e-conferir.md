@@ -114,7 +114,7 @@ O mesmo vale para `Creature`, com o método `attack`.
 ## A pasta `__pycache__`
 
 ```bash
-ls -1 ex0
+LC_ALL=C ls -1 ex0
 ```
 
 ```text
@@ -125,5 +125,6 @@ factory.py
 ```
 
 O `python3 battle.py` do `diff` importou o pacote e criou a `__pycache__` dentro de `ex0`
-([O `__pycache__`](../02-conceitos/01-modulos-e-pacotes.md#o-__pycache__)). Ela não é
+([O `__pycache__`](../02-conceitos/01-modulos-e-pacotes.md#o-__pycache__), que também explica o
+`LC_ALL=C`). Ela não é
 entregue ([Entregar](../06-fechamento/02-entregar.md)).

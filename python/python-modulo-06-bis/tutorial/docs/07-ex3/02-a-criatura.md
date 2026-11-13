@@ -31,7 +31,7 @@ class Creature(ABC):
 ## O construtor
 
 O construtor recebe o nome e o tipo e os guarda nos atributos `name` e `creature_type`, os
-"atributos para o nome e o tipo" que o enunciado pede. Diferente do `DataProcessor`, este
+"atributos para o nome e o tipo" que o enunciado pede. Diferentemente do `DataProcessor`, este
 construtor tem parâmetros: cada filha passa os seus valores
 ([A família do fogo](./03-a-familia-de-fogo.md)).
 

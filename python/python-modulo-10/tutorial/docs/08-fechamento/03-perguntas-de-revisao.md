@@ -1,15 +1,13 @@
 ---
 sidebar_position: 3
-title: As perguntas do enunciado
+title: Perguntas de revisão
+sidebar_label: Perguntas de revisão
 ---
 
-# As perguntas do enunciado
+# Perguntas de revisão
 
-Cada exercício termina com perguntas para a avaliação, e o capítulo de entrega avisa que pode ser
-pedido que você explique conceitos de programação funcional, demonstre como as closures funcionam
-ou mostre como os decoradores transformam funções. A introdução do enunciado também pede que se
-entenda **por que** esses padrões são poderosos, e não só **como** escrevê-los. As respostas
-abaixo seguem a ordem dos exercícios.
+Cada exercício do enunciado termina com perguntas sobre os conceitos que ele usa. Elas pedem
+**por que** os padrões funcionais são úteis, e não só **como** escrevê-los.
 
 ## Exercício 0
 
@@ -69,8 +67,8 @@ Quando uma função de dentro usa uma variável da função de fora, o Python gu
 numa **célula**, presa à função de dentro (`__closure__`). A função de fora termina, mas a célula
 continua viva enquanto a função de dentro existir. Cada chamada da função de fora cria células
 novas: por isso `counter_a` e `counter_b` contam separado
-([Escopo e closures](../02-conceitos/04-escopo-e-closures.md#nonlocal)). Para mostrar na avaliação:
-`counter.__code__.co_freevars` lista os nomes lembrados, e
+([Escopo e closures](../02-conceitos/04-escopo-e-closures.md#nonlocal)). Para ver isso num
+contador: `counter.__code__.co_freevars` lista os nomes lembrados, e
 `counter.__closure__[0].cell_contents` mostra o valor atual
 ([Estado independente e privado](../05-ex2/08-rodar-e-conferir.md#estado-independente-e-privado)).
 
@@ -127,7 +125,7 @@ classe, chamada pela classe ou por um objeto, para uma regra que pertence ao ass
 não depende de nenhum objeto, como validar um nome
 ([MageGuild](../07-ex4/05-mage-guild.md#validate_mage_name-o-método-estático)).
 
-## Mostrar como um decorador transforma uma função
+## Como um decorador transforma uma função?
 
 O experimento de [Decoradores](../02-conceitos/06-decoradores.md) mostra os dois lados:
 `subtract = announce(subtract)` faz à mão o que a linha `@announce` faz, e o `__name__` da função

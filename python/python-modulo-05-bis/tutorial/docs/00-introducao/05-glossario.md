@@ -36,7 +36,7 @@ title: Glossário
 | **import absoluto** | import pelo caminho completo a partir de uma pasta do `sys.path`, como `from alchemy.potions import ...` | [Absoluto e relativo](../04-conceitos/04-absoluto-e-relativo.md) |
 | **import relativo** | import a partir do pacote do próprio arquivo, com pontos, como `from .elements import ...` | [Absoluto e relativo](../04-conceitos/04-absoluto-e-relativo.md) |
 | **`importlib.import_module`** | função que importa um módulo a partir do nome num texto | [loading.py](../02-ex0/08-loading.md) |
-| **`ImportError`** | exceção de um import que achou o módulo mas não o nome pedido; `ModuleNotFoundError` é um tipo dela | [O import circular](../04-conceitos/05-o-import-circular.md) |
+| **`ImportError`** | exceção de um import que falhou, como o que acha o módulo mas não o nome pedido; `ModuleNotFoundError`, a do módulo não encontrado, é um tipo particular dela | [O import circular](../04-conceitos/05-o-import-circular.md) |
 | **interface de um pacote** | os nomes que existem direto no pacote, alcançados com `pacote.nome` | [O \_\_init\_\_.py de alchemy](../05-ex2/03-o-init-de-alchemy.md) |
 | **`load_dotenv`** | função do `python-dotenv` que carrega um `.env` em `os.environ`, sem trocar o que já existe | [O arquivo .env e o python-dotenv](../03-ex1/03-o-arquivo-env-e-o-python-dotenv.md) |
 | **módulo** | arquivo `.py` usado por outro com `import`; o nome é o do arquivo sem o `.py` | [Módulo e import](../04-conceitos/01-modulo-e-import.md) |

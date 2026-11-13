@@ -9,7 +9,7 @@ O par das trevas explode porque um `from ... import nome`, rodando enquanto o ar
 pede um nome a um módulo que ainda está pela metade. O livro e o validador continuam precisando
 um do outro; o que dá para mudar é **quando** cada um pede o que precisa, ou **onde** fica o que
 os dois precisam. O enunciado pede que se escolha um jeito para a luz e que se saiba explicar os
-outros na avaliação.
+outros.
 
 ## 1. Importar dentro da função
 
@@ -49,8 +49,8 @@ rodar.
 
 Esse jeito precisa valer **nos dois arquivos**: se o livro continuar com
 `from .light_validator import validate_ingredients`, quem entrar pelo validador acha o validador
-pela metade quando o livro pede o nome, e a explosão volta. Um experimento com um par pequeno, `experimentos/eclipse`, mostra os dois lados
-funcionando:
+pela metade quando o livro pede o nome, e a explosão volta. Um experimento com um par pequeno,
+`experimentos/eclipse`, mostra os dois lados funcionando:
 
 ```bash
 mkdir experimentos/eclipse

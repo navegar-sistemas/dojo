@@ -27,8 +27,8 @@ title: O enunciado em linguagem simples
   classes filhas ficam sem validação, que o enunciado dispensa. Os programas não leem nada do
   teclado: os valores usados são os do próprio programa.
 - **Cada arquivo traz as definições pedidas e todo o código que o exercício exige**, escrito para
-  deixar claro o conceito dele. O
-  enunciado fala também em código "limpo e bem documentado". Nos exercícios, a documentação vem
+  deixar claro o conceito dele. O enunciado fala também em código "limpo e bem documentado".
+  Nos exercícios, a documentação vem
   de nomes claros e dos type hints, sem comentários nem docstrings (textos de explicação entre
   aspas triplas no começo de uma função ou classe) que só repitam o nome; isso é escolha do
   projeto, e a alternativa seria uma docstring de uma linha em cada classe e método.
@@ -69,15 +69,16 @@ pesa no exercício 2 ([O float e o round](../04-ex2/03-o-float-e-o-round.md)).
 | 6 | um método que responde se uma idade passa de um ano sem precisar de planta nenhuma (o **método estático**), um método que cria uma planta "anônima" (o **método de classe**), um tipo `Seed` (flor que dá sementes), estatísticas de quantas vezes cada planta cresceu, envelheceu e foi mostrada (nas árvores, também quantas vezes fez sombra), guardadas numa classe escrita dentro de `Plant` (a **classe aninhada**) e protegidas, e uma única função, fora das classes, que exibe as estatísticas de qualquer planta ([Exercício 6](../08-ex6/01-o-problema.md)) |
 
 Para cada exercício, o enunciado mostra a saída do programa
-([as sete saídas](./04-o-resultado-final.md)). No exercício 0, o enunciado avisa que a saída não
-será conferida letra por letra.
+([as sete saídas](./04-o-resultado-final.md)). No exercício 0, o enunciado pede só que a saída
+imite a do exemplo, sem exigir que ela seja idêntica letra por letra.
 
 ## Entrega
 
-Só os sete arquivos `.py`, com esses nomes e nessas pastas, num repositório Git. Na avaliação,
-quem avalia vai pedir que você transforme o programa do exercício 0 num executável direto, com a
-linha *shebang*, e pode pedir que você explique os conceitos, mostre as relações de herança e
-acrescente uma funcionalidade ao código ([Entregar](../09-fechamento/02-entregar.md)).
+Só os sete arquivos `.py`, com esses nomes e nessas pastas, num repositório Git
+([Entregar](../09-fechamento/02-entregar.md)). Além do código, o enunciado pede que você saiba
+transformar o programa do exercício 0 num executável direto, com a linha *shebang*, explicar os
+conceitos, mostrar as relações de herança e acrescentar uma funcionalidade ao código
+([Perguntas de revisão](../09-fechamento/03-perguntas-de-revisao.md)).
 
 ## O que o enunciado cita sem explicar
 
@@ -92,4 +93,4 @@ acrescente uma funcionalidade ao código ([Entregar](../09-fechamento/02-entrega
   classe. O exercício 4 usa o primeiro e explica por que não o segundo
   ([Encapsulamento](../06-ex4/02-encapsulamento.md)).
 - **Instruções sobre IA**: o enunciado tem um capítulo pedindo que todo código vindo de uma
-  ferramenta de IA seja entendido por completo e revisado com colegas.
+  ferramenta de IA seja entendido por completo, verificado e testado antes de ser usado.

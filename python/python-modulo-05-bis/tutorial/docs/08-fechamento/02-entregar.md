@@ -5,20 +5,21 @@ title: Entregar
 
 # Entregar
 
-O enunciado pede a entrega num **repositório Git**, com a árvore de arquivos esperada na raiz dele,
-e só o que estiver no repositório é avaliado. Dois tipos de arquivo **não** podem ir: nenhum
-ambiente virtual e nenhum arquivo `.env`. Também ficam de fora o `poetry.lock`, que não está na
-lista do enunciado ([Poetry e pyproject.toml](../02-ex0/07-poetry-e-pyproject.md#o-poetrylock)), a
-pasta `experimentos`, as pastas `__pycache__` e a `.mypy_cache`.
+O enunciado pede a entrega num **repositório Git**, com a árvore de arquivos esperada na raiz
+dele: o que vale é o que está no repositório, e não na sua pasta. Dois tipos de arquivo **não**
+podem ir: nenhum ambiente virtual e nenhum arquivo `.env`. Também ficam de fora o `poetry.lock`,
+que não está na lista do enunciado
+([Poetry e pyproject.toml](../02-ex0/07-poetry-e-pyproject.md#o-poetrylock)), a pasta
+`experimentos`, as pastas `__pycache__` e a `.mypy_cache`.
 
 ## Copiar os arquivos para o repositório
 
-O endereço (a URL) do repositório de entrega vem junto com o projeto. O `git clone` e o
-`git push` podem pedir login ou uma **chave SSH**, conforme o servidor do repositório. Uma chave
-SSH é um par de arquivos que identifica o seu computador para o servidor, no lugar de uma senha;
-quem fornece o repositório explica como criar a chave e cadastrá-la no servidor. A partir da
-pasta `the-codex`, suba um nível, baixe o repositório numa pasta `entrega` e copie para ela só os
-arquivos da entrega:
+Os comandos partem de um repositório Git já criado num serviço de hospedagem de repositórios, e
+do endereço (a URL) dele. O `git clone` e o `git push` podem pedir login ou uma **chave SSH**,
+conforme o serviço. Uma chave SSH é um par de arquivos que identifica o seu computador para o
+serviço, no lugar de uma senha; a documentação do serviço explica como criar a chave e
+cadastrá-la. A partir da pasta `the-codex`, suba um nível, baixe o repositório numa pasta
+`entrega` e copie para ela só os arquivos da entrega:
 
 ```bash
 cd ..
@@ -32,9 +33,9 @@ cp the-codex/elements.py the-codex/ft_*.py entrega/
 cd entrega
 ```
 
-- troque `<endereço-do-repositório>` pelo endereço recebido. O `git clone` baixa o repositório
-  para a pasta `entrega`. Se a pasta do projeto tem outro nome, troque `the-codex` pelo nome da
-  sua pasta nos comandos `cp`;
+- troque `<endereço-do-repositório>` pelo endereço do seu repositório. O `git clone` baixa o
+  repositório para a pasta `entrega`. Se a pasta do projeto tem outro nome, troque `the-codex`
+  pelo nome da sua pasta nos comandos `cp`;
 - o `mkdir -p` cria as pastas `ex0` e `ex1` (o `-p` não reclama se elas já existirem);
 - os arquivos de `ex0` e `ex1` são copiados um a um, pelo nome: assim o `poetry.lock` e o `.env`
   ficam para trás. Um `cp the-codex/ex1/*` não serviria, porque o `*` não pega os nomes que começam
@@ -78,13 +79,13 @@ git status --short --untracked-files=all
 ```
 
 Os 25 arquivos da árvore do enunciado, todos novos (`??`), e nada mais: nenhum `.env`, nenhum
-ambiente virtual, nenhum `__pycache__`. Num repositório de entrega que já tinha arquivos de antes,
+ambiente virtual, nenhum `__pycache__`. Num repositório que já tinha arquivos de antes,
 eles também aparecem, com outras marcas.
 
 ## Registrar e enviar
 
-Cada registro do git leva o nome e o e-mail de quem o fez. Diga ao git quem você é, dentro do
-repositório de entrega, antes do primeiro registro:
+Cada registro do git leva o nome e o e-mail de quem o fez. Diga ao git quem você é, dentro da
+pasta `entrega`, antes do primeiro registro:
 
 ```bash
 git config user.name "Seu Nome"
@@ -110,10 +111,10 @@ git push
   ```
 
   seguido de uma linha `create mode` por arquivo. `main` é o **ramo** (*branch*), a linha de
-  histórico onde o registro entra (pode ser `master`, conforme o servidor); `root-commit` aparece
-  só no primeiro registro do repositório; o código de sete caracteres identifica o registro e muda
-  a cada vez;
-- `git push` envia o registro para o repositório de entrega.
+  histórico onde o registro entra (pode ser `master`, conforme o serviço e a versão do git);
+  `root-commit` aparece só no primeiro registro do repositório; o código de sete caracteres
+  identifica o registro e muda a cada vez;
+- `git push` envia o registro para o repositório remoto, o mesmo de onde o `git clone` baixou a pasta.
 
 Sem os dois `git config`, conforme a máquina, o git recusa o registro com
 `Please tell me who you are` ("diga quem você é"), ou registra assim mesmo, com um nome e um
@@ -141,7 +142,7 @@ agora, e `--no-edit` mantém a mensagem. O comando mostra o resumo de novo, já 
 ## Conferir o que foi enviado
 
 O que conta é o que está **no repositório**, não na sua pasta. Baixe uma cópia nova numa pasta à
-parte e sele um laboratório novo nela, como a avaliação pode pedir:
+parte e sele um laboratório novo nela, do zero:
 
 ```bash
 cd ..

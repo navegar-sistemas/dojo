@@ -20,8 +20,7 @@ Um arquivo `ex3/ft_vault_security.py` com uma função **`secure_archive()`** qu
 - recebe três parâmetros: o nome do arquivo, **obrigatório**; a ação a executar, ler ou escrever,
   **opcional**, como `int` ou `str` (a escolha é sua); e o texto a escrever, **opcional**.
 
-Na avaliação, a estrutura do código é conferida contra esses requisitos. O programa só pode usar
-`open()`, `read()`, `write()` e `print()`; não há `import`.
+O programa só pode usar `open()`, `read()`, `write()` e `print()`; não há `import`.
 
 ## A saída esperada
 

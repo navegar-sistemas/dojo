@@ -83,8 +83,9 @@ git version 2.43.0
 ```
 
 Qualquer versão serve, e o número pode ser outro; no macOS, a linha termina com um texto entre
-parênteses, como `(Apple Git-157)`. Se o comando não existir: no Debian e no Ubuntu, `sudo apt install git`;
-no Fedora, `sudo dnf install git`; no Arch, `sudo pacman -S git`; no macOS, o primeiro `git` abre a mesma janela das ferramentas de linha de comando da Apple; aceite e
-espere terminar.
+parênteses, como `(Apple Git-157)`. Se o comando não existir: no Debian e no Ubuntu,
+`sudo apt install git`; no Fedora, `sudo dnf install git`; no Arch, `sudo pacman -S git`; no macOS,
+o primeiro `git` abre a mesma janela das ferramentas de linha de comando da Apple; aceite e espere
+terminar.
 
 No resto do tutorial, `python3` quer dizer o Python 3.10 ou mais novo desta página.

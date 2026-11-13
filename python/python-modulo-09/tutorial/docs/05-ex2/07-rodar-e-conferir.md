@@ -138,7 +138,7 @@ rank 'admiral': Input should be 'cadet', 'officer', 'lieutenant', 'captain' or '
 - um erro **dentro** de um tripulante aparece na missão com o caminho completo: o tripulante de
   posição 1, campo `age`. É a resposta, na prática, à pergunta do enunciado sobre um `CrewMember`
   que falha dentro de uma `SpaceMission`
-  ([As perguntas do enunciado](../07-fechamento/03-as-perguntas-do-enunciado.md)).
+  ([Perguntas de revisão](../07-fechamento/03-perguntas-de-revisao.md)).
 
 ```bash
 .venv/bin/flake8 experimentos/testar_space_crew.py

@@ -202,8 +202,8 @@ def ex1() -> str:
         f'<line x1="{high:g}" y1="{AXIS_Y - 30}" x2="{high:g}" '
         f'y2="{AXIS_Y + 10}" stroke="{COLORS["zone_edge"]}" '
         f'stroke-width="2"/>',
-        text((low + high) / 2, AXIS_Y + 48, "aceita: de 0 a 40, com 0 e 40",
-             size=12, fill="ok"),
+        text((low + high) / 2, AXIS_Y + 48,
+             "aceita: de 0 a 40, limites incluídos", size=12, fill="ok"),
     ]
     body += axis((-50, 0, 25, 40, 100))
     body += marker(Marker(25, '"25"', "aceita", "ok"))

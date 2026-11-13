@@ -81,8 +81,8 @@ cd ..
 vela.py is running
 ```
 
-No Python 3.10, o traceback do `ModuleNotFoundError` não tem a linha `import vela`: para código
-vindo do `-c`, ele não mostra a linha de código.
+Até o Python 3.12, o traceback do `ModuleNotFoundError` não tem a linha `import vela`: para
+código vindo do `-c`, essas versões não mostram a linha de código.
 
 ```mermaid
 flowchart TD

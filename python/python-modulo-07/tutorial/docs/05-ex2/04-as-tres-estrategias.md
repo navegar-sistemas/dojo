@@ -90,9 +90,9 @@ class DefensiveStrategy(BattleStrategy):
         return [creature.attack(), creature.heal()]
 ```
 
-O mesmo desenho da agressiva, com a capacidade de curar: ataca e depois cura. A mensagem de erro
-é escolha do tutorial, por analogia com a da agressiva (o enunciado só mostra esta), com
-`defensive`.
+O mesmo desenho da agressiva, com a capacidade de curar: ataca e depois cura. O enunciado só
+mostra a mensagem de erro da agressiva; a da defensiva é escolha do tutorial, no mesmo formato,
+com `defensive` no lugar de `aggressive`.
 
 ## O `__init__.py`
 

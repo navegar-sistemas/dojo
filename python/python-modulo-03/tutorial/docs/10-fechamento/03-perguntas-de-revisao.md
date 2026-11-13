@@ -1,17 +1,17 @@
 ---
 sidebar_position: 3
-title: Perguntas da avaliação
+title: Perguntas de revisão
+sidebar_label: Perguntas de revisão
 ---
 
-# Perguntas da avaliação
+# Perguntas de revisão
 
-O enunciado avisa que a avaliação pode pedir explicações sobre a escolha de cada coleção,
-demonstrações de operações com elas e extensões dos programas, e que é preciso entender os
-princípios de cada estrutura de dados. No exercício 0, ele manda preparar para a avaliação as
-formas alternativas de não repetir o nome do programa; no exercício 3, pergunta como o Python
-imprime um set vazio, e por quê.
+Estas perguntas revisam os princípios de cada estrutura de dados do projeto: por que cada coleção
+foi escolhida, como as operações com elas funcionam e como estender os programas. Duas vêm do
+próprio enunciado: no exercício 0, as formas alternativas de não repetir o nome do programa; no
+exercício 3, como o Python imprime um set vazio, e por quê.
 
-## Que outras formas há de não imprimir o nome do programa junto com os argumentos? (exercício 0)
+## Como não repetir o nome do programa? (exercício 0)
 
 O nome do programa está em `sys.argv[0]`, e os argumentos, nas posições seguintes. Cada forma
 abaixo percorre só os argumentos:
@@ -29,7 +29,7 @@ As duas primeiras estão em [Percorrer os argumentos](../03-ex0/04-percorrer-os-
 Como `set()`. As chaves vazias `{}` já são o dicionário vazio, então o Python escreve o set vazio
 como a chamada que o cria ([Sets](../06-ex3/02-sets.md#como-um-set-vazio-é-impresso)).
 
-## Comprehensions de set (exercício 6)
+## Como é uma comprehension de set? (exercício 6)
 
 O enunciado lembra que comprehensions também funcionam com sets: entre chaves e sem os
 dois-pontos, como `{n % 3 for n in numbers}`. O resultado é um set, sem repetições
@@ -50,14 +50,15 @@ dois-pontos, como `{n % 3 for n in numbers}`. O resultado é um set, sem repeti�
 ## Por que trocar listas por sets acelerou o Twitter?
 
 Perguntar se um valor está numa lista compara com um elemento de cada vez, e o tempo cresce na
-mesma proporção do tamanho da lista. Num set, o hash do valor aponta direto para a gaveta onde ele estaria, e o
-tempo não depende do tamanho ([A estrutura e o algoritmo](../02-colecoes/03-a-estrutura-e-o-algoritmo.md)).
+mesma proporção do tamanho da lista. Num set, o hash do valor aponta direto para a gaveta onde
+ele estaria, e o tempo não depende do tamanho
+([A estrutura e o algoritmo](../02-colecoes/03-a-estrutura-e-o-algoritmo.md)).
 
 ## Acrescentar uma funcionalidade
 
-Pedidos de extensão costumam mexer numa parte só do programa. Alguns exemplos e onde mexer:
+Uma funcionalidade nova costuma mexer numa parte só do programa. Alguns exemplos e onde mexer:
 
-| Pedido | Onde |
+| Funcionalidade | Onde |
 |---|---|
 | mostrar quantas pontuações ficaram acima da média (exercício 1) | um laço com contador em `show_stats` |
 | um quinto jogador (exercício 3) | um nome a mais em `PLAYERS`; os laços percorrem a lista toda |

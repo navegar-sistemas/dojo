@@ -40,7 +40,8 @@ title: O enunciado em linguagem simples
   não a lógica: cada função devolve uma frase fixa ou montada a partir de outras. Há duas
   exceções, pedidas pelo próprio enunciado: `light_spell_allowed_ingredients()` e
   `dark_spell_allowed_ingredients()`, do exercício 4, devolvem a **lista** de ingredientes
-  (`list[str]`), porque o texto de cada uma diz "devolve a lista dos ingredientes".
+  (`list[str]`): o enunciado diz que a da luz "devolve a lista de ingredientes permitidos", e a
+  das trevas é a contraparte dela.
 
 ## Os cinco exercícios
 
@@ -78,9 +79,9 @@ flowchart LR
 ## Entrega
 
 A árvore acima, na raiz de um repositório Git. Nenhum ambiente virtual e nenhum arquivo `.env`
-vão junto. Na avaliação, pode ser pedido que você crie um ambiente virtual novo do zero, explique
-qualquer mecanismo de import, mude o que o pacote expõe, ou quebre e conserte uma dependência
-circular ([As perguntas do enunciado](../08-fechamento/03-as-perguntas-do-enunciado.md)).
+vão junto. Dominar o projeto é saber criar um ambiente virtual novo do zero, explicar qualquer
+mecanismo de import, mudar o que o pacote expõe e quebrar e consertar uma dependência circular; as
+[Perguntas de revisão](../08-fechamento/03-perguntas-de-revisao.md) praticam cada um.
 
 ## O que o enunciado cita sem explicar
 
@@ -108,4 +109,4 @@ circular ([As perguntas do enunciado](../08-fechamento/03-as-perguntas-do-enunci
 - **Alambique, destilação, transmutação, grimório, Oráculo, Zion, Matrix**: só o cenário de
   ficção do projeto.
 - **Instruções sobre IA**: o enunciado tem um capítulo pedindo que todo código vindo de uma
-  ferramenta de IA seja entendido por completo e revisado com colegas.
+  ferramenta de IA seja entendido por completo, conferido e testado antes de ser usado.

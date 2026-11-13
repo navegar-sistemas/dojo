@@ -32,8 +32,8 @@ Um programa que:
   do sistema) e num ambiente virtual.
 
 O programa precisa funcionar dentro e fora de um ambiente virtual, com uma saída claramente
-diferente em cada caso. O ambiente virtual em si não é entregue: na avaliação, você pode precisar
-criar um novo.
+diferente em cada caso. O ambiente virtual em si não vai para o repositório: quem baixa o projeto
+cria um novo, do zero.
 
 ### Parte 2: `loading.py`, `requirements.txt` e `pyproject.toml`
 

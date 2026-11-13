@@ -21,7 +21,7 @@ Traceback (most recent call last):
 AttributeError: module 'alchemy' has no attribute 'create_air'
 ```
 
-(No Python 3.10, o traceback não tem a linha de código nem a de marcação.)
+(Até o Python 3.12, o traceback não tem a linha de código nem a de marcação.)
 
 Os nomes que um módulo ou pacote oferece a quem o importa formam a sua **interface**. A interface
 de um pacote é feita no `__init__.py`: tudo o que ele importa ou define vira atributo do pacote.

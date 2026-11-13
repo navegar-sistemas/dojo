@@ -5,16 +5,17 @@ title: Entregar
 
 # Entregar
 
-O enunciado pede a entrega num **repositório Git**, e só o que estiver no repositório é avaliado.
+O enunciado pede a entrega num **repositório Git**, e o que conta é só o que está no repositório.
 Vão os oito arquivos da tabela de [Conferir tudo](./01-conferir-tudo.md#os-arquivos), e nada
 mais.
 
 ## Copiar os arquivos para o repositório
 
-O endereço (a URL) do repositório de entrega vem junto com o projeto. O `git clone` e o
-`git push` podem pedir login ou uma **chave SSH**, conforme o servidor do repositório. Uma chave
-SSH é um par de arquivos que identifica o seu computador para o servidor, no lugar de uma senha;
-quem fornece o repositório explica como criar a chave e cadastrá-la no servidor. A partir da
+O repositório fica num serviço de hospedagem de Git (como o GitHub ou o GitLab), e o endereço (a
+URL) dele aparece na página do repositório. O `git clone` e o `git push` podem pedir login ou uma
+**chave SSH**, conforme o serviço. Uma chave SSH é um par de arquivos que identifica o seu
+computador para o serviço, no lugar de uma senha; a documentação do serviço explica como criar a
+chave e cadastrá-la. A partir da
 pasta `the-matrix`, suba um nível, baixe o repositório numa pasta `entrega` e copie só os
 arquivos pedidos:
 
@@ -28,7 +29,7 @@ cp the-matrix/ex2/oracle.py the-matrix/ex2/requirements.txt the-matrix/ex2/.env.
 cd entrega
 ```
 
-Troque `<endereço-do-repositório>` pelo endereço recebido e, se a pasta do projeto tem outro nome,
+Troque `<endereço-do-repositório>` pelo endereço do seu repositório e, se a pasta do projeto tem outro nome,
 troque `the-matrix` pelo nome dela nos comandos `cp`. O `git clone` baixa o repositório; o
 `mkdir -p` cria as pastas dos exercícios (o `-p` não reclama se elas já existirem), e cada `cp`
 copia os arquivos listados para a pasta do fim da linha.
@@ -36,7 +37,7 @@ copia os arquivos listados para a pasta do fim da linha.
 ## O autor dos registros
 
 Todo registro do Git leva o nome e o e-mail de quem o fez. Antes do primeiro registro, defina os
-dois **dentro do repositório de entrega**, com os seus dados no lugar dos do exemplo:
+dois **dentro da pasta `entrega`**, com os seus dados no lugar dos do exemplo:
 
 ```bash
 git config user.name "Seu Nome"
@@ -73,7 +74,7 @@ Changes to be committed:
 
 `git add` marca os arquivos para o próximo registro; `git status` mostra o que está marcado. A
 lista `Changes to be committed` ("mudanças a registrar") tem exatamente os oito arquivos. O resto
-pode variar: esta é a saída de um repositório de entrega vazio (`No commits yet`, "nenhum
+pode variar: esta é a saída de um repositório vazio (`No commits yet`, "nenhum
 registro ainda"); num repositório que já tem registros, essa linha não aparece. A primeira linha
 mostra o **ramo** (*branch*), a linha de histórico em que os registros entram; o nome padrão pode
 ser `main` ou `master`.
@@ -121,7 +122,7 @@ primeiro registro do repositório. Depois vem a lista dos oito arquivos criados.
 git push
 ```
 
-`git push` envia o registro para o repositório de entrega.
+`git push` envia o registro para o repositório no serviço de hospedagem.
 
 ### Se o Git inventou um autor
 
@@ -190,5 +191,5 @@ requirements.txt
 
 Os oito arquivos estão lá, e nenhum ambiente nem `.env`. Para rodar os programas a partir de uma
 cópia assim, os ambientes são recriados
-([Recriar tudo a partir da entrega](./03-as-perguntas-do-enunciado.md#recriar-tudo-a-partir-da-entrega)).
+([Recriar tudo a partir do repositório](./03-perguntas-de-revisao.md#recriar-tudo-a-partir-do-repositório)).
 Depois, a pasta `conferencia` pode ser apagada (`cd .. && rm -rf conferencia`).

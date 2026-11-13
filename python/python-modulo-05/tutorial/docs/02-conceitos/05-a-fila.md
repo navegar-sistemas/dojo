@@ -47,7 +47,7 @@ except IndexError as error:
 
 ## O tipo de uma lista que começa vazia
 
-Por `[]`, o mypy não sabe o tipo dos itens. Ele espera o primeiro uso da variável:
+Só pelo `[]`, o mypy não sabe o tipo dos itens. Ele espera o primeiro uso da variável:
 
 - se o primeiro uso é um `append`, no mesmo trecho de código (a mesma função, ou o corpo do
   arquivo), o tipo vem do item acrescentado. Aqui, sem a anotação, `queue` também seria

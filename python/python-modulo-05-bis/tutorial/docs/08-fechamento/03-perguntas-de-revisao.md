@@ -1,15 +1,15 @@
 ---
 sidebar_position: 3
-title: As perguntas do enunciado
+title: Perguntas de revisão
 ---
 
-# As perguntas do enunciado
+# Perguntas de revisão
 
-O enunciado deixa uma pergunta no fim de cada exercício, e avisa que, na avaliação, pode ser pedido
-que você sele um laboratório novo do zero, explique qualquer mecanismo de import, mude o que o
-pacote expõe, ou quebre e conserte uma dependência circular. Também pede, no exercício 1, que você
-saiba explicar por que o `.env` está no `.gitignore`, e, no exercício 4, as alternativas à solução
-escolhida.
+O enunciado deixa uma pergunta no fim de cada exercício. Junto com elas, duas outras que o
+enunciado levanta: por que o `.env` está no `.gitignore` (exercício 1) e quais são as
+alternativas à solução escolhida no exercício 4. No fim, quatro práticas: selar um laboratório
+novo do zero, mudar o que o pacote expõe, quebrar e consertar uma dependência circular, e
+explicar cada mecanismo de import.
 
 ## Exercício 0: o que um ambiente virtual isola, e o que não isola?
 
@@ -51,8 +51,8 @@ biblioteca vira trabalho manual. Para um script pequeno, o `requirements.txt` ba
 projeto que várias pessoas instalam, o arquivo de travamento evita o "na minha máquina funciona".
 
 A vantagem depende de o `poetry.lock` ir junto com o projeto. Nesta entrega ele fica de fora,
-porque o enunciado não o lista: na avaliação, o `poetry install` num clone novo resolve as versões
-do zero, como o `pip`, e pode chegar a versões diferentes das que você instalou
+porque o enunciado não o lista: o `poetry install` num clone novo do repositório resolve as
+versões do zero, como o `pip`, e pode chegar a versões diferentes das que você instalou
 ([O poetry.lock](../02-ex0/07-poetry-e-pyproject.md#o-poetrylock)). Para reproduzir o laboratório
 exatamente, o `poetry.lock` teria de ser entregue.
 
@@ -139,7 +139,7 @@ de `validate_ingredients`, quando ela é chamada, e a essa altura os dois já te
 | um terceiro módulo | mover a lista de ingredientes para um módulo que os dois importam, e que não importa nenhum deles: o círculo desaparece | o melhor desenho em geral, mas acrescenta um arquivo à árvore do enunciado, e o enunciado quer a lista numa função do livro |
 | passar o valor como parâmetro | o livro passa a lista ao validador: `validate_ingredients(ingredients, allowed)` | o validador deixa de precisar do livro, mas muda a assinatura que o enunciado fixa |
 
-## Na avaliação: selar um laboratório novo do zero
+## Prática: selar um laboratório novo do zero
 
 ```bash
 rm -rf lab_env
@@ -159,7 +159,7 @@ Successfully installed numpy-2.5.4 pandas-3.1.1 python-dateutil-4.0.0 python-dot
 Depois, os programas do roteiro: `python3 ex0/construct.py` (a saída "sealed"),
 `python3 ex0/loading.py` e `python3 ex1/oracle.py`.
 
-## Na avaliação: mudar o que o pacote expõe
+## Prática: mudar o que o pacote expõe
 
 Para expor também `create_earth`, o `alchemy/__init__.py` ganha o nome no import e na `__all__`:
 
@@ -182,7 +182,7 @@ Success: no issues found in 1 source file
 O programa não falha mais, e o erro proposital do mypy desaparece: a falha do exercício 2 vinha só
 dessa escolha do `__init__.py`. Volte o arquivo ao original, com só o `create_air`, para a entrega.
 
-## Na avaliação: quebrar e consertar uma dependência circular
+## Prática: quebrar e consertar uma dependência circular
 
 **Quebrar a luz.** Mova o import do `light_validator.py` para o topo, como no par das trevas:
 
@@ -237,7 +237,7 @@ O laboratório não explode, e a última linha do programa, que nunca tinha roda
 feitiço. A mudança foi uma decisão, quando o validador busca o livro, e não uma correção de
 sintaxe. Volte o import para o topo: o par das trevas é entregue quebrado, de propósito.
 
-## Na avaliação: explicar qualquer mecanismo de import
+## Prática: explicar cada mecanismo de import
 
 A parte [Módulos e pacotes](../04-conceitos/01-modulo-e-import.md) cobre cada um, com um
 experimento:

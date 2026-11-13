@@ -67,9 +67,9 @@ lista `__all__` do pacote, ou seja, o que `from ex0 import ...` e `from ex0 impo
 
 ## Entrega
 
-Os três programas de teste e as três pastas de pacote, no repositório Git. Na avaliação, quem
-avalia pode pedir que você explique os padrões de projeto usados
-([As perguntas do enunciado](../06-fechamento/03-as-perguntas-do-enunciado.md)).
+Os três programas de teste e as três pastas de pacote, no repositório Git. O enunciado
+recomenda entender os padrões de projeto, e não só o código que os implementa
+([Perguntas de revisão](../06-fechamento/03-perguntas-de-revisao.md)).
 
 ## O que o enunciado cita sem explicar
 
@@ -83,7 +83,7 @@ avalia pode pedir que você explique os padrões de projeto usados
   `Creature` ([As capacidades](../04-ex1/02-as-capacidades.md)).
 - **Strategy** ("estratégia"): o jeito de agir numa luta, guardado num objeto que se pode trocar
   ([O padrão estratégia](../05-ex2/02-o-padrao-estrategia.md)).
-- **Arquiteto de Baralhos (*Deck Architect*), DataDeck, *Gotta catch 'em all*:** só o cenário de ficção do projeto, um jogo
-  de colecionar monstros.
-- **Instruções sobre IA**: o enunciado tem um capítulo pedindo que todo código vindo de uma
-  ferramenta de IA seja entendido por completo e revisado com colegas.
+- **Arquiteto de Baralhos (*Deck Architect*), DataDeck, *Gotta catch 'em all*:** só o cenário
+  de ficção do projeto, um jogo de colecionar monstros.
+- **Instruções sobre IA**: o enunciado tem um capítulo pedindo que todo conteúdo gerado por uma
+  ferramenta de IA seja conferido, testado e entendido por completo antes de ser usado.

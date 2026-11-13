@@ -68,6 +68,9 @@ LOCAL_MARKERS = ["sqlite", "localhost", "127.0.0.1"]
 
 Nenhuma dessas constantes é configuração: são fatos do programa, iguais em toda máquina.
 
+As constantes entram logo depois do bloco do `import`. Cada função desta página e das seguintes
+entra no fim do arquivo, na ordem em que aparece.
+
 ## Carregar o .env
 
 ```python
@@ -89,8 +92,7 @@ O `load_dotenv` abre e lê o `.env`, e a leitura de um arquivo pode falhar mesmo
 Sem o `try`, qualquer um deles derrubaria o programa com um traceback. Com ele, o programa diz qual
 arquivo não pôde ler e por quê, e termina com o código `1`: com um `.env` ilegível, não há como
 saber se a configuração está completa. Um `.env` que não existe não é erro: o `load_dotenv` não
-carrega nada, e a falta das variáveis é acusada logo depois. A função entra depois das constantes;
-a página [Rodar e conferir](./10-rodar-e-conferir.md#arquivos-ilegíveis) provoca os dois erros.
+carrega nada, e a falta das variáveis é acusada logo depois. A página [Rodar e conferir](./10-rodar-e-conferir.md#arquivos-ilegíveis) provoca os dois erros.
 
 ## Encontrar os problemas
 

@@ -1,12 +1,12 @@
 ---
 sidebar_position: 3
-title: As perguntas do enunciado
+title: Perguntas de revisão
 ---
 
-# As perguntas do enunciado
+# Perguntas de revisão
 
-O enunciado deixa perguntas ao longo dos exercícios e avisa que, na avaliação, pode ser pedido
-que você explique os conceitos por trás do código.
+Os conceitos por trás do código, em forma de pergunta e resposta. Várias das perguntas vêm do
+próprio enunciado, que as deixa ao longo dos exercícios.
 
 ## Por que usar `if __name__ == "__main__":`?
 

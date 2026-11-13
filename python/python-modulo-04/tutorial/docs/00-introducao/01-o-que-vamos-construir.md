@@ -69,7 +69,7 @@ ele pede.
 | Ambiente | prepara o Python, a pasta do projeto e as duas ferramentas que conferem o código (flake8 e mypy) |
 | O que é um arquivo | explica, com experimentos pequenos, caminhos, `open()`, `read()`, `close()`, as falhas possíveis e os argumentos do terminal |
 | Exercícios 0 a 3 | constroem os quatro programas, um por parte |
-| Fechamento | confere tudo, mostra como entregar e responde às perguntas que o enunciado deixa para a avaliação |
+| Fechamento | confere tudo, mostra como entregar e reúne perguntas de revisão sobre arquivos, erros, fluxos e `with` |
 
 Cada exercício termina com o arquivo completo. Os termos novos estão reunidos no
 [glossário](./05-glossario.md).

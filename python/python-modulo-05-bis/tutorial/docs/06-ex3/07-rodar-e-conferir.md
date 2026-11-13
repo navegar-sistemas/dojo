@@ -40,7 +40,7 @@ Success: no issues found in 5 source files
 
 O flake8 não imprime nada. O mypy conta cinco arquivos: os quatro `.py` com código e o
 `__init__.py` vazio da pasta `alchemy/transmutation`. Para conferir os imports, ele também lê os
-módulos importados (`elements.py`, `alchemy/elements.py`), sem contá-los.
+módulos importados (`elements.py`, `alchemy/__init__.py`, `alchemy/elements.py`), sem contá-los.
 
 ## De outra pasta
 

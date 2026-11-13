@@ -24,13 +24,14 @@ title: Glossário
 | **buffer** | área de memória onde a escrita espera antes de ir para o destino | [close e o recurso](../02-arquivos/04-close-e-o-recurso.md) |
 | **caminho absoluto** | caminho que começa com `/` e parte da raiz | [Arquivos e caminhos](../02-arquivos/01-arquivos-e-caminhos.md) |
 | **caminho relativo** | caminho que não começa com `/` e parte da pasta atual | [Arquivos e caminhos](../02-arquivos/01-arquivos-e-caminhos.md) |
-| **`cat`** | comando do terminal que imprime o conteúdo de um arquivo; com `-v`, mostra os caracteres invisíveis | [O enunciado em linguagem simples](./02-o-enunciado-em-linguagem-simples.md) |
-| **chave SSH** | par de arquivos que identifica o seu computador para o servidor do `git`, no lugar da senha | [Entregar](../07-fechamento/02-entregar.md) |
+| **`cat`** | comando do terminal que imprime o conteúdo de um arquivo; com `-v`, mostra os caracteres invisíveis | [O enunciado em linguagem simples](./02-o-enunciado-em-linguagem-simples.md), [Rodar e conferir do exercício 1](../04-ex1/08-rodar-e-conferir.md) |
+| **chave SSH** | par de arquivos que identifica o seu computador para o serviço que hospeda o repositório `git`, no lugar da senha | [Entregar](../07-fechamento/02-entregar.md) |
 | **`chmod`** | comando que muda as permissões de um arquivo | [Quando o open falha](../02-arquivos/05-quando-o-open-falha.md) |
 | **classe** | o tipo de um objeto, como `TextIOWrapper` para o objeto arquivo | [open e o objeto arquivo](../02-arquivos/02-open-e-o-objeto-arquivo.md) |
 | **`close()`** | método que fecha o arquivo e despeja o buffer | [close e o recurso](../02-arquivos/04-close-e-o-recurso.md) |
 | **codificação (*encoding*)** | regra que traduz bytes em caracteres; quase sempre UTF-8 | [open e o objeto arquivo](../02-arquivos/02-open-e-o-objeto-arquivo.md) |
 | **código de saída** | número que um programa devolve ao terminar: `0` é sucesso; `echo $?` mostra o do último programa | [Rodar e conferir do exercício 0](../03-ex0/06-rodar-e-conferir.md) |
+| **configuração de idioma** | ajuste do sistema que diz idioma e codificação, como `pt_BR.UTF-8`; até o Python 3.14, decide a codificação padrão do `open()` | [open e o objeto arquivo](../02-arquivos/02-open-e-o-objeto-arquivo.md) |
 | **construtor** | o tipo chamado como função para criar um valor dele, como `str(25)` | [O enunciado em linguagem simples](./02-o-enunciado-em-linguagem-simples.md) |
 | **`cp`** | comando que copia arquivos | [Entregar](../07-fechamento/02-entregar.md) |
 | **descritor** | o número de um fluxo: 0 entrada, 1 saída, 2 erro | [Os três fluxos](../05-ex2/02-os-tres-fluxos.md) |
@@ -97,7 +98,8 @@ title: Glossário
 | **tupla** | sequência entre parênteses, como `(True, "ok")` | [A assinatura](../06-ex3/03-a-assinatura.md) |
 | **type hint** | anotação do tipo de um parâmetro, variável ou retorno, como `file_name: str` | [Type hints, flake8 e mypy](../01-ambiente/04-type-hints-flake8-e-mypy.md) |
 | **`typing.IO[str]`** | o type hint de um arquivo aberto que lê e escreve `str` | [open e o objeto arquivo](../02-arquivos/02-open-e-o-objeto-arquivo.md) |
-| **`UnicodeDecodeError`** | exceção lançada quando bytes não formam texto: na leitura de um arquivo com `read()` ou na entrada, com `input()` e `readline()`; herda de `ValueError` | [Quando o open falha](../02-arquivos/05-quando-o-open-falha.md), [Pedir o nome](../04-ex1/04-pedir-o-nome.md) |
+| **`UnicodeDecodeError`** | exceção lançada quando bytes não formam texto: na leitura de um arquivo com `read()` e, até o Python 3.14, na entrada, com `input()` e `readline()`; herda de `ValueError` | [Quando o open falha](../02-arquivos/05-quando-o-open-falha.md), [Pedir o nome](../04-ex1/04-pedir-o-nome.md) |
+| **`UnicodeEncodeError`** | exceção lançada quando um texto não pode virar bytes; até o Python 3.14, na configuração de idioma mais comum, o `print` de um argumento com byte inválido a lança | [O uso](../03-ex0/02-o-uso.md) |
 | **valor padrão** | valor que um parâmetro recebe quando quem chama não passa nada | [A assinatura](../06-ex3/03-a-assinatura.md) |
 | **`ValueError`** | exceção de um valor inválido, como `int("abc")`; o `open()` a lança para um nome com o caractere nulo | [Pré-requisitos](./03-pre-requisitos.md), [Gravar o arquivo](../04-ex1/05-gravar-o-arquivo.md) |
 | **`with`** | instrução que fecha o arquivo sozinha quando o bloco termina | [O with](../06-ex3/02-o-with.md) |

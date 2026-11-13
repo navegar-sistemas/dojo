@@ -144,7 +144,7 @@ Por isso `cabinet.shelf.take_mercury()` funciona, mesmo sem o `__init__.py` expo
 O `__init__.py` não esconde nem protege nada: ele decide **quais nomes existem no pacote**, o atalho
 `cabinet.take_salt`. Tudo o que está nos módulos continua alcançável pelo caminho completo. O
 exercício 2 pergunta exatamente isso
-([As perguntas do enunciado](../08-fechamento/03-as-perguntas-do-enunciado.md)).
+([Perguntas de revisão](../08-fechamento/03-perguntas-de-revisao.md)).
 
 ```mermaid
 flowchart LR

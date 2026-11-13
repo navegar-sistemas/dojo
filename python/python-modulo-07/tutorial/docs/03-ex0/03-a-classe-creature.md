@@ -50,7 +50,7 @@ como o torneio, lê o nome da criatura.
 
 `attack` e `describe` **devolvem** o texto, e quem chama decide o que fazer com ele: o
 `battle.py` imprime, e a estratégia do exercício 2 junta os textos numa lista, que o torneio
-imprime. O
-enunciado pede assim: o `attack` "devolve uma mensagem de texto".
+imprime. O enunciado pede assim: o `attack` "vai devolver uma mensagem de texto apropriada", e o
+`describe` "vai devolver uma mensagem padrão".
 
 As quatro criaturas entram no fim deste mesmo arquivo ([As quatro criaturas](./04-as-quatro-criaturas.md)).
