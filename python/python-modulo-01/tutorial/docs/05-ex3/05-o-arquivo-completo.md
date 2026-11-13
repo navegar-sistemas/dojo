@@ -42,6 +42,9 @@ if __name__ == "__main__":
         plant.show()
 ```
 
+Como no [exercício 0](../02-ex0/04-o-arquivo-completo.md), o arquivo termina com uma única quebra
+de linha depois da última linha, que o botão de copiar não leva.
+
 `grow()` e `age()` não são chamados neste programa, mas continuam na classe: o enunciado pede
 plantas prontas para crescer logo depois de criadas, e a classe é a mesma que evolui de exercício
 em exercício. O arquivo chama `print()` e `round()`.

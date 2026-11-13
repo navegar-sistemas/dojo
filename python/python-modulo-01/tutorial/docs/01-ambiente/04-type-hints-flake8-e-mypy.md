@@ -54,6 +54,14 @@ do Python (chamado **PEP 8**) pede **duas linhas em branco entre** as funções 
 fora de qualquer classe, e entre `double` e `triple` não havia nenhuma. Sem aviso nenhum, o flake8
 não imprime nada.
 
+Todo arquivo `.py` termina com uma quebra de linha logo depois da última linha. O botão de copiar,
+no canto de cada bloco de código, não leva essa quebra final, e alguns editores não a acrescentam
+ao salvar. Sem ela, o flake8 acusa mais um aviso, na última linha:
+`experimentos/estilo.py:4:22: W292 no newline at end of file` ("sem quebra de linha no fim do
+arquivo"). A correção é pôr o cursor no fim da última linha, apertar Enter uma vez e salvar; o
+[arquivo completo do exercício 0](../02-ex0/04-o-arquivo-completo.md) mostra os outros avisos
+sobre o fim do arquivo.
+
 O flake8 recebe as pastas a conferir. Nunca rode `flake8 .` (o ponto é "a pasta atual"): ele
 entraria também na `.venv` e acusaria milhares de avisos no código das bibliotecas instaladas.
 

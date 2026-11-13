@@ -81,6 +81,9 @@ if __name__ == "__main__":
     rose.show()
 ```
 
+Como no [exercício 0](../02-ex0/04-o-arquivo-completo.md), o arquivo termina com uma única quebra
+de linha depois da última linha, que o botão de copiar não leva.
+
 - os valores negativos de teste, `-5.0` e `-1`, são escolhas do projeto; qualquer negativo serve;
 - `Plant created: ` e `Current state: ` usam o `end=""` do
   [exercício 3](../05-ex3/04-o-prefixo-created.md), com o `show()` completando a linha;

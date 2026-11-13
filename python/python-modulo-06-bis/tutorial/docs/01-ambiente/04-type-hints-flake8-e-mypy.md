@@ -31,7 +31,7 @@ a variável também é anotada, como em `items: list[str] = []`.
 
 Crie `experimentos/estilo.py`:
 
-```python
+```python title="experimentos/estilo.py"
 def double(number: int) -> int:
     return number * 2
 def triple(number):
@@ -76,7 +76,7 @@ Found 1 error in 1 file (checked 1 source file)
 
 Corrija `experimentos/estilo.py`, com duas linhas em branco e os type hints em `triple`:
 
-```python
+```python title="experimentos/estilo.py"
 def double(number: int) -> int:
     return number * 2
 

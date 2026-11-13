@@ -21,7 +21,7 @@ teste rápido ([Rodar e conferir](../06-ex4/08-rodar-e-conferir.md)) sem rodar a
 
 `#!/usr/bin/env python3`, como primeira linha, diz ao sistema que programa deve ler o arquivo.
 Com ela e com a permissão de execução (`chmod +x`), o arquivo roda como um programa comum,
-`./ft_garden_intro.py`, sem digitar `python3`. O `env` procura o `python3` nas pastas de
+`./ex0/ft_garden_intro.py`, sem digitar `python3`. O `env` procura o `python3` nas pastas de
 programas do sistema (o `PATH`), e por isso a linha funciona em máquinas com o Python instalado
 em lugares diferentes ([O shebang](../02-ex0/06-o-shebang.md)).
 
@@ -68,7 +68,7 @@ regra fica escrita num lugar só ([Setters que validam](../06-ex4/04-setters-que
 
 Com herança. `Plant` tem o que é comum (nome, altura, idade, validação, crescer, envelhecer,
 mostrar), e `Flower`, `Tree` e `Vegetable` herdam tudo isso e só escrevem o que é delas. Com
-`super()`, cada filha completa os métodos da pai em vez de copiá-los
+`super()`, cada filha completa os métodos da classe pai em vez de copiá-los
 ([Herança](../07-ex5/02-heranca.md) e [super()](../07-ex5/03-super.md)).
 
 ## Qual a diferença entre um método estático e um método de classe?
@@ -91,6 +91,6 @@ os contadores ficam protegidos dentro dela. A árvore estende as estatísticas p
 ## Como uma única função exibe as estatísticas de qualquer planta?
 
 `display_stats` recebe uma `Plant`, e toda filha é uma `Plant`. Ela só pede o objeto de
-estatísticas e manda ele se exibir; cada tipo de estatística sabe se exibir do seu jeito. O
+estatísticas e manda que ele se exiba; cada tipo de estatística sabe se exibir do seu jeito. O
 mesmo código com comportamentos diferentes conforme o objeto é o **polimorfismo**
 ([A função de estatísticas](../08-ex6/07-a-funcao-de-estatisticas.md)).

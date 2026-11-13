@@ -38,3 +38,6 @@ Um laço `for` percorre a lista, uma planta por volta:
 
 O mypy sabe que `plants` é uma lista de `Plant` (todos os itens são `Plant`), e por isso aceita
 `plant.show()`.
+
+Este laço ainda imprime as plantas sem o `Created: ` do começo de cada linha da saída; a página
+[O prefixo Created](./04-o-prefixo-created.md) completa o laço que vai para o arquivo.

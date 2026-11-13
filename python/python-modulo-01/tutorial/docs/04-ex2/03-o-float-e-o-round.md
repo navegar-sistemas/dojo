@@ -44,7 +44,7 @@ python3 experimentos/decimais.py
 
 - no terceiro dia, a soma acumulou o erro, e o `print` mostra `27.400000000000002` em vez de
   `27.4`. A soma clássica `0.1 + 0.2` mostra o mesmo efeito;
-- **`round(numero, 1)`** arredonda para **uma** casa decimal: `round(height, 1)` dá `27.4`. O
+- **`round(número, 1)`** arredonda para **uma** casa decimal: `round(height, 1)` dá `27.4`. O
   `round` é uma das funções autorizadas deste exercício;
 - `round(25.0, 1)` dá `25.0`, que imprime com a casa decimal que a saída pede;
 - `round(25, 1)` dá `25`, **sem** casa decimal: arredondar um inteiro devolve um inteiro;
@@ -64,10 +64,13 @@ python3 experimentos/decimais.py
            )
    ```
 
-   A linha ficou comprida demais para o limite de 79 caracteres do flake8, e foi dividida em
-   duas f-strings. Duas strings seguidas, sem nada entre elas, viram uma só: o Python as junta
-   numa só ao ler o código. Os parênteses do `print` são o que permite quebrar a linha entre as
-   duas.
+   Numa linha só,
+   `print(f"{self.name}: {round(self.height, 1)}cm, {self.age_days} days old")` teria 82
+   caracteres, contando os oito espaços de recuo, e o flake8 acusaria
+   `E501 line too long (82 > 79 characters)` ("linha comprida demais"): o estilo padrão limita
+   cada linha a 79 caracteres. Por isso a linha foi dividida em duas f-strings. Duas strings
+   seguidas, sem nada entre elas, viram uma só: o Python as junta numa só ao ler o código. Os
+   parênteses do `print` são o que permite quebrar a linha entre as duas.
 
    Arredondar só no `show()` é escolha do projeto: a altura guardada não perde nada, e todo lugar
    que imprime uma altura arredonda do mesmo jeito. Outra opção seria arredondar ao guardar, em

@@ -88,11 +88,10 @@ apagada à vontade.
 
 ## Por que isso importa
 
-Sem o `if`, todo o código de demonstração de um arquivo rodaria também quando outro arquivo o
-importasse só para usar uma função ou uma classe. Com o `if`, o arquivo pode ser as duas coisas:
-um programa que se demonstra quando rodado, e um módulo que só oferece o seu código quando
-importado. O enunciado pede que você saiba explicar por que esse bloco é importante, e a
-resposta é esta.
+O enunciado pede que você saiba explicar por que esse bloco é importante. Sem o `if`, todo o
+código de demonstração de um arquivo rodaria também quando outro arquivo o importasse só para
+usar uma função ou uma classe. Com o `if`, o arquivo pode ser as duas coisas: um programa que se
+demonstra quando rodado, e um módulo que só oferece o seu código quando importado.
 
 O exercício 0 exige o bloco. Nos exercícios seguintes, o enunciado só o permite, e usá-lo em
 todos é escolha do projeto: a demonstração fica separada das classes, e o

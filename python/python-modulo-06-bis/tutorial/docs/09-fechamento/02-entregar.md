@@ -6,9 +6,9 @@ title: Entregar
 # Entregar
 
 O enunciado pede a entrega num **repositório Git**, e só o que estiver no repositório é avaliado.
-Só os três arquivos pedidos precisam ir; a pasta `.venv`, a pasta `experimentos`, as pastas
-`__pycache__`, que o Python cria ao importar um arquivo, e a pasta `.mypy_cache`, que o mypy
-cria, ficam de fora.
+Só os arquivos pedidos precisam ir: os seis `.py` da raiz e os `.py` das pastas `ex3` e `ex4`. A
+pasta `.venv`, a pasta `experimentos`, as pastas `__pycache__`, que o Python cria ao importar um
+módulo, e a pasta `.mypy_cache`, que o mypy cria, ficam de fora.
 
 ## Copiar os arquivos para o repositório
 
@@ -17,26 +17,27 @@ O endereço (a URL) do repositório de entrega vem junto com o projeto. O `git c
 SSH é um par de arquivos que identifica o seu computador para o servidor, no lugar de uma senha;
 quem fornece o repositório explica como criar a chave e cadastrá-la no servidor. A partir da
 pasta `code-nexus`, suba um nível, baixe o repositório numa pasta `entrega` e copie só os
-arquivos `.py` de cada exercício:
+arquivos `.py`:
 
 ```bash
 cd ..
 git clone <endereço-do-repositório> entrega
-for ex in ex0 ex1 ex2; do
-    mkdir -p "entrega/$ex"
-    cp "code-nexus/$ex/"*.py "entrega/$ex/"
-done
+cp code-nexus/*.py entrega/
+mkdir -p entrega/ex3 entrega/ex4
+cp code-nexus/ex3/*.py entrega/ex3/
+cp code-nexus/ex4/*.py entrega/ex4/
 cd entrega
 ```
 
 Troque `<endereço-do-repositório>` pelo endereço recebido. O `git clone` baixa o repositório; o
-`for` cria cada pasta de exercício dentro de `entrega` (o `-p` do `mkdir` não reclama se ela já
-existir) e copia para ela os arquivos `.py` com `cp`.
+primeiro `cp` copia os seis arquivos da raiz; o `mkdir -p` cria as pastas dos pacotes (o `-p` não
+reclama se elas já existirem); os dois últimos `cp` copiam só os `.py` de cada pacote, deixando
+as pastas `__pycache__` para trás.
 
 ## Registrar e enviar
 
 ```bash
-git add ex0 ex1 ex2
+git add *.py ex3 ex4
 git status
 ```
 
@@ -47,14 +48,27 @@ No commits yet
 
 Changes to be committed:
   (use "git rm --cached <file>..." to unstage)
-	new file:   ex0/data_processor.py
-	new file:   ex1/data_stream.py
-	new file:   ex2/data_pipeline.py
+	new file:   battle.py
+	new file:   capacitor.py
+	new file:   data_pipeline.py
+	new file:   data_processor.py
+	new file:   data_stream.py
+	new file:   ex3/__init__.py
+	new file:   ex3/capability.py
+	new file:   ex3/creature.py
+	new file:   ex3/factory.py
+	new file:   ex3/flame.py
+	new file:   ex3/transform.py
+	new file:   ex4/__init__.py
+	new file:   ex4/aggressive.py
+	new file:   ex4/normal.py
+	new file:   ex4/strategy.py
+	new file:   tournament.py
 
 ```
 
 `git add` marca os arquivos para o próximo registro; `git status` mostra o que está marcado. A
-lista `Changes to be committed` ("mudanças a registrar") tem exatamente os três arquivos. O
+lista `Changes to be committed` ("mudanças a registrar") tem exatamente os dezesseis arquivos. O
 resto pode variar: esta é a saída de um repositório de entrega vazio (`No commits yet`, "nenhum
 registro ainda"); num repositório que já tem registros, essa linha não aparece. A primeira
 linha mostra o **ramo** (*branch*), a linha de histórico em que os registros entram; o nome
@@ -69,7 +83,7 @@ git config --global user.email "seu@email"
 ```
 
 ```bash
-git commit -m "Add exercises 0 to 2"
+git commit -m "Add exercises 0 to 4"
 git push
 ```
 
@@ -85,9 +99,10 @@ parte e rode um programa nela:
 cd ..
 git clone <endereço-do-repositório> conferencia
 cd conferencia
-ls ex0 ex1 ex2
-python3 ex2/data_pipeline.py
+ls ex3 ex4
+python3 tournament.py
 ```
 
-Os três arquivos aparecem, e o programa imprime a mesma saída que na pasta do projeto. Depois, a
-pasta `conferencia` pode ser apagada (`cd .. && rm -rf conferencia`).
+As pastas `ex3` e `ex4` aparecem com os seus arquivos `.py`, e o torneio imprime a mesma saída
+que na pasta do projeto: os pacotes foram enviados inteiros. Depois, a pasta `conferencia` pode
+ser apagada (`cd .. && rm -rf conferencia`).

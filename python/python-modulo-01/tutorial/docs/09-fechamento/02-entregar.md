@@ -49,7 +49,8 @@ done
 cd entrega
 ```
 
-O `for` cria cada pasta de exercício dentro de `entrega` e copia para ela os arquivos `.py`; o
+O `for` cria cada pasta de exercício dentro de `entrega` (o `-p` faz o `mkdir` não reclamar se a
+pasta já existir, por exemplo ao repetir o comando) e copia para ela os arquivos `.py`; o
 `cd entrega` entra no repositório, e **todos os comandos git daqui em diante rodam de dentro da
 pasta `entrega`** (fora dela, o git responde `fatal: not a git repository`). Se a pasta do
 projeto tiver outro nome, troque `code-cultivation` por ele no `cp`.
@@ -114,8 +115,10 @@ python3 ex6/ft_garden_analytics.py
 ```
 
 Os sete arquivos aparecem, e o programa roda como na sua pasta. Os `diff` de cada exercício
-também podem ser repetidos aqui. Depois, a pasta `conferencia` pode ser apagada
-(`cd .. && rm -rf conferencia`).
+também podem ser repetidos aqui. Depois, a pasta `conferencia` pode ser apagada com
+`cd .. && rm -rf conferencia`: o `cd ..` sai dela; o `&&` só roda o comando seguinte se o
+anterior deu certo; o `rm -rf` apaga a pasta e tudo o que há dentro dela, sem pedir confirmação
+e sem passar pela lixeira.
 
 ## Na avaliação
 

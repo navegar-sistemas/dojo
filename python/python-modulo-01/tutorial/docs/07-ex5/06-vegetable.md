@@ -34,8 +34,8 @@ class Vegetable(Plant):
         print(f" Nutritional value: {round(self._nutritional_value)}")
 ```
 
-- `grow()` e `age()` são sobrescritos, e cada um chama o da pai com `super()`: a altura e a idade
-  continuam mudando pelo caminho de `Plant`, com a validação;
+- `grow()` e `age()` são sobrescritos, e cada um chama o método da classe pai com `super()`: a
+  altura e a idade continuam mudando pelo caminho de `Plant`, com a validação;
 - depois, cada um soma 0,5 ao valor nutricional;
 - o `show()` imprime o valor com `round()` sem casas, que devolve um inteiro: `0` e `20`, como na
   saída.

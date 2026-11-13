@@ -22,8 +22,10 @@ dentro da classe porque o assunto dela é da classe.
   `staticmethod()`, uma das autorizadas, que o transforma em método estático. O enunciado aceita
   essa sintaxe;
 - não há `self`: o único parâmetro é a idade em dias;
-- `age_days > 365` devolve `True` ou `False`. Um ano tem 365 dias, então 365 dias é exatamente um
-  ano, e não **mais** que um ano; só a partir de 366 a resposta é `True`.
+- `age_days > 365` devolve `True` ou `False`. O limite é escolha do projeto: com um ano de 365
+  dias, 365 dias é exatamente um ano, e não **mais** que um ano; só a partir de 366 a resposta é
+  `True`. A saída só pergunta por 30 e por 400 dias, e qualquer número de 30 a 399 no lugar do
+  365 daria as mesmas respostas.
 
 Ele é chamado pela classe, sem objeto nenhum: `Plant.is_older_than_a_year(30)`.
 

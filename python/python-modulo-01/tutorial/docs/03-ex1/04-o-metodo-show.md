@@ -22,15 +22,17 @@ class Plant:
 ```
 
 - o `def` fica recuado dentro da classe; é isso que faz de `show` um método de `Plant`;
-- o flake8 exige uma linha em branco antes de cada método, inclusive o primeiro, logo depois
-  dos atributos (o aviso seria `E301 expected 1 blank line`);
+- entre os atributos e o `def` há uma linha em branco: o flake8 exige uma linha em branco antes
+  de um método que vem depois de outra linha da classe (sem ela, o aviso seria
+  `E301 expected 1 blank line, found 0`). Um método escrito logo abaixo da linha `class Plant:`
+  dispensa essa linha, como o `__init__` do [exercício 3](../05-ex3/02-o-construtor.md);
 - `-> None`: o método não devolve nada, só imprime.
 
 ## O self
 
-Todo método comum recebe, como **primeiro parâmetro**, o objeto sobre o qual foi chamado. O costume do
-Python é chamar esse parâmetro de `self` ("o próprio"). Em `rose.show()`, o `self` é a `rose`, e
-`self.name` é `rose.name`; em `sunflower.show()`, o `self` é o `sunflower`.
+Todo método comum recebe, como **primeiro parâmetro**, o objeto sobre o qual foi chamado. O
+costume do Python é chamar esse parâmetro de `self` ("o próprio"). Em `rose.show()`, o `self` é a
+`rose`, e `self.name` é `rose.name`; em `sunflower.show()`, o `self` é o `sunflower`.
 
 O Python passa esse objeto sozinho: `rose.show()` é um atalho para `Plant.show(rose)`. Um
 experimento mostra as duas formas:

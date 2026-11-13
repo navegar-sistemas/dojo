@@ -48,6 +48,10 @@ FIM
 Se os dois textos forem iguais, o `diff` **não imprime nada**. Se imprimir alguma linha, ela
 mostra onde a saída do programa (marcada com `<`) difere do esperado (marcada com `>`).
 
+O enunciado avisa que, neste exercício, a avaliação não confere a saída letra por letra. Usar o
+`diff` mesmo assim é escolha do projeto: é o mesmo comando que confere a saída de cada exercício
+seguinte.
+
 ## Conferir estilo e tipos
 
 ```bash

@@ -110,4 +110,7 @@ método novo em `Plant`. A alternativa seria um método `Plant.show_stats()` que
 `self._stats.display()` sem expor os `count_*`; a função de fora só repassaria a chamada.
 
 O tipo de retorno de `get_stats`, `"Plant.Stats"`, vai entre aspas pelo mesmo motivo do
-[método de classe](./03-o-metodo-de-classe.md#por-que-plant-entre-aspas).
+[método de classe](./03-o-metodo-de-classe.md#por-que-plant-entre-aspas): até o Python 3.13, a
+anotação é lida no momento do `def`, quando o nome `Plant` ainda não existe. O `Plant.Stats()`
+dentro do `__init__` dispensa as aspas: o corpo de um método só roda quando o método é chamado
+(aqui, quando uma planta é criada), e nessa hora a classe `Plant` já está pronta.

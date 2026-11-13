@@ -239,6 +239,9 @@ if __name__ == "__main__":
     display_stats(unknown)
 ```
 
+Como no [exercício 0](../02-ex0/04-o-arquivo-completo.md), o arquivo termina com uma única quebra
+de linha depois da última linha, que o botão de copiar não leva.
+
 - `Vegetable` não aparece na saída deste exercício, mas continua no arquivo: o enunciado pede as
   classes do exercício 5 melhoradas, e uma hortaliça também tem estatísticas, herdadas de
   `Plant`;

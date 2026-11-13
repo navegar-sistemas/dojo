@@ -48,9 +48,9 @@ title: Glossário
 | Termo | Significado |
 |---|---|
 | **herança** | criar uma classe a partir de outra, recebendo tudo o que ela tem: `class Flower(Plant):`. [Veja](../07-ex5/02-heranca.md) |
-| **classe pai (base)** | a classe de onde outra herda; `Plant` é a pai de `Flower`. [Veja](../07-ex5/02-heranca.md) |
+| **classe pai (base)** | a classe de onde outra herda; `Plant` é a classe pai de `Flower`. [Veja](../07-ex5/02-heranca.md) |
 | **classe filha** | a classe que herda; `Flower` é filha de `Plant`. [Veja](../07-ex5/02-heranca.md) |
-| **sobrescrever (override)** | escrever na classe filha um método com o mesmo nome de um da pai, que passa a valer no lugar dele. [Veja](../07-ex5/02-heranca.md) |
+| **sobrescrever (override)** | escrever na classe filha um método com o mesmo nome de um método da classe pai, que passa a valer no lugar dele. [Veja](../07-ex5/02-heranca.md) |
 | **`super()`** | dá acesso, de dentro da classe filha, aos métodos da classe pai: `super().show()`. [Veja](../07-ex5/03-super.md) |
 | **cadeia de herança** | uma classe que herda de outra que herda de uma terceira: `Seed` → `Flower` → `Plant`. [Veja](../08-ex6/06-seed.md) |
 | **polimorfismo** | o mesmo código chamando um método que cada tipo de objeto implementa do seu jeito: `display_stats` funciona com qualquer planta. [Veja](../08-ex6/07-a-funcao-de-estatisticas.md) |
@@ -59,7 +59,7 @@ title: Glossário
 
 | Termo | Significado |
 |---|---|
-| **decorador** | uma linha com `@` antes de um `def`, que muda o tipo do método: `@staticmethod`. [Veja](../08-ex6/02-o-metodo-estatico.md) |
+| **decorador** | uma linha `@nome` logo antes de um `def`: passa a função definida para `nome` e guarda o resultado no lugar dela; `@staticmethod` transforma o método em método estático. [Veja](../08-ex6/02-o-metodo-estatico.md) |
 | **método estático** | método que não recebe o objeto nem a classe; é uma função comum guardada dentro da classe. [Veja](../08-ex6/02-o-metodo-estatico.md) |
 | **método de classe** | método que recebe a classe (`cls`) em vez do objeto; serve para criar objetos de um jeito especial. [Veja](../08-ex6/03-o-metodo-de-classe.md) |
 | **classe aninhada** | uma classe escrita dentro de outra: `Plant.Stats`. [Veja](../08-ex6/04-a-classe-aninhada.md) |

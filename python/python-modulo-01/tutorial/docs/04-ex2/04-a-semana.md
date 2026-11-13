@@ -43,5 +43,5 @@ própria planta, e não somada à parte.
 ```
 
 `rose.height` é a altura guardada no objeto depois dos sete dias. A subtração dá
-`5.600000000000005`, pela aproximação do `float` ([O float e o round](./03-o-float-e-o-round.md)), e o
-`round(growth, 1)` imprime `5.6`.
+`5.600000000000005`, pela aproximação do `float`
+([O float e o round](./03-o-float-e-o-round.md)), e o `round(growth, 1)` imprime `5.6`.

@@ -5,11 +5,11 @@ title: super()
 
 # super()
 
-Sobrescrever um método troca o da pai pelo da filha. Muitas vezes a filha não quer **trocar**, e
-sim **completar**: o `show()` da flor deve imprimir a linha de planta **e** a cor. Copiar o
-`print` de `Plant` para dentro de `Flower` duplicaria código. O `super()` resolve: dentro de um
-método da filha, `super()` dá acesso aos métodos da classe pai, e `super().show()` roda o
-`show()` de `Plant`.
+Sobrescrever um método troca o método da classe pai pelo da filha. Muitas vezes a filha não quer
+**trocar**, e sim **completar**: o `show()` da flor deve imprimir a linha de planta **e** a cor.
+Copiar o `print` de `Plant` para dentro de `Flower` duplicaria código. O `super()` resolve:
+dentro de um método da filha, `super()` dá acesso aos métodos da classe pai, e `super().show()`
+roda o `show()` de `Plant`.
 
 ## Um experimento
 
@@ -53,8 +53,11 @@ Plant: Rose
   da cor;
 - `super()` está na lista de funções autorizadas deste exercício.
 
-O construtor da filha **precisa** chamar `super().__init__`: sem essa chamada, o `__init__` de
-`Plant` não roda, e a flor ficaria sem `_name`.
+Quando a filha escreve o seu próprio `__init__`, ele **sobrescreve** o de `Plant`: ao criar uma
+flor, o Python chama só o `__init__` da flor. Por isso esse construtor **precisa** chamar
+`super().__init__`: sem essa chamada, o `__init__` de `Plant` não roda, e a flor ficaria sem
+`_name`. No experimento de [Herança](./02-heranca.md), a `Flower` não tinha `__init__` próprio, e
+o de `Plant` era usado direto.
 
 ## O padrão dos três tipos
 

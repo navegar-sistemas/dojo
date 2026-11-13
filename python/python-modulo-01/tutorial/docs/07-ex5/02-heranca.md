@@ -59,11 +59,12 @@ Plant: Oak
 - `Flower` não escreveu `__init__` nem `water`, e mesmo assim `Flower("Rose")` funcionou e
   `rose.water()` regou a rosa: os dois vieram de `Plant`;
 - `Flower` escreveu o seu próprio `show`, e `rose.show()` usou o da flor. Escrever na filha um
-  método com o mesmo nome de um da pai se chama **sobrescrever** (*override*): para os objetos da
-  filha, vale o método da filha;
+  método com o mesmo nome de um método da classe pai se chama **sobrescrever** (*override*): para
+  os objetos da filha, vale o método da filha;
 - a classe pai não muda: `oak`, uma `Plant`, continua com o `show` de planta;
-- a filha usa `self._name`, o atributo protegido da pai. Era isso que a convenção protected do
-  [exercício 4](../06-ex4/02-encapsulamento.md) prometia: interno à classe **e às filhas**.
+- a filha usa `self._name`, o atributo protegido da classe pai. Era isso que a convenção
+  protected do [exercício 4](../06-ex4/02-encapsulamento.md) prometia: interno à classe **e às
+  filhas**.
 
 Ao procurar um nome num objeto (`rose.show`), o Python olha primeiro o próprio objeto, depois a
 classe dele e, se não achar, sobe para a classe pai.
@@ -107,5 +108,5 @@ classDiagram
     }
 ```
 
-As setas apontam da filha para a pai. Cada filha lista só o que acrescenta ou sobrescreve; o
-resto vem de `Plant`.
+As setas apontam da classe filha para a classe pai. Cada filha lista só o que acrescenta ou
+sobrescreve; o resto vem de `Plant`.

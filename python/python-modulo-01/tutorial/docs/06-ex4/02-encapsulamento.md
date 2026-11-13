@@ -56,7 +56,9 @@ python3 experimentos/protegido.py
 - `rose._height` funciona: o `_` é só um aviso.
 
 O mangling existe para evitar que uma classe filha, sem querer, use o mesmo nome de atributo da
-classe pai e o sobrescreva. O efeito colateral é que a própria classe filha também não enxerga o
-atributo pelo nome escrito. O enunciado pede a convenção protected, de um `_` só, para os atributos
-da classe, e por isso os **três** atributos da planta passam a ser `_name`, `_height` e `_age_days`:
-o nome também, mesmo sem regra de validação.
+classe a partir da qual foi construída (a **classe pai**, também apresentada no exercício 5) e,
+ao guardar um valor nele, apague o valor que a classe pai guardava ali. O efeito colateral é que
+a própria classe filha também não enxerga o atributo pelo nome escrito. O enunciado pede a
+convenção protected, de um `_` só, para os atributos da classe, e por isso os **três** atributos
+da planta passam a ser `_name`, `_height` e `_age_days`: o nome também, mesmo sem regra de
+validação.

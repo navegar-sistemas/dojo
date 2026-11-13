@@ -164,8 +164,11 @@ True
   `greetings.words.hello` continua alcançável.
 
 O Python não esconde nada de verdade. Expor é um combinado, como o `_` no começo de um atributo
-interno: o que o `__init__.py` oferece (e o `__all__` lista) é a parte pública do pacote, e o
-resto é assunto interno dele. Quem usa o pacote importa do pacote, e não dos submódulos.
+interno: o que o `__init__.py` oferece (e o `__all__` lista) é a porta de entrada do pacote, o
+que quem o usa deve importar. Um submódulo continua importável pelo nome completo, como em
+`from greetings.words import hello`; o projeto usa isso de forma pontual, para duas classes
+abstratas que o pacote `ex3` não expõe
+([A porta do pacote](../07-ex3/07-a-porta-do-pacote.md)).
 
 ## Um módulo do pacote não roda sozinho
 

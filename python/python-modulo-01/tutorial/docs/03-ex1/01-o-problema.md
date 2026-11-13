@@ -51,6 +51,6 @@ As alturas são inteiras (`25cm`, sem casa decimal).
 ## As perguntas do enunciado
 
 O enunciado pergunta como você está guardando os dados das plantas e que problemas apareceriam
-com mais plantas, e avisa que a abordagem vai precisar evoluir nos próximos exercícios. A
+com mais plantas, e avisa que talvez a abordagem precise evoluir nos próximos exercícios. A
 resposta deste exercício é a classe; os próximos a melhoram: dados preenchidos na criação
 (exercício 3), dados protegidos (exercício 4), tipos especiais de planta (exercício 5).

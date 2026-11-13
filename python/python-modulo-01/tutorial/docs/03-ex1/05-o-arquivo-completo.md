@@ -40,6 +40,9 @@ if __name__ == "__main__":
     cactus.show()
 ```
 
+Como no [exercício 0](../02-ex0/04-o-arquivo-completo.md), o arquivo termina com uma única quebra
+de linha depois da última linha, que o botão de copiar não leva.
+
 O arquivo só chama `print()`, a função autorizada; `Plant()` é a própria classe, e `show()` é um
 método do próprio arquivo. As linhas em branco dentro do bloco main só separam uma planta da
 outra.

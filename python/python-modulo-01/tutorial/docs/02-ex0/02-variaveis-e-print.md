@@ -19,8 +19,11 @@ age: int = 30
 
 O `: str` e o `: int` são **type hints** de variável
 ([Type hints, flake8 e mypy](../01-ambiente/04-type-hints-flake8-e-mypy.md)). O enunciado só os
-exige em funções e métodos, e o Python funcionaria sem eles aqui. Anotar também as variáveis é
-escolha do projeto: deixa explícito o tipo de cada dado.
+exige em funções e métodos, e o Python funcionaria sem eles aqui. Anotar estas três variáveis é
+escolha do projeto: no exercício 0, guardar cada dado numa variável do tipo certo é o próprio
+assunto. Do exercício 1 em diante, as variáveis do bloco main e dos experimentos ficam sem
+anotação: o tipo já está no valor (`rose = Plant()` guarda uma `Plant`), e o mypy o deduz
+sozinho.
 
 Os nomes ficam em `snake_case` (minúsculas), a regra do enunciado para variáveis. Escrevê-los em
 inglês, como o resto do código e a saída, é escolha do projeto.

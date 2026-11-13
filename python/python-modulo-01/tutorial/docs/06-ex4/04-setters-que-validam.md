@@ -6,8 +6,9 @@ title: Setters que validam
 # Setters que validam
 
 Um **setter** ("ajustador") é um método que muda o valor de um atributo protegido, depois de
-**validar** o valor novo, isto é, conferir se ele serve. É o único caminho para escrever a
-altura e a idade da planta.
+**validar** o valor novo, isto é, conferir se ele serve. Depois que a planta existe, ele é o
+único caminho para mudar a altura e a idade: quem está de fora chama o setter, e os métodos da
+própria classe que mudam esses valores também o chamam.
 
 ```python
     def set_height(self, height: float) -> bool:

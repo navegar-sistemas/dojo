@@ -14,8 +14,8 @@ environment*, ou **venv**): uma pasta que aponta para o Python instalado e guard
 próprias, só deste projeto.
 
 O venv é escolha do projeto: funciona igual em qualquer Linux e no macOS, sem `sudo`. Outra opção
-seriam os pacotes da distribuição (`sudo apt install flake8 mypy`), em versões que variam de
-sistema para sistema.
+seriam os pacotes da distribuição (no Debian e no Ubuntu, `sudo apt install flake8 mypy`), em
+versões que variam de sistema para sistema.
 
 ## Criar o venv
 

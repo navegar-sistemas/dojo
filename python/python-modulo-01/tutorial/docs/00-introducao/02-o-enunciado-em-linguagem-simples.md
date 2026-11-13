@@ -22,9 +22,12 @@ title: O enunciado em linguagem simples
   palavras separadas por `_`: `show`, `age_days`).
 - **O programa sempre roda sem erro.** Nenhum programa pode parar no meio com uma mensagem de erro
   do Python.
-- **Sem validar o que não foi pedido.** Só o exercício 4 pede para recusar valores inválidos; nos
-  outros, os valores usados são os do próprio programa.
-- **Código só com o que o exercício pede**, escrito para deixar claro o conceito dele. O
+- **Validação só onde o enunciado pede.** O exercício 4 pede que altura e idade negativas sejam
+  recusadas, e os exercícios 5 e 6 herdam essa regra da classe `Plant`; os atributos novos das
+  classes filhas ficam sem validação, que o enunciado dispensa. Os programas não leem nada do
+  teclado: os valores usados são os do próprio programa.
+- **Cada arquivo traz as definições pedidas e todo o código que o exercício exige**, escrito para
+  deixar claro o conceito dele. O
   enunciado fala também em código "limpo e bem documentado". Nos exercícios, a documentação vem
   de nomes claros e dos type hints, sem comentários nem docstrings (textos de explicação entre
   aspas triplas no começo de uma função ou classe) que só repitam o nome; isso é escolha do
@@ -33,7 +36,9 @@ title: O enunciado em linguagem simples
 
 O enunciado também libera, em todos os exercícios, as palavras da linguagem (`class`, `def`,
 `if`, `for`, `return`), o bloco `if __name__ == "__main__":` e o método `capitalize()` dos
-textos, mesmo sem aparecerem nas listas abaixo.
+textos, mesmo sem aparecerem nas listas abaixo. O `capitalize()` devolve o texto com a primeira
+letra maiúscula e as outras minúsculas (`"rose".capitalize()` dá `"Rose"`); o projeto não precisa
+dele.
 
 ## Funções autorizadas
 
@@ -61,7 +66,7 @@ pesa no exercício 2 ([O float e o round](../04-ex2/03-o-float-e-o-round.md)).
 | 3 | plantas criadas já com os seus dados, numa linha só, e pelo menos cinco delas impressas com o mesmo `show()` ([Exercício 3](../05-ex3/01-o-problema.md)) |
 | 4 | a classe protege os seus atributos, e a altura e a idade só podem ser lidas e mudadas por métodos (`get_height()`, `get_age()`, `set_height()`, `set_age()`), que recusam valores negativos com uma mensagem de erro ([Exercício 4](../06-ex4/01-o-problema.md)) |
 | 5 | três tipos especiais de planta, `Flower` (flor), `Tree` (árvore) e `Vegetable` (hortaliça), que reaproveitam tudo de `Plant` e acrescentam os seus próprios dados e ações ([Exercício 5](../07-ex5/01-o-problema.md)) |
-| 6 | um método que responde se uma idade passa de um ano, um jeito de criar uma planta "anônima", um tipo `Seed` (flor que dá sementes), e estatísticas de quantas vezes cada planta cresceu, envelheceu e foi mostrada ([Exercício 6](../08-ex6/01-o-problema.md)) |
+| 6 | um método que responde se uma idade passa de um ano sem precisar de planta nenhuma (o **método estático**), um método que cria uma planta "anônima" (o **método de classe**), um tipo `Seed` (flor que dá sementes), estatísticas de quantas vezes cada planta cresceu, envelheceu e foi mostrada (nas árvores, também quantas vezes fez sombra), guardadas numa classe escrita dentro de `Plant` (a **classe aninhada**) e protegidas, e uma única função, fora das classes, que exibe as estatísticas de qualquer planta ([Exercício 6](../08-ex6/01-o-problema.md)) |
 
 Para cada exercício, o enunciado mostra a saída do programa
 ([as sete saídas](./04-o-resultado-final.md)). No exercício 0, o enunciado avisa que a saída não

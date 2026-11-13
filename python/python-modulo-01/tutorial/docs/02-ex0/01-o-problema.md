@@ -34,7 +34,7 @@ Age: 30 days
 A saída tem um título, uma linha para cada dado da planta, uma **linha vazia** e uma linha de
 encerramento. A altura vem em centímetros (`cm`, colado ao número) e a idade em dias.
 
-## As duas perguntas da avaliação
+## O que a avaliação cobra deste exercício
 
 O enunciado deixa duas tarefas para a avaliação:
 

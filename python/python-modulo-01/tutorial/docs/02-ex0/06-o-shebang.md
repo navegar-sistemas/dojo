@@ -7,16 +7,18 @@ title: O shebang
 
 Até aqui, o programa roda com `python3 ex0/ft_garden_intro.py`: quem digita escolhe o programa
 (`python3`) que vai ler o arquivo. Um programa comum do sistema, como `ls`, roda só pelo nome. O
-**shebang** dá isso a um arquivo `.py`: com ele, o arquivo roda com `./ft_garden_intro.py`, sem
-digitar `python3`.
+**shebang**, junto com a permissão de execução, dá isso a um arquivo `.py`: o programa passa a
+rodar com `./ex0/ft_garden_intro.py`, sem digitar `python3`.
 
-Na avaliação, quem avalia pede que você acrescente o shebang ao programa, ao vivo. O arquivo
-entregue fica sem shebang; o treino é feito numa cópia, em `experimentos/`.
+Na avaliação, quem avalia pede que você acrescente o shebang ao programa, ao vivo. Entregar o
+arquivo sem shebang é escolha do projeto, apoiada no enunciado: ele diz que a avaliação vai pedir
+que você *atualize* o script para usar o shebang. O treino é feito numa cópia, em
+`experimentos/`.
 
 ## A linha
 
-O shebang é a **primeira linha** do arquivo, começando com `#!` (o nome vem de *hash*, `#`, e
-*bang*, `!`):
+O shebang é a **primeira linha** do arquivo, começando com `#!` (o nome costuma ser explicado
+como a junção de *hash* ou *sharp*, nomes do `#` em inglês, com *bang*, nome do `!`):
 
 ```text
 #!/usr/bin/env python3
@@ -28,6 +30,11 @@ O shebang é a **primeira linha** do arquivo, começando com `#!` (o nome vem de
   pastas de programas do sistema. Escrever o caminho do Python direto (como `/usr/bin/python3`)
   também funciona, mas só nas máquinas em que o Python está exatamente ali; o `env` acha o
   `python3` em qualquer pasta da lista de pastas de programas do sistema (o `PATH`).
+
+Numa máquina em que o Python 3.10 ou mais novo tem outro nome, como `python3.11`
+([O Python](../01-ambiente/01-o-python.md)), a linha continua `#!/usr/bin/env python3`, e o `env`
+acha o `python3` antigo do sistema. O programa do exercício 0 roda nele do mesmo jeito: as
+f-strings e os type hints de variável existem desde o Python 3.6.
 
 ## Treinar numa cópia
 
@@ -55,9 +62,10 @@ if __name__ == "__main__":
 
 ## A permissão de execução
 
-Tentar rodar agora com `./experimentos/semente.py` termina num erro com `permission denied`
-("permissão negada"; o resto da mensagem muda conforme o shell): o sistema só roda como programa um
-arquivo marcado como **executável**. O comando `chmod +x` dá essa marca:
+Tentar rodar agora com `./experimentos/semente.py` termina num erro de permissão negada: o bash
+escreve `Permission denied`, e o zsh, `permission denied`, cada um junto do caminho do arquivo. O
+sistema só roda como programa um arquivo marcado como **executável**. O comando `chmod +x` dá
+essa marca:
 
 ```bash
 chmod +x experimentos/semente.py

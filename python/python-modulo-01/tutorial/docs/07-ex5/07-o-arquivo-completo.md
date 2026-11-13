@@ -141,6 +141,9 @@ if __name__ == "__main__":
     tomato.show()
 ```
 
+Como no [exercício 0](../02-ex0/04-o-arquivo-completo.md), o arquivo termina com uma única quebra
+de linha depois da última linha, que o botão de copiar não leva.
+
 As funções de atualização do exercício 4 (`update_height` e `update_age`) ficaram de fora: eram
 da demonstração daquele exercício, e esta não as usa. O arquivo chama `super()`, `print()`,
 `range()` e `round()`, as quatro autorizadas.

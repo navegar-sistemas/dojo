@@ -29,6 +29,9 @@ criar o [ambiente virtual](./03-o-ambiente-virtual.md):
 sudo apt install python3 python3-venv
 ```
 
+Em outras distribuições Linux, o Python vem do gerenciador de pacotes delas (`dnf` no Fedora,
+`pacman` no Arch).
+
 No macOS, instale o Python pelo instalador oficial, em
 [python.org](https://www.python.org/downloads/). Depois, abra um terminal novo e rode
 `python3 --version` de novo.
@@ -39,9 +42,10 @@ Instalar de novo o `python3` do sistema não adianta: ele continua na mesma vers
 instalar um Python novo, separado do que veio com o sistema:
 
 - **macOS:** o instalador oficial de [python.org](https://www.python.org/downloads/) instala a
-  versão mais nova, que passa a responder pelo comando `python3`;
-- **Linux:** muitas distribuições oferecem versões mais novas como pacotes com o número no nome.
-  Confira se a sua tem, por exemplo, o `python3.11`:
+  versão mais nova, que passa a responder pelo comando `python3` nos terminais abertos depois da
+  instalação. Abra um terminal novo e confira com `python3 --version`;
+- **Linux (Debian e Ubuntu):** muitas versões dessas distribuições oferecem Pythons mais novos
+  como pacotes com o número no nome. Confira se a sua tem, por exemplo, o `python3.11`:
 
   ```bash
   apt-cache policy python3.11
@@ -54,10 +58,13 @@ instalar um Python novo, separado do que veio com o sistema:
   ```
 
   Esse Python é chamado pelo nome com o número, `python3.11`. Se a distribuição não oferece
-  nenhuma versão 3.10 ou mais nova, o caminho é atualizar a distribuição.
+  nenhuma versão 3.10 ou mais nova, o caminho é atualizar a distribuição;
+- **outras distribuições Linux:** o Python novo vem do gerenciador de pacotes delas (`dnf` no
+  Fedora, `pacman` no Arch).
 
-Quando o Python novo tem outro nome (como `python3.11`), use esse nome em todo lugar onde
-aparece `python3`.
+Quando o Python novo tem outro nome (como `python3.11`), use esse nome em todo comando digitado
+no terminal onde aparece `python3`. A linha do [shebang](../02-ex0/06-o-shebang.md) é a exceção:
+ela continua `#!/usr/bin/env python3`.
 
 ## O git
 
@@ -69,7 +76,9 @@ git --version
 ```
 
 O comando responde `git version` seguido de um número; qualquer versão serve. Se o comando não
-existir: no Linux, `sudo apt install git`; no macOS, o primeiro `git` abre uma janela oferecendo
-instalar as ferramentas de linha de comando da Apple, que trazem o git; aceite e espere terminar.
+existir: no Linux (Debian e Ubuntu), `sudo apt install git`; em outras distribuições Linux, o
+pacote `git` do gerenciador de pacotes delas; no macOS, o primeiro `git` abre uma janela
+oferecendo instalar as ferramentas de linha de comando da Apple, que trazem o git; aceite e
+espere terminar.
 
 Daqui em diante, `python3` quer dizer esse Python 3.10 ou mais novo.

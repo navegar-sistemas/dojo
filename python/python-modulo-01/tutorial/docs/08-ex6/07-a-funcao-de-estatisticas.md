@@ -17,7 +17,7 @@ def display_stats(plant: Plant) -> None:
 - o parâmetro é anotado como `Plant`, e aceita qualquer filha: uma `Flower`, uma `Tree` ou uma
   `Seed` **é uma** `Plant`, e o mypy aceita todas;
 - a função fica fora da classe, então lê o nome e as estatísticas pelos getters;
-- `plant.get_stats().display()` pede o objeto de estatísticas e manda ele se exibir.
+- `plant.get_stats().display()` pede o objeto de estatísticas e manda que ele se exiba.
 
 ## Uma chamada, comportamentos diferentes
 
