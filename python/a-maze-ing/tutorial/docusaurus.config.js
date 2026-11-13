@@ -12,8 +12,8 @@ const config = {
     v4: true,
   },
 
-  url: 'https://estudo-maze.navegarsistemas.com.br',
-  baseUrl: '/',
+  url: 'https://dojo-docs.navegarsistemas.com.br',
+  baseUrl: '/a-maze-ing/',
 
   onBrokenLinks: 'throw',
   onBrokenAnchors: 'throw',
