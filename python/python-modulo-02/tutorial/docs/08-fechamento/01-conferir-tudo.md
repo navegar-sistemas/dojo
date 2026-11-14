@@ -5,7 +5,7 @@ title: Conferir tudo
 
 # Conferir tudo
 
-Antes de entregar, as conferências de cada exercício, agora todas juntas, a partir da pasta
+Antes de entregar, as conferências de todos os exercícios rodam de uma vez, a partir da pasta
 `garden-guardian`.
 
 ## Os arquivos
@@ -32,7 +32,7 @@ ft_finally_block.py
 ```
 
 Um arquivo por pasta, com o nome exato que o enunciado pede. Um nome errado (uma letra trocada,
-`.py` faltando) faz o exercício não ser encontrado.
+`.py` faltando) deixa o arquivo diferente do que o enunciado pede.
 
 ## Estilo
 

@@ -120,9 +120,8 @@ git push
 `git commit` registra os arquivos com uma mensagem; `git push` envia o registro para o
 repositório no servidor. O `git push` só tem o que enviar depois de um `git commit` que deu
 certo. Se o commit falhar, o push não envia os arquivos: num repositório vazio ele responde
-`failed to push`; num repositório que já tem registros, responde `Everything up-to-date`
-("tudo atualizado") sem ter enviado nada. Por isso a seção seguinte confere o que chegou de
-fato.
+`error: failed to push some refs to`; num repositório que já tem registros, responde `Everything up-to-date`
+("tudo atualizado") sem ter enviado nada.
 
 ## Conferir o que foi enviado
 

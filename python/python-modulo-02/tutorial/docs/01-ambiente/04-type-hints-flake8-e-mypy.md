@@ -35,7 +35,11 @@ def triple(number):
     return number * 3
 ```
 
-Ele tem dois defeitos: falta espaço entre as funções, e `triple` não tem type hints.
+Ele tem dois defeitos: falta espaço entre as funções, e `triple` não tem type hints. O arquivo
+termina com uma quebra de linha depois de `    return number * 3`; o botão de copiar, no canto
+do bloco, não leva essa quebra, e sem ela o flake8 acrescenta o aviso
+`W292 no newline at end of file`, explicado em
+[O fim do arquivo](../03-ex0/06-rodar-e-conferir.md#o-fim-do-arquivo).
 
 ## O flake8
 
@@ -48,11 +52,11 @@ experimentos/estilo.py:3:1: E302 expected 2 blank lines, found 0
 ```
 
 Cada aviso diz o arquivo, a linha, a coluna, um código e a explicação: na linha 3, o estilo
-padrão do Python (chamado **PEP 8**) pede **duas linhas em branco** separando cada função
-e cada classe do código vizinho no arquivo, antes e depois dela. O começo e o fim do arquivo não
-contam: uma função na primeira linha não precisa de nada antes, e o arquivo não termina com linhas
-em branco. Entre `double` e `triple` não havia nenhuma. (Entre os métodos de dentro de uma
-classe, a regra é **uma** linha em branco.) Sem aviso nenhum, o flake8 não imprime nada.
+padrão do Python (chamado **PEP 8**) pede **duas linhas em branco** separando cada função e cada
+classe do nível de fora do arquivo (as que não estão recuadas) do código vizinho, antes e depois
+dela. Antes da primeira linha do arquivo e depois da última não vai linha em branco nenhuma.
+Entre `double` e `triple` não havia nenhuma. (Entre os métodos de dentro de uma classe, a regra é
+**uma** linha em branco.) Sem aviso nenhum, o flake8 não imprime nada.
 
 O flake8 recebe as pastas a conferir. Nunca rode `flake8 .` (o ponto é "a pasta atual"): ele
 entraria também na `.venv` e acusaria milhares de avisos no código das bibliotecas instaladas.

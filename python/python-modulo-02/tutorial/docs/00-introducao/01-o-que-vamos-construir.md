@@ -9,8 +9,8 @@ title: O que vamos construir
 Todo programa encontra situações em que algo dá errado: o usuário digita uma letra onde se
 esperava um número, um arquivo não existe, uma conta divide por zero. Em Python, cada uma dessas
 situações gera uma **exceção**, um aviso de erro que, se ninguém tratar, encerra o programa na
-hora. Este tutorial ensina a **tratar** esses avisos, para que o programa perceba o erro, diga o
-que aconteceu e continue funcionando.
+hora. **Tratar** esses avisos faz o programa perceber o erro, dizer o que aconteceu e continuar
+funcionando.
 
 O projeto se chama **Garden Guardian** ("guardião do jardim"). O tema é um jardim monitorado por
 computador: sensores mandam temperaturas, um sistema de irrigação rega as plantas. O tema só dá
@@ -51,18 +51,5 @@ exata de cada programa, e essa saída é em inglês.
 ## O enunciado
 
 O projeto vem com um documento oficial que diz o que precisa ser entregue: o **enunciado** (em
-inglês, *subject*). Este tutorial não pressupõe que você o leu: a
-[próxima página](./02-o-enunciado-em-linguagem-simples.md) resume tudo o que ele pede, e cada
-regra é explicada de novo na página que a cumpre.
-
-## Como o tutorial avança
-
-| Parte | O que ela faz |
-|---|---|
-| Ambiente | prepara o Python, a pasta do projeto e as duas ferramentas que conferem o código (flake8 e mypy) |
-| O que é uma exceção | explica, com exemplos pequenos, o que acontece quando um erro aparece e como capturá-lo |
-| Exercícios 0 a 4 | constroem os cinco programas, um por parte |
-| Fechamento | confere tudo, mostra como entregar e reúne perguntas de revisão sobre os conceitos do projeto, com as respostas |
-
-O código de cada exercício aparece em pedaços e, no fim, o arquivo completo. Os termos novos
-estão reunidos no [glossário](./05-glossario.md).
+inglês, *subject*). A [próxima página](./02-o-enunciado-em-linguagem-simples.md) resume o que ele
+pede. Os termos novos estão no [glossário](./05-glossario.md).

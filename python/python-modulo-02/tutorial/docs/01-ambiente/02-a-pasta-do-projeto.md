@@ -16,12 +16,12 @@ mkdir ex0 ex1 ex2 ex3 ex4
 ```
 
 O nome `garden-guardian` é só uma sugestão; o que o enunciado fixa são as pastas `ex0` a `ex4` e
-os nomes dos arquivos. **Todos os comandos do tutorial são rodados a partir desta pasta**, a
-`garden-guardian`.
+os nomes dos arquivos. **Os comandos do tutorial são rodados a partir desta pasta**, a
+`garden-guardian`, salvo quando a página diz outra coisa.
 
-Crie também uma pasta `experimentos`, para os programas pequenos que a parte
-[O que é uma exceção](../02-excecoes/01-o-programa-que-trava.md) usa para mostrar cada ideia.
-Eles não fazem parte da entrega:
+Crie também uma pasta `experimentos`, para os programas pequenos que mostram cada ideia, a
+partir da página [Type hints, flake8 e mypy](./04-type-hints-flake8-e-mypy.md). Eles não fazem
+parte da entrega:
 
 ```bash
 mkdir experimentos

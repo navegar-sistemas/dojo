@@ -5,10 +5,8 @@ title: Perguntas de revisão
 
 # Perguntas de revisão
 
-O enunciado deixa perguntas ao longo dos exercícios. Elas resumem os conceitos do projeto, e
-saber respondê-las é saber explicar como cada programa lida com os erros. Estas são as perguntas,
-com as respostas que o projeto construiu, mais uma sobre a escolha que o exercício 0 deixa em
-aberto.
+Os exercícios 2, 3 e 4 do enunciado trazem perguntas sobre os conceitos que praticam. A
+terceira pergunta abaixo vem da escolha que o exercício 0 deixa em aberto.
 
 ## Por que o Python tem diferentes tipos de erro?
 
@@ -50,7 +48,8 @@ capturado pelo `except GardenError` existente
 ## Por que liberar recursos mesmo quando acontecem erros?
 
 Porque o erro não faz o recurso desaparecer: um arquivo continua aberto, uma válvula continua
-aberta, e o programa (ou o jardim) paga o preço depois.
+aberta, e o programa (ou o jardim) paga o preço depois
+([O problema do exercício 4](../07-ex4/01-o-problema.md)).
 
 ## Como o bloco finally ajuda a garantir que a limpeza sempre ocorra?
 

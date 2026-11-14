@@ -85,8 +85,8 @@ git --version
 git version 2.43.0
 ```
 
-Qualquer versão serve; o número pode ser outro, e no macOS a linha termina com um texto entre
-parênteses, como `(Apple Git-157)`. Se o comando não existir: no Debian e no Ubuntu,
+Qualquer versão serve; o número pode ser outro, e no git da Apple a linha termina com um texto
+entre parênteses, como `(Apple Git-157)`. Se o comando não existir: no Debian e no Ubuntu,
 `sudo apt install git`; no Fedora, `sudo dnf install git`; no Arch, `sudo pacman -S git`; no
 macOS, o primeiro `git` abre a mesma janela das ferramentas de linha de comando da Apple; aceite
 e espere terminar.

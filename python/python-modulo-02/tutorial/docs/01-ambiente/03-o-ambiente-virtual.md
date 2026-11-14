@@ -32,9 +32,10 @@ O comando não imprime nada quando dá certo.
 
 No Debian e no Ubuntu, o `venv` vem num pacote separado, o `python3-venv`. Sem ele, o comando
 termina com uma mensagem que cita o `ensurepip` (a parte do Python que instala o `pip` no venv) e
-o pacote `python3-venv`, e deixa uma pasta `.venv` incompleta. Apague essa pasta, instale o
-pacote (o mesmo `sudo apt install` da página [O Python](./01-o-python.md#se-o-comando-não-existir))
-e crie o venv de novo:
+o pacote `python3-venv`, e deixa uma pasta `.venv` incompleta. O comando que a mensagem sugere
+leva o número da versão, como `apt install python3.11-venv`; o `python3-venv` instala esse mesmo
+pacote. Apague a pasta, instale o pacote (o mesmo `sudo apt install` da página
+[O Python](./01-o-python.md#se-o-comando-não-existir)) e crie o venv de novo:
 
 ```bash
 rm -rf .venv

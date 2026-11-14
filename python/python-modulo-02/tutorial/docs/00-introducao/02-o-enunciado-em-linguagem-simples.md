@@ -27,9 +27,10 @@ title: O enunciado em linguagem simples
   ([Exercício 3](../06-ex3/01-o-problema.md)).
 - **Tratar os erros com `try` e `except`**, em todos os exercícios
   ([try e except](../02-excecoes/03-try-e-except.md)).
-- **Qualquer exceção embutida pode ser usada**, por exemplo `ValueError`, `TypeError`,
-  `ZeroDivisionError`, `FileNotFoundError`, `KeyError`, `IndexError`, `AttributeError` e a
-  classe base `Exception`; cada exercício indica as mais adequadas.
+- **Qualquer exceção embutida pode ser usada**, como `ValueError`, `TypeError`,
+  `ZeroDivisionError`, `FileNotFoundError`, `KeyError`, `IndexError`, `AttributeError` e
+  `Exception`, a classe de que todas elas derivam; alguns exercícios indicam as mais adequadas
+  ([Os tipos embutidos](../02-excecoes/06-os-tipos-embutidos.md)).
 - **Soluções simples**, focadas em mostrar o tratamento de erros.
 
 O enunciado também diz que as palavras `try`, `except`, `finally` e `raise` podem ser usadas à
@@ -67,16 +68,14 @@ Para cada exercício, o enunciado mostra a saída exata do programa. A página
 
 Só os cinco arquivos `.py` (`ex0/ft_first_exception.py`, `ex1/ft_raise_exception.py`,
 `ex2/ft_different_errors.py`, `ex3/ft_custom_errors.py` e `ex4/ft_finally_block.py`), com esses
-nomes e nessas pastas, num repositório Git ([Entregar](../08-fechamento/02-entregar.md)). Os
-conceitos por trás de cada programa estão reunidos em
-[Perguntas de revisão](../08-fechamento/03-perguntas-de-revisao.md).
+nomes e nessas pastas, num repositório Git ([Entregar](../08-fechamento/02-entregar.md)).
 
 ## O que o enunciado cita sem explicar
 
-- **"Módulo 00" e "Módulo 01"**: o básico de Python e as classes, que o enunciado supõe
+- **"Module 00" e "Module 01"** (módulos 00 e 01): o básico de Python e as classes, que o enunciado supõe
   conhecidos. Tudo o que este tutorial usa deles está nos
   [pré-requisitos](./03-pre-requisitos.md).
-- **"Você já encontrou `open()` em C"**: a linguagem C também tem uma função `open` para abrir
+- **"You have already encountered open() in C"** (você já encontrou o `open()` em C): a linguagem C também tem uma função `open` para abrir
   arquivos. Não é preciso saber C; o `open()` do Python é explicado no
   [exercício 2](../05-ex2/02-garden-operations.md).
 - **Instruções sobre IA**: o enunciado tem um capítulo pedindo que todo código vindo de uma

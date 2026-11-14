@@ -23,7 +23,7 @@ Um arquivo `ex0/ft_first_exception.py`, que só pode chamar as funções prontas
   programa continua depois do erro.
 
 O enunciado deixa escolher o tipo capturado: a classe base `Exception` ou o tipo exato que
-`input_temperature` pode lançar. Este tutorial usa o tipo exato, `ValueError`, pelo motivo da
+`input_temperature` pode lançar. O programa captura o tipo exato, `ValueError`, pelo motivo da
 página [Os tipos embutidos](../02-excecoes/06-os-tipos-embutidos.md): capturar só o erro
 esperado.
 

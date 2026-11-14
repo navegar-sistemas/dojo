@@ -25,7 +25,7 @@ Três detalhes de texto aparecem bastante:
 - Um texto entre aspas duplas pode conter aspas simples: `f"Input data is '{temp_str}'"` imprime
   `Input data is '25'`.
 - O símbolo `°` (grau) é um caractere comum dentro do texto; o Python 3 aceita qualquer caractere
-  num arquivo `.py`.
+  num arquivo `.py` salvo em UTF-8, a codificação padrão dos editores atuais.
 
 Também é preciso saber abrir um **terminal** (a janela onde se digitam comandos) e andar entre
 pastas com `cd`. Os comandos do tutorial funcionam no terminal do Linux e do macOS.

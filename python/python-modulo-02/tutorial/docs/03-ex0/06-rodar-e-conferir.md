@@ -51,7 +51,7 @@ FIM
 
 Ao digitar (ou colar) o comando, o terminal mostra um aviso no começo de cada linha até receber a
 linha `FIM`: `>` no bash, o interpretador de comandos padrão da maioria dos Linux, e `heredoc>` no
-zsh, o padrão do macOS. Ele está esperando o resto do texto, não travou.
+zsh, o padrão do macOS. Ele está esperando o resto do texto.
 
 Se os dois textos forem iguais, o `diff` **não imprime nada**. Se imprimir alguma linha, ela
 mostra onde a saída do programa (marcada com `<`) difere do esperado (marcada com `>`).

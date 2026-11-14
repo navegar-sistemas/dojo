@@ -47,8 +47,8 @@ que fica escrito uma vez só.
    `except` imprime o erro e o aviso `.. ending tests and returning to main` ("encerrando os
    testes e voltando ao main").
 4. O `return` dentro do `except` sai da função **inteira**, não só do teste atual: se houvesse um
-   terceiro teste, ele não rodaria. É o "interrompa o teste e retorne imediatamente para o main"
-   do enunciado.
+   terceiro teste, ele não rodaria. É o "stop the test and immediately return to main"
+   do enunciado ("interrompa o teste e volte imediatamente ao main").
 5. Em qualquer caso, o `finally` imprime `Closing watering system` antes de seguir, inclusive
    antes do `return` sair da função (página [finally](./02-finally.md)).
 

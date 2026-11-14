@@ -31,7 +31,7 @@ Sem nenhuma linha impressa, a saída é idêntica à do enunciado.
 
 A demonstração sempre passa uma mensagem, então ela não mostra as mensagens padrão. Para vê-las,
 crie cada erro sem mensagem, do mesmo jeito que na conferência dos limites do
-[exercício 1](../04-ex1/06-rodar-e-conferir.md):
+[exercício 1](../04-ex1/06-rodar-e-conferir.md#conferir-os-limites):
 
 ```bash
 cd ex3
