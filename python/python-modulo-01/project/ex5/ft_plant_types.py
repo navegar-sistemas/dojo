@@ -111,8 +111,10 @@ class Vegetable(Plant):
         self._nutritional_value = 0.0
 
     def grow(self) -> None:
+        previous_height: float = self._height
         super().grow()
-        self._nutritional_value += 0.5
+        if self._height != previous_height:
+            self._nutritional_value += 0.5
 
     def age(self) -> None:
         super().age()

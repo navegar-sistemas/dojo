@@ -22,15 +22,15 @@ A simulação repete o mesmo dia sete vezes: crescer, envelhecer, mostrar. Um la
     start_height = rose.height
     for day in range(1, 8):
         print(f"=== Day {day} ===")
-        rose.grow(0.8)
-        rose.age(1)
+        rose.grow()
+        rose.age()
         rose.show()
 ```
 
 - antes do laço, a rosa é mostrada no estado inicial: `Rose: 25.0cm, 30 days old`;
 - `start_height` guarda a altura do começo da semana, para a conta do fim;
-- a cada volta, `day` vale o número do dia, e a rosa cresce 0,8 cm, envelhece 1 dia e é
-  mostrada.
+- a cada volta, `day` vale o número do dia, e a rosa cresce a sua taxa (0,8 cm), envelhece 1 dia
+  e é mostrada.
 
 ## O crescimento da semana
 

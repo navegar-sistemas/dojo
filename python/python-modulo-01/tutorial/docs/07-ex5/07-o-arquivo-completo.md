@@ -10,8 +10,11 @@ saída por tipo:
 
 ```python title="ex5/ft_plant_types.py"
 class Plant:
-    def __init__(self, name: str, height: float, age_days: int) -> None:
+    def __init__(
+        self, name: str, height: float, age_days: int, growth_rate: float
+    ) -> None:
         self._name = name
+        self._growth_rate = growth_rate
         self._height = 0.0
         self._age_days = 0
         self.set_height(height)
@@ -43,18 +46,19 @@ class Plant:
             f"{self._age_days} days old"
         )
 
-    def grow(self, centimeters: float) -> None:
-        self.set_height(self._height + centimeters)
+    def grow(self) -> None:
+        self.set_height(self._height + self._growth_rate)
 
-    def age(self, days: int) -> None:
-        self.set_age(self._age_days + days)
+    def age(self) -> None:
+        self.set_age(self._age_days + 1)
 
 
 class Flower(Plant):
     def __init__(
-        self, name: str, height: float, age_days: int, color: str
+        self, name: str, height: float, age_days: int, growth_rate: float,
+        color: str
     ) -> None:
-        super().__init__(name, height, age_days)
+        super().__init__(name, height, age_days, growth_rate)
         self._color = color
         self._blooming = False
 
@@ -72,10 +76,10 @@ class Flower(Plant):
 
 class Tree(Plant):
     def __init__(
-        self, name: str, height: float, age_days: int,
+        self, name: str, height: float, age_days: int, growth_rate: float,
         trunk_diameter: float
     ) -> None:
-        super().__init__(name, height, age_days)
+        super().__init__(name, height, age_days, growth_rate)
         self._trunk_diameter = trunk_diameter
 
     def produce_shade(self) -> None:
@@ -92,20 +96,23 @@ class Tree(Plant):
 
 class Vegetable(Plant):
     def __init__(
-        self, name: str, height: float, age_days: int,
+        self, name: str, height: float, age_days: int, growth_rate: float,
         harvest_season: str
     ) -> None:
-        super().__init__(name, height, age_days)
+        super().__init__(name, height, age_days, growth_rate)
         self._harvest_season = harvest_season
         self._nutritional_value = 0.0
 
-    def grow(self, centimeters: float) -> None:
-        super().grow(centimeters)
-        self._nutritional_value += 0.5
+    def grow(self) -> None:
+        previous_height = self._height
+        super().grow()
+        if self._height != previous_height:
+            self._nutritional_value += 0.5
 
-    def age(self, days: int) -> None:
-        super().age(days)
-        self._nutritional_value += 0.5
+    def age(self) -> None:
+        previous_age = self._age_days
+        super().age()
+        self._nutritional_value += 0.5 * (self._age_days - previous_age)
 
     def show(self) -> None:
         super().show()
@@ -117,7 +124,7 @@ if __name__ == "__main__":
     print("=== Garden Plant Types ===")
 
     print("=== Flower")
-    rose = Flower("Rose", 15.0, 10, "red")
+    rose = Flower("Rose", 15.0, 10, 0.8, "red")
     rose.show()
     print("[asking the rose to bloom]")
     rose.bloom()
@@ -125,19 +132,19 @@ if __name__ == "__main__":
     print()
 
     print("=== Tree")
-    oak = Tree("Oak", 200.0, 365, 5.0)
+    oak = Tree("Oak", 200.0, 365, 1.5, 5.0)
     oak.show()
     print("[asking the oak to produce shade]")
     oak.produce_shade()
     print()
 
     print("=== Vegetable")
-    tomato = Vegetable("Tomato", 5.0, 10, "April")
+    tomato = Vegetable("Tomato", 5.0, 10, 2.1, "April")
     tomato.show()
     print("[make tomato grow and age for 20 days]")
     for _ in range(20):
-        tomato.grow(2.1)
-        tomato.age(1)
+        tomato.grow()
+        tomato.age()
     tomato.show()
 ```
 

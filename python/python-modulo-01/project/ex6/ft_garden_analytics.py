@@ -37,7 +37,7 @@ class Plant:
 
     @classmethod
     def anonymous(cls) -> "Plant":
-        return Plant("Unknown plant", 0.0, 0, 0.0)
+        return cls("Unknown plant", 0.0, 0, 0.0)
 
     def get_name(self) -> str:
         return self._name
@@ -151,6 +151,8 @@ class Tree(Plant):
             super().display()
             print(f" {self._shade_calls} shade")
 
+    _stats: "Tree.Stats"
+
     def __init__(
         self,
         name: str,
@@ -161,11 +163,10 @@ class Tree(Plant):
     ) -> None:
         super().__init__(name, height, age_days, growth_rate)
         self._trunk_diameter = trunk_diameter
-        self._tree_stats = Tree.Stats()
-        self._stats = self._tree_stats
+        self._stats = Tree.Stats()
 
     def produce_shade(self) -> None:
-        self._tree_stats.record_shade()
+        self._stats.record_shade()
         print(
             f"Tree {self._name} now produces a shade of "
             f"{round(self._height, 1)}cm long and "
@@ -191,8 +192,10 @@ class Vegetable(Plant):
         self._nutritional_value = 0.0
 
     def grow(self) -> None:
+        previous_height: float = self._height
         super().grow()
-        self._nutritional_value += 0.5
+        if self._height != previous_height:
+            self._nutritional_value += 0.5
 
     def age(self, days: int = 1) -> None:
         previous_age: int = self._age_days

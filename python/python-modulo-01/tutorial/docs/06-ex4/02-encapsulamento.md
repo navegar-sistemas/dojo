@@ -59,6 +59,6 @@ O mangling existe para evitar que uma classe filha, sem querer, use o mesmo nome
 classe a partir da qual foi construída (a **classe pai**, também apresentada no exercício 5) e,
 ao guardar um valor nele, apague o valor que a classe pai guardava ali. O efeito colateral é que
 a própria classe filha também não enxerga o atributo pelo nome escrito. O enunciado pede a
-convenção protected, de um `_` só, para os atributos da classe, e por isso os **três** atributos
-da planta passam a ser `_name`, `_height` e `_age_days`: o nome também, mesmo sem regra de
-validação.
+convenção protected, de um `_` só, para os atributos da classe, e por isso os **quatro**
+atributos da planta passam a ser `_name`, `_height`, `_age_days` e `_growth_rate`: o nome e a
+taxa também, mesmo sem regra de validação.

@@ -80,6 +80,7 @@ classDiagram
         _name
         _height
         _age_days
+        _growth_rate
         get_height()
         get_age()
         set_height()

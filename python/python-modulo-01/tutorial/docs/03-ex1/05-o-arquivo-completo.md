@@ -47,4 +47,5 @@ O arquivo só chama `print()`, a função autorizada; `Plant()` é a própria cl
 método do próprio arquivo. As linhas em branco dentro do bloco main só separam uma planta da
 outra.
 
-O preenchimento repete quatro linhas por planta. O exercício 3 resolve essa repetição.
+O preenchimento repete quatro linhas por planta, e esquecer uma delas só aparece como erro quando
+o programa roda. O exercício 3 resolve as duas coisas.

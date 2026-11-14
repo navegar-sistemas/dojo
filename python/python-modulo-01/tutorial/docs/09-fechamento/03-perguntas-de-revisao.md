@@ -35,9 +35,11 @@ Com mais plantas, os objetos cabem numa lista e são percorridos num laço
 
 ## Como a planta muda com o tempo, e como plantas diferentes evoluem de jeitos diferentes?
 
-`grow()` e `age()` são métodos que mudam o estado da planta: a altura e a idade guardadas nela
-([grow e age](../04-ex2/02-grow-e-age.md)). Cada tipo de planta pode ter o seu próprio jeito de
-crescer sobrescrevendo esses métodos: a hortaliça cresce como qualquer planta e ainda ganha valor
+`grow()` e `age()` são métodos que mudam o estado da planta: a altura e a idade guardadas nela.
+Cada planta guarda a sua taxa de crescimento, e `grow()` usa a taxa da própria planta: a rosa
+cresce 0,8 cm por chamada, o girassol do exercício 6, 30 cm
+([grow e age](../04-ex2/02-grow-e-age.md)). Um tipo de planta também pode mudar o que esses
+métodos fazem, sobrescrevendo-os: a hortaliça cresce como qualquer planta e ainda ganha valor
 nutricional ([Vegetable](../07-ex5/06-vegetable.md)).
 
 ## Para que serve o construtor?

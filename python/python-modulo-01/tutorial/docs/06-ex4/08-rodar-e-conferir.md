@@ -56,7 +56,7 @@ antes.
 
 ```bash
 cd ex4
-python3 -c 'from ft_garden_security import Plant; Plant("Fern", -3.0, 10).show()'
+python3 -c 'from ft_garden_security import Plant; Plant("Fern", -3.0, 10, 0.5).show()'
 cd ..
 ```
 
@@ -72,7 +72,7 @@ padrão, `0.0` cm.
 
 ```bash
 cd ex4
-python3 -c 'from ft_garden_security import Plant; fern = Plant("Fern", 15.0, 10); fern.grow(-20.0); fern.show()'
+python3 -c 'from ft_garden_security import Plant; fern = Plant("Fern", 15.0, 10, -20.0); fern.grow(); fern.show()'
 cd ..
 ```
 
@@ -81,7 +81,8 @@ Fern: Error, height can't be negative
 Fern: 15.0cm, 10 days old
 ```
 
-O `grow(-20.0)` levaria a altura a `-5.0`; o setter recusou, e a samambaia continua com 15 cm.
+Com a taxa `-20.0`, o `grow()` levaria a altura a `-5.0`; o setter recusou, e a samambaia continua
+com 15 cm.
 
 O import deixou uma pasta `ex4/__pycache__`, que não faz parte da entrega e pode ser apagada.
 

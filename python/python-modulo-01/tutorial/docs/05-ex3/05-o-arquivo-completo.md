@@ -10,10 +10,13 @@ iguais. No bloco main, as cinco plantas e o laço:
 
 ```python title="ex3/ft_plant_factory.py"
 class Plant:
-    def __init__(self, name: str, height: float, age_days: int) -> None:
+    def __init__(
+        self, name: str, height: float, age_days: int, growth_rate: float
+    ) -> None:
         self.name = name
         self.height = height
         self.age_days = age_days
+        self.growth_rate = growth_rate
 
     def show(self) -> None:
         print(
@@ -21,20 +24,20 @@ class Plant:
             f"{self.age_days} days old"
         )
 
-    def grow(self, centimeters: float) -> None:
-        self.height += centimeters
+    def grow(self) -> None:
+        self.height += self.growth_rate
 
-    def age(self, days: int) -> None:
-        self.age_days += days
+    def age(self) -> None:
+        self.age_days += 1
 
 
 if __name__ == "__main__":
     plants = [
-        Plant("Rose", 25.0, 30),
-        Plant("Oak", 200.0, 365),
-        Plant("Cactus", 5.0, 90),
-        Plant("Sunflower", 80.0, 45),
-        Plant("Fern", 15.0, 120),
+        Plant("Rose", 25.0, 30, 0.8),
+        Plant("Oak", 200.0, 365, 1.5),
+        Plant("Cactus", 5.0, 90, 0.1),
+        Plant("Sunflower", 80.0, 45, 3.0),
+        Plant("Fern", 15.0, 120, 0.5),
     ]
     print("=== Plant Factory Output ===")
     for plant in plants:

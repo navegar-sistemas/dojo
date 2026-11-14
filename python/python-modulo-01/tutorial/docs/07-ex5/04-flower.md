@@ -11,9 +11,10 @@ florescer.
 ```python
 class Flower(Plant):
     def __init__(
-        self, name: str, height: float, age_days: int, color: str
+        self, name: str, height: float, age_days: int, growth_rate: float,
+        color: str
     ) -> None:
-        super().__init__(name, height, age_days)
+        super().__init__(name, height, age_days, growth_rate)
         self._color = color
         self._blooming = False
 
@@ -29,11 +30,11 @@ class Flower(Plant):
             print(f" {self._name} has not bloomed yet")
 ```
 
-- a assinatura do `__init__` (a linha dos parâmetros) passou de 79 caracteres, e os parâmetros
-  foram para a linha de baixo, dentro dos parênteses. O flake8 aceita a quebra porque ela está
-  dentro de parênteses abertos;
-- `super().__init__(name, height, age_days)` cuida de nome, altura e idade, **com a validação do
-  exercício 4**: uma flor com altura negativa também é recusada;
+- a assinatura do `__init__` não cabe numa linha de 79 caracteres, e os parâmetros vão para as
+  linhas de baixo, dentro dos parênteses, como no construtor de `Plant`. O flake8 aceita a quebra
+  porque ela está dentro de parênteses abertos;
+- `super().__init__(name, height, age_days, growth_rate)` cuida de nome, altura, idade e taxa,
+  **com a validação do exercício 4**: uma flor com altura negativa também é recusada;
 - `_blooming` guarda se a flor está florescendo: começa `False`, e `bloom()` o põe em `True`. O
   enunciado pede só o atributo da cor; `_blooming` é o estado de que `bloom()` precisa para que o
   `show()` saiba o que imprimir;

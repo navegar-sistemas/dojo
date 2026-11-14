@@ -39,10 +39,10 @@ class Tree(Plant):
     _stats: "Tree.Stats"
 
     def __init__(
-        self, name: str, height: float, age_days: int,
+        self, name: str, height: float, age_days: int, growth_rate: float,
         trunk_diameter: float
     ) -> None:
-        super().__init__(name, height, age_days)
+        super().__init__(name, height, age_days, growth_rate)
         self._trunk_diameter = trunk_diameter
         self._stats = Tree.Stats()
 

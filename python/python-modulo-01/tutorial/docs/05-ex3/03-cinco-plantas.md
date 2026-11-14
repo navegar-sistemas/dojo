@@ -9,11 +9,11 @@ Com o construtor, cada planta cabe numa expressão, e as cinco cabem numa **list
 
 ```python
     plants = [
-        Plant("Rose", 25.0, 30),
-        Plant("Oak", 200.0, 365),
-        Plant("Cactus", 5.0, 90),
-        Plant("Sunflower", 80.0, 45),
-        Plant("Fern", 15.0, 120),
+        Plant("Rose", 25.0, 30, 0.8),
+        Plant("Oak", 200.0, 365, 1.5),
+        Plant("Cactus", 5.0, 90, 0.1),
+        Plant("Sunflower", 80.0, 45, 3.0),
+        Plant("Fern", 15.0, 120, 0.5),
     ]
 ```
 
@@ -23,7 +23,9 @@ Com o construtor, cada planta cabe numa expressão, e as cinco cabem numa **list
 - a vírgula depois do último item é permitida e é o costume quando cada item fica numa linha: uma
   planta acrescentada depois não mexe na linha anterior;
 - as alturas são escritas com `.0`, pelo motivo da página
-  [O float e o round](../04-ex2/03-o-float-e-o-round.md).
+  [O float e o round](../04-ex2/03-o-float-e-o-round.md);
+- o último número de cada planta é a taxa de crescimento. A saída deste exercício não a mostra, e
+  os valores são escolha do projeto, cada planta com o seu ritmo.
 
 São cinco plantas de tamanhos bem diferentes, de um cacto de 5 cm a um carvalho de 2 m:
 

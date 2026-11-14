@@ -11,21 +11,25 @@ padrão**. Na criação não existe valor anterior, então o projeto usa o valor
 e idade `0`.
 
 ```python
-    def __init__(self, name: str, height: float, age_days: int) -> None:
+    def __init__(
+        self, name: str, height: float, age_days: int, growth_rate: float
+    ) -> None:
         self._name = name
+        self._growth_rate = growth_rate
         self._height = 0.0
         self._age_days = 0
         self.set_height(height)
         self.set_age(age_days)
 ```
 
-1. o nome é guardado primeiro, porque as mensagens de erro dos setters o usam;
+1. o nome é guardado primeiro, porque as mensagens de erro dos setters o usam; a taxa vem logo
+   depois, guardada direto, porque não tem validação;
 2. altura e idade começam com o valor padrão;
 3. os setters tentam trocar o padrão pelos valores recebidos. Um valor válido entra; um negativo
    é recusado com a mensagem de erro, e o padrão fica.
 
 A validação continua escrita num lugar só: o construtor não repete o `if height < 0`, ele chama o
-setter. `Plant("Fern", -3.0, 10)` imprime `Fern: Error, height can't be negative` e cria uma
+setter. `Plant("Fern", -3.0, 10, 0.5)` imprime `Fern: Error, height can't be negative` e cria uma
 samambaia com `0.0` cm e 10 dias ([Rodar e conferir](./08-rodar-e-conferir.md) roda esse
 caso).
 

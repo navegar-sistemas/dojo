@@ -14,14 +14,16 @@ serve para isso: em vez do objeto, ele recebe a **classe**, e pode usá-la para 
 ```python
     @classmethod
     def anonymous(cls) -> "Plant":
-        return cls("Unknown plant", 0.0, 0)
+        return cls("Unknown plant", 0.0, 0, 0.0)
 ```
 
 - `@classmethod` passa o método pela função `classmethod()`, autorizada neste exercício;
 - o primeiro parâmetro, por costume chamado `cls` (de *class*), é a classe em que o método foi
   chamado. Em `Plant.anonymous()`, o `cls` é `Plant`;
-- `cls("Unknown plant", 0.0, 0)` é o mesmo que `Plant("Unknown plant", 0.0, 0)`: cria uma planta
-  com o nome `Unknown plant`, 0 cm e 0 dias, os valores da saída do enunciado.
+- `cls("Unknown plant", 0.0, 0, 0.0)` é o mesmo que `Plant("Unknown plant", 0.0, 0, 0.0)`: cria
+  uma planta com o nome `Unknown plant`, 0 cm e 0 dias, os valores da saída do enunciado. A taxa
+  de crescimento não aparece na saída, e a planta anônima fica com `0.0`: sem dados, ela não
+  cresce.
 
 Quem chama não passa nada: `Plant.anonymous()` devolve a planta pronta.
 

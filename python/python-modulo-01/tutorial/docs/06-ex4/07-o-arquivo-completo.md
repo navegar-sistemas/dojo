@@ -11,8 +11,11 @@ atualização e o bloco main com as quatro etapas da saída:
 
 ```python title="ex4/ft_garden_security.py"
 class Plant:
-    def __init__(self, name: str, height: float, age_days: int) -> None:
+    def __init__(
+        self, name: str, height: float, age_days: int, growth_rate: float
+    ) -> None:
         self._name = name
+        self._growth_rate = growth_rate
         self._height = 0.0
         self._age_days = 0
         self.set_height(height)
@@ -44,11 +47,11 @@ class Plant:
             f"{self._age_days} days old"
         )
 
-    def grow(self, centimeters: float) -> None:
-        self.set_height(self._height + centimeters)
+    def grow(self) -> None:
+        self.set_height(self._height + self._growth_rate)
 
-    def age(self, days: int) -> None:
-        self.set_age(self._age_days + days)
+    def age(self) -> None:
+        self.set_age(self._age_days + 1)
 
 
 def update_height(plant: Plant, height: float) -> None:
@@ -67,7 +70,7 @@ def update_age(plant: Plant, age_days: int) -> None:
 
 if __name__ == "__main__":
     print("=== Garden Security System ===")
-    rose = Plant("Rose", 15.0, 10)
+    rose = Plant("Rose", 15.0, 10, 0.8)
     print("Plant created: ", end="")
     rose.show()
     print()

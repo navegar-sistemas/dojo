@@ -49,8 +49,11 @@ class Plant:
 O construtor de `Plant` cria um objeto `Stats` e o guarda num atributo protegido:
 
 ```python
-    def __init__(self, name: str, height: float, age_days: int) -> None:
+    def __init__(
+        self, name: str, height: float, age_days: int, growth_rate: float
+    ) -> None:
         self._name = name
+        self._growth_rate = growth_rate
         self._height = 0.0
         self._age_days = 0
         self._stats = Plant.Stats()
@@ -74,17 +77,23 @@ Os três métodos contados avisam o `_stats` logo no começo:
             f"{self._age_days} days old"
         )
 
-    def grow(self, centimeters: float) -> None:
+    def grow(self) -> None:
         self._stats.count_grow()
-        self.set_height(self._height + centimeters)
+        self.set_height(self._height + self._growth_rate)
 
-    def age(self, days: int) -> None:
+    def age(self, days: int = 1) -> None:
         self._stats.count_age()
         self.set_age(self._age_days + days)
 ```
 
 As classes filhas não precisam contar `grow`, `age` nem `show`: `Flower.show()` chama
 `super().show()`, que é este `show()`, e a contagem acontece aqui, uma vez por chamada.
+
+O `age()` mudou desde o exercício 5. A saída mostra o girassol envelhecendo 20 dias com uma única
+chamada (`1 age`), e o `age()` que soma sempre um dia não faz isso. Ele passa a receber os dias
+num parâmetro, `days`, com **valor padrão** `1`: o `= 1` na assinatura faz `age()` sem argumento
+valer o mesmo que `age(1)`. Assim, `sunflower.age(20)` envelhece 20 dias, e toda chamada que já
+existia, sem argumento, continua envelhecendo um dia.
 
 ## Ler as estatísticas de fora
 

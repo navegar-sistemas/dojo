@@ -102,6 +102,11 @@ As linhas `name: str` e `height: int` não guardam valor nenhum: só **declaram*
 tem esses atributos, com esses tipos. O valor de cada um continua sendo dado objeto por objeto,
 depois de instanciar, que é o jeito que o enunciado pede neste exercício.
 
+A declaração não garante que o valor exista. Um objeto cujo atributo nunca recebeu valor passa
+no mypy, que confia na declaração, e o erro só aparece quando o programa roda e lê o atributo:
+`AttributeError: 'Plant' object has no attribute 'height'`. O
+[construtor do exercício 3](../05-ex3/02-o-construtor.md) fecha essa brecha.
+
 ## Os três atributos da planta
 
 A planta do exercício tem nome, altura e idade:

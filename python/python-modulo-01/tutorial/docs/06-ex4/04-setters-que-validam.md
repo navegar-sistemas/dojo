@@ -45,13 +45,15 @@ reaproveitar os setters sem imprimir nada a mais
 ## grow e age também passam pelos setters
 
 ```python
-    def grow(self, centimeters: float) -> None:
-        self.set_height(self._height + centimeters)
+    def grow(self) -> None:
+        self.set_height(self._height + self._growth_rate)
 
-    def age(self, days: int) -> None:
-        self.set_age(self._age_days + days)
+    def age(self) -> None:
+        self.set_age(self._age_days + 1)
 ```
 
-Crescer e envelhecer também mudam altura e idade, então também passam pela validação: um
-`grow(-20.0)` numa planta de 15 cm daria altura negativa, e é recusado com a mesma mensagem. O
-valor devolvido pelo setter não interessa a `grow` e `age`, que o ignoram.
+Crescer e envelhecer também mudam altura e idade, então também passam pela validação. A taxa de
+crescimento não tem regra (o enunciado só pede validar altura e idade) e pode ser negativa, como
+numa planta murchando: numa planta de 15 cm com taxa `-20.0`, o `grow()` daria altura negativa, e
+é recusado com a mesma mensagem. O valor devolvido pelo setter não interessa a `grow` e `age`, que
+o ignoram.

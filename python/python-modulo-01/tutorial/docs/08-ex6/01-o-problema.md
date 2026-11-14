@@ -85,10 +85,12 @@ Stats: 0 grow, 0 age, 1 show
 
 O que a saída diz sobre o funcionamento:
 
-- a rosa cresce de 15 para 23 cm com **uma** chamada a `grow()` (`1 grow`): 8 cm de uma vez;
-- o girassol cresce de 80 para 110 cm e envelhece de 45 para 65 dias com **uma** chamada a cada
-  método (`1 grow, 1 age`): 30 cm e 20 dias de uma vez. É por isso que `grow()` e `age()`
-  recebem a quantidade desde o [exercício 2](../04-ex2/02-grow-e-age.md);
+- a rosa cresce de 15 para 23 cm com **uma** chamada a `grow()` (`1 grow`): 8 cm de uma vez, a
+  taxa de crescimento dela;
+- o girassol cresce de 80 para 110 cm com **uma** chamada a `grow()`: a taxa dele é de 30 cm;
+- o girassol envelhece de 45 para 65 dias com **uma** chamada a `age()` (`1 age`): 20 dias de uma
+  vez. O `age()` do exercício 5 soma sempre um dia, e por isso passa a receber quantos dias
+  envelhecer ([A classe aninhada](./04-a-classe-aninhada.md#contar-as-chamadas));
 - as estatísticas da árvore têm a linha a mais, `0 shade` e depois `1 shade`;
 - o girassol tem `0` sementes antes de florescer e `42` depois;
 - a planta anônima se chama `Unknown plant` e tem 0 cm e 0 dias.

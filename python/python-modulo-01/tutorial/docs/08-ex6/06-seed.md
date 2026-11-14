@@ -44,10 +44,10 @@ que ela guarda no atributo `_stats`.
 ```python
 class Seed(Flower):
     def __init__(
-        self, name: str, height: float, age_days: int, color: str,
-        seed_yield: int
+        self, name: str, height: float, age_days: int, growth_rate: float,
+        color: str, seed_yield: int
     ) -> None:
-        super().__init__(name, height, age_days, color)
+        super().__init__(name, height, age_days, growth_rate, color)
         self._seed_yield = seed_yield
         self._seeds = 0
 
@@ -72,8 +72,8 @@ class Seed(Flower):
 
 Esta é uma escolha do projeto. O enunciado pede que a `Seed` guarde o número de sementes depois
 de florescer, e a saída mostra `0` antes e `42` depois. O número vem no construtor
-(`Seed("Sunflower", 80.0, 45, "yellow", 42)`), e cada girassol pode render quantas sementes o
-programa disser.
+(`Seed("Sunflower", 80.0, 45, 30.0, "yellow", 42)`), e cada girassol pode render quantas
+sementes o programa disser.
 
 Outras opções seriam um número fixo dentro de `bloom()`, igual para todas as sementes, ou um
 parâmetro obrigatório em `bloom()`. A segunda mudaria a assinatura do método herdado de
@@ -90,14 +90,15 @@ então um `show()` num girassol conta **um**, e não três: a saída mostra `2 s
 
 ```python
     print("=== Seed")
-    sunflower = Seed("Sunflower", 80.0, 45, "yellow", 42)
+    sunflower = Seed("Sunflower", 80.0, 45, 30.0, "yellow", 42)
     sunflower.show()
     print("[make sunflower grow, age and bloom]")
-    sunflower.grow(30.0)
+    sunflower.grow()
     sunflower.age(20)
     sunflower.bloom()
     sunflower.show()
     display_stats(sunflower)
 ```
 
-`display_stats` é a [função de estatísticas](./07-a-funcao-de-estatisticas.md).
+O girassol tem a taxa de 30 cm, e um `grow()` o leva de 80 a 110 cm; `age(20)` o envelhece 20
+dias de uma vez. `display_stats` é a [função de estatísticas](./07-a-funcao-de-estatisticas.md).

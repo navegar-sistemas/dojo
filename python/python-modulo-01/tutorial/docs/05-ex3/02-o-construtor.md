@@ -51,15 +51,26 @@ O `__init__` devolve `None`, como todo construtor.
 
 ```python
 class Plant:
-    def __init__(self, name: str, height: float, age_days: int) -> None:
+    def __init__(
+        self, name: str, height: float, age_days: int, growth_rate: float
+    ) -> None:
         self.name = name
         self.height = height
         self.age_days = age_days
+        self.growth_rate = growth_rate
 ```
 
-Com ele, `Plant("Rose", 25.0, 30)` cria uma rosa completa: 25 cm, 30 dias, pronta para `show()`,
-`grow()` e `age()`.
+- o enunciado pede os dados iniciais (nome, altura e idade) e uma planta pronta para crescer
+  logo depois de criada. O `grow()` do exercício 2 usa a taxa de crescimento, e por isso ela
+  também entra no construtor, como quarto parâmetro;
+- numa linha só, o `def` teria 92 caracteres, contando os quatro espaços de recuo, acima dos 79
+  que o flake8 aceita
+  ([O float e o round](../04-ex2/03-o-float-e-o-round.md)). Os parâmetros vão para a linha de
+  baixo, dentro dos parênteses, e o `) -> None:` fecha a assinatura na linha seguinte.
+
+Com ele, `Plant("Rose", 25.0, 30, 0.8)` cria uma rosa completa: 25 cm, 30 dias, 0,8 cm de
+crescimento por dia, pronta para `show()`, `grow()` e `age()`.
 
 Instanciar sem os dados agora é um erro: `Plant()` faz o Python reclamar que faltam os argumentos
-`name`, `height` e `age_days`, e o mypy aponta o mesmo erro antes mesmo de rodar. Toda planta
-nasce completa, ou não nasce.
+`name`, `height`, `age_days` e `growth_rate`, e o mypy aponta o mesmo erro antes mesmo de rodar.
+Toda planta nasce completa, ou não nasce.

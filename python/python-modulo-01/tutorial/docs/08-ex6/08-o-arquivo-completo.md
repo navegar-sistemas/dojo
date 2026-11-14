@@ -5,10 +5,10 @@ title: O arquivo completo
 
 # O arquivo completo
 
-`Plant` com a classe aninhada `Stats`, o método estático, o método de classe, os getters novos e
-a contagem em `show()`, `grow()` e `age()`; `Flower` como no exercício 5; `Seed` herdando de
-`Flower`; `Tree` com a sua `Stats`; `Vegetable` como no exercício 5; a função `display_stats`; e o
-bloco main com os cinco blocos da saída:
+`Plant` com a classe aninhada `Stats`, o método estático, o método de classe, os getters novos, a
+contagem em `show()`, `grow()` e `age()` e o `age()` recebendo os dias; `Flower` como no
+exercício 5; `Seed` herdando de `Flower`; `Tree` com a sua `Stats`; `Vegetable` com o `age()`
+recebendo os dias; a função `display_stats`; e o bloco main com os cinco blocos da saída:
 
 ```python title="ex6/ft_garden_analytics.py"
 class Plant:
@@ -33,8 +33,11 @@ class Plant:
                 f"{self._age_calls} age, {self._show_calls} show"
             )
 
-    def __init__(self, name: str, height: float, age_days: int) -> None:
+    def __init__(
+        self, name: str, height: float, age_days: int, growth_rate: float
+    ) -> None:
         self._name = name
+        self._growth_rate = growth_rate
         self._height = 0.0
         self._age_days = 0
         self._stats = Plant.Stats()
@@ -47,7 +50,7 @@ class Plant:
 
     @classmethod
     def anonymous(cls) -> "Plant":
-        return cls("Unknown plant", 0.0, 0)
+        return cls("Unknown plant", 0.0, 0, 0.0)
 
     def get_name(self) -> str:
         return self._name
@@ -82,20 +85,21 @@ class Plant:
             f"{self._age_days} days old"
         )
 
-    def grow(self, centimeters: float) -> None:
+    def grow(self) -> None:
         self._stats.count_grow()
-        self.set_height(self._height + centimeters)
+        self.set_height(self._height + self._growth_rate)
 
-    def age(self, days: int) -> None:
+    def age(self, days: int = 1) -> None:
         self._stats.count_age()
         self.set_age(self._age_days + days)
 
 
 class Flower(Plant):
     def __init__(
-        self, name: str, height: float, age_days: int, color: str
+        self, name: str, height: float, age_days: int, growth_rate: float,
+        color: str
     ) -> None:
-        super().__init__(name, height, age_days)
+        super().__init__(name, height, age_days, growth_rate)
         self._color = color
         self._blooming = False
 
@@ -113,10 +117,10 @@ class Flower(Plant):
 
 class Seed(Flower):
     def __init__(
-        self, name: str, height: float, age_days: int, color: str,
-        seed_yield: int
+        self, name: str, height: float, age_days: int, growth_rate: float,
+        color: str, seed_yield: int
     ) -> None:
-        super().__init__(name, height, age_days, color)
+        super().__init__(name, height, age_days, growth_rate, color)
         self._seed_yield = seed_yield
         self._seeds = 0
 
@@ -145,10 +149,10 @@ class Tree(Plant):
     _stats: "Tree.Stats"
 
     def __init__(
-        self, name: str, height: float, age_days: int,
+        self, name: str, height: float, age_days: int, growth_rate: float,
         trunk_diameter: float
     ) -> None:
-        super().__init__(name, height, age_days)
+        super().__init__(name, height, age_days, growth_rate)
         self._trunk_diameter = trunk_diameter
         self._stats = Tree.Stats()
 
@@ -167,20 +171,23 @@ class Tree(Plant):
 
 class Vegetable(Plant):
     def __init__(
-        self, name: str, height: float, age_days: int,
+        self, name: str, height: float, age_days: int, growth_rate: float,
         harvest_season: str
     ) -> None:
-        super().__init__(name, height, age_days)
+        super().__init__(name, height, age_days, growth_rate)
         self._harvest_season = harvest_season
         self._nutritional_value = 0.0
 
-    def grow(self, centimeters: float) -> None:
-        super().grow(centimeters)
-        self._nutritional_value += 0.5
+    def grow(self) -> None:
+        previous_height = self._height
+        super().grow()
+        if self._height != previous_height:
+            self._nutritional_value += 0.5
 
-    def age(self, days: int) -> None:
+    def age(self, days: int = 1) -> None:
+        previous_age = self._age_days
         super().age(days)
-        self._nutritional_value += 0.5
+        self._nutritional_value += 0.5 * (self._age_days - previous_age)
 
     def show(self) -> None:
         super().show()
@@ -203,18 +210,18 @@ if __name__ == "__main__":
     print()
 
     print("=== Flower")
-    rose = Flower("Rose", 15.0, 10, "red")
+    rose = Flower("Rose", 15.0, 10, 8.0, "red")
     rose.show()
     display_stats(rose)
     print("[asking the rose to grow and bloom]")
-    rose.grow(8.0)
+    rose.grow()
     rose.bloom()
     rose.show()
     display_stats(rose)
     print()
 
     print("=== Tree")
-    oak = Tree("Oak", 200.0, 365, 5.0)
+    oak = Tree("Oak", 200.0, 365, 1.5, 5.0)
     oak.show()
     display_stats(oak)
     print("[asking the oak to produce shade]")
@@ -223,10 +230,10 @@ if __name__ == "__main__":
     print()
 
     print("=== Seed")
-    sunflower = Seed("Sunflower", 80.0, 45, "yellow", 42)
+    sunflower = Seed("Sunflower", 80.0, 45, 30.0, "yellow", 42)
     sunflower.show()
     print("[make sunflower grow, age and bloom]")
-    sunflower.grow(30.0)
+    sunflower.grow()
     sunflower.age(20)
     sunflower.bloom()
     sunflower.show()
@@ -242,9 +249,14 @@ if __name__ == "__main__":
 Como no [exercício 0](../02-ex0/04-o-arquivo-completo.md), o arquivo termina com uma única quebra
 de linha depois da última linha, que o botão de copiar não leva.
 
+- a rosa é criada com a taxa de crescimento `8.0`, e o girassol com `30.0`: um `grow()` leva a
+  rosa de 15 a 23 cm e o girassol de 80 a 110 cm, como na saída. O carvalho guarda a taxa `1.5`
+  do exercício 5, que esta saída não usa;
 - `Vegetable` não aparece na saída deste exercício, mas continua no arquivo: o enunciado pede as
   classes do exercício 5 melhoradas, e uma hortaliça também tem estatísticas, herdadas de
-  `Plant`;
+  `Plant`. O `age()` dela acompanha o de `Plant` e também recebe os dias; como o valor
+  nutricional já era contado por dia envelhecido ([Vegetable](../07-ex5/06-vegetable.md)), um
+  `age(20)` soma 10, o mesmo que vinte `age()`;
 - as linhas `[statistics for ...]` saem de `display_stats`; as outras linhas entre colchetes são
   `print` do bloco main.
 
