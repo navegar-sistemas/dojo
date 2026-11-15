@@ -132,6 +132,222 @@
         {
             "name": "tem:TemLinha",
             "regexp": "não tem nenhuma linha|tem uma linha"
+        },
+        {
+            "name": "chave:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "fim:d",
+            "regexp": "-?\\d+"
+        },
+        {
+            "name": "gerador:Gerador",
+            "regexp": "módulo mazegen|programa"
+        },
+        {
+            "name": "inicio:d",
+            "regexp": "-?\\d+"
+        },
+        {
+            "name": "itens:L",
+            "regexp": "\"(?:[^\"\\\\]|\\\\.)*\"(?:(?:, | e )\"(?:[^\"\\\\]|\\\\.)*\")*"
+        },
+        {
+            "name": "linha:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "motivo:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "n:d",
+            "regexp": "-?\\d+"
+        },
+        {
+            "name": "pares:L",
+            "regexp": "\"(?:[^\"\\\\]|\\\\.)*\"(?:(?:, | e )\"(?:[^\"\\\\]|\\\\.)*\")*"
+        },
+        {
+            "name": "posicao:Pos",
+            "regexp": "acrescentada no fim|inserida no início"
+        },
+        {
+            "name": "variacao:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "altura:d",
+            "regexp": "-?\\d+"
+        },
+        {
+            "name": "alvo:Alvo",
+            "regexp": "cada linha de coordenadas do rodapé|o nome de cada arquivo selecionado|a última linha da saída padrão|a primeira linha do README|cada linha da grade|a linha 3 do rodapé|a solução"
+        },
+        {
+            "name": "aspecto:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "bit:d",
+            "regexp": "-?\\d+"
+        },
+        {
+            "name": "borda:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "campo:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "celula:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "celulas:L",
+            "regexp": "\"(?:[^\"\\\\]|\\\\.)*\"(?:(?:, | e )\"(?:[^\"\\\\]|\\\\.)*\")*"
+        },
+        {
+            "name": "cmp:Cmp",
+            "regexp": "pelo menos|no máximo"
+        },
+        {
+            "name": "colunas:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "cor:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "digito:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "direcao:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "elemento:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "entrada:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "evento:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "excecao:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "expressao:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "grade:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "item:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "largura:d",
+            "regexp": "-?\\d+"
+        },
+        {
+            "name": "linhas:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "modelo:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "modulo:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "op:Op",
+            "regexp": "começa com|contém"
+        },
+        {
+            "name": "opcoes:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "paredes:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "pasta:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "presenca:Presenca",
+            "regexp": "presente|ausente"
+        },
+        {
+            "name": "prompt:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "propriedade:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "relacao:Relacao",
+            "regexp": "diferentes entre si|idênticos"
+        },
+        {
+            "name": "relato:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "rotulo:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "saida:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "secao:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "situacao:EstadoCelula",
+            "regexp": "é alcançável a partir da entrada|tem as paredes externas fechadas|não tem valor F"
+        },
+        {
+            "name": "situacao:FA",
+            "regexp": "fechadas|abertas"
+        },
+        {
+            "name": "trechos:L",
+            "regexp": "\"(?:[^\"\\\\]|\\\\.)*\"(?:(?:, | e )\"(?:[^\"\\\\]|\\\\.)*\")*"
+        },
+        {
+            "name": "valor:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "venv:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "verificacao:Q",
+            "regexp": "(?:[^\"\\\\]|\\\\.)*"
+        },
+        {
+            "name": "vis:Visib",
+            "regexp": "visível|oculto"
         }
     ]
 }

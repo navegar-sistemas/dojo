@@ -31,8 +31,9 @@ saem do pacote.
 
 ## O arquivo completo
 
-Juntando as constantes e a assinatura ([página 2](./10-construtor-e-atributos.md)), as
-conferências do construtor ([página 3](./02-validar-os-parametros.md)) e o laço de tentativas
+Juntando as constantes e a assinatura ([página 2](./10-construtor-e-atributos.md)), as funções
+`_is_int` e `_is_point` e as conferências do construtor ([página 3](./02-validar-os-parametros.md))
+e o laço de tentativas
 ([página 4](./03-generate.md)). Os imports trazem cada peça das partes 4 a 8; do módulo do
 `Braider` vêm também as constantes `MAX_DEAD_ENDS` e `MIN_LOOPS`. A docstring da classe (o texto
 entre `"""` abaixo de `class MazeGenerator:`) descreve os três atributos públicos.
@@ -53,6 +54,31 @@ from mazegen.value_objects.pattern42 import Pattern42
 MIN_SIZE = 1
 MAX_SIZE = 100
 MAX_ATTEMPTS = 20
+
+
+def _is_int(value: object) -> bool:
+    """Tell whether the value is an int that is not a bool.
+
+    Args:
+        value: Any value passed by the caller.
+
+    Returns:
+        True for int values; False for bool, which is a subclass of int.
+    """
+    return isinstance(value, int) and not isinstance(value, bool)
+
+
+def _is_point(value: object) -> bool:
+    """Tell whether the value is an (x, y) tuple of two ints.
+
+    Args:
+        value: Any value passed by the caller.
+
+    Returns:
+        True for a tuple of exactly two ints.
+    """
+    return (isinstance(value, tuple) and len(value) == 2
+            and all(_is_int(item) for item in value))
 
 
 class MazeGenerator:
@@ -81,19 +107,30 @@ class MazeGenerator:
             seed: Seed of the random source; None for a fresh one.
 
         Raises:
-            MazeError: A parameter is impossible; the message names it.
+            MazeError: A parameter has the wrong type or an impossible
+                value; the message names it.
         """
         for name, value in (("width", width), ("height", height)):
+            if not _is_int(value):
+                raise MazeError(f"{name} must be an integer, got {value!r}")
             if not MIN_SIZE <= value <= MAX_SIZE:
                 raise MazeError(f"{name} must be between {MIN_SIZE} and "
                                 f"{MAX_SIZE}, got {value}")
         if exit is None:
             exit = (width - 1, height - 1)
+        for name, point in (("entry", entry), ("exit", exit)):
+            if not _is_point(point):
+                raise MazeError(f"{name} must be a tuple of two integers, "
+                                f"got {point!r}")
         for name, (x, y) in (("entry", entry), ("exit", exit)):
             if not (0 <= x < width and 0 <= y < height):
                 raise MazeError(f"{name} ({x}, {y}) is outside the maze")
         if entry == exit:
             raise MazeError("entry and exit must differ")
+        if not isinstance(perfect, bool):
+            raise MazeError(f"perfect must be True or False, got {perfect!r}")
+        if seed is not None and not _is_int(seed):
+            raise MazeError(f"seed must be an integer or None, got {seed!r}")
         if not perfect and (width - 1) * (height - 1) < 2:
             raise MazeError(
                 "perfect=False needs (width - 1) x (height - 1) >= 2 for a "
@@ -198,9 +235,13 @@ from mazegen.generator import MazeGenerator
 
 for kwargs in [
     {"width": 0, "height": 15},
+    {"width": "20", "height": 15},
     {"width": 20, "height": 101},
     {"width": 20, "height": 15, "entry": (20, 0)},
+    {"width": 20, "height": 15, "entry": (0,)},
     {"width": 20, "height": 15, "exit": (0, 0)},
+    {"width": 20, "height": 15, "perfect": "no"},
+    {"width": 20, "height": 15, "seed": "x"},
     {"width": 2, "height": 2},
     {"width": 20, "height": 15, "entry": (6, 5)},
 ]:
@@ -213,14 +254,18 @@ EOF
 
 ```text
 width must be between 1 and 100, got 0
+width must be an integer, got '20'
 height must be between 1 and 100, got 101
 entry (20, 0) is outside the maze
+entry must be a tuple of two integers, got (0,)
 entry and exit must differ
+perfect must be True or False, got 'no'
+seed must be an integer or None, got 'x'
 perfect=False needs (width - 1) x (height - 1) >= 2 for a Pac-Man board, got 2x2
 entry (6, 5) lies on the "42" pattern
 ```
 
-- A lista tem seis dicionários, um por tentativa. `kwargs` é só o nome da variável, comum em
+- A lista tem dez dicionários, um por tentativa. `kwargs` é só o nome da variável, comum em
   Python para isto: vem de *keyword arguments*, "argumentos com nome".
 - `MazeGenerator(**kwargs)`: os dois asteriscos desmontam o dicionário e passam cada chave como um
   parâmetro com nome. `{"width": 0, "height": 15}` vira `MazeGenerator(width=0, height=15)`.

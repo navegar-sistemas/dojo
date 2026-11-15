@@ -25,6 +25,8 @@ SUPRESSAO = re.compile(
     r"(?i)#\s*noqa\b|#\s*flake8[:=]\s*noqa|#\s*type:\s*ignore|#\s*mypy:"
 )
 PACOTE_DO_MODULO = "mazegen"
+# Nome do módulo Python da MiniLibX (mlx-2.2-py3-none-any.whl do subject).
+MINILIBX = "mlx"
 
 Definicao = ast.FunctionDef | ast.AsyncFunctionDef | ast.ClassDef
 Documentavel = Definicao | ast.Module
@@ -663,4 +665,23 @@ def so_biblioteca_padrao(estado: Estado) -> None:
             and nome.split(".")[0] not in sys.stdlib_module_names
         ],
         "imports de fora da biblioteca padrão",
+    )
+
+
+@then('a análise estática confirma "sem MiniLibX"')
+def sem_minilibx(estado: Estado) -> None:
+    """Nenhum módulo importa a MiniLibX (I01).
+
+    Args:
+        estado: Estado do cenário, com as árvores da análise.
+    """
+    falhar_se(
+        estado,
+        [
+            (arquivo, linha, f"importa {nome}")
+            for arquivo, arvore in estado.arvores.items()
+            for nome, linha in importacoes(arvore)
+            if nome.split(".")[0] == MINILIBX
+        ],
+        "imports da MiniLibX",
     )

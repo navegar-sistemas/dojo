@@ -12,7 +12,7 @@ from pathlib import Path
 import pytest
 from pytest_bdd import given, parsers, then, when
 
-from suporte.config import CONFIG_BASE, Config
+from suporte.config import CONFIG_BASE, VARIACOES, Config
 from suporte.estado import PROJECT_DIR, TIMEOUT, Estado, Execucao
 from suporte.tipos import TIPOS
 
@@ -457,7 +457,7 @@ def config_de(estado: Estado, origem: str) -> None:
 
 
 @given(
-    parsers.parse('o config {origem:Origem} salvo em "{arquivo}"',
+    parsers.parse('o config {origem:Origem} salvo em "{arquivo:Q}"',
                   extra_types=TIPOS)
 )
 def config_salvo_em(estado: Estado, origem: str, arquivo: str) -> None:
@@ -559,3 +559,143 @@ def caminho_na_situacao(estado: Estado, caminho: str, situacao: str) -> None:
                 f'"{caminho}" {"é" if ignorado else "não é"} ignorado pelo '
                 f"git em {estado.cwd}"
             )
+
+
+def config_atual(estado: Estado) -> Config:
+    """Config que um passo anterior carregou.
+
+    Args:
+        estado: Estado do cenário.
+
+    Returns:
+        O config do cenário.
+    """
+    if estado.config is None:
+        pytest.fail("este passo precisa de um config carregado antes")
+    return estado.config
+
+
+def aplicar_pares(config: Config, pares: list[str]) -> None:
+    """Aplica cada "CHAVE=valor" ao config, trocando ou acrescentando.
+
+    Args:
+        config: Config a alterar.
+        pares: Itens no formato CHAVE=valor; o valor pode ser vazio.
+    """
+    for par in pares:
+        chave, igual, valor = par.partition("=")
+        if not igual or not chave:
+            pytest.fail(f'"{par}" não está no formato CHAVE=valor')
+        config.definir(chave, valor)
+
+
+@given(parsers.parse("o config base com {pares:L}", extra_types=TIPOS))
+def config_base_com(estado: Estado, pares: list[str]) -> None:
+    """Parte do config base e aplica os pares.
+
+    Args:
+        estado: Estado do cenário.
+        pares: Itens CHAVE=valor.
+    """
+    estado.config = Config(list(CONFIG_BASE))
+    aplicar_pares(estado.config, pares)
+
+
+@given(parsers.parse("o config com {pares:L}", extra_types=TIPOS))
+def config_com(estado: Estado, pares: list[str]) -> None:
+    """Aplica os pares ao config atual, depois de um Contexto.
+
+    Args:
+        estado: Estado do cenário.
+        pares: Itens CHAVE=valor.
+    """
+    aplicar_pares(config_atual(estado), pares)
+
+
+@given(parsers.parse('o config sem a chave "{chave:Q}"', extra_types=TIPOS))
+def config_sem_chave(estado: Estado, chave: str) -> None:
+    """Remove as linhas da chave.
+
+    Args:
+        estado: Estado do cenário.
+        chave: Nome da chave, sem diferenciar maiúsculas.
+    """
+    config_atual(estado).sem(chave)
+
+
+@given(
+    parsers.parse(
+        'o config com a linha {n:d} trocada por "{linha:Q}"',
+        extra_types=TIPOS,
+    )
+)
+def config_com_linha_trocada(estado: Estado, n: int, linha: str) -> None:
+    """Troca a linha número n, contada a partir de 1.
+
+    Args:
+        estado: Estado do cenário.
+        n: Número da linha.
+        linha: Linha nova.
+    """
+    try:
+        config_atual(estado).trocar_linha(n, linha)
+    except ValueError as erro:
+        pytest.fail(str(erro))
+
+
+@given(
+    parsers.parse(
+        'o config com a linha da chave "{chave:Q}" trocada por "{linha:Q}"',
+        extra_types=TIPOS,
+    )
+)
+def config_com_linha_da_chave(
+    estado: Estado, chave: str, linha: str
+) -> None:
+    """Troca a linha da chave; texto vazio remove a linha.
+
+    Args:
+        estado: Estado do cenário.
+        chave: Nome da chave.
+        linha: Linha nova, ou "".
+    """
+    try:
+        config_atual(estado).trocar_linha_da_chave(chave, linha)
+    except ValueError as erro:
+        pytest.fail(str(erro))
+
+
+@given(
+    parsers.parse(
+        'o config com a linha "{linha:Q}" {posicao:Pos}', extra_types=TIPOS
+    )
+)
+def config_com_linha(estado: Estado, linha: str, posicao: str) -> None:
+    """Insere a linha no início ou acrescenta no fim.
+
+    Args:
+        estado: Estado do cenário.
+        linha: Linha nova.
+        posicao: "inserida no início" ou "acrescentada no fim".
+    """
+    config_atual(estado).inserir(linha, posicao == "inserida no início")
+
+
+@given(
+    parsers.parse(
+        'o config escrito com a variação "{variacao:Q}"', extra_types=TIPOS
+    )
+)
+def config_com_variacao(estado: Estado, variacao: str) -> None:
+    """Marca a variação que a gravação aplica ao texto do config.
+
+    Args:
+        estado: Estado do cenário.
+        variacao: Uma das variações de VARIACOES.
+    """
+    if variacao not in VARIACOES:
+        pytest.fail(
+            f'variação "{variacao}" não existe; as válidas são: '
+            f"{', '.join(VARIACOES)}"
+        )
+    config_atual(estado).variacao = variacao

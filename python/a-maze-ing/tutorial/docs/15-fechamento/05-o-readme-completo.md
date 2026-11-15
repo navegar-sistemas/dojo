@@ -201,10 +201,12 @@ seed=None) takes:
         the same seed gives the same sequence of mazes; None gives a
         different one on every run.
 
-The constructor raises MazeError when a parameter is impossible: width
-or height outside 1..100, entry or exit outside the grid or on the
-"42", entry equal to exit, or perfect=False with
-(width - 1) * (height - 1) < 2. The message names the parameter.
+The constructor raises MazeError when a parameter has the wrong type
+(width, height or seed not an int, entry or exit not a tuple of two
+ints, perfect not a bool) or an impossible value: width or height
+outside 1..100, entry or exit outside the grid or on the "42", entry
+equal to exit, or perfect=False with (width - 1) * (height - 1) < 2.
+The message names the parameter.
 
 Each call to generate() builds a new maze and fills:
 

@@ -16,6 +16,7 @@ from step_defs.analise_estatica import (
     retorno_anotado,
     secao_args,
     secao_returns,
+    sem_minilibx,
     sem_supressao,
     so_biblioteca_padrao,
     todo_teste_usa_framework,
@@ -158,6 +159,16 @@ CASOS: list[tuple[Passo, str, str]] = [
         "import mazegen\n",
         "from a_maze_ing import main\n",
     ),
+    (
+        sem_minilibx,
+        "import os\nfrom mlxtras import x\nfrom . import mlx\n",
+        "from mlx import Mlx\n",
+    ),
+    (
+        sem_minilibx,
+        "import mazegen\n",
+        "def f() -> None:\n    import mlx.mlx\n",
+    ),
 ]
 
 IDS = [
@@ -184,6 +195,8 @@ IDS = [
     "desempacotada-aninhada",
     "pacote-de-terceiros",
     "programa-principal",
+    "minilibx-from",
+    "minilibx-import-interno",
 ]
 
 

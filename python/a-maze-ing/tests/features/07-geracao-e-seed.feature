@@ -169,3 +169,10 @@ Funcionalidade: Geração aleatória reproduzível por seed
       | MazeGenerator(width=2, height=2, perfect=False)               | perfect |
       | MazeGenerator(width=101, height=15)                           | width   |
       | MazeGenerator(width=20, height=1000000)                       | height  |
+      | MazeGenerator(width='20', height=15)                          | width   |
+      | MazeGenerator(width=2.5, height=15)                           | width   |
+      | MazeGenerator(width=True, height=15)                          | width   |
+      | MazeGenerator(width=20, height=15, entry=(0,))                | entry   |
+      | MazeGenerator(width=20, height=15, exit=[19, 14])             | exit    |
+      | MazeGenerator(width=20, height=15, perfect='no')              | perfect |
+      | MazeGenerator(width=20, height=15, seed='x')                  | seed    |

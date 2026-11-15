@@ -105,14 +105,13 @@ def test_cenario_cita_a_decisao_que_usa(decisao: str) -> None:
     assert sem_tag == []
 
 
-def test_faltantes_so_lista_frases() -> None:
-    """make faltantes não relata como solto um cenário que tem test_*.py."""
+def test_nenhuma_frase_falta() -> None:
+    """make faltantes não acha frase sem função nem cenário sem test_*.py."""
     processo = subprocess.run(
         ["make", "faltantes"],
         cwd=TESTS_DIR,
         capture_output=True,
         text=True,
-        check=True,
+        check=False,
     )
-    assert "not bound to any test" not in processo.stdout
-    assert "is not defined" in processo.stdout
+    assert processo.returncode == 0, processo.stdout + processo.stderr

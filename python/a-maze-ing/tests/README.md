@@ -23,7 +23,7 @@ A partir desta pasta:
 | `make debug` | o mesmo que `run`, dentro do `pdb` (aceita `ETAPA`) |
 | `make lint` | `flake8 .` e `mypy .` com as flags do subject |
 | `make lint-strict` | `flake8 .` e `mypy . --strict` |
-| `make faltantes` | lista as frases dos `.feature` que ainda não têm função |
+| `make faltantes` | lista as frases dos `.feature` sem função, com cada linha de Exemplos aplicada, e os `.feature` sem `test_*.py` |
 | `make manuais` | lista os cenários `@manual`, o roteiro de inspeção da defesa |
 | `make clean` | apaga `__pycache__`, `.mypy_cache` e `.pytest_cache` |
 
@@ -44,7 +44,8 @@ tests/
 ├── features/       NN-nome.feature; README.md, decisoes.md e vocabulario.md
 ├── cenarios/       test_NN_nome.py: liga cada .feature ao pytest
 ├── step_defs/      funções dos passos, um módulo por assunto
-├── suporte/        código comum dos passos: tipos de parâmetro, config, estado do cenário
+├── suporte/        código comum dos passos: tipos, config, estado, validador, sessão, render
+├── fixtures/       labirintos de teste da V23 (exemplo do subject e o perfeito do config base)
 └── autoteste/      testes do suporte e dos passos
 ```
 
@@ -60,14 +61,21 @@ tests/
 
 | Módulo | Frases |
 |---|---|
-| `step_defs/execucao.py` | `eu executo ...`, código de saída, conteúdo da saída, mensagem de erro |
+| `step_defs/execucao.py` | `eu executo ...`, código de saída, conteúdo da saída, mensagem de erro, expressões sobre alvos, comparação de execuções |
 | `step_defs/repositorio.py` | estado do repositório, arquivos e caminhos, config, situações de erro |
+| `step_defs/geracao.py` | `eu gero o labirinto ...` e `um labirinto gerado pelo ...` |
+| `step_defs/labirinto.py` | labirinto e célula de teste, `o validador da suíte ...`, grade, rodapé, células |
+| `step_defs/analyzer.py` | `... com o maze_analyzer` e as linhas do relatório dele |
+| `step_defs/interacao.py` | `o programa iniciado com ...`, envio ao menu, eventos, prompt |
+| `step_defs/renderizacao.py` | `a renderização confirma "..."` e as cores da última renderização |
+| `step_defs/modulo.py` | `o gerador "..."`, a exceção do construtor, `o módulo mazegen confirma "..."` |
+| `step_defs/pacote.py` | virtualenvs, metadados e propriedades do pacote, README e LICENSE |
+| `step_defs/catalogo.py` | `os casos de erro do catálogo da suíte` e o que eles confirmam |
 | `step_defs/analise_estatica.py` | `o código-fonte de ...` e `a análise estática confirma "..."` |
-| `step_defs/renderizacao.py` | `a renderização confirma "..."` |
 
 ## Criar um passo
 
-1. `make faltantes` mostra a frase sem função e um esqueleto.
+1. `make faltantes` mostra a frase sem função e o `.feature:linha` onde ela aparece.
 2. Escreva a função no módulo do assunto em `step_defs/`:
 
    ```python

@@ -12,6 +12,13 @@ pytest_plugins = [
     "step_defs.repositorio",
     "step_defs.analise_estatica",
     "step_defs.renderizacao",
+    "step_defs.geracao",
+    "step_defs.labirinto",
+    "step_defs.analyzer",
+    "step_defs.interacao",
+    "step_defs.modulo",
+    "step_defs.pacote",
+    "step_defs.catalogo",
 ]
 
 REFERENCIAS = ("pdf-", "md-", "regua-", "decisao-")

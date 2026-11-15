@@ -4,6 +4,7 @@ import pytest
 
 from step_defs.execucao import (
     AVISO_DO_42,
+    alvo_casa_com,
     codigo_de_saida,
     comando_termina_com,
     conferir_mensagem_de_erro,
@@ -12,6 +13,7 @@ from step_defs.execucao import (
     eu_executo_com_entrada,
     linha_da_saida_contem,
     resultado_da_execucao,
+    resultados_comparados,
     saida_contem,
     saida_do_comando_contem,
     saida_do_comando_igual,
@@ -20,6 +22,7 @@ from step_defs.execucao import (
 )
 from suporte.config import Config
 from suporte.estado import Estado, Execucao
+from suporte.labirinto import Labirinto, ler_saida
 
 ERRO = "Error: cfg.txt, line 3: expected KEY=VALUE, got 'abc'\n"
 
@@ -340,3 +343,310 @@ def test_resultado_erro_invalido(
     com_resultado(cenario, codigo, "", "Error: cfg.txt not found\n")
     with pytest.raises(pytest.fail.Exception):
         resultado_da_execucao(cenario, resultado)
+
+
+ARQUIVO = "d7\n\n0,0\n1,0\nE\n"
+README = "*This project has been created by eu.*\r\n# A-Maze-ing\n"
+
+
+def com_labirintos(cenario: Estado, *textos: str) -> Estado:
+    """Põe no cenário labirintos lidos de arquivos de saída.
+
+    Args:
+        cenario: Estado numa pasta temporária.
+        *textos: Conteúdo de cada arquivo de saída.
+
+    Returns:
+        O mesmo estado.
+    """
+    cenario.labirintos += [ler_saida(texto) for texto in textos]
+    return cenario
+
+
+@pytest.mark.parametrize(
+    ("alvo", "regex"),
+    [
+        ("a solução", "^[NESW]+$"),
+        ("cada linha da grade", "^[0-9a-f]{2}$"),
+        ("cada linha de coordenadas do rodapé", r"^\d+,\d+$"),
+        ("a linha 3 do rodapé", "^E$"),
+    ],
+    ids=["solução", "grade", "coordenadas", "linha 3"],
+)
+def test_alvo_do_labirinto_casa(
+    cenario: Estado, alvo: str, regex: str
+) -> None:
+    """Os alvos de labirinto passam quando todo item casa.
+
+    Args:
+        cenario: Estado numa pasta temporária.
+        alvo: Alvo da V67.
+        regex: Expressão que todo item cumpre.
+    """
+    com_labirintos(cenario, ARQUIVO, "b7\n\n0,0\n1,0\nE\n")
+    alvo_casa_com(cenario, alvo, regex)
+
+
+@pytest.mark.parametrize(
+    ("alvo", "texto", "regex"),
+    [
+        ("a solução", "d7\n\n0,0\n1,0\nX\n", "^[NESW]+$"),
+        ("cada linha da grade", "D7\n\n0,0\n1,0\nE\n", "^[0-9a-f]+$"),
+        ("cada linha da grade", ARQUIVO, "^[0-9a-f]{3}$"),
+        (
+            "cada linha de coordenadas do rodapé",
+            "d7\n\n# entry (0,0)\n1,0\nE\n",
+            r"^\d+,\d+$",
+        ),
+        ("a linha 3 do rodapé", "d7\n\n0,0\n1,0\nE \n", "^[NESW]+$"),
+    ],
+    ids=[
+        "letra fora", "maiúscula", "largura", "anotação", "espaço no fim",
+    ],
+)
+def test_alvo_do_labirinto_nao_casa(
+    cenario: Estado, alvo: str, texto: str, regex: str
+) -> None:
+    """Um item que não casa, em qualquer labirinto do cenário, falha.
+
+    Args:
+        cenario: Estado numa pasta temporária.
+        alvo: Alvo da V67.
+        texto: Arquivo de saída do segundo labirinto.
+        regex: Expressão pedida.
+    """
+    com_labirintos(cenario, ARQUIVO, texto)
+    with pytest.raises(pytest.fail.Exception, match="não casa"):
+        alvo_casa_com(cenario, alvo, regex)
+
+
+def test_grade_do_labirinto_da_classe_em_hexadecimal(cenario: Estado) -> None:
+    """Sem texto, a grade da classe é escrita em hexadecimal minúsculo.
+
+    Args:
+        cenario: Estado numa pasta temporária.
+    """
+    cenario.labirintos.append(Labirinto([[13, 7], [10, 15]], None, None, ""))
+    alvo_casa_com(cenario, "cada linha da grade", "^(d7|af)$")
+    with pytest.raises(pytest.fail.Exception, match="'af'"):
+        alvo_casa_com(cenario, "cada linha da grade", "^d7$")
+
+
+@pytest.mark.parametrize(
+    ("alvo", "mensagem"),
+    [
+        ("a solução", "nenhum labirinto"),
+        ("cada linha de coordenadas do rodapé", "rodapé tem 1"),
+        ("a linha 3 do rodapé", "rodapé tem 1"),
+        ("a primeira linha do README", "README.md não existe"),
+        ("o nome de cada arquivo selecionado", "nenhum arquivo"),
+        ("a última linha da saída padrão", "nenhum comando"),
+        ("a grade inteira", "não existe"),
+    ],
+    ids=[
+        "sem labirinto", "rodapé curto", "sem linha 3", "sem README",
+        "sem seleção", "sem execução", "alvo desconhecido",
+    ],
+)
+def test_alvo_sem_itens(cenario: Estado, alvo: str, mensagem: str) -> None:
+    """Alvo sem os itens que ele confere derruba o passo.
+
+    Args:
+        cenario: Estado numa pasta temporária.
+        alvo: Alvo pedido.
+        mensagem: Trecho da mensagem de falha.
+    """
+    if alvo != "a solução":
+        com_labirintos(cenario, "d7\n\n0,0\n")
+    with pytest.raises(pytest.fail.Exception, match=mensagem):
+        alvo_casa_com(cenario, alvo, ".")
+
+
+def test_solucao_ausente(cenario: Estado) -> None:
+    """Labirinto sem a linha do caminho não tem solução a conferir.
+
+    Args:
+        cenario: Estado numa pasta temporária.
+    """
+    com_labirintos(cenario, "d7\n\n0,0\n1,0\n")
+    with pytest.raises(pytest.fail.Exception, match="não tem solução"):
+        alvo_casa_com(cenario, "a solução", ".")
+
+
+def test_primeira_linha_do_readme_sem_converter_quebras(
+    cenario: Estado,
+) -> None:
+    """A primeira linha mantém o \\r do CRLF, que o $ não aceita.
+
+    Args:
+        cenario: Estado numa pasta temporária.
+    """
+    (cenario.cwd / "README.md").write_bytes(README.encode("utf-8"))
+    alvo_casa_com(cenario, "a primeira linha do README", r"^\*This")
+    with pytest.raises(pytest.fail.Exception, match="não casa"):
+        alvo_casa_com(cenario, "a primeira linha do README", r"\.\*$")
+
+
+def test_nome_de_cada_arquivo_selecionado(cenario: Estado) -> None:
+    """A expressão vale para o nome, sem a pasta, de cada arquivo lido.
+
+    Args:
+        cenario: Estado numa pasta temporária.
+    """
+    cenario.lido = [
+        cenario.cwd / "mazegen-1.0.0-py3-none-any.whl",
+        cenario.cwd / "mazegen-1.0.0.tar.gz",
+    ]
+    alvo_casa_com(
+        cenario,
+        "o nome de cada arquivo selecionado",
+        r"^mazegen-.+(\.whl|\.tar\.gz)$",
+    )
+    with pytest.raises(pytest.fail.Exception, match="tar.gz"):
+        alvo_casa_com(cenario, "o nome de cada arquivo selecionado", r"\.whl$")
+
+
+def test_ultima_linha_da_saida_padrao(cenario: Estado) -> None:
+    """Só a última linha do stdout é conferida.
+
+    Args:
+        cenario: Estado numa pasta temporária.
+    """
+    com_resultado(cenario, saida_padrao="1 2\nNESW\n", saida_erro="x\n")
+    alvo_casa_com(cenario, "a última linha da saída padrão", "^[NESW]+$")
+    with pytest.raises(pytest.fail.Exception, match="não casa"):
+        alvo_casa_com(cenario, "a última linha da saída padrão", "^1")
+    com_resultado(cenario, saida_padrao="")
+    with pytest.raises(pytest.fail.Exception, match="não imprimiu"):
+        alvo_casa_com(cenario, "a última linha da saída padrão", ".")
+
+
+def test_expressao_invalida(cenario: Estado) -> None:
+    """Uma expressão que não compila derruba o passo citando-a.
+
+    Args:
+        cenario: Estado numa pasta temporária.
+    """
+    com_labirintos(cenario, ARQUIVO)
+    with pytest.raises(pytest.fail.Exception, match="inválida"):
+        alvo_casa_com(cenario, "a solução", "^[NESW")
+
+
+def execucao_de(texto: str, saida_padrao: str = "") -> Execucao:
+    """Execução com código 0 e o labirinto do arquivo de saída.
+
+    Args:
+        texto: Conteúdo do OUTPUT_FILE.
+        saida_padrao: O que a execução mostrou.
+
+    Returns:
+        A execução.
+    """
+    return Execucao(
+        "python3 a_maze_ing.py cfg.txt", 0, saida_padrao, "", False, None,
+        texto, ler_saida(texto),
+    )
+
+
+# Pares de labirintos que só diferem num aspecto: (aspecto, outro arquivo).
+OUTROS = [
+    ("arquivo de saída", "d7\n\n0,0\n1,0\nE\n\n"),
+    ("grade", "b7\n\n0,0\n1,0\nE\n"),
+    ("solução", "d7\n\n0,0\n1,0\nEW\n"),
+    ("células de valor F", "df\n\n0,0\n1,0\nE\n"),
+]
+
+
+@pytest.mark.parametrize(
+    ("aspecto", "outro"), OUTROS, ids=[aspecto for aspecto, _ in OUTROS]
+)
+def test_resultados_comparados(
+    cenario: Estado, aspecto: str, outro: str
+) -> None:
+    """Iguais no aspecto são idênticos; um diferente quebra a igualdade.
+
+    Args:
+        cenario: Estado numa pasta temporária.
+        aspecto: Aspecto da V71.
+        outro: Arquivo de saída diferente do ARQUIVO nesse aspecto.
+    """
+    cenario.execucoes = [execucao_de(ARQUIVO), execucao_de(ARQUIVO)]
+    resultados_comparados(cenario, "idênticos", aspecto)
+    with pytest.raises(pytest.fail.Exception, match="1 e 2"):
+        resultados_comparados(cenario, "diferentes entre si", aspecto)
+    cenario.execucoes = [
+        execucao_de(ARQUIVO), execucao_de(outro), execucao_de(ARQUIVO)
+    ]
+    with pytest.raises(pytest.fail.Exception, match="1 e 2, 2 e 3"):
+        resultados_comparados(cenario, "idênticos", aspecto)
+    with pytest.raises(pytest.fail.Exception, match="1 e 3"):
+        resultados_comparados(cenario, "diferentes entre si", aspecto)
+    cenario.execucoes = [execucao_de(ARQUIVO), execucao_de(outro)]
+    resultados_comparados(cenario, "diferentes entre si", aspecto)
+
+
+def test_saida_exibida_comparada(cenario: Estado) -> None:
+    """A saída exibida é o stdout de cada execução.
+
+    Args:
+        cenario: Estado numa pasta temporária.
+    """
+    cenario.execucoes = [
+        execucao_de(ARQUIVO, "um"), execucao_de("b7\n\n0,0\n1,0\nE\n", "um")
+    ]
+    resultados_comparados(cenario, "idênticos", "saída exibida")
+    cenario.execucoes.append(execucao_de(ARQUIVO, "dois"))
+    with pytest.raises(pytest.fail.Exception, match="diferem"):
+        resultados_comparados(cenario, "idênticos", "saída exibida")
+
+
+@pytest.mark.parametrize(
+    ("execucoes", "relacao", "aspecto", "mensagem"),
+    [
+        ([], "idênticos", "grade", "pelo menos 2"),
+        ([execucao_de(ARQUIVO)], "idênticos", "grade", "pelo menos 2"),
+        (
+            [Execucao("c", 1, "", "Error: x\n")] * 2,
+            "idênticos",
+            "grade",
+            "não produziu labirinto",
+        ),
+        (
+            [Execucao("c", 1, "", "Error: x\n")] * 2,
+            "idênticos",
+            "arquivo de saída",
+            "não gravou",
+        ),
+        (
+            [execucao_de("d7\n\n0,0\n1,0\n")] * 2,
+            "idênticos",
+            "solução",
+            "não tem solução",
+        ),
+        ([execucao_de(ARQUIVO)] * 2, "idênticos", "cor", "não existe"),
+        ([execucao_de(ARQUIVO)] * 2, "iguais", "grade", "não existe"),
+    ],
+    ids=[
+        "nenhuma", "uma só", "sem labirinto", "sem arquivo", "sem solução",
+        "aspecto desconhecido", "relação desconhecida",
+    ],
+)
+def test_resultados_comparados_invalido(
+    cenario: Estado,
+    execucoes: list[Execucao],
+    relacao: str,
+    aspecto: str,
+    mensagem: str,
+) -> None:
+    """Menos de 2 execuções, aspecto ausente ou valor fora da lista falham.
+
+    Args:
+        cenario: Estado numa pasta temporária.
+        execucoes: Execuções do cenário.
+        relacao: Relação pedida.
+        aspecto: Aspecto pedido.
+        mensagem: Trecho da mensagem de falha.
+    """
+    cenario.execucoes = execucoes
+    with pytest.raises(pytest.fail.Exception, match=mensagem):
+        resultados_comparados(cenario, relacao, aspecto)

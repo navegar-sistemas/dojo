@@ -7,8 +7,8 @@ title: Validar os parâmetros
 
 Quem chama `MazeGenerator(width=0, height=15)` pediu um labirinto impossível. Se o construtor
 aceitasse, o erro só apareceria mais tarde, no meio da geração, com uma mensagem confusa ou um
-labirinto errado. Esta página mostra o começo do construtor, que confere cada parâmetro e recusa
-os impossíveis com uma mensagem que diz o que corrigir.
+labirinto errado. Esta página mostra o começo do construtor, que confere o tipo e o valor de cada
+parâmetro e recusa os errados com uma mensagem que diz o que corrigir.
 
 ## Por que o construtor confere
 
@@ -24,18 +24,68 @@ O erro é sempre um `MazeError`, a exceção do `mazegen`
 ([parte 4](../04-value-objects/01-maze-error.md)), e a mensagem **cita o nome do parâmetro**: quem
 recebe o erro sabe o que corrigir sem ler o código.
 
+## Tipos
+
+As anotações da assinatura (`width: int`, `entry: tuple[int, int]`...) servem ao mypy e a quem lê,
+mas o Python não as confere quando o programa roda: `MazeGenerator(width="20", height=15)` chega
+ao construtor sem erro nenhum. Sem uma conferência, o `"20"` estouraria mais adiante com um
+`TypeError` que não fala em `MazeError`, e um `width=2.5` passaria pelo construtor e só quebraria
+dentro de `generate()`. Duas funções do módulo, fora da classe, respondem se um valor tem o tipo
+certo:
+
+```python
+def _is_int(value: object) -> bool:
+    """Tell whether the value is an int that is not a bool.
+
+    Args:
+        value: Any value passed by the caller.
+
+    Returns:
+        True for int values; False for bool, which is a subclass of int.
+    """
+    return isinstance(value, int) and not isinstance(value, bool)
+
+
+def _is_point(value: object) -> bool:
+    """Tell whether the value is an (x, y) tuple of two ints.
+
+    Args:
+        value: Any value passed by the caller.
+
+    Returns:
+        True for a tuple of exactly two ints.
+    """
+    return (isinstance(value, tuple) and len(value) == 2
+            and all(_is_int(item) for item in value))
+```
+
+- `isinstance(value, int)` pergunta se o valor é um inteiro. O parâmetro é anotado como `object`
+  porque a função existe justamente para receber qualquer coisa.
+- `True` e `False` também passam em `isinstance(..., int)`: no Python, `bool` é um caso particular
+  de `int` (`True == 1`). O `and not isinstance(value, bool)` recusa os dois, porque
+  `width=True` é engano de quem chamou, não uma largura.
+- `_is_point` exige uma tupla de exatamente dois inteiros. `all(...)` devolve `True` quando a
+  condição vale para todos os itens.
+- O sublinhado no começo do nome marca as duas funções como internas: elas não fazem parte do que
+  o pacote oferece (só `MazeGenerator` e `MazeError`).
+
 ## Tamanho
 
 ```python
         for name, value in (("width", width), ("height", height)):
+            if not _is_int(value):
+                raise MazeError(f"{name} must be an integer, got {value!r}")
             if not MIN_SIZE <= value <= MAX_SIZE:
                 raise MazeError(f"{name} must be between {MIN_SIZE} and "
                                 f"{MAX_SIZE}, got {value}")
 ```
 
-- O laço percorre dois pares `(nome, valor)`: assim o mesmo `if` serve para a largura e para a
-  altura, sem ser escrito duas vezes. `width` vem antes de `height`: com os dois errados, o erro
+- O laço percorre dois pares `(nome, valor)`: assim os mesmos `if` servem para a largura e para a
+  altura, sem ser escritos duas vezes. `width` vem antes de `height`: com os dois errados, o erro
   fala de `width`.
+- O tipo é conferido antes do intervalo: comparar `"20"` com números levantaria `TypeError`.
+  `{value!r}` mostra o valor como ele aparece no código, com as aspas de um texto:
+  `width must be an integer, got '20'`.
 - `MIN_SIZE <= value <= MAX_SIZE` é uma comparação encadeada do Python: vale o mesmo que
   `MIN_SIZE <= value and value <= MAX_SIZE`. O `not` inverte: o erro sai quando o valor está fora
   do intervalo.
@@ -50,6 +100,10 @@ recebe o erro sabe o que corrigir sem ler o código.
 ```python
         if exit is None:
             exit = (width - 1, height - 1)
+        for name, point in (("entry", entry), ("exit", exit)):
+            if not _is_point(point):
+                raise MazeError(f"{name} must be a tuple of two integers, "
+                                f"got {point!r}")
         for name, (x, y) in (("entry", entry), ("exit", exit)):
             if not (0 <= x < width and 0 <= y < height):
                 raise MazeError(f"{name} ({x}, {y}) is outside the maze")
@@ -59,11 +113,28 @@ recebe o erro sabe o que corrigir sem ler o código.
 
 - O `None` vira o canto de baixo à direita **antes** das conferências, para a saída padrão passar
   pelas mesmas regras que uma saída informada.
+- O primeiro laço confere o formato; só depois dele o segundo laço pode desmontar cada ponto em
+  `x` e `y` sem risco: `entry=(0,)` seria recusado aqui com uma mensagem clara, em vez de quebrar
+  no desmonte com `ValueError`.
 - `for name, (x, y) in ...` desmonta cada item em três variáveis de uma vez: o nome e as duas
   coordenadas.
 - Uma coordenada está dentro da grade quando `x` vai de 0 a `width − 1` e `y` de 0 a
   `height − 1`.
 - O enunciado exige entrada e saída dentro da grade e diferentes uma da outra.
+
+## O modo e a semente
+
+```python
+        if not isinstance(perfect, bool):
+            raise MazeError(f"perfect must be True or False, got {perfect!r}")
+        if seed is not None and not _is_int(seed):
+            raise MazeError(f"seed must be an integer or None, got {seed!r}")
+```
+
+- `perfect` precisa ser `True` ou `False`. Sem essa conferência, `perfect="no"` seria aceito e
+  daria um labirinto perfeito: um texto não vazio conta como verdadeiro num `if`.
+- `seed` pode faltar (`None`) ou ser um inteiro. O `random.Random` aceitaria um texto como
+  semente, mas a assinatura promete `int | None`, e o construtor cumpre a promessa.
 
 ## Tamanho possível para o Pac-Man
 

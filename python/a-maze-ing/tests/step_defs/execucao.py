@@ -1,11 +1,13 @@
 """Passos que executam comandos e conferem a saída."""
 
 import re
+from collections.abc import Callable
 
 import pytest
 from pytest_bdd import parsers, then, when
 
 from suporte.estado import Estado, Execucao
+from suporte.labirinto import FECHADA, Labirinto
 from suporte.tipos import TIPOS
 
 # Palavra-chave que a mensagem de erro traz para cada motivo (I21).
@@ -100,6 +102,29 @@ def eu_executo_com_entrada(
         estado.executar(comando, entrada)
 
 
+@when(
+    parsers.parse(
+        "eu executo {comandos:L} {n:d} vezes com a entrada {linhas:L}",
+        extra_types=TIPOS,
+    )
+)
+def eu_executo_vezes(
+    estado: Estado, comandos: list[str], n: int, linhas: list[str]
+) -> None:
+    """Repete a execução com entrada n vezes e troca a lista de execuções.
+
+    Args:
+        estado: Estado do cenário.
+        comandos: Comandos na ordem em que aparecem no passo.
+        n: Número de repetições.
+        linhas: Linhas enviadas ao stdin, cada uma terminada em "\\n".
+    """
+    inicio = len(estado.resultados)
+    for _ in range(n):
+        eu_executo_com_entrada(estado, comandos, linhas)
+    estado.execucoes = estado.resultados[inicio:]
+
+
 @then(
     parsers.parse(
         "{fluxo:Fluxo} {verbo:Contem} {textos:L}", extra_types=TIPOS
@@ -128,10 +153,15 @@ def saida_contem(
 def codigo_de_saida(estado: Estado, codigo: int) -> None:
     """Confere o código de saída do último comando.
 
+    Numa sessão, espera o processo terminar antes de conferir.
+
     Args:
         estado: Estado do cenário.
         codigo: Código esperado.
     """
+    sessao = estado.em_sessao()
+    if sessao is not None and sessao.esperar_fim() is None:
+        pytest.fail(f"'{sessao.comando}' não terminou dentro do tempo limite")
     resultado = estado.resultado
     assert resultado.codigo == codigo, (
         f"'{resultado.comando}' terminou com código {resultado.codigo}, "
@@ -291,3 +321,328 @@ def resultado_da_execucao(estado: Estado, resultado: str) -> None:
     mensagem = conferir_mensagem_de_erro(execucao, citados.split(", "))
     if motivo:
         conferir_motivo(mensagem, motivo)
+
+
+@then(parsers.parse("todos os comandos terminam com código {codigo:d}"))
+def todos_terminam_com(estado: Estado, codigo: int) -> None:
+    """Confere o código de saída de todos os comandos do cenário.
+
+    Args:
+        estado: Estado do cenário.
+        codigo: Código esperado.
+    """
+    if not estado.resultados:
+        pytest.fail("nenhum comando foi executado antes deste passo")
+    errados = [
+        f"'{execucao.comando}' terminou com código {execucao.codigo}\n"
+        f"{execucao.saida_padrao}{execucao.saida_erro}"
+        for execucao in estado.resultados
+        if execucao.codigo != codigo
+    ]
+    if errados:
+        pytest.fail(f"esperado código {codigo}:\n" + "\n".join(errados))
+
+
+@then(parsers.parse("a mensagem de erro cita {itens:L}", extra_types=TIPOS))
+def mensagem_cita(estado: Estado, itens: list[str]) -> None:
+    """Confere a mensagem da D01 e os itens citados, na ordem.
+
+    Args:
+        estado: Estado do cenário.
+        itens: Textos que a mensagem cita.
+    """
+    conferir_mensagem_de_erro(estado.resultado, itens)
+
+
+@then(
+    parsers.parse(
+        'a mensagem de erro explica "{motivo:Q}"', extra_types=TIPOS
+    )
+)
+def mensagem_explica(estado: Estado, motivo: str) -> None:
+    """Confere a mensagem da D01 e a palavra-chave do motivo (I21).
+
+    Args:
+        estado: Estado do cenário.
+        motivo: Uma das chaves de MOTIVOS.
+    """
+    conferir_motivo(conferir_mensagem_de_erro(estado.resultado, []), motivo)
+
+
+def labirintos_do_cenario(estado: Estado) -> list[Labirinto]:
+    """Labirintos produzidos no cenário, exigindo pelo menos um.
+
+    Args:
+        estado: Estado do cenário.
+
+    Returns:
+        Os labirintos, do primeiro ao atual.
+    """
+    if not estado.labirintos:
+        pytest.fail("nenhum labirinto foi produzido antes deste passo")
+    return estado.labirintos
+
+
+def linhas_da_grade(labirinto: Labirinto) -> list[str]:
+    """Linhas da grade como texto, sem a quebra de linha.
+
+    Args:
+        labirinto: Labirinto lido de arquivo ou gerado pela classe.
+
+    Returns:
+        As linhas do texto bruto até a linha vazia; para o labirinto da
+        classe, a grade escrita em hexadecimal minúsculo.
+    """
+    if labirinto.texto is None:
+        return [
+            "".join(format(valor, "x") for valor in linha)
+            for linha in labirinto.grade
+        ]
+    linhas = labirinto.texto.split("\n")
+    return linhas[:linhas.index("")] if "" in linhas else linhas
+
+
+def linhas_do_rodape(estado: Estado, inicio: int, fim: int) -> list[str]:
+    """Linhas do rodapé de cada labirinto, da posição inicio até fim.
+
+    Args:
+        estado: Estado do cenário.
+        inicio: Índice da primeira linha, a partir de 0.
+        fim: Índice depois da última linha.
+
+    Returns:
+        As linhas pedidas de todos os labirintos do cenário.
+    """
+    linhas: list[str] = []
+    for labirinto in labirintos_do_cenario(estado):
+        if len(labirinto.rodape) < fim:
+            pytest.fail(
+                f"o rodapé tem {len(labirinto.rodape)} linha(s), esperadas "
+                f"pelo menos {fim}: {labirinto.rodape!r}"
+            )
+        linhas += labirinto.rodape[inicio:fim]
+    return linhas
+
+
+def solucoes(estado: Estado) -> list[str]:
+    """Solução de cada labirinto do cenário.
+
+    Args:
+        estado: Estado do cenário.
+
+    Returns:
+        O caminho de cada labirinto.
+    """
+    caminhos: list[str] = []
+    for labirinto in labirintos_do_cenario(estado):
+        if labirinto.caminho is None:
+            pytest.fail("o labirinto não tem solução (linha do caminho)")
+        caminhos.append(labirinto.caminho)
+    return caminhos
+
+
+def primeira_linha_do_readme(estado: Estado) -> list[str]:
+    """Primeira linha do README.md do repositório, sem converter quebras.
+
+    Args:
+        estado: Estado do cenário.
+
+    Returns:
+        A linha, como item único.
+    """
+    readme = estado.cwd / "README.md"
+    if not readme.is_file():
+        pytest.fail(f"README.md não existe em {estado.cwd}")
+    return [readme.read_bytes().decode("utf-8").split("\n")[0]]
+
+
+def nomes_selecionados(estado: Estado) -> list[str]:
+    """Nome de cada arquivo selecionado por "eu leio".
+
+    Args:
+        estado: Estado do cenário.
+
+    Returns:
+        Os nomes, sem a pasta.
+    """
+    if not estado.lido:
+        pytest.fail("nenhum arquivo foi selecionado antes deste passo")
+    return [caminho.name for caminho in estado.lido]
+
+
+def ultima_linha_da_saida(estado: Estado) -> list[str]:
+    """Última linha da saída padrão do último comando.
+
+    Args:
+        estado: Estado do cenário.
+
+    Returns:
+        A linha, como item único.
+    """
+    linhas = estado.resultado.saida_padrao.splitlines()
+    if not linhas:
+        pytest.fail(f"'{estado.resultado.comando}' não imprimiu nada")
+    return [linhas[-1]]
+
+
+# Itens a que cada alvo da V67 aplica a expressão; os de labirinto juntam
+# os itens de todos os labirintos do cenário.
+ALVOS: dict[str, Callable[[Estado], list[str]]] = {
+    "a solução": solucoes,
+    "cada linha da grade": lambda estado: [
+        linha
+        for labirinto in labirintos_do_cenario(estado)
+        for linha in linhas_da_grade(labirinto)
+    ],
+    "cada linha de coordenadas do rodapé": (
+        lambda estado: linhas_do_rodape(estado, 0, 2)
+    ),
+    "a linha 3 do rodapé": lambda estado: linhas_do_rodape(estado, 2, 3),
+    "a primeira linha do README": primeira_linha_do_readme,
+    "o nome de cada arquivo selecionado": nomes_selecionados,
+    "a última linha da saída padrão": ultima_linha_da_saida,
+}
+
+
+@then(
+    parsers.parse(
+        '{alvo:Alvo} casa com a expressão "{regex:Q}"', extra_types=TIPOS
+    )
+)
+def alvo_casa_com(estado: Estado, alvo: str, regex: str) -> None:
+    """Aplica a expressão (``re.search``) a cada item do alvo.
+
+    As expressões dos cenários trazem as âncoras ``^`` e ``$``; o passo
+    não acrescenta nenhuma.
+
+    Args:
+        estado: Estado do cenário.
+        alvo: Um dos ALVOS.
+        regex: Expressão regular.
+    """
+    itens = ALVOS.get(alvo)
+    if itens is None:
+        pytest.fail(
+            f'alvo "{alvo}" não existe; os válidos são: {", ".join(ALVOS)}'
+        )
+    try:
+        padrao = re.compile(regex)
+    except re.error as erro:
+        pytest.fail(f"expressão {regex!r} inválida: {erro}")
+    fora = [item for item in itens(estado) if not padrao.search(item)]
+    if fora:
+        pytest.fail(f"{alvo}: {fora!r} não casa com {regex!r}")
+
+
+def labirinto_da(execucao: Execucao) -> Labirinto:
+    """Labirinto de uma execução, exigindo que ela tenha produzido um.
+
+    Args:
+        execucao: Execução do cenário.
+
+    Returns:
+        O labirinto.
+    """
+    if execucao.labirinto is None:
+        pytest.fail(
+            f"'{execucao.comando}' não produziu labirinto (código "
+            f"{execucao.codigo}):\n{execucao.saida_erro}"
+        )
+    return execucao.labirinto
+
+
+def conteudo_da(execucao: Execucao) -> str:
+    """Conteúdo do OUTPUT_FILE gravado por uma execução.
+
+    Args:
+        execucao: Execução do cenário.
+
+    Returns:
+        O texto do arquivo de saída.
+    """
+    if execucao.conteudo_saida is None:
+        pytest.fail(f"'{execucao.comando}' não gravou arquivo de saída")
+    return execucao.conteudo_saida
+
+
+def solucao_da(execucao: Execucao) -> str:
+    """Solução do labirinto de uma execução.
+
+    Args:
+        execucao: Execução do cenário.
+
+    Returns:
+        O caminho do labirinto.
+    """
+    caminho = labirinto_da(execucao).caminho
+    if caminho is None:
+        pytest.fail(f"o labirinto de '{execucao.comando}' não tem solução")
+    return caminho
+
+
+# O que a V71 compara em cada execução.
+ASPECTOS: dict[str, Callable[[Execucao], object]] = {
+    "arquivo de saída": conteudo_da,
+    "grade": lambda execucao: labirinto_da(execucao).grade,
+    "solução": solucao_da,
+    "células de valor F": lambda execucao: {
+        celula
+        for celula in labirinto_da(execucao).celulas()
+        if labirinto_da(execucao).valor(celula) == FECHADA
+    },
+    "saída exibida": lambda execucao: execucao.saida_padrao,
+}
+
+
+@then(
+    parsers.parse(
+        'os resultados são {relacao:Relacao} em "{aspecto:Q}"',
+        extra_types=TIPOS,
+    )
+)
+def resultados_comparados(estado: Estado, relacao: str, aspecto: str) -> None:
+    """Compara as execuções da última repetição, duas a duas, no aspecto.
+
+    "idênticos" exige todas iguais; "diferentes entre si" exige todas
+    distintas entre si.
+
+    Args:
+        estado: Estado do cenário.
+        relacao: "idênticos" ou "diferentes entre si".
+        aspecto: Um dos ASPECTOS.
+    """
+    extrair = ASPECTOS.get(aspecto)
+    if extrair is None:
+        pytest.fail(
+            f'aspecto "{aspecto}" não existe; os válidos são: '
+            f'{", ".join(ASPECTOS)}'
+        )
+    if relacao not in ("idênticos", "diferentes entre si"):
+        pytest.fail(
+            f'relação "{relacao}" não existe; as válidas são: idênticos, '
+            "diferentes entre si"
+        )
+    if len(estado.execucoes) < 2:
+        pytest.fail(
+            f"a comparação precisa de pelo menos 2 execuções, o cenário tem "
+            f"{len(estado.execucoes)}"
+        )
+    valores = [extrair(execucao) for execucao in estado.execucoes]
+    pares = [
+        (i, j)
+        for i in range(len(valores))
+        for j in range(i + 1, len(valores))
+        if (valores[i] == valores[j]) != (relacao == "idênticos")
+    ]
+    if pares:
+        descricao = ", ".join(f"{i + 1} e {j + 1}" for i, j in pares)
+        comandos = "\n".join(
+            f"{numero}: {execucao.comando}"
+            for numero, execucao in enumerate(estado.execucoes, start=1)
+        )
+        pytest.fail(
+            f'esperados resultados {relacao} em "{aspecto}", mas as '
+            f"execuções {descricao} "
+            f"{'diferem' if relacao == 'idênticos' else 'são iguais'}:\n"
+            f"{comandos}"
+        )

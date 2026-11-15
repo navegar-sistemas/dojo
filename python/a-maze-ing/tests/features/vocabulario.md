@@ -69,6 +69,47 @@ parte do texto fixo.
 - Valores das listas fechadas são comparados com o texto do passo antes da conversão de `Q`.
 - Sessão interativa: `subprocess.Popen` com uma thread lendo a saída; cada envio espera o prompt
   `Choice? (1-4): ` (I03) ou o fim do processo.
+- O parâmetro de V60, V75 e V80 chama `situacao`, não `estado`: `estado` é o nome da fixture
+  do cenário, que todo passo recebe.
+
+## Critérios dos passos
+
+O que cada passo confere onde a coluna "O que a função faz" do catálogo não fixa tudo.
+
+- Labirintos: os passos `Então` sobre labirinto valem para `labirintos` mais o labirinto de
+  cada item de `execucoes`, sem repetir o mesmo; sem nenhum, o passo falha. As propriedades que
+  dependem do config usam o config atual do cenário. O "42" esperado é o da D07 para as
+  dimensões da grade e, num labirinto da classe, também o `pattern` dela. V69 e as propriedades
+  de formato do arquivo falham sobre um labirinto da classe, que não tem rodapé.
+- V22 e V23 gravam `labirinto_de_teste.txt` na pasta do cenário. Os modelos de V23 estão em
+  `tests/fixtures/`, com a origem de cada um em `suporte/labirinto.py`.
+- V37: o arquivo analisado é o `OUTPUT_FILE` da execução que produziu o labirinto atual, se o
+  disco ainda tem o mesmo texto; senão, o texto do labirinto vai para um arquivo temporário. V84
+  e V85 também rodam o analyzer quando ele ainda não rodou; V85 compara o `PERFECT` sem
+  diferenciar caixa.
+- V73 em `modo Pac-Man`: o relato é o da primeira checagem que falha, nesta ordem: rotas
+  independentes, becos reais, canto ou centro fechado, células inalcançáveis; sem falha,
+  `aceito`. Em `coerência das paredes`, vários pares incoerentes são separados por `; `.
+- V67 aplica `re.search` sem flags (as expressões já têm `^` e `$`); a linha da grade é a linha
+  crua do arquivo e, num labirinto da classe, o hexadecimal minúsculo.
+- V71 exige pelo menos 2 execuções; "diferentes entre si" exige todas distintas duas a duas.
+- Catálogo (V19): um caso por linha de Exemplos de cada cenário de erro de 03, 04, 05, 07, 08 e
+  13 que roda o programa; cada caso guarda o que a mensagem cita (o do cenário ou, sem ele, o da
+  D01). V47 roda cada caso num estado próprio, desfeito logo depois.
+- V04 cria o venv numa pasta temporária, com o `python3` do `PATH` do cenário; os comandos dele
+  não entram em `resultados`. V05 resolve a pasta contra a raiz do repositório.
+- V26 e V44 conferem a expressão com `ast` (uma chamada a `MazeGenerator` só com literais e
+  parâmetros da I09) antes do `eval`; entrada e saída do labirinto vêm dos literais (`entry`
+  ausente = `(0, 0)`, `exit` ausente = canto inferior direito). `só MazeError escapa do
+  construtor` testa a expressão do cenário e uma lista fixa de valores e tipos errados.
+- Renderização: os blocos são as linhas com ESC, cortadas em 2 × HEIGHT + 1; `49` e o reset
+  contam como sem cor; a cor das paredes é a do canto `(0, 0)`. `células do 42` são as células
+  de valor F do arquivo; `células do caminho` excluem entrada e saída. `seguida do menu` exige
+  as 5 linhas do menu da figura e o prompt logo depois do bloco. `nova renderização abaixo da
+  anterior` proíbe sequência CSI que não seja SGR. `paredes em rodízio` só vale numa sessão:
+  cada `1`, `2` ou `3` enviado é uma renderização e só o `3` avança a cor.
+- Sessão: V27 falha se o programa terminar antes do primeiro prompt; V28 `visível` também
+  confere que o ciano apareceu; V46 espera o prompt ou o fim depois de EOF e SIGINT.
 
 ## Catálogo
 
@@ -77,7 +118,7 @@ parte do texto fixo.
 | V01 | given | `o arquivo "{arquivo}" na raiz do repositório` | confere que existe; caminho relativo à raiz do repositório (inclusive em subpasta, como `mazegen/__init__.py`); aceita glob (`mazegen-*`) | → alvos |
 | V02 | given | `o repositório no estado "{estado}"` | prepara o repositório (lista de estados) | → repo |
 | V04 | given | `um virtualenv novo "{venv}" em que rodou {comandos:L}` | cria o venv e roda os comandos nele; exige código 0 | repo → venvs |
-| V05 | given, when | `o ambiente de execução é o virtualenv "{venv}" na pasta "{pasta}"` | os próximos comandos usam o `PATH` do venv e o `cwd` pasta (`"."` = repo) | venvs → ambiente |
+| V05 | given, when | `o ambiente de execução é o virtualenv "{venv}" na pasta "{pasta}"` | os próximos comandos usam o `PATH` do venv e o `cwd` pasta, relativa à raiz do repositório do cenário, a mesma base da V16 (`"."` = a raiz) | venvs → ambiente |
 | V06 | given | `o código-fonte de {alvos:L}` | lista os `.py` dos alvos, relativos à raiz do repositório do cenário (`"."` = a raiz inteira); pastas `.venv`, `build`, `dist` e `__pycache__` ficam de fora em qualquer nível; alvo inexistente ou sem nenhum `.py` falha | → fontes |
 | V07 | given | `o config {origem:Origem}` | carrega o config base (`CONFIG_BASE` de `suporte/config.py`) ou o `config.txt` do repositório | → config |
 | V08 | given | `o config {origem:Origem} salvo em "{arquivo}"` | igual a V07, com outro destino; a gravação cria as pastas pai que faltam | → config |
@@ -131,7 +172,7 @@ parte do texto fixo.
 | V57 | then | `a mensagem de erro cita {itens:L}` | stderr com uma linha, começando com `Error: `, contendo os itens na ordem | resultado |
 | V58 | then | `a mensagem de erro explica "{motivo}"` | casa a expressão do motivo (I21) | resultado |
 | V59 | then | `o resultado da execução é "{resultado}"` | `sucesso` (sem estourar o tempo limite, código 0, nenhuma linha de stderr com `Error:` além de `Error: maze too small for the "42" pattern` (D06, I10) e o `OUTPUT_FILE` do config gravado com conteúdo) ou `erro citando A, B[; motivo: M]` (código 1 e as regras de V57 e V58) | resultado |
-| V60 | then | `o caminho "{caminho}" {estado:EstadoCaminho}` | `exists`, `git check-ignore`, `git ls-files` ou tamanho > 0; aceita glob | repo |
+| V60 | then | `o caminho "{caminho}" {situacao:EstadoCaminho}` | `exists`, `git check-ignore`, `git ls-files` ou tamanho > 0; aceita glob | repo |
 | V61 | then | `o arquivo "{arquivo}" {verbo:Contem} {textos:L}` | procura as strings no arquivo lido sem converter quebras de linha (`newline=""`), para `\r` ser detectável | repo |
 | V62 | given, then | `o arquivo "{arquivo}" {tem:TemLinha} que casa com a expressão "{regex}"` | `re.search` com `re.M` | repo |
 | V64 | then | `a seção "{secao}" do README contém {textos:L}` | do título `#… secao` até o próximo título do mesmo nível | repo |
@@ -145,16 +186,16 @@ parte do texto fixo.
 | V72 | then | `<sujeito> confirma "<propriedade>"` | cada propriedade da lista fechada do sujeito é um passo próprio, com a frase inteira escrita no decorador (`@then('a análise estática confirma "open sempre dentro de with"')`); a propriedade que varia num Esquema do Cenário (`docstring em cada <definicao>`) é um passo com parâmetro | conforme o sujeito |
 | V73 | then | `o validador da suíte relata "{relato}" em "{verificacao}"` | compara o texto que o validador devolve | labirintos |
 | V74 | then | `o validador da suíte conta {n:d} "{item}"` | conta os itens (lista) | labirintos |
-| V75 | then | `a célula "{celula}" {estado:EstadoCelula}` | célula dada como `"x,y"` | labirintos |
+| V75 | then | `a célula "{celula}" {situacao:EstadoCelula}` | célula dada como `"x,y"` | labirintos |
 | V76 | then | `pelo menos uma das células {celulas:L} é alcançável a partir da entrada` | alcançável e sem valor F | labirintos |
 | V77 | then | `todas as células da "{borda}" têm a parede "{direcao}" fechada` | percorre a borda | labirintos |
 | V78 | then | `as células de valor F ocupam as colunas "{colunas}" e as linhas "{linhas}"` | intervalos como `"6 a 8 e 10 a 12"` | labirintos |
 | V79 | then | `o dígito da célula é "{digito}"` | sobre a célula; compara sem diferenciar maiúsculas | celula |
-| V80 | then | `as paredes {estado:FA} da célula são "{paredes}"` | sobre a célula | celula |
+| V80 | then | `as paredes {situacao:FA} da célula são "{paredes}"` | sobre a célula | celula |
 | V81 | then | `a célula tem {n:d} paredes fechadas` | sobre a célula | celula |
 | V82 | then | `o bit {bit:d} da célula está ligado` | sobre a célula | celula |
-| V83 | then | `a linha "{rotulo}" do maze_analyzer {op:Op} {textos:L}` | rótulo = início da linha da saída do analyzer; roda o analyzer se ainda não rodou | analise |
-| V84 | then | `o número na linha "{rotulo}" do maze_analyzer é {cmp:Cmp} {n:d}` | primeiro inteiro da linha | analise |
+| V83 | then | `a linha "{rotulo}" do maze_analyzer {op:Op} {textos:L}` | rótulo = início da linha da saída do analyzer; `começa com` e `contém` valem para o valor, o resto da linha depois do rótulo, dos espaços e do `:` (`Independent loops: 0 / 228 possible` → `0 / 228 possible`); roda o analyzer se ainda não rodou | analise |
+| V84 | then | `o número na linha "{rotulo}" do maze_analyzer é {cmp:Cmp} {n:d}` | primeiro inteiro do valor (V83) | analise |
 | V85 | then | `o veredito do maze_analyzer corresponde ao PERFECT do config` | `True` → `PERFECT maze`; `False` → `Pac-Man-USABLE` | analise, config |
 | V86 | then | `na última renderização, as posições de "{elemento}" têm a cor "{cor}"` | todas as posições do elemento têm a cor | resultado ou sessao |
 | V87 | then | `na última renderização, a cor "{cor}" só aparece em "{elemento}"` | a cor não aparece fora do elemento | resultado ou sessao |
@@ -186,6 +227,7 @@ parte do texto fixo.
 | FA | `fechadas`, `abertas` |
 | Op | `começa com`, `contém` |
 | Cmp | `pelo menos`, `no máximo` |
+| Presenca | `presente`, `ausente` (só na propriedade `42 {presenca:Presenca}` de V72, que não pode casar com as propriedades fixas que começam com `42 `) |
 | V02 estado | `atual` (`cwd` em `project/`); `instalado` (`make install`, uma vez por sessão); `clone limpo` (`git archive HEAD` rodado em `project/` e extraído numa pasta temporária, ou seja, o que está commitado, sem as mudanças da árvore de trabalho, seguido de `git init`, `git add` e `git commit` só nessa cópia, porque a raiz do git é `dojo`); `clone do remoto` (`git clone --depth 1 $AMAZEING_REMOTE` numa pasta temporária; sem a variável, ou com ela vazia, o cenário é pulado com a mensagem que diz qual variável falta) |
 | V15 variação | `uma linha vazia entre cada par`, `espaços em volta do igual`, `espaços no fim de cada linha`, `finais de linha CRLF`, `sem quebra de linha depois da última linha`, `chave WIDTH minúscula`, `todas as chaves minúsculas`, `chave HEIGHT capitalizada`, `perfect=true minúsculo` |
 | V16 tipo | `inexistente`, `diretório` (pasta vazia), `diretório sem permissão de escrita` (pasta vazia com `chmod 500`), `sem permissão de leitura` (config base com `chmod 000`), `não UTF-8` (config base precedido de um comentário acentuado, em latin-1), `vazio`, `bytes binários aleatórios`, `só espaços e tabulações`, `BOM UTF-8 + config base`, `config base com WIDTH de 100000 dígitos`, `só WÍDTH=20 e HEÍGHT=15, com acento`, `pasta com a_maze_ing.py, amazeing/ e config.txt` (cópia desses três itens da raiz do repositório do cenário, sem `__pycache__`), `diretório pai criado` (só a pasta pai passa a existir; o caminho continua inexistente) |
@@ -194,7 +236,7 @@ parte do texto fixo.
 | V46 evento | `EOF`, `SIGINT`, `1 segundo sem entrada` |
 | V58 motivo | `arquivo não encontrado`, `arquivo não é UTF-8`, `chave obrigatória ausente`, `entrada igual à saída`, `tamanho sem tabuleiro Pac-Man`, `coordenada no padrão 42` (palavras-chave na I21) |
 | V71 aspecto | `arquivo de saída`, `grade`, `solução`, `células de valor F`, `saída exibida` |
-| V72 o validador da suíte | `valores de 0 a 15`, `bits na convenção N=1, E=2, S=4, W=8`, `x é a coluna e y é a linha`, `entrada e saída válidas`, `entrada diferente da saída`, `x de entrada e saída dentro da largura`, `y de entrada e saída dentro da altura`, `toda célula fora do 42 alcançável`, `borda fechada`, `paredes coerentes`, `vizinhas leste-oeste coerentes` (bit E de (x, y) = bit W de (x+1, y)), `vizinhas norte-sul coerentes` (bit S de (x, y) = bit N de (x, y+1)), `inalcançáveis são as células do 42`, `células F em dois componentes 4-conexos`, `componente da esquerda com a forma do 4`, `componente da direita com a forma do 2`, `células F iguais ao padrão 42`, `nenhuma célula F fora do padrão`, `42 sem passagem aberta`, `glifos 3x5 com uma coluna livre entre os dígitos`, `42 presente`, `42 ausente`, `42 com margem de corredor`, `42 fora dos cantos`, `centro livre do 42`, `árvore geradora fora do 42`, `caminho único entre entrada e saída`, `ramos fora da solução terminam em beco`, `solução atravessa só paredes abertas`, `solução não sai da grade`, `solução não entra no 42`, `solução termina na saída`, `solução mais curta`, `solução sem célula repetida`, `solução válida e mais curta`, `pelo menos 2 rotas independentes`, `no máximo 2 becos reais`, `zero becos reais`, `sem área aberta 3x3`, `blocos 2x2, 2x3 e 3x2 abertos aceitos`, `modo igual ao PERFECT do config`, `rodapé com ENTRY, EXIT e caminho válido`, `labirinto válido conforme o config` (dimensões, valores, borda, coerência, entrada e saída, "42" por D06/D07, conectividade, sem 3x3, solução válida e mais curta, modo), `uma linha vazia logo após a grade`, `exatamente 3 linhas após a linha vazia`, `arquivo termina com quebra de linha`, `linha vazia contém só a quebra de linha`, `nenhuma linha com espaço no fim` |
+| V72 o validador da suíte | `valores de 0 a 15`, `bits na convenção N=1, E=2, S=4, W=8`, `x é a coluna e y é a linha`, `entrada e saída válidas`, `entrada diferente da saída`, `x de entrada e saída dentro da largura`, `y de entrada e saída dentro da altura`, `toda célula fora do 42 alcançável`, `borda fechada`, `paredes coerentes`, `vizinhas leste-oeste coerentes` (bit E de (x, y) = bit W de (x+1, y)), `vizinhas norte-sul coerentes` (bit S de (x, y) = bit N de (x, y+1)), `inalcançáveis são as células do 42`, `células F em dois componentes 4-conexos`, `componente da esquerda com a forma do 4`, `componente da direita com a forma do 2`, `células F iguais ao padrão 42`, `nenhuma célula F fora do padrão`, `42 sem passagem aberta`, `glifos 3x5 com uma coluna livre entre os dígitos`, `42 presente`, `42 ausente`, `42 com margem de corredor`, `42 fora dos cantos`, `centro livre do 42`, `árvore geradora fora do 42`, `caminho único entre entrada e saída`, `ramos fora da solução terminam em beco`, `solução atravessa só paredes abertas`, `solução não sai da grade`, `solução não entra no 42`, `solução termina na saída`, `solução mais curta`, `solução sem célula repetida`, `solução válida e mais curta`, `pelo menos 2 rotas independentes`, `no máximo 2 becos reais`, `zero becos reais`, `sem área aberta 3x3`, `blocos 2x2, 2x3 e 3x2 abertos aceitos` (o validador não recusa o labirinto por área aberta e ele tem pelo menos um bloco 2x2 aberto; a aceitação de 2x3 e 3x2 é provada pelas grades de teste de V22 com V73 em `áreas abertas`), `modo igual ao PERFECT do config`, `rodapé com ENTRY, EXIT e caminho válido`, `labirinto válido conforme o config` (dimensões, valores, borda, coerência, entrada e saída, "42" por D06/D07, conectividade, sem 3x3, solução válida e mais curta, modo), `uma linha vazia logo após a grade`, `exatamente 3 linhas após a linha vazia`, `arquivo termina com quebra de linha`, `linha vazia contém só a quebra de linha`, `nenhuma linha com espaço no fim` |
 | V72 a renderização | `cada renderização seguida do menu`, `nova renderização abaixo da anterior, seguida do menu`, `2 × HEIGHT + 1 linhas`, `2 × WIDTH + 1 posições de 2 caracteres por linha`, `só caracteres ASCII`, `cores por sequências ANSI de fundo`, `cada linha termina com o reset ANSI`, `última sequência ANSI é o reset`, `paredes iguais às do arquivo de saída`, `entrada e saída iguais às do rodapé`, `caminho do arquivo marcado em ciano`, `caminho marcado liga entrada e saída por paredes abertas`, `caminho marcado com o comprimento da busca em largura`, `cinco cores distintas para entrada, saída, 42, caminho e paredes`, `paredes em rodízio branco, amarelo, verde, azul`, `labirinto diferente do da renderização anterior` |
 | V72 a análise estática | `open sempre dentro de with`, `anotação de retorno em toda definição`, `docstring em cada módulo`, `docstring em cada função`, `docstring em cada método`, `docstring em cada classe`, `docstrings com aspas triplas duplas`, `resumo de uma frase terminado em ponto`, `linha em branco entre resumo e descrição`, `seção Args: nas funções com parâmetros`, `seção Returns: nas funções que retornam valor`, `coleções vazias com tipo anotado` (também nas atribuições desempacotadas, como `a, b = [], []`), `testes usam pytest ou unittest`, `sem supressão de flake8 nem mypy` (comentários, lidos pelo `tokenize`, que casam com `(?i)#\s*noqa\b\|#\s*flake8[:=]\s*noqa\|#\s*type:\s*ignore\|#\s*mypy:`), `mazegen só importa a biblioteca padrão` (todo import absoluto está em `sys.stdlib_module_names` ou é `mazegen.*`), `sem MiniLibX` |
 | V72 o módulo mazegen | `uma única classe pública de geração`, `grid e solution preenchidos após generate`, `solution pública e documentada`, `grid público com as paredes de cada célula`, `mesmos parâmetros geram a mesma grade`, `grade igual à do arquivo de saída`, `só MazeError escapa do construtor` |
@@ -205,7 +247,7 @@ parte do texto fixo.
 | V77 borda / direção | `primeira linha`, `última coluna`, `última linha`, `primeira coluna` / `Norte`, `Leste`, `Sul`, `Oeste` |
 | Paredes (V25, V80, V89) | `nenhuma` ou direções em lista com vírgulas e "e": `Norte`, `Norte e Sul`, `Norte, Leste, Sul e Oeste` |
 | V83/V84 rótulo | `Verdict:`, `Reachable region`, `Independent loops`, `Dead-ends`, `Corners + centre`, `Wall coherence`, `Entry` |
-| V86–V88 elemento / cor | `entrada`, `saída`, `células do caminho`, `passagens do caminho`, `células do 42`, `paredes` / `branco`, `amarelo`, `verde`, `azul`, `magenta`, `vermelho`, `ciano`, `cinza` (códigos SGR na I21) |
+| V86–V88 elemento / cor | `entrada`, `saída`, `células do caminho`, `passagens do caminho`, `células do 42`, `paredes` (as posições de parede fechada e todos os cantos entre 4 células, I02) / `branco`, `amarelo`, `verde`, `azul`, `magenta`, `vermelho`, `ciano`, `cinza` (códigos SGR na I21) |
 | V65 campo | `Name`, `Version`, `License-Expression` |
 | V45 linhas | `1` regenerar, `2` mostrar/ocultar o caminho, `3` trocar a cor das paredes, `4` sair; inválidas usadas: `9`, `abc`, `""`, `-1` |
 | V91 prompt | `Choice? (1-4): ` |
