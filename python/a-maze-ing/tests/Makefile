@@ -14,7 +14,7 @@ install:
 		{ echo "o python3 do PATH é anterior ao 3.10" >&2; exit 1; }
 	python3 -m venv $(VENV)
 	$(PY) -m pip install --quiet --no-cache-dir --upgrade pip
-	$(PY) -m pip install --quiet -r requirements.txt
+	$(PY) -m pip install --quiet --no-cache-dir -r requirements.txt
 
 run:
 	$(PY) -m pytest $(ALVO)

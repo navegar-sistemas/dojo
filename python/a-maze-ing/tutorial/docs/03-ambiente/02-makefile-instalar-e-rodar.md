@@ -44,7 +44,7 @@ são arquivos, e sim comandos, e que por isso rodam sempre.
 install:
 	python3 -m venv $(VENV)
 	$(PY) -m pip install --quiet --no-cache-dir --upgrade pip
-	$(PY) -m pip install --quiet flake8==7.4.1 mypy==2.4.1 build==1.6.1
+	$(PY) -m pip install --quiet --no-cache-dir flake8==7.4.1 mypy==2.4.1 build==1.6.1
 ```
 
 1. Cria o `.venv` com o `python3` do sistema. É o único lugar onde o Python do sistema é usado.
@@ -55,13 +55,15 @@ install:
 As opções do `pip`:
 
 - `--quiet`: não imprime o progresso, só erros e avisos;
-- `--no-cache-dir`: não guarda os arquivos baixados na pasta de cache do usuário, uma pasta fora
-  do projeto onde o `pip` guarda o que baixa para não baixar de novo.
+- `--no-cache-dir`: não usa a pasta de cache do usuário, uma pasta fora do projeto onde o `pip`
+  guarda o que baixa para não baixar de novo; nada é lido dela nem gravado nela.
 
-O `--no-cache-dir` aparece só na linha que atualiza o `pip`, e isso é uma escolha do projeto. O
-`pip` novo é baixado uma vez para dentro do `.venv` e não precisa ficar guardado em outro lugar.
-Na linha das três ferramentas, o cache ajuda: depois de apagar o `.venv`, um novo
-`make install` reaproveita os arquivos já baixados em vez de baixá-los de novo.
+O `--no-cache-dir` aparece nas duas linhas, e isso é uma escolha do projeto. A pasta de cache é
+uma só para todos os `pip` da máquina, e cada versão do `pip` pede os arquivos ao servidor de um
+jeito um pouco diferente. O `pip` que vem com o Python e o `pip` atualizado pela primeira linha
+são versões diferentes: quando um encontra no cache o que o outro guardou, imprime
+`WARNING: Cache entry deserialization failed, entry ignored` e baixa de novo. Sem o cache, o
+`make install` baixa as três ferramentas a cada vez e não imprime aviso nenhum.
 
 O `==7.4.1` fixa a versão exata de cada ferramenta. É uma escolha do projeto, que protege o
 "zero avisos" do lint: uma versão nova do flake8 ou do mypy pode trazer uma regra nova e acusar
@@ -116,7 +118,7 @@ rodá-lo, e o `--quiet` cala o `pip`:
 ```text
 python3 -m venv .venv
 .venv/bin/python -m pip install --quiet --no-cache-dir --upgrade pip
-.venv/bin/python -m pip install --quiet flake8==7.4.1 mypy==2.4.1 build==1.6.1
+.venv/bin/python -m pip install --quiet --no-cache-dir flake8==7.4.1 mypy==2.4.1 build==1.6.1
 ```
 
 `make -n` imprime os comandos que rodaria, sem executá-los. Dá para ver as variáveis já trocadas

@@ -115,7 +115,7 @@ MYPY_FLAGS = --warn-return-any --warn-unused-ignores --ignore-missing-imports \
 install:
 	python3 -m venv $(VENV)
 	$(PY) -m pip install --quiet --no-cache-dir --upgrade pip
-	$(PY) -m pip install --quiet flake8==7.4.1 mypy==2.4.1 build==1.6.1
+	$(PY) -m pip install --quiet --no-cache-dir flake8==7.4.1 mypy==2.4.1 build==1.6.1
 
 run:
 	$(PY) a_maze_ing.py config.txt

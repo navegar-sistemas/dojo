@@ -65,8 +65,8 @@ link. O critério é ajudar quem quer aprender mais. O README de referência lis
 
 - o livro *Mazes for Programmers*, de Jamis Buck, e o artigo dele sobre o *recursive
   backtracker*;
-- as páginas da Wikipedia sobre algoritmos de geração de labirintos, busca em largura e códigos
-  ANSI (as sequências de cor do terminal);
+- as páginas da Wikipedia sobre algoritmos de geração de labirintos, busca em largura, códigos
+  ANSI (as sequências de cor do terminal) e caracteres de caixa (os que desenham as paredes);
 - a documentação do módulo `random` do Python;
 - a PEP 257 (a convenção das docstrings) e o guia de estilo do Google, que define o formato das
   docstrings do projeto;

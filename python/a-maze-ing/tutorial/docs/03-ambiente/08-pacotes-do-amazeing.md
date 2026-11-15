@@ -77,7 +77,7 @@ arquivos.
 ```
 
 `RenderService`, que transforma um labirinto em linhas de texto colorido para o terminal
-([parte 13](../13-tela/02-a-grade-de-posicoes.md)).
+([parte 13](../13-tela/02-a-grade-de-caracteres.md)).
 
 ```python title="amazeing/ui/__init__.py"
 """Terminal user interface."""
@@ -90,8 +90,9 @@ arquivos.
 """Stateless helpers shared by the application layers."""
 ```
 
-`ValueParser`, que converte o texto do config em número, booleano ou coordenada, e `Ansi`, os
-códigos que mudam a cor do terminal ([parte 10](../10-utilitarios/02-inteiros-sem-surpresa.md)).
+`ValueParser`, que converte o texto do config em número, booleano ou coordenada, `Ansi`, as
+cores do terminal, e `Box`, os caracteres de caixa que desenham as paredes
+([parte 10](../10-utilitarios/02-inteiros-sem-surpresa.md)).
 
 ## O esqueleto completo
 
@@ -134,7 +135,7 @@ A saída dos dois comandos:
 ```text
 python3 -m venv .venv
 .venv/bin/python -m pip install --quiet --no-cache-dir --upgrade pip
-.venv/bin/python -m pip install --quiet flake8==7.4.1 mypy==2.4.1 build==1.6.1
+.venv/bin/python -m pip install --quiet --no-cache-dir flake8==7.4.1 mypy==2.4.1 build==1.6.1
 .venv/bin/python -m flake8 .
 .venv/bin/python -m mypy . --strict
 Success: no issues found in 13 source files

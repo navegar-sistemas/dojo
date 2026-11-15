@@ -7,34 +7,52 @@ from suporte.config import chaves_das_linhas
 from suporte.estado import Estado
 from suporte.labirinto import Celula, Labirinto, ler_saida
 from suporte.render import (
+    BRANCO,
+    CAMADAS,
     CIANO,
     CORES,
-    Cor,
     ELEMENTOS,
     ESCAPE,
+    GLIFOS,
+    PERMITIDOS,
     RESET,
     SEQUENCIA,
+    TEXTO,
+    Cor,
     Posicao,
     Renderizacao,
+    Rgb,
     Tela,
+    bracos,
+    caminho_do_arquivo,
     caminho_marcado,
+    cantos,
     conferir_rodizio,
     cor_das_paredes,
+    cor_em,
     da_celula,
+    descrever,
+    desenho_do_caminho,
     dimensoes,
     direcoes,
     distancia,
     grade_desenhada,
+    interior,
     nome_da_cor,
     nomes_das_direcoes,
     onde,
     paredes_desenhadas,
+    paredes_na_tela,
     posicoes_da_cor,
     posicoes_de,
     problemas_de_sgr,
+    problemas_do_formato,
     renderizacoes,
     seguida_do_menu,
+    sequencias_que_nao_sao_sgr,
     tela,
+    trocas_sem_mudanca,
+    visiveis,
 )
 from suporte.tipos import TIPOS
 
@@ -80,14 +98,14 @@ def desenhos(estado: Estado) -> list[Renderizacao]:
 
 
 def tela_de(renderizacao: Renderizacao, numero: int) -> Tela:
-    """Fundos das posições de uma renderização, ou a falha do passo.
+    """Caracteres e cores de uma renderização, ou a falha do passo.
 
     Args:
         renderizacao: Bloco desenhado.
         numero: Índice do bloco na saída, a partir de 0, para a mensagem.
 
     Returns:
-        Os fundos, numa grade de 2n + 1 por 2m + 1 posições.
+        Os caracteres, numa grade de 2n + 1 linhas por 4m + 1 colunas.
     """
     try:
         desenho = tela(renderizacao)
@@ -98,13 +116,13 @@ def tela_de(renderizacao: Renderizacao, numero: int) -> Tela:
 
 
 def telas(estado: Estado) -> list[Tela]:
-    """Fundos das posições de todas as renderizações.
+    """Caracteres e cores de todas as renderizações.
 
     Args:
         estado: Estado do cenário.
 
     Returns:
-        Uma grade de fundos por renderização, na ordem.
+        Uma grade de caracteres por renderização, na ordem.
     """
     return [
         tela_de(bloco, numero)
@@ -113,16 +131,32 @@ def telas(estado: Estado) -> list[Tela]:
 
 
 def ultima_tela(estado: Estado) -> Tela:
-    """Fundos das posições da última renderização.
+    """Caracteres e cores da última renderização.
 
     Args:
         estado: Estado do cenário.
 
     Returns:
-        A grade de fundos.
+        A grade de caracteres.
     """
     blocos = desenhos(estado)
     return tela_de(blocos[-1], len(blocos) - 1)
+
+
+def grade_da_tela(desenho: Tela, qual: str) -> list[list[int]]:
+    """Bits de parede que o desenho mostra, ou a falha do passo.
+
+    Args:
+        desenho: Caracteres de uma renderização.
+        qual: Nome da renderização, para a mensagem.
+
+    Returns:
+        Uma linha de valores de 0 a 15 por linha de células.
+    """
+    try:
+        return grade_desenhada(desenho)
+    except ValueError as erro:
+        pytest.fail(f"na {qual}, {erro}")
 
 
 def labirinto_atual(estado: Estado) -> Labirinto:
@@ -153,7 +187,7 @@ def tela_e_labirinto(estado: Estado) -> tuple[Tela, Labirinto]:
         estado: Estado do cenário.
 
     Returns:
-        (fundos da última renderização, labirinto do arquivo).
+        (caracteres da última renderização, labirinto do arquivo).
     """
     desenho = ultima_tela(estado)
     labirinto = labirinto_atual(estado)
@@ -166,18 +200,46 @@ def tela_e_labirinto(estado: Estado) -> tuple[Tela, Labirinto]:
     return desenho, labirinto
 
 
-def codigo_da_cor(cor: str) -> int:
-    """Código SGR da cor nomeada no passo (I21).
+def rgb_da_cor(cor: str) -> Rgb:
+    """RGB da cor nomeada no passo (I21).
 
     Args:
         cor: Nome da cor.
 
     Returns:
-        O código do fundo.
+        O RGB.
     """
     if cor not in CORES:
         pytest.fail(f'"{cor}" não existe; os válidos são: {", ".join(CORES)}')
     return CORES[cor]
+
+
+def conferir_elemento(elemento: str) -> None:
+    """Derruba o passo quando o elemento não é da lista fechada.
+
+    Args:
+        elemento: Nome escrito no passo.
+    """
+    if elemento not in ELEMENTOS:
+        pytest.fail(
+            f'"{elemento}" não existe; os válidos são: {", ".join(ELEMENTOS)}'
+        )
+
+
+def posicoes_ou_falha(labirinto: Labirinto, nome: str) -> set[Posicao]:
+    """Posições do elemento, ou a falha do passo quando o rodapé não as dá.
+
+    Args:
+        labirinto: Labirinto do arquivo de saída.
+        nome: Um dos ELEMENTOS.
+
+    Returns:
+        As posições do elemento no desenho, possivelmente nenhuma.
+    """
+    try:
+        return posicoes_de(labirinto, nome)
+    except ValueError as erro:
+        pytest.fail(str(erro))
 
 
 def posicoes_do_elemento(labirinto: Labirinto, nome: str) -> set[Posicao]:
@@ -190,29 +252,25 @@ def posicoes_do_elemento(labirinto: Labirinto, nome: str) -> set[Posicao]:
     Returns:
         As posições do elemento no desenho.
     """
-    try:
-        posicoes = posicoes_de(labirinto, nome)
-    except ValueError as erro:
-        pytest.fail(str(erro))
+    posicoes = posicoes_ou_falha(labirinto, nome)
     if not posicoes:
         pytest.fail(f'o labirinto do arquivo não tem "{nome}"')
     return posicoes
 
 
-def descrever(desenho: Tela, posicoes: set[Posicao]) -> str:
-    """Amostra de posições com a cor de cada uma, para as mensagens.
+def amostra(desenho: Tela, posicoes: set[Posicao]) -> str:
+    """Amostra de posições com o caractere e as cores, para as mensagens.
 
     Args:
-        desenho: Fundos das posições.
+        desenho: Caracteres da renderização.
         posicoes: Posições a descrever.
 
     Returns:
-        Até AMOSTRA posições como "linha l, coluna c: cor".
+        Até AMOSTRA posições como "linha l, coluna c: 'x' texto t, fundo f".
     """
-    amostra = sorted(posicoes)[:AMOSTRA]
     return "; ".join(
-        f"{onde(posicao)}: {nome_da_cor(desenho[posicao[0]][posicao[1]])}"
-        for posicao in amostra
+        f"{onde(posicao)}: {descrever(desenho[posicao[0]][posicao[1]])}"
+        for posicao in sorted(posicoes)[:AMOSTRA]
     )
 
 
@@ -288,8 +346,8 @@ def seguidas_do_menu(estado: Estado) -> None:
 def nova_abaixo_da_anterior(estado: Estado) -> None:
     """A ação desenhou outra renderização depois do menu da anterior.
 
-    O desenho anterior continua na saída: nenhuma sequência limpa a tela
-    ou move o cursor (I02).
+    O desenho anterior continua na saída: nenhuma sequência ESC além das
+    SGR, CSI ou não (como ``ESC c``), limpa a tela ou move o cursor (I02).
 
     Args:
         estado: Estado do cenário.
@@ -303,15 +361,11 @@ def nova_abaixo_da_anterior(estado: Estado) -> None:
                 f"a renderização {numero} não é seguida do menu: "
                 f"{blocos[numero].seguinte[:6]!r}"
             )
-    controles = [
-        sequencia
-        for sequencia in SEQUENCIA.findall(estado.resultado.saida_padrao)
-        if not sequencia.endswith("m")
-    ]
+    controles = sequencias_que_nao_sao_sgr(estado.resultado.saida_padrao)
     if controles:
         pytest.fail(
-            f"a saída tem sequências que limpam a tela ou movem o cursor: "
-            f"{sorted(set(controles))}"
+            f"a saída tem sequências ESC que não são SGR, e podem limpar a "
+            f"tela ou mover o cursor: {controles}"
         )
 
 
@@ -332,79 +386,207 @@ def linhas_da_altura(estado: Estado) -> None:
         )
 
 
-@then(
-    'a renderização confirma "2 × WIDTH + 1 posições de 2 caracteres por '
-    'linha"'
-)
-def posicoes_da_largura(estado: Estado) -> None:
-    """Cada linha desenhada tem 2 × WIDTH + 1 posições de 2 caracteres.
+@then('a renderização confirma "4 × WIDTH + 1 caracteres por linha"')
+def caracteres_da_largura(estado: Estado) -> None:
+    """Cada linha desenhada tem 4 × WIDTH + 1 caracteres visíveis (I02).
 
     Args:
         estado: Estado do cenário.
     """
     largura, _ = tamanho_do_config(estado)
-    esperadas = 2 * largura + 1
+    esperados = 4 * largura + 1
     for numero, bloco in enumerate(desenhos(estado)):
-        try:
-            desenho = tela(bloco)
-        except ValueError as erro:
-            pytest.fail(f"renderização {numero}: {erro}")
-        for linha, posicoes in enumerate(desenho):
-            if len(posicoes) != esperadas:
+        for indice, linha in enumerate(bloco.linhas):
+            achados = len(visiveis(linha))
+            if achados != esperados:
                 pytest.fail(
-                    f"a linha {linha} da renderização {numero} tem "
-                    f"{len(posicoes)} posições; com WIDTH={largura}, "
-                    f"esperadas {esperadas}: {bloco.linhas[linha]!r}"
+                    f"a linha {indice} da renderização {numero} tem "
+                    f"{achados} caracteres; com WIDTH={largura}, esperados "
+                    f"{esperados}: {linha!r}"
                 )
 
 
-@then('a renderização confirma "só caracteres ASCII"')
-def so_ascii(estado: Estado) -> None:
-    """As linhas desenhadas só têm caracteres ASCII (D18).
+@then('a renderização confirma "só espaços e caracteres de caixa"')
+def so_caixa(estado: Estado) -> None:
+    """As linhas desenhadas só têm espaços e os caracteres da I02 (D18).
 
     Args:
         estado: Estado do cenário.
     """
     for numero, bloco in enumerate(desenhos(estado)):
         for linha in bloco.linhas:
-            fora = sorted(set(linha) - set(map(chr, range(128))))
+            fora = sorted(
+                {caractere.simbolo for caractere in visiveis(linha)}
+                - PERMITIDOS
+            )
             if fora:
                 pytest.fail(
-                    f"a renderização {numero} tem caracteres fora do ASCII "
-                    f"{fora}: {linha!r}"
+                    f"a renderização {numero} tem caracteres fora de "
+                    f"{''.join(sorted(PERMITIDOS))!r} {fora}: {linha!r}"
                 )
 
 
-@then('a renderização confirma "cores por sequências ANSI de fundo"')
-def cores_de_fundo(estado: Estado) -> None:
-    """As cores vêm só de fundos SGR, sobre espaços (I02, I21).
+@then('a renderização confirma "cores por sequências ANSI de 24 bits"')
+def cores_de_24_bits(estado: Estado) -> None:
+    """As cores vêm de SGR 38;2 e 48;2, e todo caractere tem as duas (I02).
 
-    Toda sequência é um fundo, o 49 ou o reset; todo caractere desenhado é
-    espaço; e o desenho usa pelo menos um fundo.
+    Toda sequência é uma cor de texto ou de fundo de 24 bits ou o reset;
+    todo caractere desenhado tem cor de texto e de fundo em vigor.
 
     Args:
         estado: Estado do cenário.
     """
-    fundos: set[int] = set()
     for numero, bloco in enumerate(desenhos(estado)):
-        for linha in bloco.linhas:
+        for indice, linha in enumerate(bloco.linhas):
             problemas = problemas_de_sgr(linha)
             if problemas:
                 pytest.fail(
                     f"renderização {numero}: {problemas[0]} em {linha!r}"
                 )
-            texto = SEQUENCIA.sub("", linha)
-            if texto.strip(" "):
-                pytest.fail(
-                    f"a renderização {numero} desenha com caracteres que não "
-                    f"são espaço ({sorted(set(texto) - {' '})}): {linha!r}"
-                )
-        for fundos_da_linha in tela_de(bloco, numero):
-            fundos.update(
-                fundo for fundo in fundos_da_linha if fundo is not None
+            for coluna, caractere in enumerate(visiveis(linha)):
+                if caractere.texto is None or caractere.fundo is None:
+                    pytest.fail(
+                        f"na renderização {numero}, o caractere da "
+                        f"{onde((indice, coluna))} não tem cor de texto e de "
+                        f"fundo: {descrever(caractere)}"
+                    )
+
+
+def linhas_desenhadas(estado: Estado) -> list[tuple[int, str]]:
+    """Linhas de todas as renderizações, com o número da renderização.
+
+    Args:
+        estado: Estado do cenário.
+
+    Returns:
+        Pares (renderização, linha), na ordem da saída.
+    """
+    return [
+        (numero, linha)
+        for numero, bloco in enumerate(desenhos(estado))
+        for linha in bloco.linhas
+    ]
+
+
+@then(
+    'a renderização confirma "texto e fundo na mesma sequência e um reset no '
+    'fim de cada linha"'
+)
+def sequencias_da_i02(estado: Estado) -> None:
+    """Cada linha abre com texto e fundo juntos e só tem o reset no fim.
+
+    Toda sequência antes do fim é ``ESC[38;2;R;G;B;48;2;R;G;Bm``; a
+    primeira abre a linha e a última é o único reset (I02).
+
+    Args:
+        estado: Estado do cenário.
+    """
+    for numero, linha in linhas_desenhadas(estado):
+        problemas = problemas_do_formato(linha)
+        if problemas:
+            pytest.fail(f"renderização {numero}: {problemas[0]}")
+
+
+@then(
+    'a renderização confirma "sequência só quando o par de cores muda"'
+)
+def sequencias_so_na_troca(estado: Estado) -> None:
+    """Nenhuma sequência repete o par em vigor ou fica sem caractere (I02).
+
+    Args:
+        estado: Estado do cenário.
+    """
+    for numero, linha in linhas_desenhadas(estado):
+        sobrando = trocas_sem_mudanca(linha)
+        if sobrando:
+            pytest.fail(
+                f"renderização {numero}: {len(sobrando)} sequências sem "
+                f"troca de cor; a primeira: {sobrando[0]}"
             )
-    if not fundos:
-        pytest.fail("nenhuma posição desenhada tem cor de fundo")
+
+
+@then(
+    'a renderização confirma "espaço fora das paredes, dos cantos e do '
+    'caminho"'
+)
+def espaco_fora_do_desenhado(estado: Estado) -> None:
+    """Só paredes fechadas, cantos com braço e o caminho visível têm traço.
+
+    As paredes vêm do OUTPUT_FILE atual; o caminho do rodapé conta só
+    quando a última renderização tem algum ciano.
+
+    Args:
+        estado: Estado do cenário.
+    """
+    desenho, labirinto = tela_e_labirinto(estado)
+    tracadas = posicoes_ou_falha(labirinto, "paredes")
+    if posicoes_da_cor(desenho, CIANO):
+        try:
+            tracadas |= set(
+                desenho_do_caminho(caminho_do_arquivo(labirinto))
+            )
+        except ValueError as erro:
+            pytest.fail(str(erro))
+    sobram = {
+        (linha, coluna)
+        for linha, caracteres in enumerate(desenho)
+        for coluna, caractere in enumerate(caracteres)
+        if (linha, coluna) not in tracadas and caractere.simbolo != " "
+    }
+    if sobram:
+        pytest.fail(
+            f"{len(sobram)} caracteres fora das paredes, dos cantos e do "
+            f"caminho visível não são espaço: {amostra(desenho, sobram)}"
+        )
+
+
+@then(
+    'a renderização confirma "fundo branco fora da entrada, da saída e do '
+    '42"'
+)
+def fundo_branco(estado: Estado) -> None:
+    """Todo caractere fora da entrada, da saída e do 42 tem fundo branco.
+
+    Args:
+        estado: Estado do cenário.
+    """
+    desenho, labirinto = tela_e_labirinto(estado)
+    destacadas: set[Posicao] = set()
+    for nome in ("entrada", "saída", "42"):
+        destacadas |= posicoes_ou_falha(labirinto, nome)
+    erradas = {
+        (linha, coluna)
+        for linha, caracteres in enumerate(desenho)
+        for coluna, caractere in enumerate(caracteres)
+        if (linha, coluna) not in destacadas and caractere.fundo != BRANCO
+    }
+    if erradas:
+        pytest.fail(
+            f"{len(erradas)} caracteres fora da entrada, da saída e do 42 "
+            f"sem fundo branco: {amostra(desenho, erradas)}"
+        )
+
+
+@then(
+    'a renderização confirma "cada canto com o caractere das suas paredes"'
+)
+def cantos_pelas_paredes(estado: Estado) -> None:
+    """Cada canto tem o caractere dos braços das paredes ao redor (I02).
+
+    Args:
+        estado: Estado do cenário.
+    """
+    for numero, desenho in enumerate(telas(estado)):
+        largura, altura = dimensoes(desenho)
+        fechadas = paredes_na_tela(desenho)
+        for canto in sorted(cantos(largura, altura)):
+            esperado = GLIFOS[bracos(fechadas, canto)]
+            achado = desenho[canto[0]][canto[1]].simbolo
+            if achado != esperado:
+                pytest.fail(
+                    f"na renderização {numero}, o canto da {onde(canto)} é "
+                    f"{achado!r}; as paredes ao redor pedem {esperado!r}"
+                )
 
 
 @then('a renderização confirma "última sequência ANSI é o reset"')
@@ -435,20 +617,21 @@ def paredes_do_arquivo(estado: Estado) -> None:
         estado: Estado do cenário.
     """
     desenho, labirinto = tela_e_labirinto(estado)
-    desenhada = grade_desenhada(desenho)
+    desenhada = grade_da_tela(desenho, "última renderização")
     for celula in labirinto.celulas():
         x, y = celula
         if desenhada[y][x] != labirinto.valor(celula):
+            mostradas = paredes_desenhadas(desenho, celula)
             pytest.fail(
                 f"a célula {celula} aparece com as paredes "
-                f"{nomes_das_direcoes(paredes_desenhadas(desenho, celula))} "
-                f"e vale {labirinto.valor(celula):x} no arquivo de saída"
+                f"{nomes_das_direcoes(mostradas)} e vale "
+                f"{labirinto.valor(celula):x} no arquivo de saída"
             )
 
 
 @then('a renderização confirma "entrada e saída iguais às do rodapé"')
 def pontas_do_rodape(estado: Estado) -> None:
-    """Magenta e vermelho só nas células de entrada e saída do rodapé.
+    """Magenta e vermelho só no interior da entrada e da saída do rodapé.
 
     Args:
         estado: Estado do cenário.
@@ -461,40 +644,53 @@ def pontas_do_rodape(estado: Estado) -> None:
         ("vermelho", labirinto.saida),
     ):
         achadas = posicoes_da_cor(desenho, CORES[nome])
-        if achadas != {da_celula(celula)}:
+        if achadas != interior(celula):
             pytest.fail(
-                f"{nome} deveria estar só na célula {celula} do rodapé "
-                f"({onde(da_celula(celula))}), mas está em "
-                f"{[onde(posicao) for posicao in sorted(achadas)]}"
+                f"{nome} deveria estar só no interior da célula {celula} do "
+                f"rodapé ({onde(da_celula(celula))} e as vizinhas), mas está "
+                f"em {[onde(posicao) for posicao in sorted(achadas)]}"
             )
 
 
 @then('a renderização confirma "caminho do arquivo marcado em ciano"')
 def caminho_do_arquivo_em_ciano(estado: Estado) -> None:
-    """O ciano cobre exatamente o caminho do rodapé do arquivo atual (I02).
+    """O ciano desenha exatamente o caminho do rodapé do arquivo (I02).
 
-    Células intermediárias e passagens entre células consecutivas são
-    ciano; entrada e saída ficam com as próprias cores.
+    O centro de cada célula do caminho, entrada e saída inclusive, tem o
+    caractere dos braços para a anterior e a seguinte; cada passagem entre
+    células consecutivas, ``━`` ou ``┃``; nada mais é ciano.
 
     Args:
         estado: Estado do cenário.
     """
     desenho, labirinto = tela_e_labirinto(estado)
     try:
-        esperadas = posicoes_de(
-            labirinto, "passagens do caminho"
-        ) | posicoes_de(labirinto, "células do caminho")
+        esperado = desenho_do_caminho(caminho_do_arquivo(labirinto))
     except ValueError as erro:
         pytest.fail(str(erro))
     achadas = posicoes_da_cor(desenho, CIANO)
-    faltam = esperadas - achadas
-    sobram = achadas - esperadas
+    faltam = {
+        posicao for posicao in esperado
+        if cor_em(desenho[posicao[0]][posicao[1]], TEXTO) != CIANO
+    }
+    sobram = achadas - set(esperado)
     if faltam or sobram:
         pytest.fail(
             f"o ciano não é o caminho {labirinto.caminho!r} do arquivo: "
-            f"faltam {len(faltam)} posições ({descrever(desenho, faltam)}) "
-            f"e sobram {len(sobram)} "
-            f"({[onde(posicao) for posicao in sorted(sobram)[:AMOSTRA]]})"
+            f"faltam {len(faltam)} posições ({amostra(desenho, faltam)}) "
+            f"e sobram {len(sobram)} ({amostra(desenho, sobram)})"
+        )
+    trocados = {
+        posicao for posicao, simbolo in esperado.items()
+        if desenho[posicao[0]][posicao[1]].simbolo != simbolo
+    }
+    if trocados:
+        primeiro = min(trocados)
+        pytest.fail(
+            f"{len(trocados)} posições do caminho com o caractere errado; a "
+            f"da {onde(primeiro)} é "
+            f"{desenho[primeiro[0]][primeiro[1]].simbolo!r}, esperado "
+            f"{esperado[primeiro]!r}"
         )
 
 
@@ -554,10 +750,9 @@ def cinco_cores(estado: Estado) -> None:
     """
     desenho, labirinto = tela_e_labirinto(estado)
     cores: dict[str, Cor] = {}
-    for nome in ("entrada", "saída", "células do 42", "células do caminho",
-                 "paredes"):
+    for nome in ("entrada", "saída", "42", "células do caminho", "paredes"):
         achadas = {
-            desenho[linha][coluna]
+            cor_em(desenho[linha][coluna], CAMADAS[nome])
             for linha, coluna in posicoes_do_elemento(labirinto, nome)
         }
         if len(achadas) != 1 or None in achadas:
@@ -576,7 +771,7 @@ def cinco_cores(estado: Estado) -> None:
 
 
 @then(
-    'a renderização confirma "paredes em rodízio branco, amarelo, verde, '
+    'a renderização confirma "paredes em rodízio grafite, laranja, verde, '
     'azul"'
 )
 def paredes_em_rodizio(estado: Estado) -> None:
@@ -614,9 +809,9 @@ def diferente_do_anterior(estado: Estado) -> None:
             f"a saída tem {len(desenhos_da_saida)} renderização; esperadas 2"
         )
     anterior, ultima = desenhos_da_saida[-2], desenhos_da_saida[-1]
-    if dimensoes(anterior) == dimensoes(ultima) and grade_desenhada(
-        anterior
-    ) == grade_desenhada(ultima):
+    if dimensoes(anterior) == dimensoes(ultima) and grade_da_tela(
+        anterior, "penúltima renderização"
+    ) == grade_da_tela(ultima, "última renderização"):
         pytest.fail(
             "a última renderização mostra as mesmas paredes da anterior"
         )
@@ -632,26 +827,26 @@ def diferente_do_anterior(estado: Estado) -> None:
 def elemento_tem_a_cor(estado: Estado, elemento: str, cor: str) -> None:
     """Todas as posições do elemento têm a cor na última renderização.
 
+    A cor das paredes e do caminho é a do texto; a da entrada, da saída e
+    do 42, a do fundo.
+
     Args:
         estado: Estado do cenário.
         elemento: Um dos ELEMENTOS.
         cor: Nome da cor (I21).
     """
-    if elemento not in ELEMENTOS:
-        pytest.fail(
-            f'"{elemento}" não existe; os válidos são: {", ".join(ELEMENTOS)}'
-        )
-    codigo = codigo_da_cor(cor)
+    conferir_elemento(elemento)
+    rgb = rgb_da_cor(cor)
     desenho, labirinto = tela_e_labirinto(estado)
     posicoes = posicoes_do_elemento(labirinto, elemento)
     erradas = {
         posicao for posicao in posicoes
-        if desenho[posicao[0]][posicao[1]] != codigo
+        if cor_em(desenho[posicao[0]][posicao[1]], CAMADAS[elemento]) != rgb
     }
     if erradas:
         pytest.fail(
             f'{len(erradas)} de {len(posicoes)} posições de "{elemento}" não '
-            f"são {cor}: {descrever(desenho, erradas)}"
+            f"têm {cor} no {CAMADAS[elemento]}: {amostra(desenho, erradas)}"
         )
 
 
@@ -669,19 +864,16 @@ def cor_so_no_elemento(estado: Estado, cor: str, elemento: str) -> None:
         cor: Nome da cor (I21).
         elemento: Um dos ELEMENTOS.
     """
-    if elemento not in ELEMENTOS:
-        pytest.fail(
-            f'"{elemento}" não existe; os válidos são: {", ".join(ELEMENTOS)}'
-        )
-    codigo = codigo_da_cor(cor)
+    conferir_elemento(elemento)
+    rgb = rgb_da_cor(cor)
     desenho, labirinto = tela_e_labirinto(estado)
-    fora = posicoes_da_cor(desenho, codigo) - posicoes_do_elemento(
+    fora = posicoes_da_cor(desenho, rgb) - posicoes_do_elemento(
         labirinto, elemento
     )
     if fora:
         pytest.fail(
             f'{cor} aparece em {len(fora)} posições fora de "{elemento}": '
-            f"{[onde(posicao) for posicao in sorted(fora)[:AMOSTRA]]}"
+            f"{amostra(desenho, fora)}"
         )
 
 
@@ -698,12 +890,13 @@ def nenhuma_posicao_com_a_cor(estado: Estado, cor: str) -> None:
         estado: Estado do cenário.
         cor: Nome da cor (I21).
     """
-    codigo = codigo_da_cor(cor)
-    achadas = posicoes_da_cor(ultima_tela(estado), codigo)
+    rgb = rgb_da_cor(cor)
+    desenho = ultima_tela(estado)
+    achadas = posicoes_da_cor(desenho, rgb)
     if achadas:
         pytest.fail(
             f"{cor} aparece em {len(achadas)} posições: "
-            f"{[onde(posicao) for posicao in sorted(achadas)[:AMOSTRA]]}"
+            f"{amostra(desenho, achadas)}"
         )
 
 
@@ -731,8 +924,6 @@ def celulas_do_digito(estado: Estado, digito: str, paredes: str) -> None:
     except ValueError:
         pytest.fail(f'"{digito}" não é um dígito hexadecimal')
     desenho, labirinto = tela_e_labirinto(estado)
-    if cor_das_paredes(desenho) is None:
-        pytest.fail("o canto superior esquerdo do desenho está sem cor")
     celulas = [
         celula for celula in labirinto.celulas()
         if labirinto.valor(celula) == valor
@@ -740,7 +931,10 @@ def celulas_do_digito(estado: Estado, digito: str, paredes: str) -> None:
     if not celulas:
         pytest.fail(f'o arquivo de saída não tem célula de dígito "{digito}"')
     for celula in celulas:
-        mostradas = paredes_desenhadas(desenho, celula)
+        try:
+            mostradas = paredes_desenhadas(desenho, celula)
+        except ValueError as erro:
+            pytest.fail(f"na última renderização, {erro}")
         if mostradas != esperadas:
             pytest.fail(
                 f"a célula {celula}, de dígito {digito}, aparece com as "
@@ -750,7 +944,7 @@ def celulas_do_digito(estado: Estado, digito: str, paredes: str) -> None:
 
 
 def tem_ciano(estado: Estado) -> bool:
-    """Diz se a última renderização tem alguma posição ciano.
+    """Diz se a última renderização tem algum caractere ciano.
 
     Args:
         estado: Estado do cenário.

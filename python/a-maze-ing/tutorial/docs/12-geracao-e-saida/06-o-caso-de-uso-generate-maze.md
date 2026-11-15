@@ -103,7 +103,7 @@ sequenceDiagram
 
 O diagrama mostra as chamadas de cima para baixo, na ordem em que acontecem: a seta cheia é
 uma chamada, a tracejada é a resposta. As duas últimas peças ainda não existem: o
-`RenderService`, que desenha, é construído na [parte 13](../13-tela/02-a-grade-de-posicoes.md),
+`RenderService`, que desenha, é construído na [parte 13](../13-tela/02-a-grade-de-caracteres.md),
 e o `state` que ele recebe é o estado da tela (caminho visível ou não, cor das paredes), o
 `ViewState` da [parte 13](../13-tela/01-o-estado-da-tela.md). Gravar antes de devolver o
 retrato ao menu é uma decisão com motivo, explicada na

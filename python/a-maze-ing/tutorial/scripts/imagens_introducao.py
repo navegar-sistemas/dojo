@@ -4,7 +4,8 @@ Uso, na pasta tutorial/:
 
     python3 scripts/imagens_introducao.py <raiz de uma implementação pronta>
 
-A implementação fornece o pacote mazegen, que gera os labirintos reais.
+A implementação fornece o mazegen, que gera os labirintos reais, e o
+amazeing, cujo RenderService desenha os desenhos do terminal.
 """
 
 from __future__ import annotations
@@ -15,17 +16,16 @@ from collections.abc import Sequence
 from pathlib import Path
 
 from svg import (
-    COLORS,
     _svg,
     _text,
     bits_svg,
     cell_bits_svg,
-    color,
     grid_from_hex,
     maze_svg,
     save,
     sides_svg,
 )
+from terminal import arms_table, decode, drawing_svg, layout_svg
 
 OUT = Path(__file__).resolve().parent.parent / "static" / "img" / "problema"
 STEP = {"N": (0, -1), "E": (1, 0), "S": (0, 1), "W": (-1, 0)}
@@ -50,62 +50,6 @@ def walk(start: XY, letters: str) -> list[XY]:
         x, y = cells[-1]
         cells.append((x + dx, y + dy))
     return cells
-
-
-def render_rows(grid: list[list[int]], entry: XY, exit_: XY,
-                path: list[XY], visible: bool) -> list[list[str]]:
-    """Reproduz as cores do desenho do terminal, posição por posição.
-
-    Args:
-        grid: Grade de bits.
-        entry: Entrada.
-        exit_: Saída.
-        path: Células do caminho.
-        visible: Caminho visível.
-
-    Returns:
-        A matriz de cores, (2H+1) x (2W+1).
-    """
-    height, width = len(grid), len(grid[0])
-    on_path = set(path) if visible else set()
-    steps = set(zip(path, path[1:])) if visible else set()
-    rows: list[list[str]] = []
-    for py in range(2 * height + 1):
-        row: list[str] = []
-        for px in range(2 * width + 1):
-            x, y = px // 2, py // 2
-            if px % 2 == 0 and py % 2 == 0:
-                name = "white_wall"
-            elif px % 2 == 1 and py % 2 == 1:
-                if (x, y) == entry:
-                    name = "magenta"
-                elif (x, y) == exit_:
-                    name = "red"
-                elif (x, y) in on_path:
-                    name = "cyan"
-                else:
-                    name = "corridor"
-            elif py % 2 == 0:
-                closed = y == height or grid[y][x] & 1
-                pair = ((x, y - 1), (x, y))
-                if closed:
-                    name = "white_wall"
-                elif pair in steps or pair[::-1] in steps:
-                    name = "cyan"
-                else:
-                    name = "corridor"
-            else:
-                closed = x == width or grid[y][x] & 8
-                pair = ((x - 1, y), (x, y))
-                if closed:
-                    name = "white_wall"
-                elif pair in steps or pair[::-1] in steps:
-                    name = "cyan"
-                else:
-                    name = "corridor"
-            row.append(name)
-        rows.append(row)
-    return rows
 
 
 def passages(grid: list[list[int]]) -> dict[XY, list[XY]]:
@@ -237,93 +181,6 @@ def side_by_side(panels: Sequence[tuple[str, str]], caption: str) -> str:
     return _svg(total_w, total_h, body)
 
 
-def terminal_svg(rows: Sequence[Sequence[str]], size: int,
-                 caption: str) -> str:
-    """Desenha as posições como o terminal, com a moldura escura do fundo.
-
-    Args:
-        rows: rows[py][px] com o nome da cor de cada posição.
-        size: Lado de cada quadrado.
-        caption: Legenda abaixo do desenho.
-
-    Returns:
-        O documento SVG.
-    """
-    pad, frame = 16, 14
-    inner_w, inner_h = len(rows[0]) * size, len(rows) * size
-    width = max(inner_w + 2 * (pad + frame), len(caption) * 7.4 + 40)
-    left, top = (width - inner_w) / 2, pad + frame
-    body = [
-        f'<rect x="{left - frame:g}" y="{pad}" '
-        f'width="{inner_w + 2 * frame:g}" height="{inner_h + 2 * frame:g}" '
-        f'rx="6" fill="{COLORS["corridor"]}"/>'
-    ]
-    for py, row in enumerate(rows):
-        for px, name in enumerate(row):
-            body.append(
-                f'<rect x="{left + px * size:g}" y="{top + py * size:g}" '
-                f'width="{size}" height="{size}" fill="{color(name)}"/>'
-            )
-    total_h = top + inner_h + frame + 40
-    body.append(_text(width / 2, total_h - 20, caption, size=13,
-                      fill="muted"))
-    return _svg(width, total_h, body)
-
-
-def positions_svg() -> str:
-    """Desenha as 7 x 5 posições de uma grade 3x2, numeradas.
-
-    A célula 1,0 e as posições das paredes Norte e Oeste dela levam
-    rótulos.
-
-    Returns:
-        O documento SVG.
-    """
-    size, gap, top = 48, 4, 70
-    caption = ("amarelo: célula · azul: posição de parede (fechada ou "
-               "aberta) · escuro: canto")
-    width = max(7 * size + 130, len(caption) * 7.4 + 40)
-    left = (width - 7 * size) / 2 + 20
-    labels = {(3, 1): "1,0", (3, 0): "N", (2, 1): "O"}
-    body: list[str] = []
-    for py in range(5):
-        for px in range(7):
-            if px % 2 == 0 and py % 2 == 0:
-                name = "wall"
-            elif px % 2 == 1 and py % 2 == 1:
-                name = "highlight"
-            else:
-                name = "stack"
-            x, y = left + px * size, top + py * size
-            body.append(
-                f'<rect x="{x + gap / 2:g}" y="{y + gap / 2:g}" '
-                f'width="{size - gap}" height="{size - gap}" '
-                f'fill="{color(name)}"/>'
-            )
-            if (px, py) in labels:
-                body.append(_text(x + size / 2, y + size / 2,
-                                  labels[(px, py)], size=15, weight="bold"))
-    for px in range(7):
-        body.append(_text(left + px * size + size / 2, top - 14, str(px),
-                          size=13, fill="muted"))
-    for py in range(5):
-        body.append(_text(left - 16, top + py * size + size / 2, str(py),
-                          size=13, fill="muted"))
-    body.append(_text(left + 7 * size / 2, top - 42, "coluna do quadro →",
-                      size=13, weight="bold"))
-    middle = top + 5 * size / 2
-    body.append(
-        f'<g transform="rotate(90 {left - 44:g} {middle:g})">'
-        + _text(left - 44, middle, "linha do quadro →", size=13,
-                weight="bold")
-        + "</g>"
-    )
-    height = top + 5 * size + 44
-    body.append(_text(width / 2, height - 20, caption, size=13,
-                      fill="muted"))
-    return _svg(width, height, body)
-
-
 def glyph_svg(extra: dict[XY, str], caption: str) -> str:
     """Desenha o bloco 7 x 5 do "42", com as posições numeradas.
 
@@ -345,6 +202,10 @@ def glyph_svg(extra: dict[XY, str], caption: str) -> str:
 def main() -> None:
     """Gera todas as imagens desta parte."""
     sys.path.insert(0, sys.argv[1])
+    from amazeing.domain.entities.view_state import ViewState
+    from amazeing.domain.value_objects.generated_maze import GeneratedMaze
+    from amazeing.services.render_service import RenderService
+    from amazeing.utils.box import Box
     from mazegen import MazeGenerator
 
     closed = [[15] * 6 for _ in range(4)]
@@ -456,22 +317,36 @@ def main() -> None:
     save(maze_svg(gen.grid, cell=28, wall=3, fills=fills,
                   caption="20 x 15, modo Pac-Man, semente 42"),
          OUT / "labirinto-20x15.svg")
-    save(maze_svg(gen.grid, cell=28, wall=3, fills=fills,
-                  path=walk((0, 0), gen.solution),
-                  caption="20 x 15, modo Pac-Man, semente 42, com o "
-                          "caminho mais curto"),
-         OUT / "labirinto-20x15-caminho.svg")
 
-    for visible, name in ((False, "desenho-3x2"),
-                          (True, "desenho-3x2-caminho")):
-        rows = render_rows(small, (0, 0), (0, 1), small_path, visible)
-        caption = ("cores do terminal: branco = parede, escuro = corredor, "
-                   "magenta = entrada, vermelho = saída")
-        if visible:
-            caption += ", ciano = caminho"
-        save(terminal_svg(rows, 34, caption), OUT / f"{name}.svg")
+    renderer = RenderService()
+    arms = arms_table(Box.glyph)
+    example = GeneratedMaze(tuple(tuple(row) for row in small), (0, 0),
+                            (0, 1), "EESWW", frozenset())
+    state = ViewState()
+    for name, caption in (
+            ("desenho-3x2", "grafite: paredes · magenta: entrada · "
+                            "vermelho: saída"),
+            ("desenho-3x2-caminho", "grafite: paredes · magenta: entrada · "
+                                    "vermelho: saída · ciano: caminho")):
+        save(drawing_svg(decode(renderer.render(example, state)), arms,
+                         cw=18, ch=36, caption=caption), OUT / f"{name}.svg")
+        state.toggle_path()
 
-    save(positions_svg(), OUT / "posicoes.svg")
+    save(layout_svg(3, 2, {(6, 1): "1,0", (5, 0): "N", (6, 0): "N",
+                           (7, 0): "N", (4, 1): "O"}, cw=30, ch=50,
+                    caption="escuro: canto · azul: lugar de parede · "
+                            "amarelo: interior da célula, com o centro "
+                            "mais forte"),
+         OUT / "grade-3x2.svg")
+
+    snapshot = GeneratedMaze.from_generator(gen, (0, 0), (19, 14))
+    state = ViewState()
+    state.toggle_path()
+    save(drawing_svg(decode(renderer.render(snapshot, state)), arms,
+                     cw=7, ch=14,
+                     caption="20 x 15, modo Pac-Man, semente 42, com o "
+                             "caminho mais curto, como o terminal mostra"),
+         OUT / "terminal-20x15.svg")
 
 
 if __name__ == "__main__":

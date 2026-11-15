@@ -133,10 +133,10 @@ def makefile_rule_svg() -> str:
         f'width="{char + 4:g}" height="30" rx="5" fill="none" '
         f'stroke="{COLORS["exit"]}" stroke-width="2"/>',
         f'<rect x="{left - 4:g}" y="{line1 - 15:g}" width="{4 * char:g}" '
-        f'height="30" rx="5" fill="none" stroke="{COLORS["blue_wall"]}" '
+        f'height="30" rx="5" fill="none" stroke="{COLORS["blue"]}" '
         f'stroke-width="2"/>',
         _text(left - 4, line1 - 34, "alvo: o nome da regra",
-              size=14, fill="blue_wall", weight="bold", anchor="start"),
+              size=14, fill="blue", weight="bold", anchor="start"),
         _text(left + 4.5 * char + 150, line1, "← dois-pontos: fecha o nome",
               size=14, fill="exit", weight="bold"),
     ]
@@ -145,7 +145,7 @@ def makefile_rule_svg() -> str:
         body.append(
             f'<rect x="{left:g}" y="{y - 15:g}" width="{tab_w - 6:g}" '
             f'height="30" rx="5" fill="{COLORS["highlight"]}" '
-            f'stroke="{COLORS["yellow_wall"]}" stroke-width="2"/>'
+            f'stroke="{COLORS["yellow"]}" stroke-width="2"/>'
         )
         body.append(_text(left + (tab_w - 6) / 2, y, "TAB", size=13,
                           weight="bold"))
@@ -192,13 +192,13 @@ def bit_ops_svg() -> str:
         value = 8 >> index
         cx = grid_x + index * (box + gap) + box / 2
         body.append(_text(cx, top - 44, name, size=13, weight="bold",
-                          fill="blue_wall" if value == 2 else "text"))
+                          fill="blue" if value == 2 else "text"))
         body.append(_text(cx, top - 26, str(value), size=13, fill="muted"))
     leste_x = grid_x + 2 * (box + gap) - 3
     body.append(
         f'<rect x="{leste_x}" y="{top - 58}" width="{box + 6}" '
         f'height="{len(rows) * row_h + 50}" rx="8" fill="none" '
-        f'stroke="{COLORS["blue_wall"]}" stroke-width="2" '
+        f'stroke="{COLORS["blue"]}" stroke-width="2" '
         f'stroke-dasharray="6 4"/>'
     )
     for row, (expr, bits, shown, note) in enumerate(rows):
@@ -234,7 +234,7 @@ def coherence_svg() -> str:
     """
     size, gap, top = 110, 16, 60
     pairs = (
-        (40, 13, 7, "coerente: as duas dizem «aberta»", "green_wall"),
+        (40, 13, 7, "coerente: as duas dizem «aberta»", "green"),
         (380, 13, 15, "incoerente: uma diz «aberta», a outra «fechada»",
          "exit"),
     )
@@ -309,12 +309,12 @@ def window_walls_svg() -> str:
         for x in range(2):
             gx = left + (x + 1) * cell
             body.append(_line(gx, top + y * cell + 6, gx,
-                              top + (y + 1) * cell - 6, "blue_wall", 6))
+                              top + (y + 1) * cell - 6, "blue", 6))
     for y in range(2):
         for x in range(3):
             gy = top + (y + 1) * cell
             body.append(_line(left + x * cell + 6, gy,
-                              left + (x + 1) * cell - 6, gy, "green_wall",
+                              left + (x + 1) * cell - 6, gy, "green",
                               6))
     body.append(
         f'<rect x="{left}" y="{top}" width="{3 * cell}" height="{3 * cell}" '
@@ -322,14 +322,14 @@ def window_walls_svg() -> str:
     )
     legend_x = left + 3 * cell + 36
     body.append(_line(legend_x, top + 40, legend_x + 36, top + 40,
-                      "blue_wall", 6))
+                      "blue", 6))
     body.append(_text(legend_x + 48, top + 32, "6 paredes verticais:",
                       size=14, anchor="start", weight="bold"))
     body.append(_text(legend_x + 48, top + 52,
                       "o Leste (E) das colunas x0 e x0+1", size=14,
                       anchor="start"))
     body.append(_line(legend_x, top + 120, legend_x + 36, top + 120,
-                      "green_wall", 6))
+                      "green", 6))
     body.append(_text(legend_x + 48, top + 112, "6 paredes horizontais:",
                       size=14, anchor="start", weight="bold"))
     body.append(_text(legend_x + 48, top + 132,
@@ -567,7 +567,7 @@ def two_loops_svg(maze_rows: list[list[int]]) -> str:
                        caption=caption)
     left = 58 + _caption_overflow(58 + 3 * cell + 16, caption) / 2
     top = 54
-    loops = (("current", 0, -5), ("blue_wall", 1, 5))
+    loops = (("current", 0, -5), ("blue", 1, 5))
     extra: list[str] = []
     for tone, column, shift in loops:
         x1 = left + column * cell + cell / 2 + shift

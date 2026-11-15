@@ -1,7 +1,7 @@
 # language: pt
 Funcionalidade: Representação visual
-  O programa exibe o labirinto no terminal, só com caracteres ASCII e cores ANSI, mostrando
-  paredes, entrada, saída, o "42" e o caminho da solução.
+  O programa exibe o labirinto no terminal, com espaços, caracteres de caixa e cores ANSI de 24
+  bits, mostrando paredes, entrada, saída, o "42" e o caminho da solução.
 
   # pdf: "file using a hexadecimal wall representation. You will also provide a visual representation"
   # pdf: "of the maze"
@@ -21,7 +21,7 @@ Funcionalidade: Representação visual
     Dado o config base
     Quando eu executo "python3 a_maze_ing.py cfg.txt" com a entrada "4"
     Então a renderização confirma "2 × HEIGHT + 1 linhas"
-    E a renderização confirma "2 × WIDTH + 1 posições de 2 caracteres por linha"
+    E a renderização confirma "4 × WIDTH + 1 caracteres por linha"
 
   # pdf: "Terminal ASCII rendering, or"
   # pdf: "A graphical display using the MiniLibX (MLX) library."
@@ -33,8 +33,12 @@ Funcionalidade: Representação visual
     E o código-fonte de "."
     Quando eu executo "python3 a_maze_ing.py cfg.txt" com a entrada "4"
     E a análise estática percorre o código-fonte
-    Então a renderização confirma "só caracteres ASCII"
-    E a renderização confirma "cores por sequências ANSI de fundo"
+    Então a renderização confirma "só espaços e caracteres de caixa"
+    E a renderização confirma "cores por sequências ANSI de 24 bits"
+    E a renderização confirma "cada canto com o caractere das suas paredes"
+    E a renderização confirma "espaço fora das paredes, dos cantos e do caminho"
+    E a renderização confirma "texto e fundo na mesma sequência e um reset no fim de cada linha"
+    E a renderização confirma "sequência só quando o par de cores muda"
     E a análise estática confirma "sem MiniLibX"
 
   # pdf: "The visual should clearly show walls, entry, exit, and the solution path."
@@ -105,12 +109,13 @@ Funcionalidade: Representação visual
 
   # figura: legenda "entry", "exit", ""42" pattern", "shortest path"
   # md:  "Legenda: entrada, saída, padrão "42", caminho mais curto."
-  @informativo @derivado @automatizado @decisao-I02 @decisao-I03 @decisao-I04 @pdf-p10-figura @md-L198
+  @informativo @derivado @automatizado @decisao-I02 @decisao-I03 @decisao-I04 @decisao-I21 @pdf-p10-figura @md-L198
   Cenário: Entrada, saída, "42" e caminho têm cores distintas
     Dado o config base
     E o programa iniciado com "python3 a_maze_ing.py cfg.txt"
     Quando eu envio ao menu "2"
     Então a renderização confirma "cinco cores distintas para entrada, saída, 42, caminho e paredes"
+    E a renderização confirma "fundo branco fora da entrada, da saída e do 42"
 
   # pdf: "When visually represented (see below), the maze must contain a visible "42" drawn"
   # pdf: "by several fully closed cells."
@@ -119,8 +124,8 @@ Funcionalidade: Representação visual
   Esquema do Cenário: As células do "42" aparecem na cor do "42"
     Dado o config base com "PERFECT=<perfeito>"
     Quando eu executo "python3 a_maze_ing.py cfg.txt" com a entrada "4"
-    Então na última renderização, as posições de "células do 42" têm a cor "cinza"
-    E na última renderização, a cor "cinza" só aparece em "células do 42"
+    Então na última renderização, as posições de "42" têm a cor "cinza"
+    E na última renderização, a cor "cinza" só aparece em "42"
 
     Exemplos:
       | perfeito |
@@ -133,7 +138,7 @@ Funcionalidade: Representação visual
   Cenário: A figura da renderização padrão no terminal
     - Dada a figura "Terminal default rendering of the maze"
     - Quando eu comparo com o meu programa logo após "python3 ./a_maze_ing.py config.txt"
-    - Então os dois mostram paredes em blocos de cor, entrada, saída e o "42" em cor fixa diferente da das paredes
+    - Então os dois mostram paredes, entrada, saída e o "42" em cor fixa diferente da das paredes, a figura com blocos cheios e o programa com linhas finas de caracteres de caixa
     - E o menu de interação aparece abaixo do labirinto
 
   # pdf: "Different maze, shortest path and wall colours"

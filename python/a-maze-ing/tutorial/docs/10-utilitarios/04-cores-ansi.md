@@ -5,158 +5,166 @@ title: Cores ANSI
 
 # Cores ANSI
 
-Com as sequências SGR da [página anterior](./08-sequencias-ansi.md), o programa consegue
-pintar o fundo de um trecho do terminal. Falta decidir como desenhar cada posição do labirinto
-e quais cores usar, e guardar tudo num lugar só. Esta página cria a classe `Ansi`
-(`amazeing/utils/ansi.py`) com as cores que o desenho usa
-([parte 13](../13-tela/02-a-grade-de-posicoes.md)).
+Com as sequências SGR da [página anterior](./08-sequencias-ansi.md), o programa consegue escolher
+a cor do texto e a do fundo de cada trecho do terminal. Falta decidir quais cores o desenho usa
+e onde cada uma entra, e guardar tudo num lugar só, para que nenhuma outra classe precise
+montar uma sequência à mão. Esta página cria a classe `Ansi` (`amazeing/utils/ansi.py`) com as
+cores do desenho ([parte 13](../13-tela/02-a-grade-de-caracteres.md)) e o método que monta a
+sequência.
 
-## Por que só fundo, e por que dois espaços
+## Texto e fundo
 
-O desenho usa **só a cor de fundo**. Cada posição do desenho são dois espaços com fundo
-colorido: o espaço não tem traço nenhum, então o que aparece é um bloco da cor do fundo.
+No desenho, as paredes são **linhas**: caracteres como `━` e `┃`, apresentados na
+[próxima página](./09-caracteres-de-caixa.md). O que tem forma de linha usa a cor do **texto**;
+o que tem forma de bloco usa a cor do **fundo**:
 
-São **dois** espaços porque o lugar de um caractere no terminal tem mais ou menos o dobro de
-altura que de largura. Com um espaço por posição, cada bloco seria um retângulo alto; com dois
-lado a lado, vira quase um quadrado:
+- no texto: as paredes e o caminho mais curto, que também é uma linha;
+- no fundo: o branco de todo o desenho, o "42" e as células de entrada e de saída.
 
-![Um xadrez de 5 por 3 desenhado com 1 espaço por posição (retângulos altos) e com 2 espaços (quadrados)](/img/utilitarios/um-ou-dois-espacos.svg)
-
-Cores do terminal: cada retângulo é o fundo de uma posição; o claro e o escuro só alternam para o
-xadrez aparecer.
-
-A alternativa seria pintar o **texto** de um caractere cheio, como `█`. O enunciado pede
-"renderização ASCII", e o `█` não está na tabela ASCII, a dos 128 caracteres básicos
-([página anterior](./08-sequencias-ansi.md)); o espaço está. Usar só espaços cumpre o pedido ao
-pé da letra e funciona em qualquer terminal. Essa leitura do enunciado é escolha do projeto.
+Todo caractere do desenho recebe um fundo, mesmo o espaço de um corredor, que fica branco. Pintar
+o fundo inteiro é escolha do projeto: sem ele, o corredor teria a cor de fundo do terminal, e
+uma parede grafite sumiria num terminal de tema escuro. Com o fundo branco, o desenho sai igual
+em qualquer tema.
 
 ## As constantes
 
-![As nove cores de Ansi: nome, sequência e uso](/img/utilitarios/paleta-ansi.svg)
+![As nove cores de Ansi: WHITE 255, 255, 255, fundo de tudo; CHARCOAL 31, 41, 55, ORANGE 194, 65, 12, GREEN 21, 128, 61 e BLUE 29, 78, 216, as quatro cores de parede; GREY 156, 163, 175, fundo do 42; MAGENTA 217, 70, 239, fundo da entrada; RED 239, 68, 68, fundo da saída; CYAN 34, 211, 238, linha do caminho](/img/utilitarios/paleta-ansi.svg)
 
-Cores do terminal, num terminal de tema escuro: cada quadrado mostra o fundo que a sequência
-produz, com o nome da constante, a sequência e o uso no desenho. O `DEFAULT` aparece escuro só
-porque, num tema escuro, o fundo padrão do terminal é escuro; num terminal de tema claro, ele
-sairia claro. Ele não escolhe cor nenhuma, como explica a seção
-[Por que o corredor tem cor](#por-que-o-corredor-tem-cor).
+Cada quadrado mostra a cor, com o nome da constante, os valores de vermelho, verde e azul e o que
+ela pinta no desenho. O menu troca a cor das paredes entre `CHARCOAL`, `ORANGE`, `GREEN` e
+`BLUE`. As cores e o que cada uma pinta são escolha do projeto; o critério das quatro cores de
+parede está na [paleta da parte 13](../13-tela/01-o-estado-da-tela.md#a-paleta).
 
-| Constante | Número | Uso no desenho |
-|---|---|---|
-| `DEFAULT` | `49` | corredor (a passagem entre paredes) |
-| `WHITE`, `YELLOW`, `GREEN`, `BLUE` | `47`, `43`, `42`, `44` | paredes: o menu troca entre as quatro |
-| `GREY` | `100` | células do "42" |
-| `MAGENTA` | `45` | entrada |
-| `RED` | `41` | saída |
-| `CYAN` | `46` | caminho mais curto |
-
-As cores e o que cada uma pinta são escolha do projeto. São as cores básicas, que todo terminal
-entende. Existem sequências para 256 cores e para cores RGB, mas nem todo terminal as aceita, e
-o labirinto não precisa de mais do que isso. As quatro cores de parede são diferentes das
-outras, para uma parede nunca ser confundida com a entrada, a saída, o caminho ou o "42".
-
-### Por que o corredor tem cor
-
-O corredor poderia ficar sem sequência nenhuma. Só que a cor de fundo **continua valendo** até
-outro comando: um corredor impresso logo depois de uma parede branca sairia branco também. O
-`DEFAULT = 49` existe para que **toda** posição comece com a sua própria sequência. O `49` não
-escolhe uma cor: devolve o fundo que o terminal já usa, escuro ou claro, conforme o tema de quem
-roda o programa.
-
-## `RESET` e `background`
+## O tipo `Rgb`
 
 ```python
-RESET = "\x1b[0m"
+Rgb = tuple[int, int, int]
 ```
 
-Toda linha do desenho termina com o reset. Sem ele, a última cor da linha (a parede da borda)
-"vazaria" para o resto da linha, para o menu e até para o terminal depois que o programa
-termina.
+Cada cor é uma tupla de três números: vermelho, verde e azul. `tuple[int, int, int]` é a
+anotação de tipo de uma tupla com **exatamente** três inteiros. A linha dá um nome curto a esse
+tipo, um **apelido de tipo** (*type alias*): `Rgb` pode ser usado em qualquer anotação no lugar
+de `tuple[int, int, int]`, e o mypy entende os dois como o mesmo tipo.
 
 ```python
-@staticmethod
-def background(code: int) -> str:
-    return f"\x1b[{code}m"
+    WHITE: Rgb = (255, 255, 255)
 ```
 
-`background(41)` devolve `"\x1b[41m"`: a f-string troca `{code}` pelo número. `@staticmethod`
-quer dizer que o método não usa nenhum dado de um objeto e se chama direto pela classe:
-`Ansi.background(Ansi.RED)`.
+Dentro da classe, cada cor é um atributo anotado com o apelido: `WHITE` vale a tupla
+`(255, 255, 255)`. O `ViewState` e o `RenderService`, da parte 13, importam o `Rgb` deste mesmo
+arquivo para anotar as cores que guardam.
 
-As cores ficam guardadas como **números**, e a sequência só é montada na hora de desenhar. Assim
-a lista das cores de parede é uma tupla de números (`Ansi.WHITE`, `Ansi.YELLOW`...), fácil de
-comparar e de percorrer, e o formato `ESC [ número m` fica escrito num lugar só.
+## `RESET` e `colours`
 
-Uma linha do desenho é uma sequência por posição, cada uma seguida de dois espaços, e o reset no
-fim:
+```python
+    RESET = "\x1b[0m"
+```
 
-![Uma linha do desenho: cada posição é uma sequência SGR e dois espaços](/img/utilitarios/linha-sgr.svg)
+Toda linha do desenho termina com o reset. Sem ele, as últimas cores da linha continuariam
+valendo para o menu e até para o terminal depois que o programa termina.
 
-Cores do terminal, num tema escuro: branco é a parede (`47`), magenta a entrada (`45`) e os
-quadrados escuros são corredor (`49`, o fundo padrão). Embaixo de cada quadrado, o texto que o
-programa imprime para ele; o `\x1b[0m` do fim é o reset.
+```python
+    @staticmethod
+    def colours(text: Rgb, background: Rgb) -> str:
+        return "\x1b[38;2;{};{};{};48;2;{};{};{}m".format(*text, *background)
+```
+
+`colours(text, background)` monta a sequência que escolhe as duas cores de uma vez: a do texto
+e a do fundo. `@staticmethod` quer dizer que o método não usa nenhum dado de um objeto e se chama
+direto pela classe: `Ansi.colours(Ansi.CHARCOAL, Ansi.WHITE)`.
+
+O `format` troca cada `{}` da string, da esquerda para a direita, por um argumento. O `*` na
+frente de uma tupla a **desempacota**: `*text` passa os três números da tupla como três
+argumentos separados. Com `*text, *background`, o `format` recebe seis números e preenche os
+seis `{}`:
+
+```python
+"{};{};{}".format(*(31, 41, 55))    # '31;41;55', o mesmo que .format(31, 41, 55)
+```
+
+Escrita como f-string com os índices, `{text[0]}` a `{background[2]}`, a mesma linha do `return`
+teria 111 caracteres, acima do limite de 79 do flake8; com o `format` e o `*`, ela cabe.
+
+As cores ficam guardadas como **tuplas**, e a sequência só é montada na hora de desenhar. Assim
+a lista das cores de parede é uma tupla de cores (`Ansi.CHARCOAL`, `Ansi.ORANGE`...), fácil de
+comparar e de percorrer, e o formato `ESC [ 38;2;R;G;B;48;2;R;G;B m` fica escrito num lugar só.
+
+Uma linha real do desenho, a segunda do labirinto 3x2 da
+[parte 1](../01-o-problema/07-o-desenho-e-o-menu.md), separada nos trechos de cada sequência:
+
+![Uma linha do desenho em três trechos: a parede da borda, grafite sobre fundo branco, a entrada em magenta e o resto da linha sobre fundo branco, cada trecho com a sua sequência](/img/utilitarios/linha-sgr.svg)
+
+Em cima, a linha como o terminal a mostra; embaixo, o texto que o programa imprime para cada
+trecho. Uma sequência só aparece onde o par de cores muda: o trecho 3 pinta oito espaços e uma
+parede com uma sequência só.
 
 ## O arquivo completo
 
 ```python title="amazeing/utils/ansi.py"
-"""ANSI background colours of the terminal drawing."""
+"""24-bit ANSI colours of the terminal drawing."""
+
+Rgb = tuple[int, int, int]
 
 
 class Ansi:
-    """SGR background codes and the reset sequence.
+    """Colours of the drawing and the escape sequences that apply them.
 
     Attributes:
         RESET: Sequence that restores the terminal colours.
-        DEFAULT: Default terminal background, used for corridors.
-        WHITE: White background.
-        YELLOW: Yellow background.
-        GREEN: Green background.
-        BLUE: Blue background.
-        MAGENTA: Magenta background, the entry.
-        RED: Red background, the exit.
-        CYAN: Cyan background, the shortest path.
-        GREY: Grey background, the "42".
+        WHITE: Background of the whole drawing.
+        CHARCOAL: Wall colour, the first of the rotation.
+        ORANGE: Wall colour.
+        GREEN: Wall colour.
+        BLUE: Wall colour, the last of the rotation.
+        MAGENTA: Background of the entry.
+        RED: Background of the exit.
+        CYAN: Lines of the shortest path.
+        GREY: Background of the "42".
     """
 
     RESET = "\x1b[0m"
-    DEFAULT = 49
-    WHITE = 47
-    YELLOW = 43
-    GREEN = 42
-    BLUE = 44
-    MAGENTA = 45
-    RED = 41
-    CYAN = 46
-    GREY = 100
+    WHITE: Rgb = (255, 255, 255)
+    CHARCOAL: Rgb = (31, 41, 55)
+    ORANGE: Rgb = (194, 65, 12)
+    GREEN: Rgb = (21, 128, 61)
+    BLUE: Rgb = (29, 78, 216)
+    MAGENTA: Rgb = (217, 70, 239)
+    RED: Rgb = (239, 68, 68)
+    CYAN: Rgb = (34, 211, 238)
+    GREY: Rgb = (156, 163, 175)
 
     @staticmethod
-    def background(code: int) -> str:
-        """SGR sequence that sets a background colour.
+    def colours(text: Rgb, background: Rgb) -> str:
+        """SGR sequence that sets the text and the background colour.
 
         Args:
-            code: SGR background code.
+            text: Colour of the characters.
+            background: Colour behind the characters.
 
         Returns:
             The escape sequence.
         """
-        return f"\x1b[{code}m"
+        return "\x1b[38;2;{};{};{};48;2;{};{};{}m".format(*text, *background)
 ```
 
 ## Experimente
 
-Uma parede branca e a entrada magenta, lado a lado, com o reset no fim. Na raiz do projeto:
+Uma parede grafite sobre branco e o interior da entrada, em magenta, lado a lado, com o reset no
+fim. Na raiz do projeto:
 
 ```bash
 .venv/bin/python - <<'EOF'
 from amazeing.utils.ansi import Ansi
 
-line = Ansi.background(Ansi.WHITE) + "  " + Ansi.background(Ansi.MAGENTA) + "  " + Ansi.RESET
-print(repr(line))
+wall = Ansi.colours(Ansi.CHARCOAL, Ansi.WHITE) + "┃"
+entry = Ansi.colours(Ansi.CHARCOAL, Ansi.MAGENTA) + "   "
+print(repr(wall + entry + Ansi.RESET))
 EOF
 ```
 
 ```text
-'\x1b[47m  \x1b[45m  \x1b[0m'
+'\x1b[38;2;31;41;55;48;2;255;255;255m┃\x1b[38;2;31;41;55;48;2;217;70;239m   \x1b[0m'
 ```
 
-O `repr` mostra os caracteres invisíveis escritos por extenso. Troque `print(repr(line))` por
-`print(line)` para ver, no terminal, um quadrado branco e um magenta.
+O `repr` mostra os caracteres invisíveis escritos por extenso. Troque `print(repr(...))` por
+`print(wall + entry + Ansi.RESET)` para ver, no terminal, a parede e o bloco magenta.

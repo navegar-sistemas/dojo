@@ -40,7 +40,10 @@ o explica em detalhe.
 | **caminho mais curto** | a menor sequência de passos da entrada à saída, escrita com as letras `N`, `E`, `S`, `W`. [Veja](../07-solver/01-busca-em-largura.md) |
 | **arquivo de configuração** | o arquivo de texto com as opções (`WIDTH`, `HEIGHT`, `ENTRY`, ...), uma `CHAVE=valor` por linha; o do projeto é o `config.txt`. [Veja](../01-o-problema/03-o-arquivo-de-configuracao.md) |
 | **arquivo de saída** | o arquivo de texto em que o programa grava o labirinto, um caractere hexadecimal por célula. [Veja](../01-o-problema/04-o-arquivo-de-saida.md) |
-| **quadro** | a tabela de posições do desenho no terminal: uma posição por célula, por parede e por canto, `2 × WIDTH + 1` de largura. [Veja](../01-o-problema/07-o-desenho-e-o-menu.md) |
+| **quadro** | a grade de caracteres do desenho no terminal, com `2 × HEIGHT + 1` linhas de `4 × WIDTH + 1` caracteres; no código, três tabelas: os caracteres, as cores do texto e as cores do fundo. [Veja](../13-tela/02-a-grade-de-caracteres.md) |
+| **canto** | no desenho do terminal, o caractere onde até quatro paredes se encontram: linha par e coluna múltipla de 4. [Veja](../13-tela/02-a-grade-de-caracteres.md#onde-cada-pedaço-cai) |
+| **interior e centro da célula** | no desenho do terminal, os três caracteres da célula `x,y` (linha `2y + 1`, colunas `4x + 1` a `4x + 3`); o do meio, coluna `4x + 2`, é o centro, por onde passa a linha do caminho. [Veja](../13-tela/02-a-grade-de-caracteres.md#onde-cada-pedaço-cai) |
+| **camada do desenho** | cada etapa em que o `RenderService` escreve por cima da base do desenho: paredes e cantos, o "42", entrada e saída, caminho. Não é o mesmo que as camadas da arquitetura. [Veja](../13-tela/02-a-grade-de-caracteres.md#as-camadas-do-desenho) |
 
 ## Números e algoritmos
 
@@ -112,13 +115,18 @@ o explica em detalhe.
 | **licença MIT** | a licença do projeto: permite a qualquer um usar, copiar e redistribuir o gerador. [Veja](../09-gerador/06-a-licenca.md) |
 | **`maze_analyzer.py`** | o verificador que acompanha o enunciado: lê um arquivo de saída e diz se o labirinto cumpre as regras. [Veja](../16-bonus/03-conferir-com-o-analyzer.md) |
 | **ANSI** | as sequências de caracteres especiais que mandam o terminal mudar de cor. [Veja](../10-utilitarios/08-sequencias-ansi.md) |
-| **SGR** | a sequência ANSI que escolhe a cor (*Select Graphic Rendition*). [Veja](../10-utilitarios/08-sequencias-ansi.md) |
+| **SGR** | a sequência ANSI que escolhe as cores do texto e do fundo (*Select Graphic Rendition*). [Veja](../10-utilitarios/08-sequencias-ansi.md) |
+| **cor RGB (de 24 bits)** | uma cor dada por três números de 0 a 255, as quantidades de vermelho, verde e azul; os três juntos ocupam 24 bits. [Veja](../10-utilitarios/08-sequencias-ansi.md) |
+| **ASCII** | a tabela básica que numera 128 caracteres: letras sem acento, dígitos, pontuação, o espaço e caracteres de controle. [Veja](../10-utilitarios/08-sequencias-ansi.md) |
+| **Unicode** | a tabela que numera os caracteres de todas as escritas; os 128 primeiros são os da tabela ASCII. [Veja](../10-utilitarios/09-caracteres-de-caixa.md) |
+| **caractere de caixa** | um caractere feito para desenhar molduras (`━`, `┃`, `┏`...), cujos traços encostam nas bordas e se emendam com os do vizinho. [Veja](../10-utilitarios/09-caracteres-de-caixa.md) |
+| **braço** | num caractere de caixa, a linha que sai do centro até uma das bordas; cada braço tem um bit, como as paredes (Norte = 1, Leste = 2, Sul = 4, Oeste = 8). [Veja](../10-utilitarios/09-caracteres-de-caixa.md) |
 
 ## Arquitetura
 
 | Termo | Significado |
 |---|---|
-| **camada** | um grupo de classes com o mesmo papel, num dos anéis da arquitetura. [Veja](../02-arquitetura/01-por-que-camadas.md) |
+| **camada** | um grupo de classes com o mesmo papel, num dos anéis da arquitetura; não confundir com a camada do desenho. [Veja](../02-arquitetura/01-por-que-camadas.md) |
 | **Clean Architecture** | ("arquitetura limpa") o estilo de organizar o código em anéis, com as regras no centro e os detalhes (arquivos, terminal) na borda. [Veja](../02-arquitetura/01-por-que-camadas.md) |
 | **regra de dependência** | o código de uma camada importa a própria camada e os anéis mais para dentro, nunca mais para fora; camadas diferentes do mesmo anel não se importam. [Veja](../02-arquitetura/03-regra-de-dependencia.md) |
 | **inversão de dependência** | o centro declara o que precisa (uma porta), e a borda fornece; assim o centro não importa a borda. [Veja](../02-arquitetura/07-a-porta-e-a-inversao.md) |
@@ -149,7 +157,8 @@ o explica em detalhe.
 | `MazeGenerator` | a fachada do gerador: a única classe que outro projeto precisa usar. [Veja](../09-gerador/01-a-fachada.md) |
 | `AppError` | o erro da aplicação, com as variações `ConfigError` e `OutputError`. [Veja](../10-utilitarios/05-a-hierarquia-app-error.md) |
 | `ValueParser` | converte o texto de uma opção em número, `True`/`False` ou coordenada. [Veja](../10-utilitarios/02-inteiros-sem-surpresa.md) |
-| `Ansi` | as sequências de cor do terminal. [Veja](../10-utilitarios/04-cores-ansi.md) |
+| `Ansi` | as cores RGB do desenho e a sequência que aplica um par de cores, a do texto e a do fundo. [Veja](../10-utilitarios/04-cores-ansi.md) |
+| `Box` | os caracteres de caixa do desenho, escolhidos pela soma dos braços. [Veja](../10-utilitarios/09-caracteres-de-caixa.md) |
 | `MazeConfig` | as opções lidas do arquivo de configuração, já validadas. [Veja](../11-configuracao/01-o-value-object-maze-config.md) |
 | `FileConfigRepository` | lê o arquivo de configuração e devolve um `MazeConfig`. [Veja](../11-configuracao/05-abrindo-o-arquivo.md) |
 | `GeneratedMaze` | o retrato do labirinto pronto: grade, entrada, saída, caminho e "42". [Veja](../12-geracao-e-saida/01-o-retrato-generated-maze.md) |
@@ -157,5 +166,5 @@ o explica em detalhe.
 | `FileMazeRepository` | grava o labirinto no arquivo de saída. [Veja](../12-geracao-e-saida/05-gravando-o-arquivo.md) |
 | `GenerateMaze` | o use case que gera um labirinto, grava e devolve o retrato. [Veja](../12-geracao-e-saida/06-o-caso-de-uso-generate-maze.md) |
 | `ViewState` | o estado da tela: caminho visível ou não e a cor atual das paredes. [Veja](../13-tela/01-o-estado-da-tela.md) |
-| `RenderService` | transforma o labirinto nas linhas coloridas do terminal. [Veja](../13-tela/02-a-grade-de-posicoes.md) |
+| `RenderService` | transforma o labirinto nas linhas do terminal: caracteres de caixa com cores RGB. [Veja](../13-tela/02-a-grade-de-caracteres.md) |
 | `Menu` | mostra o labirinto e o menu e responde às escolhas do usuário. [Veja](../14-menu-e-main/01-o-laco-do-menu.md) |

@@ -34,7 +34,7 @@ Os nomes das classes servem só para situar: o papel de cada uma é explicado co
 | `amazeing/repositories` | `FileConfigRepository`, que lê o config, e `FileMazeRepository`, que grava o arquivo de saída | `domain`, `utils`, `errors` |
 | `amazeing/use_cases` | `GenerateMaze`, a operação "gerar um labirinto e gravá-lo", e `MazeRepository`, a sua porta (explicada na [próxima página](./07-a-porta-e-a-inversao.md)) | `domain`, `errors`, `mazegen` |
 | `amazeing/domain` | os dados do programa: `MazeConfig` (as opções lidas), `GeneratedMaze` (o labirinto pronto) e `ViewState` (o estado da tela) | `utils`, `errors`, `mazegen` |
-| `amazeing/utils` | `ValueParser` (converte texto em número, booleano ou coordenada) e `Ansi` (os códigos de cor do terminal) | só a biblioteca padrão |
+| `amazeing/utils` | `ValueParser` (converte texto em número, booleano ou coordenada), `Ansi` (as cores do terminal) e `Box` (os caracteres de caixa que desenham as paredes) | só a biblioteca padrão |
 | `amazeing/errors.py` | `AppError` e as suas variações: os tipos de erro da aplicação | só a biblioteca padrão |
 | `mazegen` | o gerador reutilizável | só a biblioteca padrão (e os próprios módulos do `mazegen`) |
 
@@ -95,7 +95,7 @@ passar, cada um por um motivo.
 | `services` → `use_cases` | o desenho só transforma um labirinto pronto em texto colorido; não lê, não grava e não gera |
 | `repositories` → `use_cases` e `mazegen` | o repository só converte entre texto e os objetos do `domain` (as opções lidas, o labirinto pronto); ele encaixa na porta do use case sem importá-la, como mostra a [próxima página](./07-a-porta-e-a-inversao.md) |
 | `use_cases` → `utils` | o use case só coordena (pede o labirinto ao gerador e manda gravar); converter texto ou escolher cor não é trabalho dele |
-| `utils` e `errors` → `mazegen` | são peças de apoio da aplicação (conversão de texto, cores, tipos de erro) que não precisam saber nada de labirinto |
+| `utils` e `errors` → `mazegen` | são peças de apoio da aplicação (conversão de texto, cores, caracteres de desenho, tipos de erro) que não precisam saber nada de labirinto |
 
 Quanto menos uma camada importa, menos coisas a obrigam a mudar. Se uma dessas proibições
 precisar ser quebrada, é sinal de que o código está na camada errada.

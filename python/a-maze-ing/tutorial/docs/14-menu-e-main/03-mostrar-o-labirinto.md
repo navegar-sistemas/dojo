@@ -59,8 +59,8 @@ continua aparecendo no terminal.
 
 Um exemplo, com um arquivo de configuração `pequeno.txt` de um labirinto 5x5, pequeno demais
 para o "42" (`WIDTH=5`, `HEIGHT=5`, `ENTRY=0,0`, `EXIT=4,4`, `OUTPUT_FILE=pequeno_maze.txt`,
-`PERFECT=False`). Com o programa pronto (a [página 10](./09-o-programa-rodando.md) roda o
-exemplo de verdade), o comando
+`PERFECT=False`). Com o programa pronto (o exemplo roda na
+[página 10](./09-o-programa-rodando.md)), o comando
 
 ```bash
 printf '2\n4\n' | .venv/bin/python a_maze_ing.py pequeno.txt > /dev/null
@@ -113,8 +113,9 @@ Uma sessão num terminal, com um arquivo de configuração `nove.txt` de um labi
 
 ![Terminal com o comando que roda o nove.txt, o labirinto 9 por 7, o menu, uma escolha inválida e a escolha 2](/img/menu/sessao-9x7.svg)
 
-Cores do terminal: claro = parede, preto = fundo do terminal (corredor), cinza = "42", magenta =
-entrada, vermelho = saída, ciano = caminho.
+O desenho tem fundo branco, paredes grafite, o "42" em cinza, a entrada em magenta e a saída em
+vermelho; o texto do comando e do menu sai nas cores normais do terminal, porque cada linha do
+desenho termina com o reset.
 
 O desenho seguinte, depois do `2`: o mesmo labirinto, agora com o caminho em ciano, e o menu de
 novo.

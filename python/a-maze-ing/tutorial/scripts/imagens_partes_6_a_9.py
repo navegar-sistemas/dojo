@@ -584,7 +584,7 @@ def braider_images(out: Path, mz: dict[str, Any]) -> None:
     right_svg = overlay(
         maze_svg(after, cell=22, wall=3, fills=dead_end_fills(maze),
                  caption=caption),
-        wall_marks(after, 22, caption, opened, "green_wall", 6))
+        wall_marks(after, 22, caption, opened, "green", 6))
     save(compose([left_svg, right_svg], 2), out / "antes-depois.svg")
 
     seed, width, height = 32, 4, 3
@@ -620,7 +620,7 @@ def braider_images(out: Path, mz: dict[str, Any]) -> None:
         pictures.append(overlay(
             maze_svg(rows, cell=56, fills=fills, caption=caption),
             wall_marks(rows, 56, caption, opened_walls(previous, rows),
-                       "green_wall", 7)))
+                       "green", 7)))
         previous = rows
     save(compose(pictures, 3), out / "passos-4x3.svg")
 
@@ -651,7 +651,7 @@ def braider_images(out: Path, mz: dict[str, Any]) -> None:
         maze_svg(closed3, cell=64, caption=caption),
         wall_marks(closed3, 64, caption,
                    [((x, y), "E") for y in range(3) for x in range(2)],
-                   "blue_wall", 7)
+                   "blue", 7)
         + wall_marks(closed3, 64, caption,
                      [((x, y), "S") for y in range(2) for x in range(3)],
                      "current", 7))
@@ -673,7 +673,7 @@ def braider_images(out: Path, mz: dict[str, Any]) -> None:
     real = overlay(
         maze_svg(corridor, cell=64, fills={(0, 0): "current"},
                  show_open=True, caption=caption),
-        wall_marks(corridor, 64, caption, [((0, 0), "S")], "green_wall", 8))
+        wall_marks(corridor, 64, caption, [((0, 0), "S")], "green", 8))
     walled = [[0, 15, 0], [0, 7, 15], [0, 15, 0]]
     caption = "beco cercado: as paredes vermelhas nunca abrem"
     fenced = overlay(
@@ -745,7 +745,7 @@ def generator_images(out: Path, mz: dict[str, Any]) -> None:
         overlay(maze_svg(gen.grid, cell=16, wall=2.5, fills=fills,
                          caption=braided_caption),
                 wall_marks(gen.grid, 16, braided_caption,
-                           opened_walls(carved, gen.grid), "green_wall", 4)),
+                           opened_walls(carved, gen.grid), "green", 4)),
         maze_svg(gen.grid, cell=16, wall=2.5, fills=fills,
                  path=walk((0, 0), gen.solution),
                  caption="3. Solver: solution"),

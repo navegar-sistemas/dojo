@@ -17,16 +17,17 @@ O programa é chamado assim no terminal (`config.txt` é o arquivo com as opçõ
 python3 a_maze_ing.py config.txt
 ```
 
-Um labirinto de 20 colunas por 15 linhas gerado pelo programa:
+Um labirinto de 20 colunas por 15 linhas gerado pelo programa, como ele aparece no terminal:
 
-![Um labirinto 20 por 15 gerado pelo programa, com o caminho mais curto em ciano](/img/problema/labirinto-20x15-caminho.svg)
+![Um labirinto 20 por 15 desenhado no terminal, com o caminho mais curto em ciano](/img/problema/terminal-20x15.svg)
 
 Na figura:
-- o quadrado **magenta**, no canto de cima à esquerda, é a **entrada**;
+- as linhas **grafite** são as paredes, sobre o fundo branco;
+- o bloco **magenta**, no canto de cima à esquerda, é a **entrada**;
 - o **vermelho**, no canto de baixo à direita, é a **saída**;
 - a linha **ciano** é o caminho mais curto entre as duas;
-- os quadrados **cinza** no meio desenham o número **42**, que o labirinto precisa mostrar
-  sempre que ele cabe (num labirinto pequeno demais, o programa gera sem ele e avisa).
+- os blocos **cinza** no meio desenham o número **42**, que o labirinto precisa mostrar sempre
+  que ele cabe (num labirinto pequeno demais, o programa gera sem ele e avisa).
 
 ## O enunciado
 
@@ -61,7 +62,7 @@ pequenas do gerador, depois a aplicação que as usa.
 | 7. Solver: o caminho mais curto | o algoritmo que acha o caminho mais curto da entrada à saída |
 | 8. Braider: o tabuleiro Pac-Man | o algoritmo que transforma o labirinto num tabuleiro com rotas alternativas |
 | 9. MazeGenerator e o pacote | a classe que junta o gerador, a documentação, a licença e o pacote instalável |
-| 10. Utilitários da aplicação | os erros da aplicação, a conversão de texto em número, em `True`/`False` e em coordenada, e as cores do terminal |
+| 10. Utilitários da aplicação | os erros da aplicação, a conversão de texto em número, em `True`/`False` e em coordenada, as cores do terminal e os caracteres que desenham as paredes |
 | 11. Configuração | a leitura e a validação do arquivo de opções |
 | 12. Geração e arquivo de saída | gerar o labirinto e gravá-lo no arquivo |
 | 13. Estado da tela e desenho | o desenho colorido no terminal |

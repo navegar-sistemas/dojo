@@ -54,15 +54,16 @@ output file in hexadecimal and shows it in the terminal.
   the program prints `Error: maze too small for the "42" pattern`.
 - **Output file**: one hexadecimal digit per cell, then the entry, the exit
   and the shortest path from entry to exit as `N`/`E`/`S`/`W` letters.
-- **Display**: the maze is drawn with ANSI background colours, followed by
-  a menu to regenerate it, show or hide the shortest path, rotate the wall
-  colours and quit.
+- **Display**: the maze is drawn with box-drawing characters and 24-bit
+  ANSI colours on a white background, followed by a menu to regenerate it,
+  show or hide the shortest path, rotate the wall colours and quit.
 - **Reusable module**: the generator lives in the `mazegen` package,
   shipped as `mazegen-1.0.0-py3-none-any.whl` and `mazegen-1.0.0.tar.gz`.
 
 ## Instructions
 
-Requirements: Python 3.10 or later and `make`.
+Requirements: Python 3.10 or later, `make` and a terminal with 24-bit
+colour.
 
 ```sh
 make install          # creates .venv with flake8, mypy and build
@@ -82,7 +83,7 @@ After each drawing the menu reads one choice:
 |---|---|
 | `1` | generate a new maze and write it to `OUTPUT_FILE` |
 | `2` | show or hide the shortest path |
-| `3` | rotate the wall colours (white, yellow, green, blue) |
+| `3` | rotate the wall colours (charcoal, orange, green, blue) |
 | `4` | quit with exit code 0 |
 
 Other rules of the `Makefile`:
@@ -285,6 +286,8 @@ The verdict starts with `Pac-Man-USABLE` and ends with
 - Python, `random`, <https://docs.python.org/3/library/random.html>.
 - Wikipedia, "ANSI escape code",
   <https://en.wikipedia.org/wiki/ANSI_escape_code>.
+- Wikipedia, "Box-drawing characters",
+  <https://en.wikipedia.org/wiki/Box-drawing_characters>.
 - PEP 257, <https://peps.python.org/pep-0257/>, and the Google Python
   Style Guide,
   <https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings>.

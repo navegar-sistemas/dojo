@@ -26,7 +26,7 @@ arquivos seguem a ordem de implementação.
 | 11 | `11-modo-pacman.feature` | `PERFECT=False` (tabuleiro Pac-Man) |
 | 12 | `12-areas-abertas.feature` | corredores de no máximo 2 células, nenhum 3x3 aberto |
 | 13 | `13-arquivo-de-saida.feature` | formato hexadecimal, rodapé, analyzer, exemplo do subject |
-| 14 | `14-representacao-visual.feature` | renderização ASCII ou MLX |
+| 14 | `14-representacao-visual.feature` | renderização no terminal com caracteres de caixa e cores de 24 bits, ou MLX |
 | 15 | `15-interacoes.feature` | regenerar, mostrar/ocultar caminho, cores, sair |
 | 16 | `16-modulo-reutilizavel.feature` | `MazeGenerator`, documentação, pacote `mazegen-*` |
 | 17 | `17-licenca.feature` | `LICENSE.md` |

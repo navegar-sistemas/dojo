@@ -6,14 +6,14 @@ title: O resultado final
 # O resultado final
 
 Antes de construir peça por peça, ajuda ver aonde se quer chegar. Esta página mostra o programa
-pronto, como ele fica no fim da [parte 14](../14-menu-e-main/06-saidas-e-erros-inesperados.md):
+pronto, como ele fica no fim da [parte 14](../14-menu-e-main/09-o-programa-rodando.md):
 o que aparece na tela, o arquivo que ele grava e como outro projeto usa o gerador. Nada aqui é
 para rodar agora.
 
 ## Na tela
 
-O comando `make run` desenha o labirinto no terminal, com quadrados coloridos. Ele é um atalho,
-criado na [parte 3](../03-ambiente/02-makefile-instalar-e-rodar.md), para
+O comando `make run` desenha o labirinto no terminal, com linhas e blocos coloridos. Ele é um
+atalho, criado na [parte 3](../03-ambiente/02-makefile-instalar-e-rodar.md), para
 `.venv/bin/python a_maze_ing.py config.txt`: o `python3 a_maze_ing.py config.txt` do enunciado,
 usando o Python do ambiente virtual do projeto (a pasta `.venv`, também criada na parte 3).
 
@@ -21,11 +21,10 @@ O labirinto muda a cada execução. Para ter sempre o mesmo, o `config.txt` traz
 `# SEED=42`, comentada (o `#` no começo faz o programa ignorá-la). Apagando o `#`, a semente do
 sorteio fica fixa em 42, e o labirinto é sempre este, aqui com o caminho mais curto à mostra:
 
-![Labirinto 20 por 15 com o caminho mais curto](/img/problema/labirinto-20x15-caminho.svg)
+![Labirinto 20 por 15 desenhado no terminal, com o caminho mais curto](/img/problema/terminal-20x15.svg)
 
-Magenta é a entrada, vermelho é a saída, ciano é o caminho mais curto e cinza é o "42". No
-terminal, as paredes são quadrados coloridos sobre o fundo escuro; a figura usa linhas finas
-para ficar legível.
+As paredes são linhas grafite sobre fundo branco; magenta é a entrada, vermelho é a saída, ciano
+é o caminho mais curto e cinza é o "42". A moldura escura é o terminal em volta do desenho.
 
 Abaixo do desenho, o programa mostra um menu e espera o usuário digitar um número:
 
@@ -42,7 +41,7 @@ Choice? (1-4):
 |---|---|
 | `1` | sorteia outro labirinto, desenha e regrava o arquivo de saída |
 | `2` | mostra ou esconde o caminho mais curto (em ciano) |
-| `3` | troca a cor das paredes: branco, amarelo, verde, azul e de novo branco |
+| `3` | troca a cor das paredes: grafite, laranja, verde, azul e de novo grafite |
 | `4` | encerra o programa |
 
 ## No arquivo

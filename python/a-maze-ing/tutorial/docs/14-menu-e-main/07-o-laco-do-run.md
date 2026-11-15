@@ -55,10 +55,10 @@ Uma sessão em que o usuário digita `2`, depois `3`, depois `1` e por fim `4`:
 
 | Resposta | O que muda | Desenho seguinte |
 |---|---|---|
-| (início) | gera e grava o primeiro labirinto | labirinto 1, sem caminho, paredes brancas |
-| `2` | `show_path` vira `True` | labirinto 1, com caminho, paredes brancas |
-| `3` | a cor passa para amarelo | labirinto 1, com caminho, paredes amarelas |
-| `1` | gera e grava o labirinto 2 | labirinto 2, com caminho, paredes amarelas |
+| (início) | gera e grava o primeiro labirinto | labirinto 1, sem caminho, paredes grafite |
+| `2` | `show_path` vira `True` | labirinto 1, com caminho, paredes grafite |
+| `3` | a cor passa para laranja | labirinto 1, com caminho, paredes laranja |
+| `1` | gera e grava o labirinto 2 | labirinto 2, com caminho, paredes laranja |
 | `4` | `return 0` | nenhum: o programa termina |
 
 A opção `1` troca só o `maze`. O `ViewState` é o mesmo objeto do começo ao fim, então o caminho

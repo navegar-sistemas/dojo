@@ -14,7 +14,7 @@ inicial, os dois métodos que mudam o estado e a propriedade que dá a cor.
 
 ```python
     def __init__(self) -> None:
-        """Start with the path hidden and white walls."""
+        """Start with the path hidden and charcoal walls."""
         self.show_path = False
         self.colour_index = 0
 ```
@@ -23,7 +23,7 @@ O `__init__` roda quando o objeto é criado, com `ViewState()`. O `-> None` é a
 do retorno: o método não devolve nada.
 
 O enunciado não diz como a tela começa. O projeto escolheu o caminho escondido (`False`) e as
-paredes brancas (índice `0`, o primeiro da paleta): o primeiro desenho mostra o labirinto limpo,
+paredes grafite (índice `0`, o primeiro da paleta): o primeiro desenho mostra o labirinto limpo,
 e o usuário pede o caminho se quiser.
 
 ## Alternar o caminho
@@ -42,7 +42,7 @@ não há um `show()` e um `hide()` separados; o menu nunca precisa de um dos doi
 
 ```python
     def next_colour(self) -> None:
-        """Move to the next wall colour, back to white after blue."""
+        """Move to the next wall colour, back to charcoal after blue."""
         self.colour_index = (self.colour_index + 1) % len(PALETTE)
 ```
 
@@ -50,10 +50,10 @@ O `%` dá o **resto da divisão**. Com 4 cores, `len(PALETTE)` é 4:
 
 | Índice antes | `+ 1` | `% 4` | Cor depois |
 |---|---|---|---|
-| 0 | 1 | 1 | amarelo |
+| 0 | 1 | 1 | laranja |
 | 1 | 2 | 2 | verde |
 | 2 | 3 | 3 | azul |
-| 3 | 4 | 0 | branco de novo |
+| 3 | 4 | 0 | grafite de novo |
 
 O resto nunca chega a 4, então o índice nunca sai da paleta. Usar `len(PALETTE)` em vez de
 escrever `4` mantém o rodízio certo se alguém acrescentar uma cor à tupla.
@@ -62,8 +62,8 @@ escrever `4` mantém o rodízio certo se alguém acrescentar uma cor à tupla.
 
 ```python
     @property
-    def wall_colour(self) -> int:
-        """SGR background code of the walls.
+    def wall_colour(self) -> Rgb:
+        """Colour of the walls.
 
         Returns:
             The current colour of PALETTE.
@@ -72,9 +72,10 @@ escrever `4` mantém o rodízio certo se alguém acrescentar uma cor à tupla.
 ```
 
 O `@property` faz o método ser lido como se fosse um atributo, **sem parênteses**: quem desenha
-escreve `state.wall_colour`, e não `state.wall_colour()`. O `RenderService` precisa do código da
-cor (`47`, `43`, `42` ou `44`), não da posição dela na paleta; a propriedade faz a tradução, e
-ninguém fora do `ViewState` precisa saber que a paleta existe.
+escreve `state.wall_colour`, e não `state.wall_colour()`. O `RenderService` precisa da cor em si,
+a tupla RGB, não da posição dela na paleta; a propriedade faz a tradução, e ninguém fora do
+`ViewState` precisa saber que a paleta existe. A anotação `-> Rgb` diz que o valor devolvido é
+uma tupla de três inteiros ([parte 10](../10-utilitarios/04-cores-ansi.md#o-tipo-rgb)).
 
 As duas metades do estado, e o que muda cada uma:
 
@@ -88,15 +89,15 @@ stateDiagram-v2
         visivel --> oculto: toggle_path()
     }
     state "cor das paredes" as cor {
-        state "branco (0)" as branco
-        state "amarelo (1)" as amarelo
+        state "grafite (0)" as grafite
+        state "laranja (1)" as laranja
         state "verde (2)" as verde
         state "azul (3)" as azul
-        [*] --> branco
-        branco --> amarelo: next_colour()
-        amarelo --> verde: next_colour()
+        [*] --> grafite
+        grafite --> laranja: next_colour()
+        laranja --> verde: next_colour()
         verde --> azul: next_colour()
-        azul --> branco: next_colour()
+        azul --> grafite: next_colour()
     }
 ```
 
@@ -108,9 +109,9 @@ no caminho.
 ```python title="amazeing/domain/entities/view_state.py"
 """State of the display that survives regenerations."""
 
-from amazeing.utils.ansi import Ansi
+from amazeing.utils.ansi import Ansi, Rgb
 
-PALETTE = (Ansi.WHITE, Ansi.YELLOW, Ansi.GREEN, Ansi.BLUE)
+PALETTE = (Ansi.CHARCOAL, Ansi.ORANGE, Ansi.GREEN, Ansi.BLUE)
 
 
 class ViewState:
@@ -122,7 +123,7 @@ class ViewState:
     """
 
     def __init__(self) -> None:
-        """Start with the path hidden and white walls."""
+        """Start with the path hidden and charcoal walls."""
         self.show_path = False
         self.colour_index = 0
 
@@ -131,12 +132,12 @@ class ViewState:
         self.show_path = not self.show_path
 
     def next_colour(self) -> None:
-        """Move to the next wall colour, back to white after blue."""
+        """Move to the next wall colour, back to charcoal after blue."""
         self.colour_index = (self.colour_index + 1) % len(PALETTE)
 
     @property
-    def wall_colour(self) -> int:
-        """SGR background code of the walls.
+    def wall_colour(self) -> Rgb:
+        """Colour of the walls.
 
         Returns:
             The current colour of PALETTE.
@@ -162,14 +163,15 @@ print(state.show_path)
 ```
 
 ```text
-False 0 47
-1 43
-2 42
-3 44
-0 47
-1 43
+False 0 (31, 41, 55)
+1 (194, 65, 12)
+2 (21, 128, 61)
+3 (29, 78, 216)
+0 (31, 41, 55)
+1 (194, 65, 12)
 True
 ```
 
-A primeira linha é o estado inicial. Depois de cinco trocas de cor, o índice deu a volta
-(`3` → `0`) e parou no `1`; o caminho, alternado uma vez, ficou `True`.
+A primeira linha é o estado inicial: caminho oculto e paredes grafite. Depois de cinco trocas
+de cor, o índice deu a volta (`3` → `0`) e parou no `1`, o laranja; o caminho, alternado uma
+vez, ficou `True`.

@@ -108,7 +108,7 @@ lines += ["", f"{ex},{ey}", f"{sx},{sy}", maze.solution]
 - `""` é a linha vazia que separa a grade do rodapé.
 - `f"{ex},{ey}"` escreve `0,0`: sem espaço e sem parênteses, o mesmo formato do arquivo de
   configuração. Escrever `str(maze.entry)` daria `(0, 0)`, que o `maze_analyzer.py` não lê.
-- O caminho é o `solution`, as mesmas letras que o desenho pinta de ciano.
+- O caminho é o `solution`, as mesmas letras que o desenho mostra como a linha ciano.
 
 O exemplo de arquivo do enunciado mostra anotações como `# entry (x,y)` ao lado do rodapé. Elas
 explicam a figura e não fazem parte do arquivo: com elas, o `maze_analyzer.py` não consegue ler

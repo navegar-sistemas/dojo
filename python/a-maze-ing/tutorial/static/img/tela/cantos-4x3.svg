@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="522" height="444" viewBox="0 0 522 444">
+<rect width="522" height="444" fill="#ffffff" rx="8"/>
+<rect x="40" y="40" width="442" height="52" fill="#ffffff" shape-rendering="crispEdges"/>
+<rect x="40" y="92" width="442" height="52" fill="#ffffff" shape-rendering="crispEdges"/>
+<rect x="40" y="144" width="442" height="52" fill="#ffffff" shape-rendering="crispEdges"/>
+<rect x="40" y="196" width="442" height="52" fill="#ffffff" shape-rendering="crispEdges"/>
+<rect x="40" y="248" width="442" height="52" fill="#ffffff" shape-rendering="crispEdges"/>
+<rect x="40" y="300" width="442" height="52" fill="#ffffff" shape-rendering="crispEdges"/>
+<rect x="40" y="352" width="442" height="52" fill="#ffffff" shape-rendering="crispEdges"/>
+<rect x="40" y="40" width="26" height="52" fill="#fde68a" fill-opacity="0.75"/>
+<rect x="144" y="40" width="26" height="52" fill="#fde68a" fill-opacity="0.75"/>
+<rect x="248" y="40" width="26" height="52" fill="#fde68a" fill-opacity="0.75"/>
+<rect x="352" y="40" width="26" height="52" fill="#fde68a" fill-opacity="0.75"/>
+<rect x="456" y="40" width="26" height="52" fill="#fde68a" fill-opacity="0.75"/>
+<rect x="40" y="144" width="26" height="52" fill="#fde68a" fill-opacity="0.75"/>
+<rect x="144" y="144" width="26" height="52" fill="#fde68a" fill-opacity="0.75"/>
+<rect x="248" y="144" width="26" height="52" fill="#fde68a" fill-opacity="0.75"/>
+<rect x="352" y="144" width="26" height="52" fill="#fde68a" fill-opacity="0.75"/>
+<rect x="456" y="144" width="26" height="52" fill="#fde68a" fill-opacity="0.75"/>
+<rect x="40" y="248" width="26" height="52" fill="#fde68a" fill-opacity="0.75"/>
+<rect x="144" y="248" width="26" height="52" fill="#fde68a" fill-opacity="0.75"/>
+<rect x="248" y="248" width="26" height="52" fill="#fde68a" fill-opacity="0.75"/>
+<rect x="352" y="248" width="26" height="52" fill="#fde68a" fill-opacity="0.75"/>
+<rect x="456" y="248" width="26" height="52" fill="#fde68a" fill-opacity="0.75"/>
+<rect x="40" y="352" width="26" height="52" fill="#fde68a" fill-opacity="0.75"/>
+<rect x="144" y="352" width="26" height="52" fill="#fde68a" fill-opacity="0.75"/>
+<rect x="248" y="352" width="26" height="52" fill="#fde68a" fill-opacity="0.75"/>
+<rect x="352" y="352" width="26" height="52" fill="#fde68a" fill-opacity="0.75"/>
+<rect x="456" y="352" width="26" height="52" fill="#fde68a" fill-opacity="0.75"/>
+<path d="M49.1 62.1h7.8v7.8h-7.8zM49.1 66h7.8v26h-7.8zM53 62.1h13v7.8h-13zM75.1 62.1h7.8v7.8h-7.8zM79 62.1h13v7.8h-13zM66 62.1h13v7.8h-13zM101.1 62.1h7.8v7.8h-7.8zM105 62.1h13v7.8h-13zM92 62.1h13v7.8h-13zM127.1 62.1h7.8v7.8h-7.8zM131 62.1h13v7.8h-13zM118 62.1h13v7.8h-13zM153.1 62.1h7.8v7.8h-7.8zM157 62.1h13v7.8h-13zM144 62.1h13v7.8h-13zM179.1 62.1h7.8v7.8h-7.8zM183 62.1h13v7.8h-13zM170 62.1h13v7.8h-13zM205.1 62.1h7.8v7.8h-7.8zM209 62.1h13v7.8h-13zM196 62.1h13v7.8h-13zM231.1 62.1h7.8v7.8h-7.8zM235 62.1h13v7.8h-13zM222 62.1h13v7.8h-13zM257.1 62.1h7.8v7.8h-7.8zM261 62.1h13v7.8h-13zM248 62.1h13v7.8h-13zM283.1 62.1h7.8v7.8h-7.8zM287 62.1h13v7.8h-13zM274 62.1h13v7.8h-13zM309.1 62.1h7.8v7.8h-7.8zM313 62.1h13v7.8h-13zM300 62.1h13v7.8h-13zM335.1 62.1h7.8v7.8h-7.8zM339 62.1h13v7.8h-13zM326 62.1h13v7.8h-13zM361.1 62.1h7.8v7.8h-7.8zM361.1 66h7.8v26h-7.8zM365 62.1h13v7.8h-13zM352 62.1h13v7.8h-13zM387.1 62.1h7.8v7.8h-7.8zM391 62.1h13v7.8h-13zM378 62.1h13v7.8h-13zM413.1 62.1h7.8v7.8h-7.8zM417 62.1h13v7.8h-13zM404 62.1h13v7.8h-13zM439.1 62.1h7.8v7.8h-7.8zM443 62.1h13v7.8h-13zM430 62.1h13v7.8h-13zM465.1 62.1h7.8v7.8h-7.8zM465.1 66h7.8v26h-7.8zM456 62.1h13v7.8h-13zM49.1 114.1h7.8v7.8h-7.8zM49.1 92h7.8v26h-7.8zM49.1 118h7.8v26h-7.8zM361.1 114.1h7.8v7.8h-7.8zM361.1 92h7.8v26h-7.8zM361.1 118h7.8v26h-7.8zM465.1 114.1h7.8v7.8h-7.8zM465.1 92h7.8v26h-7.8zM465.1 118h7.8v26h-7.8zM49.1 166.1h7.8v7.8h-7.8zM49.1 144h7.8v26h-7.8zM49.1 170h7.8v26h-7.8zM53 166.1h13v7.8h-13zM75.1 166.1h7.8v7.8h-7.8zM79 166.1h13v7.8h-13zM66 166.1h13v7.8h-13zM101.1 166.1h7.8v7.8h-7.8zM105 166.1h13v7.8h-13zM92 166.1h13v7.8h-13zM127.1 166.1h7.8v7.8h-7.8zM131 166.1h13v7.8h-13zM118 166.1h13v7.8h-13zM153.1 166.1h7.8v7.8h-7.8zM157 166.1h13v7.8h-13zM144 166.1h13v7.8h-13zM179.1 166.1h7.8v7.8h-7.8zM183 166.1h13v7.8h-13zM170 166.1h13v7.8h-13zM205.1 166.1h7.8v7.8h-7.8zM209 166.1h13v7.8h-13zM196 166.1h13v7.8h-13zM231.1 166.1h7.8v7.8h-7.8zM235 166.1h13v7.8h-13zM222 166.1h13v7.8h-13zM257.1 166.1h7.8v7.8h-7.8zM257.1 170h7.8v26h-7.8zM248 166.1h13v7.8h-13zM361.1 166.1h7.8v7.8h-7.8zM361.1 144h7.8v26h-7.8zM465.1 166.1h7.8v7.8h-7.8zM465.1 144h7.8v26h-7.8zM465.1 170h7.8v26h-7.8zM49.1 218.1h7.8v7.8h-7.8zM49.1 196h7.8v26h-7.8zM49.1 222h7.8v26h-7.8zM257.1 218.1h7.8v7.8h-7.8zM257.1 196h7.8v26h-7.8zM257.1 222h7.8v26h-7.8zM465.1 218.1h7.8v7.8h-7.8zM465.1 196h7.8v26h-7.8zM465.1 222h7.8v26h-7.8zM49.1 270.1h7.8v7.8h-7.8zM49.1 248h7.8v26h-7.8zM49.1 274h7.8v26h-7.8zM153.1 270.1h7.8v7.8h-7.8zM157 270.1h13v7.8h-13zM179.1 270.1h7.8v7.8h-7.8zM183 270.1h13v7.8h-13zM170 270.1h13v7.8h-13zM205.1 270.1h7.8v7.8h-7.8zM209 270.1h13v7.8h-13zM196 270.1h13v7.8h-13zM231.1 270.1h7.8v7.8h-7.8zM235 270.1h13v7.8h-13zM222 270.1h13v7.8h-13zM257.1 270.1h7.8v7.8h-7.8zM257.1 248h7.8v26h-7.8zM261 270.1h13v7.8h-13zM248 270.1h13v7.8h-13zM283.1 270.1h7.8v7.8h-7.8zM287 270.1h13v7.8h-13zM274 270.1h13v7.8h-13zM309.1 270.1h7.8v7.8h-7.8zM313 270.1h13v7.8h-13zM300 270.1h13v7.8h-13zM335.1 270.1h7.8v7.8h-7.8zM339 270.1h13v7.8h-13zM326 270.1h13v7.8h-13zM361.1 270.1h7.8v7.8h-7.8zM352 270.1h13v7.8h-13zM465.1 270.1h7.8v7.8h-7.8zM465.1 248h7.8v26h-7.8zM465.1 274h7.8v26h-7.8zM49.1 322.1h7.8v7.8h-7.8zM49.1 300h7.8v26h-7.8zM49.1 326h7.8v26h-7.8zM465.1 322.1h7.8v7.8h-7.8zM465.1 300h7.8v26h-7.8zM465.1 326h7.8v26h-7.8zM49.1 374.1h7.8v7.8h-7.8zM49.1 352h7.8v26h-7.8zM53 374.1h13v7.8h-13zM75.1 374.1h7.8v7.8h-7.8zM79 374.1h13v7.8h-13zM66 374.1h13v7.8h-13zM101.1 374.1h7.8v7.8h-7.8zM105 374.1h13v7.8h-13zM92 374.1h13v7.8h-13zM127.1 374.1h7.8v7.8h-7.8zM131 374.1h13v7.8h-13zM118 374.1h13v7.8h-13zM153.1 374.1h7.8v7.8h-7.8zM157 374.1h13v7.8h-13zM144 374.1h13v7.8h-13zM179.1 374.1h7.8v7.8h-7.8zM183 374.1h13v7.8h-13zM170 374.1h13v7.8h-13zM205.1 374.1h7.8v7.8h-7.8zM209 374.1h13v7.8h-13zM196 374.1h13v7.8h-13zM231.1 374.1h7.8v7.8h-7.8zM235 374.1h13v7.8h-13zM222 374.1h13v7.8h-13zM257.1 374.1h7.8v7.8h-7.8zM261 374.1h13v7.8h-13zM248 374.1h13v7.8h-13zM283.1 374.1h7.8v7.8h-7.8zM287 374.1h13v7.8h-13zM274 374.1h13v7.8h-13zM309.1 374.1h7.8v7.8h-7.8zM313 374.1h13v7.8h-13zM300 374.1h13v7.8h-13zM335.1 374.1h7.8v7.8h-7.8zM339 374.1h13v7.8h-13zM326 374.1h13v7.8h-13zM361.1 374.1h7.8v7.8h-7.8zM365 374.1h13v7.8h-13zM352 374.1h13v7.8h-13zM387.1 374.1h7.8v7.8h-7.8zM391 374.1h13v7.8h-13zM378 374.1h13v7.8h-13zM413.1 374.1h7.8v7.8h-7.8zM417 374.1h13v7.8h-13zM404 374.1h13v7.8h-13zM439.1 374.1h7.8v7.8h-7.8zM443 374.1h13v7.8h-13zM430 374.1h13v7.8h-13zM465.1 374.1h7.8v7.8h-7.8zM465.1 352h7.8v26h-7.8zM456 374.1h13v7.8h-13z" fill="#1f2937"/>
+<line x1="40" y1="40" x2="40" y2="404" stroke="#9ca3af" stroke-width="0.6" stroke-dasharray="2 2"/>
+<line x1="66" y1="40" x2="66" y2="404" stroke="#9ca3af" stroke-width="0.6" stroke-dasharray="2 2"/>
+<line x1="92" y1="40" x2="92" y2="404" stroke="#9ca3af" stroke-width="0.6" stroke-dasharray="2 2"/>
+<line x1="118" y1="40" x2="118" y2="404" stroke="#9ca3af" stroke-width="0.6" stroke-dasharray="2 2"/>
+<line x1="144" y1="40" x2="144" y2="404" stroke="#9ca3af" stroke-width="0.6" stroke-dasharray="2 2"/>
+<line x1="170" y1="40" x2="170" y2="404" stroke="#9ca3af" stroke-width="0.6" stroke-dasharray="2 2"/>
+<line x1="196" y1="40" x2="196" y2="404" stroke="#9ca3af" stroke-width="0.6" stroke-dasharray="2 2"/>
+<line x1="222" y1="40" x2="222" y2="404" stroke="#9ca3af" stroke-width="0.6" stroke-dasharray="2 2"/>
+<line x1="248" y1="40" x2="248" y2="404" stroke="#9ca3af" stroke-width="0.6" stroke-dasharray="2 2"/>
+<line x1="274" y1="40" x2="274" y2="404" stroke="#9ca3af" stroke-width="0.6" stroke-dasharray="2 2"/>
+<line x1="300" y1="40" x2="300" y2="404" stroke="#9ca3af" stroke-width="0.6" stroke-dasharray="2 2"/>
+<line x1="326" y1="40" x2="326" y2="404" stroke="#9ca3af" stroke-width="0.6" stroke-dasharray="2 2"/>
+<line x1="352" y1="40" x2="352" y2="404" stroke="#9ca3af" stroke-width="0.6" stroke-dasharray="2 2"/>
+<line x1="378" y1="40" x2="378" y2="404" stroke="#9ca3af" stroke-width="0.6" stroke-dasharray="2 2"/>
+<line x1="404" y1="40" x2="404" y2="404" stroke="#9ca3af" stroke-width="0.6" stroke-dasharray="2 2"/>
+<line x1="430" y1="40" x2="430" y2="404" stroke="#9ca3af" stroke-width="0.6" stroke-dasharray="2 2"/>
+<line x1="456" y1="40" x2="456" y2="404" stroke="#9ca3af" stroke-width="0.6" stroke-dasharray="2 2"/>
+<line x1="482" y1="40" x2="482" y2="404" stroke="#9ca3af" stroke-width="0.6" stroke-dasharray="2 2"/>
+<line x1="40" y1="40" x2="482" y2="40" stroke="#9ca3af" stroke-width="0.6" stroke-dasharray="2 2"/>
+<line x1="40" y1="92" x2="482" y2="92" stroke="#9ca3af" stroke-width="0.6" stroke-dasharray="2 2"/>
+<line x1="40" y1="144" x2="482" y2="144" stroke="#9ca3af" stroke-width="0.6" stroke-dasharray="2 2"/>
+<line x1="40" y1="196" x2="482" y2="196" stroke="#9ca3af" stroke-width="0.6" stroke-dasharray="2 2"/>
+<line x1="40" y1="248" x2="482" y2="248" stroke="#9ca3af" stroke-width="0.6" stroke-dasharray="2 2"/>
+<line x1="40" y1="300" x2="482" y2="300" stroke="#9ca3af" stroke-width="0.6" stroke-dasharray="2 2"/>
+<line x1="40" y1="352" x2="482" y2="352" stroke="#9ca3af" stroke-width="0.6" stroke-dasharray="2 2"/>
+<line x1="40" y1="404" x2="482" y2="404" stroke="#9ca3af" stroke-width="0.6" stroke-dasharray="2 2"/>
+<text x="53" y="28" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="79" y="28" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="105" y="28" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="131" y="28" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">3</text>
+<text x="157" y="28" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">4</text>
+<text x="183" y="28" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">5</text>
+<text x="209" y="28" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">6</text>
+<text x="235" y="28" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">7</text>
+<text x="261" y="28" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">8</text>
+<text x="287" y="28" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">9</text>
+<text x="313" y="28" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">10</text>
+<text x="339" y="28" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">11</text>
+<text x="365" y="28" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">12</text>
+<text x="391" y="28" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">13</text>
+<text x="417" y="28" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">14</text>
+<text x="443" y="28" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">15</text>
+<text x="469" y="28" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">16</text>
+<text x="26" y="66" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">0</text>
+<text x="26" y="118" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">1</text>
+<text x="26" y="170" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">2</text>
+<text x="26" y="222" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">3</text>
+<text x="26" y="274" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">4</text>
+<text x="26" y="326" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">5</text>
+<text x="26" y="378" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">6</text>
+<text x="261" y="424" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="normal" fill="#6b7280" text-anchor="middle" dominant-baseline="central">em amarelo, os 20 cantos: linhas pares, colunas múltiplas de 4</text>
+</svg>

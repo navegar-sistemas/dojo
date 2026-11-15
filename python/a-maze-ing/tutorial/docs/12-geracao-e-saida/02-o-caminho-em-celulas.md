@@ -7,8 +7,8 @@ title: O caminho em células
 
 O caminho mais curto vem do gerador como **letras**: `EES` quer dizer "um passo para a direita
 (Leste), outro para a direita, um para baixo (Sul)". O arquivo de saída grava exatamente essas
-letras. O desenho na tela, porém, precisa saber **quais células** pintar de ciano
-([parte 13](../13-tela/04-o-caminho-em-ciano.md)). Esta página cria o método `path()` do
+letras. O desenho na tela, porém, precisa saber **por quais células** passa a linha ciano
+([parte 13](../13-tela/05-o-caminho-em-ciano.md)). Esta página cria o método `path()` do
 retrato, que traduz as letras em células.
 
 ## A tradução, passo a passo
@@ -90,7 +90,7 @@ O resultado tem sempre `len(solution) + 1` células, da entrada à saída.
 
 As células do caminho poderiam ser mais um campo do retrato. Mas elas saem das letras: guardar
 as duas formas abriria espaço para elas discordarem, por um erro em algum lugar. Com `path()`,
-há uma fonte só, o `solution`, e a tela pinta exatamente o caminho que o arquivo grava.
+há uma fonte só, o `solution`, e a tela desenha exatamente o caminho que o arquivo grava.
 Recalcular é barato: uma soma por passo, e mesmo numa grade 100x100 o caminho tem no máximo
 10 000 células.
 

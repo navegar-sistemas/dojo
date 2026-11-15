@@ -100,6 +100,7 @@ amazeing/use_cases/generate_maze.py
 amazeing/use_cases/ports.py
 amazeing/utils/__init__.py
 amazeing/utils/ansi.py
+amazeing/utils/box.py
 amazeing/utils/value_parser.py
 config.txt
 mazegen-1.0.0-py3-none-any.whl

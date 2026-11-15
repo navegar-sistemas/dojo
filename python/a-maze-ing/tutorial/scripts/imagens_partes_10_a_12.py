@@ -11,9 +11,12 @@ reais.
 from __future__ import annotations
 
 import sys
+from html import escape
 from pathlib import Path
+from typing import Any
 
 from svg import COLORS, _svg, _text, grid_from_hex, maze_svg, save
+from terminal import SGR, arms_table, chars_body, decode, hex_colour
 
 IMG = Path(__file__).resolve().parent.parent / "static" / "img"
 UTILS = IMG / "utilitarios"
@@ -21,17 +24,20 @@ CONFIG = IMG / "configuracao"
 OUTPUT = IMG / "geracao"
 STEP = {"N": (0, -1), "E": (1, 0), "S": (0, 1), "W": (-1, 0)}
 
+# Nome da constante de Ansi e o que ela pinta no desenho.
 PALETTE = (
-    ("DEFAULT", 49, "corridor", "corredor"),
-    ("WHITE", 47, "white_wall", "parede"),
-    ("YELLOW", 43, "yellow_wall", "parede"),
-    ("GREEN", 42, "green_wall", "parede"),
-    ("BLUE", 44, "blue_wall", "parede"),
-    ("GREY", 100, "grey", "\"42\""),
-    ("MAGENTA", 45, "magenta", "entrada"),
-    ("RED", 41, "red", "saída"),
-    ("CYAN", 46, "cyan", "caminho"),
+    ("WHITE", "fundo de tudo"),
+    ("CHARCOAL", "parede (1ª cor)"),
+    ("ORANGE", "parede (2ª cor)"),
+    ("GREEN", "parede (3ª cor)"),
+    ("BLUE", "parede (4ª cor)"),
+    ("GREY", "fundo do \"42\""),
+    ("MAGENTA", "fundo da entrada"),
+    ("RED", "fundo da saída"),
+    ("CYAN", "linha do caminho"),
 )
+NAMES = {1: "N", 2: "L", 4: "S", 8: "O"}
+MONO = 'font-family="ui-monospace, Menlo, Consolas, monospace"'
 
 
 def walk(start: tuple[int, int], letters: str) -> list[tuple[int, int]]:
@@ -52,40 +58,65 @@ def walk(start: tuple[int, int], letters: str) -> list[tuple[int, int]]:
     return cells
 
 
-def swatch(x: float, y: float, size: float, name: str) -> str:
+def swatch(x: float, y: float, size: float, fill: str) -> str:
     """Cria um quadrado da cor indicada, com contorno.
 
     Args:
         x: Canto esquerdo.
         y: Topo.
         size: Lado.
-        name: Nome da cor em COLORS.
+        fill: Cor CSS.
 
     Returns:
         O elemento SVG.
     """
     return (
         f'<rect x="{x:g}" y="{y:g}" width="{size:g}" height="{size:g}" '
-        f'rx="4" fill="{COLORS[name]}" stroke="#9ca3af" stroke-width="1"/>'
+        f'rx="4" fill="{fill}" stroke="#9ca3af" stroke-width="1"/>'
     )
 
 
-def palette_svg() -> str:
-    """Desenha as constantes de Ansi: nome, código SGR e cor.
+def mono(x: float, y: float, value: str, size: float = 13,
+         anchor: str = "start", fill: str = "text") -> str:
+    """Cria um texto em fonte de largura fixa, com os espaços preservados.
+
+    Args:
+        x: Posição horizontal.
+        y: Posição vertical do centro.
+        value: Texto.
+        size: Tamanho da fonte.
+        anchor: Âncora horizontal.
+        fill: Cor.
+
+    Returns:
+        O elemento SVG.
+    """
+    return (f'<text x="{x:g}" y="{y:g}" {MONO} font-size="{size:g}" '
+            f'fill="{COLORS.get(fill, fill)}" text-anchor="{anchor}" '
+            f'dominant-baseline="central" xml:space="preserve">'
+            f"{escape(value)}</text>")
+
+
+def palette_svg(ansi: Any) -> str:
+    """Desenha as cores de Ansi: nome, valores RGB e uso.
+
+    Args:
+        ansi: A classe Ansi da implementação.
 
     Returns:
         O documento SVG.
     """
-    column, size, left, top, per_row, row_height = 92, 44, 20, 20, 5, 130
+    column, size, left, top, per_row, row_height = 128, 44, 20, 20, 5, 130
     body: list[str] = []
-    for index, (name, code, colour, role) in enumerate(PALETTE):
+    for index, (name, role) in enumerate(PALETTE):
+        rgb = getattr(ansi, name)
         cx = left + index % per_row * column + column / 2
         cy = top + index // per_row * row_height
-        body.append(swatch(cx - size / 2, cy, size, colour))
+        body.append(swatch(cx - size / 2, cy, size, hex_colour(rgb)))
         body.append(_text(cx, cy + size + 18, name, size=13,
                           weight="bold"))
-        body.append(_text(cx, cy + size + 36, f"\\x1b[{code}m", size=12,
-                          fill="muted"))
+        body.append(_text(cx, cy + size + 36, "{}, {}, {}".format(*rgb),
+                          size=12, fill="muted"))
         body.append(_text(cx, cy + size + 54, role, size=12,
                           fill="muted"))
     rows = (len(PALETTE) + per_row - 1) // per_row
@@ -93,108 +124,144 @@ def palette_svg() -> str:
     return _svg(width, top + (rows - 1) * row_height + size + 76, body)
 
 
-def line_svg() -> str:
-    """Mostra que cada posição do desenho é uma sequência SGR e 2 espaços.
+def line_svg(line: str, arms: dict[str, int]) -> str:
+    """Separa uma linha real do desenho nos trechos de cada sequência SGR.
 
-    A linha é a segunda do desenho do labirinto 3x2 com o caminho oculto.
+    Em cima, a linha desenhada, com o número de cada trecho; embaixo, o
+    texto que o programa imprime para cada trecho.
 
-    Returns:
-        O documento SVG.
-    """
-    codes = (47, 45, 49, 49, 49, 49, 47)
-    colours = {47: "white_wall", 45: "magenta", 49: "corridor"}
-    column, size, left, top = 86, 50, 20, 20
-    body: list[str] = []
-    for index, code in enumerate(codes):
-        cx = left + index * column + column / 2
-        body.append(swatch(cx - size / 2, top, size, colours[code]))
-        body.append(_text(cx, top + size + 18, f'"\\x1b[{code}m  "',
-                          size=12, fill="text").replace(
-            "<text ", '<text xml:space="preserve" style="white-space:pre" ',
-            1))
-    reset_x = left + len(codes) * column + 50
-    body.append(_text(reset_x, top + size / 2, "fim da linha", size=12,
-                      fill="muted"))
-    body.append(_text(reset_x, top + size + 18, '"\\x1b[0m"', size=12,
-                      fill="text"))
-    width = reset_x + 70
-    caption = ("cada posição: a sequência da cor e dois espaços; "
-               "o reset fecha a linha")
-    body.append(_text(width / 2, top + size + 50, caption, size=13,
-                      fill="muted"))
-    return _svg(width, top + size + 72, body)
-
-
-def sequence_svg() -> str:
-    """Decompõe a sequência "\\x1b[41m" nas suas quatro peças.
+    Args:
+        line: Uma linha devolvida por RenderService.render.
+        arms: Saída de arms_table.
 
     Returns:
         O documento SVG.
     """
+    rows = decode([line])
+    matches = list(SGR.finditer(line))
+    ends = [match.start() for match in matches[1:]] + [len(line)]
+    segments = [(f"\\x1b[{match.group(1)}m", line[match.end():end])
+                for match, end in zip(matches, ends)]
+    cw, ch, left, top = 22.0, 44.0, 70.0, 44.0
+    body = chars_body(rows, arms, left, top, cw, ch)
+    body.append(f'<rect x="{left:g}" y="{top:g}" '
+                f'width="{len(rows[0]) * cw:g}" height="{ch:g}" fill="none" '
+                f'stroke="#9ca3af" stroke-width="1"/>')
+    start = 0
+    for number, (_, text) in enumerate(segments[:-1], start=1):
+        x0, x1 = left + start * cw, left + (start + len(text)) * cw
+        body.append(f'<line x1="{x0 + 2:g}" y1="{top - 8:g}" '
+                    f'x2="{x1 - 2:g}" y2="{top - 8:g}" stroke="#6b7280" '
+                    f'stroke-width="2"/>')
+        body.append(_text((x0 + x1) / 2, top - 22, str(number), size=13,
+                          weight="bold"))
+        start += len(text)
+    y = top + ch + 34
+    for number, (sequence, text) in enumerate(segments, start=1):
+        label = str(number) if text else "fim"
+        body.append(_text(left - 30, y, label, size=13, weight="bold"))
+        shown = f'"{sequence}"' + (f' + "{text}"' if text else "")
+        body.append(mono(left, y, shown))
+        y += 26
+    caption = ("cada trecho: a sequência das cores e os caracteres que ela "
+               "pinta; o reset fecha a linha")
+    width = max(left + max(len(rows[0]) * cw, 7.9 * max(
+        len(f'"{seq}" + "{text}"') for seq, text in segments)) + 30,
+        len(caption) * 7.4 + 40)
+    body.append(_text(width / 2, y + 10, caption, size=13, fill="muted"))
+    return _svg(width, y + 32, body)
+
+
+def sequence_svg(ansi: Any) -> str:
+    """Decompõe a sequência de texto grafite e fundo branco nas suas peças.
+
+    À direita, o texto "Ab" decodificado da mesma sequência.
+
+    Args:
+        ansi: A classe Ansi da implementação.
+
+    Returns:
+        O documento SVG.
+    """
+    sequence = ansi.colours(ansi.CHARCOAL, ansi.WHITE)
+    inner = sequence[2:-1]
+    text_part, back_part = inner[:inner.index(";48")], inner[
+        inner.index(";48") + 1:]
     pieces = (
         ("ESC", "\\x1b", "avisa: vem um", "comando"),
         ("[", "", "abre o", "comando"),
-        ("41", "", "o número:", "fundo vermelho"),
+        (text_part, "", "38;2: cor do texto", "R;G;B: grafite"),
+        (";", "", "separa os", "números"),
+        (back_part, "", "48;2: cor do fundo", "R;G;B: branco"),
         ("m", "", "fecha: é um", "comando de cor"),
     )
-    widths = (110, 70, 110, 70)
-    gap, left, top, height = 16, 30, 60, 64
-    body = [_text(left, 26, 'Python: "\\x1b[41m"', size=15, weight="bold",
-                  anchor="start")]
+    gap, left, top, height = 12, 30, 60, 64
+    body = [mono(left, 26, f'Python: "\\x1b[{inner}m"', size=14)]
     x = float(left)
-    for (label, code, first, second), width in zip(pieces, widths):
+    for label, code, first, second in pieces:
+        width = max(104.0, len(label) * 10.5 + 24)
         body.append(
-            f'<rect x="{x:g}" y="{top}" width="{width}" height="{height}" '
+            f'<rect x="{x:g}" y="{top}" width="{width:g}" height="{height}" '
             f'rx="8" fill="{COLORS["highlight"]}" stroke="{COLORS["wall"]}" '
             f'stroke-width="2"/>'
         )
         shift = 10 if code else 0
-        body.append(_text(x + width / 2, top + height / 2 - shift, label,
-                          size=22, weight="bold"))
+        body.append(mono(x + width / 2, top + height / 2 - shift, label,
+                         size=17, anchor="middle"))
         if code:
             body.append(_text(x + width / 2, top + height / 2 + 16, code,
                               size=12, fill="muted"))
         body.append(_text(x + width / 2, top + height + 22, first, size=13))
         body.append(_text(x + width / 2, top + height + 40, second, size=13))
         x += width + gap
-    sample = x + 20
-    body.append(swatch(sample, top + 7, 50, "red"))
-    body.append(_text(sample + 25, top + height + 22, "o que vier", size=13))
-    body.append(_text(sample + 25, top + height + 40, "depois", size=13))
+    sample = x + 24
+    for index, (char, text, back) in enumerate(
+            decode([sequence + "Ab" + ansi.RESET])[0]):
+        cx = sample + index * 28
+        body.append(f'<rect x="{cx:g}" y="{top + 4}" width="28" height="56" '
+                    f'fill="{hex_colour(back)}" stroke="#d1d5db" '
+                    f'stroke-width="1"/>')
+        body.append(mono(cx + 14, top + 32, char, size=40, anchor="middle",
+                         fill=hex_colour(text)))
+    body.append(_text(sample + 28, top + height + 22, "o que vier", size=13))
+    body.append(_text(sample + 28, top + height + 40, "depois", size=13))
     return _svg(sample + 90, top + height + 64, body)
 
 
-def spaces_svg() -> str:
-    """Compara posições de 1 e de 2 caracteres de largura no terminal.
+def arms_svg(glyph: Any) -> str:
+    """Desenha os 16 caracteres de Box.glyph com os braços de cada um.
 
-    Um caractere de terminal tem mais ou menos o dobro de altura que de
-    largura, então 2 caracteres lado a lado formam um quadrado.
+    Args:
+        glyph: A função Box.glyph da implementação.
 
     Returns:
         O documento SVG.
     """
-    char_w, char_h, top, columns, rows, panel = 13, 26, 46, 5, 3, 220
+    cw, ch, column, per_row, left, top = 34, 68, 78, 8, 24, 20
+    arms = arms_table(glyph)
+    white, charcoal = (255, 255, 255), (31, 41, 55)
     body: list[str] = []
-    panels = ((1, "1 espaço por posição"), (2, "2 espaços por posição"))
-    for index, (chars, title) in enumerate(panels):
-        width = chars * char_w
-        middle = 20 + index * panel + panel / 2
-        left = middle - columns * width / 2
-        body.append(_text(middle, 22, title, size=14, weight="bold"))
-        for row in range(rows):
-            for column in range(columns):
-                name = ("white_wall" if (row + column) % 2 == 0
-                        else "corridor")
-                body.append(
-                    f'<rect x="{left + column * width:g}" '
-                    f'y="{top + row * char_h}" width="{width}" '
-                    f'height="{char_h}" fill="{COLORS[name]}" '
-                    f'stroke="#9ca3af" stroke-width="0.5"/>'
-                )
-        caption = "retângulos altos" if chars == 1 else "quadrados"
-        body.append(_text(middle, top + rows * char_h + 20, caption,
-                          size=13, fill="muted"))
-    return _svg(40 + len(panels) * panel, top + rows * char_h + 42, body)
+    for value in range(16):
+        x = left + value % per_row * column + (column - cw) / 2
+        y = top + value // per_row * (ch + 70)
+        rows = decode(["\x1b[38;2;{};{};{};48;2;{};{};{}m".format(
+            *charcoal, *white) + glyph(value) + "\x1b[0m"])
+        body.append(f'<rect x="{x:g}" y="{y:g}" width="{cw}" height="{ch}" '
+                    f'fill="#f9fafb" stroke="#9ca3af" stroke-width="1" '
+                    f'stroke-dasharray="3 3"/>')
+        body.extend(chars_body(rows, arms, x, y, cw, ch)[1:])
+        names = "+".join(name for bit, name in NAMES.items() if value & bit)
+        body.append(_text(x + cw / 2, y + ch + 18, str(value), size=15,
+                          weight="bold"))
+        body.append(_text(x + cw / 2, y + ch + 38, names or "nenhum",
+                          size=12, fill="muted"))
+    width = left * 2 + per_row * column
+    height = top + 2 * (ch + 70) + 20
+    caption = ("N = Norte (1) · L = Leste (2) · S = Sul (4) · O = Oeste (8); "
+               "o número é a soma dos braços")
+    body.append(_text(width / 2, height - 18, caption, size=13,
+                      fill="muted"))
+    return _svg(width, height, body)
 
 
 def config_grid_svg(pattern: set[tuple[int, int]]) -> str:
@@ -217,12 +284,21 @@ def config_grid_svg(pattern: set[tuple[int, int]]) -> str:
 def main() -> None:
     """Gera todas as imagens destas partes."""
     sys.path.insert(0, sys.argv[1])
+    from amazeing.domain.entities.view_state import ViewState
+    from amazeing.domain.value_objects.generated_maze import GeneratedMaze
+    from amazeing.services.render_service import RenderService
+    from amazeing.utils.ansi import Ansi
+    from amazeing.utils.box import Box
     from mazegen import MazeGenerator
 
-    save(palette_svg(), UTILS / "paleta-ansi.svg")
-    save(line_svg(), UTILS / "linha-sgr.svg")
-    save(sequence_svg(), UTILS / "sequencia-sgr.svg")
-    save(spaces_svg(), UTILS / "um-ou-dois-espacos.svg")
+    arms = arms_table(Box.glyph)
+    example = GeneratedMaze(((13, 5, 3), (13, 5, 6)), (0, 0), (0, 1),
+                            "EESWW", frozenset())
+    second = RenderService().render(example, ViewState())[1]
+    save(palette_svg(Ansi), UTILS / "paleta-ansi.svg")
+    save(line_svg(second, arms), UTILS / "linha-sgr.svg")
+    save(sequence_svg(Ansi), UTILS / "sequencia-sgr.svg")
+    save(arms_svg(Box.glyph), UTILS / "caixa-bracos.svg")
     save(config_grid_svg(MazeGenerator(20, 15).pattern),
          CONFIG / "entrada-no-42.svg")
 

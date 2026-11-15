@@ -67,30 +67,32 @@ aplicação que não abrem arquivos nem imprimem nada.
 ## A paleta
 
 ```python
-from amazeing.utils.ansi import Ansi
+from amazeing.utils.ansi import Ansi, Rgb
 
-PALETTE = (Ansi.WHITE, Ansi.YELLOW, Ansi.GREEN, Ansi.BLUE)
+PALETTE = (Ansi.CHARCOAL, Ansi.ORANGE, Ansi.GREEN, Ansi.BLUE)
 ```
 
 `PALETTE` ("paleta") é a lista das cores que as paredes podem ter, na ordem do rodízio. Cada cor
-é um número, o **código SGR** de uma cor de fundo: o terminal entende uma sequência especial de
-caracteres com esse número e passa a pintar o fundo daquela cor. A classe `Ansi`
-([parte 10](../10-utilitarios/04-cores-ansi.md)) dá nome a esses números:
+é uma tupla de três números, a quantidade de vermelho, de verde e de azul (uma **cor RGB**, de 0
+a 255 cada), e entra no desenho como a cor do traço das paredes. A classe `Ansi`
+([parte 10](../10-utilitarios/04-cores-ansi.md)) dá nome a essas tuplas, e `Rgb` é o apelido do
+tipo delas, usado na anotação da [próxima página](./07-os-metodos-do-view-state.md):
 
-| Nome | Código | Cor de fundo |
+| Nome | RGB | Cor |
 |---|---|---|
-| `Ansi.WHITE` | `47` | branco |
-| `Ansi.YELLOW` | `43` | amarelo |
-| `Ansi.GREEN` | `42` | verde |
-| `Ansi.BLUE` | `44` | azul |
+| `Ansi.CHARCOAL` | `31, 41, 55` | grafite |
+| `Ansi.ORANGE` | `194, 65, 12` | laranja |
+| `Ansi.GREEN` | `21, 128, 61` | verde |
+| `Ansi.BLUE` | `29, 78, 216` | azul |
 
 A paleta é uma **tupla** (entre parênteses), e não uma lista (entre colchetes), porque uma tupla
 não pode ser alterada depois de criada, e a paleta nunca muda.
 
-As quatro cores são escolha do projeto: o enunciado só pede que o usuário consiga trocar a cor
-das paredes. Elas foram escolhidas para não coincidir com nenhuma das cores fixas do desenho
-(cinza no "42", magenta na entrada, vermelho na saída, ciano no caminho). Assim, qualquer que
-seja a cor das paredes, as marcações continuam visíveis.
+As quatro cores são escolha do projeto ([parte
+1](../01-o-problema/07-o-desenho-e-o-menu.md#as-cores)). Elas são escuras o bastante para aparecer
+sobre o fundo branco do desenho e diferentes de todas as cores fixas (cinza no "42", magenta na
+entrada, vermelho na saída, ciano no caminho). Assim, qualquer que seja a cor das paredes, as
+marcações continuam visíveis.
 
 Os métodos que mudam e leem o estado, e o arquivo completo, estão na
 [próxima página](./07-os-metodos-do-view-state.md).

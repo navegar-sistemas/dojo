@@ -62,10 +62,11 @@ parte do texto fixo.
 - "Labirinto atual" é o último produzido: o `OUTPUT_FILE` de uma execução com código 0, o
   `grid`/`solution`/`pattern` de `generate()` ou um labirinto de teste. Os passos `Então` sobre
   labirinto valem para todos os labirintos gerados no cenário.
-- Renderização: a saída padrão é dividida em blocos de 2 × HEIGHT + 1 linhas; cada posição são 2
-  espaços com cor de fundo ANSI (I02, códigos na I21). Numa sessão, as propriedades de V72
-  `a renderização` olham todas as renderizações da sessão (ex.: o rodízio de cores), e as que
-  citam o arquivo de saída comparam com o `OUTPUT_FILE` atual.
+- Renderização: a saída padrão é dividida em blocos de 2 × HEIGHT + 1 linhas de 4 × WIDTH + 1
+  caracteres; cada caractere tem uma cor de texto e uma de fundo de 24 bits (I02, cores na
+  I21). Numa sessão, as propriedades de V72 `a renderização` olham todas as renderizações da
+  sessão (ex.: o rodízio de cores), e as que citam o arquivo de saída comparam a última
+  renderização com o `OUTPUT_FILE` atual.
 - Valores das listas fechadas são comparados com o texto do passo antes da conversão de `Q`.
 - Sessão interativa: `subprocess.Popen` com uma thread lendo a saída; cada envio espera o prompt
   `Choice? (1-4): ` (I03) ou o fim do processo.
@@ -102,12 +103,33 @@ O que cada passo confere onde a coluna "O que a função faz" do catálogo não 
   parâmetros da I09) antes do `eval`; entrada e saída do labirinto vêm dos literais (`entry`
   ausente = `(0, 0)`, `exit` ausente = canto inferior direito). `só MazeError escapa do
   construtor` testa a expressão do cenário e uma lista fixa de valores e tipos errados.
-- Renderização: os blocos são as linhas com ESC, cortadas em 2 × HEIGHT + 1; `49` e o reset
-  contam como sem cor; a cor das paredes é a do canto `(0, 0)`. `células do 42` são as células
-  de valor F do arquivo; `células do caminho` excluem entrada e saída. `seguida do menu` exige
-  as 5 linhas do menu da figura e o prompt logo depois do bloco. `nova renderização abaixo da
-  anterior` proíbe sequência CSI que não seja SGR. `paredes em rodízio` só vale numa sessão:
-  cada `1`, `2` ou `3` enviado é uma renderização e só o `3` avança a cor.
+- Renderização: os blocos são as linhas com ESC, cortadas em 2 × HEIGHT + 1; o reset volta a "sem
+  cor"; a cor das paredes é a do texto do canto `(0, 0)`. Uma cor aparece num caractere quando é o
+  fundo dele ou o texto de um caractere que não é espaço. A cor de `paredes`, `células do caminho` e
+  `passagens do caminho` é a do texto; a de `entrada`, `saída` e `42` é a do fundo. `paredes` são as
+  paredes fechadas e os cantos de onde sai pelo menos uma parede; `42` é o interior das células de
+  valor F do arquivo e as paredes entre duas delas; `entrada` e `saída` são as 3 colunas do interior
+  da célula; `células do caminho` são os centros das células do caminho, sem entrada e saída;
+  `passagens do caminho` são as colunas e linhas entre os centros de duas células consecutivas. Uma
+  parede do desenho está fechada quando todas as posições dela têm `┃` (vertical) ou `━`
+  (horizontal) e aberta quando nenhuma tem; só parte dos `━` é defeito. `só espaços e caracteres de
+  caixa` aceita o espaço e os caracteres da tabela da I02; `cores por sequências ANSI de 24 bits`
+  aceita só os parâmetros SGR `38;2;R;G;B`, `48;2;R;G;B`, `0` e vazio, e exige cor de texto e de
+  fundo em todo caractere; `texto e fundo na mesma sequência e um reset no fim de cada linha` exige
+  que a linha abra com `\x1b[38;2;R;G;B;48;2;R;G;Bm`, use só essa forma no meio e termine com
+  `\x1b[0m`, o único reset dela; `sequência só quando o par de cores muda` recusa a sequência que
+  repete o par em vigor ou que vem logo antes de outra, sem caractere no meio; `cada canto com o
+  caractere das suas paredes` compara cada canto com os braços das paredes desenhadas ao redor dele;
+  `espaço fora das paredes, dos cantos e do caminho` exige espaço em todo caractere da última
+  renderização fora de `paredes` do `OUTPUT_FILE` atual e, quando ela tem algum ciano, fora das
+  posições do caminho do rodapé; `fundo branco fora da entrada, da saída e do 42` tira os três
+  elementos do `OUTPUT_FILE` atual e olha a última renderização; `caminho do arquivo marcado em
+  ciano` exige texto ciano exatamente nos centros das células do caminho do rodapé, entrada e saída
+  inclusive, e nas passagens do caminho, com os caracteres da I02. `seguida do menu` exige as 5
+  linhas do menu da figura e o prompt logo depois do bloco. `nova renderização abaixo da anterior`
+  proíbe toda sequência ESC que não seja SGR, CSI ou não (como `ESC c`, que limpa a tela). `paredes
+  em rodízio` só vale numa sessão: cada `1`, `2` ou `3` enviado é uma renderização e só o `3` avança
+  a cor.
 - Sessão: V27 falha se o programa terminar antes do primeiro prompt; V28 `visível` também
   confere que o ciano apareceu; V46 espera o prompt ou o fim depois de EOF e SIGINT.
 
@@ -237,7 +259,7 @@ O que cada passo confere onde a coluna "O que a função faz" do catálogo não 
 | V58 motivo | `arquivo não encontrado`, `arquivo não é UTF-8`, `chave obrigatória ausente`, `entrada igual à saída`, `tamanho sem tabuleiro Pac-Man`, `coordenada no padrão 42` (palavras-chave na I21) |
 | V71 aspecto | `arquivo de saída`, `grade`, `solução`, `células de valor F`, `saída exibida` |
 | V72 o validador da suíte | `valores de 0 a 15`, `bits na convenção N=1, E=2, S=4, W=8`, `x é a coluna e y é a linha`, `entrada e saída válidas`, `entrada diferente da saída`, `x de entrada e saída dentro da largura`, `y de entrada e saída dentro da altura`, `toda célula fora do 42 alcançável`, `borda fechada`, `paredes coerentes`, `vizinhas leste-oeste coerentes` (bit E de (x, y) = bit W de (x+1, y)), `vizinhas norte-sul coerentes` (bit S de (x, y) = bit N de (x, y+1)), `inalcançáveis são as células do 42`, `células F em dois componentes 4-conexos`, `componente da esquerda com a forma do 4`, `componente da direita com a forma do 2`, `células F iguais ao padrão 42`, `nenhuma célula F fora do padrão`, `42 sem passagem aberta`, `glifos 3x5 com uma coluna livre entre os dígitos`, `42 presente`, `42 ausente`, `42 com margem de corredor`, `42 fora dos cantos`, `centro livre do 42`, `árvore geradora fora do 42`, `caminho único entre entrada e saída`, `ramos fora da solução terminam em beco`, `solução atravessa só paredes abertas`, `solução não sai da grade`, `solução não entra no 42`, `solução termina na saída`, `solução mais curta`, `solução sem célula repetida`, `solução válida e mais curta`, `pelo menos 2 rotas independentes`, `no máximo 2 becos reais`, `zero becos reais`, `sem área aberta 3x3`, `blocos 2x2, 2x3 e 3x2 abertos aceitos` (o validador não recusa o labirinto por área aberta e ele tem pelo menos um bloco 2x2 aberto; a aceitação de 2x3 e 3x2 é provada pelas grades de teste de V22 com V73 em `áreas abertas`), `modo igual ao PERFECT do config`, `rodapé com ENTRY, EXIT e caminho válido`, `labirinto válido conforme o config` (dimensões, valores, borda, coerência, entrada e saída, "42" por D06/D07, conectividade, sem 3x3, solução válida e mais curta, modo), `uma linha vazia logo após a grade`, `exatamente 3 linhas após a linha vazia`, `arquivo termina com quebra de linha`, `linha vazia contém só a quebra de linha`, `nenhuma linha com espaço no fim` |
-| V72 a renderização | `cada renderização seguida do menu`, `nova renderização abaixo da anterior, seguida do menu`, `2 × HEIGHT + 1 linhas`, `2 × WIDTH + 1 posições de 2 caracteres por linha`, `só caracteres ASCII`, `cores por sequências ANSI de fundo`, `cada linha termina com o reset ANSI`, `última sequência ANSI é o reset`, `paredes iguais às do arquivo de saída`, `entrada e saída iguais às do rodapé`, `caminho do arquivo marcado em ciano`, `caminho marcado liga entrada e saída por paredes abertas`, `caminho marcado com o comprimento da busca em largura`, `cinco cores distintas para entrada, saída, 42, caminho e paredes`, `paredes em rodízio branco, amarelo, verde, azul`, `labirinto diferente do da renderização anterior` |
+| V72 a renderização | `cada renderização seguida do menu`, `nova renderização abaixo da anterior, seguida do menu`, `2 × HEIGHT + 1 linhas`, `4 × WIDTH + 1 caracteres por linha`, `só espaços e caracteres de caixa`, `cores por sequências ANSI de 24 bits`, `fundo branco fora da entrada, da saída e do 42`, `cada canto com o caractere das suas paredes`, `espaço fora das paredes, dos cantos e do caminho`, `texto e fundo na mesma sequência e um reset no fim de cada linha`, `sequência só quando o par de cores muda`, `cada linha termina com o reset ANSI`, `última sequência ANSI é o reset`, `paredes iguais às do arquivo de saída`, `entrada e saída iguais às do rodapé`, `caminho do arquivo marcado em ciano`, `caminho marcado liga entrada e saída por paredes abertas`, `caminho marcado com o comprimento da busca em largura`, `cinco cores distintas para entrada, saída, 42, caminho e paredes`, `paredes em rodízio grafite, laranja, verde, azul`, `labirinto diferente do da renderização anterior` |
 | V72 a análise estática | `open sempre dentro de with`, `anotação de retorno em toda definição`, `docstring em cada módulo`, `docstring em cada função`, `docstring em cada método`, `docstring em cada classe`, `docstrings com aspas triplas duplas`, `resumo de uma frase terminado em ponto`, `linha em branco entre resumo e descrição`, `seção Args: nas funções com parâmetros`, `seção Returns: nas funções que retornam valor`, `coleções vazias com tipo anotado` (também nas atribuições desempacotadas, como `a, b = [], []`), `testes usam pytest ou unittest`, `sem supressão de flake8 nem mypy` (comentários, lidos pelo `tokenize`, que casam com `(?i)#\s*noqa\b\|#\s*flake8[:=]\s*noqa\|#\s*type:\s*ignore\|#\s*mypy:`), `mazegen só importa a biblioteca padrão` (todo import absoluto está em `sys.stdlib_module_names` ou é `mazegen.*`), `sem MiniLibX` |
 | V72 o módulo mazegen | `uma única classe pública de geração`, `grid e solution preenchidos após generate`, `solution pública e documentada`, `grid público com as paredes de cada célula`, `mesmos parâmetros geram a mesma grade`, `grade igual à do arquivo de saída`, `só MazeError escapa do construtor` |
 | V72 o catálogo de casos de erro | `nenhum caso termina com Traceback`, `nenhum caso estoura o tempo limite`, `mensagem começa com Error:`, `mensagem cita o arquivo, a linha ou a chave`, `mensagem sem nome de exceção do Python` (as três últimas pulam o caso de uso errado da linha de comando, I12) |
@@ -247,7 +269,7 @@ O que cada passo confere onde a coluna "O que a função faz" do catálogo não 
 | V77 borda / direção | `primeira linha`, `última coluna`, `última linha`, `primeira coluna` / `Norte`, `Leste`, `Sul`, `Oeste` |
 | Paredes (V25, V80, V89) | `nenhuma` ou direções em lista com vírgulas e "e": `Norte`, `Norte e Sul`, `Norte, Leste, Sul e Oeste` |
 | V83/V84 rótulo | `Verdict:`, `Reachable region`, `Independent loops`, `Dead-ends`, `Corners + centre`, `Wall coherence`, `Entry` |
-| V86–V88 elemento / cor | `entrada`, `saída`, `células do caminho`, `passagens do caminho`, `células do 42`, `paredes` (as posições de parede fechada e todos os cantos entre 4 células, I02) / `branco`, `amarelo`, `verde`, `azul`, `magenta`, `vermelho`, `ciano`, `cinza` (códigos SGR na I21) |
+| V86–V88 elemento / cor | `entrada`, `saída`, `células do caminho`, `passagens do caminho`, `42`, `paredes` (definidos nas regras da renderização) / `branco`, `grafite`, `laranja`, `verde`, `azul`, `magenta`, `vermelho`, `ciano`, `cinza` (RGB na I21) |
 | V65 campo | `Name`, `Version`, `License-Expression` |
 | V45 linhas | `1` regenerar, `2` mostrar/ocultar o caminho, `3` trocar a cor das paredes, `4` sair; inválidas usadas: `9`, `abc`, `""`, `-1` |
 | V91 prompt | `Choice? (1-4): ` |

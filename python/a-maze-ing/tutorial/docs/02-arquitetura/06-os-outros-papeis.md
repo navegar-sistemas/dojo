@@ -63,8 +63,8 @@ nome da classe.
 ValueParser.to_coordinate("19,14")   # (19, 14)
 ```
 
-- Exemplos: `ValueParser` (converte texto em número, booleano ou coordenada) e `Ansi` (os
-  códigos que mudam a cor do terminal).
+- Exemplos: `ValueParser` (converte texto em número, booleano ou coordenada), `Ansi` (as cores
+  do terminal) e `Box` (os caracteres de caixa que desenham as paredes).
 
 ## Composition root
 

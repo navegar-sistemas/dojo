@@ -105,7 +105,7 @@ O `Menu` recebe três objetos prontos, e só os guarda:
 | Parâmetro | O que é |
 |---|---|
 | `generate` | o `GenerateMaze`, a operação que gera um labirinto, grava o arquivo de saída e devolve o retrato `GeneratedMaze` ([parte 12](../12-geracao-e-saida/06-o-caso-de-uso-generate-maze.md)) |
-| `renderer` | o `RenderService`, que transforma o labirinto em linhas coloridas ([parte 13](../13-tela/02-a-grade-de-posicoes.md)) |
+| `renderer` | o `RenderService`, que transforma o labirinto em linhas coloridas ([parte 13](../13-tela/02-a-grade-de-caracteres.md)) |
 | `state` | o `ViewState`, com o caminho visível ou não e a cor das paredes ([parte 13](../13-tela/01-o-estado-da-tela.md)) |
 
 O `_` no começo de `self._generate` é uma convenção do Python: avisa que o atributo é de uso

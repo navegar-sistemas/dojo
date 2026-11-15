@@ -87,9 +87,10 @@ digitado; [página 1](./01-o-laco-do-menu.md)), ninguém digita, e nada é ecoad
 aparece e não há quebra de linha depois do prompt. `Invalid choice` sai colado nele, e o próximo
 prompt vem na linha seguinte.
 
-Com o programa pronto, `printf '9\n4\n' | .venv/bin/python a_maze_ing.py config.txt` termina
-assim (só as últimas linhas, depois do desenho; a [página 10](./09-o-programa-rodando.md) roda o
-comando de verdade). O `$` marca onde cada linha termina; ele não é impresso pelo programa:
+Com o programa pronto, `printf '9\n4\n' | .venv/bin/python a_maze_ing.py config.txt` termina assim
+(só as últimas linhas, depois do desenho; o comando roda na [página
+10](./09-o-programa-rodando.md)). O `$` marca onde cada linha termina; ele não é impresso pelo
+programa:
 
 ```text
 === A-Maze-ing ===$

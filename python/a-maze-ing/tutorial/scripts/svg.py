@@ -26,15 +26,10 @@ COLORS = {
     "stack": "#93c5fd",
     "text": "#111827",
     "muted": "#6b7280",
-    "white_wall": "#f3f4f6",
-    "yellow_wall": "#facc15",
-    "green_wall": "#22c55e",
-    "blue_wall": "#3b82f6",
-    "grey": "#9ca3af",
-    "magenta": "#d946ef",
+    "yellow": "#facc15",
+    "green": "#22c55e",
+    "blue": "#3b82f6",
     "red": "#ef4444",
-    "cyan": "#22d3ee",
-    "corridor": "#1f2328",
 }
 
 FONT = "font-family=\"ui-sans-serif, system-ui, sans-serif\""
@@ -381,45 +376,6 @@ def bits_svg(bits: int) -> str:
                       f"0b{bits:04b} = {' + '.join(terms)} = {bits} "
                       f"= \"{bits:x}\"", size=18, weight="bold"))
     return _svg(width, arrow_y + 80, body)
-
-
-def blocks_svg(
-    rows: Sequence[Sequence[str]],
-    *,
-    size: int = 26,
-    caption: str | None = None,
-    gap: float = 0,
-) -> str:
-    """Desenha uma matriz de quadrados coloridos (o desenho do terminal).
-
-    Args:
-        rows: rows[py][px] com o nome da cor de cada posição.
-        size: Lado de cada quadrado.
-        caption: Legenda abaixo do desenho.
-        gap: Espaço entre quadrados, para mostrar a grade de posições.
-
-    Returns:
-        O documento SVG.
-    """
-    pad = 16
-    left = pad + _caption_overflow(pad * 2 + len(rows[0]) * size,
-                                   caption) / 2
-    body: list[str] = []
-    for py, row in enumerate(rows):
-        for px, name in enumerate(row):
-            body.append(
-                f'<rect x="{left + px * size + gap / 2:g}" '
-                f'y="{pad + py * size + gap / 2:g}" '
-                f'width="{size - gap:g}" height="{size - gap:g}" '
-                f'fill="{color(name)}" stroke="#e5e7eb" '
-                f'stroke-width="{1 if gap else 0.5}"/>'
-            )
-    total_w = left * 2 + len(rows[0]) * size
-    total_h = pad * 2 + len(rows) * size + (24 if caption else 0)
-    if caption:
-        body.append(_text(total_w / 2, total_h - 20, caption, size=13,
-                          fill="muted"))
-    return _svg(total_w, total_h, body)
 
 
 def save(svg: str, path: Path) -> None:

@@ -60,7 +60,7 @@ dele.
 | `AppError` | a base dos erros da aplicação (config ruim, saída que não grava) | [parte 10](../10-utilitarios/05-a-hierarquia-app-error.md) |
 | `FileConfigRepository` | lê o arquivo de configuração e devolve um `MazeConfig` | [parte 11](../11-configuracao/05-abrindo-o-arquivo.md) |
 | `FileMazeRepository` | grava o arquivo de saída | [parte 12](../12-geracao-e-saida/05-gravando-o-arquivo.md) |
-| `RenderService` | transforma o labirinto em linhas coloridas | [parte 13](../13-tela/02-a-grade-de-posicoes.md) |
+| `RenderService` | transforma o labirinto em linhas coloridas | [parte 13](../13-tela/02-a-grade-de-caracteres.md) |
 | `Menu` | o laço que desenha, pergunta e reage | [páginas 1 a 4](./01-o-laco-do-menu.md) |
 | `GenerateMaze` | gera um labirinto, grava o arquivo e devolve o retrato | [parte 12](../12-geracao-e-saida/06-o-caso-de-uso-generate-maze.md) |
 | `MazeGenerator` | o gerador do pacote reutilizável `mazegen` | [parte 9](../09-gerador/01-a-fachada.md) |
@@ -119,7 +119,7 @@ o tradicional dos programas de terminal para dizer "como usar": a palavra `Usage
 comando. Quem a recebe não precisa saber o que deu errado, e sim como chamar o programa, e ela
 diz isso. O código de saída continua 1, como em qualquer falha.
 
-Com o programa pronto (a [página 10](./09-o-programa-rodando.md) roda os dois de verdade), estes
+Com o programa pronto (os dois rodam na [página 10](./09-o-programa-rodando.md)), estes
 dois comandos imprimem a mesma linha de uso e terminam com código 1:
 
 ```bash

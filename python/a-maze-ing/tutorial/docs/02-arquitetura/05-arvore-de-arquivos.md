@@ -61,6 +61,7 @@ amazeing/                                  a aplicação
     utils/
         value_parser.py                    ValueParser
         ansi.py                            Ansi
+        box.py                             Box
 ```
 
 Três tipos de arquivo fogem da regra "uma classe por arquivo". Os dois primeiros são explicados
@@ -90,7 +91,7 @@ toda peça nova só importa peças que já existem e já funcionam:
 | [7](../07-solver/01-busca-em-largura.md) | `Solver` |
 | [8](../08-braider/01-becos-sem-saida.md) | `Braider` |
 | [9](../09-gerador/01-a-fachada.md) | `MazeGenerator`, a documentação e o pacote |
-| [10](../10-utilitarios/01-excecoes-da-aplicacao.md) | `AppError`, `ValueParser`, `Ansi` |
+| [10](../10-utilitarios/01-excecoes-da-aplicacao.md) | `AppError`, `ValueParser`, `Ansi`, `Box` |
 | [11](../11-configuracao/01-o-value-object-maze-config.md) | `MazeConfig`, `FileConfigRepository` |
 | [12](../12-geracao-e-saida/01-o-retrato-generated-maze.md) | `GeneratedMaze`, `MazeRepository`, `FileMazeRepository`, `GenerateMaze` |
 | [13](../13-tela/01-o-estado-da-tela.md) | `ViewState`, `RenderService` |

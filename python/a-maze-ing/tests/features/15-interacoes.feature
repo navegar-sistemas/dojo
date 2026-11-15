@@ -62,22 +62,24 @@ Funcionalidade: Interações do usuário
   # md:  "Mostrar/Ocultar um caminho mais curto válido da entrada até a saída."
   # regua: "A toggle button to show and hide the shortest path from entry to exit."
   # regua-md: "Um botão de alternância para mostrar e ocultar o caminho mais curto da entrada até a saída."
-  @obrigatorio @automatizado @decisao-I03 @decisao-I21 @pdf-p12-L10 @md-L266 @regua-p2
+  @obrigatorio @automatizado @decisao-I02 @decisao-I03 @decisao-I21 @pdf-p12-L10 @md-L266 @regua-p2
   Cenário: Mostrar o caminho mais curto
     Dado o programa iniciado com "python3 a_maze_ing.py cfg.txt", com o caminho oculto
     Quando eu envio ao menu "2"
     Então na última renderização, as posições de "células do caminho" têm a cor "ciano"
     E a renderização confirma "caminho do arquivo marcado em ciano"
+    E a renderização confirma "espaço fora das paredes, dos cantos e do caminho"
 
   # pdf: "Show/Hide a valid shortest path from the entrance to the exit."
   # md:  "Mostrar/Ocultar um caminho mais curto válido da entrada até a saída."
   # regua: "A toggle button to show and hide the shortest path from entry to exit."
   # regua-md: "Um botão de alternância para mostrar e ocultar o caminho mais curto da entrada até a saída."
-  @obrigatorio @automatizado @decisao-I03 @decisao-I21 @pdf-p12-L10 @md-L266 @regua-p2
+  @obrigatorio @automatizado @decisao-I02 @decisao-I03 @decisao-I21 @pdf-p12-L10 @md-L266 @regua-p2
   Cenário: Ocultar o caminho mais curto
     Dado o programa iniciado com "python3 a_maze_ing.py cfg.txt", com o caminho visível
     Quando eu envio ao menu "2"
     Então na última renderização, nenhuma posição tem a cor "ciano"
+    E a renderização confirma "espaço fora das paredes, dos cantos e do caminho"
 
   # pdf: "Show/Hide a valid shortest path from the entrance to the exit."
   # md:  "Mostrar/Ocultar um caminho mais curto válido da entrada até a saída."
@@ -126,13 +128,13 @@ Funcionalidade: Interações do usuário
   @obrigatorio @automatizado @decisao-I03 @decisao-I04 @decisao-I21 @pdf-p12-L11 @md-L267 @regua-p2
   Cenário: Trocar a cor das paredes
     Dado o programa iniciado com "python3 a_maze_ing.py cfg.txt", com o caminho visível
-    Então na última renderização, as posições de "paredes" têm a cor "branco"
+    Então na última renderização, as posições de "paredes" têm a cor "grafite"
     Quando eu envio ao menu "3"
-    Então na última renderização, as posições de "paredes" têm a cor "amarelo"
+    Então na última renderização, as posições de "paredes" têm a cor "laranja"
     E na última renderização, as posições de "entrada" têm a cor "magenta"
     E na última renderização, as posições de "saída" têm a cor "vermelho"
     E na última renderização, as posições de "células do caminho" têm a cor "ciano"
-    E na última renderização, as posições de "células do 42" têm a cor "cinza"
+    E na última renderização, as posições de "42" têm a cor "cinza"
 
   # pdf: "Change maze wall colours."
   # md:  "Alterar as cores das paredes do labirinto."
@@ -140,8 +142,8 @@ Funcionalidade: Interações do usuário
   Cenário: Trocar a cor várias vezes percorre a paleta e volta ao início
     Dado o programa iniciado com "python3 a_maze_ing.py cfg.txt"
     Quando eu envio ao menu "3", "3", "3" e "3"
-    Então a renderização confirma "paredes em rodízio branco, amarelo, verde, azul"
-    E na última renderização, as posições de "paredes" têm a cor "branco"
+    Então a renderização confirma "paredes em rodízio grafite, laranja, verde, azul"
+    E na última renderização, as posições de "paredes" têm a cor "grafite"
 
   # pdf: "Change maze wall colours."
   # md:  "Alterar as cores das paredes do labirinto."
@@ -149,7 +151,7 @@ Funcionalidade: Interações do usuário
   Cenário: Toda cor da paleta é visível no terminal
     - Dado o programa aberto num terminal de fundo claro e depois num de fundo escuro
     - Quando eu percorro as cores das paredes
-    - Então em todas as cores as paredes ficam visíveis contra o fundo do terminal
+    - Então em todas as cores as paredes ficam visíveis contra o fundo branco do desenho, nos dois terminais
 
   # pdf: "Re-generate a new maze and display it."
   # pdf: "Change maze wall colours."
@@ -160,7 +162,7 @@ Funcionalidade: Interações do usuário
     Dado o programa iniciado com "python3 a_maze_ing.py cfg.txt"
     Quando eu envio ao menu "3" e "1"
     Então a renderização confirma "labirinto diferente do da renderização anterior"
-    E na última renderização, as posições de "paredes" têm a cor "amarelo"
+    E na última renderização, as posições de "paredes" têm a cor "laranja"
 
   # pdf: "Optional: set specific colours to display the "42" pattern."
   # md:  "Opcional: definir cores específicas para exibir o padrão "42"."

@@ -5,31 +5,43 @@ from collections.abc import Callable
 import pytest
 
 from autoteste.desenho import (
-    AMARELO,
+    ANEL,
     ARQUIVO,
     AZUL,
     BRANCO,
     CIANO,
     CINZA,
     CONFIG,
+    GRAFITE,
+    LARANJA,
     MAGENTA,
     TEXTO_DO_MENU,
     VERDE,
-    VERMELHO,
+    CAMINHO,
+    com_fundo,
+    com_simbolo,
+    com_texto,
     desenhar,
     grade,
     saida,
+    sgr,
+    tela_com_menu,
+    volta,
 )
 from autoteste.falso import programa_falso
 from step_defs.interacao import envio_ao_menu, programa_iniciado
 from step_defs.renderizacao import (
     caminho_do_arquivo_em_ciano,
+    cantos_pelas_paredes,
+    caracteres_da_largura,
     celulas_do_digito,
     cinco_cores,
     cor_so_no_elemento,
-    cores_de_fundo,
+    cores_de_24_bits,
     diferente_do_anterior,
+    espaco_fora_do_desenhado,
     elemento_tem_a_cor,
+    fundo_branco,
     labirinto_atual,
     linhas_com_reset,
     linhas_da_altura,
@@ -40,31 +52,22 @@ from step_defs.renderizacao import (
     paredes_do_arquivo,
     paredes_em_rodizio,
     pontas_do_rodape,
-    posicoes_da_largura,
     seguidas_do_menu,
-    so_ascii,
+    sequencias_da_i02,
+    sequencias_so_na_troca,
+    so_caixa,
     tamanho_do_config,
     termina_com_reset,
 )
 from suporte.config import Config
 from suporte.estado import Estado, Execucao
-from suporte.render import Cor
+from suporte.render import PAR, RESET, Rgb, Tela
 from suporte.sessao import PROMPT
 
-PAREDE = "\x1b[47m  \x1b[0m"
+PAREDE = "\x1b[38;2;31;41;55;48;2;255;255;255m┃\x1b[0m"
 Passo = Callable[[Estado], None]
-Grade = list[list[Cor]]
-
-# Labirinto 2x2 em anel: a BFS liga (0,0) a (1,0) em 1 passo; o ciano dá a
-# volta por baixo, em 3.
-ANEL = "93\nc6\n\n0,0\n1,0\nE\n"
-VOLTA: Grade = [
-    [BRANCO] * 5,
-    [BRANCO, MAGENTA, None, VERMELHO, BRANCO],
-    [BRANCO, CIANO, BRANCO, CIANO, BRANCO],
-    [BRANCO, CIANO, CIANO, CIANO, BRANCO],
-    [BRANCO] * 5,
-]
+# Parede Sul da célula (1, 0), aberta no exemplo, desenhada fechada.
+SUL_DE_1_0 = [(2, 5), (2, 6), (2, 7)]
 
 
 def com_saida(
@@ -91,23 +94,6 @@ def com_saida(
     return cenario
 
 
-def trocar(fundos: Grade, linha: int, coluna: int, cor: Cor) -> Grade:
-    """Cópia da grade de fundos com uma posição trocada.
-
-    Args:
-        fundos: Grade original.
-        linha: Linha da posição.
-        coluna: Coluna da posição.
-        cor: Novo fundo.
-
-    Returns:
-        A grade nova.
-    """
-    copia = [list(linha_de_fundos) for linha_de_fundos in fundos]
-    copia[linha][coluna] = cor
-    return copia
-
-
 def test_linhas_coloridas_terminam_com_reset(cenario: Estado) -> None:
     """Linhas sem cor, como o menu, não precisam do reset.
 
@@ -120,7 +106,11 @@ def test_linhas_coloridas_terminam_com_reset(cenario: Estado) -> None:
 
 @pytest.mark.parametrize(
     "linha",
-    ["\x1b[47m  ", f"{PAREDE} ", f"{PAREDE}\x1b[47m  "],
+    [
+        "\x1b[38;2;31;41;55;48;2;255;255;255m┃",
+        f"{PAREDE} ",
+        f"{PAREDE}\x1b[38;2;31;41;55m┃",
+    ],
     ids=["sem reset", "espaço depois do reset", "cor aberta no fim"],
 )
 def test_linha_colorida_sem_reset_no_fim(cenario: Estado, linha: str) -> None:
@@ -147,9 +137,11 @@ def test_saida_sem_renderizacao(cenario: Estado) -> None:
 BONS: list[Passo] = [
     seguidas_do_menu,
     linhas_da_altura,
-    posicoes_da_largura,
-    so_ascii,
-    cores_de_fundo,
+    caracteres_da_largura,
+    so_caixa,
+    cores_de_24_bits,
+    fundo_branco,
+    cantos_pelas_paredes,
     termina_com_reset,
     paredes_do_arquivo,
     pontas_do_rodape,
@@ -157,6 +149,9 @@ BONS: list[Passo] = [
     marcado_por_paredes_abertas,
     marcado_mais_curto,
     cinco_cores,
+    sequencias_da_i02,
+    sequencias_so_na_troca,
+    espaco_fora_do_desenhado,
 ]
 
 
@@ -171,43 +166,178 @@ def test_renderizacao_do_exemplo(cenario: Estado, passo: Passo) -> None:
     passo(com_saida(cenario, saida(grade(caminho=False), grade())))
 
 
+def test_espaco_com_o_caminho_oculto(cenario: Estado) -> None:
+    """Sem ciano, o caminho não conta, e o resto fora das paredes é espaço.
+
+    Args:
+        cenario: Estado numa pasta temporária.
+    """
+    espaco_fora_do_desenhado(
+        com_saida(cenario, saida(grade(), grade(caminho=False)))
+    )
+
+
+def caminho_sem_ciano() -> Tela:
+    """O exemplo com o caminho traçado na cor das paredes, sem ciano.
+
+    Returns:
+        A grade de caracteres.
+    """
+    desenho = grade()
+    for linha, coluna in CAMINHO:
+        desenho = com_texto(desenho, linha, coluna, GRAFITE)
+    return desenho
+
+
+def desenhar_com(desenho: Tela, antes: bool, depois: bool) -> str:
+    """Escreve o desenho com sequência ou reset em volta de cada caractere.
+
+    Args:
+        desenho: Caracteres e cores.
+        antes: Se cada caractere vem depois da sequência do seu par.
+        depois: Se cada caractere vem seguido do reset.
+
+    Returns:
+        As linhas, cada uma terminada no reset.
+    """
+    linhas: list[str] = []
+    for caracteres in desenho:
+        partes = [
+            (sgr(caractere.texto, caractere.fundo) if antes else "")
+            + caractere.simbolo
+            + (RESET if depois else "")
+            for caractere in caracteres
+        ]
+        if not antes:
+            primeiro = caracteres[0]
+            partes.insert(0, sgr(primeiro.texto, primeiro.fundo))
+        linhas.append("".join(partes) + ("" if depois else RESET))
+    return "\n".join(linhas)
+
+
+def com_texto_e_fundo_separados(texto: str) -> str:
+    """Troca cada sequência de texto e fundo por duas, uma de cada.
+
+    Args:
+        texto: Saída padrão.
+
+    Returns:
+        A saída com a sequência do texto seguida da do fundo.
+    """
+    return PAR.sub(
+        lambda casado: "\x1b[38;2;{};{};{}m\x1b[48;2;{};{};{}m".format(
+            *casado.groups()
+        ),
+        texto,
+    )
+
+
+def exibicao(texto_do_desenho: str) -> str:
+    """Saída de uma exibição com o desenho já escrito.
+
+    Args:
+        texto_do_desenho: Linhas desenhadas.
+
+    Returns:
+        A linha vazia, o desenho, o menu e o prompt.
+    """
+    return tela_com_menu(grade()).replace(desenhar(grade()), texto_do_desenho)
+
+
+REPETIDA = "\x1b[38;2;1;2;3;48;2;4;5;6m"
 SEM_MENU = "\n" + desenhar(grade()) + "\n"
 OUTRA_ALTURA = ["WIDTH=3", "HEIGHT=3"]
 OUTRA_LARGURA = ["WIDTH=4", "HEIGHT=2"]
+TEXTO_GRAFITE = "38;2;31;41;55"
 DEFEITOS: list[tuple[Passo, str, list[str], str]] = [
     (seguidas_do_menu, SEM_MENU, CONFIG, "sem o menu"),
     (seguidas_do_menu, TEXTO_DO_MENU, CONFIG, "nenhuma renderização"),
     (linhas_da_altura, saida(grade()), OUTRA_ALTURA, "esperadas 7"),
-    (posicoes_da_largura, saida(grade()), OUTRA_LARGURA, "esperadas 9"),
-    (posicoes_da_largura, saida(grade()).replace("m  ", "m   ", 1), CONFIG,
-     "número ímpar"),
-    (so_ascii, saida(grade()).replace("  ", "\u2588\u2588", 1), CONFIG,
-     "fora do ASCII"),
-    (cores_de_fundo, saida(grade()).replace("[47m", "[37m", 1), CONFIG,
-     "'37'"),
-    (cores_de_fundo, saida(grade()).replace("m  ", "m##", 1), CONFIG,
-     "não são espaço"),
-    (cores_de_fundo, saida([[None] * 7] * 5), CONFIG,
-     "nenhuma posição desenhada tem cor"),
-    (termina_com_reset, saida(grade()) + "\x1b[47m", CONFIG,
-     "'\\\\x1b\\[47m'"),
+    (caracteres_da_largura, saida(grade()), OUTRA_LARGURA, "esperados 17"),
+    (caracteres_da_largura, saida(grade()).replace("┓", "┓ ", 1), CONFIG,
+     "tem 14 caracteres"),
+    (so_caixa, saida(com_simbolo(grade(), [(0, 5)], "█")), CONFIG,
+     "fora de"),
+    (so_caixa, saida(com_simbolo(grade(), [(2, 4)], "┐")), CONFIG,
+     "fora de"),
+    (so_caixa, saida(com_simbolo(grade(), [(3, 6)], "#")), CONFIG,
+     "fora de"),
+    (cores_de_24_bits, saida(grade()).replace(TEXTO_GRAFITE, "37", 1),
+     CONFIG, "'37' não é cor de 24 bits"),
+    (cores_de_24_bits, saida(grade()).replace(TEXTO_GRAFITE, "38;5;236", 1),
+     CONFIG, "'38' sem 2;R;G;B"),
+    (cores_de_24_bits, saida(grade()).replace("m┏", "m\x1b[1m┏", 1), CONFIG,
+     "'1' não é cor"),
+    (cores_de_24_bits, saida(grade()).replace("m┏", "m\x1b[2J┏", 1), CONFIG,
+     "não é SGR"),
+    (cores_de_24_bits, saida(com_fundo(grade(), 0, 0, None)), CONFIG,
+     "linha 0, coluna 0 não tem cor de texto e de fundo"),
+    (cores_de_24_bits, saida(com_texto(grade(), 3, 6, None)), CONFIG,
+     "linha 3, coluna 6 não tem cor"),
+    (fundo_branco, saida(com_fundo(grade(), 3, 6, CINZA)), CONFIG,
+     "1 caracteres fora da entrada"),
+    (fundo_branco, saida(com_fundo(grade(), 1, 6, CIANO)), CONFIG,
+     "linha 1, coluna 6"),
+    (cantos_pelas_paredes, saida(com_simbolo(grade(), [(0, 0)], "╋")),
+     CONFIG, "pedem '┏'"),
+    (cantos_pelas_paredes, saida(com_simbolo(grade(), [(2, 4)], "━")),
+     CONFIG, "linha 2, coluna 4 é '━'; as paredes ao redor pedem '┓'"),
+    (cantos_pelas_paredes, saida(com_simbolo(grade(), SUL_DE_1_0, "━")),
+     CONFIG, "coluna 4 é '┓'; as paredes ao redor pedem '┳'"),
+    (termina_com_reset, saida(grade()) + "\x1b[38;2;1;2;3m", CONFIG,
+     "'\\\\x1b\\[38;2;1;2;3m'"),
     (termina_com_reset, TEXTO_DO_MENU, CONFIG, "não tem sequência"),
-    (paredes_do_arquivo, saida(trocar(grade(), 2, 3, BRANCO)), CONFIG,
-     "célula \\(1, 0\\)"),
-    (pontas_do_rodape, saida(trocar(grade(), 3, 3, MAGENTA)), CONFIG,
+    (paredes_do_arquivo, saida(com_simbolo(grade(), SUL_DE_1_0, "━")),
+     CONFIG, "célula \\(1, 0\\) aparece com as paredes Norte, Sul e"),
+    (paredes_do_arquivo, saida(com_simbolo(grade(), [(3, 4)], " ")),
+     CONFIG, "célula \\(0, 1\\) aparece"),
+    (paredes_do_arquivo, saida(com_simbolo(grade(), [(2, 6)], "━")),
+     CONFIG, "só em parte"),
+    (pontas_do_rodape, saida(com_fundo(grade(), 3, 6, MAGENTA)), CONFIG,
+     "magenta deveria estar só"),
+    (pontas_do_rodape, saida(com_fundo(grade(), 1, 3, BRANCO)), CONFIG,
      "magenta deveria estar só"),
     (caminho_do_arquivo_em_ciano, saida(grade(caminho=False)), CONFIG,
-     "faltam 3"),
-    (caminho_do_arquivo_em_ciano, saida(trocar(grade(), 3, 3, CIANO)),
+     "faltam 9"),
+    (caminho_do_arquivo_em_ciano, saida(com_fundo(grade(), 3, 6, CIANO)),
      CONFIG, "sobram 1"),
+    (caminho_do_arquivo_em_ciano, saida(com_texto(grade(), 2, 4, CIANO)),
+     CONFIG, "sobram 1"),
+    (caminho_do_arquivo_em_ciano,
+     saida(com_simbolo(grade(), [(1, 2)], "━")), CONFIG,
+     "caractere errado; a da linha 1, coluna 2 é '━', esperado '╺'"),
     (marcado_por_paredes_abertas, saida(grade(caminho=False)), CONFIG,
-     "0 passagens ciano"),
+     "centro da entrada"),
+    (marcado_mais_curto, saida(com_simbolo(grade(), [(1, 6)], "┳")), CONFIG,
+     "pedem '━'"),
     (cinco_cores, saida(grade(caminho=False)), CONFIG,
      '"células do caminho" deveria ter uma única cor'),
-    (cinco_cores, saida(trocar(grade(), 3, 1, None)), CONFIG,
-     '"células do 42" deveria ter uma única cor'),
-    (cinco_cores, saida(trocar(grade(), 1, 3, CINZA)), CONFIG,
+    (cinco_cores, saida(com_fundo(grade(), 3, 1, BRANCO)), CONFIG,
+     '"42" deveria ter uma única cor'),
+    (cinco_cores, saida(com_texto(grade(), 1, 6, CINZA)), CONFIG,
      "cores repetidas"),
+    (espaco_fora_do_desenhado, saida(caminho_sem_ciano()), CONFIG,
+     "caracteres fora das paredes, dos cantos e do caminho visível"),
+    (espaco_fora_do_desenhado,
+     saida(com_simbolo(grade(), [(3, 1), (3, 2), (3, 3)], "━")), CONFIG,
+     "3 caracteres fora"),
+    (espaco_fora_do_desenhado,
+     saida(com_simbolo(grade(caminho=False), [(3, 6)], "┃")), CONFIG,
+     "linha 3, coluna 6: '┃'"),
+    (sequencias_so_na_troca, exibicao(desenhar_com(grade(), True, False)),
+     CONFIG, "repete o par de cores em vigor"),
+    (sequencias_da_i02, exibicao(desenhar_com(grade(), False, True)),
+     CONFIG, "no meio da linha não é texto e fundo"),
+    (sequencias_da_i02, com_texto_e_fundo_separados(saida(grade())), CONFIG,
+     "não abre com texto e fundo numa sequência só"),
+    (sequencias_so_na_troca, com_texto_e_fundo_separados(saida(grade())),
+     CONFIG, "sem caractere no meio"),
+    (sequencias_da_i02, saida(grade()).replace("\n\x1b", "\n \x1b", 1),
+     CONFIG, "não abre com texto e fundo"),
+    (sequencias_da_i02, saida(grade()).replace("┓\x1b[0m", "\x1b[0m┓", 1),
+     CONFIG, "não termina com o reset"),
+    (sequencias_so_na_troca, saida(grade()).replace("\n", f"\n{REPETIDA}", 2),
+     CONFIG, "sem caractere no meio"),
 ]
 
 
@@ -216,11 +346,20 @@ DEFEITOS: list[tuple[Passo, str, list[str], str]] = [
     DEFEITOS,
     ids=[
         "menu ausente", "sem renderização", "altura", "largura",
-        "caractere ímpar", "não ASCII", "cor de frente", "caractere visível",
-        "sem fundo", "termina colorido", "sem sequência", "parede a mais",
-        "entrada em outro lugar", "caminho oculto", "ciano a mais",
-        "sem corrente", "caminho sem cor", "42 sem cor",
-        "caminho na cor do 42",
+        "caractere a mais", "bloco cheio", "caixa fina", "caractere ASCII",
+        "16 cores", "256 cores", "negrito", "limpa a tela", "sem fundo",
+        "sem texto", "fundo do 42 fora", "caminho no fundo",
+        "canto errado", "canto sem braço", "canto sem parede nova",
+        "termina colorido", "sem sequência", "parede a mais",
+        "parede a menos", "parede em parte", "entrada a mais",
+        "entrada a menos", "caminho oculto", "ciano no fundo",
+        "canto ciano", "braço errado no caminho", "sem corrente",
+        "centro do caminho errado", "caminho sem cor", "42 sem cor",
+        "caminho na cor do 42", "caminho oculto traçado", "42 cheio de ━",
+        "corredor com traço", "sequência a cada caractere",
+        "reset a cada caractere", "texto e fundo separados",
+        "texto e fundo separados sem caractere", "linha sem abrir",
+        "reset antes do fim", "sequência sem caractere",
     ],
 )
 def test_renderizacao_com_defeito(
@@ -262,7 +401,7 @@ def test_caminho_marcado_mais_longo(cenario: Estado) -> None:
     Args:
         cenario: Estado numa pasta temporária.
     """
-    com_saida(cenario, saida(VOLTA), ANEL, ["WIDTH=2", "HEIGHT=2"])
+    com_saida(cenario, saida(volta()), ANEL, ["WIDTH=2", "HEIGHT=2"])
     marcado_por_paredes_abertas(cenario)
     with pytest.raises(pytest.fail.Exception, match="3 passos.*dá 1"):
         marcado_mais_curto(cenario)
@@ -282,10 +421,15 @@ def test_nova_renderizacao_abaixo(cenario: Estado) -> None:
     [
         (saida(grade()), "1 renderização"),
         (saida(grade()) + saida(grade()).replace("\n", "\n\x1b[2J", 1),
-         "limpam a tela"),
+         "limpar a tela"),
+        (saida(grade()) + saida(grade()).replace("\n", "\n\x1bc", 1),
+         "não são SGR.*x1bc"),
+        (saida(grade()) + saida(grade()).replace("\n", "\n\x1b7", 1),
+         "não são SGR.*x1b7"),
         (saida(grade()) + "\n" + desenhar(grade()), "não é seguida do menu"),
     ],
-    ids=["uma só", "limpa a tela", "sem menu no fim"],
+    ids=["uma só", "limpa a tela", "ESC c", "guarda o cursor",
+         "sem menu no fim"],
 )
 def test_nova_renderizacao_com_defeito(
     cenario: Estado, texto: str, mensagem: str
@@ -307,18 +451,22 @@ def test_labirinto_diferente(cenario: Estado) -> None:
     Args:
         cenario: Estado numa pasta temporária.
     """
-    outra = trocar(grade(AMARELO), 2, 3, AMARELO)
+    outra = com_simbolo(grade(LARANJA), SUL_DE_1_0, "━")
     diferente_do_anterior(com_saida(cenario, saida(grade(), outra)))
+
+
+FECHADA_EM_PARTE = com_simbolo(grade(), [(2, 6)], "━")
 
 
 @pytest.mark.parametrize(
     ("texto", "mensagem"),
     [
         (saida(grade()), "1 renderização"),
-        (saida(trocar(grade(), 2, 3, BRANCO), grade(caminho=False),
+        (saida(com_simbolo(grade(), SUL_DE_1_0, "━"), grade(caminho=False),
                grade(AZUL)), "mesmas paredes"),
+        (saida(FECHADA_EM_PARTE, grade()), "penúltima renderização.*parte"),
     ],
-    ids=["uma só", "mesmas paredes em outra cor"],
+    ids=["uma só", "mesmas paredes em outra cor", "parede em parte"],
 )
 def test_labirinto_igual(cenario: Estado, texto: str, mensagem: str) -> None:
     """A cor e o caminho não contam: só as paredes diferenciam.
@@ -339,8 +487,8 @@ def test_labirinto_igual(cenario: Estado, texto: str, mensagem: str) -> None:
         ("saída", "vermelho"),
         ("células do caminho", "ciano"),
         ("passagens do caminho", "ciano"),
-        ("células do 42", "cinza"),
-        ("paredes", "branco"),
+        ("42", "cinza"),
+        ("paredes", "grafite"),
     ],
     ids=["entrada", "saída", "células", "passagens", "42", "paredes"],
 )
@@ -359,63 +507,94 @@ def test_elemento_com_a_cor(cenario: Estado, elemento: str, cor: str) -> None:
 
 
 @pytest.mark.parametrize(
-    ("elemento", "cor", "mensagem"),
+    ("desenho", "elemento", "cor", "mensagem"),
     [
-        ("paredes", "amarelo", "não são amarelo"),
-        ("células do caminho", "ciano", "não são ciano"),
-        ("corredor", "ciano", "não existe"),
-        ("entrada", "roxo", "os válidos são: branco"),
+        (grade(), "paredes", "laranja", "não têm laranja no texto"),
+        (grade(caminho=False), "células do caminho", "ciano",
+         "não têm ciano no texto"),
+        (com_fundo(grade(), 1, 7, GRAFITE), "passagens do caminho",
+         "ciano", None),
+        (com_texto(grade(), 1, 2, MAGENTA), "entrada", "magenta", None),
+        (com_fundo(grade(), 1, 2, BRANCO), "entrada", "magenta",
+         "1 de 3 posições de \"entrada\" não têm magenta no fundo"),
+        (grade(), "corredor", "ciano", "não existe"),
+        (grade(), "entrada", "roxo", "os válidos são: branco"),
     ],
-    ids=["outra cor", "caminho oculto", "elemento inválido", "cor inválida"],
+    ids=["outra cor", "caminho oculto", "fundo não conta no caminho",
+         "texto não conta na entrada", "entrada em parte",
+         "elemento inválido", "cor inválida"],
 )
 def test_elemento_sem_a_cor(
-    cenario: Estado, elemento: str, cor: str, mensagem: str
+    cenario: Estado,
+    desenho: Tela,
+    elemento: str,
+    cor: str,
+    mensagem: str | None,
 ) -> None:
-    """Posição com outra cor ou nome fora da lista derrubam o passo.
+    """Posição com outra cor na camada do elemento derruba o passo.
+
+    A cor que só aparece na outra camada não muda o resultado: None diz
+    que o passo passa.
 
     Args:
         cenario: Estado numa pasta temporária.
+        desenho: Última exibição.
         elemento: Elemento conferido.
         cor: Cor esperada.
-        mensagem: Trecho esperado na falha.
+        mensagem: Trecho esperado na falha, ou None quando passa.
     """
-    com_saida(cenario, saida(grade(), grade(caminho=False)))
+    com_saida(cenario, saida(grade(), desenho))
+    if mensagem is None:
+        elemento_tem_a_cor(cenario, elemento, cor)
+        return
     with pytest.raises(pytest.fail.Exception, match=mensagem):
         elemento_tem_a_cor(cenario, elemento, cor)
 
 
 def test_elemento_vazio(cenario: Estado) -> None:
-    """Um labirinto sem células F não tem "células do 42".
+    """Um labirinto sem células F não tem "42".
 
     Args:
         cenario: Estado numa pasta temporária.
     """
     com_saida(cenario, saida(grade()), "d17\nec7\n\n0,0\n2,0\nEE\n")
-    with pytest.raises(pytest.fail.Exception, match='não tem "células do 42"'):
-        elemento_tem_a_cor(cenario, "células do 42", "cinza")
+    with pytest.raises(pytest.fail.Exception, match='não tem "42"'):
+        elemento_tem_a_cor(cenario, "42", "cinza")
 
 
 @pytest.mark.parametrize(
-    ("cor", "elemento", "mensagem"),
+    ("desenho", "cor", "elemento", "mensagem"),
     [
-        ("ciano", "células do caminho", "2 posições fora"),
-        ("branco", "entrada", "fora de \"entrada\""),
-        ("azul", "lado", "não existe"),
+        (grade(), "ciano", "células do caminho", "8 posições fora"),
+        (grade(), "branco", "entrada", "fora de \"entrada\""),
+        (com_texto(grade(), 0, 0, CINZA), "cinza", "42",
+         "1 posições fora de \"42\": linha 0, coluna 0"),
+        (com_texto(grade(), 3, 6, CINZA), "cinza", "42", None),
+        (grade(), "azul", "lado", "não existe"),
     ],
-    ids=["passagens fora", "cor em outro elemento", "elemento inválido"],
+    ids=["passagens fora", "cor em outro elemento", "texto conta fora",
+         "texto de espaço não conta", "elemento inválido"],
 )
 def test_cor_fora_do_elemento(
-    cenario: Estado, cor: str, elemento: str, mensagem: str
+    cenario: Estado,
+    desenho: Tela,
+    cor: str,
+    elemento: str,
+    mensagem: str | None,
 ) -> None:
     """A cor que aparece fora do elemento derruba o passo.
 
     Args:
         cenario: Estado numa pasta temporária.
+        desenho: Última exibição.
         cor: Cor conferida.
         elemento: Único elemento que pode ter a cor.
-        mensagem: Trecho esperado na falha.
+        mensagem: Trecho esperado na falha, ou None quando passa.
     """
-    com_saida(cenario, saida(grade()))
+    com_saida(cenario, saida(desenho))
+    if mensagem is None:
+        cor_so_no_elemento(cenario, cor, elemento)
+        return
     with pytest.raises(pytest.fail.Exception, match=mensagem):
         cor_so_no_elemento(cenario, cor, elemento)
 
@@ -428,7 +607,7 @@ def test_nenhuma_posicao_com_a_cor(cenario: Estado) -> None:
     """
     com_saida(cenario, saida(grade(), grade(caminho=False)), None)
     nenhuma_posicao_com_a_cor(cenario, "ciano")
-    with pytest.raises(pytest.fail.Exception, match="magenta aparece em 1"):
+    with pytest.raises(pytest.fail.Exception, match="magenta aparece em 3"):
         nenhuma_posicao_com_a_cor(cenario, "magenta")
     with pytest.raises(pytest.fail.Exception, match="não existe"):
         nenhuma_posicao_com_a_cor(cenario, "preto")
@@ -459,24 +638,26 @@ def test_celulas_do_digito(cenario: Estado, digito: str, paredes: str) -> None:
     ("desenho", "digito", "paredes", "mensagem"),
     [
         (grade(), "f", "Norte e Sul", "esperadas Norte, Sul"),
-        (trocar(grade(), 3, 2, None), "f", "Norte, Leste, Sul e Oeste",
+        (com_simbolo(grade(), [(3, 4)], " "), "f",
+         "Norte, Leste, Sul e Oeste",
          "aparece com as paredes Norte, Sul, Oeste"),
         (grade(), "5", "Norte e Sul", 'não tem célula de dígito "5"'),
         (grade(), "g", "nenhuma", "não é um dígito"),
         (grade(), "f", "Cima", "não existe"),
-        (trocar(grade(), 0, 0, None), "f", "nenhuma", "sem cor"),
+        (com_simbolo(grade(), [(4, 2)], " "), "f",
+         "Norte, Leste, Sul e Oeste", "só em parte"),
     ],
     ids=["paredes erradas", "parede ausente no desenho", "dígito ausente",
-         "dígito inválido", "direção inválida", "canto sem cor"],
+         "dígito inválido", "direção inválida", "parede em parte"],
 )
 def test_celulas_do_digito_com_defeito(
-    cenario: Estado, desenho: Grade, digito: str, paredes: str, mensagem: str
+    cenario: Estado, desenho: Tela, digito: str, paredes: str, mensagem: str
 ) -> None:
     """Paredes diferentes, dígito ausente ou valores inválidos falham.
 
     Args:
         cenario: Estado numa pasta temporária.
-        desenho: Grade de fundos exibida.
+        desenho: Caracteres exibidos.
         digito: Dígito do arquivo de saída.
         paredes: Paredes esperadas.
         mensagem: Trecho esperado na falha.
@@ -536,7 +717,7 @@ def test_tamanho_do_config(
 
 
 def sessao_com_cores(
-    cenario: Estado, cores: list[int], envios: list[str]
+    cenario: Estado, cores: list[Rgb], envios: list[str]
 ) -> None:
     """Abre o programa falso, que exibe uma cor de paredes por exibição.
 
@@ -552,12 +733,12 @@ def sessao_com_cores(
 
 
 def test_paredes_em_rodizio(cenario: Estado) -> None:
-    """Branco, amarelo, verde, azul e de volta ao branco a cada opção 3.
+    """Grafite, laranja, verde, azul e de volta ao grafite a cada opção 3.
 
     Args:
         cenario: Estado numa pasta temporária.
     """
-    cores = [BRANCO, AMARELO, AMARELO, VERDE, AZUL, BRANCO]
+    cores = [GRAFITE, LARANJA, LARANJA, VERDE, AZUL, GRAFITE]
     sessao_com_cores(cenario, cores, ["3", "1", "3", "3", "3"])
     paredes_em_rodizio(cenario)
 
@@ -568,7 +749,7 @@ def test_paredes_fora_do_rodizio(cenario: Estado) -> None:
     Args:
         cenario: Estado numa pasta temporária.
     """
-    sessao_com_cores(cenario, [BRANCO, AMARELO, VERDE], ["3", "1"])
+    sessao_com_cores(cenario, [GRAFITE, LARANJA, VERDE], ["3", "1"])
     with pytest.raises(pytest.fail.Exception, match="depois de '1'"):
         paredes_em_rodizio(cenario)
 

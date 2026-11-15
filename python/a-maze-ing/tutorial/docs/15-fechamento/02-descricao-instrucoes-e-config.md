@@ -33,7 +33,8 @@ diz **o que é** e, quando cabe, **a regra** que a define:
   (9x7) e o aviso quando ele não cabe;
 - **Output file**: um dígito hexadecimal por célula, depois a entrada, a saída e o caminho mais
   curto;
-- **Display**: as cores do desenho e as quatro opções do menu;
+- **Display**: como o labirinto é desenhado (caracteres de caixa e cores de 24 bits sobre fundo
+  branco) e as quatro opções do menu;
 - **Reusable module**: o pacote `mazegen` e os dois arquivos que o distribuem.
 
 O avaliador usa essa lista como roteiro: cada item é algo que ele vai querer ver funcionando.
@@ -43,8 +44,9 @@ O avaliador usa essa lista como roteiro: cada item é algo que ele vai querer ve
 Tudo o que alguém precisa para sair de uma cópia recém-baixada do repositório e ver o labirinto
 na tela:
 
-- **o que precisa estar instalado**: Python 3.10 ou mais novo (o mínimo do enunciado) e o
-  programa `make`;
+- **o que precisa estar instalado**: Python 3.10 ou mais novo (o mínimo do enunciado), o
+  programa `make` e um terminal com cores de 24 bits, as cores RGB que o desenho usa
+  ([parte 10](../10-utilitarios/08-sequencias-ansi.md));
 - **os dois comandos**, num bloco de código, com um comentário do que cada um faz: `make install`
   cria o ambiente virtual `.venv`, uma pasta com um Python e as ferramentas só deste projeto
   ([parte 3](../03-ambiente/01-o-ambiente-virtual.md)); `make run` executa o programa;

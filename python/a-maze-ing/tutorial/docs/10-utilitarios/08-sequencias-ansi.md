@@ -7,8 +7,8 @@ title: Sequências ANSI
 
 O enunciado exige mostrar o labirinto com as paredes, a entrada, a saída e o caminho bem
 visíveis, e deixar o usuário trocar a cor das paredes. Este projeto desenha no terminal, com
-quadradinhos coloridos. Para isso, o programa precisa mandar o terminal mudar de cor no meio do
-texto. Esta página mostra como; a [próxima](./04-cores-ansi.md) cria a classe `Ansi`, com as
+linhas e fundos coloridos. Para isso, o programa precisa mandar o terminal mudar de cor no meio
+do texto. Esta página mostra como; a [próxima](./04-cores-ansi.md) cria a classe `Ansi`, com as
 cores que o desenho usa.
 
 ## Caracteres que são comandos
@@ -35,23 +35,53 @@ de normas técnicas dos Estados Unidos. Hoje praticamente todo terminal as enten
 ## O comando de cor: SGR
 
 O comando que muda a cor se chama **SGR** (*Select Graphic Rendition*, "escolher a aparência").
-Neste projeto, ele tem sempre quatro peças: o ESC, um `[`, um número e a letra `m`. (O comando
-aceita mais de um número, separados por `;`, para mudar várias coisas de uma vez; o desenho
-nunca precisa disso.)
+Ele começa com o ESC e um `[`, termina com a letra `m` e leva no meio números separados por
+`;`. Os números dizem **o que** muda e **para qual cor**.
 
-![As quatro peças da sequência de fundo vermelho: ESC avisa que vem um comando, o colchete abre o comando, 41 é o número do fundo vermelho e a letra m fecha](/img/utilitarios/sequencia-sgr.svg)
+Cada caractere que o terminal mostra tem duas cores:
 
-As caixas amarelas são as quatro peças, na ordem em que são impressas; o quadrado vermelho, à
-direita, é a cor de fundo que o terminal passa a usar. O terminal não mostra nenhum desses
-caracteres. A partir deles, tudo o que for impresso sai com fundo vermelho, até outro comando de
-cor.
+- a **cor do texto**: a do traço do caractere, como as linhas de uma letra `A`;
+- a **cor do fundo**: a do retângulo atrás do caractere. Um espaço não tem traço nenhum, então
+  só o fundo dele aparece.
 
-O número diz **o que** muda:
+### Cores de 24 bits
 
-| Número | Muda | Exemplo |
+Uma tela mistura três luzes em cada ponto: vermelho, verde e azul. Uma cor **RGB** (de *red*,
+*green*, *blue*) é a quantidade de cada uma, de 0 (apagada) a 255 (no máximo): `255, 255, 255`
+é branco, `0, 0, 0` é preto, `239, 68, 68` é um vermelho. Cada quantidade cabe em 8 bits
+(255 é o maior número de 8 bits), e as três juntas ocupam 24: por isso se fala em **cor de 24
+bits**. São 256 × 256 × 256, mais de 16 milhões de cores.
+
+O SGR escolhe uma cor RGB com cinco números:
+
+| Números | Muda | Exemplo |
 |---|---|---|
-| `30` a `37` | a cor do texto | `31`: texto vermelho |
-| `40` a `47` | a cor do fundo | `41`: fundo vermelho |
-| `100` a `107` | a cor do fundo, versão clara | `100`: fundo cinza |
-| `49` | volta o fundo à cor padrão do terminal | |
-| `0` | volta tudo ao padrão (o *reset*) | |
+| `38;2;R;G;B` | a cor do texto | `38;2;31;41;55`: texto grafite |
+| `48;2;R;G;B` | a cor do fundo | `48;2;255;255;255`: fundo branco |
+| `0` | volta tudo ao padrão do terminal (o *reset*) | |
+
+O `38` quer dizer "cor do texto", o `48` "cor do fundo", e o `2` que vem logo depois avisa que
+os três números seguintes são R, G e B.
+
+Um único comando pode mudar as duas cores de uma vez: basta pôr os dois grupos de números em
+sequência, separados por mais um `;`. É assim que este projeto escreve toda cor, com o texto e
+o fundo juntos:
+
+![As peças da sequência de texto grafite e fundo branco: ESC, colchete, 38;2;31;41;55, ponto e vírgula, 48;2;255;255;255 e a letra m; à direita, o texto Ab em grafite sobre branco](/img/utilitarios/sequencia-sgr.svg)
+
+As caixas amarelas são as peças, na ordem em que são impressas; à direita, o texto `Ab` como o
+terminal passa a mostrá-lo, em grafite sobre branco. No desenho do labirinto, o mesmo grafite
+pinta as paredes, feitas com os caracteres da [página 9](./09-caracteres-de-caixa.md). O terminal
+não mostra nenhum caractere da sequência. A partir dela, tudo o que for impresso sai com essas
+duas cores, até o próximo comando de cor.
+
+### As cores com nome
+
+O SGR também tem números curtos para oito cores com nome: `31` é "texto vermelho", `41` é
+"fundo vermelho", e assim por diante. Esses números não fixam o tom: cada terminal tem um
+**tema**, a sua tabela de cores, e um mesmo `41` sai num vermelho diferente em cada tema.
+
+As cores de 24 bits saem iguais em qualquer terminal que as aceita. Usar só elas é escolha do
+projeto: o desenho tem fundo branco e paredes escuras mesmo num terminal de tema escuro. Em
+troca, o programa precisa de um terminal com cores de 24 bits, e o
+[README](../15-fechamento/02-descricao-instrucoes-e-config.md) avisa isso nos requisitos.
