@@ -24,3 +24,4 @@ python/a-maze-ing/private
 python/a-maze-ing/project-validate
 python/a-maze-ing/spec
 .mypy_cache
+.venv
